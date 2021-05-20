@@ -1,0 +1,110 @@
+.color-primary svg {
+    fill: var(--primary);
+}
+
+.color-secondary {
+    fill: var(--secondary);
+}
+
+.navbar-home {
+    background-color: var(--white);
+    border: 0;
+    padding: 1.1rem 1.6rem;
+}
+
+.navbar-home a {
+    color: var(--primary);
+    font-size: 15pt;
+}
+
+.navbar-home a:hover {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.dropdown-menu a {
+    color: var(--white);
+    font-size: 15pt;
+}
+
+.dropdown-menu a:hover {
+    background: none;
+    color: var(--secondary);
+}
+
+.my-dropdown-menu {
+    background-color: var(--dark);
+    padding: 1.2rem 1rem;
+    border: 2px solid var(--secondary);
+    border-radius: 0;
+}
+
+.dropdown-lang {
+    background-color: var(--dark);
+    border: 2px solid var(--secondary);
+    border-radius: 0;
+}
+
+.already-member a {
+    color: #fff;
+}
+
+.already-member a:hover {
+    color: var(--secondary);
+}
+
+.heading-title {
+    color: var(--primary);
+}
+
+.sub-header a {
+    color: var(--secondary);
+}
+
+.footer {
+    color: var(--secondary);
+    line-height: 1.45;
+    padding: 4.48rem 0;
+}
+
+.footer .title-foot {
+    font-size: 18pt;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.footer a {
+    font-size: 16pt;
+    color: var(--secondary);
+}
+
+.footer a:hover {
+    text-decoration: none;
+    color: var(--white);
+}
+
+.top-news-page {
+    background-color: var(--dark);
+    font-size: 45pt;
+    color: var(--secondary);
+    font-weight: 600;
+    padding: 2.54rem 0;
+}
+
+.news-title {
+    font-size: 22pt;
+    color: var(--primary);
+}
+
+.title-course {
+    color: var(--primary);
+    font-size: 22pt;
+    font-weight: 600;
+}
+
+.teacher-name {
+    color: var(--primary);
+    font-size: 18.5pt;
+}
+
+/*# sourceMappingURL=style-app.css.map */
