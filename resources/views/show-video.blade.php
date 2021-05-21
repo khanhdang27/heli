@@ -22,8 +22,10 @@ $list_video = [
     </div>
     <p class="m-0 teacher-name">Ms. Polly Leung</p>
     <div class="row justify-content-between rating-bar">
-        <div class="col-sm-8 d-flex flex-column justify-content-end rating-point">O O O O O 4.5/5</div>
-        <div class="col-sm-4"><img class="ic-heart" src="{{ asset("images/ic/Group29.png")}}"></div>
+        <div class="col-sm-8 d-flex flex-column justify-content-end text-primary rating-point">
+            O O O O O 4.5/5
+        </div>
+        <div class="col-sm-4"><img class="ic-heart" src="{{ asset("images/ic/ic_heart.svg")}}"></div>
     </div>
     <div class="row">
         <div class="col-sm-8">
@@ -33,7 +35,7 @@ $list_video = [
 
         </div>
         <div class="col-sm-4">
-            <div class="box-list-video">
+            <div class="box-list-video text-primary">
                 <ol>
                     @foreach($list_video as $item)
                         <li>{{$item}}</li>

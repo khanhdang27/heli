@@ -24,9 +24,9 @@ class CourseController extends Controller
     {
         $tutors = Tutor::all();
         $courses = Course::query()
-            ->with('tutors', 'translations')
+            ->with('tutor', 'translations')
             ->when(request('name') != '', function (Builder $query) {
-                $query->where('course_name', '%' . request('name') . '%');
+                $query->whereTranslationLike('course_name', '%' . request('name') . '%');
             })
             ->when(request('tutor') != '', function (Builder $query) {
                 $query->where('tutor_id', request('tutor'));
@@ -38,7 +38,6 @@ class CourseController extends Controller
             'tutors' => $tutors
         ]);
     }
-
 
     /**
      * Show the form for creating a new resource.

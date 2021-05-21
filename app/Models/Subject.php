@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $subject_name
- * @property string|null $subject_color
+ * @property string|null $subject_color_background
+ * @property string|null $subject_color_text
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

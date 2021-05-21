@@ -47,7 +47,7 @@ class Course extends Model implements TranslatableContract
 
     protected $table = 'courses';
     protected $guarded = [];
-    public $translatedAttributes = ['course_name', 'course_description'];
+    public array $translatedAttributes = ['course_name', 'course_description'];
 
 
     public function videos(): \Illuminate\Database\Eloquent\Relations\HasMany

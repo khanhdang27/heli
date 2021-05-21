@@ -87,8 +87,8 @@
                             加入購物車
                         </div>
                         <div class="d-flex share-bar">
-                            <span class="pr-2"><img width="36" src="{{ asset("images/ic/Group28.png")}}"></span>
-                            <p class="text-20-blue">@lang('keywords.coursePage.shareCourse')</p>
+                            <span class="mr-2"><img width="36" src="{{ asset("images/ic/ic_share.svg")}}"></span>
+                            <p class="text-20 pt-1">@lang('keywords.coursePage.shareCourse')</p>
                         </div>
                     </div>
                 </div>

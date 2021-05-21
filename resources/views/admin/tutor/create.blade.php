@@ -5,10 +5,74 @@ $subjectList = new \App\Models\Subject();
 
 @extends('admin.layout')
 @section('content')
+    @push('scripts')
+        <script>
+            var dropzone = new Dropzone('#uploadFile', {
+                previewTemplate: document.querySelector('#preview-template').innerHTML,
+                parallelUploads: 3,
+                thumbnailHeight: 120,
+                thumbnailWidth: 120,
+                maxFilesize: 6,
+                filesizeBase: 1500,
+                thumbnail: function (file, dataUrl) {
+                    if (file.previewElement) {
+                        file.previewElement.classList.remove("dz-file-preview");
+                        var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+                        for (var i = 0; i < images.length; i++) {
+                            var thumbnailElement = images[i];
+                            thumbnailElement.alt = file.name;
+                            thumbnailElement.src = dataUrl;
+                        }
+                        setTimeout(function () {
+                            file.previewElement.classList.add("dz-image-preview");
+                        }, 1);
+                    }
+                }
+            });
+
+            var minSteps = 6,
+                maxSteps = 60,
+                timeBetweenSteps = 100,
+                bytesPerStep = 100000;
+
+            dropzone.uploadFiles = function (files) {
+                var self = this;
+
+                for (var i = 0; i < files.length; i++) {
+
+                    var file = files[i];
+                    totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+                    for (var step = 0; step < totalSteps; step++) {
+                        var duration = timeBetweenSteps * (step + 1);
+                        setTimeout(function (file, totalSteps, step) {
+                            return function () {
+                                file.upload = {
+                                    progress: 100 * (step + 1) / totalSteps,
+                                    total: file.size,
+                                    bytesSent: (step + 1) * file.size / totalSteps
+                                };
+
+                                self.emit('uploadprogress', file, file.upload.progress, file.upload
+                                    .bytesSent);
+                                if (file.upload.progress === 100) {
+                                    file.status = Dropzone.SUCCESS;
+                                    self.emit("success", file, 'success', null);
+                                    self.emit("complete", file);
+                                    self.processQueue();
+                                }
+                            };
+                        }(file, totalSteps, step), duration);
+                    }
+                }
+            }
+        </script>
+
+    @endpush
     <!-- CARDS -->
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-10 col-xl-8">
+            <div class="col-lg-8">
                 <!-- Goals -->
                 <div class="card">
                     <div class="card-header">
@@ -23,17 +87,13 @@ $subjectList = new \App\Models\Subject();
                             </div>
                         </div> <!-- / .row -->
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-flex">
                         <div class="card-body">
                             {!! Form::open(['route'=> 'admin.tutor.store', 'enctype' => 'multipart/form-data']) !!}
                             @csrf
                             <div class="form-group ">
-                                {{ Form::label('tutor_name', 'Tutor name') }}
-                                {{ Form::text('tutor_name', old('tutor_name'), ['class'=>'form-control']) }}
-                            </div>
-                            <div class="custom-file mb-4">
-                                {{ Form::label('tutor_photo', 'Photo', ['class' => 'custom-file-label']) }}
-                                {{ Form::file('tutor_photo', ['class' => 'custom-file-input']) }}
+                                {{ Form::label('full_name', 'Tutor name') }}
+                                {{ Form::text('full_name', old('full_name'), ['class'=>'form-control']) }}
                             </div>
                             <div class="form-group ">
 
@@ -91,18 +151,37 @@ $subjectList = new \App\Models\Subject();
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>
-                        <script>
-                            // Add the following code if you want the name of the file appear on select
-                            $(document).ready(function () {
-                                $(".custom-file-input").on("change", function () {
-                                    var fileName = $(this).val().split("\\").pop();
-                                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                                });
-                            });
-                        </script>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
 
+                                <!-- Title -->
+                                <h4 class="card-header-title">
+                                    Add photo for Tutor
+                                </h4>
+
+                            </div>
+                        </div> <!-- / .row -->
+                    </div>
+                    <div class="card-body">
+                        {!! Form::open([
+                                'route' => 'admin.banner.store',
+                                'enctype'=>'multipart/form-data',
+                                'class'=>'dropzone',
+                                'id'=>"uploadFile"
+                            ])  !!}
+                        @csrf
+                        <div class="dz-message">
+                            Drag 'n' Drop Files<br>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
             </div>
         </div> <!-- / .row -->
     </div>

@@ -31,10 +31,10 @@
         </div>
         @include('layout.sub-header')
         <div class="container-fluid p-0">
-            <div class="title-subject text-center">
+            <div class="title-subject text-primary text-center">
                 IGCSE
             </div>
-            <div class="container-fluid sort mb-4 d-flex">
+            <div class="container-fluid sort text-primary mb-4 d-flex">
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form>
                     <label class="radio-inline mr-5">

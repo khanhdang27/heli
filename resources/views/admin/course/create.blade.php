@@ -44,7 +44,7 @@ $tutorList = new \App\Models\Tutor();
                             <div class="form-group ">
 
                                 {{ Form::label('tutor_id', 'Tutor') }}
-                                {{ Form::select('tutor_id', $tutorList->getName(),null, ['class' => 'form-control']) }}
+                                {{ Form::select('tutor_id', $tutorList->getAllTutorName(),null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:en', 'Course Description (English)') }}

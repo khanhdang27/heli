@@ -44,7 +44,10 @@
                                         </a>
                                     </th>
                                     <th>
-                                        Color
+                                        Background color
+                                    </th>
+                                    <th>
+                                        Text color
                                     </th>
                                     <th></th>
                                 </tr>
@@ -57,10 +60,14 @@
                                         </td>
                                         <td class="goal-progress">
                                             <div
-                                                style="width: 50px; height: 30px; background-color: {{ $value->subject_color }}">
+                                                style="width: 50px; height: 30px; background-color: {{ $value->subject_color_background }}">
                                             </div>
                                         </td>
-
+                                        <td class="goal-progress">
+                                            <div
+                                                style="width: 50px; height: 30px;border: 1px solid black; background-color: {{ $value->subject_color_text }}">
+                                            </div>
+                                        </td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"

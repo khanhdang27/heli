@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Model\TutorTeachSubject;
+use App\Models\TutorTeachSubject;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\Tutor
  *
  * @property int $id
- * @property string $tutor_name
+ * @property string $full_name
  * @property string $tutor_photo
  * @property int $subject_id
  * @property string|null $remember_token
@@ -49,7 +49,7 @@ class Tutor extends Model implements TranslatableContract
 {
     use Translatable;
 
-    protected $table = 'tutor';
+    protected $table = 'tutors';
     protected $guarded = [];
     public array $translatedAttributes = ['tutor_info', 'tutor_level', 'tutor_experience', 'tutor_specialized'];
 
@@ -63,10 +63,10 @@ class Tutor extends Model implements TranslatableContract
         return Tutor::all();
     }
 
-    public function getAllTutorName(): array
+    public final function getAllTutorName(): array
     {
         $tutorName = Tutor::all();
-        return $tutorName->pluck('tutor_name', 'id')->toArray();
+        return $tutorName->pluck('full_name', 'id')->toArray();
     }
 
 }

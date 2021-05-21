@@ -34,7 +34,7 @@
         </div>
         <div class="container-fluid pb-5 ml-auto mr-auto body-forum-page">
             <div class="">
-                <div class="row row-question pt-5 pb-5">
+                <div class="row row-question border-secondary pt-5 pb-5">
                     <div class="col-sm-3">
                         <div class="d-flex">
                             <img src="{{asset("images/ava2.jpg")}}" width="98" height="98">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateUserRequest;
+use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -18,13 +19,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $roleUsers = DB::table('roles')
-            ->join('role_users', 'roles.id', '=', 'role_users.role_id')
-            ->join('users', 'users.id', '=', 'role_users.user_id')
-            ->where('role_id', '=', '2')
-            ->paginate(20);
+        // $roleUsers = DB::table('roles')
+        //     ->join('role_users', 'roles.id', '=', 'role_users.role_id')
+        //     ->join('users', 'users.id', '=', 'role_users.user_id')
+        //     ->where('role_id', '=', '2')
+        //     ->paginate(20);
+
+        $member = User::with('role')->where(['role_id'=> Role::$MEMBER_TYPE]);
         return view('admin.user.index', [
-            'roleUsers' => $roleUsers
+            'roleUsers' => $member
         ]);
 
     }

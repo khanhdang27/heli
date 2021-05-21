@@ -8,17 +8,15 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-
                                 <!-- Title -->
                                 <h4 class="card-header-title">
                                     Material
                                 </h4>
-
                             </div>
                             <div class="col-auto">
 
                                 <!-- Button -->
-                                <a href="{{ route('admin.material.create') }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('admin.course-material.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                          stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                          class="css-i6dzq1">
@@ -62,7 +60,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($materials as $value)
+                                @foreach($courseMaterial as $value)
                                     <tr>
                                         <td class="goal-project">
                                             {{ $value->material_name }}
@@ -109,7 +107,7 @@
                                 </tbody>
                             </table>
                             <div class="d-flex justify-content-center">
-                                {{ $materials->links() }}
+                                {{ $courseMaterial->links() }}
                             </div>
                         </div>
                     </div>

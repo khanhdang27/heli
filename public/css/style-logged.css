@@ -1,7 +1,6 @@
 /*LOGGED PAGE--------------------------------------------------------------------------------------------------*/
 .title-news {
     font-size: 40px;
-    color: #E6C06C;
     padding-top: 7.3rem;
     padding-bottom: 1rem;
     font-weight: 400;
@@ -13,17 +12,14 @@
 }
 
 .text-33 {
-    color: #0B487D;
-    font-size: 33px;
+    font-size: 24.7pt;
 }
 
-.text-25-white {
-    color: #fff;
-    font-size: 25px;
+.text-25 {
+    font-size: 18.7pt;
 }
 
 .btn-dark-blue {
-    background-color: #294157;
     padding: 0 3.6rem !important;
     min-height: 42px;
 }
@@ -120,23 +116,15 @@
 
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 .title-subject {
-    font-size: 45px;
-    color: #0B487D;
+    font-size: 33.8pt;
     padding: 3rem 0;
     font-weight: 600;
 }
 
 .sort {
-    font-size: 25px;
-    color: #0B487D;
-    font-weight: 400;
+    font-size: 18.5pt;
     max-width: 1767px;
 }
-
-.heading-title {
-
-}
-
 .btn-sort {
     width: 30px;
     height: 20px;
@@ -148,8 +136,7 @@
 
 /*SHOW VIDEO------------------------------------------------------------------------------------*/
 .box-list-video {
-    font-size: 30px;
-    color: #0B487D;
+    font-size: 22.5pt;
     max-width: 550px;
     height: 420px;
     overflow-y: auto;
@@ -160,31 +147,22 @@
     max-width: 1500px;
 }
 
-.menu-tab a {
-    font-size: 30px;
-    color: #0B487D;
-    font-weight: 600;
-}
-
 .product {
     max-width: 508px;
     border: 3px solid;
 }
 
 .product-btn {
-    font-size: 28px;
+    font-size: 21pt;
     padding: 0.5rem 0 !important;
 }
 
 .share-bar {
     margin-top: 2rem;
-    font-size: 20px;
-    color: #0B487D;
 }
 
 .price {
-    font-size: 35px;
-    color: #0B487D;
+    font-size: 26.5pt;
     font-weight: 600;
     margin: 3.2rem 0;
 }
@@ -193,34 +171,26 @@
     max-width: 846px;
 }
 
-.text-blue {
-    color: #0B487D;
-}
-
 .content-info {
-    font-size: 25px;
-    color: #0B487D;
+    font-size: 18.7pt;
 }
 
 .title {
-    font-size: 35px;
-    color: #0B487D;
+    font-size: 26.5pt;
     font-weight: 600;
 }
 
 .text-intro {
-    color: #0B487D;
-    font-size: 25px;
+    font-size: 18.7pt;
 }
 
 .bottom-package {
-    font-size: 28px;
+    font-size: 21pt;
     padding-top: 3rem;
 }
 
 .text-20-blue {
-    font-size: 20px;
-    color: #0B487D;
+    font-size: 15pt;
 }
 
 .text-20-blue:hover {
@@ -228,8 +198,7 @@
 }
 
 .content-review {
-    font-size: 25px;
-    color: #0B487D;
+    font-size: 18.7pt;
 }
 
 .avatar-review {
@@ -242,22 +211,16 @@
 }
 
 .name-guest {
-    font-size: 25px;
-    color: #0B487D;
+    font-size: 18.7pt;
     font-weight: 600;
 }
 
 .point {
-    font-size: 17px;
-}
-
-.date {
-    font-size: 15px;
+    font-size: 12.8pt;
 }
 
 .name-course {
-    font-size: 18px;
-    color: #0B487D;
+    font-size: 13.5pt;
 }
 
 /*COURSE PAGE 2-------------------------------------------------------------------------------*/
@@ -274,19 +237,16 @@
 }
 
 .quantity {
-    color: #0B487D;
-    font-size: 16px;
+    font-size: 12pt;
 }
 
 .name-class {
-    font-size: 30px;
-    color: #0B487D;
+    font-size: 22.5pt;
     font-weight: 600;
 }
 
 .text25 {
-    font-size: 25px;
-
+    font-size: 18.7pt;
 }
 
 .course-box {
@@ -316,36 +276,21 @@
     max-width: 90%;
 }
 
-
-
 .btn-hashtag {
     font-size: 18pt;
-    color: #fff;
     border: none;
-    background-color: #0B487D;
     padding: 0.5rem 1rem;
     border-radius: 28px;
     margin: 0 0.5rem 1rem 0;
 }
 
-.btn-hashtag a {
-    text-decoration: none;
-}
-
-.btn-hashtag:hover {
-    cursor: pointer;
-    text-decoration: none;
-    background-color: #335C7E;
-    color: #fff;
-}
 
 .btn-hashtag:focus {
     outline: none;
 }
 
 .text-40 {
-    font-size: 40px;
-    color: #0B487D;
+    font-size: 30pt;
     font-weight: 600;
 }
 
@@ -372,30 +317,18 @@
 }
 
 .title-article {
-    font-size: 40px;
+    font-size: 30pt;
     color: #fff;
     font-weight: 600;
 }
 
 .text-12 {
-    font-size: 12px;
+    font-size: 9pt;
 }
 
 .text-20 {
-    font-size: 20px;
+    font-size: 15pt;
     color: #fff;
-}
-
-
-.btn-hashtag-small {
-    background-color: #fff;
-    font-size: 12px;
-    color: #0B487D;
-    border: none;
-    border-radius: 19px;
-    padding: 0.5rem 1rem;
-    margin: 0.3rem 0.3rem;
-    float: right;
 }
 
 .btn-hashtag-small:hover {
@@ -406,23 +339,14 @@
     outline: none;
 }
 
-.bg-article {
-    border: none;
-    max-width: 220px;
-}
-
 .title-article-right {
     max-width: 333px;
 }
 
 .text-30 {
-    font-size: 30px;
+    font-size: 22.5pt;
     color: #0B487D;
     font-weight: 600;
-}
-
-.bg-blue {
-    background-color: #0B487D;
 }
 
 .info-article-right {
@@ -435,37 +359,15 @@
     overflow-y: auto;
 }
 
-.btn-read-more {
-    font-size: 45px;
-    color: #0B487D;
-    background-color: #fff;
-    border: 2px solid #0B487D;
-    border-radius: 43px;
-    padding: 0 2rem;
-    text-align: center;
-}
+
 
 /*FORUM PAGE-------------------------------------------------------------------*/
 .body-forum-page {
     max-width: 70%;
 }
 
-.text-25 {
-    font-size: 25px;
-    color: #0B487D;
-}
-
-.question {
-
-}
-
 .img-question {
     width: 60%;
-}
-
-.text-28 {
-    font-size: 28px;
-    color: #0B487D;
 }
 
 .ic-action {
@@ -473,5 +375,5 @@
 }
 
 .row-question {
-    border-bottom: 1px solid #E6C06C;
+    border-bottom: 1px solid;
 }

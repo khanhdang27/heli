@@ -24,7 +24,7 @@ class CreateTutorRequest extends FormRequest
     public function rules()
     {
         return [
-            'tutor_name'          => 'required',
+            'full_name'          => 'required',
             'tutor_photo'         => 'required|image|mimes:jpg,jpeg,png',
             'subject_id'          => 'required',
             'tutor_info:en'       => 'required',
