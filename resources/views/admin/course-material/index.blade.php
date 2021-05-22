@@ -122,15 +122,6 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" id="stylesheetDark">
 @endpush
 @push('js')
-    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script>
-        $('.delete-item').click(function () {
-            const url = $(this).data('url');
-            if (confirm('Do you want delete item?')) {
-                axios.delete(url).then(response => {
-                    location.reload();
-                })
-            }
-        })
-    </script>
+<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
 @endpush

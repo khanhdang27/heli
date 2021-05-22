@@ -3,7 +3,6 @@ $tutorList = new \App\Models\Tutor();
 
 ?>
 
-
 @extends('admin.layout')
 @section('content')
     <!-- CARDS -->

@@ -662,22 +662,22 @@
                                     <div class="avatar-group">
                                         <a href="profile-posts.html" class="avatar avatar-xs" data-toggle="tooltip"
                                            title="" data-original-title="Dianna Smiley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-1.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="profile-posts.html" class="avatar avatar-xs" data-toggle="tooltip"
                                            title="" data-original-title="Ab Hadley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-2.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-2.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="profile-posts.html" class="avatar avatar-xs" data-toggle="tooltip"
                                            title="" data-original-title="Adolfo Hess">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-3.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-3.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="profile-posts.html" class="avatar avatar-xs" data-toggle="tooltip"
                                            title="" data-original-title="Daniela Dewitt">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-4.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-4.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                     </div>
@@ -719,17 +719,17 @@
                                     <div class="avatar-group justify-content-end">
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Dianna Smiley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-1.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Ab Hadley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-2.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-2.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Adolfo Hess">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-3.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-3.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                     </div>
@@ -771,17 +771,17 @@
                                     <div class="avatar-group justify-content-end">
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Dianna Smiley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-1.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Ab Hadley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-2.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-2.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Adolfo Hess">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-3.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-3.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                     </div>
@@ -823,12 +823,12 @@
                                     <div class="avatar-group justify-content-end">
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Dianna Smiley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-1.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Ab Hadley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-2.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-2.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                     </div>
@@ -870,22 +870,22 @@
                                     <div class="avatar-group justify-content-end">
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Dianna Smiley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-1.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Ab Hadley">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-2.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-2.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Adolfo Hess">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-3.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-3.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                         <a href="#!" class="avatar avatar-xs" data-toggle="tooltip" title=""
                                            data-original-title="Daniela Dewitt">
-                                            <img src="./cpanel/assets/img/avatars/profiles/avatar-4.jpg"
+                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-4.jpg")}}"
                                                  class="avatar-img rounded-circle" alt="...">
                                         </a>
                                     </div>

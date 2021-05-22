@@ -18,8 +18,8 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme.min.css') }}" id="stylesheetLight">
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme-dark.min.css') }}" id="stylesheetDark">
-    @stack('css')
+    {{-- <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme-dark.min.css') }}" id="stylesheetDark"> --}}
+    @stack('css')   
 
     <title>Helios</title>
 </head>
@@ -57,7 +57,6 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 
 <!-- Theme JS -->
-<script src="{{ asset('cpanel/assets/js/theme.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
     document.body.addEventListener("onload", function() {
@@ -65,12 +64,8 @@
     });
 </script>
 @stack('js')
-<script>
-    ClassicEditor
-        .create(document.querySelector('#editor'))
-        .catch(error => {
-            console.error(error);
-        });
-</script>
+
+@stack('ck-editor-init')
+
 </body>
 </html>
