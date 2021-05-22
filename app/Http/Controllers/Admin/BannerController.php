@@ -34,12 +34,6 @@ class BannerController extends Controller
         return view('admin.banner.create');
     }
 
-//    /**
-//     * Store a newly created resource in storage.
-//     *
-//     * @param CreateBannerRequest $request
-//     * @return \Illuminate\Http\RedirectResponse
-//     */
     /**
      * Store a newly created resource in storage
      *
@@ -48,15 +42,6 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-
-        $image = $request->file('file');
-        $fileInfo = $image->getClientOriginalName();
-        $filename = pathinfo($fileInfo, PATHINFO_FILENAME);
-        $extension = pathinfo($fileInfo, PATHINFO_EXTENSION);
-        $file_name = $filename . '-' . time() . '.' . $extension;
-        //$image->move(public_path('photo'),$file_name);
-
-        $image = Storage::put('photo', $image);
         $banner = new Banner();
         $banner->banner_photo = $image;
         $banner->save();

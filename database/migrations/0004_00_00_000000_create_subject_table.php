@@ -17,7 +17,7 @@ class CreateSubjectTable extends Migration
             $table->id();
             $table->string('subject_color_background');
             $table->string('subject_color_text');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

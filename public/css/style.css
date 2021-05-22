@@ -291,11 +291,7 @@ html, body {
 .body-product-content {
     height: 258px;
     padding: 1.76rem;
-    font-size: 21px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    font-size: 15.7pt;
 }
 
 .content-top {
@@ -339,17 +335,11 @@ html, body {
     align-items: center;
     justify-content: flex-end;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-    background-color: #fff;
 }
 
 .price-bar2 {
-    display: flex;
-    justify-content: flex-end;
-    color: #0B487D;
-    font-size: 20px;
-    font-weight: 400;
-    padding-right: 1rem;
-    padding-bottom: 1rem;
+    font-size: 15pt;
+    font-weight: 600;
 }
 
 /*TAB PRODUCT-----------------------------------------*/
@@ -378,22 +368,7 @@ html, body {
     padding-bottom: 2.9rem;
 }
 
-.category-link.active {
-    border-radius: 0;
-    color: black !important;
-    background-color: #fff !important;
-    border-bottom: 6px solid #E6C06C;
-}
-
-.category-link-text.active {
-    border-radius: 0;
-    color: #0B487D !important;
-    background-color: #fff !important;
-    border-bottom: 6px solid #E6C06C;
-}
-
 .menu-category-text {
-
     height: 226px;
     justify-content: center;
     align-items: center;
@@ -428,10 +403,6 @@ html, body {
     margin: 0 7rem;
 }
 
-.text-step {
-    font-size: 25px;
-}
-
 .circle-step {
     width: 88px;
     height: 88px;
@@ -439,18 +410,16 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 23px;
+    font-size: 17.3pt;
     font-weight: 600;
 }
 
 .title-step {
-    font-size: 25px;
     font-weight: 600;
 }
 
 .row-step {
     padding: 5rem 0 3rem 0;
-    justify-content: center;
 }
 
 .col-step {
@@ -476,7 +445,7 @@ html, body {
 }
 
 #btn-register-step {
-    font-size: 25px;
+    font-size: 18.7pt;
 }
 
 @media screen and (max-width: 800px) {
@@ -511,8 +480,7 @@ html, body {
 }
 
 .rating-point {
-    color: #0B487D;
-    font-size: 25px;
+    font-size: 18.7pt;
 }
 
 .ic-heart {
@@ -525,7 +493,7 @@ video {
 }
 
 .list-video {
-    font-size: 30px;
+    font-size: 22.5pt;
     max-width: 461px;
     height: 294px;
     overflow-y: auto;
@@ -561,11 +529,6 @@ video {
     padding: 5rem 0 5rem 0;
 }
 
-.row-2 {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
 
 .border-right-radius {
     border: 10px solid;
@@ -577,10 +540,8 @@ video {
 
 .text-content {
     padding: 2.5rem 11.7rem 2.8rem 0;
-    display: flex;
-    font-size: 45px;
+    font-size: 33.8pt;
     font-weight: 600;
-    justify-content: flex-end;
 }
 
 .text {
@@ -597,7 +558,6 @@ video {
 
 .circle-check {
     left: 64%;
-    position: absolute;
     border-radius: 50%;
     width: 206px;
     height: 206px;
@@ -615,7 +575,7 @@ video {
 }
 
 .btn-register-now {
-    font-size: 40px;
+    font-size: 30pt;
     color: #fff;
     border-radius: 50px;
     margin-top: 5rem;
@@ -652,8 +612,6 @@ video {
 
 
 .avatar-guest {
-    background-color: #0B487D;
-    border: 2px solid #E6C06C;
     border-radius: 200px;
     width: 251px;
     top: -125px;
@@ -670,6 +628,7 @@ video {
     font-size: 16pt;
     padding: 10rem 1.3rem 3rem 1.3rem;
     position: unset;
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
 
 .content-praise p {
@@ -707,21 +666,12 @@ video {
     min-height: 1042px;
 }
 
-.modal-register-content {
-    border-radius: 0;
-    border: 3px solid #E6C06C;
-    background-color: rgba(15, 34, 51, 0.8);
-    max-width: 1369px;
-    min-height: 789px;
-
-}
-
 .box-btn-login {
     max-width: 559px;
 }
 
 .btn-login {
-    font-size: 28px;
+    font-size: 21pt;
     padding: 0.5rem 3.6rem;
     max-width: 475px;
     display: flex;
@@ -761,11 +711,8 @@ video {
 
 .line-or {
     max-width: 559px;
-    font-size: 40px;
-    color: #fff;
-    display: flex;
+    font-size: 30pt;
     justify-items: center;
-    align-items: center;
     margin: 4.3rem 0;
 }
 
@@ -780,12 +727,8 @@ video {
 .input-login {
     max-width: 559px;
     height: 77px;
-    background-color: #fff;
     border: 3px solid #E6C06C;
     border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 0.5rem;
     margin-right: 0 !important;
 }
@@ -800,7 +743,6 @@ video {
     width: 30px;
     height: 30px;
     border: 2px solid #E6C06C;
-    margin-right: 1rem;
 }
 
 .rememberCheck input[type="checkbox"] {
@@ -829,7 +771,6 @@ video {
 
 .input-login-item {
     border: none;
-    font-size: 25px;
     width: 90%;
     height: 100%;
 }
@@ -838,19 +779,10 @@ video {
     outline: none;
 }
 
-.col-forget-pw {
-    text-align: right;
-    padding: 0;
-}
 
 .bottom-form {
     padding: 2.8rem 0 0 2.6rem;
-    font-size: 25px;
     max-width: 559px;
-}
-
-.bottom-form a {
-    color: #fff !important;
 }
 
 #btn-login {
@@ -874,33 +806,22 @@ video {
 
 .already-member {
     max-width: 559px;
-    text-align: center;
-    font-size: 30px;
+    font-size: 22.5pt;
     margin-top: 2.6rem;
 
 }
 
-.login-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .text-login-left {
     width: fit-content;
-    font-size: 40px;
-    color: #E6C06C;
-    text-align: center;
+    font-size: 30pt;
 }
 
 .btn-close {
     display: none;
     border: none;
-
 }
 
 .btn-x {
-    color: #E6C06C;
     line-height: 0;
     font-size: 2rem;
     text-shadow: none;
@@ -958,7 +879,7 @@ video {
     padding: 0 1.5rem;
     border: 2px solid;
     border-radius: 19px;
-    font-size: 20px;
+    font-size: 15pt;
 }
 
 .btn-more:hover {

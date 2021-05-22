@@ -6,8 +6,8 @@
             </div>
         </div>
         <div class="col-sm d-flex flex-column justify-content-end">
-            <div class="name-tutor text-blue">{{ $tutor_name }}</div>
-            <div class="position-tutor text-blue">Tutor/Admission Consultant</div>
+            <div class="name-tutor text-primary">{{ $tutor_name }}</div>
+            <div class="position-tutor text-primary">Tutor/Admission Consultant</div>
             <div class="d-flex mt-5 bottom-info-right">
                 <div class="ic-tutor ic-light">
                     <img src="{{ asset("images/ic/Group62.png")}}">
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <div class="mt-5 container-fluid content-info">
+    <div class="mt-5 container-fluid content-info text-primary">
         <div class="mb-5">
             {{ $tutor_info }}
         </div>

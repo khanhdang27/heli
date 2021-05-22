@@ -24,19 +24,23 @@
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('subject_name:en', 'Name (English)') }}
-                                {{ Form::text('subject_name:en', old('subject_name:en'),['class' => 'form-control', 'required'] ) }}
+                                {{ Form::text('subject_name:en', old('subject_name:en'),['class' => 'form-control'] ) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('subject_name:cn', 'Name (Traditional Chinese)') }}
-                                {{ Form::text('subject_name:cn', old('subject_name:cn'),['class' => 'form-control', 'required'] ) }}
+                                {{ Form::text('subject_name:cn', old('subject_name:cn'),['class' => 'form-control'] ) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('subject_name:sc', 'Name (Simplify Chinese)') }}
-                                {{ Form::text('subject_name:sc', old('subject_name:sc'),['class' => 'form-control', 'required'] ) }}
+                                {{ Form::text('subject_name:sc', old('subject_name:sc'),['class' => 'form-control'] ) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('subject_color', 'Color') }}
-                                {{ Form::color('subject_color','#dddddd', ['class' => 'form-control'] ) }}
+                                {{ Form::label('subject_color_background', 'Color') }}
+                                {{ Form::color('subject_color_background','#dddddd', ['class' => 'form-control'] ) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('subject_color_text', 'Color') }}
+                                {{ Form::color('subject_color_text','#dddddd', ['class' => 'form-control'] ) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}

@@ -15,16 +15,16 @@ $date = '10/03/2021'
             </div>
             <div class="col-xl-9 d-flex justify-content-between">
                 <div class="d-flex flex-column justify-content-between">
-                    <div class="name-guest">{{$guestName}}</div>
-                    <div class="content-review">{{$content}}</div>
-                    <div class="name-course">{{$courseName}}</div>
+                    <div class="name-guest text-primary">{{$guestName}}</div>
+                    <div class="content-review text-primary">{{$content}}</div>
+                    <div class="name-course text-primary">{{$courseName}}</div>
                 </div>
                 <div class="rating">
                     <div class="d-flex">
                         <div>{{$star}}</div>
-                        <p class="point text-blue">{{$rate}}</p>
+                        <p class="point text-primary">{{$rate}}</p>
                     </div>
-                    <div class="date text-blue">{{$date}}</div>
+                    <div class="text-primary">{{$date}}</div>
                 </div>
             </div>
 

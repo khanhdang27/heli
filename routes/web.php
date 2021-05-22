@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\User;
@@ -47,7 +49,7 @@ Route::prefix('site/')->name('site.')->group(function () {
     })->name('course');
 
     Route::get('lesson', function () {
-        return view('lesson-page');
+        return view('course.lesson-page');
     })->name('lesson');
 
     Route::get('blog', function () {
@@ -83,7 +85,7 @@ Route::prefix('site/')->name('site.')->group(function () {
 
 Route::prefix('user/')->name('user.')->group(function () {
     Route::get('my-course', function () {
-        return view('my-course-page');
+        return view('course.my-course-page');
     })->name('my-course');
     Route::get('calendar', function () {
         return view('calendar-page');
@@ -98,43 +100,36 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/', [LoginController::class, 'dashboard'])
             ->name('dashboard');
-        Route::resource('subject', 'SubjectController');
 
-        Route::resource('tutor', 'TutorController');
-
-        Route::resource('course', 'CourseController');
-
-        // Route::resource('material', 'CourseMaterialController');
-
-        Route::resource('banner', 'BannerController');
-
-//        Route::get('banner/index',[BannerController::class, 'index'] )->name('banner.index');
-//        Route::get('banner/create',[BannerController::class, 'create'] )->name('banner.create');
-//        Route::post('banner/store', [BannerController::class, 'store'])->name('banner.store');
-//        Route::post('banner/edit', [BannerController::class, 'edit'])->name('banner.edit');
-//        Route::post('banner/destroy', [BannerController::class, 'destroy'])->name('banner.destroy');
-
-        Route::resource('user', 'UserController');
-
-        // Route::get('course/{course} /video', [CourseController::class, 'videoList'])
-        //     ->name('course.video.index');
-        // Route::get('course/{course}/video/create', [CourseController::class, 'createVideo'])
-        //     ->name('course.video.create');
-        // Route::post('course/{course}/video', [CourseController::class, 'storeVideo'])
-        //     ->name('course.video.store');
-        // Route::get('course/{course}/video/{course_video}/download', [CourseController::class, 'downloadVideo'])
-        //     ->name('course.video.download');
-        // Route::get('course/{course}/video/{course_video}/edit', [CourseController::class, 'editVideo'])
-        //     ->name('course.video.edit');
-
-        // Route::put('course/{course}/video/{course_video}', [CourseController::class, 'updateVideo'])
-        //     ->name('course.video.update');
-
-        // Route::delete('course/{course}/video/{course_video}', [CourseController::class, 'destroyVideo'])
-        //     ->name('course.video.destroy');
-
+        Route::resource('subject', 'Admin\SubjectController');
         Route::put('/subject/updateActive/{id}', [SubjectController::class, 'updateActive'])
             ->name('subject.updateActive');
+
+        Route::resource('tutor', 'Admin\TutorController');
+        Route::resource('course', 'Admin\CourseController');
+        Route::resource('course-material', 'Admin\CourseMaterialController');
+        Route::resource('banner', 'Admin\BannerController');
+
+        Route::resource('user', 'Admin\UserController');
+
+        Route::get('course/{course} /video', [CourseController::class, 'videoList'])
+            ->name('course.video.index');
+        Route::get('course/{course}/video/create', [CourseController::class, 'createVideo'])
+            ->name('course.video.create');
+        Route::post('course/{course}/video', [CourseController::class, 'storeVideo'])
+            ->name('course.video.store');
+        Route::get('course/{course}/video/{course_video}/download', [CourseController::class, 'downloadVideo'])
+            ->name('course.video.download');
+        Route::get('course/{course}/video/{course_video}/edit', [CourseController::class, 'editVideo'])
+            ->name('course.video.edit');
+
+        Route::put('course/{course}/video/{course_video}', [CourseController::class, 'updateVideo'])
+            ->name('course.video.update');
+
+        Route::delete('course/{course}/video/{course_video}', [CourseController::class, 'destroyVideo'])
+            ->name('course.video.destroy');
+
+
     });
 });
 

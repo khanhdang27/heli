@@ -28,6 +28,6 @@ class CreateBannerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banner');
+        Schema::dropIfExists('banners');
     }
 }

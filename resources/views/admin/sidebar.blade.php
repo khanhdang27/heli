@@ -8,7 +8,7 @@
         </button>
 
         <!-- Brand -->
-        <a class="navbar-brand" href="{{ route('site.home') }}">
+        <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
             <img src="{{ asset('images/HeliosLogo.png') }}" class="navbar-brand-img
               mx-auto" alt="...">
         </a>
@@ -23,11 +23,10 @@
                 <a href="#" id="sidebarIcon" class="dropdown-toggle" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-sm avatar-online">
-                        <img src="./cpanel/assets/img/avatars/profiles/avatar-1.jpg" class="avatar-img rounded-circle"
+                        <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg") }}" class="avatar-img rounded-circle"
                              alt="...">
                     </div>
                 </a>
-
                 <!-- Menu -->
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sidebarIcon">
                     <a href="profile-posts.html" class="dropdown-item">Profile</a>
@@ -42,7 +41,6 @@
 
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="sidebarCollapse">
-
             <!-- Form -->
             <form class="mt-4 mb-3 d-md-none">
                 <div class="input-group input-group-rounded input-group-merge">
@@ -83,7 +81,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.material.index') active @endif"
-                       href="{{ route('admin.material.index') }}">
+                       href="{{ route('admin.course-material.index') }}">
                         <i class="fe fe-clipboard"></i> Materials
                     </a>
                 </li>
@@ -531,7 +529,8 @@
 
             <div class="mt-auto"></div>
 
-        </div> <!-- / .navbar-collapse -->
+        </div>
+        <!-- / .navbar-collapse -->
 
     </div>
 </nav>

@@ -30,12 +30,12 @@
     ]
     ?>
     <div class="banner">
-        @include('categories-bar')
+        @include('layout.categories-bar')
         @if(Auth::user()==null)
             <x-home.banner static="for test"></x-home.banner>
         @else
             <div class="top-page-loggedin bg-transparent">
-                <div class="container text-center title-news">
+                <div class="container text-center title-news text-secondary">
                     @lang('keywords.latestNewsPage')
                 </div>
                 <div class="container container-news-page">
@@ -130,7 +130,7 @@
         @if(Auth::user()==null)
             <div class="container-fluid step-for-register bg-dark">
                 <div class="content-step">
-                    <div class="row row-step">
+                    <div class="row row-step justify-content-center">
                         <div class="circle-step bg-secondary text-primary">
                             Step 1
                         </div>
@@ -229,8 +229,8 @@
         @else
             <div class="container-fluid container-video border-secondary mt-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
-                    <p class="text-33">繼續我的課程...</p>
-                    <button class=" m-0 btn-register-now text-25-white btn-dark-blue ">
+                    <p class="text-33 text-primary">繼續我的課程...</p>
+                    <button class="m-0 btn-register-now text-25 text-white btn-dark-blue btn-dark">
                         其他已購買課程
                     </button>
                 </div>
@@ -246,7 +246,7 @@
                             <video width="846" class="course-video" src="#" controls></video>
                         </div>
                         <div class="col-sm-4">
-                            <div class="box-list-video">
+                            <div class="box-list-video text-primary">
                                 <ol>
                                     @foreach($list_video as $item)
                                         <li>{{$item}}</li>
@@ -260,9 +260,9 @@
         @endif
         @if(Auth::user()==null)
             <div class="free-class-container">
-                <div class="row-2">
+                <div class="position-relative d-flex align-items-center">
                     <div class="border-right-radius border-primary">
-                        <div class="text-content text-primary">
+                        <div class="text-content d-flex justify-content-end text-primary">
                             <span class="text">
                                 免費試堂；體驗課程 <br>
                                 網上課程及實時課程 <br>
@@ -270,7 +270,8 @@
                             </span>
                         </div>
                     </div>
-                    <div class="circle-check bg-primary d-flex justify-content-center align-items-center">
+                    <div
+                        class="circle-check position-absolute bg-primary d-flex justify-content-center align-items-center">
                         <img width="133px" src="images/ic/Group8.png">
                     </div>
                 </div>
@@ -288,7 +289,7 @@
                     <div class="d-flex w-75 flex-lg-nowrap flex-wrap m-auto">
                         @for ($guestPraise = 0; $guestPraise < 3; $guestPraise++)
                             <div class="praise-box ml-4 mr-4">
-                                @include('praise')
+                                @include('HomePage.praise')
                             </div>
                         @endfor
                     </div>

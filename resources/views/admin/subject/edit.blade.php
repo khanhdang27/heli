@@ -35,8 +35,12 @@
                                 {{ Form::text('subject_name:sc', $subject->translate('sc')->subject_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('subject_color', 'Color)') }}
-                                {{ Form::color('subject_color', $subject->subject_color, ['class' => 'form-control']) }}
+                                {{ Form::label('subject_color_background', 'Color)') }}
+                                {{ Form::color('subject_color_background', $subject->subject_color_background, ['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('subject_color_text', 'Color)') }}
+                                {{ Form::color('subject_color_text', $subject->subject_color_text, ['class' => 'form-control']) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}

@@ -57,12 +57,12 @@
             @if(Auth::user())
                 <button class="nav-item dropdown p-0 border-0 m-auto btn-cart">
                     <a class="btn-account text-decoration-none" href="#" id="navbardrop" data-toggle="dropdown">
-                        <img src={{asset("images/ic/user.png")}} width="40">
+                        <img src={{asset("images/ic/ic_user.svg")}} width="40">
                     </a>
                     <div class="dropdown-menu my-dropdown-menu language-item">
                         <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Setting</a>
-                        <a class="dropdown-item" href="{{ URL::route('site.userLogout')}}">Logout</a>
+                        <a class="dropdown-item" href="#">Settings</a>
+                        <a class="dropdown-item" href="{{ URL::route('site.userLogout')}}">Log out</a>
                     </div>
                 </button>
             @endif

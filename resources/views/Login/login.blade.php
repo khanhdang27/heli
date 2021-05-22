@@ -10,8 +10,8 @@
             <div class="modal-body modal-body-login">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-6 login-left">
-                            <div class="text-login-left">
+                        <div class="col-sm-6 d-flex justify-content-center align-items-center">
+                            <div class="text-login-left text-center">
                                 歡迎回來！<br>
                                 登入繼續體驗課程
                             </div>
@@ -33,34 +33,34 @@
                                     </div>@lang('keywords.loginWithAp')
                                 </div>
                             </div>
-                            <div class="line-or">
+                            <div class="line-or d-flex align-items-center text-white">
                                 <hr>
                                 <span class="text-or">or</span>
                                 <hr>
                             </div>
                             @csrf
                             {!! Form::open(['id'=>'formLogin']) !!}
-                            <div class="input-login mb-3">
+                            <div class="input-login d-flex justify-content-center align-items-center mb-3">
                                 {{ Form::email('email','phung@gmail.com',['class'=>'input-login-item', 'placeholder'=>'Email']) }}
                             </div>
-                            <div class="input-login">
+                            <div class="input-login d-flex justify-content-center align-items-center">
                                 {{ Form::password('password', ['class'=> 'input-login-item', 'placeholder'=>'Password']) }}
                             </div>
                             <div class="bottom-btn">
                                 {{ Form::submit('Login', ['class' => 'btn-login btn-secondary btn-register-now', 'id'=>'btn-login']) }}
                             </div>
                             {!! Form::close() !!}
-                            <div class="row bottom-form text-white">
+                            <div class="row bottom-form">
                                 <div class="col-sm">
-                                    <div class="remember d-flex">
-                                        <label class="rememberCheck" for="rememberCheck">
+                                    <div class="remember text-white d-flex">
+                                        <label class="rememberCheck mr-3" for="rememberCheck">
                                             <input type="checkbox" id="rememberCheck">
                                             <div class="check"></div>
                                         </label>
                                         @lang('keywords.rememberMe')
                                     </div>
                                 </div>
-                                <div class="col-sm col-forget-pw">
+                                <div class="col-sm text-right p-0 col-forget-pw">
                                     <a href="#">@lang('keywords.forgotPass')</a><br>
                                     <a href="#">@lang('keywords.register')</a>
                                 </div>

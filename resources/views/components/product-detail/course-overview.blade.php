@@ -30,15 +30,15 @@ $author = "Ms. Polly Yeung 親自撰寫";
 ?>
 
 <div class="tab-item-content">
-    <div class="pb-5 text-intro">
+    <div class="pb-5 text-intro text-primary">
         {!! $descrition !!}
     </div>
     <div class="pt-5 note-package">
-        <div class="title">@lang('keywords.coursePage.notePackage')</div>
+        <div class="title text-primary">@lang('keywords.coursePage.notePackage')</div>
         <div class="mt-5">
             <img class="responsive" height="485" src="{{ asset("images/book.jpg")}}">
         </div>
-        <div class="text-blue bottom-package">
+        <div class="text-primary bottom-package">
             <p class="pb-3">** {{$author}}</p>
 
             {{$documentTitle}}

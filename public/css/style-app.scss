@@ -107,3 +107,129 @@
     color: var(--primary);
     font-size: 18.5pt;
 }
+
+.category-link.active {
+    border-radius: 0;
+    color: black !important;
+    background-color: var(--white) !important;
+    border-bottom: 6px solid var(--secondary);
+}
+
+.category-link-text.active {
+    border-radius: 0;
+    color: var(--primary) !important;
+    background-color: #fff !important;
+    border-bottom: 6px solid var(--secondary);
+}
+
+.input-login {
+    background-color: var(--white);
+}
+
+.bottom-form {
+    a {
+        color: var(--white);
+    }
+}
+
+.text-login-left {
+    color: var(--secondary);
+}
+
+.btn-x {
+    color: var(--secondary);
+}
+
+.btn-x:focus {
+    outline: none;
+}
+
+.btn-x:hover {
+    color: var(--white);
+}
+
+.input-login {
+    .input-login-item {
+        font-size: 18.7pt;
+    }
+}
+
+.bottom-form {
+    font-size: 18.7pt;
+}
+
+.content-step {
+
+    font-size: 18.7pt;
+
+}
+
+.menu-tab {
+    a {
+        font-size: 22.5pt;
+        color: var(--primary);
+        font-weight: 600;
+    }
+}
+
+.share-bar {
+    font-size: 15pt;
+    color: var(--primary);
+}
+
+.product {
+    p {
+        color: var(--primary);
+    }
+}
+
+.btn-hashtag {
+    background-color: var(--primary);
+    color: var(--white);
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.btn-hashtag:hover {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: var(--dark);
+    color: var(--white);
+}
+
+.btn-hashtag-small {
+    background-color: var(--white);
+    font-size: 12px;
+    color: var(--primary);
+    border: none;
+    border-radius: 19px;
+    padding: 0.5rem 1rem;
+    margin: 0.3rem 0.3rem;
+    float: right;
+}
+
+.btn-read-more {
+    font-size: 33.8pt;
+    color: var(--primary);
+    background-color: var(--white);
+    border: 2px solid var(--primary);
+    border-radius: 43px;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.btn-read-more:focus {
+    outline: none;
+}
+
+.text-25 {
+    font-size: 18.7pt;
+    color: var(--primary);
+}
+
+.text-28 {
+    font-size: 21pt;
+    color: var(--primary);
+}

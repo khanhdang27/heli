@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => 'admin.material.store', 'enctype'=>'multipart/form-data']) !!}
+                            {!! Form::open(['route' => 'admin.course-material.store', 'enctype'=>'multipart/form-data']) !!}
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('material_name:en', 'Material Name (English)') }}

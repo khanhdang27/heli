@@ -1,27 +1,18 @@
 <nav class="navbar navbar-expand-md navbar-light d-none d-md-flex" id="topbar">
     <div class="container-fluid">
-
-        <!-- Form -->
         <form class="form-inline mr-4 d-none d-md-flex">
             <div class="input-group input-group-flush input-group-merge" data-toggle="lists" data-options="{&quot;valueNames&quot;: [&quot;name&quot;]}">
-
-                <!-- Input -->
                 <input type="search" class="form-control form-control-prepended dropdown-toggle search" data-toggle="dropdown" placeholder="Search" aria-label="Search" aria-expanded="false">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="fe fe-search"></i>
                     </div>
                 </div>
-
-                <!-- Menu -->
-
-
             </div>
         </form>
 
         <!-- User -->
         <div class="navbar-user">
-
             <!-- Dropdown -->
             <div class="dropdown mr-4 d-none d-md-flex">
 
@@ -314,14 +305,13 @@
                 </div> <!-- / .dropdown-menu -->
 
             </div>
-
             <!-- Dropdown -->
             <div class="dropdown">
 
                 <!-- Toggle -->
                 <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    <img src="./cpanel/assets/img/avatars/profiles/avatar-1.jpg" alt="..."
+                    <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg") }}" alt="..."
                          class="avatar-img rounded-circle">
                 </a>
 
@@ -334,7 +324,6 @@
                 </div>
 
             </div>
-
         </div>
 
     </div>

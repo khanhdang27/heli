@@ -27,8 +27,8 @@ class CreateSubjectRequest extends FormRequest
             'subject_name:en' => 'required',
             'subject_name:cn' => 'required',
             'subject_name:sc' => 'required',
-            'subject_color' => 'required',
-
+            'subject_color_background' => 'required',
+            'subject_color_text' => 'required',
         ];
     }
 }
