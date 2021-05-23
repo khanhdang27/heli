@@ -35,6 +35,7 @@
 <div class="main-content">
     @include('admin.nav')
     @yield('content')
+
 </div>
 
 
@@ -54,17 +55,20 @@
 <script src="{{ asset('cpanel/assets/libs/chart.js/Chart.extension.min.js') }}"></script>
 <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 <!-- Map -->
-<script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+{{-- <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script> --}}
 
 <!-- Theme JS -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
 <script>
     document.body.addEventListener("onload", function() {
         this.style.display = 'block !important';
     });
 </script>
-@stack('js')
 
+
+@stack('js')
 @stack('ck-editor-init')
 
 </body>

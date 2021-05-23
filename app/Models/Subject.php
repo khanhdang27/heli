@@ -36,15 +36,4 @@ class Subject extends Model implements TranslatableContract
     protected $table = 'subjects';
     protected $guarded = [];
     public $translatedAttributes = ['subject_name'];
-
-
-    public function getName()
-    {
-        $subjectName = Subject::all();
-        $options = $subjectName->pluck('subject_name', 'id')->toArray();
-        return $options;
-    }
 }
-
-
-

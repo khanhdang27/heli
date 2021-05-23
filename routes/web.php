@@ -22,7 +22,7 @@ Route::redirect('', 'site/', 301);
 
 Route::prefix('site/')->name('site.')->group(function () {
     Route::get('', function () {
-        return view('HomePage.home-page');
+        return view('home.home-page');
     })->name('home');
 
     Route::post('register', 'Auth\RegisterController@register')->name('register');
@@ -106,6 +106,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('subject.updateActive');
 
         Route::resource('tutor', 'Admin\TutorController');
+        
+        Route::resource('file', 'FileController');
+        
         Route::resource('course', 'Admin\CourseController');
         Route::resource('course-material', 'Admin\CourseMaterialController');
         Route::resource('banner', 'Admin\BannerController');

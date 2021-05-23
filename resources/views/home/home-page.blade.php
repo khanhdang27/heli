@@ -125,7 +125,7 @@
             </div>
         @endif
         <div class="product-tab">
-            @include('HomePage.product-tab')
+            @include('home.product-tab')
         </div>
         @if(Auth::user()==null)
             <div class="container-fluid step-for-register bg-dark">
@@ -281,7 +281,6 @@
                     </button>
                 </div>
             </div>
-
             <div class="justify-content-center">
                 <h1 class="title-card text-primary">客戶的表揚</h1>
                 <div class="guest-praise-container">
@@ -289,7 +288,7 @@
                     <div class="d-flex w-75 flex-lg-nowrap flex-wrap m-auto">
                         @for ($guestPraise = 0; $guestPraise < 3; $guestPraise++)
                             <div class="praise-box ml-4 mr-4">
-                                @include('HomePage.praise')
+                                @include('home.praise')
                             </div>
                         @endfor
                     </div>
@@ -297,5 +296,4 @@
             </div>
         @endif
     </div>
-
 @endsection

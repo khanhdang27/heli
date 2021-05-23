@@ -1,9 +1,8 @@
-<?php
+@php
+    use \App\Utilities\SelectionByClass;
+@endphp
 
-use App\Models\Subject;
 
-$subject = new Subject();
-?>
 <nav class="navbar navbar-expand-xl container-fluid sub-header border-secondary">
     <button class="navbar-toggler btn-collapse" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +27,7 @@ $subject = new Subject();
             </li>
 
 
-            @foreach( $subject->getName() as $value)
+            @foreach( SelectionByClass::getValues(\App\Models\Subject::class,'subject_name', 'id') as $value)
                 <li class="nav-item">
                     <a class="nav-link sub-item" href="#">{{ $value }}</a>
                 </li>

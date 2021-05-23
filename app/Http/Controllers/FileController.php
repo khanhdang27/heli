@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -37,7 +39,22 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd('it run');
+        $image = $request->file('file');
+        $fileInfo = $image->getClientOriginalName();
+        $filename = pathinfo($fileInfo, PATHINFO_FILENAME);
+        $extension = pathinfo($fileInfo, PATHINFO_EXTENSION);
+        $file_name = $filename . '-' . time() . '.' . $extension;
+        
+        $image = Storage::put('photo', $image);
+
+        try {
+            $file = new File(['source'=>$image, 'uploaded_by'=>Auth()->id(), 'status'=> true]);
+            $file->save();
+            return $file->id;
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 
     /**

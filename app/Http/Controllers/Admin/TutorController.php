@@ -63,7 +63,7 @@ class TutorController extends Controller
         );
         $tutor->tutor_photo = $request->file('tutor_photo')->store('photo');
         $tutor->save();
-        return back()->with('success', 'Delete success');
+        return back()->with('success', 'Create success');
     }
 
     /**
