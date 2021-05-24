@@ -13,7 +13,7 @@ class CreateTutorTranslations extends Migration
      */
     public function up()
     {
-        Schema::create('tutor_information', function (Blueprint $table) {
+        Schema::create('tutor_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tutor_id')
                 ->constrained('users')

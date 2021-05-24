@@ -8,6 +8,7 @@ use App\Http\Requests\Tutor\UpdateTutorRequest;
 use App\Models\Subject;
 use App\Models\Tutor;
 use App\Models\TutorTeachSubject;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
@@ -23,11 +24,11 @@ class TutorController extends Controller
     {
         $subjects = Subject::all();
         $tutors = Tutor::query()
-            ->with('subjects', 'tutor_information')
+            ->with('subject', 'translations')
             ->when(request('name') != '', function (Builder $query) {
                 $query->where('full_name', 'like', '%' . request('name') . '%');
             })
-            ->when(request('subjects') != '', function (Builder $query) {
+            ->when(request('subject') != '', function (Builder $query) {
                 $query->where('subject_id', request('subject'));
             })
             ->paginate(20)
@@ -59,18 +60,44 @@ class TutorController extends Controller
      */
     public function store(CreateTutorRequest $request)
     {
-        if ($_request = $request->validated()){
+        if ($_request = $request->validated()) {
+
+            $_user = new User([
+                "name" => $_request["name"],
+                "email" => $_request["email"],
+                "password" => $_request["password"]
+            ]);
+
+            $_user->save();
+
+            unset($_request["name"]);
+            unset($_request["email"]);
+            unset($_request["password"]);
+
             $_subject = $_request['subject_id'];
             unset($_request['subject_id']);
-            $tutor = new Tutor(
-                $_request
-            );
+            $tutor = new Tutor([
+                "user_id" => $_user->id,
+                "full_name" => $_request["full_name"],
+                "tutor_info:en"  => $_request["tutor_info:en"],
+                "tutor_info:cn"  => $_request["tutor_info:cn"],
+                "tutor_info:sc"  => $_request["tutor_info:sc"],
+                "tutor_level:en"  => $_request["tutor_level:en"],
+                "tutor_level:cn"  => $_request["tutor_level:cn"],
+                "tutor_level:sc"  => $_request["tutor_level:sc"],
+                "tutor_experience:en"  => $_request["tutor_experience:en"],
+                "tutor_experience:cn"  => $_request["tutor_experience:cn"],
+                "tutor_experience:sc"  => $_request["tutor_experience:sc"],
+                "tutor_specialized:en"  => $_request["tutor_specialized:en"],
+                "tutor_specialized:cn"  => $_request["tutor_specialized:cn"],
+                "tutor_specialized:sc"  => $_request["tutor_specialized:sc"]
+            ]);
             $tutor->save();
 
-            $tutorTeachSubject = new TutorTeachSubject(['tutor_id'=> $tutor->id, 'subject_id'=> $_subject]);
+            $tutorTeachSubject = new TutorTeachSubject(['tutor_id' => $tutor->id, 'subject_id' => $_subject]);
             $tutorTeachSubject->save();
         };
-      
+
         return back()->with('success', 'Create success');
     }
 
@@ -145,6 +172,4 @@ class TutorController extends Controller
             ], 400);
         }
     }
-
-
 }

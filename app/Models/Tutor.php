@@ -6,6 +6,7 @@ use App\Models\TutorTeachSubject;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use App\Utilities\MapFromData;
 
 /**
  * App\Models\Tutor
@@ -48,6 +49,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tutor extends Model implements TranslatableContract
 {
     use Translatable;
+    use MapFromData;
 
     protected $table = 'tutors';
     protected $guarded = [];

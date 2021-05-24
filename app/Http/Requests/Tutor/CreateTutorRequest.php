@@ -27,7 +27,7 @@ class CreateTutorRequest extends FormRequest
             'name' => 'required',
             'email'             =>'required',
             'password'          => 'required',
-            'password_retype'    => 'required_unless::password,',
+            // 'password_retype'    => 'required_unless::password,',
             'full_name'          => 'required',
             'subject_id'          => 'required',
             'tutor_info:en'       => 'required',

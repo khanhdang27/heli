@@ -1,5 +1,7 @@
 @php
     use \App\Utilities\SelectionByClass;
+    use \App\Models\Subject;
+
 @endphp
 
 @extends('admin.layout')
@@ -47,7 +49,7 @@
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id',[1=>1],null, ['class' => 'form-control']) }}
+                                {{ Form::select('subject_id',[SelectionByClass::getValues(Subject::class,'subject_name','id')],null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:en', 'Tutor Info (English)') }}

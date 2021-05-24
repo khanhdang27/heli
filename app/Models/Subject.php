@@ -5,6 +5,7 @@ namespace App\Models;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use App\Utilities\MapFromData;
 
 /**
  * App\Models\Subject
@@ -32,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model implements TranslatableContract
 {
     use Translatable;
+    use MapFromData;
 
     protected $table = 'subjects';
     protected $guarded = [];

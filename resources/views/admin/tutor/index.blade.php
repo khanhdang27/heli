@@ -91,11 +91,10 @@
                                                 width="50px;" height="60px;" alt="">
                                         </td>
                                         <td class="goal-project">
-
-                                            {{ $value->tutor_name }}
+                                            {{ $value->full_name }}
                                         </td>
                                         <td class="goal-status">
-                                            {{ $value->subject['subject_name'] }}
+                                            {{ $value->subject[0]['subject_id'] }}
 
                                         </td>
                                         <td class="text-right">

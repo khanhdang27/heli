@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Utilities\MapFromData;
 
 /**
  * App\Models\User
@@ -34,6 +35,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    use MapFromData;
 
     protected $table = 'users';
 
