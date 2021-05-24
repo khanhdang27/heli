@@ -63,10 +63,4 @@ class Tutor extends Model implements TranslatableContract
         return Tutor::all();
     }
 
-    public final function getAllTutorName(): array
-    {
-        $tutorName = Tutor::all();
-        return $tutorName->pluck('full_name', 'id')->toArray();
-    }
-
 }

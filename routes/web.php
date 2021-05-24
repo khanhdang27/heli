@@ -40,9 +40,14 @@ Route::prefix('site/')->name('site.')->group(function () {
         return view('team-page');
     })->name('teams');
 
-    Route::get('subject', function () {
-        return view('subject-page');
-    })->name('subject');
+//    Route::get('subject', function () {
+//        return view('subject-page');
+//    })->name('subject');
+
+    Route::resource('subject', 'Site\SubjectController');
+
+//    Route::get('subject/{id}',[SubjectController::class,'show'])
+//    ->name('subjects');
 
     Route::get('course', function () {
         return view('course.course-page');
@@ -101,14 +106,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [LoginController::class, 'dashboard'])
             ->name('dashboard');
 
+        Route::resource('certificate','Admin\CertificateController');
+
         Route::resource('subject', 'Admin\SubjectController');
+
         Route::put('/subject/updateActive/{id}', [SubjectController::class, 'updateActive'])
             ->name('subject.updateActive');
 
         Route::resource('tutor', 'Admin\TutorController');
-        
+
         Route::resource('file', 'FileController');
-        
+
         Route::resource('course', 'Admin\CourseController');
         Route::resource('course-material', 'Admin\CourseMaterialController');
         Route::resource('banner', 'Admin\BannerController');

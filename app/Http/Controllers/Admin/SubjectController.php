@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\CreateSubjectRequest;
+use App\Models\Certificate;
 use App\Models\Subject;
 use Illuminate\Contracts\View\View;
 
@@ -16,9 +17,11 @@ class SubjectController extends Controller
      */
     public function index()
     {
+        $certificates = Certificate::all();
         $subjects = Subject::where('status', 1)->latest()->get();
         return view('admin.subject.index', [
-            'subjects' => $subjects
+            'subjects' => $subjects,
+            'certificates' =>$certificates
         ]);
     }
 
@@ -29,7 +32,10 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('admin.subject.create');
+        $certificates = Certificate::all();
+        return view('admin.subject.create',[
+            'certificates' => $certificates
+        ]);
     }
 
     /**
@@ -40,6 +46,7 @@ class SubjectController extends Controller
      */
     public function store(CreateSubjectRequest $request)
     {
+
         Subject::create(
             $request->validated()
         );
@@ -50,11 +57,10 @@ class SubjectController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Subject $subject
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show(Subject $subject)
     {
-        //
     }
 
     /**

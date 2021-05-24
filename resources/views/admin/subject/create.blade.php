@@ -1,5 +1,8 @@
 @extends('admin.layout')
 @section('content')
+    @php
+        use App\Utilities\SelectionByClass;
+    @endphp
     <!-- CARDS -->
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
@@ -22,6 +25,11 @@
                         <div class="card-body">
                             {!! Form::open(['route' => 'admin.subject.store', 'enctype' => 'multipart/form-data' ]) !!}
                             @csrf
+                            <div class="form-group ">
+
+                                {{ Form::label('certificate_id', 'Certificate') }}
+                                {{ Form::select('certificate_id', SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id'),null, ['class' => 'form-control']) }}
+                            </div>
                             <div class="form-group ">
                                 {{ Form::label('subject_name:en', 'Name (English)') }}
                                 {{ Form::text('subject_name:en', old('subject_name:en'),['class' => 'form-control'] ) }}

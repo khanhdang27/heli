@@ -9,4 +9,13 @@ class File extends Model
     protected $table = 'file';
 
     public $timestamps = TRUE;
+
+    protected $guarded = [];
+
+    protected $hidden = ['source'];
+
+    public function file_refer()
+    {
+        return $this->morphTo();
+    }
 }

@@ -2,8 +2,8 @@
     <span class="text-white">
         <img src={{asset("images/ic/ic_wireless.svg")}}>【IELTS】新型冠狀病毒影響下的最新考試安排 ⾦鐘及尖沙咀英語教學中⼼暫停向公眾開放 ，直⾄另⾏通知 。如有其他需要，必須預約才可進入⼤樓 。更新⽇期: 2021年1⽉8⽇星期五
     </span>
-    
-    
+
+
 </div>
 <nav class="navbar navbar-expand-xl navbar-home">
     <a class="navbar-brand" href="{{ URL::route('site.home') }}">
@@ -24,7 +24,7 @@
                     @lang('keywords.navBar.subjectClassification')
                 </a>
                 <div class="dropdown-menu my-dropdown-menu dropdown-items">
-                    <a class="dropdown-item" href="{{ URL::route('site.subject')}}">IGCSE</a>
+                    <a class="dropdown-item" href="{{ URL::route('site.subject.show',1, true)}}">IGCSE</a>
                     <a class="dropdown-item" href="#">IELTS</a>
                     <a class="dropdown-item" href="#">UKISET</a>
                     <a class="dropdown-item" href="#">IAL</a>
@@ -67,7 +67,7 @@
                 </button>
             @endif
             @if (Auth::guest())
-            <!-- Button Login modal -->
+            <!-- Button login modal -->
                 <button type="button" class="btn-header btn-primary" data-toggle="modal" data-target="#loginModal"
                         id="login">
                     @lang('keywords.navBar.login')

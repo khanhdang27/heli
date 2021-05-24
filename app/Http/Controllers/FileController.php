@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
-use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
 
+    private static $MEGA_BITE = 1000000;
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -24,7 +25,7 @@ class FileController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -34,45 +35,41 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
-        // dd('it run');
+        $type = $request->query('type');
         $image = $request->file('file');
         $fileInfo = $image->getClientOriginalName();
-        $filename = pathinfo($fileInfo, PATHINFO_FILENAME);
-        $extension = pathinfo($fileInfo, PATHINFO_EXTENSION);
-        $file_name = $filename . '-' . time() . '.' . $extension;
-        
-        $image = Storage::put('photo', $image);
-
+        $path = Storage::put($type, $image);
         try {
-            $file = new File(['source'=>$image, 'uploaded_by'=>Auth()->id(), 'status'=> true]);
+            $file = new File(['source'=>$path, 'file_type'=>$type, 'raw_name'=> $fileInfo, 'file_size'=> $image->getSize()/self::$MEGA_BITE, 'uploaded_by'=>Auth()->id(), 'status'=> 1]);
             $file->save();
             return $file->id;
         } catch (\Exception $e) {
-            dd($e);
+            throw $e;
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Response
      */
     public function show(File $file)
     {
-        //
+        $url = Storage::url($file->source);
+        return $url;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Response
      */
     public function edit(File $file)
     {
@@ -82,9 +79,9 @@ class FileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param File $file
+     * @return Response
      */
     public function update(Request $request, File $file)
     {
@@ -94,11 +91,36 @@ class FileController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
+     * @param File $file
+     * @return Response
      */
     public function destroy(File $file)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
+     */
+    public function dowload(File $file)
+    {
+        $url = Storage::url($file->source);
+        return Storage::download($file->source, $file->raw_name);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\File  $file
+     * @return \Illuminate\Http\Response
+     */
+    public function findFileBy($referer)
+    {
+        $files = File::where('referer',$referer);
+
+        return $files;
     }
 }

@@ -131,4 +131,9 @@ class User extends Authenticatable
         return $this->_roles->isTutor();
     }
 
+    public function avatar()
+    {
+        return $this->morphToMany(File::class, 'file_refer');
+    }
+
 }

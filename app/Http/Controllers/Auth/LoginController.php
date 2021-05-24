@@ -15,7 +15,7 @@ class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Login Controller
+    | login Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles authenticating users for the application and
@@ -55,7 +55,7 @@ class LoginController extends Controller
         }
 
         if(Auth::attempt($request->validated())) {
-            return redirect()->route('site.home')->with('success', 'Login successful!');
+            return redirect()->route('site.home')->with('success', 'login successful!');
         }
         throw ValidationException::withMessages([
             'email' => 'Email or Password is incorrect',

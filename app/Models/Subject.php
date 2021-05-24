@@ -36,4 +36,9 @@ class Subject extends Model implements TranslatableContract
     protected $table = 'subjects';
     protected $guarded = [];
     public $translatedAttributes = ['subject_name'];
+
+    public function certificate()
+    {
+        return $this->belongsTo(Certificate::class, 'certificate_id');
+    }
 }

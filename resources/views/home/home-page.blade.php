@@ -30,7 +30,7 @@
     ]
     ?>
     <div class="banner">
-        @include('layout.categories-bar')
+        @include('categories-bar')
         @if(Auth::user()==null)
             <x-home.banner static="for test"></x-home.banner>
         @else

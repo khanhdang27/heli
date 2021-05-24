@@ -24,8 +24,11 @@ class UpdateTutorRequest extends FormRequest
     public function rules()
     {
         return [
-            'tutor_name'          => 'required',
-            'tutor_photo'         => 'nullable|image|mimes:jpg,jpeg,png',
+            'name' => 'required',
+            'email'             =>'required',
+            'password'          => 'required',
+            'password_retype'    => 'required_unless::password,',
+            'full_name'          => 'required',
             'subject_id'          => 'required',
             'tutor_info:en'       => 'required',
             'tutor_info:cn'       => 'required',

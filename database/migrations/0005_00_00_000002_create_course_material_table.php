@@ -21,7 +21,6 @@ class CreateCourseMaterialTable extends Migration
             $table->foreignId('image_id')
                 ->constrained('file')
                 ->cascadeOnDelete();
-            $table->integer('price')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

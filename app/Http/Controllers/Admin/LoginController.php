@@ -18,11 +18,11 @@ class LoginController extends Controller
     public function actionLogin(AdminLoginRequest $request)
     {
         if(Auth::attempt($request->validated())) {
-            
+
             if (Auth::user()->isSuperAdmin() || \Auth::user()->isAdmin()) {
-                return redirect()->route('admin.dashboard')->with('status', 'Login successful!');
+                return redirect()->route('admin.dashboard')->with('status', 'login successful!');
             } else {
-                return redirect()->route('site.home')->with('status', 'Login successful!');
+                return redirect()->route('site.home')->with('status', 'login successful!');
             }
         }
         throw ValidationException::withMessages([

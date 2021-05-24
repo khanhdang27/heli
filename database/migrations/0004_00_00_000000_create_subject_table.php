@@ -15,6 +15,9 @@ class CreateSubjectTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('certificate_id')
+                ->constrained('certificates')
+                ->cascadeOnDelete();
             $table->string('subject_color_background');
             $table->string('subject_color_text');
             $table->integer('status')->default(1);

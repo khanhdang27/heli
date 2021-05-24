@@ -30,13 +30,24 @@
                             {!! Form::open(['route'=> 'admin.tutor.store', 'enctype' => 'multipart/form-data']) !!}
                             @csrf
                             <div class="form-group ">
+                                {{ Form::label('name', 'Username') }}
+                                {{ Form::text('name', old('name'), ['class'=>'form-control']) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('email', 'Tutor email') }}
+                                {{ Form::email('email', old('email'), ['class'=>'form-control']) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('password', 'Password') }}
+                                {{ Form::password('password', ['class'=>'form-control']) }}
+                            </div>
+                            <div class="form-group ">
                                 {{ Form::label('full_name', 'Tutor name') }}
                                 {{ Form::text('full_name', old('full_name'), ['class'=>'form-control']) }}
                             </div>
                             <div class="form-group ">
-
                                 {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id', SelectionByClass::getValues(\App\Models\Subject::class,'subject_name', 'id'),null, ['class' => 'form-control']) }}
+                                {{ Form::select('subject_id',[1=>1],null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:en', 'Tutor Info (English)') }}
@@ -108,12 +119,11 @@
                     </div>
                     <div class="card-body">
                         {!! Form::open([
-                                'route' => 'admin.file.store',
+                                'url' => route('admin.file.store',['type'=>'avatar']),
                                 'enctype'=>'multipart/form-data',
                                 'class'=>'dropzone',
-                                'id'=>"uploadFile"
+                                'id'=>"uploadFile",
                             ])  !!}
-                        @csrf
                         <div class="dz-message">
                             Drag 'n' Drop Files<br>
                         </div>

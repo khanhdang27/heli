@@ -7,6 +7,7 @@ use App\Http\Requests\Tutor\CreateTutorRequest;
 use App\Http\Requests\Tutor\UpdateTutorRequest;
 use App\Models\Subject;
 use App\Models\Tutor;
+use App\Models\TutorTeachSubject;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
@@ -58,11 +59,18 @@ class TutorController extends Controller
      */
     public function store(CreateTutorRequest $request)
     {
-        $tutor = new Tutor(
-            $request->validated()
-        );
-        $tutor->tutor_photo = $request->file('tutor_photo')->store('photo');
-        $tutor->save();
+        if ($_request = $request->validated()){
+            $_subject = $_request['subject_id'];
+            unset($_request['subject_id']);
+            $tutor = new Tutor(
+                $_request
+            );
+            $tutor->save();
+
+            $tutorTeachSubject = new TutorTeachSubject(['tutor_id'=> $tutor->id, 'subject_id'=> $_subject]);
+            $tutorTeachSubject->save();
+        };
+      
         return back()->with('success', 'Create success');
     }
 

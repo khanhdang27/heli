@@ -47,7 +47,7 @@
                                 {{ Form::password('password', ['class'=> 'input-login-item', 'placeholder'=>'Password']) }}
                             </div>
                             <div class="bottom-btn">
-                                {{ Form::submit('Login', ['class' => 'btn-login btn-secondary btn-register-now', 'id'=>'btn-login']) }}
+                                {{ Form::submit('login', ['class' => 'btn-login btn-secondary btn-register-now', 'id'=>'btn-login']) }}
                             </div>
                             {!! Form::close() !!}
                             <div class="row bottom-form">

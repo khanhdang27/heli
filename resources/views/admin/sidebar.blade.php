@@ -68,6 +68,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.certificate.index') active @endif"
+                       href="{{ route('admin.certificate.index') }}">
+                        <i class="fe fe-clipboard"></i> Certificates
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.tutor.index') active @endif"
                        href="{{ route('admin.tutor.index') }}">
                         <i class="fe fe-clipboard"></i> Tutors

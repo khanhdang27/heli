@@ -43,7 +43,7 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $banner = new Banner();
-        $banner->banner_photo = $image;
+//        $banner->banner_id;
         $banner->save();
         return back()->with('success', 'Delete success');
     }

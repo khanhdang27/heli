@@ -47,4 +47,9 @@ class CourseMaterial extends Model implements TranslatableContract
     protected $guarded = [];
     protected $table = 'course_material';
     public $translatedAttributes = ['material_name', 'material_description', 'material_origin'];
+
+    public function documents()
+    {
+        return $this->morphToMany(File::class, 'file_refer');
+    }
 }

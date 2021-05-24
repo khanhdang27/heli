@@ -23,6 +23,18 @@
                             {!! Form::open(['route' => ['admin.tutor.update', $tutor->id],'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
                             @csrf
                             <div class="form-group ">
+                                {{ Form::label('name', 'Username') }}
+                                {{ Form::text('name', $tutor->name, ['class'=>'form-control']) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('email', 'Tutor email') }}
+                                {{ Form::email('email', $tutor->email, ['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('password', 'Password') }}
+                                {{ Form::password('password', ['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group ">
                                 {{ Form::label('tutor_name', 'Tutor name') }}
                                 {{ Form::text('tutor_name', $tutor->tutor_name, ['class' => 'form-control']) }}
                             </div>

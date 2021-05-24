@@ -40,6 +40,11 @@
                                 <tr>
                                     <th>
                                         <a href="#" class="text-muted ">
+                                            Certificate
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="#" class="text-muted ">
                                             Subject Name
                                         </a>
                                     </th>
@@ -55,6 +60,9 @@
                                 <tbody class="list">
                                 @foreach($subjects as $value)
                                     <tr>
+                                        <td class="goal-project">
+                                            {{ $value->certificate['certificate_name'] }}
+                                        </td>
                                         <td class="goal-project">
                                             {{ $value->subject_name }}
                                         </td>

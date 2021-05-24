@@ -24,6 +24,7 @@ class CreateSubjectRequest extends FormRequest
     public function rules()
     {
         return [
+            'certificate_id' => 'required',
             'subject_name:en' => 'required',
             'subject_name:cn' => 'required',
             'subject_name:sc' => 'required',

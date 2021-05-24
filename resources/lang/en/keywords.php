@@ -1,7 +1,7 @@
 <?php
 return [
     'navBar' => [
-        'login' => 'Login',
+        'login' => 'login',
         'register' => 'Register',
         'english' => 'ENG',
         'mentorTeam' => 'Mentor Team',
@@ -42,13 +42,13 @@ return [
     'discountProduct' => 'Latest Discount Courses',
     'welcomeOffer' => 'Welcome Offer',
     'hotCourseSeries' => 'Hot Course Series',
-    'loginWithFb' => 'Login with Facebook',
-    'loginWithGg' => 'Login with Google',
-    'loginWithAp' => 'Login with Apple',
+    'loginWithFb' => 'login with Facebook',
+    'loginWithGg' => 'login with Google',
+    'loginWithAp' => 'login with Apple',
     'rememberMe' => 'Remember me',
     'forgotPass' => 'Forgot password',
     'register' => 'Register',
-    'login' => 'Login',
+    'login' => 'login',
     'alreadyMember' => 'I am already a member',
     'latestNewsPage' => 'Latest news ',
     'starTutorTeam' => 'Star Tutor Team',
