@@ -61,7 +61,6 @@ class TutorController extends Controller
     public function store(CreateTutorRequest $request)
     {
         if ($_request = $request->validated()) {
-
             $_user = new User([
                 "name" => $_request["name"],
                 "email" => $_request["email"],
