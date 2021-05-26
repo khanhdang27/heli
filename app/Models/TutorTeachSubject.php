@@ -17,20 +17,14 @@ class TutorTeachSubject extends Model
 
     protected $guarded = [];
 
-    /**
-     * get user type tutor
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function getUser()
-    {
-        return $this->belongsTo(User::class, 'id');
-    }
-    public function getTutor()
+    
+    public function tutor()
     {
         return $this->belongsTo(Tutor::class, 'id');
     }
-    public function getSubject()
+    
+    public function subject()
     {
-        return $this->belongsTo(Subject::class, 'id');
+        return $this->belongsTo(Subject::class);
     }
 }

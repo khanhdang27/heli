@@ -41,11 +41,20 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $type = $request->query('type');
+        $file_type = File::$UNDEFINED;
         $image = $request->file('file');
         $fileInfo = $image->getClientOriginalName();
         $path = Storage::put($type, $image);
         try {
-            $file = new File(['source'=>$path, 'file_type'=>$type, 'raw_name'=> $fileInfo, 'file_size'=> $image->getSize()/self::$MEGA_BITE, 'uploaded_by'=>Auth()->id(), 'status'=> 1]);
+            switch ($type) {
+                case 'avatar':
+                    $file_type = File::$AVATAR;
+                    break;
+                
+                default:
+                    $file_type = File::$UNDEFINED;
+            }
+            $file = new File(['referer'=> $request->query('ref'), 'source'=>$path, 'file_type'=>$file_type, 'raw_name'=> $fileInfo, 'file_size'=> $image->getSize()/self::$MEGA_BITE, 'uploaded_by'=>Auth()->id(), 'status'=> 1]);
             $file->save();
             return $file->id;
         } catch (\Exception $e) {
@@ -62,7 +71,9 @@ class FileController extends Controller
     public function show(File $file)
     {
         $url = Storage::url($file->source);
-        return $url;
+        
+        return response()->file($url);
+
     }
 
     /**

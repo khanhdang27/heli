@@ -101,6 +101,8 @@ Route::prefix('user/')->name('user.')->group(function () {
     })->name('calendar');
 });
 
+Route::resource('file', 'FileController');
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', [LoginController::class, 'login'])
         ->name('login');
@@ -118,8 +120,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 //            ->name('subject.updateActive');
 
         Route::resource('tutor', 'Admin\TutorController');
-
-        Route::resource('file', 'FileController');
 
         Route::resource('course', 'Admin\CourseController');
         Route::resource('course-material', 'Admin\CourseMaterialController');

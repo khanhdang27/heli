@@ -60,7 +60,6 @@ class TutorController extends Controller
      */
     public function store(CreateTutorRequest $request)
     {
-//        $_user = new User::fromArray($request);
         if ($_request = $request->validated()) {
             $_user = new User([
                 "name" => $_request["name"],
@@ -70,14 +69,7 @@ class TutorController extends Controller
 
             $_user->save();
 
-//            unset($_request["name"]);
-//            unset($_request["email"]);
-//            unset($_request["password"]);
-
             $_subject = $_request['subject_id'];
-
-//            unset($_request['subject_id']);
-
 
             $tutor = new Tutor([
                 "user_id" => $_user->id,
@@ -123,11 +115,9 @@ class TutorController extends Controller
      */
     public function edit(Tutor $tutor)
     {
-        $subjects = Subject::all();
-        $tutor->load('translations');
+        $tutor->load(['translations', 'user', 'subject']);
         return view('admin.tutor.edit', [
             'tutor'    => $tutor,
-            'subjects' => $subjects,
         ]);
     }
 

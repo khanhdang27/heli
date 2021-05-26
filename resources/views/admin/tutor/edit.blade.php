@@ -1,3 +1,7 @@
+@php
+use App\Utilities\SelectionByClass;
+@endphp
+
 @extends('admin.layout')
 @section('content')
     <!-- CARDS -->
@@ -24,7 +28,7 @@
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('name', 'Username') }}
-                                {{ Form::text('name', $tutor->name, ['class'=>'form-control']) }}
+                                {{ Form::text('name', $tutor->user->name, ['class'=>'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('email', 'Tutor email') }}
@@ -39,11 +43,13 @@
                                 {{ Form::text('tutor_name', $tutor->full_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                <?php
-                                use App\Utilities\SelectionByClass
-                                ?>
+                               
                                 {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id', SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),$tutor, ['class' => 'form-control']) }}
+                                {{ Form::select('subject_id', 
+                                    SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'), 
+                                    $tutor->subject[0]->id, 
+                                    ['class' => 'form-control']) 
+                                }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:en', 'Tutor Info (English)') }}
@@ -115,7 +121,10 @@
                     </div>
                     <div class="card-body">
                         {!! Form::open([
-                                'url' => route('admin.file.store',['type'=>'avatar']),
+                                'url' => route('admin.file.store',[
+                                    'type'=>'avatar',
+                                    'ref' => $tutor->id
+                                ]),
                                 'enctype'=>'multipart/form-data',
                                 'class'=>'dropzone',
                                 'id'=>"uploadFile",

@@ -76,9 +76,7 @@
                                         Photo
                                     </th>
                                     <th>
-                                        <a href="#" class="text-muted sort" data-sort="goal-project">
-                                            Name
-                                        </a>
+                                        Name
                                     </th>
                                     <th>
                                         Subject
@@ -90,7 +88,7 @@
                                 @foreach($tutors as $value)
                                     <tr>
                                         <td>
-                                            avatar
+                                            <img type="image/jpg" src="{{ URL::route('file.show',1) }}" width="75" height="75"/> 
                                         </td>
                                         <td class="goal-project">
                                             {{ $value->full_name }}

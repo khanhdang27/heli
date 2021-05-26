@@ -65,4 +65,9 @@ class Subject extends Model implements TranslatableContract
 
         return $optionData->get()->pluck('subject_name', 'id')->toArray();
     }
+
+    public function tutor()
+    {
+        return $this->belongsToMany(Tutor::class, 'tutor_teach_subject');
+    }
 }
