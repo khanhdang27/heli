@@ -3,7 +3,7 @@
     <!-- CARDS -->
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-10 col-xl-8">
+            <div class="col-xl-8">
                 <!-- Goals -->
                 <div class="card">
                     <div class="card-header">
@@ -36,18 +36,14 @@
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_name', 'Tutor name') }}
-                                {{ Form::text('tutor_name', $tutor->tutor_name, ['class' => 'form-control']) }}
-                            </div>
-                            <div class="custom-file mb-4 ">
-                                {{ Form::label('tutor_photo', 'Tutor Photo', ['class' => 'custom-file-label']) }}
-                                {{ Form::file('tutor_photo', ['class' => 'custom-file-input']) }}
+                                {{ Form::text('tutor_name', $tutor->full_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 <?php
-                                $subjectList = new \App\Models\Subject();
+                                use App\Utilities\SelectionByClass
                                 ?>
                                 {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id', $subjectList->getName(),null, ['class' => 'form-control']) }}
+                                {{ Form::select('subject_id', SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),$tutor, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:en', 'Tutor Info (English)') }}
@@ -100,14 +96,34 @@
                             {{ Form::submit('Save', ['class' => 'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>
-                        <script>
-                            $(document).ready(function () {
-                                $(".custom-file-input").on("change", function () {
-                                    var fileName = $(this).val().split("\\").pop();
-                                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                                });
-                            });
-                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+
+                                <!-- Title -->
+                                <h4 class="card-header-title">
+                                    Add photo for Tutor
+                                </h4>
+
+                            </div>
+                        </div> <!-- / .row -->
+                    </div>
+                    <div class="card-body">
+                        {!! Form::open([
+                                'url' => route('admin.file.store',['type'=>'avatar']),
+                                'enctype'=>'multipart/form-data',
+                                'class'=>'dropzone',
+                                'id'=>"uploadFile",
+                            ])  !!}
+                        <div class="dz-message">
+                            Drag 'n' Drop Files<br>
+                        </div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

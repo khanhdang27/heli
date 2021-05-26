@@ -19,21 +19,22 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme.min.css') }}" id="stylesheetLight">
     {{-- <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme-dark.min.css') }}" id="stylesheetDark"> --}}
-    @stack('css')   
+    @stack('css')
 
     <title>Helios</title>
 </head>
 <body>
 
 @include('admin.sidebar')
-@if ($alertFm = Session::get('success'))
-<div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>{{ $alertFm }}</strong>
-</div>
-@endif
+
 <div class="main-content">
     @include('admin.nav')
+    @if ($alertFm = Session::get('success'))
+        <div class="alert text-center alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $alertFm }}</strong>
+        </div>
+    @endif
     @yield('content')
 
 </div>

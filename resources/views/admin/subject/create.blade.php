@@ -43,12 +43,12 @@
                                 {{ Form::text('subject_name:sc', old('subject_name:sc'),['class' => 'form-control'] ) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('subject_color_background', 'Color') }}
+                                {{ Form::label('subject_color_background', 'Background color') }}
                                 {{ Form::color('subject_color_background','#dddddd', ['class' => 'form-control'] ) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('subject_color_text', 'Color') }}
-                                {{ Form::color('subject_color_text','#dddddd', ['class' => 'form-control'] ) }}
+                                {{ Form::label('subject_color_text', 'Text color') }}
+                                {{ Form::color('subject_color_text','#ffffff', ['class' => 'form-control'] ) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}

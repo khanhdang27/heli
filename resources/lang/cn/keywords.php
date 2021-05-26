@@ -74,5 +74,6 @@ return [
         'readMore' => '閱讀更多'
     ],
     'HongKongPublicHolidays' => '香港公眾假期',
+    'learningMaterial' => '教材',
 
 ];

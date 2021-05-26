@@ -2,7 +2,7 @@
     use \App\Utilities\SelectionByClass;
 @endphp
 
-<nav class="navbar navbar-expand-xl container-fluid category border-secondary">
+<nav class="navbar navbar-expand-xl container-fluid category text-secondary position-absolute border-secondary">
     <button class="navbar-toggler p-0 btn-collapse" type="button" data-toggle="collapse"
             data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,16 +19,23 @@
                     </a>
                     <div class="dropdown-menu my-dropdown-menu">
                         @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id') as $key => $value)
-                        <a class="dropdown-item" href="#">IGCSE</a>
+                            {{--                        <a class="dropdown-item" id="show-subject" href="#" >{{$value}}</a>--}}
+                            <a class="btn dropdown-item certificate-nav-item"
+                               href="{{ route('site.get_subject_by_parent', $key) }}" role="button">
+                                {{$value}}
+                            </a>
                         @endforeach
                     </div>
                 </div>
             </li>
-            @foreach(SelectionByClass::getValues(\App\Models\Subject::class,'subject_name', 'id') as $key => $value)
-                <li class="nav-item">
-                    <a class="nav-link sub-item text-secondary" href="{{ URL::route('site.subject.show',$key, true)}}">{{ $value}}</a>
-                </li>
-            @endforeach
+            <div class="d-flex" id="subject-nav">
+
+            </div>
+            {{--            @foreach(SelectionByClass::getValues(\App\Models\Subject::class,'subject_name', 'id') as $key => $value)--}}
+            {{--                <li class="nav-item">--}}
+            {{--                    <a class="nav-link sub-item text-secondary" href="{{ URL::route('site.subject.show',$key, true)}}">{{ $value}}</a>--}}
+            {{--                </li>--}}
+            {{--            @endforeach--}}
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <div class="search mr-3">

@@ -92,7 +92,7 @@
                             <span class="mr-3"><img class="ic-action"
                                                     src="{{asset("images/ic/ic_bookmark.svg")}}"></span>
                             <span class="mr-5"><img class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">1</span>
-                            <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">2</span>
+                            <a href="{{URL::route('site.forumAnswers')}}"><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">2</a>
 
                         </div>
                     </div>

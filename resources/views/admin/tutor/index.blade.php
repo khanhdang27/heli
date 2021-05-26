@@ -1,9 +1,13 @@
 @extends('admin.layout')
 @section('content')
     <div class="container-fluid mt-5">
+        <div class="text-center alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Make sure the <a href="{{ route('admin.subject.index') }}" class="alert-link"><strong>Subject</strong></a> already exists before adding the Tutor!
+        </div>
         <div class="row">
             <div class="col-12">
-                <div class="mb-1">
+                <div class="mb-3">
                     <button class="btn btn-success" data-toggle="collapse" href="#Filter" role="button"
                             aria-expanded="false" aria-controls="Filter">Filter
                     </button>
@@ -86,15 +90,12 @@
                                 @foreach($tutors as $value)
                                     <tr>
                                         <td>
-                                            <img
-                                                src="{{ \Illuminate\Support\Facades\Storage::url($value->tutor_photo) }}"
-                                                width="50px;" height="60px;" alt="">
+                                            avatar
                                         </td>
                                         <td class="goal-project">
                                             {{ $value->full_name }}
                                         </td>
                                         <td class="goal-status">
-                                            {{ $value->subject[0]['subject_id'] }}
 
                                         </td>
                                         <td class="text-right">

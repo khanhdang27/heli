@@ -1,9 +1,10 @@
+@php
+    use App\Utilities\SelectionByClass;
+@endphp
 <div class="container-fluid header-top bg-dark">
     <span class="text-white">
         <img src={{asset("images/ic/ic_wireless.svg")}}>【IELTS】新型冠狀病毒影響下的最新考試安排 ⾦鐘及尖沙咀英語教學中⼼暫停向公眾開放 ，直⾄另⾏通知 。如有其他需要，必須預約才可進入⼤樓 。更新⽇期: 2021年1⽉8⽇星期五
     </span>
-
-
 </div>
 <nav class="navbar navbar-expand-xl navbar-home">
     <a class="navbar-brand" href="{{ URL::route('site.home') }}">
@@ -24,10 +25,9 @@
                     @lang('keywords.navBar.subjectClassification')
                 </a>
                 <div class="dropdown-menu my-dropdown-menu dropdown-items">
-                    <a class="dropdown-item" href="{{ URL::route('site.subject.show',1, true)}}">IGCSE</a>
-                    <a class="dropdown-item" href="#">IELTS</a>
-                    <a class="dropdown-item" href="#">UKISET</a>
-                    <a class="dropdown-item" href="#">IAL</a>
+                    @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id') as $key => $value)
+                        <a class="dropdown-item" href="{{ URL::route('site.certificate.show',$key, true)}}">{{$value}}</a>
+                    @endforeach
                 </div>
             </li>
             <li class="nav-item">
@@ -93,11 +93,11 @@
                 @endif
             <button class="nav-item dropdown text-white bg-white btn-language p-0 border-0 m-auto text-decoration-none">
                 <a class="btn-account dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    lang
+                    繁
                 </a>
                 <div class="dropdown-menu dropdown-lang language-item">
-                    <a class="dropdown-item" href="#">Chi</a>
-                    <a class="dropdown-item" href="#">Eng</a>
+                    <a class="dropdown-item" href="#">繁</a>
+                    <a class="dropdown-item" href="#">ENG</a>
                 </div>
             </button>
         </div>

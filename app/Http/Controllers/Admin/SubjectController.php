@@ -101,7 +101,19 @@ class SubjectController extends Controller
 
     public function updateActive(int $id)
     {
-        $subject = Subject::find($id);
+//        $subject = Subject::find($id);
+//
+//        $active = $subject->status;
+//
+//        $subject->status = $active == 1 ? 0 : 0;
+//
+//        $subject->save();
+//
+//        return $subject->save();
+    }
+
+    public function destroy(Subject $subject)
+    {
 
         $active = $subject->status;
 
@@ -109,22 +121,7 @@ class SubjectController extends Controller
 
         $subject->save();
 
-        return redirect()->route('admin.subject.index')
-            ->with('success', 'update success');
-    }
-
-    public function destroy(Subject $subject)
-    {
-        /*try {
-            $subject->delete();
-            return response()->json([
-                'message' => 'delete success'
-            ]);
-        } catch (\Exception $exception) {
-            return response()->json([
-                'message' => 'Cannot delete'
-            ], 400);
-        }*/
+        return $subject->save();
     }
 
 }

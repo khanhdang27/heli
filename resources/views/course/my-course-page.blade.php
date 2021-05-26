@@ -27,7 +27,7 @@
     ?>
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
-
+            @lang('keywords.coursePage.myCourses')
         </div>
         @include('layout.sub-header')
         <div class="container-fluid pt-5 pl-0 pr-0">

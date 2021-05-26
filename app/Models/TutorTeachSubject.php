@@ -25,7 +25,10 @@ class TutorTeachSubject extends Model
     {
         return $this->belongsTo(User::class, 'id');
     }
-
+    public function getTutor()
+    {
+        return $this->belongsTo(Tutor::class, 'id');
+    }
     public function getSubject()
     {
         return $this->belongsTo(Subject::class, 'id');

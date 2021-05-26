@@ -1,6 +1,10 @@
 @extends('admin.layout')
 @section('content')
     <div class="container-fluid mt-5">
+        <div class="text-center alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Make sure the <a href="{{ route('admin.certificate.index') }}" class="alert-link"><strong>Certificate</strong></a> already exists before adding the Subject!
+        </div>
         <div class="row">
             <div class="col-12">
                 <!-- Goals -->
@@ -88,15 +92,18 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <form action="{{ route('admin.subject.updateActive', $value->id) }}"
-                                                          method="post">
-                                                        @csrf
-                                                        @method('put')
-                                                        <button class="dropdown-item delete-item" type="submit">
-                                                            Delete
-                                                        </button>
+                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.subject.destroy', $value->id) }}" >
+                                                        Delete
+                                                    </button>
+{{--                                                    <form action="{{ route('admin.subject.updateActive', $value->id) }}"--}}
+{{--                                                          method="post">--}}
+{{--                                                        @csrf--}}
+{{--                                                        @method('put')--}}
+{{--                                                        <button class="dropdown-item delete-item" type="submit">--}}
+{{--                                                            Delete--}}
+{{--                                                        </button>--}}
 
-                                                    </form>
+{{--                                                    </form>--}}
                                                 </div>
                                             </div>
                                         </td>

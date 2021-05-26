@@ -10,16 +10,16 @@ $tutor = new \App\Models\Tutor();
         </div>
         <div class="container-fluid content-team-page">
             <div class="row">
-                @foreach($tutor->getTutor() as $value)
+                @foreach($tutor->getAllTutors() as $value)
                     <div class="col-xl-6 col-sm d-flex justify-content-center">
                         <div class="card-team">
                             <div class="row">
                                 <div class="col-sm info-left">
                                     <div class="thumb"
-                                         style="background-image: url({!! Storage::url($value->tutor_photo) !!})"></div>
+                                         style="background-image: url({{asset("images/ava.jpg")}})"></div>
                                     <div
                                         class="d-flex flex-column align-items-center justify-content-center info-tutor text-white">
-                                        <div class="name-tutor">{{ $value->tutor_name }}</div>
+                                        <div class="name-tutor">{{ $value->full_name }}</div>
                                         <div class="position-tutor">Tutor/Admission Consultant</div>
                                     </div>
                                 </div>
@@ -28,9 +28,9 @@ $tutor = new \App\Models\Tutor();
                                         <div class="content-info-right text-white m-auto">
                                             <div>{{ $value->tutor_info }}</div>
                                             <br>
-                                            <div>{{ $value->tutor_level }}</div>
-                                            <div>{{ $value->tutor_specialized }}</div>
-                                            <div>{{ $value->tutor_experience }}</div>
+                                            <div>► {{ $value->tutor_level }}</div>
+                                            <div>► {{ $value->tutor_specialized }}</div>
+                                            <div>► {{ $value->tutor_experience }}</div>
                                         </div>
                                         <div class="d-flex justify-content-end bottom-info-right">
                                             <div class="ic-tutor ic-light">

@@ -41,7 +41,7 @@
                             @csrf
                             {!! Form::open(['id'=>'formLogin']) !!}
                             <div class="input-login d-flex justify-content-center align-items-center mb-3">
-                                {{ Form::email('email','phung@gmail.com',['class'=>'input-login-item', 'placeholder'=>'Email']) }}
+                                {{ Form::email('email',null,['class'=>'input-login-item', 'placeholder'=>'Email']) }}
                             </div>
                             <div class="input-login d-flex justify-content-center align-items-center">
                                 {{ Form::password('password', ['class'=> 'input-login-item', 'placeholder'=>'Password']) }}

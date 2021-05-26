@@ -1,6 +1,10 @@
 @extends('admin.layout')
 @section('content')
     <div class="container-fluid mt-5">
+        <div class="text-center alert alert-warning alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            Make sure the <a href="{{ route('admin.tutor.index') }}" class="alert-link"><strong>Tutor</strong></a> already exists before adding the Course!
+        </div>
         <div class="row">
             <div class="col-12">
                 <div class="mb-1">

@@ -13,26 +13,38 @@
                 <div class="event-calendar">
                     <div class="row">
                         <div class="col-sm-4">
-                            <p><img class="mr-2" src="images/ic/Ellipse11.png"
+                            <p><img class="mr-2" src="{{asset("images/ic/ic_ellipse1.svg")}}"
                                     width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                            <p><img class="mr-2" src="images/ic/Polygon1.png"
-                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                        </div>
-                        <div class="col-sm-4">
-                            <p><img class="mr-2" src="images/ic/Ellipse12.png"
-                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                            <p><img class="mr-2" src="images/ic/Polygon2.png"
+                            <p><img class="mr-2" src="{{asset("images/ic/ic_polygon1.svg")}}"
                                     width="34">@lang('keywords.HongKongPublicHolidays')</p>
                         </div>
                         <div class="col-sm-4">
-                            <p><img class="mr-2" src="images/ic/Ellipse13.png"
+                            <p><img class="mr-2" src="{{asset("images/ic/ic_ellipse2.svg")}}"
                                     width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                            <p><img class="mr-2" src="images/ic/Polygon3.png"
+                            <p><img class="mr-2" src="{{asset("images/ic/ic_polygon2.svg")}}"
+                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
+                        </div>
+                        <div class="col-sm-4">
+                            <p><img class="mr-2" src="{{asset("images/ic/ic_ellipse3.svg")}}"
+                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
+                            <p><img class="mr-2" src="{{asset("images/ic/ic_polygon3.svg")}}"
                                     width="34">@lang('keywords.HongKongPublicHolidays')</p>
                         </div>
                     </div>
                 </div>
-
+                <div class="event-calendar">
+                    <div class="d-flex flex-wrap mb-5">
+                        <div class="mr-5 mb-3">
+                            <img src="{{asset("images/bookmark.png")}}" width="142">
+                        </div>
+                        <div class="mr-5 mb-3">
+                            <img src="{{asset("images/bookmark.png")}}" width="142">
+                        </div>
+                        <div>
+                            <img src="{{asset("images/bookmark.png")}}" width="142">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

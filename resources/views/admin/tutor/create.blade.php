@@ -21,7 +21,7 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Create Subject
+                                    Create Tutor
                                 </h4>
 
                             </div>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id',[SelectionByClass::getValues(Subject::class,'subject_name','id')],null, ['class' => 'form-control']) }}
+                                {{ Form::select('subject_id',SelectionByClass::getValues(Subject::class,'subject_name','id'),null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:en', 'Tutor Info (English)') }}

@@ -52,8 +52,8 @@
                     <label class="radio-inline mr-5">
                         <input class="btn-sort" type="radio" name="optradio">@lang('keywords.recordALesson')
                     </label>
-                    <label class="radio-inline mr-5">
-                        <input class="btn-sort" type="radio" name="optradio">THÊM
+                    <label style="color: red" class="radio-inline mr-5">
+                        <input  class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
                     </label>
                 </form>
             </div>

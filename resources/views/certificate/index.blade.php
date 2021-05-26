@@ -32,7 +32,7 @@
         @include('layout.sub-header')
         <div class="container-fluid p-0">
             <div class="title-subject text-primary text-center">
-                IGCSE
+                {{$certificate->certificate_name}}
             </div>
             <div class="container-fluid sort text-primary mb-4 d-flex">
                 <span class="mr-4">@lang('keywords.sort')</span>
@@ -49,8 +49,8 @@
                     <label class="radio-inline mr-5">
                         <input class="btn-sort" type="radio" name="optradio">@lang('keywords.recordALesson')
                     </label>
-                    <label class="radio-inline mr-5">
-                        <input class="btn-sort" type="radio" name="optradio">THÊM
+                    <label style="color: red" class="radio-inline mr-5 ">
+                        <input  class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
                     </label>
                 </form>
             </div>
@@ -64,7 +64,7 @@
                             <div class="pr-3">
                                 <a class="product-hover" href="{{URL::route('site.course')}}">
                                     <x-product.product-box
-                                        subject="{{$item['subject']}}"
+                                        subject="英文"
                                         subtitle="{{$item['subtitle']}}"
                                         description="{{$item['description']}}"
                                         courseName="{{$item['courseName']}}"
@@ -78,14 +78,14 @@
                 </div>
                 <div class="container-fluid product-recommend">
                     <div class="heading-title" id="tab-title">
-                        英文
+                        數學
                     </div>
                     <div class="d-flex flex-wrap">
                         @foreach($productList as $item)
                             <div class="pr-3">
                                 <a class="product-hover" href="{{URL::route('site.course')}}">
                                     <x-product.product-box
-                                        subject="{{$item['subject']}}"
+                                        subject="數學"
                                         subtitle="{{$item['subtitle']}}"
                                         description="{{$item['description']}}"
                                         courseName="{{$item['courseName']}}"
@@ -100,14 +100,14 @@
                 </div>
                 <div class="container-fluid product-recommend">
                     <div class="heading-title" id="tab-title">
-                        英文
+                        經濟
                     </div>
                     <div class="d-flex flex-wrap">
                         @foreach($productList as $item)
                             <div class="pr-3">
                                 <a class="product-hover" href="{{URL::route('site.course')}}">
                                     <x-product.product-box
-                                        subject="{{$item['subject']}}"
+                                        subject="經濟"
                                         subtitle="{{$item['subtitle']}}"
                                         description="{{$item['description']}}"
                                         courseName="{{$item['courseName']}}"
@@ -121,14 +121,14 @@
                 </div>
                 <div class="container-fluid product-recommend">
                     <div class="heading-title" id="tab-title">
-                        英文
+                        物理
                     </div>
                     <div class="d-flex flex-wrap">
                         @foreach($productList as $item)
                             <div class="pr-3">
                                 <a class="product-hover" href="{{URL::route('site.course')}}">
                                     <x-product.product-box
-                                        subject="{{$item['subject']}}"
+                                        subject="物理"
                                         subtitle="{{$item['subtitle']}}"
                                         description="{{$item['description']}}"
                                         courseName="{{$item['courseName']}}"

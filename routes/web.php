@@ -46,6 +46,10 @@ Route::prefix('site/')->name('site.')->group(function () {
 
     Route::resource('subject', 'Site\SubjectController');
 
+    Route::get('get-subject-by-parent-id/{id}','Site\SubjectController@getSubjectByParentId')->name('get_subject_by_parent');
+
+    Route::resource('certificate', 'Site\CertificateController');
+
 //    Route::get('subject/{id}',[SubjectController::class,'show'])
 //    ->name('subjects');
 
@@ -110,8 +114,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('subject', 'Admin\SubjectController');
 
-        Route::put('/subject/updateActive/{id}', [SubjectController::class, 'updateActive'])
-            ->name('subject.updateActive');
+//        Route::put('/subject/updateActive/{id}', [SubjectController::class, 'updateActive'])
+//            ->name('subject.updateActive');
 
         Route::resource('tutor', 'Admin\TutorController');
 

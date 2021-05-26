@@ -18,20 +18,19 @@
                         IGCSE
                     </a>
                     <div class="dropdown-menu my-dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">IGCSE</a>
-                        <a class="dropdown-item" href="#">IELTS</a>
-                        <a class="dropdown-item" href="#">UKISET</a>
-                        <a class="dropdown-item" href="#">AIL</a>
+                        @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id') as $key => $value)
+                            {{--                        <a class="dropdown-item" id="show-subject" href="#" >{{$value}}</a>--}}
+                            <a class="btn dropdown-item certificate-nav-item"
+                               href="{{ route('site.get_subject_by_parent', $key) }}" role="button">
+                                {{$value}}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
             </li>
+            <div class="d-flex" id="subject-nav">
 
-
-            @foreach( SelectionByClass::getValues(\App\Models\Subject::class,'subject_name', 'id') as $value)
-                <li class="nav-item">
-                    <a class="nav-link sub-item" href="#">{{ $value }}</a>
-                </li>
-            @endforeach
+            </div>
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <div class="search">

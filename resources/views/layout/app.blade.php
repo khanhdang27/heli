@@ -28,7 +28,11 @@
 <script src="{{ asset('js/jquery-3.6.0.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('js/lib/main.js')}}"></script>
+<script src="{{ asset('js/home/app.js')}}"></script>
 @stack('scripts')
+<script>
+    showSubjectNav("{{ route('site.get_subject_by_parent', '') }}", "{{ route('site.subject.show', '') }}")
+</script>
 @stack('scriptsLogin')
 </body>
 </html>

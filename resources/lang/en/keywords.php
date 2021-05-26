@@ -73,6 +73,6 @@ return [
         'readMore' => 'Read More'
     ],
     'HongKongPublicHolidays' => 'Hong Kong public holidays',
-
+    'learningMaterial' => 'Learning Material',
 
 ];

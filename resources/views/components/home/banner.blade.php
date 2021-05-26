@@ -1,5 +1,5 @@
 <div class="banner-content">
-    <img src="images/banner.jpg">
+    <img src="{{asset("images/banner.jpg")}}">
     <div class="banner-info">
         <div class="banner-caption text-secondary">
             <p class="m-0">太陽神教育網上課程</p>
