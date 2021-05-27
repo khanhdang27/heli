@@ -81,10 +81,10 @@
                         <p class="m-0 teacher-name">Ms. Polly Leung</p>
                         <p class="price">HKD2,500</p>
                         <div class="btn-primary m-0 btn-register-now product-btn b">
-                            馬上報讀
+                            @lang('keywords.coursePage.registerNow')
                         </div>
                         <div class="btn-primary mt-3 btn-register-now product-btn">
-                            加入購物車
+                            @lang('keywords.coursePage.addToCart')
                         </div>
                         <div class="d-flex share-bar">
                             <span class="mr-2"><img width="36" src="{{ asset("images/ic/ic_share.svg")}}"></span>

@@ -46,11 +46,6 @@
                                         File
                                     </th>
                                     <th>
-                                        <a href="#" class="text-muted">
-                                            Price
-                                        </a>
-                                    </th>
-                                    <th>
                                         Description
                                     </th>
                                     <th>
@@ -63,24 +58,21 @@
                                 @foreach($courseMaterial as $value)
                                     <tr>
                                         <td class="goal-project">
-                                            {{ $value->material_name }}
+                                            {{ $value->course_material_name }}
                                         </td>
                                         <td class="goal-project">
-                                            <img
-                                                src="{{ \Illuminate\Support\Facades\Storage::url($value->material_image) }}"
-                                                width="50px;" height="60px;" alt="">
+{{--                                            <img--}}
+{{--                                                src="{{ \Illuminate\Support\Facades\Storage::url($value->material_image) }}"--}}
+{{--                                                width="50px;" height="60px;" alt="">--}}
                                         </td>
                                         <td class="goal-project">
-                                            {{ $value->material_file }}
-                                        </td>
-                                        <td class="goal-project">
-                                            {{ $value->material_price }}
+{{--                                            {{ $value->material_file }}--}}
                                         </td>
                                         <td>
-                                            {{ $value->translate('en')->material_description }}
+                                            {{ $value->translate('en')->course_material_description }}
                                         </td>
                                         <td>
-                                            {{ $value->translate('en')->material_origin }}
+                                            {{ $value->translate('en')->course_material_origin }}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -90,12 +82,12 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.material.edit', $value->id) }}"
+                                                    <a href="{{ URL::route('admin.course-material.edit', $value->id) }}"
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                       data-url="{{ route('admin.material.destroy', $value->id) }}"
+                                                       data-url="{{ URL::route('admin.course-material.destroy',$value->id) }}"
                                                        class="dropdown-item delete-item">
                                                         Delete
                                                     </a>

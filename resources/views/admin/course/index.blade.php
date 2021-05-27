@@ -71,9 +71,9 @@
                                     <th>
                                         Name
                                     </th>
-                                    <th>
-                                        Tutor
-                                    </th>
+{{--                                    <th>--}}
+{{--                                        Tutor--}}
+{{--                                    </th>--}}
                                     <th>
                                         <a href="#" class="text-muted">
                                             Price
@@ -96,9 +96,9 @@
                                         <td class="goal-project">
                                             {{ $value->course_name }}
                                         </td>
-                                        <td class="goal-project">
-                                            {{ $value->tutor['tutor_name'] }}
-                                        </td>
+{{--                                        <td class="goal-project">--}}
+{{--                                            {{ $value->tutor['tutor_name'] }}--}}
+{{--                                        </td>--}}
                                         <td class="goal-project">
                                             {{ $value->course_price }}
                                         </td>

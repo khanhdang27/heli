@@ -235,9 +235,9 @@
         @else
             <div class="container-fluid container-video border-secondary mt-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
-                    <p class="text-33 text-primary">繼續我的課程...</p>
+                    <p class="text-33 text-primary">@lang('keywords.continueMyCourse')</p>
                     <button class="m-0 btn-register-now text-25 text-white btn-dark-blue btn-dark">
-                        其他已購買課程
+                        @lang('keywords.otherPurchasedCourses')
                     </button>
                 </div>
                 <div class="container-fluid show-video">

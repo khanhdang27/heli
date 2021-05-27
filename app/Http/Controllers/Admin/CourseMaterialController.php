@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Material\CreateMaterialRequest;
+use App\Models\Course;
 use App\Models\CourseMaterial;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,15 +18,17 @@ class CourseMaterialController extends Controller
      */
     public function index()
     {
+        $course = Course::all();
         $courseMaterial = CourseMaterial::query()
             ->with('translations')
             ->latest()
             ->when(request('name') != '', function (Builder $query) {
-                $query->whereTranslationLike('material_name', '%' . request('name') . '%');
+                $query->whereTranslationLike('course_material_name', '%' . request('name') . '%');
             })
             ->paginate(20);
         return view('admin.course-material.index', [
-            'courseMaterial' => $courseMaterial
+            'courseMaterial' => $courseMaterial,
+            'course' => $course
         ]);
     }
 
@@ -36,7 +39,10 @@ class CourseMaterialController extends Controller
      */
     public function create()
     {
-        return view('admin.course-material.create');
+        $course = Course::all();
+        return view('admin.course-material.create',[
+            'course' => $course
+        ]);
     }
 
     /**
@@ -47,11 +53,10 @@ class CourseMaterialController extends Controller
      */
     public function store(CreateMaterialRequest $request)
     {
+
         $material = new CourseMaterial(
             $request->validated()
         );
-        $material->material_image = $request->file('material_image')->store('photo');
-        $material->material_file = $request->file('material_file')->store('file');
         $material->save();
         return back()->with('success', 'Delete success');
     }
@@ -79,7 +84,7 @@ class CourseMaterialController extends Controller
 
     /**
      * @param CreateMaterialRequest $request
-     * @param Material $material
+     * @param CourseMaterial $material
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(CreateMaterialRequest $request, CourseMaterial $material)
@@ -87,8 +92,6 @@ class CourseMaterialController extends Controller
         $material->update(
             $request->validated()
         );
-        $material->material_image = $request->file('material_image')->store('photo');
-        $material->material_file = $request->file('material_file')->store('file');
         $material->save();
         return back()->with('success', 'Update success!');
     }

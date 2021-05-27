@@ -60,14 +60,13 @@ class Tutor extends Model implements TranslatableContract
         return $this->belongsToMany(Subject::class, TutorTeachSubject::class);
     }
 
-    public function getAllTutors()
-    {
-        return Tutor::all();
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    public function course()
+    {
+        return $this->belongsToMany(Tutor::class, TutorTeachCourse::class);
+    }
 }

@@ -65,7 +65,9 @@ return [
         'notePackage' => '筆記配套',
         'shareCourse' => '分享課程',
         'courseFrequency' => '課程班次',
-        'myCourses' => '我的課程'
+        'myCourses' => '我的課程',
+        'registerNow' => '馬上報讀',
+        'addToCart' => '加入購物車'
     ],
     'blog-page' => [
         'learningColumn' => '學習專欄',
@@ -75,5 +77,7 @@ return [
     ],
     'HongKongPublicHolidays' => '香港公眾假期',
     'learningMaterial' => '教材',
+    'otherPurchasedCourses' => '其他已購買課程',
+    'continueMyCourse' => '繼續我的課程...'
 
 ];

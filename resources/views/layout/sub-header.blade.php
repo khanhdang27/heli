@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </li>
-            <div class="d-flex" id="subject-nav">
+            <div class="d-flex align-items-center flex-wrap" id="subject-nav">
 
             </div>
         </ul>

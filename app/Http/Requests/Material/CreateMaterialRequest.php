@@ -22,18 +22,17 @@ class CreateMaterialRequest extends FormRequest
     public function rules()
     {
         return [
-            'material_name:en' => 'required',
-            'material_name:cn' => 'required',
-            'material_name:sc' => 'required',
-            'material_image' => 'required|image|mimes:jpg,jpeg,png',
-            'material_file' => 'required',
-            'material_price' => 'required|integer|min:0',
-            'material_description:en' => 'required',
-            'material_description:cn' => 'required',
-            'material_description:sc' => 'required',
-            'material_origin:en' => 'required',
-            'material_origin:cn' => 'required',
-            'material_origin:sc' => 'required',
+            'course_id' => 'required',
+            'course_material_name:en' => 'required',
+            'course_material_name:cn' => 'required',
+            'course_material_name:sc' => 'required',
+//           course_ 'material_price' => 'required|integer|min:0',
+            'course_material_description:en' => 'required',
+            'course_material_description:cn' => 'required',
+            'course_material_description:sc' => 'required',
+            'course_material_origin:en' => 'required',
+            'course_material_origin:cn' => 'required',
+            'course_material_origin:sc' => 'required',
 
         ];
     }

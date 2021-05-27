@@ -28,14 +28,9 @@
                     </div>
                 </div>
             </li>
-            <div class="d-flex" id="subject-nav">
+            <div class="d-flex align-items-center flex-wrap" id="subject-nav">
 
             </div>
-            {{--            @foreach(SelectionByClass::getValues(\App\Models\Subject::class,'subject_name', 'id') as $key => $value)--}}
-            {{--                <li class="nav-item">--}}
-            {{--                    <a class="nav-link sub-item text-secondary" href="{{ URL::route('site.subject.show',$key, true)}}">{{ $value}}</a>--}}
-            {{--                </li>--}}
-            {{--            @endforeach--}}
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <div class="search mr-3">

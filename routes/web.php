@@ -18,79 +18,82 @@ use App\Models\User;
 |
 */
 
+
 Route::redirect('', 'site/', 301);
 
-Route::prefix('site/')->name('site.')->group(function () {
-    Route::get('', function () {
-        return view('home.home-page');
-    })->name('home');
+Route::group(['middleware' => 'language'], function () {
+    Route::prefix('site/')->name('site.')->group(function () {
+        Route::get('', function () {
+            return view('home.home-page');
+        })->name('home');
 
-    Route::post('register', 'Auth\RegisterController@register')->name('register');
+        Route::post('register', 'Auth\RegisterController@register')->name('register');
 
-    Route::post('login', 'Auth\LoginController@login')->name('userLogin');
+        Route::post('login', 'Auth\LoginController@login')->name('userLogin');
 
-    Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
+        Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
 
 
-    Route::get('news', function () {
-        return view('news-page');
-    })->name('news');
+        Route::get('news', function () {
+            return view('news-page');
+        })->name('news');
 
-    Route::get('teams', function () {
-        return view('team-page');
-    })->name('teams');
+        Route::get('teams', function () {
+            return view('team-page');
+        })->name('teams');
 
 //    Route::get('subject', function () {
 //        return view('subject-page');
 //    })->name('subject');
 
-    Route::resource('subject', 'Site\SubjectController');
+        Route::resource('subject', 'Site\SubjectController');
 
-    Route::get('get-subject-by-parent-id/{id}','Site\SubjectController@getSubjectByParentId')->name('get_subject_by_parent');
+        Route::get('get-subject-by-parent-id/{id}', 'Site\SubjectController@getSubjectByParentId')->name('get_subject_by_parent');
 
-    Route::resource('certificate', 'Site\CertificateController');
+        Route::resource('certificate', 'Site\CertificateController');
 
 //    Route::get('subject/{id}',[SubjectController::class,'show'])
 //    ->name('subjects');
 
-    Route::get('course', function () {
-        return view('course.course-page');
-    })->name('course');
+        Route::get('course', function () {
+            return view('course.course-page');
+        })->name('course');
 
-    Route::get('lesson', function () {
-        return view('course.lesson-page');
-    })->name('lesson');
+        Route::get('lesson', function () {
+            return view('course.lesson-page');
+        })->name('lesson');
 
-    Route::get('blog', function () {
-        return view('blog-page');
-    })->name('blog');
+        Route::get('blog', function () {
+            return view('blog-page');
+        })->name('blog');
 
-    Route::get('forum', function () {
-        return view('forum.forum-page');
-    })->name('forum');
+        Route::get('forum', function () {
+            return view('forum.forum-page');
+        })->name('forum');
 
-    Route::get('forumAnswer', function () {
-        return view('forum.forum-page2');
-    })->name('forumAnswers');
+        Route::get('forumAnswer', function () {
+            return view('forum.forum-page2');
+        })->name('forumAnswers');
 
 
-    Route::get('/forgot-password', function () {
-        return view('login.forgot-password');
-    })->name('forgot-password');
+        Route::get('/forgot-password', function () {
+            return view('login.forgot-password');
+        })->name('forgot-password');
 
-    Route::post('/forgot-password', function (Illuminate\Http\Request $request) {
-        $random = Str::random(10);
-        $request->validate(['email' => 'required|email']);
-        $user = User::where('email', $request->get('email'))->first();
-        $user->password = $random;
+        Route::post('/forgot-password', function (Illuminate\Http\Request $request) {
+            $random = Str::random(10);
+            $request->validate(['email' => 'required|email']);
+            $user = User::where('email', $request->get('email'))->first();
+            $user->password = $random;
 
-        $user->save();
+            $user->save();
 
-        $send_mail = new \App\Mail\SendMail();
-        $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.test_mail');
-        \Mail::to($request->get('email'))->send($send_mail);
-    })->name('reset-password');
-});
+            $send_mail = new \App\Mail\SendMail();
+            $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.test_mail');
+            \Mail::to($request->get('email'))->send($send_mail);
+        })->name('reset-password');
+    });
+    Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
 Route::prefix('user/')->name('user.')->group(function () {
     Route::get('my-course', function () {
@@ -100,7 +103,7 @@ Route::prefix('user/')->name('user.')->group(function () {
         return view('calendar-page');
     })->name('calendar');
 });
-
+});
 Route::resource('file', 'FileController');
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -122,7 +125,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('tutor', 'Admin\TutorController');
 
         Route::resource('course', 'Admin\CourseController');
+
         Route::resource('course-material', 'Admin\CourseMaterialController');
+
         Route::resource('banner', 'Admin\BannerController');
 
         Route::resource('user', 'Admin\UserController');

@@ -20,67 +20,52 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => ['admin.material.update', $material->id],'method'=>'put', 'enctype'=>'multipart/form-data']) !!}
-                            @csrf
+                            {!! Form::open(['route' => ['admin.course-material.update', $material->id],'method'=>'put', 'enctype'=>'multipart/form-data']) !!}
+
                             <div class="form-group ">
-                                {{ Form::label('material_name:en', 'Material Name (English)') }}
-                                {{ Form::text('material_name:en', $material->translate('en')->material_name,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('material_name:cn', 'Material Name (Traditional Chinese)') }}
-                                {{ Form::text('material_name:cn', $material->translate('cn')->material_name,['class' => 'form-control']) }}
+                                {{ Form::label('course_id', 'Course') }}
+                                {{ Form::select('course_id', SelectionByClass::getValues(\App\Models\Course::class,'course_name','id') ,null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('material_name:sc', 'Material Name (Traditional Chinese)') }}
-                                {{ Form::text('material_name:sc',$material->translate('sc')->material_name,['class' => 'form-control']) }}
-                            </div>
-                            <div class="custom-file mb-4">
-                                {{ Form::label('file', 'Image', ['class' => 'custom-file-label']) }}
-                                {{ Form::file('material_image', ['class' => 'custom-file-input'])}}
-                            </div>
-                            <div class="custom-file mb-4">
-                                {{ Form::label('file', 'File', ['class' => 'custom-file-label']) }}
-                                {{ Form::file('material_file', ['class' => 'custom-file-input'])}}
+                                {{ Form::label('course_material_name:en', 'Material Name (English)') }}
+                                {{ Form::text('course_material_name:en', $material->translate('en')->course_material_name,['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('material_price', 'Price') }}
-                                {{ Form::text('material_price', $material->material_price,['class' => 'form-control']) }}
+                                {{ Form::label('course_material_name:cn', 'Material Name (Traditional Chinese)') }}
+                                {{ Form::text('course_material_name:cn', $material->translate('cn')->course_material_name,['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('material_description:en', 'Description (English)') }}
-                                {{ Form::textarea('material_description:en', $material->translate('en')->material_description,['class' => 'form-control']) }}
+                                {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)') }}
+                                {{ Form::text('course_material_name:sc',$material->translate('sc')->course_material_name,['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('material_description:cn', 'Description (Traditional Chinese)') }}
-                                {{ Form::textarea('material_description:cn', $material->translate('cn')->material_description,['class' => 'form-control']) }}
+                                {{ Form::label('course_material_description:en', 'Description (English)') }}
+                                {{ Form::textarea('course_material_description:en', $material->translate('en')->course_material_description,['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('material_description:sc', 'Description (Simplify Chinese)') }}
-                                {{ Form::textarea('material_description:sc', $material->translate('sc')->material_description,['class' => 'form-control']) }}
+                                {{ Form::label('course_material_description:cn', 'Description (Traditional Chinese)') }}
+                                {{ Form::textarea('course_material_description:cn', $material->translate('cn')->course_material_description,['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('material_origin:en', 'Material Origin (English)') }}
-                                {{ Form::text('material_origin:en', $material->translate('en')->material_origin,['class' => 'form-control']) }}
+                                {{ Form::label('course_material_description:sc', 'Description (Simplify Chinese)') }}
+                                {{ Form::textarea('course_material_description:sc', $material->translate('sc')->course_material_description,['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('material_origin:cn', 'Material Origin (Traditional Chinese)') }}
-                                {{ Form::text('material_origin:cn', $material->translate('cn')->material_origin,['class' => 'form-control']) }}
+                                {{ Form::label('course_material_origin:en', 'Material Origin (English)') }}
+                                {{ Form::text('course_material_origin:en', $material->translate('en')->course_material_origin,['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('material_origin:sc', 'Material Origin (Simplify Chinese)') }}
-                                {{ Form::text('material_origin:sc', $material->translate('sc')->material_origin,['class' => 'form-control']) }}
+                                {{ Form::label('course_material_origin:cn', 'Material Origin (Traditional Chinese)') }}
+                                {{ Form::text('course_material_origin:cn', $material->translate('cn')->course_material_origin,['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('course_material_origin:sc', 'Material Origin (Simplify Chinese)') }}
+                                {{ Form::text('course_material_origin:sc', $material->translate('sc')->course_material_origin,['class' => 'form-control']) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>
-                        <script>
-                            $(document).ready(function () {
-                                $(".custom-file-input").on("change", function () {
-                                    var fileName = $(this).val().split("\\").pop();
-                                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                                });
-                            });
-                        </script>
+
                     </div>
                 </div>
             </div>

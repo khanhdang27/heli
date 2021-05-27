@@ -18,9 +18,6 @@ class CreateCourseMaterialTable extends Migration
             $table->foreignId('course_id')
                 ->constrained('courses')
                 ->cascadeOnDelete();
-            $table->foreignId('image_id')
-                ->constrained('file')
-                ->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

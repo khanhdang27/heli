@@ -1,7 +1,6 @@
-<?php
-$tutorList = new \App\Models\Tutor();
-?>
-
+@php
+    use App\Utilities\SelectionByClass;
+@endphp
 
 @extends('admin.layout')
 @section('content')
@@ -41,7 +40,9 @@ $tutorList = new \App\Models\Tutor();
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_id', 'Tutor') }}
-                                {{ Form::select('tutor_id', $tutorList->getName(),null, ['class' => 'form-control']) }}
+                                {{ Form::select('tutor_id',
+                                    SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'),
+                                    $course->tutor->id, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_price', 'Course Price') }}

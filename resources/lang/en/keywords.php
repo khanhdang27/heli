@@ -1,8 +1,8 @@
 <?php
 return [
     'navBar' => [
-        'login' => 'login',
-        'register' => 'Register',
+        'login' => 'Login',
+        'register' => 'Signup',
         'english' => 'ENG',
         'mentorTeam' => 'Mentor Team',
         'subjectClassification' => 'Subject Classification',
@@ -42,9 +42,9 @@ return [
     'discountProduct' => 'Latest Discount Courses',
     'welcomeOffer' => 'Welcome Offer',
     'hotCourseSeries' => 'Hot Course Series',
-    'loginWithFb' => 'login with Facebook',
-    'loginWithGg' => 'login with Google',
-    'loginWithAp' => 'login with Apple',
+    'loginWithFb' => 'Login with Facebook',
+    'loginWithGg' => 'Login with Google',
+    'loginWithAp' => 'Login with Apple',
     'rememberMe' => 'Remember me',
     'forgotPass' => 'Forgot password',
     'register' => 'Register',
@@ -64,7 +64,9 @@ return [
         'notePackage' => 'Notes package',
         'shareCourse' => 'Share course',
         'courseFrequency' => 'Course frequency',
-        'myCourses' => 'My Courses'
+        'myCourses' => 'My Courses',
+        'registerNow' => 'Register Now',
+        'addToCart' => 'Add To Shopping Cart'
     ],
     'blog-page' => [
         'learningColumn' => 'Learning Column',
@@ -74,5 +76,7 @@ return [
     ],
     'HongKongPublicHolidays' => 'Hong Kong public holidays',
     'learningMaterial' => 'Learning Material',
+    'otherPurchasedCourses' => 'Other purchased courses',
+    'continueMyCourse' => 'Continue my course...'
 
 ];

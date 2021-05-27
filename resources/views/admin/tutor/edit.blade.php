@@ -43,12 +43,12 @@ use App\Utilities\SelectionByClass;
                                 {{ Form::text('tutor_name', $tutor->full_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                               
+
                                 {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id', 
-                                    SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'), 
-                                    $tutor->subject[0]->id, 
-                                    ['class' => 'form-control']) 
+                                {{ Form::select('subject_id',
+                                    SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),
+                                    $tutor->subject[0]->id,
+                                    ['class' => 'form-control'])
                                 }}
                             </div>
                             <div class="form-group ">
@@ -121,7 +121,7 @@ use App\Utilities\SelectionByClass;
                     </div>
                     <div class="card-body">
                         {!! Form::open([
-                                'url' => route('admin.file.store',[
+                                'url' => route('file.store',[
                                     'type'=>'avatar',
                                     'ref' => $tutor->id
                                 ]),

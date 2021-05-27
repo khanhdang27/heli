@@ -21,9 +21,6 @@ class CreateCourseMaterialTranslationsTable extends Migration
             $table->foreignId('course_material_id')
                 ->constrained('course_material')
                 ->cascadeOnDelete();
-            $table->foreignId('documents_id')
-                ->constrained('file')
-                ->cascadeOnDelete();
             $table->string('locale')->index();
             $table->unique(['course_material_id', 'locale']);
             $table->timestamps();
@@ -38,6 +35,6 @@ class CreateCourseMaterialTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('material_translations');
+        Schema::dropIfExists('course_material_translations');
     }
 }

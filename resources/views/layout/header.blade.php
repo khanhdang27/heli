@@ -92,12 +92,22 @@
                     </div>
                 @endif
             <button class="nav-item dropdown text-white bg-white btn-language p-0 border-0 m-auto text-decoration-none">
-                <a class="btn-account dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    繁
+{{--                <a class="btn-account dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">--}}
+{{--                    繁--}}
+{{--                </a>--}}
+{{--                <div class="dropdown-menu dropdown-lang language-item">--}}
+{{--                    <a class="dropdown-item" href="#">繁</a>--}}
+{{--                    <a class="dropdown-item" href="#">ENG</a>--}}
+{{--                </div>--}}
+                <a class="btn-account dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" >
+                    {{ Config::get('languages')[App::getLocale()] }}
                 </a>
                 <div class="dropdown-menu dropdown-lang language-item">
-                    <a class="dropdown-item" href="#">繁</a>
-                    <a class="dropdown-item" href="#">ENG</a>
+                    @foreach (Config::get('languages') as $lang => $language)
+                        @if ($lang != App::getLocale())
+                            <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                        @endif
+                    @endforeach
                 </div>
             </button>
         </div>
