@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+    <defs>
+        <clipPath id="clip-path">
+            <rect id="Rectangle_176" data-name="Rectangle 176" width="48" height="48" transform="translate(154 765)"
+                  fill="#fff" stroke="#707070" stroke-width="1"/>
+        </clipPath>
+    </defs>
+    <g id="Mask_Group_34" data-name="Mask Group 34" transform="translate(-154 -765)" clip-path="url(#clip-path)">
+        <g id="bookmark-outline" transform="translate(178 789)">
+            <g id="bookmark-outline-2" data-name="bookmark-outline" transform="translate(-24 -24)">
+                <g id="bookmark">
+                    <rect id="Rectangle_179" data-name="Rectangle 179" width="48" height="48" fill="#0b487d"
+                          opacity="0"/>
+                    <path id="Path_185" data-name="Path 185"
+                          d="M7.242,39.12a2,2,0,0,1-2-2L4.942,7.8A4.52,4.52,0,0,1,9.3,3.1L28.482,3a4.54,4.54,0,0,1,4.46,4.62l.28,29.32a1.98,1.98,0,0,1-2.98,1.74l-11.4-6.32L8.262,38.82a2.4,2.4,0,0,1-1.02.3Zm11.52-11.1a2.22,2.22,0,0,1,1,.24l9.42,5.22-.24-25.9c0-.4-.26-.68-.42-.66l-19.2.18c-.16,0-.38.26-.38.66l.24,25.8,8.56-5.26a2.12,2.12,0,0,1,1.02-.28Z"
+                          transform="translate(4.938 3)" fill="#0b487d"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

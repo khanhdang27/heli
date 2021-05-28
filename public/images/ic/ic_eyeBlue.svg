@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+    <defs>
+        <clipPath id="clip-path">
+            <rect id="Rectangle_90" data-name="Rectangle 90" width="28" height="28" transform="translate(253 1175)"
+                  fill="#0b487d" stroke="#707070" stroke-width="1"/>
+        </clipPath>
+    </defs>
+    <g id="Mask_Group_18" data-name="Mask Group 18" transform="translate(-253 -1175)" clip-path="url(#clip-path)">
+        <g id="eye-outline" transform="translate(267 1189)">
+            <g id="eye-outline-2" data-name="eye-outline" transform="translate(-14 -14)">
+                <g id="eye">
+                    <rect id="Rectangle_89" data-name="Rectangle 89" width="28" height="28" fill="#0b487d" opacity="0"/>
+                    <path id="Path_105" data-name="Path 105"
+                          d="M25.182,12.584C24.436,11.289,20.329,4.791,13.352,5c-6.452.163-10.185,5.833-11.2,7.583a1.167,1.167,0,0,0,0,1.167c.735,1.272,4.667,7.583,11.538,7.583h.292c6.452-.163,10.2-5.833,11.2-7.583A1.167,1.167,0,0,0,25.182,12.584ZM13.924,19c-5.028.117-8.307-4.188-9.333-5.833C5.757,11.289,8.8,7.451,13.469,7.334c5.005-.128,8.3,4.188,9.333,5.833-1.2,1.878-4.212,5.717-8.878,5.833Z"
+                          transform="translate(0.333 0.833)" fill="#0b487d"/>
+                    <path id="Path_106" data-name="Path 106"
+                          d="M12.583,8.5a4.083,4.083,0,1,0,4.083,4.083A4.083,4.083,0,0,0,12.583,8.5Zm0,5.833a1.75,1.75,0,1,1,1.75-1.75A1.75,1.75,0,0,1,12.583,14.333Z"
+                          transform="translate(1.417 1.417)" fill="#0b487d"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
