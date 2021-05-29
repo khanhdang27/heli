@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVideoManageTranslationsTable extends Migration
+class CreateCourseVideoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateVideoManageTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('course_video_translations', function (Blueprint $table) {
+        Schema::create('course_videos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('course_id')
+                    ->constrained('courses')
+                    ->cascadeOnDelete();
             $table->string('course_video_name');
             $table->text('course_video_description');
-            $table->foreignId('course_video_id')
-                ->constrained('video_manage')
-                ->cascadeOnDelete();
-            $table->string('locale')->index();
-            $table->unique(['course_video_id', 'locale']);
+            $table->string('video_resource');
+            $table->integer('is_live');
+            $table->integer('course_schedule_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,6 +35,6 @@ class CreateVideoManageTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('course_video_translations');
+        Schema::dropIfExists('video_manage');
     }
 }

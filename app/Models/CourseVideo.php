@@ -37,11 +37,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VideoManage withTranslation()
  * @mixin \Eloquent
  */
-class VideoManage extends Model implements TranslatableInterface
+class VideoManage extends Model
 {
-    use Translatable;
 
     protected $guarded = [];
-    protected $table = 'video_manage';
-    public $translatedAttributes = ['course_video_name', 'course_video_description'];
+    protected $table = 'course_video';
 }

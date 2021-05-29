@@ -15,8 +15,8 @@ class CreateTutorTranslations extends Migration
     {
         Schema::create('tutor_translations', function (Blueprint $table) {
             $table->id();
-           $table->foreignId('tutor_id')
-               ->constrained('users')
+            $table->foreignId('tutor_id')
+               ->constrained('tutors')
                ->cascadeOnDelete();
             $table->string('tutor_info');
             $table->string('tutor_level');
