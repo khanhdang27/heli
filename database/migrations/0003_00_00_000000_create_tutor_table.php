@@ -19,6 +19,8 @@ class CreateTutorTable extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete();
             $table->string('full_name');
+            $table->date('day_of_birth');
+            $table->string('phone_no');
             $table->softDeletes();
             $table->timestamps();
         });

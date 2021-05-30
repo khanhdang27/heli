@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostTagsTable extends Migration
+class CreateStudySessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreatePostTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_tags', function (Blueprint $table) {
+        Schema::create('study_sessions', function (Blueprint $table) {
             $table->id();
-            $table->string('tag_name');
+            $table->string('session_name');
+            $table->date('session_start');
+            $table->date('session_end');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreatePostTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_tags');
+        Schema::dropIfExists('study_sessions');
     }
 }

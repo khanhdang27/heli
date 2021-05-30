@@ -15,6 +15,17 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->text('title');
+            $table->text('content');
+            $table->bigInteger('file_id');
+            $table->bigInteger('like_no')->default(0);
+            $table->bigInteger('comment_no')->default(0);
+            $table->boolean('block');
+            $table->bigInteger('pin_comment');
+            $table->bigInteger('tag_id');
             $table->timestamps();
         });
     }

@@ -15,6 +15,13 @@ class CreateUserLikesTable extends Migration
     {
         Schema::create('user_likes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('post_id')
+                ->constrained('posts')
+                ->cascadeOnDelete();
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->integer('like_style')->default(1);
             $table->timestamps();
         });
     }

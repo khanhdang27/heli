@@ -22,7 +22,8 @@ class CreateCourseMaterialTranslationsTable extends Migration
             $table->longText('course_material_description');
             $table->string('course_material_origin');
             $table->string('locale')->index();
-            $table->unique(['course_material_id', 'locale']);
+            $table->unique(
+                ['course_material_id', 'locale']);
             $table->timestamps();
             $table->softDeletes();
         });

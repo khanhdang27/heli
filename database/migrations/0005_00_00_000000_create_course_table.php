@@ -16,8 +16,12 @@ class CreateCourseTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subject_id')->constrained('subjects');
-            $table->foreignId('tutor_id')->constrained('tutors');
+            $table->foreignId('subject_id')
+                ->constrained('subjects')
+                ->cascadeOnDelete();
+            $table->foreignId('tutor_id')
+                ->constrained('tutors')
+                ->cascadeOnDelete();
             $table->string('course_price');
             $table->string('course_discount');
             $table->softDeletes();
