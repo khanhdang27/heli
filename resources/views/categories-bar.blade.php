@@ -18,7 +18,7 @@
                         AIL
                     </a>
                     <div class="dropdown-menu my-dropdown-menu">
-                        @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id') as $key => $value)
+                        @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_code', 'id') as $key => $value)
                             {{--                        <a class="dropdown-item" id="show-subject" href="#" >{{$value}}</a>--}}
                             <a class="btn dropdown-item certificate-nav-item"
                                href="{{ route('site.get_subject_by_parent', $key) }}" role="button">

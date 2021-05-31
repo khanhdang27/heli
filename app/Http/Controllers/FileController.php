@@ -41,7 +41,7 @@ class FileController extends Controller
     public function store(Request $request)
     {
         $type = $request->query('type');
-        $file_type = File::$UNDEFINED;
+//        $file_type = File::$UNDEFINED;
         $image = $request->file('file');
         $fileInfo = $image->getClientOriginalName();
         $path = Storage::put($type, $image);
@@ -50,7 +50,7 @@ class FileController extends Controller
                 case 'avatar':
                     $file_type = File::$AVATAR;
                     break;
-                
+
                 default:
                     $file_type = File::$UNDEFINED;
             }

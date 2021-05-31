@@ -71,6 +71,8 @@ Route::group(['middleware' => 'language'], function () {
             return view('forum.forum-page');
         })->name('forum');
 
+
+
         Route::get('forumAnswer', function () {
             return view('forum.forum-page2');
         })->name('forumAnswers');
@@ -102,6 +104,7 @@ Route::prefix('user/')->name('user.')->group(function () {
     Route::get('calendar', function () {
         return view('calendar-page');
     })->name('calendar');
+    Route::resource('post','PostController');
 });
 });
 Route::resource('file', 'FileController');
@@ -132,6 +135,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('banner', 'Admin\BannerController');
 
         Route::resource('user', 'Admin\UserController');
+
+        Route::resource('post-tags', 'Admin\PostTagsController');
 
         Route::get('course/{course}/video', [CourseController::class, 'videoList'])
             ->name('course.video.index');
