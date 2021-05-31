@@ -15,14 +15,15 @@ class CreateCourseMaterialTranslationsTable extends Migration
     {
         Schema::create('course_material_translations', function (Blueprint $table) {
             $table->id();
-            $table->string('course_material_name');
-            $table->longText('course_material_description');
-            $table->string('course_material_origin');
             $table->foreignId('course_material_id')
                 ->constrained('course_material')
                 ->cascadeOnDelete();
+            $table->string('course_material_name');
+            $table->longText('course_material_description');
+            $table->string('course_material_origin');
             $table->string('locale')->index();
-            $table->unique(['course_material_id', 'locale']);
+            $table->unique(
+                ['course_material_id', 'locale']);
             $table->timestamps();
             $table->softDeletes();
         });

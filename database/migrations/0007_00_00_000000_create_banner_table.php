@@ -16,7 +16,8 @@ class CreateBannerTable extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
             $table->text('banner_title');
-            $table->foreignId('banner_background')->constrained('file');
+            $table->foreignId('banner_background')
+                ->constrained('file');
             $table->softDeletes();
             $table->timestamps();
         });

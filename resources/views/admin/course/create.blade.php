@@ -16,12 +16,10 @@ use App\Models\Tutor;
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-
                                 <!-- Title -->
                                 <h4 class="card-header-title">
                                     Create Course
                                 </h4>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>
@@ -42,10 +40,10 @@ use App\Models\Tutor;
                                 {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
                                 {{ Form::text('course_name:sc',old('course_name:sc'),['class' => 'form-control', 'required']) }}
                             </div>
-{{--                            <div class="form-group ">--}}
-{{--                                {{ Form::label('tutor_id', 'Tutor') }}--}}
-{{--                                {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}--}}
-{{--                            </div>--}}
+                           <div class="form-group ">
+                               {{ Form::label('tutor_id', 'Tutor') }}
+                               {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
+                           </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:en', 'Course Description (English)') }}
                                 {{ Form::textarea('course_description:en',old('course_description:en'),['class' => 'form-control', 'required']) }}

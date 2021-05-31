@@ -45,7 +45,7 @@ use \App\Utilities\MapData;
 class Course extends Model implements TranslatableContract
 {
     use Translatable;
-    use MapData;
+    
 
     protected $table = 'courses';
     protected $guarded = [];

@@ -35,7 +35,7 @@ use \App\Utilities\MapData;
 class User extends Authenticatable
 {
     use Notifiable;
-    use MapData;
+    
 
     protected $table = 'users';
 

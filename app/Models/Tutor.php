@@ -49,7 +49,7 @@ use \App\Utilities\MapData;
 class Tutor extends Model implements TranslatableContract
 {
     use Translatable;
-    use MapData;
+    
 
     protected $table = 'tutors';
     protected $guarded = [];
@@ -68,5 +68,10 @@ class Tutor extends Model implements TranslatableContract
     public function course()
     {
         return $this->belongsToMany(Tutor::class, TutorTeachCourse::class);
+    }
+
+    public function avatar()
+    {
+        return $this->hasOne(File::class, 'referer');
     }
 }

@@ -23,6 +23,10 @@
                             {!! Form::open(['route' => ['admin.certificate.update', $certificate->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
                             @csrf
                             <div class="form-group">
+                                {{ Form::label('certificate_code', 'Code') }}
+                                {{ Form::text('certificate_code', $certificate->certificate_code, ['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group">
                                 {{ Form::label('certificate_name', 'Name') }}
                                 {{ Form::text('certificate_name', $certificate->certificate_name, ['class' => 'form-control']) }}
                             </div>

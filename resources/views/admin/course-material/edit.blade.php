@@ -1,3 +1,7 @@
+@php
+    use \App\Utilities\SelectionByClass;
+@endphp
+
 @extends('admin.layout')
 @section('content')
     <!-- CARDS -->
@@ -14,7 +18,6 @@
                                 <h4 class="card-header-title">
                                     Edit Material
                                 </h4>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>

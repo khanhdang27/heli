@@ -36,7 +36,7 @@ use Illuminate\Support\Carbon;
 class Subject extends Model implements TranslatableContract
 {
     use Translatable;
-    use MapData;
+    
 
     protected $table = 'subjects';
     protected $guarded = [];

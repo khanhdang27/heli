@@ -13,10 +13,4 @@ trait MapData
         }
         return $obj;
     }
-
-    public function toArray()
-    {
-        return $this->toArray();
-    }
-
 }

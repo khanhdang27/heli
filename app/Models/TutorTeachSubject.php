@@ -9,7 +9,7 @@ use \App\Utilities\MapData;
 class TutorTeachSubject extends Model
 {
 
-    use MapData;
+    
 
     protected $table = 'tutor_teach_subject';
 

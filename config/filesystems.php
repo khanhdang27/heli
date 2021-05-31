@@ -26,8 +26,11 @@ return [
     |
     */
 
-    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
+    // 'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
+      
+    'cloud' => 'google', // Optional: set Google Drive as default cloud storage
+    
     /*
     |--------------------------------------------------------------------------
     | Filesystem Disks
@@ -53,6 +56,14 @@ return [
             'root' => storage_path('app/public'),
             'url' => env('APP_URL') . '/Helios/storage/app/public',
             'visibility' => 'public',
+        ],
+
+        'google' => [
+            'driver' => 'google',
+            'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+            'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+            'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+            'folderId' => env('GOOGLE_DRIVE_FOLDER_ID'),
         ],
 
         's3' => [

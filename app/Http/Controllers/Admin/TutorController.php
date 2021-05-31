@@ -24,7 +24,7 @@ class TutorController extends Controller
     {
         $subjects = Subject::all();
         $tutors = Tutor::query()
-            ->with('subject', 'translations')
+            ->with('subject', 'translations', 'avatar')
             ->when(request('name') != '', function (Builder $query) {
                 $query->where('full_name', 'like', '%' . request('name') . '%');
             })
@@ -115,7 +115,7 @@ class TutorController extends Controller
      */
     public function edit(Tutor $tutor)
     {
-        $tutor->load(['translations', 'user', 'subject']);
+        $tutor->load(['translations', 'user', 'subject', 'avatar']);
         return view('admin.tutor.edit', [
             'tutor'    => $tutor,
         ]);

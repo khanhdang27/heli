@@ -23,6 +23,10 @@
                             {!! Form::open(['route' => 'admin.certificate.store', 'enctype' => 'multipart/form-data' ]) !!}
                             @csrf
                             <div class="form-group ">
+                                {{ Form::label('certificate_code', 'Code') }}
+                                {{ Form::text('certificate_code', old('certificate_code'),['class' => 'form-control'] ) }}
+                            </div>
+                            <div class="form-group ">
                                 {{ Form::label('certificate_name', 'Name') }}
                                 {{ Form::text('certificate_name', old('certificate_name'),['class' => 'form-control'] ) }}
                             </div>

@@ -82,8 +82,8 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ URL::route('admin.course-material.edit', $value->id) }}"
-                                                       class="dropdown-item">
+                                                    <a href="{{ route('admin.course-material.edit', $value) }}"
+                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"

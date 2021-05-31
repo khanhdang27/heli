@@ -15,8 +15,10 @@ class CreateTutorTeachSubjectTable extends Migration
     {
         Schema::create('tutor_teach_subject', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tutor_id')->constrained('tutors');
-            $table->foreignId('subject_id')->constrained('subjects');
+            $table->foreignId('tutor_id')
+                ->constrained('tutors');
+            $table->foreignId('subject_id')
+                ->constrained('subjects');
             $table->timestamps();
             $table->unique(['tutor_id', 'subject_id']);
             $table->softDeletes();

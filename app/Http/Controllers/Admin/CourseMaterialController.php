@@ -54,53 +54,53 @@ class CourseMaterialController extends Controller
     public function store(CreateMaterialRequest $request)
     {
 
-        $material = new CourseMaterial(
+        $course_material = new CourseMaterial(
             $request->validated()
         );
-        $material->save();
+        $course_material->save();
         return back()->with('success', 'Delete success');
     }
 
     /**
-     * @param CourseMaterial $material
+     * @param CourseMaterial $course_material
      * @return \Illuminate\Http\Response
      */
-    public function show(CourseMaterial $material)
+    public function show(CourseMaterial $course_material)
     {
         //
     }
 
     /**
-     * @param CourseMaterial $material
+     * @param CourseMaterial $course_material
      * @return View
      */
-    public function edit(CourseMaterial $material)
+    public function edit(CourseMaterial $course_material)
     {
-        $material->load('translations');
+        $course_material->load('translations');
         return view('admin.course-material.edit', [
-            'material' => $material
+            'material' => $course_material
         ]);
     }
 
     /**
      * @param CreateMaterialRequest $request
-     * @param CourseMaterial $material
+     * @param CourseMaterial $course_material
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CreateMaterialRequest $request, CourseMaterial $material)
+    public function update(CreateMaterialRequest $request, CourseMaterial $course_material)
     {
-        $material->update(
+        $course_material->update(
             $request->validated()
         );
-        $material->save();
+        $course_material->save();
         return back()->with('success', 'Update success!');
     }
 
 
-    public function destroy(CourseMaterial $material)
+    public function destroy(CourseMaterial $course_material)
     {
         try {
-            $material->delete();
+            $course_material->delete();
             return response([
                 'message' => 'Delete success!'
             ]);

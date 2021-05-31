@@ -88,7 +88,11 @@
                                 @foreach($tutors as $value)
                                     <tr>
                                         <td>
-                                            <img type="image/jpg" src="{{ URL::route('file.show',1) }}" width="75" height="75"/> 
+                                            @if($value->avatar)
+                                                <img type="image/jpg" src="/file/{{$value->avatar->id}}" width="75" height="75"/>
+                                            @else
+                                            avatar
+                                            @endif
                                         </td>
                                         <td class="goal-project">
                                             {{ $value->full_name }}

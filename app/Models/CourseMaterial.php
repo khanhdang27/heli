@@ -44,12 +44,13 @@ use Illuminate\Database\Eloquent\Model;
 class CourseMaterial extends Model implements TranslatableContract
 {
     use Translatable;
-    protected $guarded = [];
+
     protected $table = 'course_material';
+    protected $guarded = [];
     public array $translatedAttributes = ['course_material_name', 'course_material_description', 'course_material_origin'];
 
-    public function documents()
-    {
-        return $this->morphToMany(File::class, 'file_refer');
-    }
+    // public function documents()
+    // {
+    //     return $this->morphToMany(File::class, 'file_refer');
+    // }
 }

@@ -1,5 +1,5 @@
 @php
-    use App\Utilities\SelectionByClass;
+    use \App\Utilities\SelectionByClass;
 @endphp
 
 @extends('admin.layout')

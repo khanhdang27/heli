@@ -27,6 +27,7 @@ class CreateCertificateRequest extends FormRequest
     {
         return [
             'certificate_name' => 'required',
+            'certificate_code' => 'required',
         ];
     }
 }
