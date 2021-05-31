@@ -34,5 +34,6 @@
     showSubjectNav("{{ route('site.get_subject_by_parent', '') }}", "{{ route('site.subject.show', '') }}")
 </script>
 @stack('scriptsLogin')
+@stack('inputFile')
 </body>
 </html>

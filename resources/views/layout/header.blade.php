@@ -25,7 +25,7 @@
                     @lang('keywords.navBar.subjectClassification')
                 </a>
                 <div class="dropdown-menu my-dropdown-menu dropdown-items">
-                    @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id') as $key => $value)
+                    @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_code', 'id') as $key => $value)
                         <a class="dropdown-item" href="{{ URL::route('site.certificate.show',$key, true)}}">{{$value}}</a>
                     @endforeach
                 </div>
