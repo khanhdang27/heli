@@ -60,6 +60,7 @@
 
     </div>
 </div>
+<div id="snackbar"><p class="m-0" id="contentToast">Toast</p></div>
 @push('scripts')
     <script>
         $(function () {
@@ -77,13 +78,31 @@
                     data: formData
                 }).done(function (data) {
                     console.log(data)
-                    if (data === false) {
-                        alert('Không có người dùng');
+                    if (data == 0) {
+                        Toast("Nhap email kia cha noi!!!",'warning');
                     } else {
-                        location.reload()
+                        Toast("Register Successed");
                     }
-                })
+                });
             });
-        })
+        });
+
+        function Toast(content, status) {
+            var color = '#28a745';
+            if(status == 'warning'){
+                color = '#ffc107';
+            }else if(status == 'error'){
+                color = '#dc3545';
+            }
+            var x = document.getElementById("snackbar");
+            var contentToast = document.getElementById("contentToast");
+
+            contentToast.innerHTML = content;
+            x.style.backgroundColor = color;
+            x.className = "show";
+
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+
     </script>
 @endpush

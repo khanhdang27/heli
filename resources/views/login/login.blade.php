@@ -74,7 +74,6 @@
 
             <!-- Modal footer -->
         </div>
-
     </div>
 </div>
 @push('scriptsLogin')
@@ -94,13 +93,30 @@
                     data: formData
                 }).done(function (data) {
                     console.log(data);
-                    if (data.status == 200) {
-                        location.href = data.url;
+                    if (data == 'incorrect') {
+                        Toast("Email or password incorrect",'error');
                     } else {
                         location.reload()
                     }
                 })
             });
         })
+/*
+        function Toast(content, status) {
+            var color = '#28a745';
+            if(status == 'warning'){
+                color = '#ffc107';
+            }else if(status == 'error'){
+                color = '#dc3545';
+            }
+            var x = document.getElementById("snackbar");
+            var contentToast = document.getElementById("contentToast");
+
+            contentToast.innerHTML = content;
+            x.style.backgroundColor = color;
+            x.className = "show";
+
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }*/
     </script>
 @endpush

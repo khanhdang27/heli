@@ -74,7 +74,7 @@ Route::group(['middleware' => 'language'], function () {
 
 
         Route::get('forumAnswer', function () {
-            return view('forum.forum-page2');
+            return view('forum.post-view');
         })->name('forumAnswers');
 
 
@@ -104,7 +104,10 @@ Route::prefix('user/')->name('user.')->group(function () {
     Route::get('calendar', function () {
         return view('calendar-page');
     })->name('calendar');
+
     Route::resource('post','PostController');
+    Route::resource('comment','CommentController');
+    Route::resource('user-like','UserLikeController');
 });
 });
 Route::resource('file', 'FileController');
@@ -160,7 +163,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 // //Auth::routes();
 
 
-
+//Up videos
 
 Route::get('put', function() {
     Storage::cloud()->put('test.txt', 'Hello World');
@@ -218,7 +221,8 @@ Route::get('list-folder-contents', function() {
 });
 
 Route::get('get', function() {
-    $filename = 'test.txt';
+   // $filename = 'test.txt';
+    $path = '1keP4h_tsyB035qdE340mHfwNF5cJI6ow';
 
     $dir = '/';
     $recursive = false; // Get subdirectories also?
@@ -226,7 +230,7 @@ Route::get('get', function() {
 
     $file = $contents
         ->where('type', '=', 'file')
-        ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+        ->where('path', '=', pathinfo($path, PATHINFO_FILENAME))
         ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
         ->first(); // there can be duplicate file names!
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -35,7 +37,25 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fileController = new FileController();
+        $input = $request->all();
+
+        $file_id = $fileController->store($request);
+
+        $input['user_id'] = Auth::user()->id;
+        unset($input['type']);
+        unset($input['ref']);
+        unset($input['file']);
+        $input['file_id'] = $file_id;
+
+        $comment = new Comment($input);
+
+        if($comment->save()){
+            $post = Post::find($comment->post_id);
+            $post->comment_no   =   $post->comment_no+1;
+            $post->save();
+        }
+
     }
 
     /**
