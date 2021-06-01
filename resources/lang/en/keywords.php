@@ -77,5 +77,7 @@ return [
     'HongKongPublicHolidays' => 'Hong Kong public holidays',
     'learningMaterial' => 'Learning Material',
     'otherPurchasedCourses' => 'Other purchased courses',
-    'continueMyCourse' => 'Continue my course...'
+    'continueMyCourse' => 'Continue my course...',
+    'solved' => 'Solved',
+    'waitingForAnswer' => 'Waiting for answer'
 ];

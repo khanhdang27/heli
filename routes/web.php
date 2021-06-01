@@ -74,7 +74,7 @@ Route::group(['middleware' => 'language'], function () {
 
 
         Route::get('forumAnswer', function () {
-            return view('forum.forum-page2');
+            return view('forum.post-view');
         })->name('forumAnswers');
 
 
@@ -104,7 +104,10 @@ Route::prefix('user/')->name('user.')->group(function () {
     Route::get('calendar', function () {
         return view('calendar-page');
     })->name('calendar');
+
     Route::resource('post','PostController');
+    Route::resource('comment','CommentController');
+    Route::resource('user-like','UserLikeController');
 });
 });
 Route::resource('file', 'FileController');

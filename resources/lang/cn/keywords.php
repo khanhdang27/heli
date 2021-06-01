@@ -78,6 +78,7 @@ return [
     'HongKongPublicHolidays' => '香港公眾假期',
     'learningMaterial' => '教材',
     'otherPurchasedCourses' => '其他已購買課程',
-    'continueMyCourse' => '繼續我的課程...'
-
+    'continueMyCourse' => '繼續我的課程...',
+    'solved' => '已解決',
+    'waitingForAnswer' => '等待解答'
 ];

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Models\File;
+use App\Models\PostTag;
+use App\Models\User;
 use App\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -17,7 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -63,18 +66,25 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show(Post $post)
     {
-        //
+        $postTag = PostTag::where('id',$post->tag_id)->first();
+        $comments = Comment::with('user', 'post')->where('post_id', $post->id)->get();
+
+        return view('forum.post-view', [
+            'post' => $post,
+            'postTag' => $postTag,
+            'comments'=>$comments
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function edit(Post $post)
     {
