@@ -16,23 +16,27 @@
     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-logged.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-calendar.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/toast.css')}}" rel="stylesheet">
     <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
 </head>
 <body>
 @include('layout.header')
 
 @yield('content')
-
-@include('layout.footer')
-</div>
 <script src="{{ asset('js/jquery-3.6.0.min.js')}}"></script>
 <script src="{{ asset('js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('js/lib/main.js')}}"></script>
 <script src="{{ asset('js/home/app.js')}}"></script>
+@stack('likePost')
+@include('layout.footer')
+</div>
+
 @stack('scripts')
 <script>
     showSubjectNav("{{ route('site.get_subject_by_parent', '') }}", "{{ route('site.subject.show', '') }}")
 </script>
 @stack('scriptsLogin')
+@stack('inputFile')
+
 </body>
 </html>

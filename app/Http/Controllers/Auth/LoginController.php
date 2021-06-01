@@ -57,15 +57,12 @@ class LoginController extends Controller
         if(Auth::attempt($request->validated())) {
             return redirect()->route('site.home')->with('success', 'login successful!');
         }
-        throw ValidationException::withMessages([
-            'email' => 'Email or Password is incorrect',
-            'password' => 'Email or Password is incorrect'
-        ]);
+        return 'incorrect';
     }
 
     public function logout(Request $request)
     {
-        if (\Auth::user()->isMember()) {
+        if (\Auth::check()) {
             \Auth::logout();
             return redirect()->route('site.home');
         } else {

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\CreateSubjectRequest;
 use App\Models\Certificate;
+use App\Models\PostTag;
 use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 
 class SubjectController extends Controller
@@ -71,8 +73,10 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
+
         return view('admin.subject.edit', [
-            'subject' => $subject
+            'subject' => $subject,
+
         ]);
     }
 

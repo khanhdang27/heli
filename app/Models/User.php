@@ -35,7 +35,7 @@ use \App\Utilities\MapData;
 class User extends Authenticatable
 {
     use Notifiable;
-    
+
 
     protected $table = 'users';
 
@@ -137,5 +137,6 @@ class User extends Authenticatable
     {
         return $this->morphToMany(File::class, 'file_refer');
     }
+
 
 }
