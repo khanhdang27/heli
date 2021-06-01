@@ -73,10 +73,9 @@ class RegisterController extends Controller
             $send_mail = new \App\Mail\SendMail();
             $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.test_mail');
             \Mail::to($input['email'])->send($send_mail);
+            return 1;
         }
-
-        return true;
-
+        return 0;
     }
 
 }

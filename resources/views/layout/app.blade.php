@@ -16,6 +16,7 @@
     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-logged.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-calendar.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/toast.css')}}" rel="stylesheet">
     <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
 </head>
 <body>
