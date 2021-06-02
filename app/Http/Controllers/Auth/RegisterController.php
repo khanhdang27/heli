@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\RoleUser;
+use App\Models\Student;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -69,6 +71,9 @@ class RegisterController extends Controller
 
             $roleUser = new RoleUser(['user_id' => $user->id, 'role_id' => '3']);
             $roleUser->save();
+
+            $student = new Student(['user_id' => $user->id]);
+            $student->save();
 
             $send_mail = new \App\Mail\SendMail();
             $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.test_mail');

@@ -32,7 +32,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::post('login', 'Auth\LoginController@login')->name('userLogin');
 
         Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
-
+        Route::put('/reset-password','Auth\ChangePasswordController@update')->name('resetPassword');
 
         Route::get('news', function () {
             return view('news-page');
@@ -66,6 +66,9 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('blog', function () {
             return view('blog-page');
         })->name('blog');
+        Route::get('blog-view', function () {
+            return view('blog-view');
+        })->name('blog-view');
 
         Route::get('forum', function () {
             return view('forum.forum-page');
@@ -108,6 +111,9 @@ Route::prefix('user/')->name('user.')->group(function () {
     Route::resource('post','PostController');
     Route::resource('comment','CommentController');
     Route::resource('user-like','UserLikeController');
+    Route::resource('profile','ProfileController');
+
+
 });
 });
 Route::resource('file', 'FileController');
@@ -141,6 +147,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('post-tags', 'Admin\PostTagsController');
 
+        Route::resource('blog', 'Admin\BlogController');
         Route::get('course/{course}/video', [CourseController::class, 'videoList'])
             ->name('course.video.index');
         Route::get('course/{course}/video/create', [CourseController::class, 'createVideo'])
