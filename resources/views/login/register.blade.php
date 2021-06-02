@@ -40,7 +40,6 @@
                                 <hr>
                             </div>
                             {!! Form::open(['id'=>'registerForm']) !!}
-                            @csrf
                             <div class="input-login d-flex justify-content-center align-items-center mb-3">
                                 {{ Form::email('email',null,['class'=>'input-login-item','placeholder'=>'Email','autocomplete'=>'off']) }}
                             </div>

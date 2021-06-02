@@ -179,7 +179,9 @@ html, body {
     height: 100%;
     outline: none;
 }
-
+.item-header{
+    padding:0 1rem 0 1rem !important;
+}
 /*BANNER-----------------------------------------*/
 .img {
     width: 100%;
@@ -888,3 +890,7 @@ video {
 .btn-more:focus {
     outline: none;
 }
+.text-14{
+    font-size: 10.5pt;
+}
+

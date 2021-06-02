@@ -34,9 +34,9 @@
                         <div class="thumb-article d-flex flex-column justify-content-end"
                              style="background-image: url('{{asset("images/bg-article.jpg")}}')">
                             <div class="container-fluid pt-2 info-article">
-                                <p class="title-article">
+                                <a href="{{route('site.blog-view')}}" class="title-article">
                                     【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)
-                                </p>
+                                </a>
                                 <div class="d-flex justify-content-between flex-wrap pb-3">
                                     <div class="d-flex">
                                         <p class="text-20 mr-5">

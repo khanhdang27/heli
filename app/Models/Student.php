@@ -3,13 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-use Astrotomic\Translatable\Translatable;
 
-class Student extends Model implements TranslatableContract
+class Student extends Model
 {
-    use Translatable;
+    protected $table = 'students';
 
-    protected $table = 'tutor';
+    public $timestamps = TRUE;
+
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
+
 }
