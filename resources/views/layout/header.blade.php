@@ -16,11 +16,11 @@
     </button>
     <div class="navbar-collapse collapse" id="navb">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li class="nav-item item-header">
                 <a class="nav-link"
                    href={{ URL::route('site.teams') }}>@lang('keywords.navBar.mentorTeam')</a>
             </li>
-            <li class="nav-item dropdown item-mentorTeam">
+            <li class="nav-item dropdown item-header item-mentorTeam">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     @lang('keywords.navBar.subjectClassification')
                 </a>
@@ -30,15 +30,15 @@
                     @endforeach
                 </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item item-header">
                 <a class="nav-link"
                    href="{{ URL::route('site.news') }}">@lang('keywords.navBar.latestNews')</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item item-header">
                 <a class="nav-link"
                    href="{{ URL::route('site.blog') }}">@lang('keywords.navBar.learningColumn')</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item item-header">
                 <a class="nav-link"
                    href="{{ URL::route('site.forum') }}">@lang('keywords.navBar.q&aArea')</a>
             </li>
@@ -56,11 +56,11 @@
 
             @if(Auth::user())
                 <button class="nav-item dropdown p-0 border-0 m-auto btn-cart">
-                    <a class="btn-account text-decoration-none" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="btn-account text-decoration-none" id="navbardrop" data-toggle="dropdown">
                         <img src={{asset("images/ic/ic_user.svg")}} width="40">
                     </a>
                     <div class="dropdown-menu my-dropdown-menu language-item">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{{ route('user.profile.show', Auth::user()->id) }}">Profile</a>
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="{{ URL::route('site.userLogout')}}">Log out</a>
                     </div>
