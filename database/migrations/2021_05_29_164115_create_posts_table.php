@@ -27,6 +27,7 @@ class CreatePostsTable extends Migration
             $table->bigInteger('pin_comment')->nullable()->default(null);
             $table->bigInteger('tag_id')->nullable()->default(null);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

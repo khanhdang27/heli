@@ -30,8 +30,12 @@
                         <img class="ic-action" src="{{asset("images/ic/ic_bookmark.svg")}}">
                     </span>
                     <span class="mr-5">
-                        <img class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">
-                        {{$value->like_no}}
+                        @if($value->like_no>0)
+                            <img class="ic-action" src="{{asset("images/ic/ic_fullHeart.svg")}}">
+                        @else
+                            <img class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">
+                        @endif
+                            {{$value->like_no}}
                     </span>
                     <a href="{{ route('user.post.show', $value->id)}}">
                         <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">

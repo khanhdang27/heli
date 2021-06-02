@@ -38,7 +38,6 @@ class User extends Authenticatable
 
 
     protected $table = 'users';
-
     private $_roles = NULL;
     /**
      * The attributes that are mass assignable.
