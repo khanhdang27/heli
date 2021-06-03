@@ -64,10 +64,10 @@ Route::group(['middleware' => 'language'], function () {
         })->name('lesson');
 
         Route::get('blog', function () {
-            return view('blog-page');
+            return view('blog.blog-page');
         })->name('blog');
         Route::get('blog-view', function () {
-            return view('blog-view');
+            return view('blog.blog-view');
         })->name('blog-view');
 
         Route::get('forum', function () {
@@ -145,7 +145,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('user', 'Admin\UserController');
 
-        Route::resource('post-tags', 'Admin\PostTagsController');
+        Route::resource('tag', 'Admin\TagsController');
 
         Route::resource('blog', 'Admin\BlogController');
         Route::get('course/{course}/video', [CourseController::class, 'videoList'])

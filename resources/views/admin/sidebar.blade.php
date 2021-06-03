@@ -105,7 +105,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.tags.index') active @endif"
-                       href="{{ route('admin.post-tags.index') }}">
+                       href="{{ route('admin.tag.index') }}">
                         <i class="fe fe-clipboard"></i> Q&A Tags
                     </a>
                 </li>

@@ -42,6 +42,7 @@
                             {!! Form::open(['id'=>'registerForm']) !!}
                             <div class="input-login d-flex justify-content-center align-items-center mb-3">
                                 {{ Form::email('email',null,['class'=>'input-login-item','placeholder'=>'Email','autocomplete'=>'off']) }}
+                                <div id="snackbar"><p class="m-0" id="contentToast">Toast</p></div>
                             </div>
                             <div class="bottom-btn">
                                 {{ Form::submit('Register', ['class'=>'btn-login btn-secondary btn-register-now', 'id'=>'btn-register']) }}
@@ -59,7 +60,7 @@
 
     </div>
 </div>
-<div id="snackbar"><p class="m-0" id="contentToast">Toast</p></div>
+
 @push('scripts')
     <script>
         $(function () {
@@ -78,7 +79,7 @@
                 }).done(function (data) {
                     console.log(data)
                     if (data == 0) {
-                        Toast("Nhap email kia cha noi!!!",'warning');
+                        Toast("Please enter email!");
                     } else {
                         Toast("Register Successed");
                     }
@@ -87,7 +88,7 @@
         });
 
         function Toast(content, status) {
-            var color = '#28a745';
+            var color = '#fff';
             if(status == 'warning'){
                 color = '#ffc107';
             }else if(status == 'error'){
@@ -97,6 +98,7 @@
             var contentToast = document.getElementById("contentToast");
 
             contentToast.innerHTML = content;
+            contentToast.style.color= 'red';
             x.style.backgroundColor = color;
             x.className = "show";
 

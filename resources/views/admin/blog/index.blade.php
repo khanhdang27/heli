@@ -48,7 +48,7 @@
                                         View
                                     </th>
                                     <th>
-
+                                        Created at
                                     </th>
                                     <th></th>
                                 </tr>
@@ -64,6 +64,9 @@
                                         </td>
                                         <td class="goal-project">
                                             {{$value->view_no}}
+                                        </td>
+                                        <td class="goal-project">
+                                            {{$value->created_at}}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
