@@ -13,12 +13,14 @@ class CreateBlogTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('blog_tags', function (Blueprint $table) {
+        Schema::create('blog_tag', function (Blueprint $table) {
             $table->id();
             $table->foreignId('blog_id')
                 ->constrained('blogs')
                 ->cascadeOnDelete();
-            $table->bigInteger('tag_id')->nullable()->default(null);
+            $table->foreignId('tag_id')
+                ->constrained('tags')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateBlogTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_tags');
+        Schema::dropIfExists('blog_tag');
     }
 }

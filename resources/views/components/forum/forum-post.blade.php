@@ -3,7 +3,7 @@
     //$posts = Post::all();
     $posts = \Illuminate\Support\Facades\DB::table('users')
 ->join('posts', 'users.id', '=', 'posts.user_id')
-->join('post_tags', 'posts.tag_id','=','post_tags.id')
+->join('tags', 'posts.tag_id','=','tags.id')
 ->get();
 @endphp
 @foreach($posts as $value)

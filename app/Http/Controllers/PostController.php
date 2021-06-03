@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Models\File;
 use App\Models\PostTag;
+use App\Models\Tag;
 use App\Models\User;
 use App\Post;
 use Illuminate\Contracts\View\View;
@@ -70,7 +71,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $postTag = PostTag::where('id',$post->tag_id)->first();
+        $postTag = Tag::where('id',$post->tag_id)->first();
         $comments = Comment::with('user', 'post')->where('post_id', $post->id)->get();
 
         return view('forum.post-view', [
