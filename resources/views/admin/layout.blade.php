@@ -51,10 +51,10 @@
 <script src="{{ asset('cpanel/assets/libs/highlightjs/highlight.pack.min.js') }}"></script>
 <script src="{{ asset('cpanel/assets/libs/jquery-mask-plugin/dist/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('cpanel/assets/libs/list.js/dist/list.min.js') }}"></script>
-<script src="{{ asset('cpanel/assets/libs/quill/dist/quill.min.js') }}"></script>
+{{--<script src="{{ asset('cpanel/assets/libs/quill/dist/quill.min.js') }}"></script>--}}
 <script src="{{ asset('cpanel/assets/libs/select2/dist/js/select2.min.js') }}"></script>
 <script src="{{ asset('cpanel/assets/libs/chart.js/Chart.extension.min.js') }}"></script>
-<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 <!-- Map -->
 {{-- <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script> --}}
 
@@ -71,6 +71,7 @@
 
 @stack('js')
 @stack('ck-editor-init')
-
+<!-- Plugin file -->
+<script src="./js/addons/datatables.min.js"></script>
 </body>
 </html>

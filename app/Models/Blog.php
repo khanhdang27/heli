@@ -8,4 +8,8 @@ class Blog extends Model
 {
     protected $table = 'blogs';
     protected $guarded = [];
+
+    public function tags() {
+        return $this->belongsToMany(Tag::class);
+    }
 }
