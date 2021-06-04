@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -107,6 +108,8 @@ Route::prefix('user/')->name('user.')->group(function () {
     Route::get('calendar', function () {
         return view('calendar-page');
     })->name('calendar');
+    Route::put('/user/post/block/{id}', [PostController::class, 'blockPost'])
+        ->name('blockPost');
 
     Route::resource('post','PostController');
     Route::resource('comment','CommentController');

@@ -51,7 +51,7 @@
                     </button>
                 </div>
                 <p class="text-28 pt-2 ">
-                    @if($value->block==0)
+                    @if($value->block==1)
                         @lang('keywords.solved')
                     @else
                         @lang('keywords.waitingForAnswer')
