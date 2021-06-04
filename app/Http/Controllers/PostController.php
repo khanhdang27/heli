@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use App\Models\File;
 use App\Models\PostTag;
 use App\Models\Tag;
-use App\Models\User;
 use App\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -103,16 +101,29 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $comment_id)
     {
-        //
+        $comment = Comment::where('id', $comment_id)->first();
+        $post = Post::where('id', $comment->post_id)->first();
+        $post->pin_comment = $comment_id;
+        $post->save();
+
+        return redirect()->route('user.post.show', $post->id);
+    }
+
+    public function blockPost(Request $request, $post_id)
+    {
+        $post = Post::where('id', $post_id)->first();
+        $post->block = 1;
+        $post->save();
+        return redirect()->route('user.post.show', $post->id);
     }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)

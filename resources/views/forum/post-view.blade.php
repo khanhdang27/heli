@@ -62,46 +62,65 @@
                                 {{$postTag->tag_name}}
                             </button>
                         </div>
-                        <p class="text-28 pt-2 ">
+                        <div class="">
+                            <p class="text-28 pt-2 ">
+                                @if($post->block==1)
+                                    @lang('keywords.solved')
+                                @else
+                                    @lang('keywords.waitingForAnswer')
+                                @endif
+                            </p>
                             @if($post->block==0)
-                                @lang('keywords.solved')
-                            @else
-                                @lang('keywords.waitingForAnswer')
+                                {!! Form::open(['route' => ['user.blockPost', $post->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
+                                <button class="btn btn-primary float-right">
+                                    <img height="20" style="fill: #0B487D"
+                                         src="{{asset("images/ic/ic_check.svg")}}"/> @lang('keywords.solved')
+                                </button>
+                                {!! Form::close() !!}
                             @endif
-                        </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- INDEX -->
 
-            @if(!empty(\Illuminate\Support\Facades\Auth::user()))
-                <div class="container mt-5">
-                    <p class="text-primary text-20">
-                        Add your answer
-                    </p>
-                    <div class="card card-body">
-                        {!! Form::open(['url' => URL::route('user.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
-                        <div class="form-group ">
-                            {{ Form::label('detail', 'Content') }}
-                            {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3']) }}
+        <!-- INDEX -->
+            @if($post->block==0)
+                @if(!empty(\Illuminate\Support\Facades\Auth::user()))
+                    <div class="container mt-5">
+                        <p class="text-primary text-20">
+                            Add your answer
+                        </p>
+                        <div class="card card-body">
+                            {!! Form::open(['url' => URL::route('user.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
+                            <div class="form-group ">
+                                {{ Form::label('detail', 'Content') }}
+                                {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3']) }}
+                            </div>
+                            <div class="custom-file ">
+                                {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
+                                {{ Form::file('file',['class' => 'custom-file-input']) }}
+                            </div>
+                            {{ Form::text('post_id',$post->id,['hidden'=>true]) }}
+                            {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5 float-right']) }}
+                            {!! Form::close() !!}
                         </div>
-                        <div class="custom-file ">
-                            {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
-                            {{ Form::file('file',['class' => 'custom-file-input']) }}
-                        </div>
-                        {{ Form::text('post_id',$post->id,['hidden'=>true]) }}
-                        {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5 float-right']) }}
-                        {!! Form::close() !!}
+
                     </div>
-
-                </div>
+                @endif
             @endif
-{{--            @php--}}
-{{--                $post_id= $post->id;--}}
-{{--            @endphp--}}
 
+            {{--            @php--}}
+            {{--                $post_id= $post->id;--}}
+            {{--            @endphp--}}
+            @php
+                $post_us = $post->user_id
+            @endphp
             @foreach($comments as $value)
-                <x-forum.forum-comment :comment=$value>
+                @php
+                    $value->pin_comment = $post->pin_comment==$value->id
+                @endphp
+
+                <x-forum.forum-comment :comment=$value :postUs=$post_us>
 
                 </x-forum.forum-comment>
             @endforeach
