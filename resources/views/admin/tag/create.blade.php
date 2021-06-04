@@ -12,7 +12,7 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Create Q&A Tags
+                                    Blog Tags
                                 </h4>
 
                             </div>

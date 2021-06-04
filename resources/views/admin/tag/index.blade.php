@@ -11,7 +11,7 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Q&A Tags
+                                    Blog Tags
                                 </h4>
 
                             </div>

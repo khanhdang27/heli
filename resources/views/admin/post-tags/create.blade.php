@@ -20,7 +20,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => 'admin.post-tags.store', 'enctype' => 'multipart/form-data' ]) !!}
+                            {!! Form::open(['route' => 'admin.post-tag.store', 'enctype' => 'multipart/form-data' ]) !!}
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('tag_name', 'Name') }}

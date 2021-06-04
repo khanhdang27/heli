@@ -12,7 +12,7 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Edit Certificate
+                                    Edit Blog Tags
                                 </h4>
 
                             </div>

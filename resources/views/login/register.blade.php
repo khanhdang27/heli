@@ -94,15 +94,16 @@
             }else if(status == 'error'){
                 color = '#dc3545';
             }
-            var x = document.getElementById("snackbar");
+            var snackbar = document.getElementById("snackbar");
             var contentToast = document.getElementById("contentToast");
 
             contentToast.innerHTML = content;
             contentToast.style.color= 'red';
-            x.style.backgroundColor = color;
-            x.className = "show";
+            snackbar.style.backgroundColor = color;
 
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            snackbar.className = "show";
+
+            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
         }
 
     </script>

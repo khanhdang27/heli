@@ -4,12 +4,7 @@
 
 @section('content')
     @php
-    $listTag = [
-    'a' => '#海外升學',
-    'b' => '#學費',
-    'c' => '#英國',
-    'd' => '#UCAS',
-    ]
+        use App\Utilities\SelectionByClass;
     @endphp
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
@@ -23,10 +18,10 @@
                     <p class="text-20 text-primary"><img src="{{asset("images/ic/ic_eyeBlue.svg")}}" width="26">2,840</p>
                 </div>
                 <div class="d-flex flex-wrap justify-content-end">
-                    @foreach($listTag as $value)
-                        <a href="#" class="btn-hashtag text-12">
+                    @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
+                        <button class="btn-hashtag ml-3 mr-3" type="button">
                             {{ $value }}
-                        </a>
+                        </button>
                     @endforeach
                 </div>
             </div>
