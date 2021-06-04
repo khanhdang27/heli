@@ -116,6 +116,25 @@ class BlogController extends Controller
         return back()->with('success', 'Create success');
     }
 
+    public function showBlogPage()
+    {
+        $blog_one = Blog::with('tags')->orderBy('view_no','desc')->first();
+        $blogs = Blog::with('tags')->orderBy('view_no','desc')->get();
+        $blog = Blog::with('tags')->orderBy('created_at','desc')->get();
+
+        return view('blog.blog-page',[
+            'blog_one' => $blog_one,
+            'blog' => $blog,
+            'blogs' => $blogs
+        ]);
+    }
+
+    public function viewBlog(){
+        $blog = Blog::with('tags')->get();
+        return view('blog.blog-view',[
+            'blog'=>$blog
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *

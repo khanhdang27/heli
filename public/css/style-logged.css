@@ -281,7 +281,7 @@
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 28px;
-    margin: 0 0.5rem 1rem 0;
+    margin: 0 0.5rem 0.5rem 0;
 }
 
 
@@ -295,24 +295,21 @@
 }
 
 .popular-item {
-    max-width: 1100px;
-    height: 783px;
-    display: inline-block;
+    max-width: 100%;
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
-
+#latest{
+    height: 750px;
+}
 .thumb-article {
     width: 100%;
     height: 100%;
-    background-color: #3e3e3e;
-    background-image: none;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-
 }
-
+.main-photo{
+    height: 750px;
+}
 .info-article {
+    min-height: 185px;
     background-color: rgba(15, 34, 51, 0.6);
 }
 
@@ -339,9 +336,10 @@
     outline: none;
 }
 
-.title-article-right {
-    max-width: 333px;
+.title-article-left {
+
 }
+
 
 .text-30 {
     font-size: 22.5pt;
@@ -350,12 +348,12 @@
 }
 
 .info-article-right {
-    max-width: 584px;
-    border-bottom: 1px solid #E6C06C;
+    width: 100%;
 }
 
 .list-article {
     max-height: 800px;
+    width: 100%;
     overflow-y: auto;
 }
 

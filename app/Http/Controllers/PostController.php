@@ -17,11 +17,15 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
-        //
+        $posts = Post::with('postTag','user')->get();
+
+        return view('forum.forum-page',[
+            'posts' => $posts
+        ]);
     }
 
     /**
@@ -71,7 +75,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $postTag = Tag::where('id',$post->tag_id)->first();
+        $postTag = PostTag::where('id',$post->tag_id)->first();
         $comments = Comment::with('user', 'post')->where('post_id', $post->id)->get();
 
         return view('forum.post-view', [
@@ -103,6 +107,7 @@ class PostController extends Controller
     {
         //
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -112,15 +112,15 @@
             }else if(status == 'error'){
                 color = '#dc3545';
             }
-            var x = document.getElementById("snackbarLogin");
+            var snackbar = document.getElementById("snackbarLogin");
             var contentToastLogin = document.getElementById("contentToastLogin");
 
             contentToastLogin.innerHTML = content;
             contentToastLogin.style.color= 'red';
-            x.style.backgroundColor = color;
-            x.className = "show";
+            snackbar.style.backgroundColor = color;
+            snackbar.className = "show";
 
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
         }
     </script>
 @endpush
