@@ -12,7 +12,7 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Edit Blog Tags
+                                    Edit Certificate
                                 </h4>
 
                             </div>
@@ -20,7 +20,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => ['admin.tag.update', $postTags->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
+                            {!! Form::open(['route' => ['admin.post-tag.update', $postTags->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
                             <div class="form-group">
                                 {{ Form::label('tag_name', 'Tag name') }}
                                 {{ Form::text('tag_name', $postTags->tag_name, ['class' => 'form-control']) }}

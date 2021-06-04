@@ -1,20 +1,20 @@
 <?php
 
-namespace App\View\Components\Forum;
+namespace App\View\Components\Blog;
 
 use Illuminate\View\Component;
 
-class ForumPost extends Component
+class BlogItemLatest extends Component
 {
-    public $post;
+    public $blog;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($post)
+    public function __construct($blog)
     {
-        $this->post = $post;
+        $this->blog = $blog;
     }
 
     /**
@@ -24,8 +24,8 @@ class ForumPost extends Component
      */
     public function render()
     {
-        return view('components.forum.forum-post',[
-            'post' => $this->post
+        return view('components.blog.blog-item-latest',[
+            'blog' => $this->blog
         ]);
     }
 }

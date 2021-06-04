@@ -3,24 +3,25 @@
 @section('title','Blog Page')
 
 @section('content')
-    <?php
-    $listTag = [
-        'a' => '#海外升學',
-        'b' => '#學費',
-        'c' => '#英國',
-        'd' => '#UCAS',
-    ]
-    ?>
+    @php
+        use App\Utilities\SelectionByClass;
+        $listTag = [
+            'a' => '#海外升學',
+            'b' => '#學費',
+            'c' => '#英國',
+            'd' => '#UCAS',
+        ]
+    @endphp
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.blog-page.learningColumn')
         </div>
         <div class="container-fluid pt-5 pb-5">
             <div class="ml-auto mr-auto d-flex flex-wrap w-75">
-                @foreach($listTag as $value)
-                    <a href="#" class="btn-hashtag ml-3 mr-3">
+                @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
+                    <button class="btn-hashtag ml-3 mr-3" type="button">
                         {{ $value }}
-                    </a>
+                    </button>
                 @endforeach
             </div>
         </div>
@@ -29,240 +30,81 @@
                 @lang('keywords.blog-page.popularArticlesThisWeek')
             </p>
             <div class="row">
-                <div class="col-xl-7">
-                    <div class="mt-2 popular-item">
-                        <div class="thumb-article d-flex flex-column justify-content-end"
-                             style="background-image: url('{{asset("images/bg-article.jpg")}}')">
-                            <div class="container-fluid pt-2 info-article">
-                                <a href="{{route('site.blog-view')}}" class="title-article">
-                                    【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)
+                <div class="col-xl-7 post-spotlight mb-5">
+                    <div class="popular-item ">
+                        <div class="thumb-article d-flex flex-column justify-content-end position-relative">
+                            <img class="main-photo img-thumbnail border-0 p-0 rounded-0"
+                                 src="{{asset("images/banner.jpg")}}">
+                            <div class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
+                                <a href="{{route('admin.view-blog',$blog_one->id)}}" class="title-article">
+                                    {{ $blog_one->title }}
                                 </a>
                                 <div class="d-flex justify-content-between flex-wrap pb-3">
                                     <div class="d-flex">
                                         <p class="text-20 mr-5">
-                                            2021/03/20
+                                            {{ substr($blog_one->created_at,0,10) }}
                                         </p>
-                                        <span class="text-20"><img src="{{asset("images/ic/ic_eye.svg")}}" width="26">2,840</span>
+                                        <span class="text-20"><img src="{{asset("images/ic/ic_eye.svg")}}" width="26">{{ $blog_one->view_no }}</span>
                                     </div>
                                     <div class="d-flex">
-                                        <button class="btn-hashtag-small">
-                                            #海外升學
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
+                                        @if(!empty($blog_one->tags))
+                                            @foreach($blog_one->tags as $tag)
+                                                <button class="btn-hashtag-small">
+                                                    {{$tag->tag_name}}
+
+                                                </button>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-5 ">
-                    <div class="list-article">
-                        <div class="float-right pt-3 info-article-right">
-                            <div class="d-flex pb-3 flex-wrap">
-                                <div class="border-0 img-thumbnail">
-                                    <img src="{{asset("images/bg-article2.jpg")}}" width="220" height="220">
-                                </div>
-                                <div class="title-article-right">
-                                    <p class="text-30">
-                                        【英國留學攻略】UCAS聯招系統、2021大學排名、升學顧問、費用安排
-                                    </p>
-                                    <p class="text-20-blue">
-                                        <span>2021/03/20</span><img class="ml-5"
-                                                                    src={{asset("images/ic/ic_eyeBlue.svg")}}>2,840
-                                    </p>
-                                    <div class="d-flex flex-wrap">
-                                        @foreach($listTag as $value)
-                                            <a href="#" class="btn-hashtag text-12">
-                                                {{ $value }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="float-right pt-3 info-article-right">
-                            <div class="d-flex pb-3 flex-wrap">
-                                <div class="border-0 img-thumbnail">
-                                    <img src="{{asset("images/bg-article2.jpg")}}" width="220" height="220">
-                                </div>
-                                <div class="title-article-right">
-                                    <p class="text-30">
-                                        【英國留學攻略】UCAS聯招系統、2021大學排名、升學顧問、費用安排
-                                    </p>
-                                    <p class="text-20-blue">
-                                        <span>2021/03/20</span><img class="ml-5"
-                                                                    src={{asset("images/ic/ic_eyeBlue.svg")}}>2,840
-                                    </p>
-                                    <div class="d-flex flex-wrap">
-                                        @foreach($listTag as $value)
-                                            <a href="#" class="btn-hashtag text-12">
-                                                {{ $value }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="float-right pt-3 info-article-right">
-                            <div class="d-flex pb-3 flex-wrap">
-                                <div class="border-0 img-thumbnail">
-                                    <img src="{{asset("images/bg-article2.jpg")}}" width="220" height="220">
-                                </div>
-                                <div class="title-article-right">
-                                    <p class="text-30">
-                                        【英國留學攻略】UCAS聯招系統、2021大學排名、升學顧問、費用安排
-                                    </p>
-                                    <p class="text-20-blue">
-                                        <span>2021/03/20</span><img class="ml-5"
-                                                                    src={{asset("images/ic/ic_eyeBlue.svg")}}>2,840
-                                    </p>
-                                    <div class="d-flex flex-wrap">
-                                        @foreach($listTag as $value)
-                                            <a href="#" class="btn-hashtag text-12">
-                                                {{ $value }}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
+                <div class="col-xl-5 popular-articles-right">
+                    @foreach($blogs as $item)
+                    <div class="card flex-md-row border-0" >
+                        <div class="popular-articles-item-image d-flex ">
+                            <img class="img-thumbnail align-items-center" src="{{asset("images/banner.jpg")}}" alt="Card image cap">
+                        </div>
+
+                        <div class="popular-articles-item-content">
+                            <div class="card-body">
+                                <p class="text-30">
+                                    {{$item->title}}
+                                </p>
+                                <p class="card-text">
+                                    <span>{{ substr($item->created_at,0,10) }}</span><img class="ml-5"
+                                                                src={{asset("images/ic/ic_eyeBlue.svg")}}>{{ $item->view_no }}
+                                </p>
+                                <p class="d-flex flex-wrap">
+                                    @if(!empty($item->tags))
+                                        @foreach($item->tags as $tag)
+                                            <button class="btn-hashtag text-12">
+                                                {{$tag->tag_name}}
+
+                                            </button>
+                                        @endforeach
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr class="border-secondary"/>
+                    @endforeach
                 </div>
             </div>
             <p class="pt-5 text-40 text-primary">
                 @lang('keywords.blog-page.latestArticles')
             </p>
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="mt-2 popular-item">
-                        <div class="thumb-article d-flex flex-column justify-content-end"
-                             style="background-image: url('{{asset("images/bg-article.jpg")}}')">
-                            <div class="container-fluid pt-2 info-article">
-                                <p class="title-article">
-                                    【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)
-                                </p>
-                                <div class="d-flex justify-content-between flex-wrap">
-                                    <div class="d-flex">
-                                        <p class="text-20 mr-5">
-                                            2021/03/20
-                                        </p>
-                                        <span class="text-20"><img src={{asset("images/ic/ic_eye.svg")}}>2,840</span>
-                                    </div>
-                                    <div class="d-flex flex-wrap pb-3">
-                                        <button class="btn-hashtag-small">
-                                            #海外升學
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="mt-2 popular-item">
-                        <div class="thumb-article d-flex flex-column justify-content-end"
-                             style="background-image: url('{{asset("images/bg-article.jpg")}}')">
-                            <div class="container-fluid pt-2 info-article">
-                                <p class="title-article">
-                                    【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)
-                                </p>
-                                <div class="d-flex justify-content-between flex-wrap">
-                                    <div class="d-flex">
-                                        <p class="text-20 mr-5">
-                                            2021/03/20
-                                        </p>
-                                        <span class="text-20"><img src={{asset("images/ic/ic_eye.svg")}}>2,840</span>
-                                    </div>
-                                    <div class="d-flex flex-wrap pb-3">
-                                        <button class="btn-hashtag-small">
-                                            #海外升學
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="mt-2 popular-item">
-                        <div class="thumb-article d-flex flex-column justify-content-end"
-                             style="background-image: url('{{asset("images/bg-article.jpg")}}')">
-                            <div class="container-fluid pt-2 info-article">
-                                <p class="title-article">
-                                    【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)
-                                </p>
-                                <div class="d-flex justify-content-between flex-wrap">
-                                    <div class="d-flex">
-                                        <p class="text-20 mr-5">
-                                            2021/03/20
-                                        </p>
-                                        <span class="text-20"><img src={{asset("images/ic/ic_eye.svg")}}>2,840</span>
-                                    </div>
-                                    <div class="d-flex flex-wrap pb-3">
-                                        <button class="btn-hashtag-small">
-                                            #海外升學
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="mt-2 popular-item">
-                        <div class="thumb-article d-flex flex-column justify-content-end"
-                             style="background-image: url('{{asset("images/bg-article.jpg")}}')">
-                            <div class="container-fluid pt-2 info-article">
-                                <p class="title-article">
-                                    【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)
-                                </p>
-                                <div class="d-flex justify-content-between flex-wrap">
-                                    <div class="d-flex">
-                                        <p class="text-20 mr-5">
-                                            2021/03/20
-                                        </p>
-                                        <span class="text-20"><img src={{asset("images/ic/ic_eye.svg")}}>2,840</span>
-                                    </div>
-                                    <div class="d-flex flex-wrap pb-3">
-                                        <button class="btn-hashtag-small">
-                                            #海外升學
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                        <button class="btn-hashtag-small">
-                                            #學費
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @foreach($blog as $value)
+                    <x-blog.blog-item-latest :blog=$value>
+
+                    </x-blog.blog-item-latest>
+                @endforeach
             </div>
             <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">
                 <button class="btn-read-more">
@@ -271,5 +113,4 @@
                 </button>
             </div>
         </div>
-    </div>
 @endsection

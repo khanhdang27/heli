@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <img src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                 <div class="pl-3 pt-2">
-                    <p class="text-25">{{$comment->name}}</p>
+                    <p class="text-25">{{$comment->user->name}}</p>
                     <p class="text-20-blue">{{$comment->created_at}}</p>
                 </div>
             </div>

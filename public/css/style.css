@@ -894,3 +894,19 @@ video {
     font-size: 10.5pt;
 }
 
+.post-spotlight {
+    height: 750px !important;
+}
+
+.popular-articles-item-image {
+    flex: 0 40%;
+}
+
+.popular-articles-item-content {
+    flex: 0 60%;
+}
+.popular-articles-right{
+    height: 750px;
+    overflow-y: auto;
+}
+
