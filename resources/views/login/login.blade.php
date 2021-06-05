@@ -42,6 +42,8 @@
                             {!! Form::open(['id'=>'formLogin']) !!}
                             <div class="input-login d-flex justify-content-center align-items-center mb-3">
                                 {{ Form::email('email',null,['class'=>'input-login-item', 'placeholder'=>'Email']) }}
+
+                                <div id="snackbarLogin"><p class="m-0" id="contentToastLogin">Toast</p></div>
                             </div>
                             <div class="input-login d-flex justify-content-center align-items-center">
                                 {{ Form::password('password', ['class'=> 'input-login-item', 'placeholder'=>'Password']) }}
@@ -93,30 +95,32 @@
                     data: formData
                 }).done(function (data) {
                     console.log(data);
-                    if (data == 'incorrect') {
-                        Toast("Email or password incorrect",'error');
-                    } else {
+                    if(data == 'incorrect') {
+                        ToastLogin("Email or password incorrect");
+                    }
+                    else {
                         location.reload()
                     }
                 })
             });
         })
-/*
-        function Toast(content, status) {
-            var color = '#28a745';
+
+        function ToastLogin(content, status) {
+            var color = '#fff';
             if(status == 'warning'){
                 color = '#ffc107';
             }else if(status == 'error'){
                 color = '#dc3545';
             }
-            var x = document.getElementById("snackbar");
-            var contentToast = document.getElementById("contentToast");
+            var snackbar = document.getElementById("snackbarLogin");
+            var contentToastLogin = document.getElementById("contentToastLogin");
 
-            contentToast.innerHTML = content;
-            x.style.backgroundColor = color;
-            x.className = "show";
+            contentToastLogin.innerHTML = content;
+            contentToastLogin.style.color= 'red';
+            snackbar.style.backgroundColor = color;
+            snackbar.className = "show";
 
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }*/
+            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+        }
     </script>
 @endpush

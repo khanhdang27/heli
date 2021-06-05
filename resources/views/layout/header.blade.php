@@ -36,11 +36,11 @@
             </li>
             <li class="nav-item item-header">
                 <a class="nav-link"
-                   href="{{ URL::route('site.blog') }}">@lang('keywords.navBar.learningColumn')</a>
+                   href="{{ URL::route('admin.show-blog') }}">@lang('keywords.navBar.learningColumn')</a>
             </li>
             <li class="nav-item item-header">
                 <a class="nav-link"
-                   href="{{ URL::route('site.forum') }}">@lang('keywords.navBar.q&aArea')</a>
+                   href="{{ URL::route('user.post.index') }}">@lang('keywords.navBar.q&aArea')</a>
             </li>
         </ul>
         <div class="login-bar d-flex ml-auto">

@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserLoginRequest;
-use App\Models\User;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Validator;
 
 class LoginController extends Controller
@@ -54,10 +52,11 @@ class LoginController extends Controller
             }
         }
 
-        if(Auth::attempt($request->validated())) {
+        if (Auth::attempt($request->validated())) {
             return redirect()->route('site.home')->with('success', 'login successful!');
         }
         return 'incorrect';
+
     }
 
     public function logout(Request $request)

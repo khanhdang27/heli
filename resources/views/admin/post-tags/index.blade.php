@@ -18,7 +18,7 @@
                             <div class="col-auto">
 
                                 <!-- Button -->
-                                <a href="{{ route('admin.post-tags.create') }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('admin.post-tag.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                          stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                          class="css-i6dzq1">
@@ -58,11 +58,11 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.post-tags.edit', $value->id) }}"
+                                                    <a href="{{ route('admin.post-tag.edit', $value->id) }}"
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.post-tags.destroy', $value->id) }}" >
+                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.post-tag.destroy', $value->id) }}" >
                                                         Delete
                                                     </button>
                                                 </div>

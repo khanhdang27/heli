@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -63,16 +64,16 @@ Route::group(['middleware' => 'language'], function () {
             return view('course.lesson-page');
         })->name('lesson');
 
-        Route::get('blog', function () {
-            return view('blog-page');
-        })->name('blog');
+//        Route::get('blog', function () {
+//            return view('blog.blog-page');
+//        })->name('blog');
         Route::get('blog-view', function () {
-            return view('blog-view');
+            return view('blog.blog-view');
         })->name('blog-view');
 
-        Route::get('forum', function () {
-            return view('forum.forum-page');
-        })->name('forum');
+//        Route::get('forum', function () {
+//            return view('forum.forum-page');
+//        })->name('forum');
 
 
 
@@ -107,6 +108,8 @@ Route::prefix('user/')->name('user.')->group(function () {
     Route::get('calendar', function () {
         return view('calendar-page');
     })->name('calendar');
+    Route::put('/user/post/block/{id}', [PostController::class, 'blockPost'])
+        ->name('blockPost');
 
     Route::resource('post','PostController');
     Route::resource('comment','CommentController');
@@ -115,7 +118,7 @@ Route::prefix('user/')->name('user.')->group(function () {
 
 
 });
-});
+
 Route::resource('file', 'FileController');
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -145,9 +148,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('user', 'Admin\UserController');
 
-        Route::resource('post-tags', 'Admin\PostTagsController');
+        Route::resource('tag', 'Admin\TagsController');
+
+        Route::resource('post-tag', 'Admin\PostTagController');
 
         Route::resource('blog', 'Admin\BlogController');
+        Route::get('show-blog','Admin\BlogController@showBlogPage')->name('show-blog');
+        Route::get('view-blog','Admin\BlogController@viewBlog')->name('view-blog');
+
         Route::get('course/{course}/video', [CourseController::class, 'videoList'])
             ->name('course.video.index');
         Route::get('course/{course}/video/create', [CourseController::class, 'createVideo'])
@@ -166,7 +174,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             ->name('course.video.destroy');
     });
 });
-
+});
 // //Auth::routes();
 
 

@@ -28,7 +28,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 14:48:24] production.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(91): Illuminate\\View\\Compilers\\Compiler->__construct()
@@ -59,7 +59,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 14:49:42] production.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(91): Illuminate\\View\\Compilers\\Compiler->__construct()
@@ -90,7 +90,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 14:51:06] production.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(91): Illuminate\\View\\Compilers\\Compiler->__construct()
@@ -121,7 +121,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 14:53:00] production.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(91): Illuminate\\View\\Compilers\\Compiler->__construct()
@@ -152,7 +152,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 14:55:32] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(91): Illuminate\\View\\Compilers\\Compiler->__construct()
@@ -183,7 +183,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 14:56:01] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(91): Illuminate\\View\\Compilers\\Compiler->__construct()
@@ -214,7 +214,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 14:57:08] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(91): Illuminate\\View\\Compilers\\Compiler->__construct()
@@ -245,7 +245,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 14:58:36] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:36)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(91): Illuminate\\View\\Compilers\\Compiler->__construct()
@@ -276,7 +276,7 @@
 #25 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #26 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #27 {main}
-"} 
+"}
 [2021-05-28 15:03:15] local.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php:80)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/helpers.php(433): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}()
@@ -323,7 +323,7 @@
 #41 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #42 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #43 {main}
-"} 
+"}
 [2021-05-28 15:03:15] local.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php:80)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/helpers.php(433): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}()
@@ -347,7 +347,7 @@
 #18 /home/banhtrung/Code/helios/public/index.php(60): Illuminate\\Foundation\\Http\\Kernel->terminate()
 #19 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #20 {main}
-"} 
+"}
 [2021-05-28 15:05:01] local.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php:80)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/helpers.php(433): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}()
@@ -394,7 +394,7 @@
 #41 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #42 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #43 {main}
-"} 
+"}
 [2021-05-28 15:05:01] local.ERROR: No application encryption key has been specified. {"exception":"[object] (RuntimeException(code: 0): No application encryption key has been specified. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Encryption/EncryptionServiceProvider.php:80)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/helpers.php(433): Illuminate\\Encryption\\EncryptionServiceProvider->Illuminate\\Encryption\\{closure}()
@@ -418,7 +418,7 @@
 #18 /home/banhtrung/Code/helios/public/index.php(60): Illuminate\\Foundation\\Http\\Kernel->terminate()
 #19 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #20 {main}
-"} 
+"}
 [2021-05-28 15:05:17] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -473,7 +473,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-28 15:06:49] local.ERROR: Target class [CreateRolesTable] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [CreateRolesTable] does not exist. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Container/Container.php:811)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Container/Container.php(691): Illuminate\\Container\\Container->build()
@@ -526,7 +526,7 @@
 #21 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
 #22 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #23 {main}
-"} 
+"}
 [2021-05-28 15:07:07] local.ERROR: Target class [CreateRolesTable] does not exist. {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Target class [CreateRolesTable] does not exist. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Container/Container.php:811)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Container/Container.php(691): Illuminate\\Container\\Container->build()
@@ -579,7 +579,7 @@
 #21 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
 #22 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #23 {main}
-"} 
+"}
 [2021-05-28 15:56:11] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"userId":1,"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -634,7 +634,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-28 15:56:15] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"userId":1,"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -689,7 +689,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-28 15:58:49] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"userId":1,"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -744,7 +744,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 01:42:45] local.ERROR: Class 'App\Providers\GoogleDriveServiceProvider' not found {"exception":"[object] (Error(code: 0): Class 'App\\Providers\\GoogleDriveServiceProvider' not found at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
@@ -756,7 +756,7 @@
 #6 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #7 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #8 {main}
-"} 
+"}
 [2021-05-29 01:43:04] local.ERROR: Class 'App\Providers\GoogleDriveServiceProvider' not found {"exception":"[object] (Error(code: 0): Class 'App\\Providers\\GoogleDriveServiceProvider' not found at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
@@ -768,7 +768,7 @@
 #6 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #7 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #8 {main}
-"} 
+"}
 [2021-05-29 01:43:19] local.ERROR: Class 'App\Providers\GoogleDriveServiceProvider' not found {"exception":"[object] (Error(code: 0): Class 'App\\Providers\\GoogleDriveServiceProvider' not found at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
@@ -780,7 +780,7 @@
 #6 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #7 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #8 {main}
-"} 
+"}
 [2021-05-29 01:44:03] local.ERROR: Class 'App\Providers\GoogleDriveServiceProvider' not found {"exception":"[object] (Error(code: 0): Class 'App\\Providers\\GoogleDriveServiceProvider' not found at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
@@ -792,7 +792,7 @@
 #6 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #7 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #8 {main}
-"} 
+"}
 [2021-05-29 01:46:18] local.ERROR: Class 'App\Providers\GoogleDriveServiceProvider' not found {"exception":"[object] (Error(code: 0): Class 'App\\Providers\\GoogleDriveServiceProvider' not found at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php:208)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php(144): Illuminate\\Foundation\\ProviderRepository->createProvider()
@@ -804,7 +804,7 @@
 #6 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #7 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #8 {main}
-"} 
+"}
 [2021-05-29 01:46:56] local.ERROR: Class 'App\Providers\Storage' not found {"exception":"[object] (Error(code: 0): Class 'App\\Providers\\Storage' not found at /home/banhtrung/Code/helios/app/Providers/GoogleDriveServiceProvider.php:16)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): App\\Providers\\GoogleDriveServiceProvider->boot()
@@ -822,7 +822,7 @@
 #12 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
 #13 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #14 {main}
-"} 
+"}
 [2021-05-29 01:49:30] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -877,7 +877,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 01:49:41] local.ERROR: {
  "error": {
   "errors": [
@@ -968,7 +968,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 01:57:55] local.ERROR: {
  "error": {
   "errors": [
@@ -1059,7 +1059,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 02:06:50] local.ERROR: {
  "error": {
   "errors": [
@@ -1150,7 +1150,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 02:21:42] local.ERROR: {
  "error": {
   "errors": [
@@ -1241,7 +1241,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 02:21:48] local.ERROR: {
  "error": {
   "errors": [
@@ -1332,7 +1332,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 02:22:57] local.ERROR: {
  "error": {
   "errors": [
@@ -1423,7 +1423,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 02:23:14] local.ERROR: {
  "error": {
   "errors": [
@@ -1514,7 +1514,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 02:29:06] local.ERROR: {
  "error": {
   "errors": [
@@ -1605,7 +1605,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 02:41:53] local.ERROR: {
  "error": {
   "errors": [
@@ -1696,7 +1696,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 02:43:05] local.ERROR: {
  "error": {
   "errors": [
@@ -1787,7 +1787,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 07:38:01] local.ERROR: {
  "error": {
   "errors": [
@@ -1870,7 +1870,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 07:43:15] local.ERROR: Call to undefined method Google_Service_Drive::put() {"exception":"[object] (Error(code: 0): Call to undefined method Google_Service_Drive::put() at /home/banhtrung/Code/helios/routes/web.php:23)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Routing/Route.php(225): Illuminate\\Routing\\RouteFileRegistrar->{closure}()
@@ -1917,7 +1917,7 @@
 #41 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #42 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #43 {main}
-"} 
+"}
 [2021-05-29 07:44:55] local.ERROR: Call to undefined method Google_Service_Drive::get() {"exception":"[object] (Error(code: 0): Call to undefined method Google_Service_Drive::get() at /home/banhtrung/Code/helios/routes/web.php:23)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Routing/Route.php(225): Illuminate\\Routing\\RouteFileRegistrar->{closure}()
@@ -1964,7 +1964,7 @@
 #41 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #42 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #43 {main}
-"} 
+"}
 [2021-05-29 07:47:50] local.ERROR: {
  "error": {
   "errors": [
@@ -2055,7 +2055,7 @@
 #55 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #56 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #57 {main}
-"} 
+"}
 [2021-05-29 08:00:12] local.ERROR: {
  "error": {
   "errors": [
@@ -2138,7 +2138,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:05:41] local.ERROR: {
  "error": {
   "errors": [
@@ -2221,7 +2221,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:06:39] local.ERROR: {
  "error": {
   "errors": [
@@ -2304,7 +2304,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:08:16] local.ERROR: {
  "error": {
   "errors": [
@@ -2387,7 +2387,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:08:20] local.ERROR: {
  "error": {
   "errors": [
@@ -2470,7 +2470,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:08:32] local.ERROR: {
  "error": {
   "errors": [
@@ -2553,7 +2553,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:09:32] local.ERROR: {
  "error": {
   "errors": [
@@ -2636,7 +2636,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:14:38] local.ERROR: {
  "error": {
   "errors": [
@@ -2719,7 +2719,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:24:08] local.ERROR: {
  "error": {
   "errors": [
@@ -2802,7 +2802,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:25:52] local.ERROR: {
  "error": {
   "errors": [
@@ -2885,7 +2885,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:30:22] local.ERROR: Call to undefined method Google_Service_Drive_Resource_Files::list() {"exception":"[object] (Error(code: 0): Call to undefined method Google_Service_Drive_Resource_Files::list() at /home/banhtrung/Code/helios/routes/web.php:38)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Routing/Route.php(225): Illuminate\\Routing\\RouteFileRegistrar->{closure}()
@@ -2932,7 +2932,7 @@
 #41 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #42 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #43 {main}
-"} 
+"}
 [2021-05-29 08:31:41] local.ERROR: Undefined property: Google_Service_Drive_Resource_Files::$list {"exception":"[object] (ErrorException(code: 0): Undefined property: Google_Service_Drive_Resource_Files::$list at /home/banhtrung/Code/helios/routes/web.php:38)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/routes/web.php(38): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
@@ -2980,7 +2980,7 @@
 #42 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #43 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #44 {main}
-"} 
+"}
 [2021-05-29 08:31:52] local.ERROR: Call to undefined method Google_Service_Drive_Resource_Files::list() {"exception":"[object] (Error(code: 0): Call to undefined method Google_Service_Drive_Resource_Files::list() at /home/banhtrung/Code/helios/routes/web.php:38)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Routing/Route.php(225): Illuminate\\Routing\\RouteFileRegistrar->{closure}()
@@ -3027,7 +3027,7 @@
 #41 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #42 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #43 {main}
-"} 
+"}
 [2021-05-29 08:33:47] local.ERROR: {
  "error": {
   "errors": [
@@ -3110,7 +3110,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:48:29] local.ERROR: Too few arguments to function Google_Service_Drive_Resource_Files::create(), 0 passed in /home/banhtrung/Code/helios/routes/web.php on line 38 and at least 1 expected {"exception":"[object] (ArgumentCountError(code: 0): Too few arguments to function Google_Service_Drive_Resource_Files::create(), 0 passed in /home/banhtrung/Code/helios/routes/web.php on line 38 and at least 1 expected at /home/banhtrung/Code/helios/vendor/google/apiclient-services/src/Google/Service/Drive/Resource/Files.php:90)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/routes/web.php(38): Google_Service_Drive_Resource_Files->create()
@@ -3158,7 +3158,7 @@
 #42 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #43 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #44 {main}
-"} 
+"}
 [2021-05-29 08:49:55] local.ERROR: {
  "error": {
   "errors": [
@@ -3241,7 +3241,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:50:04] local.ERROR: {
  "error": {
   "errors": [
@@ -3324,7 +3324,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:52:02] local.ERROR: {
  "error": {
   "errors": [
@@ -3407,7 +3407,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 08:53:19] local.ERROR: {
  "error": {
   "errors": [
@@ -3490,7 +3490,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:05:17] local.ERROR: {
  "error": {
   "errors": [
@@ -3573,7 +3573,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:06:39] local.ERROR: {
  "error": {
   "errors": [
@@ -3656,7 +3656,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:36:03] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -3711,7 +3711,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:36:08] local.ERROR: {
  "error": {
   "errors": [
@@ -3794,7 +3794,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:39:23] local.ERROR: {
  "error": {
   "errors": [
@@ -3877,7 +3877,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:49:12] local.ERROR: {
  "error": {
   "errors": [
@@ -3960,7 +3960,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:49:17] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -4015,7 +4015,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:50:15] local.ERROR: {
  "error": {
   "errors": [
@@ -4098,7 +4098,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:50:59] local.ERROR: Call to undefined method Google_Service_Drive::put() {"exception":"[object] (Error(code: 0): Call to undefined method Google_Service_Drive::put() at /home/banhtrung/Code/helios/routes/web.php:23)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Routing/Route.php(225): Illuminate\\Routing\\RouteFileRegistrar->{closure}()
@@ -4145,7 +4145,7 @@
 #41 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #42 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #43 {main}
-"} 
+"}
 [2021-05-29 09:51:43] local.ERROR: {
  "error": {
   "errors": [
@@ -4228,7 +4228,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 09:52:18] local.ERROR: Disk [google_drive] does not have a configured driver. {"exception":"[object] (InvalidArgumentException(code: 0): Disk [google_drive] does not have a configured driver. at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php:117)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php(101): Illuminate\\Filesystem\\FilesystemManager->resolve()
@@ -4279,7 +4279,7 @@
 #45 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #46 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #47 {main}
-"} 
+"}
 [2021-05-29 09:53:24] local.ERROR: Call to undefined method Google_Service_Drive::listContents() {"exception":"[object] (Error(code: 0): Call to undefined method Google_Service_Drive::listContents() at /home/banhtrung/Code/helios/routes/web.php:34)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Routing/Route.php(225): Illuminate\\Routing\\RouteFileRegistrar->{closure}()
@@ -4326,7 +4326,7 @@
 #41 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #42 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #43 {main}
-"} 
+"}
 [2021-05-29 09:56:33] local.ERROR: {
  "error": {
   "errors": [
@@ -4409,7 +4409,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 10:25:41] local.ERROR: {
  "error": {
   "errors": [
@@ -4492,7 +4492,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-29 12:32:22] local.ERROR: Class 'App\Providers\GoogleDriveAdapter' not found {"exception":"[object] (Error(code: 0): Class 'App\\Providers\\GoogleDriveAdapter' not found at /home/banhtrung/Code/helios/app/Providers/GoogleDriveServiceProvider.php:28)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Filesystem/FilesystemManager.php(143): App\\Providers\\GoogleDriveServiceProvider->App\\Providers\\{closure}()
@@ -4545,7 +4545,7 @@
 #47 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #48 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #49 {main}
-"} 
+"}
 [2021-05-29 13:33:32] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -4600,7 +4600,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-30 15:19:51] local.ERROR: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'student_courses' already exists (SQL: create table `student_courses` (`id` bigint unsigned not null auto_increment primary key, `course_id` bigint unsigned not null, `student_id` bigint unsigned not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' engine = InnoDB) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S01): SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'student_courses' already exists (SQL: create table `student_courses` (`id` bigint unsigned not null auto_increment primary key, `course_id` bigint unsigned not null, `student_id` bigint unsigned not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' engine = InnoDB) at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Database/Connection.php:671)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Database/Connection.php(631): Illuminate\\Database\\Connection->runQueryCallback()
@@ -4705,7 +4705,7 @@
 #30 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
 #31 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #32 {main}
-"} 
+"}
 [2021-05-30 15:20:09] local.ERROR: SQLSTATE[HY000]: General error: 1824 Failed to open the referenced table 'user' (SQL: alter table `user_likes` add constraint `user_likes_user_id_foreign` foreign key (`user_id`) references `user` (`id`) on delete cascade) {"exception":"[object] (Illuminate\\Database\\QueryException(code: HY000): SQLSTATE[HY000]: General error: 1824 Failed to open the referenced table 'user' (SQL: alter table `user_likes` add constraint `user_likes_user_id_foreign` foreign key (`user_id`) references `user` (`id`) on delete cascade) at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Database/Connection.php:671)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Database/Connection.php(631): Illuminate\\Database\\Connection->runQueryCallback()
@@ -4843,7 +4843,7 @@
 #41 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
 #42 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #43 {main}
-"} 
+"}
 [2021-05-30 15:21:08] local.ERROR: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'course_schedules' already exists (SQL: create table `course_schedules` (`id` bigint unsigned not null auto_increment primary key, `lecture_name` text not null, `course_id` bigint unsigned not null, `study_session_id` bigint unsigned not null, `is_test` tinyint(1) not null, `date` date not null, `note` text not null, `created_at` timestamp null, `updated_at` timestamp null, `deleted_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' engine = InnoDB) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S01): SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'course_schedules' already exists (SQL: create table `course_schedules` (`id` bigint unsigned not null auto_increment primary key, `lecture_name` text not null, `course_id` bigint unsigned not null, `study_session_id` bigint unsigned not null, `is_test` tinyint(1) not null, `date` date not null, `note` text not null, `created_at` timestamp null, `updated_at` timestamp null, `deleted_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' engine = InnoDB) at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Database/Connection.php:671)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Database/Connection.php(631): Illuminate\\Database\\Connection->runQueryCallback()
@@ -4981,7 +4981,7 @@
 #41 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(129): Illuminate\\Console\\Application->run()
 #42 /home/banhtrung/Code/helios/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #43 {main}
-"} 
+"}
 [2021-05-30 15:24:07] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5036,7 +5036,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-31 11:02:14] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5090,7 +5090,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 11:02:17] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5144,7 +5144,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 11:02:23] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'florist.post_tags' doesn't exist (SQL: select * from `post_tags`) (View: C:\Bitnami\wampstack-7.4\apache2\htdocs\Helios_v2\resources\views\forum\forum-page.blade.php) {"exception":"[object] (Facade\\Ignition\\Exceptions\\ViewException(code: 0): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'florist.post_tags' doesn't exist (SQL: select * from `post_tags`) (View: C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\esources\\views\\forum\\forum-page.blade.php) at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:671)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(631): Illuminate\\Database\\Connection->runQueryCallback()
@@ -5418,7 +5418,7 @@
 #64 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #65 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #66 {main}
-"} 
+"}
 [2021-05-31 11:02:51] local.ERROR: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'student_courses' already exists (SQL: create table `student_courses` (`id` bigint unsigned not null auto_increment primary key, `course_id` bigint unsigned not null, `student_id` bigint unsigned not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' engine = InnoDB) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S01): SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'student_courses' already exists (SQL: create table `student_courses` (`id` bigint unsigned not null auto_increment primary key, `course_id` bigint unsigned not null, `student_id` bigint unsigned not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci' engine = InnoDB) at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php:671)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Database\\Connection.php(631): Illuminate\\Database\\Connection->runQueryCallback()
@@ -5523,7 +5523,7 @@
 #30 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run()
 #31 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
 #32 {main}
-"} 
+"}
 [2021-05-31 11:03:09] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5577,7 +5577,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 11:03:17] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5631,7 +5631,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 11:03:29] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5685,7 +5685,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 11:04:45] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5739,7 +5739,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 11:05:07] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5793,7 +5793,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 11:05:50] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5847,7 +5847,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 11:05:51] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5901,7 +5901,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-06-01 10:57:18] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -5955,7 +5955,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-06-01 10:58:15] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php:50)
 [stacktrace]
 #0 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Support\\Traits\\ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -6009,7 +6009,7 @@
 #48 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Http\\Kernel.php(109): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter()
 #49 C:\\Bitnami\\wampstack-7.4\\apache2\\htdocs\\Helios_v2\\public\\index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 {main}
-"} 
+"}
 [2021-05-31 02:58:57] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -6064,7 +6064,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-31 02:59:03] local.ERROR: Trying to access array offset on value of type null {"exception":"[object] (ErrorException(code: 0): Trying to access array offset on value of type null at /home/banhtrung/Code/helios/routes/web.php:230)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/routes/web.php(230): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
@@ -6112,7 +6112,7 @@
 #42 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #43 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #44 {main}
-"} 
+"}
 [2021-05-31 03:00:05] local.ERROR: Call to undefined method App\Models\Subject::getValues() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Subject::getValues() at /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:50)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException()
@@ -6167,7 +6167,7 @@
 #49 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #50 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #51 {main}
-"} 
+"}
 [2021-05-31 03:02:51] local.ERROR: Trying to access array offset on value of type null {"exception":"[object] (ErrorException(code: 0): Trying to access array offset on value of type null at /home/banhtrung/Code/helios/routes/web.php:230)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/routes/web.php(230): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
@@ -6215,7 +6215,7 @@
 #42 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #43 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #44 {main}
-"} 
+"}
 [2021-05-31 03:10:53] local.ERROR: Trying to access array offset on value of type null {"exception":"[object] (ErrorException(code: 0): Trying to access array offset on value of type null at /home/banhtrung/Code/helios/routes/web.php:230)
 [stacktrace]
 #0 /home/banhtrung/Code/helios/routes/web.php(230): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError()
@@ -6263,4 +6263,4 @@
 #42 /home/banhtrung/Code/helios/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->handle()
 #43 /home/banhtrung/Code/helios/server.php(21): require_once('/home/banhtrung...')
 #44 {main}
-"} 
+"}
