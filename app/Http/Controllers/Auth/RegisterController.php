@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -77,7 +78,7 @@ class RegisterController extends Controller
 
             $send_mail = new \App\Mail\SendMail();
             $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.mail');
-            \Mail::to($input['email'])->send($send_mail);
+            Mail::to($input['email'])->send($send_mail);
             return 1;
         }
         return 0;
