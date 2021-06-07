@@ -80,5 +80,7 @@ return [
     'otherPurchasedCourses' => '其他已購買課程',
     'continueMyCourse' => '繼續我的課程...',
     'solved' => '已解決',
-    'waitingForAnswer' => '等待解答'
+    'waitingForAnswer' => '等待解答',
+    'updateYourProfile' => '更新您的個人資料',
+    'uploadYourPhoto' => '上傳你的照片'
 ];

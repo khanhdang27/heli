@@ -36,7 +36,7 @@
             </li>
             <li class="nav-item item-header">
                 <a class="nav-link"
-                   href="{{ URL::route('admin.show-blog') }}">@lang('keywords.navBar.learningColumn')</a>
+                   href="{{ URL::route('site.show-blog') }}">@lang('keywords.navBar.learningColumn')</a>
             </li>
             <li class="nav-item item-header">
                 <a class="nav-link"
@@ -45,7 +45,7 @@
         </ul>
         <div class="login-bar d-flex ml-auto">
             @if(Auth::user())
-                <div class="text-20 text-primary mr-3">
+                <div class="text-header text-primary mr-3">
                     @lang('keywords.navBar.welcomeBack')<br>
                     {{Auth::user()->name}}
                 </div>

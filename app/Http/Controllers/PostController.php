@@ -22,7 +22,6 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with('postTag','user')->get();
-
         return view('forum.forum-page',[
             'posts' => $posts
         ]);

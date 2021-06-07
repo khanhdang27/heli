@@ -22,7 +22,7 @@
                                 </div>
                                 <div class="col-sm ">
                                     <div class="info-right bg-dark d-flex flex-column justify-content-between">
-                                        <div class="content-info-right text-white m-auto">
+                                        <div class="content-info-right text-white pt-4 pl-4">
                                             <div>{{ $value->tutor_info }}</div>
                                             <br>
                                             <div>► {{ $value->tutor_level }}</div>

@@ -38,7 +38,7 @@
         <div class="col-sm-3 d-flex flex-column justify-content-between align-items-end">
             <div class="pt-3">
                 <button class="btn-hashtag text-20">
-                    {{$post->tag_name}}
+                    {{$post->postTag->tag_name}}
                 </button>
             </div>
             <p class="text-28 pt-2 ">
