@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Models\PostTag;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,8 +16,8 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function postTag()
+    public function tag()
     {
-        return $this->belongsTo(PostTag::class,'tag_id');
+        return $this->belongsTo(Tag::class,'tag_id');
     }
 }

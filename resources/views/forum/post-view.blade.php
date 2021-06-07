@@ -12,7 +12,7 @@
         </div>
         <div class="container-fluid pt-5 pb-5">
             <div class="ml-auto mr-auto pl-5 d-flex flex-wrap w-75">
-                @foreach(SelectionByClass::getValues(\App\Models\PostTag::class,'tag_name', 'id') as $key => $value)
+                @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
                     <button class="btn-hashtag ml-3 mr-3" type="button">
                         {{ $value }}
                     </button>
@@ -59,7 +59,7 @@
                     <div class="col-sm-3 d-flex flex-column justify-content-between align-items-end">
                         <div>
                             <button class="btn-hashtag text-20">
-                                {{$postTag->tag_name}}
+                                {{$tag->tag_name}}
                             </button>
                         </div>
                         <div class="">

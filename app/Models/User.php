@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use \App\Utilities\MapData;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * App\Models\User
@@ -35,7 +36,7 @@ use \App\Utilities\MapData;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    use HasRoles;
 
     protected $table = 'users';
     private $_roles = NULL;
@@ -74,18 +75,12 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
     /**
      * @return bool
      */
     public function isGuest(): bool
     {
-
-        return \Auth::guest();
+        return Auth::guest();
     }
 
     /**
@@ -136,6 +131,4 @@ class User extends Authenticatable
     {
         return $this->morphToMany(File::class, 'file_refer');
     }
-
-
 }

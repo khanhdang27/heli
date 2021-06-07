@@ -1,5 +1,10 @@
 <div class="modal fade modal-login" id="registerModal">
 
+    <div id="snackbar">
+        <p class="m-0" id="contentToast">Toast</p>
+    </div>
+
+
     <div class="modal-dialog modal-login-xl">
 
         <div class="modal-content modal-login-content">
@@ -42,7 +47,6 @@
                             {!! Form::open(['id'=>'registerForm']) !!}
                             <div class="input-login d-flex justify-content-center align-items-center mb-3">
                                 {{ Form::email('email',null,['class'=>'input-login-item','placeholder'=>'Email','autocomplete'=>'off']) }}
-                                <div id="snackbar"><p class="m-0" id="contentToast">Toast</p></div>
                             </div>
                             <div class="bottom-btn">
                                 {{ Form::submit('Register', ['class'=>'btn-login btn-secondary btn-register-now', 'id'=>'btn-register']) }}
@@ -54,10 +58,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
 </div>
 
@@ -72,16 +74,16 @@
                 $.ajax({
                     type: "POST",
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        'Accept': 'application/json'
                     },
                     url: "{{ route('site.register') }}",
                     data: formData
                 }).done(function (data) {
-                    console.log(data)
-                    if (data == 0) {
-                        Toast("Please enter email!");
+                    if (data.code == 201) {
+                        Toast("Please check mail to get password! 0_<");
                     } else {
-                        Toast("Register Successed");
+                        Toast("Please enter email!");
                     }
                 });
             });
