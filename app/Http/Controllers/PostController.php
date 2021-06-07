@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use App\Models\PostTag;
 use App\Models\Tag;
 use App\Post;
 use Illuminate\Contracts\View\View;
@@ -19,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('postTag','user')->get();
+        $posts = Post::with('tag','user')->get();
 
         return view('forum.forum-page',[
             'posts' => $posts
@@ -73,12 +72,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $postTag = PostTag::where('id',$post->tag_id)->first();
+        $tag = Tag::where('id',$post->tag_id)->first();
         $comments = Comment::with('user', 'post')->where('post_id', $post->id)->get();
 
         return view('forum.post-view', [
             'post' => $post,
-            'postTag' => $postTag,
+            'tag' => $tag,
             'comments'=>$comments
         ]);
     }

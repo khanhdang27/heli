@@ -67,10 +67,10 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $postTag = Tag::where('id',$blog->tag_id)->first();
+        $tag = Tag::where('id',$blog->tag_id)->first();
         return view('blog.blog-view', [
             'blog' => $blog,
-            'postTag' => $postTag,
+            'tag' => $tag,
         ]);
     }
 

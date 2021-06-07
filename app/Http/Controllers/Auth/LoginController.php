@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserLoginRequest;
-use Auth;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | login Controller
+    | Login Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles authenticating users for the application and
@@ -29,23 +32,55 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'logged';
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
-     *
      *
      * @return void
      */
     public function __construct()
     {
+        $this->middleware('guest')->except('logout');
+    }
+    
 
+    public function update(Request $request, $id)
+    {
+
+        $this->validate($request, [
+
+            'old_password' => 'required',
+            'new_password' => 'required',
+        ]);
+
+
+        $hashedPassword = Auth::user()->password;
+
+        if (Hash::check($request->old_password, $hashedPassword)) {
+
+            if (!Hash::check($request->new_password, $hashedPassword)) {
+
+                $users = User::find(Auth::user()->id);
+                $users->password = bcrypt($request->new_password);
+                User::where('id', Auth::user()->id)->update(array('password' =>  $users->password));
+
+                session()->flash('message', 'password updated successfully');
+                return redirect()->back();
+            } else {
+                session()->flash('message', 'new password can not be the old password!');
+                return redirect()->back();
+            }
+        } else {
+            session()->flash('message', 'old password doesn\'t matched ');
+            return redirect()->back();
+        }
     }
 
     public function login(UserLoginRequest $request)
     {
-        if (\Auth::check()) {
-            if (\Auth::user()->isSuperAdmin() || \Auth::user()->isAdmin()) {
+        if (Auth::check()) {
+            if (Auth::user()->isSuperAdmin() || Auth::user()->isAdmin()) {
                 return redirect()->route('admin.dashboard');
             } else {
                 return redirect()->route('site.home');
@@ -61,12 +96,9 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        if (\Auth::check()) {
-            \Auth::logout();
+        if (Auth::check()) {
+            Auth::logout();
             return redirect()->route('site.home');
-        } else {
-            \Auth::logout();
-            return redirect()->route('admin.login');
         }
     }
 }
