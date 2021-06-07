@@ -74,7 +74,8 @@ Route::group(['middleware' => 'language'], function () {
 //        Route::get('forum', function () {
 //            return view('forum.forum-page');
 //        })->name('forum');
-
+        Route::get('show-blog','Admin\BlogController@showBlogPage')->name('show-blog');
+        Route::get('view-blog/{id}','Admin\BlogController@viewBlog')->name('view-blog');
 
 
         Route::get('forumAnswer', function () {
@@ -153,8 +154,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('post-tag', 'Admin\PostTagController');
 
         Route::resource('blog', 'Admin\BlogController');
-        Route::get('show-blog','Admin\BlogController@showBlogPage')->name('show-blog');
-        Route::get('view-blog','Admin\BlogController@viewBlog')->name('view-blog');
+
 
         Route::get('course/{course}/video', [CourseController::class, 'videoList'])
             ->name('course.video.index');

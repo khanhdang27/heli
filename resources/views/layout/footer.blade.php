@@ -24,7 +24,7 @@
                 <a href="#">@lang('keywords.navBar.subjectClassification')</a><br>
                 @endif
                 <a href="{{ URL::route('site.news') }}">@lang('keywords.navBar.latestNews')</a><br>
-                <a href="{{ URL::route('admin.show-blog') }}">@lang('keywords.navBar.learningColumn')</a><br>
+                <a href="{{ URL::route('site.show-blog') }}">@lang('keywords.navBar.learningColumn')</a><br>
                 <a href="{{ URL::route('user.post.index') }}">@lang('keywords.footer.FAQ')</a>
             </div>
             @if(Auth::user()!=null)

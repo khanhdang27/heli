@@ -9,6 +9,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class BlogController extends Controller
 {
@@ -44,6 +45,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $blog = new Blog([
+                'photo' => $request->file('photo')->store('photo'),
                 'title' => $request['title'],
                 'content' => $request['content']
             ]
@@ -118,8 +120,11 @@ class BlogController extends Controller
 
     public function showBlogPage()
     {
-        $blog_one = Blog::with('tags')->orderBy('view_no','desc')->first();
-        $blogs = Blog::with('tags')->orderBy('view_no','desc')->get();
+        $week_start = Carbon::now()->startOfWeek();
+        $week_end = Carbon::now()->endOfWeek();
+        $blog_one = Blog::with('tags')->whereBetween('created_at', [$week_start, $week_end])->orderBy('view_no','desc')->first();
+
+        $blogs = Blog::with('tags')->whereBetween('created_at', [$week_start, $week_end])->orderBy('view_no','desc')->get();
         $blog = Blog::with('tags')->orderBy('created_at','desc')->get();
 
         return view('blog.blog-page',[
@@ -129,10 +134,10 @@ class BlogController extends Controller
         ]);
     }
 
-    public function viewBlog(){
-        $blog = Blog::with('tags')->get();
+    public function viewBlog($id){
+        $blogs = Blog::where('id',$id)->with('tags')->first();
         return view('blog.blog-view',[
-            'blog'=>$blog
+            'blog'=>$blogs
         ]);
     }
     /**

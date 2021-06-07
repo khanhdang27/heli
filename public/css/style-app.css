@@ -13,11 +13,15 @@
 }
 .navbar-home a {
   color: var(--primary);
-  font-size: 15pt;
+  font-size: 13.5pt;
 }
 .navbar-home a:hover {
   text-decoration: none;
   color: var(--primary);
+}
+
+.text-header {
+  font-size: 13.5pt;
 }
 
 .dropdown-menu a {
@@ -182,13 +186,20 @@
 
 .btn-hashtag-small {
   background-color: var(--white);
-  font-size: 12px;
   color: var(--primary);
   border: none;
   border-radius: 19px;
   padding: 0.5rem 1rem;
   margin: 0.3rem 0.3rem;
   float: right;
+}
+
+.text-buttonTag {
+  font-size: 18pt;
+}
+
+.text-buttonTag-small {
+  font-size: 9pt;
 }
 
 .btn-read-more {
@@ -206,7 +217,7 @@
 }
 
 .text-25 {
-  font-size: 18.7pt;
+  font-size: 18.75pt;
   color: var(--primary);
 }
 

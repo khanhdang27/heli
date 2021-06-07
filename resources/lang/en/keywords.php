@@ -79,5 +79,7 @@ return [
     'otherPurchasedCourses' => 'Other purchased courses',
     'continueMyCourse' => 'Continue my course...',
     'solved' => 'Solved',
-    'waitingForAnswer' => 'Waiting for answer'
+    'waitingForAnswer' => 'Waiting for answer',
+    'updateYourProfile' => 'Update your profile',
+    'uploadYourPhoto' => 'Upload your photo'
 ];
