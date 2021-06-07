@@ -12,7 +12,7 @@
         </div>
         <div class="container-fluid pt-5 pb-5">
             <div class="ml-auto mr-auto pl-5 d-flex flex-wrap w-75">
-                @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
+                @foreach(SelectionByClass::getValues(\App\Models\PostTag::class,'tag_name', 'id') as $key => $value)
                     <button class="btn-hashtag ml-3 mr-3" type="button">
                         {{ $value }}
                     </button>
@@ -59,68 +59,49 @@
                     <div class="col-sm-3 d-flex flex-column justify-content-between align-items-end">
                         <div>
                             <button class="btn-hashtag text-20">
-                                {{$tag->tag_name}}
+                                {{$postTag->tag_name}}
                             </button>
                         </div>
-                        <div class="">
-                            <p class="text-28 pt-2 ">
-                                @if($post->block==1)
-                                    @lang('keywords.solved')
-                                @else
-                                    @lang('keywords.waitingForAnswer')
-                                @endif
-                            </p>
+                        <p class="text-28 pt-2 ">
                             @if($post->block==0)
-                                {!! Form::open(['route' => ['user.blockPost', $post->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
-                                <button class="btn btn-primary float-right">
-                                    <img height="20" style="fill: #0B487D"
-                                         src="{{asset("images/ic/ic_check.svg")}}"/> @lang('keywords.solved')
-                                </button>
-                                {!! Form::close() !!}
+                                @lang('keywords.solved')
+                            @else
+                                @lang('keywords.waitingForAnswer')
                             @endif
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
+            <!-- INDEX -->
 
-        <!-- INDEX -->
-            @if($post->block==0)
-                @if(!empty(\Illuminate\Support\Facades\Auth::user()))
-                    <div class="container mt-5">
-                        <p class="text-primary text-20">
-                            Add your answer
-                        </p>
-                        <div class="card card-body">
-                            {!! Form::open(['url' => URL::route('user.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
-                            <div class="form-group ">
-                                {{ Form::label('detail', 'Content') }}
-                                {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3']) }}
-                            </div>
-                            <div class="custom-file ">
-                                {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
-                                {{ Form::file('file',['class' => 'custom-file-input']) }}
-                            </div>
-                            {{ Form::text('post_id',$post->id,['hidden'=>true]) }}
-                            {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5 float-right']) }}
-                            {!! Form::close() !!}
+            @if(!empty(\Illuminate\Support\Facades\Auth::user()))
+                <div class="container mt-5">
+                    <p class="text-primary text-20">
+                        Add your answer
+                    </p>
+                    <div class="card card-body">
+                        {!! Form::open(['url' => URL::route('user.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
+                        <div class="form-group ">
+                            {{ Form::label('detail', 'Content') }}
+                            {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3']) }}
                         </div>
-
+                        <div class="custom-file ">
+                            {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
+                            {{ Form::file('file',['class' => 'custom-file-input']) }}
+                        </div>
+                        {{ Form::text('post_id',$post->id,['hidden'=>true]) }}
+                        {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5 float-right']) }}
+                        {!! Form::close() !!}
                     </div>
-                @endif
+
+                </div>
             @endif
+{{--            @php--}}
+{{--                $post_id= $post->id;--}}
+{{--            @endphp--}}
 
-            {{--            @php--}}
-            {{--                $post_id= $post->id;--}}
-            {{--            @endphp--}}
-            @php
-                $post_us = $post->user_id
-            @endphp
             @foreach($comments as $value)
-                @php
-                    $value->pin_comment = $post->pin_comment==$value->id
-                @endphp
-
-                <x-forum.forum-comment :comment=$value :postUs=$post_us>
+                <x-forum.forum-comment :comment=$value>
 
                 </x-forum.forum-comment>
             @endforeach

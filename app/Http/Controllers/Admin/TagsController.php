@@ -7,7 +7,7 @@ use App\Models\Tag;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class TagsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $postTags = Tag::all();
         return view('admin.tag.index', [
-            'tags' => $tags
+            'postTags' => $postTags
         ]);
     }
 
@@ -69,7 +69,7 @@ class TagController extends Controller
     public function edit(Tag $tag)
     {
         return view('admin.tag.edit', [
-            'tags' => $tag
+            'postTags' => $tag
         ]);
     }
 

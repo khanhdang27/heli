@@ -20,10 +20,10 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => ['admin.post-tag.update', $tags->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
+                            {!! Form::open(['route' => ['admin.post-tag.update', $postTags->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
                             <div class="form-group">
                                 {{ Form::label('tag_name', 'Tag name') }}
-                                {{ Form::text('tag_name', $tags->tag_name, ['class' => 'form-control']) }}
+                                {{ Form::text('tag_name', $postTags->tag_name, ['class' => 'form-control']) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}

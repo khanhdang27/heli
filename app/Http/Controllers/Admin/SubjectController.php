@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\CreateSubjectRequest;
 use App\Models\Certificate;
-use App\Models\Tag;
+use App\Models\PostTag;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Contracts\View\View;

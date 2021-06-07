@@ -4,13 +4,7 @@
 
 @section('content')
     @php
-        use App\Utilities\SelectionByClass;
-        $listTag = [
-            'a' => '#海外升學',
-            'b' => '#學費',
-            'c' => '#英國',
-            'd' => '#UCAS',
-        ]
+    use App\Utilities\SelectionByClass
     @endphp
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
@@ -34,9 +28,9 @@
                     <div class="popular-item ">
                         <div class="thumb-article d-flex flex-column justify-content-end position-relative">
                             <img class="main-photo img-thumbnail border-0 p-0 rounded-0"
-                                 src="{{asset("images/banner.jpg")}}">
+                                 src="{{Storage::url($blog_one->photo)}}">
                             <div class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
-                                <a href="{{route('admin.view-blog',$blog_one->id)}}" class="title-article">
+                                <a href="{{route('site.view-blog',$blog_one->id)}}" class="title-article">
                                     {{ $blog_one->title }}
                                 </a>
                                 <div class="d-flex justify-content-between flex-wrap pb-3">
@@ -66,14 +60,14 @@
                     @foreach($blogs as $item)
                     <div class="card flex-md-row border-0" >
                         <div class="popular-articles-item-image d-flex ">
-                            <img class="img-thumbnail align-items-center" src="{{asset("images/banner.jpg")}}" alt="Card image cap">
+                            <img class="img-thumbnail rounded-0 align-items-center" src="{{Storage::url($item->photo)}}" alt="Card image cap">
                         </div>
 
                         <div class="popular-articles-item-content">
                             <div class="card-body">
-                                <p class="text-30">
+                                <a href="{{route('site.view-blog',$item->id)}}" class="text-30">
                                     {{$item->title}}
-                                </p>
+                                </a>
                                 <p class="card-text">
                                     <span>{{ substr($item->created_at,0,10) }}</span><img class="ml-5"
                                                                 src={{asset("images/ic/ic_eyeBlue.svg")}}>{{ $item->view_no }}

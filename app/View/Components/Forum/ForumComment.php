@@ -7,16 +7,14 @@ use Illuminate\View\Component;
 class ForumComment extends Component
 {
     public $comment;
-    public $postUs;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct( $comment, $postUs=null)
+    public function __construct( $comment)
     {
         $this->comment = $comment;
-        $this->postUs = $postUs;
     }
 
     /**
@@ -27,8 +25,7 @@ class ForumComment extends Component
     public function render()
     {
         return view('components.forum.forum-comment',[
-            'comment' => $this->comment,
-            'postUs' => $this->postUs
+            'comment' => $this->comment
         ]);
     }
 }

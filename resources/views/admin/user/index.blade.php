@@ -54,7 +54,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($userRoles as $value)
+                                @foreach($roleUsers as $value)
                                     <tr>
                                         <td class="goal-project">
                                             {{ $value->name }}
