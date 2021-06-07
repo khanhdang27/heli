@@ -6,12 +6,9 @@ use App\Models\Subject;
 use Illuminate\Database\Eloquent\Model;
 use \App\Utilities\MapData;
 
-class TutorTeachSubject extends Model
+class TutorSubject extends Model
 {
-
-    
-
-    protected $table = 'tutor_teach_subject';
+    protected $table = 'tutor_subject';
 
     public $timestamps = TRUE;
 

@@ -36,7 +36,7 @@
             </li>
             <li class="nav-item item-header">
                 <a class="nav-link"
-                   href="{{ URL::route('admin.show-blog') }}">@lang('keywords.navBar.learningColumn')</a>
+                   href="{{ URL::route('site.blog-view') }}">@lang('keywords.navBar.learningColumn')</a>
             </li>
             <li class="nav-item item-header">
                 <a class="nav-link"

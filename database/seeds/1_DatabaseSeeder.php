@@ -1,7 +1,8 @@
 <?php
 
 use App\Models\User;
-use App\Models\File;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,10 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create([
-            'name' => 'Super admin',
+        $user = User::create([
+            'name' => 'Administrator', 
             'email' => 'admin@gmail.com',
-            'password' => '123123',
+            'password' => bcrypt('123123')
         ]);
+        $role = Role::create(['name' => 'Admin']);
+        $permissions = Permission::pluck('id','id')->all();
+        $role->syncPermissions($permissions);
+        $user->assignRole([$role->id]);
     }
 }

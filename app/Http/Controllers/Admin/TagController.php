@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\PostTag;
-use Illuminate\Contracts\View\View;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-class PostTagsController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class PostTagsController extends Controller
      */
     public function index()
     {
-        $postTags = PostTag::all();
+        $tags = Tag::all();
         return view('admin.post-tags.index', [
-            'postTags' => $postTags
+            'tags' => $tags
         ]);
     }
 
@@ -40,9 +40,10 @@ class PostTagsController extends Controller
      */
     public function store(Request $request)
     {
-        $posTags = new PostTag(
+        $posTags = new Tag(
             $request->validate([
-                'tag_name' => 'required'
+                'tag_name' => 'required',
+                'tag_type' => 'required'
             ])
         );
         $posTags->save();
@@ -63,13 +64,13 @@ class PostTagsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param PostTag $post_tag
+     * @param Tag $post_tag
      * @return View
      */
-    public function edit(PostTag $post_tag)
+    public function edit(Tag $tag)
     {
         return view('admin.post-tags.edit', [
-            'postTags' => $post_tag
+            'tags' => $tag
         ]);
     }
 
@@ -77,21 +78,22 @@ class PostTagsController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param PostTag $post_tag
+     * @param Tag $tag
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, PostTag $post_tag)
+    public function update(Request $request, Tag $tag)
     {
-        $post_tag->update(
+        $tag->update(
             $request->validate([
-                'tag_name' => 'required'
+                'tag_name' => 'required',
+                'tag_type' => 'required'
             ])
         );
-        $post_tag->save();
+        $tag->save();
         return back()->with('success', 'Update success!');
     }
 
-    public function destroy(PostTag $post_tag)
+    public function destroy(Tag $post_tag)
     {
 
 //        try {

@@ -20,7 +20,6 @@ class CreateSubscriptionItemsTable extends Migration
             $table->string('stripe_plan');
             $table->integer('quantity')->nullable();
             $table->timestamps();
-
             $table->unique(['subscription_id', 'stripe_plan']);
         });
     }
