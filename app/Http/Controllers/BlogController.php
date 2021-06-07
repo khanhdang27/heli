@@ -119,12 +119,12 @@ class BlogController extends Controller
 
     public function showBlogPage()
     {
-        $blog_one = Blog::with('tags')->orderBy('view_no','desc')->first();
+        $blog_top = Blog::with('tags')->orderBy('view_no','desc')->first();
         $blogs = Blog::with('tags')->orderBy('view_no','desc')->get();
         $blog = Blog::with('tags')->orderBy('created_at','desc')->get();
 
         return view('blog.blog-page',[
-            'blog_one' => $blog_one,
+            'blog_top' => $blog_top,
             'blog' => $blog,
             'blogs' => $blogs
         ]);

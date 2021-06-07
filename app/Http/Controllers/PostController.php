@@ -49,7 +49,6 @@ class PostController extends Controller
         $fileController = new FileController();
         $input = $request->all();
 
-//        dd($input);
         $file_id = $fileController->store($request);
 
         $input['user_id'] = Auth::user()->id;
