@@ -45,7 +45,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($tags as $value)
+                                @foreach($postTags as $value)
                                     <tr>
                                         <td class="goal-project">
                                             {{ $value->tag_name }}

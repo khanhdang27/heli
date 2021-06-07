@@ -909,4 +909,6 @@ video {
     height: 750px;
     overflow-y: auto;
 }
-
+.card-profile{
+    max-width: 700px;
+}

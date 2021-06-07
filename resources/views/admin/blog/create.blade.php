@@ -2,7 +2,7 @@
 @section('content')
     @php
         use App\Utilities\SelectionByClass;
-        $tag=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
+        $postTag=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
     @endphp
     <!-- CARDS -->
     <div class="container-fluid mt-5">
@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 {{ Form::label('tag_id', 'Post tag') }}
 
-                                @foreach($tag as $id => $tag)
+                                @foreach($postTag as $id => $tag)
                                     {{ Form::checkbox('tag_id[]',$id,null) }}
                                     {{ Form::label($tag, $tag) }}
                                 @endforeach

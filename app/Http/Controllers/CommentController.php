@@ -37,17 +37,17 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $fileController = new FileController();
         $input = $request->all();
-        $input['user_id'] = Auth::user()->id;
 
-        if (!empty($input['file'])) {
-            $fileController = new FileController();
-            $file_id = $fileController->store($request);
-            $input['file_id'] = $file_id;
-        }
+        $file_id = $fileController->store($request);
+
+        $input['user_id'] = Auth::user()->id;
         unset($input['type']);
         unset($input['ref']);
         unset($input['file']);
+        $input['file_id'] = $file_id;
+
         $comment = new Comment($input);
 
         if($comment->save()){

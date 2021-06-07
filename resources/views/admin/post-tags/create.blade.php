@@ -26,11 +26,6 @@
                                 {{ Form::label('tag_name', 'Name') }}
                                 {{ Form::text('tag_name', old('tag_name'),['class' => 'form-control', 'placeholder'=>'ex: #ABC']) }}
                             </div>
-                            <div class="form-group ">
-                                {{ Form::label('tag_type', 'Type') }}
-                                {{Form::select('tag_type', ['1' => 'Post', '2' => 'Blog'], null, ['placeholder' => 'Pick a blog'])}}
-                                {{-- {{ Form::text('tag_name', old('tag_name'),['class' => 'form-control', 'placeholder'=>'ex: #ABC']) }} --}}
-                            </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>

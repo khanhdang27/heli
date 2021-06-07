@@ -7,7 +7,7 @@ use App\Http\Requests\Tutor\CreateTutorRequest;
 use App\Http\Requests\Tutor\UpdateTutorRequest;
 use App\Models\Subject;
 use App\Models\Tutor;
-use App\Models\TutorSubject;
+use App\Models\TutorTeachSubject;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -89,8 +89,8 @@ class TutorController extends Controller
             ]);
             $tutor->save();
 
-            $tutorSubject = new TutorSubject(['tutor_id' => $tutor->id, 'subject_id' => $_subject]);
-            $tutorSubject->save();
+            $tutorTeachSubject = new TutorTeachSubject(['tutor_id' => $tutor->id, 'subject_id' => $_subject]);
+            $tutorTeachSubject->save();
         };
 
         return back()->with('success', 'Create success');

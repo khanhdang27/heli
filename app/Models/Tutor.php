@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\TutorSubject;
+use App\Models\TutorTeachSubject;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
@@ -57,7 +57,7 @@ class Tutor extends Model implements TranslatableContract
 
     public function subject()
     {
-        return $this->belongsToMany(Subject::class, TutorSubject::class);
+        return $this->belongsToMany(Subject::class, TutorTeachSubject::class);
     }
 
     public function user()

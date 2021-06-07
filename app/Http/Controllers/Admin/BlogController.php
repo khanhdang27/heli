@@ -44,6 +44,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $blog = new Blog([
+                'photo' => $request->file('photo')->store('photo'),
                 'title' => $request['title'],
                 'content' => $request['content']
             ]
@@ -67,10 +68,10 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $tag = Tag::where('id',$blog->tag_id)->first();
+        $postTag = Tag::where('id',$blog->tag_id)->first();
         return view('blog.blog-view', [
             'blog' => $blog,
-            'tag' => $tag,
+            'postTag' => $postTag,
         ]);
     }
 
@@ -129,10 +130,10 @@ class BlogController extends Controller
         ]);
     }
 
-    public function viewBlog(){
-        $blog = Blog::with('tags')->get();
+    public function viewBlog($id){
+        $blogs = Blog::where('id',$id)->with('tags')->first();
         return view('blog.blog-view',[
-            'blog'=>$blog
+            'blog'=>$blogs
         ]);
     }
     /**

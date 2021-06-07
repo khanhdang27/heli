@@ -13,7 +13,7 @@ class CreateTutorTeachSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('tutor_subject', function (Blueprint $table) {
+        Schema::create('tutor_teach_subject', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tutor_id')
                 ->constrained('tutors');
