@@ -66,9 +66,12 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
 
+        Route::put('reset-password','Auth\ChangePasswordController@update')->name('resetPassword');
+
         Route::get('forgot-password', function () {
             return view('auth.forgot-password');
         })->middleware('guest')->name('passwords.request');
+
 
         Route::post('forgot-password', function (Request $request) {
             $request->validate(['email' => 'required|email']);
@@ -118,18 +121,11 @@ Route::group(['middleware' => 'language'], function () {
             return view('blog.blog-view');
         })->name('blog-view');
 
-<<<<<<< HEAD
 //        Route::get('forum', function () {
 //            return view('forum.forum-page');
 //        })->name('forum');
         Route::get('show-blog','Admin\BlogController@showBlogPage')->name('show-blog');
         Route::get('view-blog/{id}','Admin\BlogController@viewBlog')->name('view-blog');
-=======
-        //        Route::get('forum', function () {
-        //            return view('forum.forum-page');
-        //        })->name('forum');
-
->>>>>>> auth_permission
 
 
         Route::get('forumAnswer', function () {
@@ -193,10 +189,6 @@ Route::group(['middleware' => 'language'], function () {
             Route::get('show-blog', 'Admin\BlogController@showBlogPage')->name('show-blog');
             Route::get('view-blog', 'Admin\BlogController@viewBlog')->name('view-blog');
 
-<<<<<<< HEAD
-        Route::resource('blog', 'Admin\BlogController');
-
-=======
             Route::get('course/{course}/video', [CourseController::class, 'videoList'])
                 ->name('course.video.index');
             Route::get('course/{course}/video/create', [CourseController::class, 'createVideo'])
@@ -207,7 +199,6 @@ Route::group(['middleware' => 'language'], function () {
                 ->name('course.video.download');
             Route::get('course/{course}/video/{course_video}/edit', [CourseController::class, 'editVideo'])
                 ->name('course.video.edit');
->>>>>>> auth_permission
 
             Route::put('course/{course}/video/{course_video}', [CourseController::class, 'updateVideo'])
                 ->name('course.video.update');

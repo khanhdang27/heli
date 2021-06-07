@@ -4,7 +4,7 @@
 
 @section('content')
     @php
-    use App\Utilities\SelectionByClass
+    use App\Utilities\SelectionByClass;
     @endphp
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">

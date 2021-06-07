@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Models\UserRole;
+// use App\Models\UserRole;
 use App\Models\Student;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -76,8 +76,8 @@ class RegisterController extends Controller
         $user = new User(['name' => $name, 'email' => $data['email'], 'password' => $random]);
         $user->save();
 
-        $roleUser = new UserRole(['user_id' => $user->id, 'role_id' => '3']);
-        $roleUser->save();
+        // $roleUser = new UserRole(['user_id' => $user->id, 'role_id' => '3']);
+        // $roleUser->save();
 
         $student = new Student(['user_id' => $user->id]);
         $student->save();
