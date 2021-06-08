@@ -1,20 +1,19 @@
 <?php
 
-namespace App\View\Components\Home;
+namespace App\View\Components\Product;
 
 use Illuminate\View\Component;
 
-class Banner extends Component
+class Course extends Component
 {
-    public $banner;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($banner)
+    public function __construct()
     {
-        $this->banner = $banner;
+        //
     }
 
     /**
@@ -24,8 +23,6 @@ class Banner extends Component
      */
     public function render()
     {
-        return view('components.home.banner', [
-            'banner' => $this->banner
-        ]);
+        return view('components.product.course');
     }
 }

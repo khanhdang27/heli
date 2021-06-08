@@ -28,7 +28,7 @@
                     @endif
                     {{$post->like_no}}
                     </span>
-                <a href="{{ route('user.post.show', $post->id)}}">
+                <a href="{{ route('site.post.show', $post->id)}}">
                     <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">
                     {{$post->comment_no}}
                 </a>

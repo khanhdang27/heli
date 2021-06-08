@@ -40,6 +40,7 @@ return [
     ],
     'registerNowToExperience' => '立即註冊體驗',
     'registerNowFree' => '立即免費註冊',
+    'tryItNow' => '立即試看',
     'discountProduct' => '最新優惠課程',
     'welcomeOffer' => '迎新優惠',
     'hotCourseSeries' => '熱⾨課程系列',
@@ -80,5 +81,18 @@ return [
     'otherPurchasedCourses' => '其他已購買課程',
     'continueMyCourse' => '繼續我的課程...',
     'solved' => '已解決',
-    'waitingForAnswer' => '等待解答'
+    'waitingForAnswer' => '等待解答',
+    'updateYourProfile' => '更新您的個人資料',
+    'uploadYourPhoto' => '上傳你的照片',
+    'changePassword' => '更改密碼',
+    'step-register' =>[
+        'onlineRegistration' => '線上註冊',
+        'enjoyNewUserDiscount' => '享受新用戶優惠',
+        'experienceNow' => '立即體驗',
+        'fillInformation' => '填寫簡單資料，即可完成註冊',
+        'tryLiveClass' => '以優惠價格試上真人/直播班，並領取價值$600的免費課程',
+        'brainExperienceCourse' => '隨時隨地以手機、平板電腦或電 腦體驗課程!'
+    ],
+    'freeTrialClass' => '免費試堂；體驗課程網上課程 及實時課程 任你選擇'
+
 ];

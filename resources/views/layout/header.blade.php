@@ -40,7 +40,7 @@
             </li>
             <li class="nav-item item-header">
                 <a class="nav-link"
-                   href="{{ URL::route('user.post.index') }}">@lang('keywords.navBar.q&aArea')</a>
+                   href="{{ URL::route('site.post.index') }}">@lang('keywords.navBar.q&aArea')</a>
             </li>
         </ul>
         <div class="login-bar d-flex ml-auto">
@@ -60,7 +60,7 @@
                         <img src={{asset("images/ic/ic_user.svg")}} width="40">
                     </a>
                     <div class="dropdown-menu my-dropdown-menu language-item">
-                        <a class="dropdown-item" href="{{ route('user.profile.show', Auth::user()->id) }}">Profile</a>
+                        <a class="dropdown-item" href="{{ route('site.profile.show', Auth::user()->id) }}">Profile</a>
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="{{ URL::route('site.userLogout')}}">Log out</a>
                     </div>
@@ -82,12 +82,12 @@
                 @else
                 <div class="p-3">
                     <a class="text-center"
-                       href="{{ URL::route('user.my-course') }}">@lang('keywords.footer.myCourses')
+                       href="{{ URL::route('site.user.my-course') }}">@lang('keywords.footer.myCourses')
                     </a>
                 </div>
                 <div class="p-3">
                     <a class="text-center"
-                       href="{{ URL::route('user.calendar') }}">@lang('keywords.footer.mySchedule')
+                       href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')
                         </a>
                     </div>
                 @endif
