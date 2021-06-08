@@ -70,6 +70,7 @@
 
 
 @stack('js')
+@stack('inputFile')
 @stack('ck-editor-init')
 <!-- Plugin file -->
 <script src="./js/addons/datatables.min.js"></script>

@@ -21,7 +21,7 @@
             @if(!empty(\Illuminate\Support\Facades\Auth::user()))
                 <div class="container mt-4 mb-4">
                     <div class="card card-body">
-                        {!! Form::open(['url' => URL::route('user.post.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
+                        {!! Form::open(['url' => URL::route('site.post.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group">
                             {{ Form::label('tag_id', 'Tag') }}
                             {{ Form::select('tag_id', SelectionByClass::getValues(\App\Models\PostTag::class,'tag_name', 'id'),null, ['class' => 'form-control']) }}

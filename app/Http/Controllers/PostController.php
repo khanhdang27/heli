@@ -7,7 +7,7 @@ use App\Models\File;
 use App\Models\PostTag;
 use App\Models\Tag;
 use App\Models\User;
-use App\Post;
+use App\Models\Post;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

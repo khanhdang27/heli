@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CourseController;
-use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\SubjectController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -23,9 +23,7 @@ Route::redirect('', 'site/', 301);
 
 Route::group(['middleware' => 'language'], function () {
     Route::prefix('site/')->name('site.')->group(function () {
-        Route::get('', function () {
-            return view('home.home-page');
-        })->name('home');
+        Route::get('', 'HomeController@index')->name('home');
 
         Route::post('register', 'Auth\RegisterController@register')->name('register');
 
@@ -50,7 +48,7 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::get('get-subject-by-parent-id/{id}', 'Site\SubjectController@getSubjectByParentId')->name('get_subject_by_parent');
 
-        Route::resource('certificate', 'Site\CertificateController');
+        Route::resource('certificate', 'CertificateController');
 
         //    Route::get('subject/{id}',[SubjectController::class,'show'])
         //    ->name('subjects');
@@ -73,8 +71,8 @@ Route::group(['middleware' => 'language'], function () {
         //        Route::get('forum', function () {
         //            return view('forum.forum-page');
         //        })->name('forum');
-        Route::get('show-blog', 'Admin\BlogController@showBlogPage')->name('show-blog');
-        Route::get('view-blog/{id}', 'Admin\BlogController@viewBlog')->name('view-blog');
+        Route::get('show-blog', 'BlogController@showBlogPage')->name('show-blog');
+        Route::get('view-blog/{id}', 'BlogController@viewBlog')->name('view-blog');
 
 
         Route::get('forumAnswer', function () {
@@ -132,29 +130,29 @@ Route::group(['middleware' => 'language'], function () {
             Route::get('/', [LoginController::class, 'dashboard'])
                 ->name('dashboard');
 
-            Route::resource('certificate', 'Admin\CertificateController');
+            Route::resource('certificate', 'CertificateController');
 
-            Route::resource('subject', 'Admin\SubjectController');
+            Route::resource('subject', 'SubjectController');
 
             //        Route::put('/subject/updateActive/{id}', [SubjectController::class, 'updateActive'])
             //            ->name('subject.updateActive');
 
-            Route::resource('tutor', 'Admin\TutorController');
+            Route::resource('tutor', 'TutorController');
 
-            Route::resource('course', 'Admin\CourseController');
+            Route::resource('course', 'CourseController');
 
-            Route::resource('course-material', 'Admin\CourseMaterialController');
+            Route::resource('course-material', 'CourseMaterialController');
             // Route::get('course-material/1/edit', 'Admin\CourseMaterialController@edit')->name('course-material.edit');
 
-            Route::resource('banner', 'Admin\BannerController');
+            Route::resource('banner', 'BannerController');
 
-            Route::resource('user', 'Admin\UserController');
+            Route::resource('user', 'UserController');
 
-            Route::resource('tag', 'Admin\TagsController');
+            Route::resource('tag', 'TagsController');
 
-            Route::resource('post-tag', 'Admin\PostTagController');
+            Route::resource('post-tag', 'PostTagController');
 
-            Route::resource('blog', 'Admin\BlogController');
+            Route::resource('blog', 'BlogController');
 
 
             // Route::get('course/{course}/video', [CourseController::class, 'videoList'])

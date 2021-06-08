@@ -41,6 +41,9 @@
                                     <th>
                                         Photo
                                     </th>
+                                    <th>
+                                        Title
+                                    </th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -51,6 +54,9 @@
                                             <img
                                                 src="{{ Storage::url($value->banner_photo) }}"
                                                 width="50px;" height="60px;" alt="">
+                                        </td>
+                                        <td>
+                                            {{$value->banner_title}}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

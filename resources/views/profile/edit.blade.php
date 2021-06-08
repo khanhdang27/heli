@@ -10,13 +10,13 @@
                 <img src="{{asset('images/user_default.png')}}">
                 <div class="p-3 d-flex justify-content-center align-items-center">
                     <img src="{{asset("images/ic/ic_search.svg")}}">
-                    <a href="#">Edit your photo</a>
+                    <a href="#">@lang('keywords.uploadYourPhoto')</a>
                 </div>
             </div>
             <div class="w-100">
                 <div>
-                    <h2 class="text-center">Update your profile</h2>
-                    {!! Form::open(['url' => URL::route('user.profile.update', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data']) !!}
+                    <h2 class="text-center text-primary">@lang('keywords.updateYourProfile')</h2>
+                    {!! Form::open(['url' => URL::route('site.profile.update', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data']) !!}
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
                         {{Form::text('name',Auth::user()->name, ['class'=>'form-control'])}}
@@ -42,7 +42,7 @@
                 </div>
                 <hr class="mt-5"/>
                 <div class="mt-5">
-                    <h2 class="text-center">Change password</h2>
+                    <h2 class="text-center text-primary">@lang('keywords.changePassword')</h2>
                     {!! Form::open(['url' => URL::route('site.resetPassword', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data' ]) !!}
                     <div class="form-group">
                         {{Form::label('old_password', 'Old Password')}}

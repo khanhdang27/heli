@@ -192,7 +192,10 @@ html, body {
     position: relative;
 
 }
-
+.banner-background{
+    height: 600px;
+    opacity: 0.7;
+}
 .banner-content img {
     display: block;
     width: 100%;
@@ -206,7 +209,9 @@ html, body {
     width: 55.5vw;
     height: auto;
 }
-
+.banner-title{
+    width: 500px;
+}
 .banner-info {
     z-index: 1000;
     position: absolute;
@@ -472,7 +477,7 @@ html, body {
 
 .show-video {
     max-width: 1438px;
-    padding: 3rem 0 5rem 0;
+    padding: 3rem 0 4rem 0;
 }
 
 .rating-bar {
@@ -545,8 +550,9 @@ video {
     font-weight: 600;
 }
 
-.text {
+.text-advertisement{
     text-align: center;
+    max-width: 405px;
 }
 
 @media screen and (max-width: 874px) {
@@ -850,7 +856,7 @@ video {
 }
 
 .container-news-page {
-    padding-bottom: 10rem;
+    padding-bottom: 7rem;
 }
 
 .show-news-item {
@@ -868,7 +874,7 @@ video {
 
 .news-item {
     padding: 3rem;
-
+    max-width: 600px;
 }
 
 .bottom-collapse {

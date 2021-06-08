@@ -1,5 +1,5 @@
 
-<script src="js/lib/live-course.js"></script>
+<script src="{{asset('js/lib/live-course.js')}}"></script>
 
 <div>
     <div id="player"></div>

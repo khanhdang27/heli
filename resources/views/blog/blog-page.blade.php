@@ -40,7 +40,7 @@
                             <img class="main-photo img-thumbnail border-0 p-0 rounded-0"
                                  src="{{Storage::url($blog_top->photo)}}">
                             <div class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
-                                <a href="{{route('site.view-blog',$blog_top->id)}}" class="title-article">
+                                <a href="{{route('site.view-blog',$blog_top->id)}}" class="title-article text-truncate">
                                     {{ $blog_top->title }}
                                 </a>
                                 <div class="d-flex justify-content-between flex-wrap pb-3">

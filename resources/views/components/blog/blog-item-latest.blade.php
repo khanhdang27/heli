@@ -3,7 +3,7 @@
         <div class="thumb-article d-flex flex-column justify-content-end position-relative">
             <img class="main-photo img-thumbnail border-0 p-0 rounded-0" src="{{Storage::url($blog->photo)}}">
             <div class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
-                <a href="{{route('site.view-blog',$blog->id)}}" class="title-article">
+                <a href="{{route('site.view-blog',$blog->id)}}" class="title-article text-truncate">
                     {{ $blog->title }}
                 </a>
                 <div class="d-flex justify-content-between flex-wrap">
