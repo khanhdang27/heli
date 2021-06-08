@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use \App\Utilities\MapData;
+use Spatie\Permission\Traits\HasRoles;
+
 
 /**
  * App\Models\User
@@ -34,11 +35,9 @@ use \App\Utilities\MapData;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
-
+    use Notifiable, HasRoles;
 
     protected $table = 'users';
-    private $_roles = NULL;
     /**
      * The attributes that are mass assignable.
      *
@@ -74,68 +73,9 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isGuest(): bool
-    {
-
-        return \Auth::guest();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSuperAdmin(): bool
-    {
-        if ($this->_roles == NULL) {
-            $this->_roles = $this->roles()->first();
-        }
-        return $this->_roles->isSuperAdmin();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isAdmin(): bool
-    {
-        if ($this->_roles == NULL) {
-            $this->_roles = $this->roles()->first();
-        }
-        return $this->_roles->isAdmin();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isMember(): bool
-    {
-        if ($this->_roles === NULL) {
-            $this->_roles = $this->roles()->first();
-        }
-        return $this->_roles->isMember();
-    }
-
-    /**
-     * @return bool
-     */
-    public function isTutor(): bool
-    {
-        if ($this->_roles == NULL) {
-            $this->_roles = $this->roles()->first();
-        }
-        return $this->_roles->isTutor();
-    }
-
     public function avatar()
     {
         return $this->morphToMany(File::class, 'file_refer');
     }
-
 
 }

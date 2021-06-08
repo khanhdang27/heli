@@ -15,7 +15,11 @@
             </div>
             <div class="w-100">
                 <div>
+<<<<<<< HEAD
                     <h2 class="text-center text-primary">@lang('keywords.updateYourProfile')</h2>
+=======
+                    <h2 class="text-center">Update your profile</h2>
+>>>>>>> refactor_code
                     {!! Form::open(['url' => URL::route('site.profile.update', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data']) !!}
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
@@ -23,22 +27,20 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('full_name', 'Full Name')}}
-                        {{Form::text('full_name',$student->full_name, ['class'=>'form-control'])}}
+                        {{Form::text('full_name',$student->full_name ?? null, ['class'=>'form-control'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('day_of_birth', 'Date of birth')}}
-                        {{ Form::date('day_of_birth', $student->day_of_birth, ['class' => 'form-control']) }}
+                        {{ Form::date('day_of_birth', $student->day_of_birth ?? null, ['class' => 'form-control']) }}
                     </div>
                     <div class="form-group">
                         {{Form::label('phone_no', 'Phone')}}
-                        {{Form::text('phone_no',$student->phone_no, ['class'=>'form-control'])}}
+                        {{Form::text('phone_no',$student->phone_no ?? null, ['class'=>'form-control'])}}
                     </div>
                     <div class="d-flex">
                         {{ Form::submit('Save', ['class'=>'btn btn-primary ml-auto mt-3']) }}
                     </div>
-
                     {!! Form::close() !!}
-
                 </div>
                 <hr class="mt-5"/>
                 <div class="mt-5">
@@ -46,7 +48,7 @@
                     {!! Form::open(['url' => URL::route('site.resetPassword', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data' ]) !!}
                     <div class="form-group">
                         {{Form::label('old_password', 'Old Password')}}
-                        {{Form::text('old_password',null, ['class'=>'form-control','autocomplete'=>'off'])}}
+                        {{Form::password('old_password', ['class'=>'form-control','autocomplete'=>'off'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('password', 'New password')}}
@@ -62,11 +64,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-
-
-
         </div>
-
     </div>
 @endsection
 

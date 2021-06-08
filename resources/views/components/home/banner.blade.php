@@ -1,9 +1,9 @@
 <div class="banner-content">
-    <img class="img-thumbnail border-0 p-0 rounded-0 banner-background"  src="/file/{{$banner->banner_background}}">
+    <img class="img-thumbnail border-0 p-0 rounded-0 banner-background"  src="/file/{{$banner->banner_background ?? 0}}">
     <div class="banner-info">
         <div class="banner-caption text-secondary">
             <div class="banner-title">
-                <p>{{ $banner->banner_title }}</p>
+                <p>{{ $banner->banner_title ?? null }}</p>
             </div>
         </div>
         <div class="btn-register-free">

@@ -1,7 +1,5 @@
 <div class="modal fade modal-login" id="loginModal">
-
     <div class="modal-dialog modal-login-xl">
-
         <div class="modal-content modal-login-content">
             <div class="modal-header btn-close">
                 <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
@@ -94,11 +92,19 @@
                     url: "{{ route('site.userLogin') }}",
                     data: formData
                 }).done(function (data) {
+<<<<<<< HEAD
                     console.log(data);
                     if (data == 'incorrect') {
                         ToastLogin("Email or password incorrect");
                     } else {
                         location.reload()
+=======
+                    if(data.status == 200) {
+                        location.reload()
+                    }
+                    else {
+                        ToastLogin("Email or password incorrect");
+>>>>>>> refactor_code
                     }
                 })
             });

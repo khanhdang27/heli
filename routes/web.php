@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -30,7 +30,8 @@ Route::group(['middleware' => 'language'], function () {
         Route::post('login', 'Auth\LoginController@login')->name('userLogin');
 
         Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
-        Route::put('/reset-password', 'Auth\ChangePasswordController@update')->name('resetPassword');
+
+        Route::put('/reset-password', 'ChangePasswordController@update')->name('resetPassword');
 
         Route::get('news', function () {
             return view('news-page');
@@ -44,9 +45,9 @@ Route::group(['middleware' => 'language'], function () {
         //        return view('subject-page');
         //    })->name('subject');
 
-        Route::resource('subject', 'Site\SubjectController');
+        Route::resource('subject', 'SubjectController');
 
-        Route::get('get-subject-by-parent-id/{id}', 'Site\SubjectController@getSubjectByParentId')->name('get_subject_by_parent');
+        Route::get('get-subject-by-parent-id/{id}', 'SubjectController@getSubjectByParentId')->name('get_subject_by_parent');
 
         Route::resource('certificate', 'CertificateController');
 
@@ -142,7 +143,7 @@ Route::group(['middleware' => 'language'], function () {
             Route::resource('course', 'CourseController');
 
             Route::resource('course-material', 'CourseMaterialController');
-            // Route::get('course-material/1/edit', 'Admin\CourseMaterialController@edit')->name('course-material.edit');
+            // Route::get('course-material/1/edit', 'CourseMaterialController@edit')->name('course-material.edit');
 
             Route::resource('banner', 'BannerController');
 

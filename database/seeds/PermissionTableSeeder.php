@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionTableSeeder extends Seeder
 {
@@ -74,5 +75,18 @@ class PermissionTableSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
+
+        $roles = [
+            'moderator',
+            'tutor',
+            'student'
+        ];
+
+        foreach ($roles as $role) {
+            Role::create(['name' => $role]);
+        }
+
+        $superRole = Role::create(['name' => 'super-admin']);
+        $superRole->givePermissionTo(Permission::all());
     }
 }

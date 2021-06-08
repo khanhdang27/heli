@@ -26,7 +26,7 @@
                         <p>Phone:</p>
                     </td>
                     <td>
-                        <p class="text-primary">{{$student->phone_no}}</p>
+                        <p class="text-primary">{{$student->phone_no ?? null}}</p>
                     </td>
                 </tr>
                 <tr>
@@ -34,7 +34,7 @@
                         <p>Full name:</p>
                     </td>
                     <td>
-                        <p class="text-primary">{{$student->full_name}}</p>
+                        <p class="text-primary">{{$student->full_name ?? null}}</p>
                     </td>
                 </tr>
                 <tr>
@@ -42,7 +42,7 @@
                         <p>Date of birth:</p>
                     </td>
                     <td>
-                        <p class="text-primary">{{$student->day_of_birth}}</p>
+                        <p class="text-primary">{{$student->day_of_birth ?? null}}</p>
                     </td>
                 </tr>
             </table>

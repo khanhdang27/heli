@@ -60,7 +60,7 @@
                         <img src={{asset("images/ic/ic_user.svg")}} width="40">
                     </a>
                     <div class="dropdown-menu my-dropdown-menu language-item">
-                        <a class="dropdown-item" href="{{ route('site.profile.show', Auth::user()->id) }}">Profile</a>
+                        <a class="dropdown-item" href="{{ URL::route('site.profile.show', Auth::user()->id) }}">Profile</a>
                         <a class="dropdown-item" href="#">Settings</a>
                         <a class="dropdown-item" href="{{ URL::route('site.userLogout')}}">Log out</a>
                     </div>

@@ -55,7 +55,6 @@ class CommentController extends Controller
             $post->comment_no   =   $post->comment_no+1;
             $post->save();
         }
-
     }
 
     /**

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserLoginRequest;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Validator;
@@ -44,29 +44,22 @@ class LoginController extends Controller
 
     public function login(UserLoginRequest $request)
     {
-        if (\Auth::check()) {
-            if (\Auth::user()->isSuperAdmin() || \Auth::user()->isAdmin()) {
-                return redirect()->route('admin.dashboard');
-            } else {
-                return redirect()->route('site.home');
-            }
-        }
-
         if (Auth::attempt($request->validated())) {
-            return redirect()->route('site.home')->with('success', 'login successful!');
+            return response()->json([
+                'status' => 200,
+                'message' => 'success'
+            ], 200);
         }
-        return 'incorrect';
+        return response()->json([
+            'status' => 400,
+            'message' => 'fail'
+        ], 400);
 
     }
 
     public function logout(Request $request)
     {
-        if (\Auth::check()) {
-            \Auth::logout();
-            return redirect()->route('site.home');
-        } else {
-            \Auth::logout();
-            return redirect()->route('admin.login');
-        }
+        Auth::logout();
+        return redirect()->route('site.home');
     }
 }
