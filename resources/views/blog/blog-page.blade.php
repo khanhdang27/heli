@@ -1,11 +1,21 @@
+@php
+    use App\Utilities\SelectionByClass;
+@endphp
+
 @extends('layout.app')
 
 @section('title','Blog Page')
 
 @section('content')
-    @php
-    use App\Utilities\SelectionByClass;
-    @endphp
+
+
+    @if (empty($blog_top))
+        <div class="d-flex justify-content-center">
+            <H3>
+                No Data Fount
+            </H3>
+        </div>
+    @else
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.blog-page.learningColumn')
@@ -13,7 +23,7 @@
         <div class="container-fluid pt-5 pb-5">
             <div class="ml-auto mr-auto d-flex flex-wrap w-75">
                 @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
-                    <button class="btn-hashtag text-buttonTag ml-3 mr-3" type="button">
+                    <button class="btn-hashtag ml-3 mr-3" type="button">
                         {{ $value }}
                     </button>
                 @endforeach
@@ -28,21 +38,21 @@
                     <div class="popular-item ">
                         <div class="thumb-article d-flex flex-column justify-content-end position-relative">
                             <img class="main-photo img-thumbnail border-0 p-0 rounded-0"
-                                 src="{{Storage::url($blog_one->photo)}}">
+                                 src="{{Storage::url($blog_top->photo)}}">
                             <div class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
-                                <a href="{{route('site.view-blog',$blog_one->id)}}" class="title-article">
-                                    {{ $blog_one->title }}
+                                <a href="{{route('site.view-blog',$blog_top->id)}}" class="title-article">
+                                    {{ $blog_top->title }}
                                 </a>
                                 <div class="d-flex justify-content-between flex-wrap pb-3">
                                     <div class="d-flex">
                                         <p class="text-20 mr-5">
-                                            {{ substr($blog_one->created_at,0,10) }}
+                                            {{ substr($blog_top->created_at,0,10) }}
                                         </p>
-                                        <span class="text-20"><img src="{{asset("images/ic/ic_eye.svg")}}" width="26">{{ $blog_one->view_no }}</span>
+                                        <span class="text-20"><img src="{{asset("images/ic/ic_eye.svg")}}" width="26">{{ $blog_top->view_no }}</span>
                                     </div>
                                     <div class="d-flex">
-                                        @if(!empty($blog_one->tags))
-                                            @foreach($blog_one->tags as $tag)
+                                        @if(!empty($blog_top->tags))
+                                            @foreach($blog_top->tags as $tag)
                                                 <button class="btn-hashtag-small">
                                                     {{$tag->tag_name}}
 
@@ -62,6 +72,7 @@
                         <div class="popular-articles-item-image d-flex ">
                             <img class="img-thumbnail rounded-0 align-items-center" src="{{Storage::url($item->photo)}}" alt="Card image cap">
                         </div>
+
                         <div class="popular-articles-item-content">
                             <div class="card-body">
                                 <a href="{{route('site.view-blog',$item->id)}}" class="text-30">
@@ -74,7 +85,7 @@
                                 <p class="d-flex flex-wrap">
                                     @if(!empty($item->tags))
                                         @foreach($item->tags as $tag)
-                                            <button class="btn-hashtag text-buttonTag-small">
+                                            <button class="btn-hashtag text-12">
                                                 {{$tag->tag_name}}
 
                                             </button>
@@ -106,4 +117,5 @@
                 </button>
             </div>
         </div>
+    @endif
 @endsection

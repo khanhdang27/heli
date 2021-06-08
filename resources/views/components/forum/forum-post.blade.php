@@ -42,7 +42,7 @@
                 </button>
             </div>
             <p class="text-28 pt-2 ">
-                @if($post->block==0)
+                @if($post->block==1)
                     @lang('keywords.solved')
                 @else
                     @lang('keywords.waitingForAnswer')

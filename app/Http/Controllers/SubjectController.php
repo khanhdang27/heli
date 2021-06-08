@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\CreateSubjectRequest;
 use App\Models\Certificate;
-use App\Models\Tag;
+use App\Models\PostTag;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SubjectController extends Controller
 {
@@ -58,11 +60,16 @@ class SubjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Subject $subject
-     * @return View
+     * @param Subject $subject
+     * @return view
      */
     public function show(Subject $subject)
     {
+        $certificates = Certificate::all();
+        return view('subject.index', [
+            'subject' => $subject,
+            'certificate' => $certificates
+        ]);
     }
 
     /**
@@ -118,14 +125,28 @@ class SubjectController extends Controller
 
     public function destroy(Subject $subject)
     {
-
         $active = $subject->status;
-
         $subject->status = $active == 1 ? 0 : 0;
-
         $subject->save();
 
         return $subject->save();
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function getSubjectByParentId(Request $request, $id)
+    {
+        $certificate_id = $id;
+        if (!is_numeric($certificate_id)) {
+            $subject = Subject::getValues($certificate_id, true);
+        } else {
+            $subject = Subject::getValues($certificate_id);
+
+        }
+
+        return $subject;
     }
 
 }

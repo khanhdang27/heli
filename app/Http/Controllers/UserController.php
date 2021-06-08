@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateUserRequest;
-
+use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -18,16 +19,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $userRoles = DB::table('roles')
+        // $roleUsers = DB::table('roles')
         //     ->join('role_users', 'roles.id', '=', 'role_users.role_id')
         //     ->join('users', 'users.id', '=', 'role_users.user_id')
         //     ->where('role_id', '=', '2')
         //     ->paginate(20);
 
-        // $member = User::with('role')->where(['role_id'=> Role::$MEMBER_TYPE]);
-        // return view('admin.user.index', [
-        //     'userRoles' => $member
-        // ]);
+        $member = User::with('role')->where(['role_id'=> Role::$MEMBER_TYPE]);
+        return view('admin.user.index', [
+            'roleUsers' => $member
+        ]);
 
     }
 
@@ -49,13 +50,13 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        // $user = new User(
-        //     $request->validated()
-        // );
-        // $user->save();
-        // $userRole = new UserRole(['user_id' => $user->id, 'role_id' => '2']);
-        // $userRole->save();
-        // return back()->with('success', 'Delete success');
+        $user = new User(
+            $request->validated()
+        );
+        $user->save();
+        $roleUser = new RoleUser(['user_id' => $user->id, 'role_id' => '2']);
+        $roleUser->save();
+        return back()->with('success', 'Delete success');
     }
 
     /**

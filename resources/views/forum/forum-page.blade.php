@@ -12,7 +12,7 @@
         </div>
         <div class="container-fluid pt-5 pb-5">
             <div class="m-auto d-flex pl-5 flex-wrap w-75">
-                @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
+                @foreach(SelectionByClass::getValues(\App\Models\PostTag::class,'tag_name', 'id') as $key => $value)
                     <button class="btn-hashtag ml-3 mr-3" type="button">
                         {{ $value }}
                     </button>
@@ -24,7 +24,7 @@
                         {!! Form::open(['url' => URL::route('user.post.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group">
                             {{ Form::label('tag_id', 'Tag') }}
-                            {{ Form::select('tag_id', SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id'),null, ['class' => 'form-control']) }}
+                            {{ Form::select('tag_id', SelectionByClass::getValues(\App\Models\PostTag::class,'tag_name', 'id'),null, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('title', 'Title') }}

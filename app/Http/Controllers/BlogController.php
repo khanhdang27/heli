@@ -9,7 +9,6 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use Carbon\Carbon;
 
 class BlogController extends Controller
 {
@@ -69,10 +68,10 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $tag = Tag::where('id',$blog->tag_id)->first();
+        $postTag = Tag::where('id',$blog->tag_id)->first();
         return view('blog.blog-view', [
             'blog' => $blog,
-            'tag' => $tag,
+            'postTag' => $postTag,
         ]);
     }
 
@@ -120,15 +119,12 @@ class BlogController extends Controller
 
     public function showBlogPage()
     {
-        $week_start = Carbon::now()->startOfWeek();
-        $week_end = Carbon::now()->endOfWeek();
-        $blog_one = Blog::with('tags')->whereBetween('created_at', [$week_start, $week_end])->orderBy('view_no','desc')->first();
-
-        $blogs = Blog::with('tags')->whereBetween('created_at', [$week_start, $week_end])->orderBy('view_no','desc')->get();
+        $blog_top = Blog::with('tags')->orderBy('view_no','desc')->first();
+        $blogs = Blog::with('tags')->orderBy('view_no','desc')->get();
         $blog = Blog::with('tags')->orderBy('created_at','desc')->get();
 
         return view('blog.blog-page',[
-            'blog_one' => $blog_one,
+            'blog_top' => $blog_top,
             'blog' => $blog,
             'blogs' => $blogs
         ]);

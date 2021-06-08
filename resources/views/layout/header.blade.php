@@ -45,7 +45,7 @@
         </ul>
         <div class="login-bar d-flex ml-auto">
             @if(Auth::user())
-                <div class="text-header text-primary mr-3">
+                <div class="text-20 text-primary mr-3">
                     @lang('keywords.navBar.welcomeBack')<br>
                     {{Auth::user()->name}}
                 </div>

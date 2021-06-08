@@ -2,13 +2,11 @@
 
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Admin\SubjectController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Storage;
+
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,37 +21,6 @@ use Illuminate\Auth\Events\PasswordReset;
 
 Route::redirect('', 'site/', 301);
 
-
-Route::get('reset-password/{token}', function ($token) {
-    return view('auth.passwords.reset', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
-
-Route::post('reset-password', function (Request $request) {
-    $request->validate([
-        'token' => 'required',
-        'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
-    ]);
-
-    $status = Password::reset(
-        $request->only('email', 'password', 'password_confirmation', 'token'),
-        function ($user, $password) {
-            $user->forceFill([
-                'password' => Hash::make($password)
-            ])->setRememberToken(Str::random(60));
-
-            $user->save();
-
-            event(new PasswordReset($user));
-        }
-    );
-
-    return $status === Password::PASSWORD_RESET
-        ? redirect()->route('site')->with('status', __($status))
-        : back()->withErrors(['email' => [__($status)]]);
-})->middleware('guest')->name('passwords.update');
-
-
 Route::group(['middleware' => 'language'], function () {
     Route::prefix('site/')->name('site.')->group(function () {
         Route::get('', function () {
@@ -65,25 +32,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::post('login', 'Auth\LoginController@login')->name('userLogin');
 
         Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
-
-        Route::put('reset-password','Auth\ChangePasswordController@update')->name('resetPassword');
-
-        Route::get('forgot-password', function () {
-            return view('auth.forgot-password');
-        })->middleware('guest')->name('passwords.request');
-
-
-        Route::post('forgot-password', function (Request $request) {
-            $request->validate(['email' => 'required|email']);
-
-            $status = Password::sendResetLink(
-                $request->only('email')
-            );
-
-            return $status === Password::RESET_LINK_SENT
-                ? back()->with(['status' => __($status)])
-                : back()->withErrors(['email' => __($status)]);
-        })->middleware('guest')->name('passwords.email');
+        Route::put('/reset-password', 'Auth\ChangePasswordController@update')->name('resetPassword');
 
         Route::get('news', function () {
             return view('news-page');
@@ -121,34 +70,56 @@ Route::group(['middleware' => 'language'], function () {
             return view('blog.blog-view');
         })->name('blog-view');
 
-//        Route::get('forum', function () {
-//            return view('forum.forum-page');
-//        })->name('forum');
-        Route::get('show-blog','Admin\BlogController@showBlogPage')->name('show-blog');
-        Route::get('view-blog/{id}','Admin\BlogController@viewBlog')->name('view-blog');
+        //        Route::get('forum', function () {
+        //            return view('forum.forum-page');
+        //        })->name('forum');
+        Route::get('show-blog', 'Admin\BlogController@showBlogPage')->name('show-blog');
+        Route::get('view-blog/{id}', 'Admin\BlogController@viewBlog')->name('view-blog');
 
 
         Route::get('forumAnswer', function () {
             return view('forum.post-view');
         })->name('forumAnswers');
+
+
+        Route::get('/forgot-password', function () {
+            return view('login.forgot-password');
+        })->name('forgot-password');
+
+        Route::post('/forgot-password', function (Illuminate\Http\Request $request) {
+            // $random = Str::random(10);
+            // $request->validate(['email' => 'required|email']);
+            // $user = User::where('email', $request->get('email'))->first();
+            // $user->password = $random;
+
+            // $user->save();
+
+            // $send_mail = new \App\Mail\SendMail();
+            // $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.test_mail');
+            // \Mail::to($request->get('email'))->send($send_mail);
+        })->name('reset-password');
+
+        Route::middleware('auth')->group(function () {
+
+            Route::resource('post', 'PostController');
+            Route::resource('comment', 'CommentController');
+            Route::resource('user-like', 'UserLikeController');
+            Route::resource('profile', 'ProfileController');
+
+            Route::prefix('my/')->name('user.')->group(function () {
+
+                Route::get('course', function () {
+                    return view('course.my-course-page');
+                })->name('my-course');
+
+                Route::get('calendar', function () {
+                    return view('calendar-page');
+                })->name('calendar');
+            });
+        });
     });
+
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
-
-    Route::prefix('user/')->name('user.')->group(function () {
-        Route::get('my-course', function () {
-            return view('course.my-course-page');
-        })->name('my-course');
-        Route::get('calendar', function () {
-            return view('calendar-page');
-        })->name('calendar');
-        Route::put('/user/post/block/{id}', [PostController::class, 'blockPost'])
-            ->name('blockPost');
-
-        Route::resource('post', 'PostController');
-        Route::resource('comment', 'CommentController');
-        Route::resource('user-like', 'UserLikeController');
-        Route::resource('profile', 'ProfileController');
-    });
 
     Route::resource('file', 'FileController');
 
@@ -160,8 +131,6 @@ Route::group(['middleware' => 'language'], function () {
         Route::middleware('auth')->group(function () {
             Route::get('/', [LoginController::class, 'dashboard'])
                 ->name('dashboard');
-
-            Route::resource('roles', 'Admin\RoleController');
 
             Route::resource('certificate', 'Admin\CertificateController');
 
@@ -181,45 +150,43 @@ Route::group(['middleware' => 'language'], function () {
 
             Route::resource('user', 'Admin\UserController');
 
-            Route::resource('tag', 'Admin\TagController');
+            Route::resource('tag', 'Admin\TagsController');
 
-            Route::resource('post-tag', 'Admin\TagController');
+            Route::resource('post-tag', 'Admin\PostTagController');
 
             Route::resource('blog', 'Admin\BlogController');
-            Route::get('show-blog', 'Admin\BlogController@showBlogPage')->name('show-blog');
-            Route::get('view-blog', 'Admin\BlogController@viewBlog')->name('view-blog');
 
-            Route::get('course/{course}/video', [CourseController::class, 'videoList'])
-                ->name('course.video.index');
-            Route::get('course/{course}/video/create', [CourseController::class, 'createVideo'])
-                ->name('course.video.create');
-            Route::post('course/{course}/video', [CourseController::class, 'storeVideo'])
-                ->name('course.video.store');
-            Route::get('course/{course}/video/{course_video}/download', [CourseController::class, 'downloadVideo'])
-                ->name('course.video.download');
-            Route::get('course/{course}/video/{course_video}/edit', [CourseController::class, 'editVideo'])
-                ->name('course.video.edit');
 
-            Route::put('course/{course}/video/{course_video}', [CourseController::class, 'updateVideo'])
-                ->name('course.video.update');
+            // Route::get('course/{course}/video', [CourseController::class, 'videoList'])
+            //     ->name('course.video.index');
+            // Route::get('course/{course}/video/create', [CourseController::class, 'createVideo'])
+            //     ->name('course.video.create');
+            // Route::post('course/{course}/video', [CourseController::class, 'storeVideo'])
+            //     ->name('course.video.store');
+            // Route::get('course/{course}/video/{course_video}/download', [CourseController::class, 'downloadVideo'])
+            //     ->name('course.video.download');
+            // Route::get('course/{course}/video/{course_video}/edit', [CourseController::class, 'editVideo'])
+            //     ->name('course.video.edit');
 
-            Route::delete('course/{course}/video/{course_video}', [CourseController::class, 'destroyVideo'])
-                ->name('course.video.destroy');
+            // Route::put('course/{course}/video/{course_video}', [CourseController::class, 'updateVideo'])
+            //     ->name('course.video.update');
+
+            // Route::delete('course/{course}/video/{course_video}', [CourseController::class, 'destroyVideo'])
+            //     ->name('course.video.destroy');
         });
     });
 });
-
 // //Auth::routes();
 
 
 //Up videos
 
-// Route::get('put', function() {
+// Route::get('put', function () {
 //     Storage::cloud()->put('test.txt', 'Hello World');
 //     return 'File was saved to Google Drive';
 // });
 
-// Route::get('put-existing', function() {
+// Route::get('put-existing', function () {
 //     $filename = 'laravel.png';
 //     $filePath = public_path($filename);
 //     $fileData = File::get($filePath);
@@ -228,7 +195,7 @@ Route::group(['middleware' => 'language'], function () {
 //     return 'File was saved to Google Drive';
 // });
 
-// Route::get('list', function() {
+// Route::get('list', function () {
 //     $dir = '/';
 //     $recursive = false; // Get subdirectories also?
 //     $contents = collect(Storage::cloud()->listContents($dir, $recursive));
@@ -237,7 +204,7 @@ Route::group(['middleware' => 'language'], function () {
 //     return $contents->where('type', '=', 'file'); // files
 // });
 
-// Route::get('list-folder-contents', function() {
+// Route::get('list-folder-contents', function () {
 //     // The human readable folder name to get the contents of...
 //     // For simplicity, this folder is assumed to exist in the root directory.
 //     $folder = 'Test Dir';
@@ -250,7 +217,7 @@ Route::group(['middleware' => 'language'], function () {
 //         ->where('filename', '=', $folder)
 //         ->first(); // There could be duplicate directory names!
 
-//     if ( ! $dir) {
+//     if (!$dir) {
 //         return 'No such folder!';
 //     }
 
@@ -258,8 +225,8 @@ Route::group(['middleware' => 'language'], function () {
 //     $files = collect(Storage::cloud()->listContents($dir['path'], false))
 //         ->where('type', '=', 'file');
 
-//     return $files->mapWithKeys(function($file) {
-//         $filename = $file['filename'].'.'.$file['extension'];
+//     return $files->mapWithKeys(function ($file) {
+//         $filename = $file['filename'] . '.' . $file['extension'];
 //         $path = $file['path'];
 
 //         // Use the path to download each file via a generated link..
@@ -269,8 +236,8 @@ Route::group(['middleware' => 'language'], function () {
 //     });
 // });
 
-// Route::get('get', function() {
-//    // $filename = 'test.txt';
+// Route::get('get', function () {
+//     // $filename = 'test.txt';
 //     $path = '1keP4h_tsyB035qdE340mHfwNF5cJI6ow';
 
 //     $dir = '/';
@@ -292,7 +259,7 @@ Route::group(['middleware' => 'language'], function () {
 //         ->header('Content-Disposition', "attachment; filename='$filename'");
 // });
 
-// Route::get('put-get-stream', function() {
+// Route::get('put-get-stream', function () {
 //     // Use a stream to upload and download larger files
 //     // to avoid exceeding PHP's memory limit.
 
@@ -338,12 +305,12 @@ Route::group(['middleware' => 'language'], function () {
 //     ]);
 // });
 
-// Route::get('create-dir', function() {
+// Route::get('create-dir', function () {
 //     Storage::cloud()->makeDirectory('Test Dir');
 //     return 'Directory was created in Google Drive';
 // });
 
-// Route::get('create-sub-dir', function() {
+// Route::get('create-sub-dir', function () {
 //     // Create parent dir
 //     Storage::cloud()->makeDirectory('Test Dir');
 
@@ -356,17 +323,17 @@ Route::group(['middleware' => 'language'], function () {
 //         ->where('filename', '=', 'Test Dir')
 //         ->first(); // There could be duplicate directory names!
 
-//     if ( ! $dir) {
+//     if (!$dir) {
 //         return 'Directory does not exist!';
 //     }
 
 //     // Create sub dir
-//     Storage::cloud()->makeDirectory($dir['path'].'/Sub Dir');
+//     Storage::cloud()->makeDirectory($dir['path'] . '/Sub Dir');
 
 //     return 'Sub Directory was created in Google Drive';
 // });
 
-// Route::get('put-in-dir', function() {
+// Route::get('put-in-dir', function () {
 //     $dir = '/';
 //     $recursive = false; // Get subdirectories also?
 //     $contents = collect(Storage::cloud()->listContents($dir, $recursive));
@@ -375,16 +342,16 @@ Route::group(['middleware' => 'language'], function () {
 //         ->where('filename', '=', 'Test Dir')
 //         ->first(); // There could be duplicate directory names!
 
-//     if ( ! $dir) {
+//     if (!$dir) {
 //         return 'Directory does not exist!';
 //     }
 
-//     Storage::cloud()->put($dir['path'].'/test.txt', 'Hello World');
+//     Storage::cloud()->put($dir['path'] . '/test.txt', 'Hello World');
 
 //     return 'File was created in the sub directory in Google Drive';
 // });
 
-// Route::get('newest', function() {
+// Route::get('newest', function () {
 //     $filename = 'test.txt';
 
 //     Storage::cloud()->put($filename, \Carbon\Carbon::now()->toDateTimeString());
@@ -402,7 +369,7 @@ Route::group(['middleware' => 'language'], function () {
 //     return Storage::cloud()->get($file['path']);
 // });
 
-// Route::get('delete', function() {
+// Route::get('delete', function () {
 //     $filename = 'test.txt';
 
 //     // First we need to create a file to delete
@@ -424,7 +391,7 @@ Route::group(['middleware' => 'language'], function () {
 //     return 'File was deleted from Google Drive';
 // });
 
-// Route::get('delete-dir', function() {
+// Route::get('delete-dir', function () {
 //     $directoryName = 'test';
 
 //     // First we need to create a directory to delete
@@ -445,7 +412,7 @@ Route::group(['middleware' => 'language'], function () {
 //     return 'Directory was deleted from Google Drive';
 // });
 
-// Route::get('rename-dir', function() {
+// Route::get('rename-dir', function () {
 //     $directoryName = 'test';
 
 //     // First we need to create a directory to rename
@@ -466,7 +433,7 @@ Route::group(['middleware' => 'language'], function () {
 //     return 'Directory was renamed in Google Drive';
 // });
 
-// Route::get('share', function() {
+// Route::get('share', function () {
 //     $filename = 'test.txt';
 
 //     // Store a demo file
@@ -502,7 +469,3 @@ Route::group(['middleware' => 'language'], function () {
 
 //     return response($export->getBody(), 200, $export->getHeaders());
 // });
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

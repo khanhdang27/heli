@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTutorTeachSubjectTable extends Migration
+class CreatePostTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateTutorTeachSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('tutor_teach_subject', function (Blueprint $table) {
+        Schema::create('post_tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tutor_id')
-                ->constrained('tutors');
-            $table->foreignId('subject_id')
-                ->constrained('subjects');
+            $table->string('tag_name');
             $table->timestamps();
-            $table->unique(['tutor_id', 'subject_id']);
             $table->softDeletes();
         });
     }
@@ -32,6 +28,6 @@ class CreateTutorTeachSubjectTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tutor_teach_subject');
+        Schema::dropIfExists('post_tags');
     }
 }

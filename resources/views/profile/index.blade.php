@@ -47,7 +47,7 @@
                 </tr>
             </table>
             <div class="text-right">
-                <a href="{{ route('user.profile.edit',Auth::user()->id) }}" class="font-weight-bold">@lang('keywords.updateYourProfile')</a>
+                <a href="{{ route('user.profile.edit',Auth::user()->id) }}" class="font-weight-bold">Update your profile</a>
             </div>
         </div>
     </div>

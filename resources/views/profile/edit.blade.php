@@ -3,19 +3,19 @@
 @section('title','Blog Page')
 
 @section('content')
-    <hr class="mt-0 bg-secondary"/>
+    <hr class="mt-0"/>
     <div class="container mt-5 mb-5 pb-5">
-        <div class="card card-profile flex-row flex-wrap mx-auto pt-5 pb-5 pl-3 pr-3 mb-5">
-            <div class="w-auto">
+        <div class="card flex-row flex-nowrap mx-auto pt-5 pb-5 pl-3 pr-3 mb-5">
+            <div>
                 <img src="{{asset('images/user_default.png')}}">
                 <div class="p-3 d-flex justify-content-center align-items-center">
                     <img src="{{asset("images/ic/ic_search.svg")}}">
-                    <a href="#">@lang('keywords.uploadYourPhoto')</a>
+                    <a href="#">Edit your photo</a>
                 </div>
             </div>
-            <div class="w-auto">
+            <div class="w-100">
                 <div>
-                    <h2 class="text-center text-primary">@lang('keywords.updateYourProfile')</h2>
+                    <h2 class="text-center">Update your profile</h2>
                     {!! Form::open(['url' => URL::route('user.profile.update', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data']) !!}
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
@@ -62,6 +62,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
+
 
 
         </div>
