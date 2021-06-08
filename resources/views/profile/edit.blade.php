@@ -15,11 +15,7 @@
             </div>
             <div class="w-100">
                 <div>
-<<<<<<< HEAD
                     <h2 class="text-center text-primary">@lang('keywords.updateYourProfile')</h2>
-=======
-                    <h2 class="text-center">Update your profile</h2>
->>>>>>> refactor_code
                     {!! Form::open(['url' => URL::route('site.profile.update', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data']) !!}
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
