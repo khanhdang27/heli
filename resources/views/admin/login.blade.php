@@ -64,16 +64,13 @@
                     @enderror
 
                 </div>
-
                 <!-- Password -->
                 <div class="form-group">
 
                     <div class="row">
                         <div class="col">
-
                             <!-- Label -->
                             <label>Password</label>
-
                         </div>
                     </div> <!-- / .row -->
 
@@ -94,14 +91,11 @@
                     <span class="error text-danger">{{ $message }}</span>
                     @enderror
                 </div>
-
                 <!-- Submit -->
                 <button class="btn btn-lg btn-block btn-primary mb-3">
                     Sign in
                 </button>
-
             </form>
-
         </div>
     </div> <!-- / .row -->
 </div> <!-- / .container -->

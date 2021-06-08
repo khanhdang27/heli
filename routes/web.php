@@ -126,8 +126,10 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('login', [LoginController::class, 'login'])
             ->name('login');
         Route::post('login', [LoginController::class, 'actionLogin']);
+        Route::get('logout', [LoginController::class, 'logout'])
+                ->name('logout');
 
-        Route::middleware('auth')->group(function () {
+        Route::middleware('auth.admin')->group(function () {
             Route::get('/', [LoginController::class, 'dashboard'])
                 ->name('dashboard');
 
@@ -149,9 +151,7 @@ Route::group(['middleware' => 'language'], function () {
 
             Route::resource('user', 'UserController');
 
-            Route::resource('tag', 'TagsController');
-
-            Route::resource('post-tag', 'PostTagController');
+            Route::resource('tag', 'TagController');
 
             Route::resource('blog', 'BlogController');
 

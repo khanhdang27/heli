@@ -8,17 +8,15 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Q&A Tags
+                                    Tags
                                 </h4>
-
                             </div>
                             <div class="col-auto">
 
                                 <!-- Button -->
-                                <a href="{{ route('admin.post-tag.create') }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('admin.tag.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                          stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                          class="css-i6dzq1">
@@ -45,7 +43,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($postTags as $value)
+                                @foreach($tags as $value)
                                     <tr>
                                         <td class="goal-project">
                                             {{ $value->tag_name }}

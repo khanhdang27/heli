@@ -1,8 +1,10 @@
 <nav class="navbar navbar-expand-md navbar-light d-none d-md-flex" id="topbar">
     <div class="container-fluid">
         <form class="form-inline mr-4 d-none d-md-flex">
-            <div class="input-group input-group-flush input-group-merge" data-toggle="lists" data-options="{&quot;valueNames&quot;: [&quot;name&quot;]}">
-                <input type="search" class="form-control form-control-prepended dropdown-toggle search" data-toggle="dropdown" placeholder="Search" aria-label="Search" aria-expanded="false">
+            <div class="input-group input-group-flush input-group-merge" data-toggle="lists"
+                data-options="{&quot;valueNames&quot;: [&quot;name&quot;]}">
+                <input type="search" class="form-control form-control-prepended dropdown-toggle search"
+                    data-toggle="dropdown" placeholder="Search" aria-label="Search" aria-expanded="false">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <i class="fe fe-search"></i>
@@ -17,10 +19,11 @@
             <div class="dropdown mr-4 d-none d-md-flex">
 
                 <!-- Toggle -->
-                <a href="#" class="navbar-user-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="icon active">
-                    <i class="fe fe-bell"></i>
-                  </span>
+                <a href="#" class="navbar-user-link" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span class="icon active">
+                        <i class="fe fe-bell"></i>
+                    </span>
                 </a>
 
                 <!-- Menu -->
@@ -56,8 +59,8 @@
 
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg")}}" alt="..."
-                                                 class="avatar-img rounded-circle">
+                                            <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-1.jpg') }}"
+                                                alt="..." class="avatar-img rounded-circle">
                                         </div>
 
                                     </div>
@@ -66,7 +69,8 @@
                                         <!-- Content -->
                                         <div class="small text-muted">
                                             <strong class="text-body">Dianna Smiley</strong> shared your post with
-                                            <strong class="text-body">Ab Hadley</strong>, <strong class="text-body">Adolfo
+                                            <strong class="text-body">Ab Hadley</strong>, <strong
+                                                class="text-body">Adolfo
                                                 Hess</strong>, and <strong class="text-body">3 others</strong>.
                                         </div>
 
@@ -88,8 +92,8 @@
 
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-2.jpg")}}" alt="..."
-                                                 class="avatar-img rounded-circle">
+                                            <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-2.jpg') }}"
+                                                alt="..." class="avatar-img rounded-circle">
                                         </div>
 
                                     </div>
@@ -118,8 +122,8 @@
 
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-3.jpg")}}" alt="..."
-                                                 class="avatar-img rounded-circle">
+                                            <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-3.jpg') }}"
+                                                alt="..." class="avatar-img rounded-circle">
                                         </div>
 
                                     </div>
@@ -151,8 +155,8 @@
 
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-4.jpg")}}" alt="..."
-                                                 class="avatar-img rounded-circle">
+                                            <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-4.jpg') }}"
+                                                alt="..." class="avatar-img rounded-circle">
                                         </div>
 
                                     </div>
@@ -181,8 +185,8 @@
 
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-5.jpg")}}" alt="..."
-                                                 class="avatar-img rounded-circle">
+                                            <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-5.jpg') }}"
+                                                alt="..." class="avatar-img rounded-circle">
                                         </div>
 
                                     </div>
@@ -213,8 +217,8 @@
 
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-6.jpg")}}" alt="..."
-                                                 class="avatar-img rounded-circle">
+                                            <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-6.jpg') }}"
+                                                alt="..." class="avatar-img rounded-circle">
                                         </div>
 
                                     </div>
@@ -243,8 +247,8 @@
 
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-7.jpg")}}" alt="..."
-                                                 class="avatar-img rounded-circle">
+                                            <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-7.jpg') }}"
+                                                alt="..." class="avatar-img rounded-circle">
                                         </div>
 
                                     </div>
@@ -276,8 +280,8 @@
 
                                         <!-- Avatar -->
                                         <div class="avatar avatar-sm">
-                                            <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-8.jpg")}}" alt="..."
-                                                 class="avatar-img rounded-circle">
+                                            <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-8.jpg') }}"
+                                                alt="..." class="avatar-img rounded-circle">
                                         </div>
 
                                     </div>
@@ -310,9 +314,9 @@
 
                 <!-- Toggle -->
                 <a href="#" class="avatar avatar-sm avatar-online dropdown-toggle" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg")}}" alt="..."
-                         class="avatar-img rounded-circle">
+                    aria-haspopup="true" aria-expanded="false">
+                    <img src="{{ asset('cpanel/assets/img/avatars/profiles/avatar-1.jpg') }}" alt="..."
+                        class="avatar-img rounded-circle">
                 </a>
 
                 <!-- Menu -->
@@ -320,7 +324,7 @@
                     <a href="profile-posts.html" class="dropdown-item">Profile</a>
                     <a href="settings.html" class="dropdown-item">Settings</a>
                     <hr class="dropdown-divider">
-                    <a href="{{ URL::route('site.userLogout') }}" class="dropdown-item">Logout</a>
+                    <a href="{{ URL::route('admin.logout') }}" class="dropdown-item">Logout</a>
                 </div>
 
             </div>

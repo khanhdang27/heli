@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\MaterialTranslation
@@ -30,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CourseMaterialTranslation extends Model
 {
+    use SoftDeletes;
     protected $guarded = [];
     protected $table = 'course_material_translations';
 }

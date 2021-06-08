@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Banner
@@ -23,8 +24,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Banner extends Model
 {
+    use SoftDeletes;
     protected $table = 'banners';
     protected $guarded = [];
 
     public $timestamps = TRUE;
+
 }
