@@ -86,24 +86,24 @@ class ProfileController extends Controller
         $input = $request->all();
         $user_id = Auth::user()->id;
         $user = User::whereId($user_id)->first();
-        if(Auth::user()->isMember()){
+        if(Auth::user()->hasRole('student')){
             $student = Student::where('user_id', $user_id)->first();
             $student->update(
                 ['user_id'=>$user_id, 'full_name'=>$input['full_name'], 'day_of_birth'=>$input['day_of_birth'],'phone_no'=>$input['phone_no']]
             );
             $student->save();
         }
-        elseif(Auth::user()->isTutor()){
+        elseif(Auth::user()->hasRole('tutor')){
             $tutor = Tutor::where('user_id', $user_id)->first();
             $tutor->update(
                 ['user_id'=>$user_id, 'full_name'=>$input['full_name'], 'day_of_birth'=>$input['day_of_birth'],'phone_no'=>$input['phone_no']]
             );
-             $tutor->save();
+            $tutor->save();
         }
 
         $user->name = $input['name'];
         $user->save();
-        return redirect(route('user.profile.show', $user_id));
+        // return redirect(route('site.profile.show', $user_id));
 
     }
 

@@ -47,10 +47,8 @@
                                 <h4 class="card-header-title">
                                     Tutors
                                 </h4>
-
                             </div>
                             <div class="col-auto">
-
                                 <!-- Button -->
                                 <a href="{{ route('admin.tutor.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
@@ -62,7 +60,6 @@
                                     </svg>
                                     Add
                                 </a>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>

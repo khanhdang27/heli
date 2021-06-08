@@ -21,16 +21,16 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open([
-                                'route' => 'admin.banner.store',
-                                'enctype'=>'multipart/form-data',
-                                'class'=>'dropzone',
-                                'id'=>"uploadFile"
-                            ])  !!}
-                            @csrf
-                            <div class="dz-message">
-                                Drag 'n' Drop Files<br>
+                            {!! Form::open(['url' => URL::route('admin.banner.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
+                            <div class="form-group ">
+                                {{ Form::label('banner_title', 'Banner title') }}
+                                {{ Form::text('banner_title', old('banner_title'),['class' => 'form-control'] ) }}
                             </div>
+                            <div class="custom-file ">
+                                {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
+                                {{ Form::file('file',['class' => 'custom-file-input']) }}
+                            </div>
+                            {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>
                         <div id="editor">
@@ -42,6 +42,14 @@
             </div>
         </div>
     </div>
-
+    @push('inputFile')
+        <script>
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    @endpush
 @endsection
 

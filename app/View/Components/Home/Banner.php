@@ -6,15 +6,15 @@ use Illuminate\View\Component;
 
 class Banner extends Component
 {
-    private $_static;
+    public $banner;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($static)
+    public function __construct($banner)
     {
-        $this->_static = $static;
+        $this->banner = $banner;
     }
 
     /**
@@ -24,6 +24,8 @@ class Banner extends Component
      */
     public function render()
     {
-        return view('components.home.banner', ['static' => $this->_static]);
+        return view('components.home.banner', [
+            'banner' => $this->banner
+        ]);
     }
 }

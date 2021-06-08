@@ -1,7 +1,5 @@
 <div class="modal fade modal-login" id="loginModal">
-
     <div class="modal-dialog modal-login-xl">
-
         <div class="modal-content modal-login-content">
             <div class="modal-header btn-close">
                 <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
@@ -94,12 +92,11 @@
                     url: "{{ route('site.userLogin') }}",
                     data: formData
                 }).done(function (data) {
-                    console.log(data);
-                    if(data == 'incorrect') {
-                        ToastLogin("Email or password incorrect");
+                    if(data.status == 200) {
+                        location.reload()
                     }
                     else {
-                        location.reload()
+                        ToastLogin("Email or password incorrect");
                     }
                 })
             });
@@ -107,20 +104,22 @@
 
         function ToastLogin(content, status) {
             var color = '#fff';
-            if(status == 'warning'){
+            if (status == 'warning') {
                 color = '#ffc107';
-            }else if(status == 'error'){
+            } else if (status == 'error') {
                 color = '#dc3545';
             }
             var snackbar = document.getElementById("snackbarLogin");
             var contentToastLogin = document.getElementById("contentToastLogin");
 
             contentToastLogin.innerHTML = content;
-            contentToastLogin.style.color= 'red';
+            contentToastLogin.style.color = 'red';
             snackbar.style.backgroundColor = color;
             snackbar.className = "show";
 
-            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+            setTimeout(function () {
+                snackbar.className = snackbar.className.replace("show", "");
+            }, 3000);
         }
     </script>
 @endpush

@@ -18,9 +18,9 @@ class CreateStudentTable extends Migration
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->string('full_name');
-            $table->date('day_of_birth');
-            $table->string('phone_no');
+            $table->string('full_name')->nullable();
+            $table->date('day_of_birth')->nullable();
+            $table->string('phone_no')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

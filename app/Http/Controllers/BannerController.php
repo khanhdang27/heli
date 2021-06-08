@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Banner\CreateBannerRequest;
@@ -42,8 +42,12 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $banner = new Banner();
-//        $banner->banner_id;
+        $fileController = new FileController();
+        $file_id = $fileController->store($request);
+        $banner = Banner::create([
+            'banner_title' => $request->input('banner_title'),
+            'banner_background' => $file_id
+        ]);
         $banner->save();
         return back()->with('success', 'Delete success');
     }
@@ -52,7 +56,7 @@ class BannerController extends Controller
      * Display the specified resource.
      *
      * @param \App\Models\Banner $banner
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function show(Banner $banner)
     {

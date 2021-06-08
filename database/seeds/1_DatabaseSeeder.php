@@ -13,10 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create([
+        $super_admin = User::create([
             'name' => 'Super admin',
             'email' => 'admin@gmail.com',
             'password' => '123123',
         ]);
+
+        $super_admin->assignRole(['super-admin']);
+        $super_admin->save();
     }
 }

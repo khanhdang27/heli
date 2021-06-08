@@ -10,43 +10,41 @@
                 <img src="{{asset('images/user_default.png')}}">
                 <div class="p-3 d-flex justify-content-center align-items-center">
                     <img src="{{asset("images/ic/ic_search.svg")}}">
-                    <a href="#">Edit your photo</a>
+                    <a href="#">@lang('keywords.uploadYourPhoto')</a>
                 </div>
             </div>
             <div class="w-100">
                 <div>
-                    <h2 class="text-center">Update your profile</h2>
-                    {!! Form::open(['url' => URL::route('user.profile.update', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data']) !!}
+                    <h2 class="text-center text-primary">@lang('keywords.updateYourProfile')</h2>
+                    {!! Form::open(['url' => URL::route('site.profile.update', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data']) !!}
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
                         {{Form::text('name',Auth::user()->name, ['class'=>'form-control'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('full_name', 'Full Name')}}
-                        {{Form::text('full_name',$student->full_name, ['class'=>'form-control'])}}
+                        {{Form::text('full_name',$student->full_name ?? null, ['class'=>'form-control'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('day_of_birth', 'Date of birth')}}
-                        {{ Form::date('day_of_birth', $student->day_of_birth, ['class' => 'form-control']) }}
+                        {{ Form::date('day_of_birth', $student->day_of_birth ?? null, ['class' => 'form-control']) }}
                     </div>
                     <div class="form-group">
                         {{Form::label('phone_no', 'Phone')}}
-                        {{Form::text('phone_no',$student->phone_no, ['class'=>'form-control'])}}
+                        {{Form::text('phone_no',$student->phone_no ?? null, ['class'=>'form-control'])}}
                     </div>
                     <div class="d-flex">
                         {{ Form::submit('Save', ['class'=>'btn btn-primary ml-auto mt-3']) }}
                     </div>
-
                     {!! Form::close() !!}
-
                 </div>
                 <hr class="mt-5"/>
                 <div class="mt-5">
-                    <h2 class="text-center">Change password</h2>
+                    <h2 class="text-center text-primary">@lang('keywords.changePassword')</h2>
                     {!! Form::open(['url' => URL::route('site.resetPassword', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data' ]) !!}
                     <div class="form-group">
                         {{Form::label('old_password', 'Old Password')}}
-                        {{Form::text('old_password',null, ['class'=>'form-control','autocomplete'=>'off'])}}
+                        {{Form::password('old_password', ['class'=>'form-control','autocomplete'=>'off'])}}
                     </div>
                     <div class="form-group">
                         {{Form::label('password', 'New password')}}
@@ -62,11 +60,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-
-
-
         </div>
-
     </div>
 @endsection
 

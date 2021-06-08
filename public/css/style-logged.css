@@ -29,7 +29,6 @@
     margin-left: 5rem;
 
 }
-
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
 .content-team-page {
     max-width: 1614px;
@@ -318,7 +317,10 @@
     color: #fff;
     font-weight: 600;
 }
-
+.title-article:hover{
+    text-decoration: none;
+    color: var(--secondary);
+}
 .text-12 {
     font-size: 9pt;
 }

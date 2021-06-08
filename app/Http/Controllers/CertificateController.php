@@ -1,45 +1,52 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
-
+use App\Http\Requests\Certificate\CreateCertificateRequest;
 
 class CertificateController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
-        //
+        $certificates = Certificate::all();
+        return view('admin.certificate.index',[
+            'certificates' => $certificates
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
-        //
+        return view('admin.certificate.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  CreateCertificateRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateCertificateRequest $request)
     {
-        //
+        $certificate = new Certificate(
+            $request->validated()
+        );
+        $certificate->save();
+        return back()->with('success', 'Create success');
     }
+
 
     /**
      * Display the specified resource.
@@ -55,34 +62,42 @@ class CertificateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Certificate  $certificate
+     * @return View
      */
-    public function edit($id)
+    public function edit(Certificate $certificate)
     {
-        //
+        return view('admin.certificate.edit',[
+            'certificate' => $certificate
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  CreateCertificateRequest  $request
+     * @param  Certificate  $certificate
+     * @return \Illuminate\Http\RedirectResponse
+     *
      */
-    public function update(Request $request, $id)
+    public function update(CreateCertificateRequest $request, Certificate $certificate)
     {
-        //
+        $certificate->update(
+            $request->validated()
+        );
+        return redirect()->route('admin.certificate.index')
+            ->with('success', 'update success');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Certificate $certificate)
     {
         //
     }
+
 }

@@ -78,11 +78,11 @@
                     data: formData
                 }).done(function (data) {
                     console.log(data)
-                    if (data == 0) {
-                        Toast("Please enter email!");
-                    } else {
-                        Toast("Register Successed");
-                    }
+                    // if (data == 0) {
+                    //     Toast("Please enter email!");
+                    // } else {
+                    //     Toast("Register Successed");
+                    // }
                 });
             });
         });

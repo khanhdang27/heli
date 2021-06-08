@@ -1,32 +1,4 @@
-<?php
-$productList = [
-    'item_1' => ['subject' => '英文',
-        'subtitle' => '海外升學全攻略 英國篇',
-        'description' => '英國升學需知',
-        'courseName' => 'IGCSE 實時直播課程 英⽂課程 第⼀部分講解',
-        'tutor' => 'Ms. Polly Leung',
-        'price' => '$1500'],
-    'item_2' => ['subject' => '英文',
-        'subtitle' => '海外升學全攻略 英國篇',
-        'description' => '英國升學需知',
-        'courseName' => 'IGCSE 實時直播課程 英⽂課程 第⼀部分講解',
-        'tutor' => 'Ms. Polly Leung',
-        'price' => '$1200'],
-    'item_3' => ['subject' => '英文',
-        'subtitle' => '海外升學全攻略 英國篇',
-        'description' => '英國升學需知',
-        'courseName' => 'IGCSE 實時直播課程 英⽂課程 第⼀部分講解',
-        'tutor' => 'Ms. Polly Leung',
-        'price' => '$1200'],
-    'item_4' => ['subject' => '英文',
-        'subtitle' => '海外升學全攻略 英國篇',
-        'description' => '英國升學需知',
-        'courseName' => 'IGCSE 實時直播課程 英⽂課程 第⼀部分講解',
-        'tutor' => 'Ms. Polly Leung',
-        'price' => '$1200'],
-]
-?>
-<div class="container-fluid container-product">
+<div class="mx-auto container-product">
     <!-- Nav pills -->
     <ul class="nav nav-pills menu-category" role="tablist">
         <li class="nav-item">
@@ -81,22 +53,7 @@ $productList = [
                 <div class="heading-title text-primary" id="tab-title">
                     @lang('keywords.hotCourseSeries')
                 </div>
-                <div class="d-flex flex-wrap">
-                    @foreach($productList as $item)
-                        <div class="pr-3">
-                            <a class="product-hover" href="{{URL::route('site.course')}}">
-                                <x-product.product-box
-                                    subject="{{$item['subject']}}"
-                                    subtitle="{{$item['subtitle']}}"
-                                    description="{{$item['description']}}"
-                                    courseName="{{$item['courseName']}}"
-                                    tutor="{{$item['tutor']}}"
-                                    price="{{$item['price']}}">
-                                </x-product.product-box>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
+                <x-product.course></x-product.course>
             </div>
         </div>
         <div id="menu1" class="container-fluid tab-pane fade"><br>
@@ -104,22 +61,7 @@ $productList = [
                 <div class="heading-title text-primary" id="tab-title">
                     @lang('keywords.hotCourseSeries')
                 </div>
-                <div class="d-flex flex-wrap">
-                    @foreach($productList as $item)
-                        <div class="pr-3">
-                            <a class="product-hover" href="{{URL::route('site.course')}}">
-                                <x-product.product-box
-                                    subject="{{$item['subject']}}"
-                                    subtitle="{{$item['subtitle']}}"
-                                    description="{{$item['description']}}"
-                                    courseName="{{$item['courseName']}}"
-                                    tutor="{{$item['tutor']}}"
-                                    price="{{$item['price']}}">
-                                </x-product.product-box>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
+                <x-product.course></x-product.course>
             </div>
         </div>
         <div id="menu2" class="container-fluid tab-pane fade"><br>
@@ -127,22 +69,7 @@ $productList = [
                 <div class="heading-title text-primary" id="tab-title">
                     @lang('keywords.hotCourseSeries')
                 </div>
-                <div class="d-flex flex-wrap">
-                    @foreach($productList as $item)
-                        <div class="pr-3">
-                            <a class="product-hover" href="{{URL::route('site.course')}}">
-                                <x-product.product-box
-                                    subject="{{$item['subject']}}"
-                                    subtitle="{{$item['subtitle']}}"
-                                    description="{{$item['description']}}"
-                                    courseName="{{$item['courseName']}}"
-                                    tutor="{{$item['tutor']}}"
-                                    price="{{$item['price']}}">
-                                </x-product.product-box>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
+                <x-product.course></x-product.course>
             </div>
         </div>
         <div id="menu3" class="container-fluid tab-pane fade"><br>
@@ -150,22 +77,7 @@ $productList = [
                 <div class="heading-title text-primary" id="tab-title">
                     @lang('keywords.hotCourseSeries')
                 </div>
-                <div class="d-flex flex-wrap">
-                    @foreach($productList as $item)
-                        <div class="pr-3">
-                            <a class="product-hover" href="{{URL::route('site.course')}}">
-                                <x-product.product-box
-                                    subject="{{$item['subject']}}"
-                                    subtitle="{{$item['subtitle']}}"
-                                    description="{{$item['description']}}"
-                                    courseName="{{$item['courseName']}}"
-                                    tutor="{{$item['tutor']}}"
-                                    price="{{$item['price']}}">
-                                </x-product.product-box>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
+                <x-product.course></x-product.course>
             </div>
         </div>
     </div>

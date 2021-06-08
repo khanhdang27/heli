@@ -68,10 +68,8 @@ class RegisterController extends Controller
             $array = explode('@', $input['email']);
             $name = reset($array);
             $user = new User(['name' => $name, 'email' => $input['email'], 'password' => $random]);
+            $user->assignRole(['student']);
             $user->save();
-
-            $roleUser = new RoleUser(['user_id' => $user->id, 'role_id' => '3']);
-            $roleUser->save();
 
             $student = new Student(['user_id' => $user->id]);
             $student->save();

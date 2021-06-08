@@ -39,6 +39,7 @@ return [
     ],
     'registerNowToExperience' => 'Register now to experience',
     'registerNowFree' => 'Register Now For Free',
+    'tryItNow' => 'Try it now',
     'discountProduct' => 'Latest Discount Courses',
     'welcomeOffer' => 'Welcome Offer',
     'hotCourseSeries' => 'Hot Course Series',
@@ -79,5 +80,17 @@ return [
     'otherPurchasedCourses' => 'Other purchased courses',
     'continueMyCourse' => 'Continue my course...',
     'solved' => 'Solved',
-    'waitingForAnswer' => 'Waiting for answer'
+    'waitingForAnswer' => 'Waiting for answer',
+    'updateYourProfile' => 'Update your profile',
+    'uploadYourPhoto' => 'Upload your photo',
+    'changePassword' => 'Change Password',
+    'step-register' => [
+        'onlineRegistration' => 'Online registration',
+        'enjoyNewUserDiscount' => 'Enjoy new user discount',
+        'experienceNow' => 'Experience now',
+        'fillInformation' => 'Fill in the simple information to complete the registration',
+        'tryLiveClass' => 'Try live/live class at a discounted price, And receive a free course worth $600',
+        'brainExperienceCourse' => 'Use your mobile phone, tablet or phone anytime, anywhere Brain experience course!'
+    ],
+    'freeTrialClass' => 'Free trial class; experience courses online courses and real-time courses for you to choose'
 ];
