@@ -75,6 +75,8 @@ class RegisterController extends Controller
             $student = new Student(['user_id' => $user->id]);
             $student->save();
 
+            $stripeCustomer = $user->createAsStripeCustomer(['email'=>$input['email']]);
+
             $send_mail = new \App\Mail\SendMail();
             $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.mail');
             Mail::to($input['email'])->send($send_mail);

@@ -1,134 +1,65 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-
-    <!-- Libs CSS -->
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/fonts/feather/feather.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/flatpickr/dist/flatpickr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/quill/dist/quill.core.css') }}">
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/select2/dist/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/highlight.js/styles/vs2015.css') }}">
-
-    <!-- Map -->
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
-
-    <!-- Theme CSS -->
-
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme.min.css') }}" id="stylesheetLight">
-
-    <link rel="stylesheet" href=" {{ asset('cpanel/assets/css/theme-dark.min.css') }}" id="stylesheetDark">
-
-    <style>
-        body {
-            display: none;
-        }
-
-    </style>
-
-
-    <title>Helios</title>
-</head>
-
-<body class="d-flex align-items-center bg-auth border-top border-top-2 border-primary">
-
-    <!-- CONTENT
-================================================== -->
+@section('content')
+<div class="d-flex align-items-center bg-auth">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-5 col-xl-4 my-5">
+            <div class="col-12 col-md-8 col-xl-6 my-5">
 
                 <!-- Heading -->
                 <h1 class="display-4 text-center mb-3">
                     Sign in
                 </h1>
-
-                <!-- Subheading -->
-                <p class="text-muted text-center mb-5">
-                    Free access to our dashboard.
-                </p>
-
                 <!-- Form -->
                 <form action="" method="post">
                     @csrf
-
-                    <!-- Email address -->
                     <div class="form-group">
+                        <label for="email">{{ __('E-Mail Address') }}</label>
 
-                        <!-- Label -->
-                        <label>Email Address</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                        <!-- Input -->
-                        <input type="email" class="form-control" placeholder="name@address.com" name="email">
-                        @error('email')
-                            <span class="error text-danger">{{ $message }}</span>
-                        @enderror
-
-                    </div>
-                    <!-- Password -->
-                    <div class="form-group">
-
-                        <div class="row">
-                            <div class="col">
-                                <!-- Label -->
-                                <label>Password</label>
-                            </div>
-                        </div> <!-- / .row -->
-
-                        <!-- Input group -->
-                        <div class="input-group input-group-merge">
-
-                            <!-- Input -->
-                            <input type="password" class="form-control form-control-appended" name="password"
-                                placeholder="Enter your password">
-                            <!-- Icon -->
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <i class="fe fe-eye toggle-password" toggle="#password-field"></i>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
                                 </span>
+                            @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="password">{{ __('Password') }}</label>
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-block btn-primary mb-3">
+                            {{ __('Login') }}
+                        </button>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <a class="btn btn-link" href="#">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                <label class="form-check-label" for="remember">
+                                    {{ __('Remember Me') }}
+                                </label>
                             </div>
                         </div>
-                        @error('password')
-                            <span class="error text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
-                    <!-- Submit -->
-                    <button class="btn btn-lg btn-block btn-primary mb-3">
-                        Sign in
-                    </button>
                 </form>
             </div>
-        </div> <!-- / .row -->
-    </div> <!-- / .container -->
+        </div>
+    </div>
+</div>
 
-    <!-- JAVASCRIPT ================================================== -->
-   
-    <!-- Libs JS -->
-    <script src="{{ asset('cpanel/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-    <script src="{{ asset('cpanel/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('cpanel/assets/libs/autosize/dist/autosize.min.js') }}"></script>
-
-
-    <!-- Theme JS -->
-    <script src="{{ asset('cpanel/assets/js/theme.min.js') }}"></script>
-
-    <script>
-        $(".toggle-password").click(function() {
-            console.log("adsfasdf")
-            $(this).toggleClass("fa-eye fa-eye-slash");
-            var input = $($(this).attr("toggle"));
-            if (input.attr("type") == "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
-            }
-        });
-    </script>
-
-
-</body>
-
-</html>
+@endsection

@@ -155,6 +155,7 @@ Route::group(['middleware' => 'language'], function () {
 
             Route::resource('blog', 'BlogController');
 
+            Route::resource('roles', 'RoleController');
 
             // Route::get('course/{course}/video', [CourseController::class, 'videoList'])
             //     ->name('course.video.index');
