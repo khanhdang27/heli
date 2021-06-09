@@ -67,7 +67,7 @@ return [
         'courseFrequency' => 'Course frequency',
         'myCourses' => 'My Courses',
         'registerNow' => 'Register Now',
-        'addToCart' => 'Add To Shopping Cart'
+        'buyNow' => 'Buy Now'
     ],
     'blog-page' => [
         'learningColumn' => 'Learning Column',
@@ -92,5 +92,6 @@ return [
         'tryLiveClass' => 'Try live/live class at a discounted price, And receive a free course worth $600',
         'brainExperienceCourse' => 'Use your mobile phone, tablet or phone anytime, anywhere Brain experience course!'
     ],
-    'freeTrialClass' => 'Free trial class; experience courses online courses and real-time courses for you to choose'
+    'freeTrialClass' => 'Free trial class; experience courses online courses and real-time courses for you to choose',
+    'section' => 'Section'
 ];

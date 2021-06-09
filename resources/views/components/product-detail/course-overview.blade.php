@@ -16,37 +16,32 @@ $descrition = <<<STRING
     <p>    只傳授你 DSE 需考的英文</p>
     <p>    雖然 75 分鐘內未必提升到你嘅英文水平，但絕對可以令你 DSE 英文大幅進步。花大量時間溫同考試無關嘅英文 ? 不如集中提升自己嘅「DSE 英文能力」!</p>
 STRING;
-
-$requirements = [
-    '全面 Paper 1 考評分析',
-    '絕密 Reading Skills',
-    '最強 5** 考評用字'
-];
-
-$documentTitle = 'Paper 1 精讀秘笈';
-
-$author = "Ms. Polly Yeung 親自撰寫";
-
 ?>
 
 <div class="tab-item-content">
     <div class="pb-5 text-intro text-primary">
         {!! $descrition !!}
     </div>
+{{--    {{dd($courseDetail)}}}--}}
     <div class="pt-5 note-package">
-        <div class="title text-primary">@lang('keywords.coursePage.notePackage')</div>
-        <div class="mt-5">
-            <img class="responsive" height="485" src="{{ asset("images/book.jpg")}}">
+        <div class="title text-primary">
+            @lang('keywords.coursePage.notePackage')
         </div>
-        <div class="text-primary bottom-package">
-            <p class="pb-3">** {{$author}}</p>
+        <div class="row">
+            @foreach($courseDetail->courseMaterial as $documentItem)
+                <div class="col-sm-6">
+                    <div class="mt-5">
+                        <img class="border-0 p-0 document-image" height="430" src="{{ asset("images/book.jpg")}}">
+                    </div>
+                    <div class="text-primary bottom-package w-75 mb-3">
+                        <p class="pb-3">** {{$documentItem->course_material_origin}}</p>
 
-            {{$documentTitle}}
-            <ol>
-                @foreach($requirements as $require)
-                    <li>{{$require}}</li>
-                @endforeach
-            </ol>
+                        <p>{{$documentItem->course_material_name}}</p>
+                        {{$documentItem->course_material_description}}
+                    </div>
+                </div>
+            @endforeach
         </div>
+
     </div>
 </div>

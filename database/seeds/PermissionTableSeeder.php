@@ -28,6 +28,7 @@ class PermissionTableSeeder extends Seeder
             'student-create',
             'student-edit',
             'student-delete',
+            'student-bought',
 
             'news-list',
             'news-create',

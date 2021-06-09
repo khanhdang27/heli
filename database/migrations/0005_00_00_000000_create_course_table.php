@@ -22,8 +22,7 @@ class CreateCourseTable extends Migration
             $table->foreignId('tutor_id')
                 ->constrained('tutors')
                 ->cascadeOnDelete();
-            $table->string('course_price');
-            $table->string('course_discount');
+            $table->double('course_price');
             $table->softDeletes();
             $table->timestamps();
         });

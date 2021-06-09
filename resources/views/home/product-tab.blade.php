@@ -1,6 +1,6 @@
 <div class="mx-auto container-product">
     <!-- Nav pills -->
-    <ul class="nav nav-pills menu-category" role="tablist">
+    <ul class="nav nav-pills menu-category mb-5" role="tablist">
         <li class="nav-item">
             <a class="nav-link active category-link" data-toggle="pill" href="#home">
                 <img class="menu-img" src="{{asset("images/IGCSE_cover.jpg")}}">
@@ -53,7 +53,7 @@
                 <div class="heading-title text-primary" id="tab-title">
                     @lang('keywords.hotCourseSeries')
                 </div>
-                <x-product.course></x-product.course>
+{{--                <x-product.course-list></x-product.course-list>--}}
             </div>
         </div>
         <div id="menu1" class="container-fluid tab-pane fade"><br>
@@ -61,7 +61,7 @@
                 <div class="heading-title text-primary" id="tab-title">
                     @lang('keywords.hotCourseSeries')
                 </div>
-                <x-product.course></x-product.course>
+{{--                <x-product.course-list></x-product.course-list>--}}
             </div>
         </div>
         <div id="menu2" class="container-fluid tab-pane fade"><br>
@@ -69,7 +69,7 @@
                 <div class="heading-title text-primary" id="tab-title">
                     @lang('keywords.hotCourseSeries')
                 </div>
-                <x-product.course></x-product.course>
+{{--                <x-product.course-list></x-product.course-list>--}}
             </div>
         </div>
         <div id="menu3" class="container-fluid tab-pane fade"><br>
@@ -77,7 +77,7 @@
                 <div class="heading-title text-primary" id="tab-title">
                     @lang('keywords.hotCourseSeries')
                 </div>
-                <x-product.course></x-product.course>
+{{--                <x-product.course-list></x-product.course-list>--}}
             </div>
         </div>
     </div>

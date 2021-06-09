@@ -2,11 +2,11 @@
     <div class="row">
         <div class="col-sm">
             <div>
-                <img class="ava-responsive" height="514" src="{{ asset($tutor_photo) }}">
+                <img class="ava-responsive" height="514" src="{{ asset("images/ava.jpg") }}">
             </div>
         </div>
         <div class="col-sm d-flex flex-column justify-content-end">
-            <div class="name-tutor text-primary">{{ $tutor_name }}</div>
+            <div class="name-tutor text-primary">{{ $courseDetail->tutor->full_name }}</div>
             <div class="position-tutor text-primary">Tutor/Admission Consultant</div>
             <div class="d-flex mt-5 bottom-info-right">
                 <div class="ic-tutor ic-light">
@@ -23,16 +23,16 @@
     </div>
     <div class="mt-5 container-fluid content-info text-primary">
         <div class="mb-5">
-            {{ $tutor_info }}
+            {{ $courseDetail->tutor->tutor_info }}
         </div>
         <div>
-            {{ $tutor_level }}
+            ► {{ $courseDetail->tutor->tutor_level }}
         </div>
         <div>
-            {{ $tutor_specialized }}
+            ► {{ $courseDetail->tutor->tutor_specialized }}
         </div>
         <div>
-            {{ $tutor_experience }}
+            ► {{ $courseDetail->tutor->tutor_experience }}
         </div>
     </div>
 </div>

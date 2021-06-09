@@ -221,7 +221,10 @@
 .name-course {
     font-size: 13.5pt;
 }
-
+.document-image:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
 /*COURSE PAGE 2-------------------------------------------------------------------------------*/
 .info-course {
     width: 1500px;
@@ -256,7 +259,6 @@
 .responsive {
     width: 100%;
     max-width: 368px;
-    height: auto;
 }
 
 .ava-responsive {

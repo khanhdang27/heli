@@ -4,7 +4,7 @@ namespace App\View\Components\ProductDetail;
 
 use Illuminate\View\Component;
 
-class CourseOverview extends Component
+class BuyCourse extends Component
 {
     public $courseDetail;
     /**
@@ -24,7 +24,7 @@ class CourseOverview extends Component
      */
     public function render()
     {
-        return view('components.product-detail.course-overview',[
+        return view('components.product-detail.buy-course',[
             'courseDetail' => $this->courseDetail
         ]);
     }

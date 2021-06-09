@@ -23,6 +23,7 @@ Route::redirect('', 'site/', 301);
 
 Route::group(['middleware' => 'language'], function () {
     Route::prefix('site/')->name('site.')->group(function () {
+
         Route::get('', 'HomeController@index')->name('home');
 
         Route::post('register', 'Auth\RegisterController@register')->name('register');
@@ -57,6 +58,8 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('course', function () {
             return view('course.course-page');
         })->name('course');
+
+        Route::get('course/{id}', 'CourseController@show')->name('course-detail');
 
         Route::get('lesson', function () {
             return view('course.lesson-page');
@@ -155,6 +158,7 @@ Route::group(['middleware' => 'language'], function () {
 
             Route::resource('blog', 'BlogController');
 
+            Route::resource('roles', 'RoleController');
 
             // Route::get('course/{course}/video', [CourseController::class, 'videoList'])
             //     ->name('course.video.index');

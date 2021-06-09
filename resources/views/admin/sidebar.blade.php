@@ -115,6 +115,12 @@
                         <i class="fe fe-clipboard"></i> Blog Post
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.roles.index') active @endif"
+                       href="{{ route('admin.roles.index') }}">
+                        <i class="fe fe-clipboard"></i> Roles
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="#sidebarPages" data-toggle="collapse" role="button" aria-expanded="false"
                        aria-controls="sidebarPages">

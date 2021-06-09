@@ -2,6 +2,7 @@
 
 use App\Utilities\SelectionByClass;
 use App\Models\Tutor;
+use App\Models\Subject;
 
 @endphp
 
@@ -40,6 +41,10 @@ use App\Models\Tutor;
                                 {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
                                 {{ Form::text('course_name:sc',old('course_name:sc'),['class' => 'form-control', 'required']) }}
                             </div>
+                            <div class="form-group ">
+                                {{ Form::label('subject_id', 'Subject') }}
+                                {{ Form::select('subject_id', SelectionByClass::getValues(Subject::class,'subject_name','id') ,null, ['class' => 'form-control']) }}
+                            </div>
                            <div class="form-group ">
                                {{ Form::label('tutor_id', 'Tutor') }}
                                {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
@@ -59,10 +64,6 @@ use App\Models\Tutor;
                             <div class="form-group ">
                                 {{ Form::label('course_price', 'Course Price') }}
                                 {{ Form::text('course_price',old('course_price'),['class' => 'form-control', 'required']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_discount', 'Discount') }}
-                                {{ Form::text('course_discount',old('course_discount'),['class' => 'form-control', 'required']) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}

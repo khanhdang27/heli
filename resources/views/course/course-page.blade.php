@@ -17,11 +17,11 @@
     @include('layout.sub-header')
     <div class="body-content">
         <div class="container-fluid">
-            @include('show-video')
+            <x-home.video-course></x-home.video-course>
         </div>
         <div class="container-fluid d-flex justify-content-center pb-5">
             <div class="row container-fluid p-0 show-menu-tab">
-                <div class="col-xl-8 container-fluid ">
+                <div class="col-xl-8 container-fluid">
                     <ul class="nav nav-pills menu-tab" role="tablist">
                         <li class="nav-item ">
                             <a class="nav-link active category-link-text" data-toggle="pill" href="#home">
@@ -46,24 +46,17 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div id="home" class="container-fluid pt-5 pb-5  tab-pane active">
-                            <x-product-detail.course-overview/>
+                        <div id="home" class="container-fluid pt-5 mb-5  tab-pane active">
+                            <x-product-detail.course-overview :courseDetail=$courseDetail>
+
+                            </x-product-detail.course-overview>
                         </div>
                         <div id="menu1" class="container-fluid pb-5 tab-pane fade">
                             <x-product-detail.online-class/>
                         </div>
                         <div id="menu2" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
-                            @foreach($tutorList as $value)
-                                <x-product-detail.course-tutor
-                                    tutorPhoto="{{$value['tutor_photo']}}"
-                                    tutorName="{{$value['tutor_name']}}"
-                                    tutorInfo="{{$value['tutor_info']}}"
-                                    tutorLevel="{{$value['tutor_level']}}"
-                                    tutorSpecialized="{{$value['tutor_specialized']}}"
-                                    tutorExperience="{{$value['tutor_experience']}}"
-                                >
+                                <x-product-detail.course-tutor :courseDetail=$courseDetail>
                                 </x-product-detail.course-tutor>
-                            @endforeach
                         </div>
                         <div id="menu3" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
                             <x-product-detail.course-rate/>
@@ -71,24 +64,8 @@
                     </div>
                 </div>
                 <div class="col-xl-4">
-                    <div class="product bg-white border-secondary p-4">
-                        <div class="mb-3 title-course">
-                            <p class="m-0">IELTS 英文課程</p>
-                            <p class="m-0">第一部分講解（共12堂)</p>
-                        </div>
-                        <p class="m-0 teacher-name">Ms. Polly Leung</p>
-                        <p class="price">HKD2,500</p>
-                        <div class="btn-primary m-0 btn-register-now product-btn b">
-                            @lang('keywords.coursePage.registerNow')
-                        </div>
-                        <div class="btn-primary mt-3 btn-register-now product-btn">
-                            @lang('keywords.coursePage.addToCart')
-                        </div>
-                        <div class="d-flex share-bar">
-                            <span class="mr-2"><img width="36" src="{{ asset("images/ic/ic_share.svg")}}"></span>
-                            <p class="text-20 pt-1">@lang('keywords.coursePage.shareCourse')</p>
-                        </div>
-                    </div>
+                    <x-product-detail.buy-course :courseDetail=$courseDetail>
+                    </x-product-detail.buy-course>
                 </div>
             </div>
         </div>

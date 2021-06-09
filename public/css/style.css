@@ -252,7 +252,7 @@ html, body {
 
 /*PRODUCT BOX DISCOUNT-------------------------------------*/
 .discount-product {
-    max-width: 1767px;
+    max-width: 90%;
     padding-bottom: 4.6rem;
     padding-top: 3rem;
 }
@@ -306,7 +306,8 @@ html, body {
 
 .content-bot {
     border: 1px solid;
-    padding: 2.4rem 2.3rem;
+    width: 195px;
+    padding: 2rem 2.5rem;
 }
 
 .bottom-product {
@@ -327,17 +328,17 @@ html, body {
 
 /*PRODUCT BOX 2---------------------------------------*/
 .card-name-product {
-    padding: 1.5rem 1rem 1rem 1.5rem;
+    min-height: 125px;
     font-size: 21px;
 }
 
 .product-box2 {
-    width: 390px;
-
+    width: 380px;
     margin-top: 2.8rem;
 }
 
 .bottom-product2 {
+    height: 220px;
     align-items: center;
     justify-content: flex-end;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
@@ -347,7 +348,6 @@ html, body {
     font-size: 15pt;
     font-weight: 600;
 }
-
 /*TAB PRODUCT-----------------------------------------*/
 .product-tab {
     padding-bottom: 4.6rem;
@@ -362,7 +362,6 @@ html, body {
     height: 226px;
     justify-content: center;
     align-items: center;
-    margin: 3rem 0;
 }
 
 .menu-img {
