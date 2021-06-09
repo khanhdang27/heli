@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\PostTag;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class PostTagController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class PostTagController extends Controller
      */
     public function index()
     {
-        $postTags = PostTag::all();
+        $tags = Tag::all();
         return view('admin.post-tags.index', [
-            'postTags' => $postTags
+            'tags' => $tags
         ]);
     }
 
@@ -29,7 +29,7 @@ class PostTagController extends Controller
      */
     public function create()
     {
-        return view('admin.post-tags.create');
+        return view('admin.tags.create');
     }
 
     /**
@@ -40,12 +40,13 @@ class PostTagController extends Controller
      */
     public function store(Request $request)
     {
-        $posTags = new PostTag(
+        $tags = new Tag(
             $request->validate([
-                'tag_name' => 'required'
+                'tag_name' => 'required',
+                'tag_type' => 'required'
             ])
         );
-        $posTags->save();
+        $tags->save();
         return back()->with('success', 'Create success');
     }
 
@@ -63,13 +64,13 @@ class PostTagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param PostTag $post_tag
+     * @param Tag $tag
      * @return View
      */
-    public function edit(PostTag $tag)
+    public function edit(Tag $tag)
     {
-        return view('admin.post-tags.edit', [
-            'postTags' => $tag
+        return view('admin.tags.edit', [
+            'tags' => $tag
         ]);
     }
 
@@ -77,10 +78,10 @@ class PostTagController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param PostTag $tag
+     * @param Tag $tag
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, PostTag $tag)
+    public function update(Request $request, Tag $tag)
     {
         $tag->update(
             $request->validate([
@@ -91,7 +92,7 @@ class PostTagController extends Controller
         return back()->with('success', 'Update success!');
     }
 
-    public function destroy(PostTag $post_tag)
+    public function destroy(Tag $tag)
     {
 
 //        try {

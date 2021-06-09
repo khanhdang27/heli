@@ -4,9 +4,11 @@ namespace App;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserLike extends Model
 {
+    use SoftDeletes;
     protected $table = 'user_likes';
     protected $guarded = [];
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\UserLike;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
 class UserLikeController extends Controller

@@ -19,12 +19,7 @@ class LoginController extends Controller
     public function actionLogin(AdminLoginRequest $request)
     {
         if(Auth::attempt($request->validated())) {
-
-            // if (Auth::user()->isSuperAdmin() || \Auth::user()->isAdmin()) {
-            //     return redirect()->route('admin.dashboard')->with('status', 'login successful!');
-            // } else {
-                return redirect()->route('site.home')->with('status', 'login successful!');
-            // }
+            return redirect()->route('admin.dashboard')->with('status', 'login successful!');
         }
         throw ValidationException::withMessages([
             'email' => 'Email or Password is incorrect',
@@ -52,6 +47,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()->route('admin.login');;
     }
 }

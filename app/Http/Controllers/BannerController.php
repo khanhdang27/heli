@@ -42,6 +42,10 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+        $old_banner = Banner::all()->first();
+        if (!empty($old_banner)){
+            $old_banner->delete();
+        }
         $fileController = new FileController();
         $file_id = $fileController->store($request);
         $banner = Banner::create([
@@ -49,7 +53,7 @@ class BannerController extends Controller
             'banner_background' => $file_id
         ]);
         $banner->save();
-        return back()->with('success', 'Delete success');
+        return back()->with('success', 'Save success');
     }
 
     /**
@@ -109,7 +113,7 @@ class BannerController extends Controller
             Storage::delete($banner->banner_photo);
             return response([
                 'message' => 'Delete success!'
-            ]);
+            ],200);
         } catch (\Exception $exception) {
             return response([
                 'message' => 'Cannot delete',

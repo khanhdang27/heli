@@ -19,13 +19,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $roleUsers = DB::table('roles')
-        //     ->join('role_users', 'roles.id', '=', 'role_users.role_id')
-        //     ->join('users', 'users.id', '=', 'role_users.user_id')
-        //     ->where('role_id', '=', '2')
-        //     ->paginate(20);
-
-        $member = User::with('role')->where(['role_id'=> Role::$MEMBER_TYPE]);
+        
+        $member = User::with('roles')->where(['name'=> 'student'])->get();
         return view('admin.user.index', [
             'roleUsers' => $member
         ]);

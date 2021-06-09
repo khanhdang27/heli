@@ -12,7 +12,7 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Create Q&A Tags
+                                    Create Tags
                                 </h4>
 
                             </div>
@@ -20,11 +20,15 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => 'admin.post-tag.store', 'enctype' => 'multipart/form-data' ]) !!}
+                            {!! Form::open(['route' => 'admin.tag.store', 'enctype' => 'multipart/form-data' ]) !!}
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('tag_name', 'Name') }}
                                 {{ Form::text('tag_name', old('tag_name'),['class' => 'form-control', 'placeholder'=>'ex: #ABC']) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('tag_type', 'Type') }}
+                                {{ Form::text('tag_type', old('tag_type'),['class' => 'form-control', 'placeholder'=>'ex: #ABC']) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
