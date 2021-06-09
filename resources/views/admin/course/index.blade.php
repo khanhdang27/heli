@@ -80,11 +80,6 @@
                                         </a>
                                     </th>
                                     <th>
-                                        <a href="#" class="text-muted">
-                                            Discount
-                                        </a>
-                                    </th>
-                                    <th>
                                         Description
                                     </th>
                                     <th></th>
@@ -102,9 +97,6 @@
                                         <td class="goal-project">
                                             {{ $value->course_price }}
                                         </td>
-                                        <td class="goal-project">
-                                            {{ $value->course_discount }}
-                                        </td>
                                         <td>
                                             {{ $value->translate('en')->course_description }}
                                         </td>
@@ -116,10 +108,10 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.course.video.index', $value->id) }}"
-                                                       class="dropdown-item">
-                                                        Video
-                                                    </a>
+{{--                                                    <a href="{{ route('admin.course.video.index', $value->id) }}"--}}
+{{--                                                       class="dropdown-item">--}}
+{{--                                                        Video--}}
+{{--                                                    </a>--}}
                                                     <a href="{{ route('admin.course.edit', $value->id) }}"
                                                        class="dropdown-item">
                                                         Edit

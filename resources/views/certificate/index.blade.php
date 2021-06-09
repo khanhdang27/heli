@@ -76,6 +76,7 @@
                         @endforeach
                     </div>
                 </div>
+                <!--
                 <div class="container-fluid product-recommend">
                     <div class="heading-title" id="tab-title">
                         數學
@@ -140,6 +141,7 @@
                         @endforeach
                     </div>
                 </div>
+                -->
             </div>
         </div>
     </div>

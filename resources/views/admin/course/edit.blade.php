@@ -39,6 +39,12 @@
                                 {{ Form::text('course_name:sc', $course->translate('sc')->course_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
+                                {{ Form::label('subject_id', 'Subject') }}
+                                {{ Form::select('subject_id',
+                                    SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),
+                                    $course->subject->id, ['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group ">
                                 {{ Form::label('tutor_id', 'Tutor') }}
                                 {{ Form::select('tutor_id',
                                     SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'),
@@ -47,10 +53,6 @@
                             <div class="form-group ">
                                 {{ Form::label('course_price', 'Course Price') }}
                                 {{ Form::text('course_price', $course->course_price, ['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_discount', 'Course Discount') }}
-                                {{ Form::text('course_discount', $course->course_discount, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:en', 'Course Description (English)') }}

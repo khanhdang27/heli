@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,8 +26,11 @@ class HomeController extends Controller
     public function index()
     {
         $banners = Banner::query()->orderByDesc('created_at')->first();
+        $courses = Course::with('subject','tutor')->get();
         return view('home.home-page',[
-            'banners' => $banners
+            'banners' => $banners,
+            'courses' => $courses
         ]);
+
     }
 }

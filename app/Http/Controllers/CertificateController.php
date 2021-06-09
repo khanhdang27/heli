@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
+use App\Models\Subject;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\Certificate\CreateCertificateRequest;
 
@@ -56,7 +57,11 @@ class CertificateController extends Controller
      */
     public function show(Certificate $certificate)
     {
-        return view('certificate.index', ['certificate'=> $certificate]);
+        $subject = Subject::with('certificate')->get();
+        return view('certificate.index', [
+            'certificate'=> $certificate,
+            'subject' => $subject
+        ]);
     }
 
     /**

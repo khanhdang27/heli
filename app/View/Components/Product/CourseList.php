@@ -1,20 +1,20 @@
 <?php
 
-namespace App\View\Components\ProductDetail;
+namespace App\View\Components\Product;
 
 use Illuminate\View\Component;
 
-class CourseOverview extends Component
+class CourseList extends Component
 {
-    public $courseDetail;
+    public $courseItem;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($courseDetail)
+    public function __construct($courseItem)
     {
-        $this->courseDetail = $courseDetail;
+        $this->courseItem=$courseItem;
     }
 
     /**
@@ -24,8 +24,8 @@ class CourseOverview extends Component
      */
     public function render()
     {
-        return view('components.product-detail.course-overview',[
-            'courseDetail' => $this->courseDetail
+        return view('components.product.course-list',[
+            'courseItem'=>$this->courseItem
         ]);
     }
 }

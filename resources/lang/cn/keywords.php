@@ -93,6 +93,7 @@ return [
         'tryLiveClass' => '以優惠價格試上真人/直播班，並領取價值$600的免費課程',
         'brainExperienceCourse' => '隨時隨地以手機、平板電腦或電 腦體驗課程!'
     ],
-    'freeTrialClass' => '免費試堂；體驗課程網上課程 及實時課程 任你選擇'
+    'freeTrialClass' => '免費試堂；體驗課程網上課程 及實時課程 任你選擇',
+    'section' => '節'
 
 ];

@@ -27,17 +27,19 @@
     <div class="body-content">
         <div class="mx-auto discount-product">
             <div class="row">
-                <div class="col-md-6 col-12">
+                <div class="col-lg-6 col-12">
                     <p class="heading-title">
                         @lang('keywords.discountProduct')
                     </p>
-                    <x-product.course></x-product.course>
+                    <x-product.course-list :courseItem=$courses>
+                    </x-product.course-list>
                 </div>
-                <div class="col-md-6 col-12 welcome-offer">
+                <div class="col-lg-6 col-12 welcome-offer">
                     <p class="heading-title">
                         @lang('keywords.welcomeOffer')
                     </p>
-                    <x-product.course></x-product.course>
+                    <x-product.course-list :courseItem=$courses>
+                    </x-product.course-list>
                 </div>
             </div>
         </div>
@@ -46,7 +48,7 @@
                 <div class="heading-title" id="tab-title">
                     @lang('keywords.hotCourseSeries')...
                 </div>
-                <x-product.course></x-product.course>
+{{--                <x-product.course-list></x-product.course-list>--}}
             </div>
         @endif
         <div class="product-tab">
