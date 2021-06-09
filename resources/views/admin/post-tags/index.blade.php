@@ -56,11 +56,11 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.post-tag.edit', $value->id) }}"
+                                                    <a href="{{ route('admin.tag.edit', $value->id) }}"
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.post-tag.destroy', $value->id) }}" >
+                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.tag.destroy', $value->id) }}" >
                                                         Delete
                                                     </button>
                                                 </div>
