@@ -53,6 +53,8 @@ cardButton.addEventListener('click', async (e) => {
         console.error("error: ",error);
     } else {
         console.info('success: ',setupIntent);
+        console.log('url :>> ', "{{route('site.home')}}");
+        // window.location.replace('...');
     }
 });
 
