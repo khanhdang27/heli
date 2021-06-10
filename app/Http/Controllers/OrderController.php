@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Laravel\Cashier\Cashier;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
-class PaymentController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,19 +26,19 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        
-    }
-
-    /**
-     * add payment a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function addPayment(Request $request)
-    {
-        $payment_method = Auth::user()->addPaymentMethod($request->payment_method);
-        return response()->json($payment_method);
+        $stripe = Auth::user()->stripe_id;
+        $user = Cashier::findBillable($stripe);
+        $paymentMethods = $user->paymentMethods()->map(function($paymentMethod){
+            return $paymentMethod->asStripePaymentMethod();
+        });
+        if (empty($paymentMethods[0])) {
+            return view('payments.update-payment-method', [
+                'intent' => Auth::user()->createSetupIntent()
+            ]);
+        } else {
+            $order = new Order();
+            $order->createPaymentIntent($paymentMethods[0]);
+        }
     }
 
     /**
@@ -69,9 +71,9 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        return view('payments.update-payment-method', [
-            'intent' => Auth::user()->createSetupIntent()
-        ]);
+        // return view('payments.update-payment-method', [
+        //     'intent' => Auth::user()->createSetupIntent()
+        // ]);
     }
 
     /**

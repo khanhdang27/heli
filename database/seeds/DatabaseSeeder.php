@@ -3,8 +3,9 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\User;
 
-class PermissionTableSeeder extends Seeder
+class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -89,5 +90,15 @@ class PermissionTableSeeder extends Seeder
 
         $superRole = Role::create(['name' => 'super-admin']);
         $superRole->givePermissionTo(Permission::all());
+
+
+        $super_admin = User::create([
+            'name' => 'Super admin',
+            'email' => 'admin@gmail.com',
+            'password' => '123123',
+        ]);
+
+        $super_admin->assignRole(['super-admin']);
+        $super_admin->save();
     }
 }

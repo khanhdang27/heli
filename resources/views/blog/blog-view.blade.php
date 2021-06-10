@@ -22,7 +22,6 @@
                         @foreach($blog->tags as $tag)
                             <button class="btn-hashtag">
                                 {{$tag->tag_name}}
-
                             </button>
                         @endforeach
                     @endif

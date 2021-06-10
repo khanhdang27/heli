@@ -5,11 +5,11 @@
     <p class="m-0 teacher-name">{{$courseDetail->tutor->full_name}}</p>
     <p class="price">HKD{{$courseDetail->course_price}}</p>
     @if(\Illuminate\Support\Facades\Auth::check())
-        <div class="btn-primary mt-3 btn-register-now product-btn">
+        <a href="{{ route('site.payment.create') }}" class="btn btn-primary mt-3 btn-register-now product-btn">
             @lang('keywords.coursePage.buyNow')
-        </div>
+        </a>
     @else
-        <div class="btn-primary m-0 btn-register-now product-btn b">
+        <div class="btn-primary m-0 btn-register-now product-btn btn">
             @lang('keywords.coursePage.registerNow')
         </div>
     @endif

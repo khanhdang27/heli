@@ -2,7 +2,7 @@
 
 return [
 
-    'stripe_key' => env('STRIPE_KEY','pk_test_51ItjfcLVVZaj9HRiFukKx2U3A0Ocvxcil6dyWMQppnNzGwTosl2kTn1CotW79SaHxEIbHv1txnbXQOMD1oosTQ6C00XDUxaInY'),
+    'stripe_key' => env('STRIPE_KEY',''),
 
     /*
     |--------------------------------------------------------------------------
