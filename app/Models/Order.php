@@ -18,9 +18,11 @@ class Order extends Model
     protected $hidden = ['source'];
 
     public function createPaymentIntent ($payment) {
+
+        // dd(config('app.stripe_key'));
         $stripe = new \Stripe\StripeClient(
-            'sk_test_51J0Mf2B9muY337mPY3zpehIOosAoFhQXkZ1TwpoOaOJt8E91AJmYCPJjjgeQsewTDDlJsa3N0bVlA6GQOs7brB9S00kGnyP3AG'
-          );
+            config('app.stripe_secret')
+        );
 
         $payment_intent = $stripe->paymentIntents->create([
             'amount' => 2000,
@@ -34,9 +36,24 @@ class Order extends Model
                 'price' => 3,
                 'discount' => 3,
             ],
-            'return_url' => 'http://localhost/Helios_v2/public/site/payment/'
+            'return_url' => 'http://localhost:8000/site/payment'
         ]);
 
-        // dd($payment_intent);
+        dd($payment_intent);
+
+        // [
+        //     "metadata" => array:4 [▼
+        //   "course_id" => "0"
+        //   "user_id" => "3"
+        //   "price" => "3"
+        //   "discount" => "3"
+        // ]
+        // "next_action" => array:2 [▼
+        //   "redirect_to_url" => array:2 [▼
+        //     "return_url" => "http://localhost:8000/site/payment"
+        //     "url" => "https://hooks.stripe.com/redirect/authenticate/src_1J0rEzLVVZaj9HRiRidtEsho?client_secret=src_client_secret_P98SKQivnREMkRKPZRWMAwPB&source_redirect_slug=test_YWNjdF8xSXRqZmNMVlZaYWo5SFJpLF9KZTlZVkFwcnkwTjJpZXpZSHhOZVhGM3pDdGk4cnhK0100MjYQ7ivr ◀"
+        //   ]
+        //   "type" => "redirect_to_url"
+        // ]
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\CourseController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,18 +40,11 @@ Route::group(['middleware' => 'language'], function () {
             return view('team-page');
         })->name('teams');
 
-        //    Route::get('subject', function () {
-        //        return view('subject-page');
-        //    })->name('subject');
-
         Route::resource('subject', 'SubjectController');
 
         Route::get('get-subject-by-parent-id/{id}', 'SubjectController@getSubjectByParentId')->name('get_subject_by_parent');
 
         Route::resource('certificate', 'CertificateController');
-
-        //    Route::get('subject/{id}',[SubjectController::class,'show'])
-        //    ->name('subjects');
 
         Route::get('course', function () {
             return view('course.course-page');
@@ -65,41 +56,20 @@ Route::group(['middleware' => 'language'], function () {
             return view('course.lesson-page');
         })->name('lesson');
 
-        //        Route::get('blog', function () {
-        //            return view('blog.blog-page');
-        //        })->name('blog');
         Route::get('blog-view', function () {
             return view('blog.blog-view');
         })->name('blog-view');
 
-        //        Route::get('forum', function () {
-        //            return view('forum.forum-page');
-        //        })->name('forum');
         Route::get('show-blog', 'BlogController@showBlogPage')->name('show-blog');
         Route::get('view-blog/{id}', 'BlogController@viewBlog')->name('view-blog');
-
 
         Route::get('forumAnswer', function () {
             return view('forum.post-view');
         })->name('forumAnswers');
 
-
         Route::get('/forgot-password', function () {
             return view('login.forgot-password');
         })->name('forgot-password');
-
-        Route::post('/forgot-password', function (Illuminate\Http\Request $request) {
-            // $random = Str::random(10);
-            // $request->validate(['email' => 'required|email']);
-            // $user = User::where('email', $request->get('email'))->first();
-            // $user->password = $random;
-
-            // $user->save();
-
-            // $send_mail = new \App\Mail\SendMail();
-            // $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.test_mail');
-            // \Mail::to($request->get('email'))->send($send_mail);
-        })->name('reset-password');
 
         Route::middleware('auth')->group(function () {
 
@@ -151,7 +121,6 @@ Route::group(['middleware' => 'language'], function () {
             Route::resource('course', 'CourseController');
 
             Route::resource('course-material', 'CourseMaterialController');
-            // Route::get('course-material/1/edit', 'CourseMaterialController@edit')->name('course-material.edit');
 
             Route::resource('banner', 'BannerController');
 

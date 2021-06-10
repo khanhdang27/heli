@@ -14,9 +14,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($request)
+    public function index()
     {
-        dd($request->query());
+        
     }
 
     /**
@@ -49,7 +49,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->query());
     }
 
     /**
