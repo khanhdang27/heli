@@ -37,7 +37,6 @@ use Illuminate\Support\Carbon;
 class Subject extends Model implements TranslatableContract
 {
     use Translatable;
-    
 
     protected $table = 'subjects';
     protected $guarded = [];
@@ -47,7 +46,9 @@ class Subject extends Model implements TranslatableContract
     {
         return $this->belongsTo(Certificate::class, 'certificate_id');
     }
-
+    public function course () {
+        return $this->hasMany(Course::class);
+    }
     public function tutor()
     {
         return $this->belongsToMany(Tutor::class, 'tutor_teach_subject');

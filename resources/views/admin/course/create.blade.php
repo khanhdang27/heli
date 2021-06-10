@@ -1,8 +1,8 @@
 @php
 
-use App\Utilities\SelectionByClass;
-use App\Models\Tutor;
-use App\Models\Subject;
+    use App\Utilities\SelectionByClass;
+    use App\Models\Tutor;
+    use App\Models\Subject;
 
 @endphp
 
@@ -32,7 +32,6 @@ use App\Models\Subject;
                                 {{ Form::label('course_name:en', 'Course Name (English)') }}
                                 {{ Form::text('course_name:en',old('course_name:en'),['class' => 'form-control', 'required']) }}
                             </div>
-
                             <div class="form-group ">
                                 {{ Form::label('course_name:cn', 'Course Name (Traditional Chinese)') }}
                                 {{ Form::text('course_name:cn',old('course_name:cn'),['class' => 'form-control', 'required']) }}
@@ -45,10 +44,14 @@ use App\Models\Subject;
                                 {{ Form::label('subject_id', 'Subject') }}
                                 {{ Form::select('subject_id', SelectionByClass::getValues(Subject::class,'subject_name','id') ,null, ['class' => 'form-control']) }}
                             </div>
-                           <div class="form-group ">
-                               {{ Form::label('tutor_id', 'Tutor') }}
-                               {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
-                           </div>
+                            <div class="form-group ">
+                                {{ Form::label('tutor_id', 'Tutor') }}
+                                {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('course_type', 'Type') }}
+                                {{ Form::select('course_type', ['1'=>'Live course', '2'=>'Course recorded video'],null,['class'=>'form-control w-50']) }}
+                            </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:en', 'Course Description (English)') }}
                                 {{ Form::textarea('course_description:en',old('course_description:en'),['class' => 'form-control', 'required']) }}

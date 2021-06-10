@@ -10,8 +10,8 @@
                     <div class="row">
                         <div class="col-sm-6 d-flex justify-content-center align-items-center">
                             <div class="text-login-left text-center">
-                                歡迎回來！<br>
-                                登入繼續體驗課程
+                                @lang('keywords.loginModal.welcomeBack')<br>
+                                @lang('keywords.loginModal.loginToContinueCourse')
                             </div>
                         </div>
                         <div class="col-sm login-right">
@@ -38,17 +38,25 @@
                             </div>
                             @csrf
                             {!! Form::open(['id'=>'formLogin']) !!}
-                            <div class="input-login d-flex justify-content-center align-items-center mb-3">
-                                {{ Form::email('email',null,['class'=>'input-login-item', 'placeholder'=>'Email']) }}
-
-                                <div id="snackbarLogin"><p class="m-0" id="contentToastLogin">Toast</p></div>
-                            </div>
-                            <div class="input-login d-flex justify-content-center align-items-center">
-                                {{ Form::password('password', ['class'=> 'input-login-item', 'placeholder'=>'Password']) }}
-                            </div>
-                            <div class="bottom-btn">
-                                {{ Form::submit('login', ['class' => 'btn-login btn-secondary btn-register-now', 'id'=>'btn-login']) }}
-                            </div>
+                                <div class="input-login d-flex justify-content-center align-items-center mb-3">
+                                    {{ Form::email('email',null,[
+                                                    'class'=>'input-login-item',
+                                                    'placeholder'=>'Email'
+                                                    ]) }}
+                                    <div id="snackbarLogin"><p class="m-0" id="contentToastLogin">Toast</p></div>
+                                </div>
+                                <div class="input-login d-flex justify-content-center align-items-center">
+                                    {{ Form::password('password', [
+                                                        'class'=> 'input-login-item',
+                                                        'placeholder'=>'Password'
+                                                        ]) }}
+                                </div>
+                                <div class="bottom-btn">
+                                    {{ Form::submit('login',
+                                                    ['class' => 'btn-login btn-secondary btn-register-now',
+                                                    'id'=>'btn-login'
+                                                    ]) }}
+                                </div>
                             {!! Form::close() !!}
                             <div class="row bottom-form">
                                 <div class="col-sm">

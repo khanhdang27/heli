@@ -72,13 +72,13 @@
                         id="login">
                     @lang('keywords.navBar.login')
                 </button>
-                @include('login.login')
+                <x-login.login></x-login.login>
             <!-- Button Register Modal -->
                 <button type="button" class="btn-header btn-primary" data-toggle="modal" data-target="#registerModal"
                         id="register">
                     @lang('keywords.navBar.register')
                 </button>
-                @include('login.register')
+                <x-login.register></x-login.register>
                 @else
                 <div class="p-3">
                     <a class="text-center"

@@ -59,8 +59,9 @@ class CertificateController extends Controller
     public function show(Certificate $certificate)
     {
         $subject = Subject::with('certificate')->get();
-        
-        $courses = Course::all();
+
+        $courses = Course::with('subject','tutor', 'certificate')->get();
+
         return view('certificate.index', [
             'certificate'=> $certificate,
             'subject' => $subject,

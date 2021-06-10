@@ -147,7 +147,10 @@
 .btn-x:hover {
     color: var(--white);
 }
-
+.product-hover:hover {
+    text-decoration: none;
+    color: var(--secondary);
+}
 .input-login {
     .input-login-item {
         font-size: 18.7pt;

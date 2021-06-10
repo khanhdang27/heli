@@ -17,6 +17,7 @@
                     <p class="text-20 text-primary mr-5">{{ substr($blog->created_at,0,10) }}</p>
                     <p class="text-20 text-primary"><img src="{{asset("images/ic/ic_eyeBlue.svg")}}" width="26">{{$blog->view_no}}</p>
                 </div>
+
                 <div class="d-flex flex-wrap justify-content-end">
                     @if(!empty($blog->tags))
                         @foreach($blog->tags as $tag)
@@ -27,13 +28,13 @@
                         @endforeach
                     @endif
                 </div>
+                <div class="w-100">
+                    <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block" src="{{Storage::url($blog->photo)}}">
+                </div>
             </div>
-            <div>
+            <div class="text-dark">
                 {!! $blog->content !!}
             </div>
         </div>
     </div>
-
-
-
 @endsection

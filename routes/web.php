@@ -18,7 +18,7 @@ use App\Models\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::view('card-pay','card-pay');
 Route::redirect('', 'site/', 301);
 
 Route::group(['middleware' => 'language'], function () {

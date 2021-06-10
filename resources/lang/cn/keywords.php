@@ -12,6 +12,15 @@ return [
         'welcomeBack' => '歡迎回來！'
     ],
     'guestPraise' => '客⼾的表揚',
+    'loginModal' => [
+        'welcomeBack' => '歡迎回來!',
+        'loginToContinueCourse' => '登入繼續體驗課程',
+    ],
+    'registerModal' => [
+        'freeRegistration' => '免費註冊',
+        'experienceCourse' => '體驗課程',
+        'onlineAndRealTimeCourse'=> '網上課程及實時課程',
+    ],
     'footer' => [
         'searchForCourses' => '搜尋課程',
         'policy' => '政策',
@@ -94,6 +103,11 @@ return [
         'brainExperienceCourse' => '隨時隨地以手機、平板電腦或電 腦體驗課程!'
     ],
     'freeTrialClass' => '免費試堂；體驗課程網上課程 及實時課程 任你選擇',
-    'section' => '節'
+    'course-item' =>[
+        'section' => '節',
+        'liveCourse' => '實時直播課程',
+        'courseRecord' => '錄製課程'
+    ]
+
 
 ];

@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $banners = Banner::query()->orderByDesc('created_at')->first();
-        $courses = Course::with('subject','tutor')->get();
+        $courses = Course::with('subject','tutor', 'certificate')->get();
         return view('home.home-page',[
             'banners' => $banners,
             'courses' => $courses

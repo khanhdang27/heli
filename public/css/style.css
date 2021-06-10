@@ -10,6 +10,7 @@ html, body {
     font-family: PingFangTC;
     font-weight: 400;
     margin: 0;
+    background-image: url('../images/BG.jpg');
 }
 
 .body-page {
@@ -17,7 +18,7 @@ html, body {
 }
 
 .body-content {
-    background-image: url('../images/BG.jpg');
+
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -281,10 +282,6 @@ html, body {
     height: 323px;
     display: flex;
     align-items: center;
-}
-
-.product-hover:hover {
-    text-decoration: none;
 }
 
 .color-bar {
@@ -655,7 +652,7 @@ video {
 @media (min-width: 1200px) {
     .modal-login-xl {
         max-width: 1369px;
-        margin-top: 15.2rem !important;
+        margin-top: 3rem !important;
     }
 }
 
@@ -669,9 +666,14 @@ video {
     border: 3px solid #E6C06C;
     background-color: rgba(15, 34, 51, 0.8);
     max-width: 1369px;
-    min-height: 1042px;
+    padding: 3rem 0;
 }
-
+.modal-register-component{
+    border-radius: 0;
+    border: 3px solid #E6C06C;
+    background-color: rgba(15, 34, 51, 0.8);
+    min-height: 600px;
+}
 .box-btn-login {
     max-width: 559px;
 }
@@ -719,7 +721,7 @@ video {
     max-width: 559px;
     font-size: 30pt;
     justify-items: center;
-    margin: 4.3rem 0;
+    margin: 2.7rem 0;
 }
 
 .text-or {
@@ -916,4 +918,15 @@ video {
 }
 .card-profile{
     max-width: 700px;
+}
+/*CARD PAYMENT--------------------------------------------------------------------------------------------------*/
+.card-pay{
+    max-width: 450px;
+    height: 240px;
+    border-radius: 10px;
+}
+.card-before{
+    left: 31%;
+    bottom: 25%;
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }

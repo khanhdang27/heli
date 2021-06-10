@@ -10,11 +10,11 @@
             <div class="modal-body modal-body-login">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-6 login-left">
+                        <div class="col-sm-6 login-left d-flex flex-column justify-content-center">
                             <div class="text-login-left text-center">
-                                免費註冊<br>
-                                體驗課程<br>
-                                網上課程及實時課程<br>
+                                @lang('keywords.registerModal.freeRegistration')<br>
+                                @lang('keywords.registerModal.experienceCourse')<br>
+                                @lang('keywords.registerModal.onlineAndRealTimeCourse')<br>
                             </div>
                         </div>
                         <div class="col-sm login-right">
@@ -40,16 +40,23 @@
                                 <hr>
                             </div>
                             {!! Form::open(['id'=>'registerForm']) !!}
-                            <div class="input-login d-flex justify-content-center align-items-center mb-3">
-                                {{ Form::email('email',null,['class'=>'input-login-item','placeholder'=>'Email','autocomplete'=>'off']) }}
-                                <div id="snackbar"><p class="m-0" id="contentToast">Toast</p></div>
-                            </div>
-                            <div class="bottom-btn">
-                                {{ Form::submit('Register', ['class'=>'btn-login btn-secondary btn-register-now', 'id'=>'btn-register']) }}
-                            </div>
+                                <div class="input-login d-flex justify-content-center align-items-center mb-3">
+                                    {{ Form::email('email',null,[
+                                                    'class'=>'input-login-item',
+                                                    'placeholder'=>'Email',
+                                                    'autocomplete'=>'off'
+                                                    ]) }}
+                                    <div id="snackbar"><p class="m-0" id="contentToast">Toast</p></div>
+                                </div>
+                                <div class="bottom-btn">
+                                    {{ Form::submit('Register', [
+                                                    'class'=>'btn-login btn-secondary btn-register-now',
+                                                     'id'=>'btn-register'
+                                                     ]) }}
+                                </div>
                             {!! Form::close() !!}
                             <div class="already-member text-center">
-                                <a href="#">@lang('keywords.alreadyMember')</a>
+                                <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">@lang('keywords.alreadyMember')</a>
                             </div>
                         </div>
                     </div>

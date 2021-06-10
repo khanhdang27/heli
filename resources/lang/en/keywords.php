@@ -12,6 +12,15 @@ return [
         'welcomeBack' => 'Welcome back!'
     ],
     'guestPraise' => 'Guest Praise',
+    'loginModal' => [
+        'welcomeBack' => 'Welcome back!',
+        'loginToContinueCourse' => 'Login to continue the course',
+    ],
+    'registerModal' => [
+        'freeRegistration' => 'Free registration',
+        'experienceCourse' => 'Experience course',
+        'onlineAndRealTimeCourse'=> 'Online courses and real-time courses',
+    ],
     'footer' => ['searchForCourses' => 'Search for courses',
         'policy' => 'Policy',
         'about' => 'About',
@@ -93,5 +102,9 @@ return [
         'brainExperienceCourse' => 'Use your mobile phone, tablet or phone anytime, anywhere Brain experience course!'
     ],
     'freeTrialClass' => 'Free trial class; experience courses online courses and real-time courses for you to choose',
-    'section' => 'Section'
+    'course-item' =>[
+        'section' => 'Section',
+        'liveCourse' => 'Live course',
+        'courseRecord' => 'Course recorded video'
+    ]
 ];

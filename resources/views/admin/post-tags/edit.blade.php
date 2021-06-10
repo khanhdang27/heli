@@ -25,9 +25,9 @@
                                 {{ Form::label('tag_name', 'Tag name') }}
                                 {{ Form::text('tag_name', $tags->tag_name, ['class' => 'form-control']) }}
                             </div>
-                            <div class="form-group">
-                                {{ Form::label('tag_type', 'Tag type') }}
-                                {{ Form::text('tag_type', $tags->tag_type, ['class' => 'form-control']) }}
+                            <div class="form-group ">
+                                {{ Form::label('tag_type', 'Type') }}
+                                {{ Form::select('tag_type',['1'=>'1- Forum hashtag','2'=>'2- Blog hashtag'],$tags->tag_type,['class'=>'form-control w-25']) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}

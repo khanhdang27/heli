@@ -39,6 +39,9 @@
                                     <th>
                                         Name
                                     </th>
+                                    <th>
+                                        Type
+                                    </th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -47,6 +50,9 @@
                                     <tr>
                                         <td class="goal-project">
                                             {{ $value->tag_name }}
+                                        </td>
+                                        <td class="goal-project">
+                                            {{ $value->tag_type }}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

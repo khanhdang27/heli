@@ -28,7 +28,7 @@
                         <input class="btn-sort" type="radio" name="optradio">@lang('keywords.recordALesson')
                     </label>
                     <label style="color: red" class="radio-inline mr-5 ">
-                        <input  class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
+                        <input class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
                     </label>
                 </form>
             </div>
@@ -38,14 +38,12 @@
                         英文
                     </div>
                     <div class="d-flex flex-wrap">
-                        @foreach($courses as $item)
-                            <div class="pr-3">
-                                <a class="product-hover" href="{{URL::route('site.course')}}">
-                                    <x-product.course-item :course=$item>
-                                    </x-product.course-item>
-                                </a>
-                            </div>
-                        @endforeach
+                        <div class="pr-3">
+                            <a class="product-hover" href="{{URL::route('site.course')}}">
+                                <x-product.course-list :courseItem=$courses>
+                                </x-product.course-list>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

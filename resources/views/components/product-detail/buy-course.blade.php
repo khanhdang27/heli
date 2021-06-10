@@ -5,13 +5,15 @@
     <p class="m-0 teacher-name">{{$courseDetail->tutor->full_name}}</p>
     <p class="price">HKD{{$courseDetail->course_price}}</p>
     @if(\Illuminate\Support\Facades\Auth::check())
-        <div class="btn-primary mt-3 btn-register-now product-btn">
-            @lang('keywords.coursePage.buyNow')
-        </div>
+        <a href="#">
+            <div class="btn-primary mt-3 btn-register-now product-btn">
+                @lang('keywords.coursePage.buyNow')
+            </div>
+        </a>
     @else
-        <div class="btn-primary m-0 btn-register-now product-btn b">
-            @lang('keywords.coursePage.registerNow')
-        </div>
+        <button class="btn-register-now m-0 btn-primary product-btn p-0 w-100" data-toggle="modal" data-target="#registerModal">
+            <span>@lang('keywords.coursePage.registerNow')</span>
+        </button>
     @endif
     <div class="d-flex share-bar">
         <span class="mr-2"><img width="36" src="{{ asset("images/ic/ic_share.svg")}}"></span>
