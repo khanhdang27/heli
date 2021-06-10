@@ -3,17 +3,6 @@
 @section('title','Course Page')
 
 @section('content')
-    <?php
-    $tutorList = [
-        'item1' => [
-            'tutor_photo' => 'images/ava.jpg',
-            'tutor_name' => 'Ms. Polly Leung',
-            'tutor_info' => 'MSc Applied Linguistics and Second Language Acquisition, University of Oxford',
-            'tutor_level' => '► Bachelor of Education in Language Education, The University of Hong Kong',
-            'tutor_specialized' => '► Specialised in Language/IELTS teaching/Personal Statement/Interview',
-            'tutor_experience' => '► More than 10 years of experiences'],
-    ]
-    ?>
     @include('layout.sub-header')
     <div class="body-content">
         <div class="container-fluid">

@@ -19,10 +19,11 @@
     </div>
 </div>
 
+
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
-    const stripe = Stripe("pk_test_51ItjfcLVVZaj9HRiFukKx2U3A0Ocvxcil6dyWMQppnNzGwTosl2kTn1CotW79SaHxEIbHv1txnbXQOMD1oosTQ6C00XDUxaInY");
+    const stripe = Stripe("{{ config('app.stripe_key') }}");
 
     const elements = stripe.elements();
     const cardElement = elements.create('card',{
@@ -32,16 +33,17 @@
     cardElement.mount('#card-element');
 </script>
 
-
 <script> 
 
 const cardHolderName = document.getElementById('card-holder-name');
 const cardButton = document.getElementById('card-button');
 const clientSecret = cardButton.dataset.secret;
 
+
 cardButton.addEventListener('click', async (e) => {
     const { setupIntent, error } = await stripe.confirmCardSetup(
-        clientSecret, {
+        clientSecret,
+        {
             payment_method: {
                 card: cardElement,
                 billing_details: { name: cardHolderName.value }
@@ -52,9 +54,16 @@ cardButton.addEventListener('click', async (e) => {
     if (error) {
         console.error("error: ",error);
     } else {
-        console.info('success: ',setupIntent);
-        console.log('url :>> ', "{{route('site.home')}}");
-        // window.location.replace('...');
+        console.info('success: ',setupIntent.payment_method );
+        axios.post("{{ route('site.payment.add-payment') }}", {
+            payment_method: setupIntent.payment_method,
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 });
 

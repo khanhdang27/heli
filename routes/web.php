@@ -32,7 +32,7 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
 
-        Route::put('/reset-password', 'ChangePasswordController@update')->name('resetPassword');
+        Route::put('reset-password', 'Auth\ChangePasswordController@update')->name('resetPassword');
 
         Route::get('news', function () {
             return view('news-page');
@@ -103,7 +103,9 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::middleware('auth')->group(function () {
 
+            Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
             Route::resource('payment', 'PaymentController');
+            Route::resource('order', 'OrderController');
             Route::resource('post', 'PostController');
             Route::resource('comment', 'CommentController');
             Route::resource('user-like', 'UserLikeController');
