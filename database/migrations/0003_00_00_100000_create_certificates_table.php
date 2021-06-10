@@ -17,7 +17,7 @@ class CreateCertificatesTable extends Migration
             $table->id();
             $table->string('certificate_code');
             $table->string('certificate_name');
-            $table->timestamps();          
+            $table->timestamps();
             $table->softDeletes();
         });
     }

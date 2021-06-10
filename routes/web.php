@@ -103,6 +103,7 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::middleware('auth')->group(function () {
 
+            Route::resource('payment', 'PaymentController');
             Route::resource('post', 'PostController');
             Route::resource('comment', 'CommentController');
             Route::resource('user-like', 'UserLikeController');

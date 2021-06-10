@@ -66,14 +66,14 @@
                         @foreach($productList as $item)
                             <div class="pr-3">
                                 <a class="product-hover" href="{{URL::route('site.course')}}">
-                                    <x-product.product-box
+                                    <x-product.course-item
                                         subject="{{$item['subject']}}"
                                         subtitle="{{$item['subtitle']}}"
                                         description="{{$item['description']}}"
                                         courseName="{{$item['courseName']}}"
                                         tutor="{{$item['tutor']}}"
                                         price="{{$item['price']}}">
-                                    </x-product.product-box>
+                                    </x-product.course-item>
                                 </a>
                             </div>
                         @endforeach

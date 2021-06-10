@@ -3,28 +3,6 @@
 @section('title','Subject Page')
 
 @section('content')
-    <?php
-    $productList = [
-        'item_1' => ['subject' => '英國',
-            'subtitle' => '海外升學全攻略 英國篇',
-            'description' => '英國升學需知',
-            'courseName' => 'IGCSE 實時直播課程 英⽂課程 第⼀部分講解',
-            'tutor' => 'Ms. Polly Leung',
-            'price' => '$1500'],
-        'item_2' => ['subject' => '英國',
-            'subtitle' => '海外升學全攻略 英國篇',
-            'description' => '英國升學需知',
-            'courseName' => 'IGCSE 實時直播課程 英⽂課程 第⼀部分講解',
-            'tutor' => 'Ms. Polly Leung',
-            'price' => '$1500'],
-        'item_3' => ['subject' => '英國',
-            'subtitle' => '海外升學全攻略 英國篇',
-            'description' => '英國升學需知',
-            'courseName' => 'IGCSE 實時直播課程 英⽂課程 第⼀部分講解',
-            'tutor' => 'Ms. Polly Leung',
-            'price' => '$1500'],
-    ]
-    ?>
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.navBar.subjectClassification')
@@ -60,88 +38,16 @@
                         英文
                     </div>
                     <div class="d-flex flex-wrap">
-                        @foreach($productList as $item)
+                        @foreach($courses as $item)
                             <div class="pr-3">
                                 <a class="product-hover" href="{{URL::route('site.course')}}">
-                                    <x-product.product-box
-                                        subject="英文"
-                                        subtitle="{{$item['subtitle']}}"
-                                        description="{{$item['description']}}"
-                                        courseName="{{$item['courseName']}}"
-                                        tutor="{{$item['tutor']}}"
-                                        price="{{$item['price']}}">
-                                    </x-product.product-box>
+                                    <x-product.course-item :course=$item>
+                                    </x-product.course-item>
                                 </a>
                             </div>
                         @endforeach
                     </div>
                 </div>
-                <!--
-                <div class="container-fluid product-recommend">
-                    <div class="heading-title" id="tab-title">
-                        數學
-                    </div>
-                    <div class="d-flex flex-wrap">
-                        @foreach($productList as $item)
-                            <div class="pr-3">
-                                <a class="product-hover" href="{{URL::route('site.course')}}">
-                                    <x-product.product-box
-                                        subject="數學"
-                                        subtitle="{{$item['subtitle']}}"
-                                        description="{{$item['description']}}"
-                                        courseName="{{$item['courseName']}}"
-                                        tutor="{{$item['tutor']}}"
-                                        price="{{$item['price']}}">
-
-                                    </x-product.product-box>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="container-fluid product-recommend">
-                    <div class="heading-title" id="tab-title">
-                        經濟
-                    </div>
-                    <div class="d-flex flex-wrap">
-                        @foreach($productList as $item)
-                            <div class="pr-3">
-                                <a class="product-hover" href="{{URL::route('site.course')}}">
-                                    <x-product.product-box
-                                        subject="經濟"
-                                        subtitle="{{$item['subtitle']}}"
-                                        description="{{$item['description']}}"
-                                        courseName="{{$item['courseName']}}"
-                                        tutor="{{$item['tutor']}}"
-                                        price="{{$item['price']}}">
-                                    </x-product.product-box>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="container-fluid product-recommend">
-                    <div class="heading-title" id="tab-title">
-                        物理
-                    </div>
-                    <div class="d-flex flex-wrap">
-                        @foreach($productList as $item)
-                            <div class="pr-3">
-                                <a class="product-hover" href="{{URL::route('site.course')}}">
-                                    <x-product.product-box
-                                        subject="物理"
-                                        subtitle="{{$item['subtitle']}}"
-                                        description="{{$item['description']}}"
-                                        courseName="{{$item['courseName']}}"
-                                        tutor="{{$item['tutor']}}"
-                                        price="{{$item['price']}}">
-                                    </x-product.product-box>
-                                </a>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                -->
             </div>
         </div>
     </div>

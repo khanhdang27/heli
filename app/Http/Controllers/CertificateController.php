@@ -7,6 +7,7 @@ use App\Models\Certificate;
 use App\Models\Subject;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\Certificate\CreateCertificateRequest;
+use App\Models\Course;
 
 class CertificateController extends Controller
 {
@@ -19,7 +20,7 @@ class CertificateController extends Controller
     {
         $certificates = Certificate::all();
         return view('admin.certificate.index',[
-            'certificates' => $certificates
+            'certificates' => $certificates,
         ]);
     }
 
@@ -58,9 +59,12 @@ class CertificateController extends Controller
     public function show(Certificate $certificate)
     {
         $subject = Subject::with('certificate')->get();
+        
+        $courses = Course::all();
         return view('certificate.index', [
             'certificate'=> $certificate,
-            'subject' => $subject
+            'subject' => $subject,
+            'courses' => $courses,
         ]);
     }
 
