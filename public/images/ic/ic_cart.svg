@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <clipPath id="clip-path">
+            <rect id="Rectangle_5" data-name="Rectangle 5" width="40" height="40" transform="translate(1644.427 39)"
+                  fill="#fff" stroke="#707070" stroke-width="1"/>
+        </clipPath>
+    </defs>
+    <g id="Mask_Group_2" data-name="Mask Group 2" transform="translate(-1644.427 -39)" clip-path="url(#clip-path)">
+        <g id="shopping-bag-outline" transform="translate(1664 59)">
+            <g id="shopping-bag-outline-2" data-name="shopping-bag-outline" transform="translate(-20 -20)">
+                <g id="shopping-bag" transform="translate(0)">
+                    <rect id="Rectangle_6" data-name="Rectangle 6" width="40" height="40" transform="translate(0.427)"
+                          fill="#0b487d" opacity="0"/>
+                    <path id="Path_15" data-name="Path 15"
+                          d="M31.858,9.254l-4.77-4.77A5.057,5.057,0,0,0,23.514,3H12.827A5.057,5.057,0,0,0,9.254,4.483l-4.77,4.77A5.057,5.057,0,0,0,3,12.827V28.284a5.057,5.057,0,0,0,5.057,5.057H28.284a5.057,5.057,0,0,0,5.057-5.057V12.827a5.057,5.057,0,0,0-1.483-3.574ZM11.63,6.86a1.77,1.77,0,0,1,1.2-.489H23.514a1.77,1.77,0,0,1,1.2.489l2.882,2.882H8.748ZM28.284,29.97H8.057a1.686,1.686,0,0,1-1.686-1.686V13.114h23.6V28.284A1.686,1.686,0,0,1,28.284,29.97Z"
+                          transform="translate(2.029 2.057)" fill="#0b487d"/>
+                    <path id="Path_16" data-name="Path 16"
+                          d="M19.8,11a1.686,1.686,0,0,0-1.686,1.686,3.371,3.371,0,0,1-6.742,0,1.686,1.686,0,1,0-3.371,0,6.742,6.742,0,0,0,13.485,0A1.686,1.686,0,0,0,19.8,11Z"
+                          transform="translate(5.457 7.542)" fill="#0b487d"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
