@@ -5,6 +5,8 @@ return [
     'stripe_key' => env('STRIPE_KEY',''),
     'stripe_secret' => env('STRIPE_SECRET',''),
 
+    'home_url' => env('APP_HOME_URL', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

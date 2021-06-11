@@ -49,8 +49,8 @@
                                 {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('course_type', 'Type') }}
-                                {{ Form::select('course_type', ['1'=>'Live course', '2'=>'Course recorded video'],null,['class'=>'form-control w-50']) }}
+                                {{ Form::label('type', 'Type') }}
+                                {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],null,['class'=>'form-control w-50']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:en', 'Course Description (English)') }}

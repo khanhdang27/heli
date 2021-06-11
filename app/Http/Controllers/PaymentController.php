@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
 
 class PaymentController extends Controller
 {
@@ -16,14 +17,21 @@ class PaymentController extends Controller
     {
         // pi_1J0rEzLVVZaj9HRisGIsSaBT
         $stripe = new \Stripe\StripeClient(
-            'sk_test_51ItjfcLVVZaj9HRiH9TmpDEEpWONVWYUN3NjLWyiUxIkyeX3k6dGcy58ncttRNL8icJ4SNigxfKiqvC0BVnyK0kH00P1Biny37'
+            config('app.stripe_secret')
           );
-        $pay_intent = $stripe->paymentIntents->retrieve(
-            'pi_1J0rEzLVVZaj9HRisGIsSaBT',
+        $payment_intent = $stripe->paymentIntents->retrieve(
+            $request->query('payment_intent'),
             []
         );
-        dd($pay_intent);
-        dd($request->query());
+
+        $order = Order::create_instance([
+            'user_id' => Auth::user()->id,
+            'course_id' => $payment_intent->course_id ?? 1,
+            'price' => $payment_intent->price ?? 20,
+            'discount' => $payment_intent->discount ?? 0,
+            'total' => $payment_intent->price * (1 - $payment_intent->discount),
+        ]);
+        $order->nextAction($payment_intent);
     }
 
     /**

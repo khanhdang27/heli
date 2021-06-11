@@ -29,6 +29,7 @@ class CreateCourseRequest extends FormRequest
             'course_name:sc' => 'required',
             'subject_id' => 'required',
             'tutor_id' => 'required',
+            'type' => 'required',
             'course_description:en' => 'required',
             'course_description:cn' => 'required',
             'course_description:sc' => 'required',

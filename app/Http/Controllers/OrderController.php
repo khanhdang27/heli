@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
 use App\Models\Order;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -24,7 +26,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $stripe = Auth::user()->stripe_id;
         $user = Cashier::findBillable($stripe);
@@ -36,8 +38,21 @@ class OrderController extends Controller
                 'intent' => Auth::user()->createSetupIntent()
             ]);
         } else {
-            $order = new Order();
-            $order->createPaymentIntent($paymentMethods[0]);
+            $course_id = $request->query('course_id');
+            $course_detail = Course::find($course_id);
+            $order = Order::create_instance([
+                'user_id'=> $course_detail->user_id,
+                'course_id'=> $course_detail->course_id,
+                'price'=> $course_detail->price,
+                'discount'=> 0, //$course_detail->discount,
+                'total'=> $course_detail->total,
+            ]);
+            $result = $order->createPaymentIntent($paymentMethods[0]);
+            if ($result instanceof RedirectResponse ) {
+                return $result;
+            } else {
+                return view('order-details', ['order' => $result]);
+            }
         }
     }
 

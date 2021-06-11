@@ -51,8 +51,8 @@
                                     $course->tutor->id, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
-                                {{ Form::label('course_type', 'Type') }}
-                                {{ Form::select('course_type', ['1'=>'Live course', '2'=>'Course recorded video'],$course->type,['class'=>'form-control w-50']) }}
+                                {{ Form::label('type', 'Type') }}
+                                {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],$course->type,['class'=>'form-control w-50']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_price', 'Course Price') }}

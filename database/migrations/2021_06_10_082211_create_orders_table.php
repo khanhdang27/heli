@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
                 ->constrained('users')
                 ->cascadeOnDelete();
             $table->string('payment_id');
-            $table->string('course_id')
+            $table->foreignId('course_id')
                 ->constrained('courses')
                 ->cascadeOnDelete();
             $table->double('price');

@@ -5,13 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Models\Tutor;
 use App\Models\User;
-use App\Models\Role;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -101,10 +97,9 @@ class ProfileController extends Controller
             );
             $tutor->save();
         }
-
         $user->name = $input['name'];
         $user->save();
-        // return redirect(route('site.profile.show', $user_id));
+        return redirect(route('site.profile.show', $user_id));
 
     }
 

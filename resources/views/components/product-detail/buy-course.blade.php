@@ -5,7 +5,7 @@
     <p class="m-0 teacher-name">{{$courseDetail->tutor->full_name}}</p>
     <p class="price">HKD{{$courseDetail->course_price}}</p>
     @if(\Illuminate\Support\Facades\Auth::check())
-        <a href="#">
+        <a href="{{route('site.order.create', ['course_id'=>$courseDetail->id])}}">
             <div class="btn-primary mt-3 btn-register-now product-btn">
                 @lang('keywords.coursePage.buyNow')
             </div>
