@@ -12,8 +12,17 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($request)
+    public function index(Request $request)
     {
+        // pi_1J0rEzLVVZaj9HRisGIsSaBT
+        $stripe = new \Stripe\StripeClient(
+            'sk_test_51ItjfcLVVZaj9HRiH9TmpDEEpWONVWYUN3NjLWyiUxIkyeX3k6dGcy58ncttRNL8icJ4SNigxfKiqvC0BVnyK0kH00P1Biny37'
+          );
+        $pay_intent = $stripe->paymentIntents->retrieve(
+            'pi_1J0rEzLVVZaj9HRisGIsSaBT',
+            []
+        );
+        dd($pay_intent);
         dd($request->query());
     }
 

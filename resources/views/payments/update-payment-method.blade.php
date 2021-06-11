@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-8 col-xl-6 my-5 border rounded border-secondary">
-
+                
                 <input id="card-holder-name" type="text">
 
                 <!-- Stripe Elements Placeholder -->
@@ -18,7 +18,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="https://js.stripe.com/v3/"></script>
 
