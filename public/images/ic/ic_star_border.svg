@@ -1,6 +1,0 @@
-<svg id="star" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-  <g id="star-2" data-name="star">
-    <rect id="Rectangle_187" data-name="Rectangle 187" width="40" height="40" transform="translate(40) rotate(90)" fill="#e6c06c" opacity="0"/>
-    <path id="Path_191" data-name="Path 191" d="M27.909,33.669a1.667,1.667,0,0,1-.767-.183l-8.5-4.45-8.5,4.45a1.667,1.667,0,0,1-2.417-1.767l1.667-9.383L2.526,15.669a1.642,1.642,0,0,1,.933-2.8l9.5-1.383,4.183-8.55a1.667,1.667,0,0,1,3,0l4.233,8.533,9.5,1.383a1.642,1.642,0,0,1,.933,2.8l-6.867,6.667L29.609,31.7a1.649,1.649,0,0,1-1.7,1.967Z" transform="translate(1.358 1.331)" fill="none" stroke="#e6c06c" stroke-width="2"/>
-  </g>
-</svg>
