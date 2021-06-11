@@ -29,8 +29,10 @@
             <div class="bottom-product2 bg-white p-4">
                 <div class="card-name-product d-flex justify-content-between">
                     <div class="name-product w-70 d-flex flex-column justify-content-between text-primary">
-                        <div class="w-100">
-                            {{$value->course_description}}
+                        <div class="text-multiline-truncate">
+                            <p>
+                                {{rtrim(mb_substr($value->course_description,0,100))}}
+                            </p>
                         </div>
                         <div class="teacher pt-3">
                             {{$value->tutor->full_name}}
@@ -43,9 +45,7 @@
 
                 <div class="price-bar2 d-flex justify-content-end align-items-center">
                     <a class="product-hover" href="{{URL::route('site.course-detail',$value->id)}}">
-                        HK${{$value->course_price}}/ @lang('keywords.course-item.section')
-
-                    <img src="{{asset("images/ic/ic_drop2.svg")}}">
+                        HK${{$value->course_price}}/ @lang('keywords.course-item.section') >
                     </a>
                 </div>
             </div>

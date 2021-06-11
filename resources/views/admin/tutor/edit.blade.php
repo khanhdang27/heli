@@ -32,14 +32,14 @@ use App\Utilities\SelectionByClass;
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('email', 'Tutor email') }}
-                                {{ Form::email('email', $tutor->email, ['class' => 'form-control']) }}
+                                {{ Form::email('email', $tutor->user->email, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('password', 'Password') }}
                                 {{ Form::password('password', ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('tutor_name', 'Tutor name') }}
+                                {{ Form::label('tutor_name', 'Full name') }}
                                 {{ Form::text('tutor_name', $tutor->full_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">

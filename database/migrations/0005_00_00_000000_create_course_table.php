@@ -23,6 +23,7 @@ class CreateCourseTable extends Migration
                 ->constrained('tutors')
                 ->cascadeOnDelete();
             $table->integer('type');
+            $table->longText('course_overview');
             $table->double('course_price');
             $table->softDeletes();
             $table->timestamps();

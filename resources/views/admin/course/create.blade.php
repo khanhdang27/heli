@@ -40,29 +40,35 @@
                                 {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
                                 {{ Form::text('course_name:sc',old('course_name:sc'),['class' => 'form-control', 'required']) }}
                             </div>
-                            <div class="form-group ">
-                                {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id', SelectionByClass::getValues(Subject::class,'subject_name','id') ,null, ['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('tutor_id', 'Tutor') }}
-                                {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('course_type', 'Type') }}
-                                {{ Form::select('course_type', ['1'=>'Live course', '2'=>'Course recorded video'],null,['class'=>'form-control w-50']) }}
+                            <div class="d-flex flex-wrap justify-content-between">
+                                <div class="form-group w-25">
+                                    {{ Form::label('subject_id', 'Subject') }}
+                                    {{ Form::select('subject_id', SelectionByClass::getValues(Subject::class,'subject_name','id') ,null, ['class' => 'form-control']) }}
+                                </div>
+                                <div class="form-group w-25">
+                                    {{ Form::label('tutor_id', 'Tutor') }}
+                                    {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
+                                </div>
+                                <div class="form-group w-25">
+                                    {{ Form::label('type', 'Type') }}
+                                    {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],null,['class'=>'form-control']) }}
+                                </div>
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:en', 'Course Description (English)') }}
-                                {{ Form::textarea('course_description:en',old('course_description:en'),['class' => 'form-control', 'required']) }}
+                                {{ Form::text('course_description:en',old('course_description:en'),['class' => 'form-control', 'required']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:cn', 'Course Description (Traditional Chinese)') }}
-                                {{ Form::textarea('course_description:cn',old('course_description:cn'),['class' => 'form-control', 'required']) }}
+                                {{ Form::text('course_description:cn',old('course_description:cn'),['class' => 'form-control', 'required']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:sc', 'Course Description (Simplify Chinese)') }}
-                                {{ Form::textarea('course_description:sc',old('course_description:sc'),['class' => 'form-control', 'required']) }}
+                                {{ Form::text('course_description:sc',old('course_description:sc'),['class' => 'form-control', 'required']) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('course_overview', 'Course Overview') }}
+                                {{ Form::textarea('course_overview',old('course_overview'),['class' => 'form-control','id'=>'ckeditor', 'required']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_price', 'Course Price') }}
@@ -78,4 +84,10 @@
             </div>
         </div> <!-- / .row -->
     </div>
+    <script>
+
+        window.onload = function () {
+            CKEDITOR.replace('ckeditor');
+        };
+    </script>
 @endsection

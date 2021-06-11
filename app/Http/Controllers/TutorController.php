@@ -24,7 +24,7 @@ class TutorController extends Controller
     {
         $subjects = Subject::all();
         $tutors = Tutor::query()
-            ->with('subject', 'translations', 'avatar')
+            ->with('subject', 'translations', 'avatar','user')
             ->when(request('name') != '', function (Builder $query) {
                 $query->where('full_name', 'like', '%' . request('name') . '%');
             })

@@ -345,6 +345,18 @@ html, body {
     font-size: 15pt;
     font-weight: 600;
 }
+.text-multiline-truncate{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    display: -moz-box;
+    -moz-box-orient: vertical;
+}
+.top-course-detail{
+    max-width: 430px;
+}
 /*TAB PRODUCT-----------------------------------------*/
 .product-tab {
     padding-bottom: 4.6rem;
@@ -862,20 +874,19 @@ video {
 
 .show-news-item {
     margin: 0 auto;
-    width: fit-content;
-    height: fit-content;
+    height: 320px;
+    width: 650px;
+    overflow-y: auto;
 }
 
 .show-news-item-collapse {
     display: none;
     margin: 0 auto;
-    width: fit-content;
     height: fit-content;
 }
 
 .news-item {
     padding: 3rem;
-    max-width: 600px;
 }
 
 .bottom-collapse {
