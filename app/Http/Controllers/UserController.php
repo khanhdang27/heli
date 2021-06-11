@@ -51,7 +51,7 @@ class UserController extends Controller
         $user->save();
         $roleUser = new RoleUser(['user_id' => $user->id, 'role_id' => '2']);
         $roleUser->save();
-        return back()->with('success', 'Delete success');
+        return back()->with('success', 'Save success');
     }
 
     /**

@@ -12,10 +12,10 @@
     @else
         <div class="banner">
         @include('categories-bar')
-        <!--Banner component------------>
             @if(Auth::user()==null)
                 <x-home.banner :banner=$banners></x-home.banner>
             @else
+                <!-- #region Video -->
                 <div class="top-page-loggedin">
                     <div class="container text-center title-news text-secondary">
                         @lang('keywords.latestNewsPage')
@@ -35,6 +35,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- #endregion -->
             @endif
         </div>
         <div class="body-content">
@@ -67,7 +68,6 @@
             <div class="product-tab">
                 @include('home.product-tab')
             </div>
-            <!--Register Step component--------------->
             @if(Auth::user()==null)
                 <x-home.step-register></x-home.step-register>
             @endif
@@ -115,7 +115,6 @@
                         <x-login.register-modal></x-login.register-modal>
                     </div>
                 </div>
-                <!--Review from customer component-->
                 <x-home.review></x-home.review>
             @endif
         </div>
