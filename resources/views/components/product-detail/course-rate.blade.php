@@ -3,8 +3,6 @@ $guestPhoto = 'images/ava2.jpg';
 $guestName = 'Kenny Or';
 $content = 'Nice!';
 $courseName = 'IELTS 英文課程 第一部分講解';
-$star = 'O O O O O';
-$rate = '4.5/5';
 $date = '10/03/2021'
 ?>
 <div>
@@ -20,9 +18,12 @@ $date = '10/03/2021'
                     <div class="name-course text-primary">{{$courseName}}</div>
                 </div>
                 <div class="rating">
-                    <div class="d-flex">
-                        <div>{{$star}}</div>
-                        <p class="point text-primary">{{$rate}}</p>
+                    <div class="d-flex align-items-center">
+                        @for ($i = 0; $i < 4; $i++)
+                            <img src="{{asset('images/ic/ic_star.svg')}}" width="24">
+                        @endfor
+                        <img src="{{asset('images/ic/ic_star_border.svg')}}" width="24">
+                        <p class="point mb-0 text-primary ml-3">4.5/5</p>
                     </div>
                     <div class="text-primary">{{$date}}</div>
                 </div>

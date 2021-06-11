@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Course;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,9 +28,13 @@ class HomeController extends Controller
     {
         $banners = Banner::query()->orderByDesc('created_at')->first();
         $courses = Course::with('subject','tutor', 'certificate')->get();
+        $courseVideo = Course::with('tutor')->first();
+        $news = News::query()->orderByDesc('created_at')->limit(8)->get();
         return view('home.home-page',[
             'banners' => $banners,
-            'courses' => $courses
+            'courses' => $courses,
+            'courseVideo'=>$courseVideo,
+            'news' => $news
         ]);
 
     }

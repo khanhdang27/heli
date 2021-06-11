@@ -116,6 +116,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.news.index') active @endif"
+                       href="{{ route('admin.news.index') }}">
+                        <i class="fe fe-clipboard"></i> News
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.roles.index') active @endif"
                        href="{{ route('admin.roles.index') }}">
                         <i class="fe fe-clipboard"></i> Roles

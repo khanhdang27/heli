@@ -18,9 +18,9 @@
                         @foreach($courses as $item)
                             <div class="pr-3">
                                 <a class="product-hover" href="{{URL::route('site.course')}}">
-                                    <x-product.course-item
+                                    <x-product.course-list
                                         :course=$item>
-                                    </x-product.course-item>
+                                    </x-product.course-list>
                                 </a>
                             </div>
                         @endforeach
@@ -34,9 +34,9 @@
                         @foreach($courses as $item)
                             <div class="pr-3">
                                 <a class="product-hover" href="{{URL::route('site.course')}}">
-                                    <x-product.course-item
+                                    <x-product.course-list
                                         :course=$item>
-                                </x-product.course-item>
+                                </x-product.course-list>
                                 </a>
                             </div>
                         @endforeach

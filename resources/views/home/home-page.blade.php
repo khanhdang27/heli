@@ -20,10 +20,19 @@
                     <div class="container text-center title-news text-secondary">
                         @lang('keywords.latestNewsPage')
                     </div>
-                    <div class="news-item mx-auto">
-                        @for($news=0; $news<7;$news++)
-                            <p class="news-title m-0">8/1 Ms. Polly Leung 最新實時直播課程</p>
-                        @endfor
+                    <div class="news-item">
+                        <div class="show-news-item">
+                            @if(empty($new))
+                                <h3>News not found</h3>
+                            @else
+                                @foreach($news as $item)
+                                    <a class="news-title text-primary">
+                                        {{substr($item->updated_at,-14,6)}}
+                                        {{$item->news_title}}
+                                    </a>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
             @endif
@@ -52,7 +61,7 @@
                     <div class="heading-title" id="tab-title">
                         @lang('keywords.hotCourseSeries')...
                     </div>
-                    {{--                <x-product.course-list></x-product.course-list>--}}
+                    <x-product.course-list :courseItem=$courses></x-product.course-list>
                 </div>
             @endif
             <div class="product-tab">
@@ -63,7 +72,7 @@
                 <x-home.step-register></x-home.step-register>
             @endif
             @if(Auth::user()==null)
-                <x-home.video-course></x-home.video-course>
+                <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
                 <div class="d-flex justify-content-end pr-3">
                     <div class="text-left w-25">
                         <button class="btn-register-now mt-0 mb-4 btn-primary" id="" data-toggle="modal"
@@ -80,7 +89,7 @@
                             @lang('keywords.otherPurchasedCourses')
                         </button>
                     </div>
-                    <x-home.video-course></x-home.video-course>
+                    <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
                 </div>
             @endif
             @if(Auth::user()==null)

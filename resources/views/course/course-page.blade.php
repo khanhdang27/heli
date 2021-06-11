@@ -6,7 +6,7 @@
     @include('layout.sub-header')
     <div class="body-content">
         <div class="container-fluid">
-            <x-home.video-course></x-home.video-course>
+            <x-home.video-course :courseDetail=$courseDetail></x-home.video-course>
         </div>
         <div class="container-fluid d-flex justify-content-center pb-5">
             <div class="row container-fluid p-0 show-menu-tab">
