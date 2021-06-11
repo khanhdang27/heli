@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UserLoginRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 
 class LoginController extends Controller
@@ -42,18 +41,27 @@ class LoginController extends Controller
 
     }
 
-    public function login(UserLoginRequest $request)
+    public function login(Request $request)
     {
-        if (Auth::attempt($request->validated())) {
+        if (empty($request->get('email'))) {
+            return response()->json([
+                'status' => 400,
+                'message' => 'empty'
+            ]);
+        }
+        if (Auth::attempt($request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]))) {
             return response()->json([
                 'status' => 200,
                 'message' => 'success'
-            ], 200);
+            ]);
         }
         return response()->json([
             'status' => 400,
             'message' => 'fail'
-        ], 400);
+        ]);
 
     }
 

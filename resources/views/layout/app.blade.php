@@ -17,6 +17,7 @@
     <link href="{{ asset('css/style-logged.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-calendar.css')}}" rel="stylesheet">
     <link href="{{ asset('css/toast.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/toastr.css')}}" rel="stylesheet">
     <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
 </head>
 <body>
@@ -27,6 +28,7 @@
 <script src="{{ asset('js/bootstrap.min.js')}}"></script>
 <script src="{{ asset('js/lib/main.js')}}"></script>
 <script src="{{ asset('js/home/app.js')}}"></script>
+<script src="{{ asset('js/toastr.min.js')}}"></script>
 @stack('likePost')
 @include('layout.footer')
 </div>

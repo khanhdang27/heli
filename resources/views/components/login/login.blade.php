@@ -77,9 +77,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <!-- Modal footer -->
         </div>
     </div>
@@ -100,34 +98,27 @@
                     url: "{{ route('site.userLogin') }}",
                     data: formData
                 }).done(function (data) {
-                    if(data.status == 200) {
+                    if(data['message']=='success') {
+                        toastr["success"]("@lang('keywords.toast.loginSuccess')");
                         location.reload()
+                    }else if(data['message']=='empty'){
+                        toastr["error"]("","@lang('keywords.toast.pleaseEnterEmailPass')");
                     }
                     else {
-                        ToastLogin("Email or password incorrect");
+                      toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
                     }
                 })
             });
         })
-
-        function ToastLogin(content, status) {
-            var color = '#fff';
-            if (status == 'warning') {
-                color = '#ffc107';
-            } else if (status == 'error') {
-                color = '#dc3545';
+        toastLogin();
+        function toastLogin(){
+            toastr.options = {
+                "closeButton": true,
+                "newestOnTop": false,
+                "positionClass": "toast-bottom-right",
+                "timeOut": false,
+                "extendedTimeOut": false,
             }
-            var snackbar = document.getElementById("snackbarLogin");
-            var contentToastLogin = document.getElementById("contentToastLogin");
-
-            contentToastLogin.innerHTML = content;
-            contentToastLogin.style.color = 'red';
-            snackbar.style.backgroundColor = color;
-            snackbar.className = "show";
-
-            setTimeout(function () {
-                snackbar.className = snackbar.className.replace("show", "");
-            }, 3000);
         }
     </script>
 @endpush

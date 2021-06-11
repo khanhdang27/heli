@@ -19,9 +19,10 @@ return [
     'registerModal' => [
         'freeRegistration' => 'Free registration',
         'experienceCourse' => 'Experience course',
-        'onlineAndRealTimeCourse'=> 'Online courses and real-time courses',
+        'onlineAndRealTimeCourse' => 'Online courses and real-time courses',
     ],
-    'footer' => ['searchForCourses' => 'Search for courses',
+    'footer' => [
+        'searchForCourses' => 'Search for courses',
         'policy' => 'Policy',
         'about' => 'About',
         'member' => 'Member',
@@ -106,5 +107,14 @@ return [
         'section' => 'Section',
         'liveCourse' => 'Live course',
         'courseRecord' => 'Course recorded video'
+    ],
+    'toast' =>[
+        'loginSuccess' => 'Login success',
+        'loginFailed' => 'Login failed',
+        'registerSuccess' => 'Register success',
+        'pleaseEnterEmailPass' => 'Please enter your email and password!',
+        'incorrect' => 'Email or password incorrect',
+        'pleaseEnterEmail' => 'Please enter your email!',
+        'pleaseCheckEmail' => 'Please check your email!',
     ]
 ];

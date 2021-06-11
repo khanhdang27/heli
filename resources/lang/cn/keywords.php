@@ -107,7 +107,14 @@ return [
         'section' => '節',
         'liveCourse' => '實時直播課程',
         'courseRecord' => '錄製課程'
+    ],
+    'toast' =>[
+        'loginSuccess' => '登錄成功',
+        'loginFailed' => '登錄失敗',
+        'registerSuccess' => '註冊成功',
+        'pleaseEnterEmailPass' => '請輸入您的電子郵件和密碼!',
+        'incorrect' => '電子郵件或密碼不正確',
+        'pleaseEnterEmail' => '請輸入您的郵箱!',
+        'pleaseCheckEmail' => '請檢查您的電子郵件!',
     ]
-
-
 ];

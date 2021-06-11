@@ -84,34 +84,24 @@
                     url: "{{ route('site.register') }}",
                     data: formData
                 }).done(function (data) {
-                    console.log(data)
-                    // if (data == 0) {
-                    //     Toast("Please enter email!");
-                    // } else {
-                    //     Toast("Register Successed");
-                    // }
+                    if (data == 0) {
+                        toastr["error"]('',"@lang('keywords.toast.pleaseEnterEmail')");
+                    } else {
+                        toastr["success"]("@lang('keywords.toast.pleaseCheckEmail')", "@lang('keywords.toast.registerSuccess')");
+                    }
                 });
             });
         });
-
-        function Toast(content, status) {
-            var color = '#fff';
-            if(status == 'warning'){
-                color = '#ffc107';
-            }else if(status == 'error'){
-                color = '#dc3545';
+        toastRegister();
+        function toastRegister(){
+            toastr.options = {
+                "closeButton": true,
+                "newestOnTop": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": true,
+                "timeOut": false,
+                "extendedTimeOut": false,
             }
-            var snackbar = document.getElementById("snackbar");
-            var contentToast = document.getElementById("contentToast");
-
-            contentToast.innerHTML = content;
-            contentToast.style.color= 'red';
-            snackbar.style.backgroundColor = color;
-
-            snackbar.className = "show";
-
-            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
         }
-
     </script>
 @endpush
