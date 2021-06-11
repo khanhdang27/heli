@@ -38,7 +38,6 @@
                                 {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
                                 {{ Form::text('course_name:sc', $course->translate('sc')->course_name, ['class' => 'form-control']) }}
                             </div>
-<<<<<<< HEAD
                             <div class="d-flex flex-wrap justify-content-between">
                                 <div class="form-group w-25">
                                     {{ Form::label('subject_id', 'Subject') }}
@@ -56,27 +55,6 @@
                                     {{ Form::label('type', 'Type') }}
                                     {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],$course->type,['class'=>'form-control']) }}
                                 </div>
-=======
-                            <div class="form-group ">
-                                {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id',
-                                    SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),
-                                    $course->subject->id, ['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('tutor_id', 'Tutor') }}
-                                {{ Form::select('tutor_id',
-                                    SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'),
-                                    $course->tutor->id, ['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('type', 'Type') }}
-                                {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],$course->type,['class'=>'form-control w-50']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_price', 'Course Price') }}
-                                {{ Form::text('course_price', $course->course_price, ['class' => 'form-control']) }}
->>>>>>> trung_order
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:en', 'Course Description (English)') }}

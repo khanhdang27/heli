@@ -46,7 +46,7 @@ class Order extends Model
         );
 
         $payment_intent = $stripe->paymentIntents->create([
-            'amount' => $this->price * 100,
+            'amount' => 20 * 100,
             'currency' => 'usd',
             'payment_method' => $payment->id,
             'confirm' => true,
@@ -55,7 +55,7 @@ class Order extends Model
                 'course_id'=> $this->course_id,
                 'user_id' => $this->user_id,
                 'price' => $this->price,
-                'discount' => $this->discount,
+                'discount' => 0,//$this->discount,
             ],
             'return_url' => config('app.home_url'). '/payment'
         ]);
@@ -64,7 +64,7 @@ class Order extends Model
 
     public function nextAction($intent)
     {
-        
+
         switch ($intent->status) {
             case self::$succeeded:
                 $this->status = self::$ORDER_STATUS_SUCCEEDED;
@@ -82,6 +82,5 @@ class Order extends Model
         $this->total = $this->price *(1 - $this->discount);
 
         return $this->save();
-
     }
 }
