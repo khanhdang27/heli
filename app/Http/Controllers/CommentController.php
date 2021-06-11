@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\Post;
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
 {
@@ -55,6 +56,7 @@ class CommentController extends Controller
             $post->comment_no   =   $post->comment_no+1;
             $post->save();
         }
+        return back();
     }
 
     /**

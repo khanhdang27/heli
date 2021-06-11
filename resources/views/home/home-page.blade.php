@@ -3,7 +3,7 @@
 @section('title','Home Page')
 
 @section('content')
-    @if (empty($courses))
+    @if (empty($courses[0]))
         <div class="d-flex justify-content-center">
             <H3>
                 No Data Of Course
@@ -22,7 +22,7 @@
                     </div>
                     <div class="news-item">
                         <div class="show-news-item">
-                            @if(empty($new))
+                            @if(empty($news))
                                 <h3>News not found</h3>
                             @else
                                 @foreach($news as $item)

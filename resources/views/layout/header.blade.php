@@ -82,7 +82,7 @@
                 @else
                 <div class="p-3">
                     <a class="text-center"
-                       href="{{ URL::route('site.user.my-course') }}">@lang('keywords.footer.myCourses')
+                       href="#">@lang('keywords.footer.myCourses')
                     </a>
                 </div>
                 <div class="p-3">

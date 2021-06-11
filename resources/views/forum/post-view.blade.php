@@ -46,11 +46,7 @@
                         <div class="text-28">
                             <span class="mr-3"><img class="ic-action"
                                                     src="{{asset("images/ic/ic_bookmark.svg")}}"></span>
-{{--                            {!! Form::open(['url' => URL::route('user.user-like.store'), 'enctype' => 'multipart/form-data' ]) !!}--}}
-{{--                            {{ Form::text('user_id',$post->user_id,['hidden'=>true]) }}--}}
-{{--                            {{ Form::text('post_id',$post->id,['hidden'=>true]) }}--}}
-{{--                            {{ Form::submit(null, ['class'=>'btn-like mt-5 float-right']) }}--}}
-{{--                            {!! Form::close() !!}--}}
+
                             <button id="likePost" class="mr-5 border-0 bg-white text-primary"><img class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">{{$post->like_no}}</button>
                             <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}</span>
 
@@ -80,7 +76,7 @@
                         Add your answer
                     </p>
                     <div class="card card-body">
-                        {!! Form::open(['url' => URL::route('user.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
+                        {!! Form::open(['url' => URL::route('site.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
                             {{ Form::label('detail', 'Content') }}
                             {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3']) }}
@@ -129,7 +125,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: "POST",
-                    url: "{{ route('user.user-like.store') }}",
+                    url: "{{ route('site.user-like.store') }}",
                     data: {post_id: post_id, user_id:user_id}
                 })
                 console.log("ok");

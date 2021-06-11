@@ -1,10 +1,10 @@
-
 @font-face {
     font-family: PingFangTC;
     src: url('../fonts/PingFang.ttc') format('truetype');
 }
 
-html, body {
+html,
+body {
     font-size: 10.5pt;
     background-color: var(--white);
     font-family: PingFangTC;
@@ -18,13 +18,14 @@ html, body {
 }
 
 .body-content {
-
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
 }
 
+
 /*HEADER-----------------------------------------*/
+
 .header-top {
     padding: 1rem;
     display: flex;
@@ -35,7 +36,6 @@ html, body {
 .logo {
     width: 17rem;
 }
-
 
 .item-mentorTeam {
     padding-right: 0.5rem;
@@ -48,7 +48,6 @@ html, body {
 .dropdown-menu {
     z-index: 1002;
 }
-
 
 .btn-cart {
     border: none;
@@ -63,7 +62,6 @@ html, body {
     outline: none;
 }
 
-
 .btn-header {
     font-size: 20px;
     min-width: 85px;
@@ -73,6 +71,7 @@ html, body {
     margin-left: 1rem;
     margin-right: 0.5rem;
 }
+
 .btn-header:hover {
     cursor: pointer;
     background-color: #294157;
@@ -94,20 +93,17 @@ html, body {
     position: relative;
 }
 
-
 .dropdown-item {
     color: #fff;
-
 }
-
 
 .nav-item {
     padding-left: 2rem;
     padding-right: 2rem;
     display: flex;
     justify-content: center;
-
 }
+
 .search {
     border: 2px solid #0B487D;
     border-radius: 20px;
@@ -151,8 +147,7 @@ html, body {
     text-align: center;
 }
 
-
-.links > a {
+.links>a {
     color: #636b6f;
     padding: 0 25px;
     font-size: 13px;
@@ -180,10 +175,14 @@ html, body {
     height: 100%;
     outline: none;
 }
-.item-header{
-    padding:0 0 0 1rem !important;
+
+.item-header {
+    padding: 0 0 0 1rem !important;
 }
+
+
 /*BANNER-----------------------------------------*/
+
 .img {
     width: 100%;
 }
@@ -191,12 +190,13 @@ html, body {
 .banner-content {
     width: 100%;
     position: relative;
-
 }
-.banner-background{
+
+.banner-background {
     height: 600px;
     opacity: 0.7;
 }
+
 .banner-content img {
     display: block;
     width: 100%;
@@ -210,9 +210,11 @@ html, body {
     width: 55.5vw;
     height: auto;
 }
-.banner-title{
+
+.banner-title {
     width: 500px;
 }
+
 .banner-info {
     z-index: 1000;
     position: absolute;
@@ -225,9 +227,7 @@ html, body {
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
     margin-bottom: 2.5vw;
     line-height: 1.45;
-
 }
-
 
 .free {
     min-height: 2.45vw;
@@ -239,7 +239,6 @@ html, body {
     .free {
         font-size: 15px !important;
     }
-
     .banner-caption {
         font-size: 25px;
     }
@@ -251,7 +250,9 @@ html, body {
     }
 }
 
+
 /*PRODUCT BOX DISCOUNT-------------------------------------*/
+
 .discount-product {
     max-width: 90%;
     padding-bottom: 4.6rem;
@@ -323,7 +324,9 @@ html, body {
     padding-right: 1rem;
 }
 
+
 /*PRODUCT BOX 2---------------------------------------*/
+
 .card-name-product {
     min-height: 125px;
     font-size: 21px;
@@ -345,19 +348,23 @@ html, body {
     font-size: 15pt;
     font-weight: 600;
 }
-.text-multiline-truncate{
+
+.text-multiline-truncate {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-
     display: -moz-box;
     -moz-box-orient: vertical;
 }
-.top-course-detail{
+
+.top-course-detail {
     max-width: 430px;
 }
+
+
 /*TAB PRODUCT-----------------------------------------*/
+
 .product-tab {
     padding-bottom: 4.6rem;
 }
@@ -396,14 +403,14 @@ html, body {
     .menu-category {
         display: none;
     }
-
     .menu-category-text {
-
         display: flex !important;
     }
 }
 
+
 /*STEP FOR REGISTER-----------------------------------------*/
+
 .step-for-register {
     padding-bottom: 3.6rem;
 }
@@ -448,14 +455,12 @@ html, body {
     width: 289px;
     display: flex;
     justify-content: space-between;
-
 }
 
 .list-dot {
     width: 15px;
     height: 15px;
     border-radius: 20px;
-
 }
 
 #btn-register-step {
@@ -466,18 +471,17 @@ html, body {
     .row-step {
         display: none;
     }
-
     .content-step {
         padding-top: 1rem;
     }
-
     .title-step {
         padding: 1.5rem 0 0 0;
     }
-
 }
 
+
 /*SHOW VIDEO-----------------------------------------*/
+
 .container-video {
     border-top: 3px solid;
     border-bottom: 3px solid;
@@ -513,36 +517,45 @@ video {
     overflow-y: auto;
 }
 
+
 /* width */
+
 ::-webkit-scrollbar {
     width: 5px;
 }
 
+
 /* Track */
+
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px #fff;
     border-radius: 10px;
 }
 
+
 /* Handle */
+
 ::-webkit-scrollbar-thumb {
     background: #0B487D;
     border-radius: 10px;
 }
 
+
 /* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
     background: #b30000;
 }
 
+
 /*FREE CLASS-----------------------------------------*/
+
 .free-class-container {
     background-image: url("../images/freeclass-bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     padding: 5rem 0 5rem 0;
 }
-
 
 .border-right-radius {
     border: 10px solid;
@@ -558,7 +571,7 @@ video {
     font-weight: 600;
 }
 
-.text-advertisement{
+.text-advertisement {
     text-align: center;
     max-width: 405px;
 }
@@ -568,7 +581,6 @@ video {
         font-size: 25px;
         padding-right: 3rem;
     }
-
 }
 
 .circle-check {
@@ -583,7 +595,6 @@ video {
         width: 106px;
         height: 106px;
     }
-
     .circle-check img {
         width: 83px;
     }
@@ -610,6 +621,7 @@ video {
     }
 }
 
+
 /*GUEST PRAISE-----------------------------------------*/
 
 .title-card {
@@ -624,7 +636,6 @@ video {
     flex-direction: column;
     align-items: center;
 }
-
 
 .avatar-guest {
     border-radius: 200px;
@@ -653,14 +664,17 @@ video {
 .praise-box {
     margin-bottom: 12rem;
 }
+
+
 /*FOOTER--------------------------------------------------------------------------------------------------*/
+
 .footer-builder {
     border: 2px solid;
 }
 
 
-
 /*LOGIN MODAL--------------------------------------------------------------------------------------------------*/
+
 @media (min-width: 1200px) {
     .modal-login-xl {
         max-width: 1369px;
@@ -680,12 +694,14 @@ video {
     max-width: 1369px;
     padding: 3rem 0;
 }
-.modal-register-component{
+
+.modal-register-component {
     border-radius: 0;
     border: 3px solid #E6C06C;
     background-color: rgba(15, 34, 51, 0.8);
     min-height: 600px;
 }
+
 .box-btn-login {
     max-width: 559px;
 }
@@ -740,9 +756,7 @@ video {
     padding: 0 2.56rem;
 }
 
-.login-right {
-
-}
+.login-right {}
 
 .input-login {
     max-width: 559px;
@@ -756,7 +770,6 @@ video {
 #item1 {
     margin-bottom: 1rem;
 }
-
 
 .rememberCheck {
     display: block;
@@ -781,11 +794,9 @@ video {
 
 .check:before {
     background-color: #fff;
-
 }
 
-.rememberCheck input[type="checkbox"]:checked + .check {
-
+.rememberCheck input[type="checkbox"]:checked+.check {
     background-color: dodgerblue;
 }
 
@@ -798,7 +809,6 @@ video {
 .input-login-item:focus {
     outline: none;
 }
-
 
 .bottom-form {
     padding: 2.8rem 0 0 2.6rem;
@@ -821,14 +831,12 @@ video {
 
 .bottom-btn {
     max-width: 559px;
-
 }
 
 .already-member {
     max-width: 559px;
     font-size: 22.5pt;
     margin-top: 2.6rem;
-
 }
 
 .text-login-left {
@@ -854,7 +862,9 @@ video {
     }
 }
 
+
 /*LATEST NEW PAGE--------------------------------------------------------------------------------------------------*/
+
 .body-news-page {
     background-image: url("../images/BG_news.jpg");
     background-repeat: no-repeat;
@@ -908,7 +918,8 @@ video {
 .btn-more:focus {
     outline: none;
 }
-.text-14{
+
+.text-14 {
     font-size: 10.5pt;
 }
 
@@ -923,20 +934,26 @@ video {
 .popular-articles-item-content {
     flex: 0 60%;
 }
-.popular-articles-right{
+
+.popular-articles-right {
     height: 750px;
     overflow-y: auto;
 }
-.card-profile{
+
+.card-profile {
     max-width: 700px;
 }
+
+
 /*CARD PAYMENT--------------------------------------------------------------------------------------------------*/
-.card-pay{
+
+.card-pay {
     max-width: 450px;
     height: 240px;
     border-radius: 10px;
 }
-.card-before{
+
+.card-before {
     left: 31%;
     bottom: 25%;
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
