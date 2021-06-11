@@ -49,36 +49,28 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div id="home" class="container-fluid tab-pane active">
-            <div>
-                <div class="heading-title text-primary" id="tab-title">
-                    @lang('keywords.hotCourseSeries')
-                </div>
-{{--                <x-product.course-list></x-product.course-list>--}}
+            <div class="heading-title text-primary" id="tab-title">
+                @lang('keywords.hotCourseSeries')
             </div>
+            {{--                <x-product.course-list></x-product.course-list>--}}
         </div>
         <div id="menu1" class="container-fluid tab-pane fade"><br>
-            <div>
-                <div class="heading-title text-primary" id="tab-title">
-                    @lang('keywords.hotCourseSeries')
-                </div>
-{{--                <x-product.course-list></x-product.course-list>--}}
+            <div class="heading-title text-primary" id="tab-title">
+                @lang('keywords.hotCourseSeries')
             </div>
+            {{--                <x-product.course-list></x-product.course-list>--}}
         </div>
         <div id="menu2" class="container-fluid tab-pane fade"><br>
-            <div>
-                <div class="heading-title text-primary" id="tab-title">
-                    @lang('keywords.hotCourseSeries')
-                </div>
-{{--                <x-product.course-list></x-product.course-list>--}}
+            <div class="heading-title text-primary" id="tab-title">
+                @lang('keywords.hotCourseSeries')
             </div>
+            {{--                <x-product.course-list></x-product.course-list>--}}
         </div>
         <div id="menu3" class="container-fluid tab-pane fade"><br>
-            <div>
-                <div class="heading-title text-primary" id="tab-title">
-                    @lang('keywords.hotCourseSeries')
-                </div>
-{{--                <x-product.course-list></x-product.course-list>--}}
+            <div class="heading-title text-primary" id="tab-title">
+                @lang('keywords.hotCourseSeries')
             </div>
+            {{--                <x-product.course-list></x-product.course-list>--}}
         </div>
     </div>
 </div>
