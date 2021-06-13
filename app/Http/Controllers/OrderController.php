@@ -6,6 +6,7 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
 use App\Models\Order;
+use App\Models\StudentCourses;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,20 +40,37 @@ class OrderController extends Controller
             ]);
         } else {
             $course_id = $request->query('course_id');
-            $course_detail = Course::find($course_id);
-            $order = Order::create_instance([
-                'user_id'=> $course_detail->user_id,
-                'course_id'=> $course_detail->course_id,
-                'price'=> $course_detail->price,
-                'discount'=> 0, //$course_detail->discount,
-                'total'=> $course_detail->total,
-            ]);
-            $result = $order->createPaymentIntent($paymentMethods[0]);
-            if ($result instanceof RedirectResponse ) {
-                return $result;
-            } else {
-                return view('order-details', ['order' => $result]);
+
+            $student_bought = StudentCourses::query()->where([
+                'course_id' => $course_id,
+                'student_id' => Auth::user()->id
+            ])->get();
+            // dd($student_bought);
+            if ($student_bought){
+                $course_detail = Course::find($course_id);
+                $order = Order::create_instance([
+                    'user_id'=> Auth::user()->id,
+                    'course_id'=> $course_detail->id,
+                    'price'=> $course_detail->price * 100,
+                    'discount'=> 0, //$course_detail->discount,
+                    'total'=> $course_detail->total,
+                ]);
+                $result = $order->createPaymentIntent($paymentMethods[0]);
+
+                if ($result instanceof RedirectResponse ) {
+                    return $result;
+                } else {
+                    if ($result) {
+                        $student_course = StudentCourses::create([
+                            'course_id' => (int) $course_id,
+                            'student_id' => Auth::user()->id
+                        ]);
+                    }
+                    return view('order.order-detail', ['order' => $result]);
+                }
             }
+            
+            
         }
     }
 

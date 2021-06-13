@@ -29,6 +29,8 @@
 <script src="{{ asset('js/lib/main.js')}}"></script>
 <script src="{{ asset('js/home/app.js')}}"></script>
 <script src="{{ asset('js/toastr.min.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 @stack('likePost')
 @include('layout.footer')
 </div>

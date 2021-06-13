@@ -40,7 +40,6 @@ class Order extends Model
     }
 
     public function createPaymentIntent ($payment) {
-        // dd(config('app.stripe_key'));
         $stripe = new \Stripe\StripeClient(
             config('app.stripe_secret')
         );

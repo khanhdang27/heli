@@ -33,7 +33,7 @@ $list_video = [
     </div>
     <div class="row">
         <div class="col-sm-8">
-            <x-video-course></x-video-course>
+            <x-product-detail.lecture-course></x-product-detail.lecture-course>
         </div>
         <div class="col-sm-4">
             <div class="box-list-video text-primary">

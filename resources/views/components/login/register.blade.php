@@ -45,14 +45,17 @@
                                                     'class'=>'input-login-item',
                                                     'placeholder'=>'Email',
                                                     'autocomplete'=>'off'
-                                                    ]) }}
-                                    <div id="snackbar"><p class="m-0" id="contentToast">Toast</p></div>
+                                        ]) }}
                                 </div>
                                 <div class="bottom-btn">
-                                    {{ Form::submit('Register', [
-                                                    'class'=>'btn-login btn-secondary btn-register-now',
-                                                     'id'=>'btn-register'
-                                                     ]) }}
+                                    
+                                    <button class='btn-login btn-secondary btn-register-now'
+                                        id='btn-register'>
+                                        {{__('Register')}}
+                                        <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none" role="status" aria-hidden="true"></span>
+                                        <span class="sr-only">Loading...</span>
+                                    </button>
+
                                 </div>
                             {!! Form::close() !!}
                             <div class="already-member text-center">
@@ -73,21 +76,37 @@
         $(function () {
             $('#registerForm').submit(function (e) {
                 e.preventDefault();
+                var spinner = $("#spinner-load");
+                var button_regis = $("btn-register");
+
                 let formData = $(this).serializeArray();
                 $(".invalid-feedback").children("strong").text("");
                 $("#registerForm input").removeClass("is-invalid");
+                spinner.removeClass('d-none');
+                button_regis.addClass("disabled")
                 $.ajax({
-                    type: "POST",
+                    type: "post",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     url: "{{ route('site.register') }}",
                     data: formData
                 }).done(function (data) {
-                    if (data == 0) {
-                        toastr["error"]('',"@lang('keywords.toast.pleaseEnterEmail')");
-                    } else {
+                    console.log('data :>> ', data);
+                    if (data.status == 200) {
+                        spinner.addClass('d-none')
                         toastr["success"]("@lang('keywords.toast.pleaseCheckEmail')", "@lang('keywords.toast.registerSuccess')");
+                        button_regis.addClass("disabled")
+
+                    } else if (data.status == 409) {
+                        spinner.addClass('d-none')
+                        toastr["error"]('',"mail is duplicate");
+                        button_regis.addClass("disabled")
+                    
+                    } else {
+                        spinner.addClass('d-none')
+                        toastr["error"]('',"@lang('keywords.toast.pleaseEnterEmail')");
+                        button_regis.addClass("disabled")
                     }
                 });
             });
@@ -99,8 +118,14 @@
                 "newestOnTop": false,
                 "positionClass": "toast-bottom-right",
                 "preventDuplicates": true,
-                "timeOut": false,
-                "extendedTimeOut": false,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "3600",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
             }
         }
     </script>

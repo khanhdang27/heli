@@ -13,7 +13,7 @@
                 
                 <div class="d-flex justify-content-between">
                     <label for="card-holder-name">Card Holder</label>
-                    <input class="w-75" id="card-holder-name form-control" 
+                    <input class="w-75 form-control" id="card-holder-name" 
                         type="text"
                         style="text-transform:uppercase">
                     

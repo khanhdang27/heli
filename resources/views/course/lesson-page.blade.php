@@ -16,7 +16,7 @@
                     <p class="m-0 teacher-name">Ms. Polly Leung</p>
                 </div>
                 <div class="pt-5">
-                    <x-video-course></x-video-course>
+                    <x-product-detail.lecture-course></x-product-detail.lecture-course>
                 </div>
             </div>
 

@@ -21,10 +21,11 @@ class CreateStudentCoursesTable extends Migration
                     ->cascadeOnDelete();
             $table
                 ->foreignId('student_id')
-                    ->constrained('students')
+                    ->constrained('users')
                     ->cascadeOnDelete();
             $table->unique(['student_id', 'course_id']);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
