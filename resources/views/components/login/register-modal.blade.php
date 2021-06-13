@@ -20,6 +20,8 @@
                     <div class="d-flex justify-content-center">
                         <button class="btn-register-now btn-secondary"  data-toggle="modal" data-target="#registerModal" data-dismiss="modal">
                             <span>@lang('keywords.registerNowToExperience')</span>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
                         </button>
                     </div>
                 </div>

@@ -20,7 +20,7 @@ use \App\Utilities\MapData;
  * @property-read \App\Models\CourseTranslation $translation
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CourseTranslation[] $translations
  * @property-read int|null $translations_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\VideoManage[] $videos
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lecture[] $videos
  * @property-read int|null $videos_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course listsTranslations($translationField)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Course newModelQuery()
@@ -45,7 +45,7 @@ use \App\Utilities\MapData;
  */
 class Course extends Model implements TranslatableContract
 {
-    use Translatable;
+    use Translatable, SoftDeletes;
 
 
     protected $table = 'courses';
@@ -53,9 +53,9 @@ class Course extends Model implements TranslatableContract
     public array $translatedAttributes = ['course_name', 'course_description'];
 
 
-    public function videos(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function videos()
     {
-        return $this->hasMany(VideoManage::class, 'course_id');
+        return $this->hasMany(Lecture::class, 'course_id');
     }
 
     public function tutor()

@@ -47,15 +47,19 @@
                                 </div>
                                 <div class="input-login d-flex justify-content-center align-items-center">
                                     {{ Form::password('password', [
-                                                        'class'=> 'input-login-item',
-                                                        'placeholder'=>'Password'
-                                                        ]) }}
+                                        'class'=> 'input-login-item',
+                                        'placeholder'=>'Password'
+                                        ])
+                                    }}
                                 </div>
                                 <div class="bottom-btn">
-                                    {{ Form::submit('login',
-                                                    ['class' => 'btn-login btn-secondary btn-register-now',
-                                                    'id'=>'btn-login'
-                                                    ]) }}
+                                    <button
+                                        class = 'btn-login btn-secondary btn-register-now'
+                                        id = 'btn-login'>
+                                        {{__('Login')}}
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <span class="sr-only">Loading...</span>
+                                    </button>
                                 </div>
                             {!! Form::close() !!}
                             <div class="row bottom-form">

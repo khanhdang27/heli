@@ -675,12 +675,11 @@ video {
 
 /*LOGIN MODAL--------------------------------------------------------------------------------------------------*/
 
-@media (min-width: 1200px) {
-    .modal-login-xl {
-        max-width: 1369px;
-        margin-top: 3rem !important;
-    }
+.modal-login-xl {
+    max-width: 90%;
+    margin-top: 3rem !important;
 }
+
 
 .modal-body-login {
     display: flex;

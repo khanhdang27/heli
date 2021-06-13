@@ -31,5 +31,8 @@ class CourseTranslation extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
+
     protected $table = 'course_translations';
+
+    public $timestamps = TRUE;
 }
