@@ -40,7 +40,9 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $newsValidate = $request->validate([
-           'news_title' => 'required'
+           'title' => 'required',
+            'content' => 'required',
+            'file_id' => 'required'
         ]);
         $news = new News($newsValidate);
         $news->save();

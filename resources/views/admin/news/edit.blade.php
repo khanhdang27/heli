@@ -21,11 +21,18 @@
                     <div class="card-body">
                         <div class="card-body">
                             {!! Form::open(['route' => ['admin.news.update', $news->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
-                            @csrf
+
                             <div class="form-group">
-                                {{ Form::label('news_title', 'News title') }}
-                                {{ Form::text('news_title', $news->news_title, ['class' => 'form-control']) }}
+                                {{ Form::label('title', 'News title') }}
+                                {{ Form::text('title', $news->title, ['class' => 'form-control']) }}
                                 @error('news_title')
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('content', 'News content') }}
+                                {{ Form::textarea('content', $news->content, ['id'=>'ckeditor']) }}
+                                @error('content')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

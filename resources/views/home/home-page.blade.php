@@ -3,7 +3,7 @@
 @section('title','Home Page')
 
 @section('content')
-   
+
     <div class="banner">
     @include('categories-bar')
         @if(Auth::user()==null)
@@ -16,15 +16,13 @@
                 </div>
                 <div class="news-item">
                     <div class="show-news-item">
-                        @if(empty($news))
-                            <h3>News not found</h3>
-                        @else
+                        @if($news!=null)
                             @foreach($news as $item)
-                                <a class="news-title text-primary">
-                                    {{substr($item->updated_at,-14,6)}}
-                                    {{$item->news_title}}
-                                </a>
-                            @endforeach
+                            <a class="news-title text-primary">
+                                {{substr($item->updated_at,-14,6)}}
+                                {{$item->title}}
+                            </a>
+                        @endforeach
                         @endif
                     </div>
                 </div>
@@ -61,7 +59,7 @@
         @if(Auth::user()!=null)
             <div class="mx-auto product-recommend">
                 <div class="heading-title" id="tab-title">
-                    @lang('keywords.hotCourseSeries')...
+                    @lang('keywords.recommendedForYou')...
                 </div>
                 <x-product.course-list :courseItem=$courses></x-product.course-list>
             </div>

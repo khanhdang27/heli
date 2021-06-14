@@ -15,9 +15,9 @@
                         <div class="content-top text-wrap w-75">
                             {{ $value->certificate->certificate_code }}<br>
                             @if($value->type==1)
-                                @lang('keywords.course-item.courseRecord')
-                            @else
                                 @lang('keywords.course-item.liveCourse')
+                            @else
+                                @lang('keywords.course-item.courseRecord')
                             @endif
                         </div>
                         <div class="content-bot">
