@@ -28,7 +28,6 @@
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-<<<<<<< HEAD
                             <div class="form-group ">
                                 {{ Form::label('content', 'News Content') }}
                                 {{ Form::text('content', old('content'),['class' => 'form-control'] ) }}
@@ -40,12 +39,6 @@
                                 {{ Form::label('file_id', 'News File') }}
                                 {{ Form::file('file', old('file_id'),['class' => 'form-control'] ) }}
                                 @error('file')
-=======
-                            <div class="form-group">
-                                {{ Form::label('content', 'News content') }}
-                                {{ Form::textarea('content', old('content'),['id'=>'ckeditor']) }}
-                                @error('content')
->>>>>>> cbeca538f496051b8e1341836e96e22eadd48d3a
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
