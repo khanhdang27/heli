@@ -82,7 +82,7 @@
                 @else
                 <div class="p-3">
                     <a class="text-center"
-                       href="#">@lang('keywords.footer.myCourses')
+                       href="{{ route('site.user.course') }}">@lang('keywords.footer.myCourses')
                     </a>
                 </div>
                 <div class="p-3">

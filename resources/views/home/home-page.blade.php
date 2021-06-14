@@ -22,7 +22,7 @@
                             @foreach($news as $item)
                                 <a class="news-title text-primary">
                                     {{substr($item->updated_at,-14,6)}}
-                                    {{$item->news_title}}
+                                    {{$item->title}}
                                 </a>
                             @endforeach
                         @endif

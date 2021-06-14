@@ -4,7 +4,7 @@ function myFunction() {
     const path = require('path');
     const fs = require('fs');
 
-    const CLIENT_ID ="340748320970-khgr5r86mc2pk8jh8kk54qis0d4qe3gr.apps.googleusercontent.com";
+    const CLIENT_ID = "340748320970-khgr5r86mc2pk8jh8kk54qis0d4qe3gr.apps.googleusercontent.com";
     const CLIENT_SECRET = "_7bPDhZnPURhyCFAL55FEpMi";
     const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
 
@@ -16,34 +16,34 @@ function myFunction() {
         REDIRECT_URI
     );
 
-     oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+    oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-     const drive = google.drive({
-         version: 'v3',
-         auth: oauth2Client,
-     });
-     const filePath = path.join(__dirname, 'intro.mp4');
+    const drive = google.drive({
+        version: 'v3',
+        auth: oauth2Client,
+    });
+    const filePath = path.join(__dirname, 'intro.mp4');
 
-     async function uploadFile() {
-         try {
-             const response = await drive.files.create({
-                 requestBody: {
-                     name: 'minecraft.mp4', //This can be name of your choice
-                     mimeType: 'video/mp4',
-                     parents: ['1BgxWnj0i8TRrYbLQXIjyN0otoLsyZ13R'],
-                 },
-                 media: {
-                     mimeType: 'video/mp4',
-                     body: fs.createReadStream(filePath),
-                 },
-             });
+    async function uploadFile() {
+        try {
+            const response = await drive.files.create({
+                requestBody: {
+                    name: 'minecraft.mp4', //This can be name of your choice
+                    mimeType: 'video/mp4',
+                    parents: ['1BgxWnj0i8TRrYbLQXIjyN0otoLsyZ13R'],
+                },
+                media: {
+                    mimeType: 'video/mp4',
+                    body: fs.createReadStream(filePath),
+                },
+            });
 
-             console.log(response.data);
-         } catch (error) {
-             console.log(error.message);
-         }
-     }
-     uploadFile()
+            console.log(response.data);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    uploadFile()
 
     async function generatePublicUrl() {
         try {
@@ -70,5 +70,3 @@ function myFunction() {
 }
 
 myFunction();
-
-

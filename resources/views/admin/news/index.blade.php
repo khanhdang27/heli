@@ -54,7 +54,7 @@
                                             {{substr($value->updated_at,0,10)}}
                                         </td>
                                         <td>
-                                            {{$value->news_title}}
+                                            {{$value->title}}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

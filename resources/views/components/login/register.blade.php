@@ -12,7 +12,7 @@
                         <div class="col-sm-6 login-left d-flex flex-column justify-content-center">
                             <div class="text-login-left text-center">
                                 @lang('keywords.registerModal.freeRegistration')<br>
-                                @lang('keywords.registerModal.experienceCourse')<br>
+                                @lang('keywords.registerModal.experienceCourse')<br> 
                                 @lang('keywords.registerModal.onlineAndRealTimeCourse')<br>
                             </div>
                         </div>

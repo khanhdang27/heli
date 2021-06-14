@@ -10,4 +10,14 @@ class StudentCourses extends Model
     use SoftDeletes;
     protected $table = 'student_courses';
     protected $guarded = [];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

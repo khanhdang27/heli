@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="price-bar2 d-flex justify-content-end align-items-center">
-                    <a class="product-hover" href="{{URL::route('site.course-detail',$value->id)}}">
+                    <a class="product-hover" href="{{URL::route('site.course.show',$value->id)}}">
                         HK${{$value->course_price}}/ @lang('keywords.course-item.section') >
                     </a>
                 </div>

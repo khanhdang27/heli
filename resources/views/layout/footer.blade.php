@@ -34,7 +34,7 @@
                 <div class="col-lg-2 mb-3">
                     <p class="title-foot">@lang('keywords.footer.member')</p>
                     <a href="#">@lang('keywords.footer.myAccount')</a><br>
-                    <a href="{{ URL::route('site.user.my-course') }}">@lang('keywords.footer.myCourses')</a><br>
+                    <a href="{{ URL::route('site.user.course') }}">@lang('keywords.footer.myCourses')</a><br>
                     <a href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')</a>
                 </div>
             @else

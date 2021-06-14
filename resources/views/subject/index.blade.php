@@ -65,7 +65,7 @@
                     <div class="d-flex flex-wrap">
                         @foreach($productList as $item)
                             <div class="pr-3">
-                                <a class="product-hover" href="{{URL::route('site.course')}}">
+                                <a class="product-hover" href="{{URL::route('site.course.index')}}">
                                     <x-product.course-item
                                         subject="{{$item['subject']}}"
                                         subtitle="{{$item['subtitle']}}"

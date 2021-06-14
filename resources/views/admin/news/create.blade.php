@@ -22,9 +22,23 @@
                         <div class="card-body">
                             {!! Form::open(['route' => 'admin.news.store', 'enctype' => 'multipart/form-data' ]) !!}
                             <div class="form-group ">
-                                {{ Form::label('news_title', 'News title') }}
-                                {{ Form::text('news_title', old('news_title'),['class' => 'form-control'] ) }}
-                                @error('news_title')
+                                {{ Form::label('title', 'News Title') }}
+                                {{ Form::text('title', old('title'),['class' => 'form-control'] ) }}
+                                @error('title')
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('content', 'News Content') }}
+                                {{ Form::text('content', old('content'),['class' => 'form-control'] ) }}
+                                @error('content')
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('file_id', 'News File') }}
+                                {{ Form::file('file', old('file_id'),['class' => 'form-control'] ) }}
+                                @error('file')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
