@@ -17,31 +17,31 @@
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['route' => ['admin.course.video.update', $course->id, $videoManage->id],'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open(['route' => ['admin.course.video.update', $course->id, $lecture->id],'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group ">
                             {{ Form::label('course_video_name:en', 'Video Name (English)') }}
-                            {{ Form::text('course_video_name:en', $videoManage->translate('en')->course_video_name, ['class' => 'form-control']) }}
+                            {{ Form::text('course_video_name:en', $lecture->translate('en')->course_video_name, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_video_name:cn', 'Video Name (Traditional Chinese)') }}
-                            {{ Form::text('course_video_name:cn', $videoManage->translate('cn')->course_video_name, ['class' => 'form-control']) }}
+                            {{ Form::text('course_video_name:cn', $lecture->translate('cn')->course_video_name, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_video_name:sc', 'Video Name (Traditional Chinese)') }}
-                            {{ Form::text('course_video_name:sc', $videoManage->translate('sc')->course_video_name, ['class' => 'form-control']) }}
+                            {{ Form::text('course_video_name:sc', $lecture->translate('sc')->course_video_name, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_video_description:en', 'Video Description (English)') }}
-                            {{ Form::text('course_video_description:en', $videoManage->translate('en')->course_video_description, ['class' => 'form-control']) }}
+                            {{ Form::text('course_video_description:en', $lecture->translate('en')->course_video_description, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_video_description:cn', 'Video Description (Traditional Chinese)') }}
-                            {{ Form::text('course_video_description:cn', $videoManage->translate('cn')->course_video_description, ['class' => 'form-control']) }}
+                            {{ Form::text('course_video_description:cn', $lecture->translate('cn')->course_video_description, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_video_description:sc', 'Video Description (Simplify Chinese)') }}
-                            {{ Form::text('course_video_description:sc', $videoManage->translate('sc')->course_video_description, ['class' => 'form-control']) }}
+                            {{ Form::text('course_video_description:sc', $lecture->translate('sc')->course_video_description, ['class' => 'form-control']) }}
                         </div>
                         <div class="custom-file mb-4">
                             {{ Form::label('course_video_file', 'Video', ['class' => 'custom-file-label']) }}

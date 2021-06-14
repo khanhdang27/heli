@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\RoleUser;
 use App\Models\Student;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -66,23 +63,41 @@ class RegisterController extends Controller
         $input = $request->all();
         $random = Str::random(10);
         if (!empty($input['email'])) {
-            $array = explode('@', $input['email']);
-            $name = reset($array);
-            $user = new User(['name' => $name, 'email' => $input['email'], 'password' => $random]);
-            $user->assignRole(['student']);
-            $user->save();
+            try {
+                $array = explode('@', $input['email']);
+                $name = reset($array);
+                $user = new User(['name' => $name, 'email' => $input['email'], 'password' => $random]);
+                $user->assignRole(['student']);
+                $user->save();
 
-            $student = new Student(['user_id' => $user->id]);
-            $student->save();
+                $student = new Student(['user_id' => $user->id]);
+                $student->save();
 
-            $stripeCustomer = $user->createAsStripeCustomer(['email'=>$input['email']]);
+                $stripeCustomer = $user->createAsStripeCustomer(['email'=>$input['email']]);
 
-            $send_mail = new \App\Mail\SendMail();
-            $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.mail');
-            Mail::to($input['email'])->send($send_mail);
-            return 1;
+                $send_mail = new \App\Mail\SendMail();
+                $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.mail');
+                Mail::to($input['email'])->send($send_mail);
+
+                return response()->json(
+                    [
+                        'status' => 200,
+                        'message' => 'succeed'
+                    ], 200);
+            } catch (\Throwable $th) {
+                return response()->json(
+                    [
+                        'status' => 409,
+                        'message' => 'duplicate'
+                    ], 409);
+            }
+            
         }
-        return 0;
+        return response()->json(
+            [
+                'status' => 400,
+                'message' => 'fails'
+            ], 400);
     }
 
 }

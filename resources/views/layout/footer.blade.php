@@ -1,6 +1,9 @@
 @php
     use App\Utilities\SelectionByClass;
-    $getCertificate = SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_name', 'id');
+    use \App\Models\Certificate;
+
+
+    $getCertificate = SelectionByClass::getValues(Certificate::class, 'certificate_name', 'id');
     $result = key($getCertificate);
 
 @endphp

@@ -7,7 +7,7 @@ use App\Http\Requests\Course\CreateCourseRequest;
 use App\Http\Requests\Course\CreateVideoRequest;
 use App\Http\Requests\Course\UpdateVideoRequest;
 use App\Models\Course;
-use App\Models\VideoManage;
+use App\Models\Lecture;
 use App\Models\Tutor;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
@@ -150,42 +150,42 @@ class CourseController extends Controller
 
     public function storeVideo(Course $course, CreateVideoRequest $request)
     {
-        $videoManage = new VideoManage(
+        $lecture = new Lecture(
             $request->validated()
         );
-        $videoManage->course_video_file = $request->file('course_video_file')->store('video', 'local');
-        $course->videos()->save($videoManage);
+        $lecture->course_video_file = $request->file('course_video_file')->store('video', 'local');
+        $course->videos()->save($lecture);
         return redirect()->route('admin.course.video.index', $course->id)
             ->with('success', 'Create success!');
     }
 
-    public function downloadVideo(Course $course, VideoManage $videoManage)
+    public function downloadVideo(Course $course, Lecture $lecture)
     {
-        return response()->download(storage_path('app/' . $videoManage->course_video_file));
+        return response()->download(storage_path('app/' . $lecture->course_video_file));
     }
 
-    public function editVideo(Course $course, VideoManage $videoManage)
+    public function editVideo(Course $course, Lecture $lecture)
     {
-        $videoManage->load('translations');
+        $lecture->load('translations');
         return view('admin.course.video.edit', [
             'course'      => $course,
-            'videoManage' => $videoManage
+            'lecture' => $lecture
         ]);
     }
 
-    public function updateVideo(Course $course, VideoManage $videoManage, UpdateVideoRequest $request)
+    public function updateVideo(Course $course, Lecture $lecture, UpdateVideoRequest $request)
     {
-        $fileDelete = $videoManage->course_video_file;
+        $fileDelete = $lecture->course_video_file;
         $changeFile = false;
-        $videoManage->fill(
+        $lecture->fill(
             $request->validated()
         );
         if ($request->hasFile('course_video_file')) {
-            $videoManage->course_video_file = $request->file('course_video_file')->store('video', 'local');
+            $lecture->course_video_file = $request->file('course_video_file')->store('video', 'local');
             $changeFile = true;
         }
 
-        $videoManage->save();
+        $lecture->save();
         if ($changeFile) {
             Storage::disk('local')->delete($fileDelete);
         }
@@ -193,11 +193,11 @@ class CourseController extends Controller
             ->with('success', 'Create success!');
     }
 
-    public function destroyVideo(Course $course, VideoManage $videoManage)
+    public function destroyVideo(Course $course, Lecture $lecture)
     {
         try {
-            $videoManage->delete();
-            Storage::delete($videoManage->course_video_file);
+            $lecture->delete();
+            Storage::delete($lecture->course_video_file);
             return response([
                 'message' => 'Delete success!'
             ]);

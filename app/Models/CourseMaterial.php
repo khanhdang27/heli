@@ -44,14 +44,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class CourseMaterial extends Model implements TranslatableContract
 {
-    use Translatable;
+    use Translatable, SoftDeletes;
 
     protected $table = 'course_material';
     protected $guarded = [];
     public array $translatedAttributes = ['course_material_name', 'course_material_description', 'course_material_origin'];
 
-    // public function documents()
-    // {
-    //     return $this->morphToMany(File::class, 'file_refer');
-    // }
 }

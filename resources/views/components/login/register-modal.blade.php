@@ -18,13 +18,12 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button class="btn-register-now btn-secondary"  data-toggle="modal" data-target="#registerModal" data-dismiss="modal">
+                        <button class="btn-register-now btn-secondary" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">
                             <span>@lang('keywords.registerNowToExperience')</span>
                         </button>
                     </div>
                 </div>
             </div>
-            <!-- Modal footer -->
         </div>
     </div>
 </div>

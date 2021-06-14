@@ -18,7 +18,6 @@ class TutorTeachSubject extends Model
     public $timestamps = TRUE;
 
     protected $guarded = [];
-
     
     public function tutor()
     {

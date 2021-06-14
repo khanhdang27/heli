@@ -2,9 +2,6 @@
 
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,9 +29,6 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::put('reset-password', 'Auth\ChangePasswordController@update')->name('resetPassword');
 
-//        Route::get('news', function () {
-//            return view('news-page');
-//        })->name('news');
         Route::get('news', 'NewsController@show')->name('news');
         Route::get('teams', function () {
             return view('team-page');
@@ -67,9 +61,9 @@ Route::group(['middleware' => 'language'], function () {
             return view('forum.post-view');
         })->name('forumAnswers');
 
-        Route::get('/forgot-password', function () {
-            return view('login.forgot-password');
-        })->name('forgot-password');
+        // Route::get('/forgot-password', function () {
+        //     return view('login.forgot-password');
+        // })->name('forgot-password');
 
         Route::middleware('auth')->group(function () {
 

@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TutorTeachCourse extends Model
 {
     use SoftDeletes;
-    //
+
+    protected $table = 'lecture';
+
+    public $timestamps = TRUE;
+
+    protected $guarded = [];
 }

@@ -47,15 +47,20 @@
                                 </div>
                                 <div class="input-login d-flex justify-content-center align-items-center">
                                     {{ Form::password('password', [
-                                                        'class'=> 'input-login-item',
-                                                        'placeholder'=>'Password'
-                                                        ]) }}
+                                        'class'=> 'input-login-item',
+                                        'placeholder'=>'Password'
+                                        ])
+                                    }}
                                 </div>
                                 <div class="bottom-btn">
-                                    {{ Form::submit('login',
-                                                    ['class' => 'btn-login btn-secondary btn-register-now',
-                                                    'id'=>'btn-login'
-                                                    ]) }}
+                                    <button
+                                        class = 'btn-login btn-secondary btn-register-now'
+                                        id = 'btn-login' type="submit">
+                                        {{__('Login')}}
+                                        <span class="spinner-border spinner-border-sm ml-1 d-none" role="status" aria-hidden="true"></span>
+                                        <span class="sr-only">Loading...</span>
+                                    </button>
+
                                 </div>
                             {!! Form::close() !!}
                             <div class="row bottom-form">
@@ -87,6 +92,11 @@
         $(function () {
             $('#formLogin').submit(function (e) {
                 e.preventDefault();
+<<<<<<< HEAD
+=======
+
+                var spinner = $("#spinner-load");
+>>>>>>> main
                 let formData = $(this).serializeArray();
                 $(".invalid-feedback").children("strong").text("");
                 $("#formLogin input").removeClass("is-invalid");
@@ -99,6 +109,7 @@
                     data: formData
                 }).done(function (data) {
                     if(data['message']=='success') {
+<<<<<<< HEAD
                         toastr["success"]("@lang('keywords.toast.loginSuccess')");
                         location.reload()
                     }else if(data['message']=='empty'){
@@ -106,6 +117,18 @@
                     }
                     else {
                       toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
+=======
+                        spinner.addClass('d-none')
+                        toastr["success"]("@lang('keywords.toast.loginSuccess')");
+                        location.reload()
+                    }else if(data['message']=='empty'){
+                        spinner.addClass('d-none')
+                        toastr["error"]("","@lang('keywords.toast.pleaseEnterEmailPass')");
+                    }
+                    else {
+                        spinner.addClass('d-none')
+                        toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
+>>>>>>> main
                     }
                 })
             });
