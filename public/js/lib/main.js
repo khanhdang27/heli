@@ -12697,7 +12697,6 @@ var FullCalendar = (function (exports) {
         function TableListItemEvent() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
-
         TableListItemEvent.prototype.render = function () {
             var _a = this, props = _a.props, context = _a.context;
             var timeFormat = context.options.eventTimeFormat || DEFAULT_TABLE_EVENT_TIME_FORMAT;
@@ -12723,15 +12722,23 @@ var FullCalendar = (function (exports) {
         };
         return TableListItemEvent;
     }(BaseComponent));
-
+    // Custom
     function renderInnerContent$2(innerProps) {
         return (createElement(Fragment, null,
             createElement("div", {
                 className: "fc-daygrid-event-dot",
                 style: {borderColor: innerProps.borderColor || innerProps.backgroundColor}
             }),
-            innerProps.timeText && (createElement("div", {className: "fc-event-time"}, innerProps.timeText)),
-            createElement("div", {className: "fc-event-title"}, innerProps.event.title || createElement(Fragment, null, "\u00A0"))));
+            createElement(
+                "div",
+                {className: "fc-event-time-title"},
+                [
+                    createElement("div", {className: "fc-event-title"}, innerProps.event.title || createElement(Fragment, null, "\u00A0")),
+                    innerProps.timeText && (createElement("div", {className: "fc-event-time"}, innerProps.timeText)),
+                ]
+            ),
+
+        ));
     }
 
     function getSegAnchorAttrs$1(seg) {

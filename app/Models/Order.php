@@ -33,7 +33,7 @@ class Order extends Model
         $_order = new Order();
         $_order->user_id =  $data['user_id'];
         $_order->course_id = $data['course_id'];
-        $_order->price =  $data['price'];
+        $_order->price =  $data['course_price'];
         $_order->discount =  $data['discount'];
         $_order->total =  $data['total'];
         return $_order;
@@ -45,8 +45,8 @@ class Order extends Model
         );
 
         $payment_intent = $stripe->paymentIntents->create([
-            'amount' => 20 * 100,
-            'currency' => 'usd',
+            'amount' => $this->price * 100,
+            'currency' => 'hkd',
             'payment_method' => $payment->id,
             'confirm' => true,
             'customer'=> $payment->customer,
@@ -63,7 +63,6 @@ class Order extends Model
 
     public function nextAction($intent)
     {
-
         switch ($intent->status) {
             case self::$succeeded:
                 $this->status = self::$ORDER_STATUS_SUCCEEDED;
@@ -80,6 +79,12 @@ class Order extends Model
         $this->payment_id = $intent->id;
         $this->total = $this->price *(1 - $this->discount);
 
-        return $this->save();
+        $this->save();
+        return $this->fresh();
+    }
+    
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
     }
 }

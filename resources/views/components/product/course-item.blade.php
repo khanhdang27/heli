@@ -15,9 +15,9 @@
                         <div class="content-top text-wrap w-75">
                             {{ $value->certificate->certificate_code }}<br>
                             @if($value->type==1)
-                                @lang('keywords.course-item.courseRecord')
-                            @else
                                 @lang('keywords.course-item.liveCourse')
+                            @else
+                                @lang('keywords.course-item.courseRecord')
                             @endif
                         </div>
                         <div class="content-bot">
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="price-bar2 d-flex justify-content-end align-items-center">
-                    <a class="product-hover" href="{{URL::route('site.course-detail',$value->id)}}">
+                    <a class="product-hover" href="{{URL::route('site.course.show',$value->id)}}">
                         HK${{$value->course_price}}/ @lang('keywords.course-item.section') >
                     </a>
                 </div>

@@ -44,14 +44,14 @@ class OrderController extends Controller
             $student_bought = StudentCourses::query()->where([
                 'course_id' => $course_id,
                 'student_id' => Auth::user()->id
-            ])->get();
-            // dd($student_bought);
-            if ($student_bought){
-                $course_detail = Course::find($course_id);
+            ])->first();
+
+            if (empty($student_bought)){
+                $course_detail = Course::findOrFail($course_id);
                 $order = Order::create_instance([
                     'user_id'=> Auth::user()->id,
                     'course_id'=> $course_detail->id,
-                    'price'=> $course_detail->price * 100,
+                    'course_price'=> $course_detail->course_price,
                     'discount'=> 0, //$course_detail->discount,
                     'total'=> $course_detail->total,
                 ]);
@@ -60,7 +60,7 @@ class OrderController extends Controller
                 if ($result instanceof RedirectResponse ) {
                     return $result;
                 } else {
-                    if ($result) {
+                    if ($result instanceof Order) {
                         $student_course = StudentCourses::create([
                             'course_id' => (int) $course_id,
                             'student_id' => Auth::user()->id
@@ -68,6 +68,9 @@ class OrderController extends Controller
                     }
                     return view('order.order-detail', ['order' => $result]);
                 }
+            } else {
+                $order = Order::with('course')->where('course_id',$course_id)->first();
+                return view('order.order-detail', ['order' => $order]);
             }
             
             

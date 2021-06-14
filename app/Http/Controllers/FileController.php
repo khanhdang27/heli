@@ -53,7 +53,7 @@ class FileController extends Controller
                 default:
                     $file_type = File::$UNDEFINED;
             }
-            $file = new File(['referer'=> $request->query('ref'), 'source'=>$path, 'file_type'=>$file_type, 'raw_name'=> $fileInfo, 'file_size'=> $image->getSize()/self::$MEGA_BITE, 'uploaded_by'=>Auth()->id(), 'status'=> 1]);
+            $file = new File(['referer'=> $request->query('ref') ?? 0, 'source'=>$path, 'file_type'=>$file_type, 'raw_name'=> $fileInfo, 'file_size'=> $image->getSize()/self::$MEGA_BITE, 'uploaded_by'=>Auth()->id(), 'status'=> 1]);
             $file->save();
             return $file->id;
         } catch (\Exception $e) {

@@ -40,9 +40,19 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $newsValidate = $request->validate([
-           'news_title' => 'required'
+           'title' => 'required',
+           'content' => 'required',
+           'file' => 'file'
         ]);
-        $news = new News($newsValidate);
+
+        $fileController = new FileController();
+        $file_id = $fileController->store($request);
+
+        $news = new News([
+            'title' => $newsValidate['title'],
+            'content' => $newsValidate['content'],
+            'file_id' => $file_id
+        ]);
         $news->save();
         return back()->with('success', 'Create success');
     }
@@ -74,23 +84,25 @@ class NewsController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, News $news)
-    {
-        $news->update(
-            $request->validate([
-                'news_title' => 'required'
-            ])
-        );
-        return redirect()->route('admin.news.index')
-            ->with('success','Update success');
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \App\Models\News  $news
+    //  * @return \Illuminate\Http\RedirectResponse
+    //  */
+    // public function update(Request $request, News $news)
+    // {
+    //     $news->update(
+    //         $request->validate([
+    //             'title' => 'required',
+    //             'content' => 'required',
+    //             'file' => 'file'
+    //         ])
+    //     );
+    //     return redirect()->route('admin.news.index')
+    //         ->with('success','Update success');
+    // }
 
     /**
      * Remove the specified resource from storage.

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,11 +41,11 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::resource('certificate', 'CertificateController');
 
-        Route::get('course', function () {
-            return view('course.course-page');
-        })->name('course');
+        // Route::get('course', function () {
+        //     return view('course.course-page');
+        // })->name('course');
 
-        Route::get('course/{id}', 'CourseController@show')->name('course-detail');
+        Route::resource('course', 'CourseController');
 
         Route::get('lesson', function () {
             return view('course.lesson-page');
@@ -77,9 +78,7 @@ Route::group(['middleware' => 'language'], function () {
 
             Route::prefix('my/')->name('user.')->group(function () {
 
-                Route::get('course', function () {
-                    return view('course.my-course-page');
-                })->name('my-course');
+                Route::get('course', 'CourseController@my')->name('course');
 
                 Route::get('calendar', function () {
                     return view('calendar-page');

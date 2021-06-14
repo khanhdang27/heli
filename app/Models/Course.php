@@ -52,7 +52,6 @@ class Course extends Model implements TranslatableContract
     protected $guarded = [];
     public array $translatedAttributes = ['course_name', 'course_description'];
 
-
     public function videos()
     {
         return $this->hasMany(Lecture::class, 'course_id');
@@ -62,16 +61,24 @@ class Course extends Model implements TranslatableContract
     {
         return $this->belongsTo(Tutor::class, 'tutor_id');
     }
+
     public function certificate()
     {
         return $this->belongsTo(Certificate::class,'subject_id','id', Subject::class);
     }
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);
     }
+
     public function courseMaterial()
     {
         return $this->hasMany(CourseMaterial::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsToMany(User::class, 'student_courses', 'course_id', 'student_id');
     }
 }

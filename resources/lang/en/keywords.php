@@ -52,6 +52,7 @@ return [
     'tryItNow' => 'Try it now',
     'discountProduct' => 'Latest Discount Courses',
     'welcomeOffer' => 'Welcome Offer',
+    'recommendedForYou' => 'Recommended for you',
     'hotCourseSeries' => 'Hot Course Series',
     'loginWithFb' => 'Login with Facebook',
     'loginWithGg' => 'Login with Google',

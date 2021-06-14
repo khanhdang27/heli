@@ -22,10 +22,24 @@
                         <div class="card-body">
                             {!! Form::open(['route' => ['admin.news.update', $news->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
                             @csrf
-                            <div class="form-group">
-                                {{ Form::label('news_title', 'News title') }}
-                                {{ Form::text('news_title', $news->news_title, ['class' => 'form-control']) }}
-                                @error('news_title')
+                            <div class="form-group ">
+                                {{ Form::label('title', 'News Title') }}
+                                {{ Form::text('title', old('title'),['class' => 'form-control'] ) }}
+                                @error('title')
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('content', 'News Content') }}
+                                {{ Form::text('content', old('content'),['class' => 'form-control'] ) }}
+                                @error('content')
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('file_id', 'News File') }}
+                                {{ Form::file('file_id', old('file_id'),['class' => 'form-control'] ) }}
+                                @error('file_id')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

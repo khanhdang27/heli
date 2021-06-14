@@ -1,6 +1,6 @@
 <div class="modal fade modal-login" id="loginModal">
     <div class="modal-dialog modal-login-xl">
-        <div class="modal-content modal-login-content">
+        <div class="modal-content modal-login-content mx-auto">
             <div class="modal-header btn-close">
                 <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
             </div>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                
+
             </div>
             <!-- Modal footer -->
         </div>
