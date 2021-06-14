@@ -11,29 +11,12 @@
             <div class="content-news-page border-secondary">
                 <div class="news-item">
                     <div class="show-news-item">
-<<<<<<< HEAD
-<<<<<<< HEAD
                         @foreach($news as $item)
                             <a class="news-title text-primary">
                                 {{substr($item->updated_at,-14,6)}}
                                 {{$item->title}}
                             </a>
                         @endforeach
-=======
-=======
->>>>>>> cbeca538f496051b8e1341836e96e22eadd48d3a
-                        @if($news!=null)
-                            @foreach($news as $item)
-                                <a class="news-title text-primary">
-                                    {{substr($item->updated_at,-14,6)}}
-                                    {{$item->title}}
-                                </a>
-                            @endforeach
-                        @endif
-<<<<<<< HEAD
->>>>>>> 6131ad6 (Fix bug in forum, edit mail template)
-=======
->>>>>>> cbeca538f496051b8e1341836e96e22eadd48d3a
                     </div>
 
 {{--                    <div class="d-flex justify-content-center bottom-collapse">--}}

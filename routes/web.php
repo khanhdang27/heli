@@ -41,10 +41,6 @@ Route::group(['middleware' => 'language'], function () {
 
         Route::resource('certificate', 'CertificateController');
 
-        // Route::get('course', function () {
-        //     return view('course.course-page');
-        // })->name('course');
-
         Route::resource('course', 'CourseController');
 
         Route::get('lesson', function () {
