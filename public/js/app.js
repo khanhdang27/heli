@@ -37458,12 +37458,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\Bitnami\wampstack-7.4\apache2\htdocs\Helios\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Bitnami\wampstack-7.4\apache2\htdocs\Helios\resources\sass\app.scss */"./resources/sass/app.scss");
 =======
 __webpack_require__(/*! C:\wamp\www\Helios\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\wamp\www\Helios\resources\sass\app.scss */"./resources/sass/app.scss");
 >>>>>>> 6131ad6 (Fix bug in forum, edit mail template)
+=======
+__webpack_require__(/*! C:\wamp\www\Helios\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp\www\Helios\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> cbeca538f496051b8e1341836e96e22eadd48d3a
 
 
 /***/ })

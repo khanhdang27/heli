@@ -41,6 +41,7 @@ class NewsController extends Controller
     {
         $newsValidate = $request->validate([
            'title' => 'required',
+<<<<<<< HEAD
            'content' => 'required',
            'file' => 'file'
         ]);
@@ -52,6 +53,10 @@ class NewsController extends Controller
             'title' => $newsValidate['title'],
             'content' => $newsValidate['content'],
             'file_id' => $file_id
+=======
+            'content' => 'required',
+            'file_id' => 'required'
+>>>>>>> cbeca538f496051b8e1341836e96e22eadd48d3a
         ]);
         $news->save();
         return back()->with('success', 'Create success');

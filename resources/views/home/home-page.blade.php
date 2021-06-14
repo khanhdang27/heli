@@ -18,11 +18,19 @@
                     <div class="show-news-item">
                         @if($news!=null)
                             @foreach($news as $item)
+<<<<<<< HEAD
                                 <a class="news-title text-primary">
                                     {{substr($item->updated_at,-14,6)}}
                                     {{$item->title}}
                                 </a>
                             @endforeach
+=======
+                            <a class="news-title text-primary">
+                                {{substr($item->updated_at,-14,6)}}
+                                {{$item->title}}
+                            </a>
+                        @endforeach
+>>>>>>> cbeca538f496051b8e1341836e96e22eadd48d3a
                         @endif
                     </div>
                 </div>

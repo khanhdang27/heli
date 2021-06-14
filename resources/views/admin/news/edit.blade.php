@@ -43,6 +43,13 @@
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                {{ Form::label('content', 'News content') }}
+                                {{ Form::textarea('content', $news->content, ['id'=>'ckeditor']) }}
+                                @error('content')
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>
