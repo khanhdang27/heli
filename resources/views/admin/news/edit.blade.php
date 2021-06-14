@@ -21,6 +21,7 @@
                     <div class="card-body">
                         <div class="card-body">
                             {!! Form::open(['route' => ['admin.news.update', $news->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
+<<<<<<< HEAD
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('title', 'News Title') }}
@@ -40,6 +41,20 @@
                                 {{ Form::label('file_id', 'News File') }}
                                 {{ Form::file('file_id', old('file_id'),['class' => 'form-control'] ) }}
                                 @error('file_id')
+=======
+
+                            <div class="form-group">
+                                {{ Form::label('title', 'News title') }}
+                                {{ Form::text('title', $news->title, ['class' => 'form-control']) }}
+                                @error('news_title')
+>>>>>>> 6131ad6 (Fix bug in forum, edit mail template)
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('content', 'News content') }}
+                                {{ Form::textarea('content', $news->content, ['id'=>'ckeditor']) }}
+                                @error('content')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

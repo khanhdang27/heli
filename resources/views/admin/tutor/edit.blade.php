@@ -105,37 +105,6 @@ use App\Utilities\SelectionByClass;
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-
-                                <!-- Title -->
-                                <h4 class="card-header-title">
-                                    Add photo for Tutor
-                                </h4>
-
-                            </div>
-                        </div> <!-- / .row -->
-                    </div>
-                    <div class="card-body">
-                        {!! Form::open([
-                                'url' => route('file.store',[
-                                    'type'=>'avatar',
-                                    'ref' => $tutor->id
-                                ]),
-                                'enctype'=>'multipart/form-data',
-                                'class'=>'dropzone',
-                                'id'=>"uploadFile",
-                            ])  !!}
-                        <div class="dz-message">
-                            Drag 'n' Drop Files<br>
-                        </div>
-                        {!! Form::close() !!}
-                    </div>
-                </div>
-            </div>
         </div> <!-- / .row -->
     </div>
 @endsection

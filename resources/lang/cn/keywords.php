@@ -52,6 +52,7 @@ return [
     'tryItNow' => '立即試看',
     'discountProduct' => '最新優惠課程',
     'welcomeOffer' => '迎新優惠',
+    'recommendedForYou' => '推薦的給你',
     'hotCourseSeries' => '熱⾨課程系列',
     'loginWithFb' => '以Facebook登入',
     'loginWithGg' => '以Google+登入',

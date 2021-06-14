@@ -10,7 +10,7 @@
     <script src="{{ asset('js/admin/upload-file-project.js') }}"></script>
 
     <!-- CARDS -->
-    <div class="container-fluid mt-5">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <!-- Goals -->
@@ -32,7 +32,7 @@
                             {!! Form::open(['route'=> 'admin.tutor.store', 'enctype' => 'multipart/form-data']) !!}
                             @csrf
                             <div class="form-group ">
-                                {{ Form::label('name', 'Username') }}
+                                {{ Form::label('name', 'Name') }}
                                 {{ Form::text('name', old('name'), ['class'=>'form-control']) }}
                             </div>
                             <div class="form-group ">
@@ -44,7 +44,7 @@
                                 {{ Form::password('password', ['class'=>'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('full_name', 'Tutor name') }}
+                                {{ Form::label('full_name', 'Full name') }}
                                 {{ Form::text('full_name', old('full_name'), ['class'=>'form-control']) }}
                             </div>
                             <div class="form-group ">
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div> <!-- / .row -->
     </div>
 

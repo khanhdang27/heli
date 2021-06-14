@@ -56,6 +56,9 @@
                                         <td>
                                             {{$value->title}}
                                         </td>
+                                        <td>
+                                            {{$value->content}}
+                                        </td>
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
