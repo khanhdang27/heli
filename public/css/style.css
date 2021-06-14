@@ -689,7 +689,7 @@ video {
     border-radius: 0;
     border: 3px solid #E6C06C;
     background-color: rgba(15, 34, 51, 0.8);
-    max-width: 1369px;
+    max-width: 100%;
     padding: 3rem 0;
 }
 

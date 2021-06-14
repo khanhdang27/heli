@@ -7,8 +7,7 @@
                 <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
-            <div class="modal-body modal-body-login">
-                <div class="container-fluid">
+            <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6 login-left d-flex flex-column justify-content-center">
                             <div class="text-login-left text-center">
@@ -63,8 +62,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
             </div>
         </div>
 

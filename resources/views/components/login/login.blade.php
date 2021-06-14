@@ -5,8 +5,7 @@
                 <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
-            <div class="modal-body modal-body-login">
-                <div class="container-fluid">
+            <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6 d-flex justify-content-center align-items-center">
                             <div class="text-login-left text-center">
@@ -81,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                
             </div>
             <!-- Modal footer -->
         </div>
@@ -92,11 +91,8 @@
         $(function () {
             $('#formLogin').submit(function (e) {
                 e.preventDefault();
-<<<<<<< HEAD
-=======
 
                 var spinner = $("#spinner-load");
->>>>>>> main
                 let formData = $(this).serializeArray();
                 $(".invalid-feedback").children("strong").text("");
                 $("#formLogin input").removeClass("is-invalid");
@@ -109,15 +105,6 @@
                     data: formData
                 }).done(function (data) {
                     if(data['message']=='success') {
-<<<<<<< HEAD
-                        toastr["success"]("@lang('keywords.toast.loginSuccess')");
-                        location.reload()
-                    }else if(data['message']=='empty'){
-                        toastr["error"]("","@lang('keywords.toast.pleaseEnterEmailPass')");
-                    }
-                    else {
-                      toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
-=======
                         spinner.addClass('d-none')
                         toastr["success"]("@lang('keywords.toast.loginSuccess')");
                         location.reload()
@@ -128,7 +115,6 @@
                     else {
                         spinner.addClass('d-none')
                         toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
->>>>>>> main
                     }
                 })
             });
