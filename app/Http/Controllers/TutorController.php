@@ -133,15 +133,15 @@ class TutorController extends Controller
         $tutor->fill(
             $request->validated()
         );
-        $imageDelete = null;
-        if ($request->hasFile('tutor_photo')) {
-            $imageDelete = $tutor->tutor_photo;
-            $tutor->tutor_photo = $request->file('tutor_photo')->store('photo');
-        }
+//        $imageDelete = null;
+//        if ($request->hasFile('tutor_photo')) {
+//            $imageDelete = $tutor->tutor_photo;
+//            $tutor->tutor_photo = $request->file('tutor_photo')->store('photo');
+//        }
         $tutor->save();
-        if ($imageDelete) {
-            Storage::delete($imageDelete);
-        }
+//        if ($imageDelete) {
+//            Storage::delete($imageDelete);
+//        }
         return back()->with('success', 'Update success!');
     }
 

@@ -12,7 +12,7 @@
         </div>
         <div class="container-fluid pt-5 pb-5">
             <div class="ml-auto mr-auto pl-5 d-flex flex-wrap w-75">
-                @foreach(SelectionByClass::getValues(\App\Models\PostTag::class,'tag_name', 'id') as $key => $value)
+                @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
                     <button class="btn-hashtag ml-3 mr-3" type="button">
                         {{ $value }}
                     </button>
@@ -41,7 +41,9 @@
                             {{$post->content}}
                         </p>
                         <div class="pt-3 pb-3 ">
-                            <img class="img-question" src="/file/{{$post->file_id}}">
+                            @if($post->file_id!=null)
+                                <img class="img-question" src="/file/{{$post->file_id}}">
+                            @endif
                         </div>
                         <div class="text-28">
                             <span class="mr-3"><img class="ic-action"
@@ -79,7 +81,7 @@
                         {!! Form::open(['url' => URL::route('site.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
                             {{ Form::label('detail', 'Content') }}
-                            {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3']) }}
+                            {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3','required']) }}
                         </div>
                         <div class="custom-file ">
                             {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}

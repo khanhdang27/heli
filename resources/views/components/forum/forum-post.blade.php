@@ -5,7 +5,7 @@
                 <img src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                 <div class="pl-3 pt-2">
                     <p class="text-25">{{$post->user->name}}</p>
-                    <p class="text-20-blue">{{$post->created_at}}</p>
+                    <p class="text-primary">{{ substr($post->created_at,0,10) }}</p>
                 </div>
             </div>
         </div>
@@ -14,7 +14,9 @@
                 {{$post->title}}
             </p>
             <div class="pt-3 pb-3 ">
+                @if($post->file_id!=null)
                 <img class="img-question" src="/file/{{$post->file_id}}">
+                @endif
             </div>
             <div class="text-28">
                     <span class="mr-3">

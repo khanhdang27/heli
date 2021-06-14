@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Tag;
 use App\Models\Post;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('postTag','user')->get();
+        $posts = Post::with('postTag','user')->orderByDesc('created_at')->get();
 
         return view('forum.forum-page',[
             'posts' => $posts
@@ -43,24 +44,37 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $fileController = new FileController();
-        $input = $request->all();
+        if (!empty($request->file)){
+            $fileController = new FileController();
+            $input = $request->all();
 
-        $file_id = $fileController->store($request);
+            $file_id = $fileController->store($request);
 
-        $input['user_id'] = Auth::user()->id;
-        unset($input['type']);
-        unset($input['ref']);
-        unset($input['file']);
-        $input['file_id'] = $file_id;
+            $input['user_id'] = Auth::user()->id;
+            unset($input['type']);
+            unset($input['ref']);
+            unset($input['file']);
+            $input['file_id'] = $file_id;
 
 
-
-        $post = new Post(
-            $input
-        );
-        $post->save();
-        return back()->with('success', 'Create success');
+            $post = new Post(
+                $input
+            );
+            $post->save();
+            return back()->with('success', 'Create success');
+        }
+        else{
+            $input = $request->all();
+            $input['user_id'] = Auth::user()->id;
+            unset($input['type']);
+            unset($input['ref']);
+            unset($input['file']);
+            $post = new Post(
+                $input
+            );
+            $post->save();
+            return back()->with('success', 'Create success');
+        }
     }
 
     /**

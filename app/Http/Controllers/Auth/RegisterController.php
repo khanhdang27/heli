@@ -76,7 +76,7 @@ class RegisterController extends Controller
                 $stripeCustomer = $user->createAsStripeCustomer(['email'=>$input['email']]);
 
                 $send_mail = new \App\Mail\SendMail();
-                $send_mail = $send_mail->subject('Account')->title('Your password')->body("password: $random")->view('mail.mail');
+                $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password'=>$random]);
                 Mail::to($input['email'])->send($send_mail);
 
                 return response()->json(
@@ -91,7 +91,7 @@ class RegisterController extends Controller
                         'message' => 'duplicate'
                     ], 409);
             }
-            
+
         }
         return response()->json(
             [

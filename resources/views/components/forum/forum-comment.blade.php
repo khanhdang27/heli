@@ -14,7 +14,10 @@
                 {{$comment->detail}}
             </p>
             <div class="pt-3 pb-3 ">
-                <img class="img-question" src="/file/{{$comment->file_id}}">
+                @if($comment->file_id!=null)
+                    <img class="img-question" src="/file/{{$comment->file_id}}">
+                @endif
+
             </div>
             <div class="text-28 d-flex">
                 <span class="mr-5"><img class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}"></span>

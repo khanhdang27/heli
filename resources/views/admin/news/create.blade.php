@@ -21,10 +21,17 @@
                     <div class="card-body">
                         <div class="card-body">
                             {!! Form::open(['route' => 'admin.news.store', 'enctype' => 'multipart/form-data' ]) !!}
-                            <div class="form-group ">
-                                {{ Form::label('news_title', 'News title') }}
-                                {{ Form::text('news_title', old('news_title'),['class' => 'form-control'] ) }}
-                                @error('news_title')
+                            <div class="form-group">
+                                {{ Form::label('title', 'News title') }}
+                                {{ Form::text('title', old('title'),['class' => 'form-control'] ) }}
+                                @error('title')
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('content', 'News content') }}
+                                {{ Form::textarea('content', old('content'),['id'=>'ckeditor']) }}
+                                @error('content')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -37,5 +44,11 @@
             </div>
         </div> <!-- / .row -->
     </div>
+    <script>
+
+        window.onload = function () {
+            CKEDITOR.replace('ckeditor');
+        };
+    </script>
 @endsection
 

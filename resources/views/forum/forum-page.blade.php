@@ -11,13 +11,14 @@
             @lang('keywords.navBar.q&aArea')
         </div>
         <div class="container-fluid pt-5 pb-5">
-            <div class="m-auto d-flex pl-5 flex-wrap w-75">
-                @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
-                    <button class="btn-hashtag ml-3 mr-3" type="button">
-                        {{ $value }}
-                    </button>
-                @endforeach
-            </div>
+
+                <div class="m-auto d-flex pl-5 flex-wrap w-75">
+                    @foreach(SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id') as $key => $value)
+                        <button class="btn-hashtag ml-3 mr-3" type="button">
+                            {{ $value }}
+                        </button>
+                    @endforeach
+                </div>
             @if(!empty(\Illuminate\Support\Facades\Auth::user()))
                 <div class="container mt-4 mb-4">
                     <div class="card card-body">
@@ -51,12 +52,12 @@
 
             </x-forum.forum-post>
             @endforeach
-            <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">
-                <button class="btn-read-more">
-                    @lang('keywords.blog-page.readMore')
-                    <img src="{{asset("images/ic/ic_drop.svg")}}" width="65">
-                </button>
-            </div>
+{{--            <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">--}}
+{{--                <button class="btn-read-more">--}}
+{{--                    @lang('keywords.blog-page.readMore')--}}
+{{--                    <img src="{{asset("images/ic/ic_drop.svg")}}" width="65">--}}
+{{--                </button>--}}
+{{--            </div>--}}
         </div>
 
     </div>
