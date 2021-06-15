@@ -1,5 +1,5 @@
 <div class="banner-content">
-    <img class="img-thumbnail border-0 p-0 rounded-0 banner-background"  src="/file/{{$banner->banner_background ?? 0}}">
+    <img class="img-thumbnail border-0 p-0 rounded-0 banner-background"  src="{{ asset('/file/'.$banner->banner_background ?? 0)}}">
     <div class="banner-info">
         <div class="banner-caption text-secondary">
             <div class="banner-title">

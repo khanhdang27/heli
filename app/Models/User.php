@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Config;
 use Spatie\Permission\Traits\HasRoles;
 use Laravel\Cashier\Billable;
+use Laravel\Cashier\Cashier;
 
 /**
  * App\Models\User
@@ -76,6 +78,14 @@ class User extends Authenticatable
     public function avatar()
     {
         return $this->morphToMany(File::class, 'file_refer');
+    }
+
+    public function stripeOptions(array $options = []): array
+    {
+        return [
+            'api_key' => Config::get('stripe_secret', 'sk_test_51J2TzpAeSHGjb6nlUOLu4IJgRHbcb4bCNA34wJtzjqiURevEVqLvl552PE7NLhSGNUJEMmPTxOo106kppcXhg6UY00keidCaXt'),
+            'stripe_version' => Cashier::STRIPE_VERSION,
+        ];
     }
 
 }
