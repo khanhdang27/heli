@@ -92,9 +92,12 @@ class CourseController extends Controller
             ->with('subject','tutor','courseMaterial')
             ->first();
 
-        $student_course = StudentCourses::where([
-            'course_id'=> $id, 'student_id'=>Auth::user()->id
-        ])->first();
+        $student_course  = null;
+        if (Auth::check()){
+            $student_course = StudentCourses::where([
+                'course_id'=> $id, 'student_id'=>Auth::user()->id
+            ])->first();
+        } 
         return view('course.course-page',[
             'courseDetail' => $courseDetail,
             'student_course' => $student_course
