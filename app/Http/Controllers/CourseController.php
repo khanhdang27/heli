@@ -8,13 +8,10 @@ use App\Http\Requests\Course\CreateVideoRequest;
 use App\Http\Requests\Course\UpdateVideoRequest;
 use App\Models\Course;
 use App\Models\Lecture;
-use App\Models\StudentCourses;
 use App\Models\Tutor;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
-
-use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -42,16 +39,6 @@ class CourseController extends Controller
         ]);
     }
 
-    public function my()
-    {
-        $courses = Course::with('tutor', 'translations', 'student')
-            ->whereHas('student', function (Builder $query) {
-                $query->where('student_id', Auth::user()->id);
-            })->get();
-
-        return view('course.my-course-page', ['courses'=> $courses]);
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -60,6 +47,7 @@ class CourseController extends Controller
     public function create()
     {
         $tutors = Tutor::all();
+
 
         return view('admin.course.create', [
             'tutors' => $tutors
@@ -88,16 +76,9 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        $courseDetail = Course::where('id',$id)
-            ->with('subject','tutor','courseMaterial')
-            ->first();
-
-        $student_course = StudentCourses::where([
-            'course_id'=> $id, 'student_id'=>Auth::user()->id
-        ])->first();
+        $courseDetail = Course::where('id',$id)->with('subject','tutor','courseMaterial')->first();
         return view('course.course-page',[
-            'courseDetail' => $courseDetail,
-            'student_course' => $student_course
+            'courseDetail' => $courseDetail
         ]);
     }
 
