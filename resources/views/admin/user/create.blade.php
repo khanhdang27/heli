@@ -21,19 +21,27 @@
                     <div class="card-body">
                         <div class="card-body">
                             {!! Form::open(['route' => 'admin.user.store', 'enctype'=>'multipart/form-data', ''])  !!}
-                            @csrf
-                            <div class="form-group ">
+                            <div class="form-group">
                                 {{ Form::label('name', 'Name') }}
                                 {{ Form::text('name', old('name'),['class' => 'form-control']) }}
                             </div>
-                            <div class="form-group ">
+                            @error('name')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
+                            <div class="form-group">
                                 {{ Form::label('email', 'Email') }}
-                                {{ Form::text('email', old('email'),['class' => 'form-control']) }}
+                                {{ Form::email('email', old('email'),['class' => 'form-control']) }}
                             </div>
-                            <div class="form-group ">
+                            @error('email')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
+                            <div class="form-group">
                                 {{ Form::label('password', 'Password') }}
                                 {{ Form::text('password', old('password'),['class' => 'form-control']) }}
                             </div>
+                            @error('password')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>
