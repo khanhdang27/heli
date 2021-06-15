@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm text-right p-0 col-forget-pw">
-                                    <a href="#">@lang('keywords.forgotPass')</a><br>
+                                    <a href="{{route('site.backpack.auth.password.reset')}}">@lang('keywords.forgotPass')</a><br>
                                     <a href="#">@lang('keywords.register')</a>
                                 </div>
 

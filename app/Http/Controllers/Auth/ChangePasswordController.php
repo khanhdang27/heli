@@ -12,16 +12,17 @@ use Illuminate\Support\Facades\Validator;
 class ChangePasswordController extends Controller
 {
     public function update(Request $request){
-//        if (Hash::check('plain-text', Auth::)) {
-//            // The passwords match...
-//        }
 
-        $request ->validate([
+        $request->validate([
             'old_password' => 'required',
             'password' => 'required|confirmed',
         ]);
-        User::find(Auth::user()->id)
-            ->update(['password'=> $request->password]);
+        $user = User::find(Auth::user()->id);
+        $user->forceFill([
+            'password' => Hash::make($request->input('password'))
+        ])->setRememberToken(Str::random(60));
+
+
     }
 
 }

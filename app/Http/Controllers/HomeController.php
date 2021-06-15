@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Course;
 use App\Models\News;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -39,3 +38,4 @@ class HomeController extends Controller
 
     }
 }
+
