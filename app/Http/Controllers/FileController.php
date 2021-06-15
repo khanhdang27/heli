@@ -69,7 +69,7 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        $url =  Storage::get($file->source);
+        $url = Storage::get($file->source);
         return $url;
     }
 

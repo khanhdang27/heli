@@ -88,7 +88,7 @@ class RegisterController extends Controller
                 return response()->json(
                     [
                         'status' => 409,
-                        'message' => 'duplicate'
+                        'message' => $th->getMessage()
                     ], 409);
             }
 
