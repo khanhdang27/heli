@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="133" height="133" viewBox="0 0 133 133">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_45" data-name="Rectangle 45" width="133" height="133" transform="translate(1272 4216)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_8" data-name="Mask Group 8" transform="translate(-1272 -4216)" clip-path="url(#clip-path)">
+    <g id="checkmark-circle-outline" transform="translate(1272 4216)">
+      <g id="checkmark-circle">
+        <rect id="Rectangle_46" data-name="Rectangle 46" width="133" height="133" fill="#fff" opacity="0"/>
+        <path id="Path_55" data-name="Path 55" d="M17.495,35.167a5.564,5.564,0,0,0-7.869,7.869L26.251,59.661a5.378,5.378,0,0,0,7.925-.277L72.967,15.051a5.542,5.542,0,0,0-8.312-7.315l-34.469,39.9Z" transform="translate(36.315 27.399)" fill="#fff"/>
+        <path id="Path_56" data-name="Path 56" d="M107.057,51.875a5.542,5.542,0,0,0-5.542,5.542A44.319,44.319,0,1,1,57.182,13.083,48.712,48.712,0,0,1,67.711,14.3a5.542,5.542,0,1,0,2.6-10.751A58.409,58.409,0,0,0,57.182,2,55.417,55.417,0,1,0,112.6,57.417a5.542,5.542,0,0,0-5.542-5.542Z" transform="translate(9.318 9.083)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>
