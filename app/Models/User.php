@@ -88,5 +88,4 @@ class User extends Authenticatable
             'stripe_version' => Cashier::STRIPE_VERSION,
         ];
     }
-
 }

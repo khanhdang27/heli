@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $banners = Banner::query()->orderByDesc('created_at')->first();
+        $banners = Banner::query()->first();
         $courses = Course::with('subject','tutor', 'certificate')->get();
         $courseVideo = Course::with('tutor')->first();
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
@@ -35,7 +35,6 @@ class HomeController extends Controller
             'courseVideo'=>$courseVideo,
             'news' => $news
         ]);
-
     }
 }
 

@@ -6,8 +6,6 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use \App\Utilities\MapData;
-
 /**
  * App\Models\Course
  *
@@ -52,6 +50,15 @@ class Course extends Model implements TranslatableContract
     protected $guarded = [];
     public array $translatedAttributes = ['course_name', 'course_description'];
 
+    protected $filterable = [
+        'certificate',
+        'is_hot',
+        'latest_discount',
+        'welcome_offer',
+        'course_name',
+        'subject'
+    ];
+
     public function videos()
     {
         return $this->hasMany(Lecture::class, 'course_id');
@@ -80,5 +87,10 @@ class Course extends Model implements TranslatableContract
     public function student()
     {
         return $this->belongsToMany(User::class, 'student_courses', 'course_id', 'student_id');
+    }
+
+    public function discount()
+    {
+        return $this->hasMany(Discount::class);
     }
 }
