@@ -87,9 +87,9 @@ class RegisterController extends Controller
             } catch (\Throwable $th) {
                 return response()->json(
                     [
-                        'status' => 409,
+                        'status' => 400,
                         'message' => $th->getMessage()
-                    ], 409);
+                    ], 400);
             }
 
         }

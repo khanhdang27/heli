@@ -10,7 +10,7 @@
             <div class="w-100">
                 <div class="mt-5">
                     <h2 class="text-center">Change password</h2>
-                    {!! Form::open(['url' => URL::route('site.resetPassword', Auth::user()->id),'method'=>'put', 'enctype' => 'multipart/form-data' ]) !!}
+                    {!! Form::open(['url' => URL::route('site.userUpdatePassword', Auth::user()->id),'method'=>'post' ]) !!}
                     <div class="form-group">
                         {{Form::label('old_password', 'Old Password')}}
                         {{Form::password('old_password', ['class'=>'form-control','autocomplete'=>'off'])}}

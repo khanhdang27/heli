@@ -25,6 +25,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::post('register', 'Auth\RegisterController@register')->name('register');
         Route::post('login', 'Auth\LoginController@login')->name('userLogin');
         Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
+        Route::post('password/update', 'Auth\ChangePasswordController@update')->name('userUpdatePassword');
 
         Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('backpack.auth.password.reset');
         Route::post('password/reset', 'Auth\ResetPasswordController@reset');
@@ -58,10 +59,6 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('forumAnswer', function () {
             return view('forum.post-view');
         })->name('forumAnswers');
-
-        Route::get('/forgot-password', function () {
-            return view('login.forgot-password');
-        })->name('forgot-password');
 
         Route::middleware('auth')->group(function () {
 
