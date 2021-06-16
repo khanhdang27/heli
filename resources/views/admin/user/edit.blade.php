@@ -26,14 +26,23 @@
                                 {{ Form::label('name', 'Name') }}
                                 {{ Form::text('name', $user->name ,['class' => 'form-control']) }}
                             </div>
+                            @error('name')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             <div class="form-group ">
                                 {{ Form::label('email', 'Email') }}
                                 {{ Form::text('email', $user->email,['class' => 'form-control']) }}
                             </div>
+                            @error('email')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             <div class="form-group ">
                                 {{ Form::label('password', 'Password') }}
                                 {{ Form::text('password', $user->password,['class' => 'form-control']) }}
                             </div>
+                            @error('password')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>

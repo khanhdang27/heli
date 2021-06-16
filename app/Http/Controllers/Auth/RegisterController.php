@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Laravel\Cashier\Cashier;
+use Throwable;
 
 class RegisterController extends Controller
 {
@@ -73,10 +76,10 @@ class RegisterController extends Controller
                 $student = new Student(['user_id' => $user->id]);
                 $student->save();
 
-                $stripeCustomer = $user->createAsStripeCustomer(['email'=>$input['email']]);
+                $stripeCustomer = $user->createAsStripeCustomer(['email' => $input['email']]);
 
-                $send_mail = new \App\Mail\SendMail();
-                $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password'=>$random]);
+                $send_mail = new SendMail();
+                $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
                 Mail::to($input['email'])->send($send_mail);
 
                 return response()->json(
@@ -84,7 +87,7 @@ class RegisterController extends Controller
                         'status' => 200,
                         'message' => 'succeed'
                     ], 200);
-            } catch (\Throwable $th) {
+            } catch (Throwable $th) {
                 return response()->json(
                     [
                         'status' => 409,

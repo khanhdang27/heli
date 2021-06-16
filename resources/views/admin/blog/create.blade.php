@@ -25,9 +25,9 @@
                     <div class="card-body">
                         <div class="card-body">
                             {!! Form::open(['route' => 'admin.blog.store', 'enctype' => 'multipart/form-data' ]) !!}
-                            <div class="form-group ">
-                                {{ Form::label('photo', 'Photo') }}
-                                {{ Form::file('photo', ['class' => 'form-control']) }}
+                            <div class="custom-file mb-5">
+                                {{ Form::label('photo', 'Photo',['class'=>'custom-file-label']) }}
+                                {{ Form::file('photo',['class' => 'custom-file-input']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('title', 'Title') }}
@@ -60,6 +60,15 @@
             CKEDITOR.replace('ckeditor');
         };
     </script>
+    @push('inputFile')
+        <script>
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    @endpush
 
 @endsection
 

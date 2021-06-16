@@ -37,11 +37,11 @@
 
 .card-team {
     margin-top: 3.4rem;
-    max-width: 772px;
+    max-width: 100%;
 }
 
 .thumb {
-    width: 386px;
+    width: 100%;
     height: 100%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -49,13 +49,17 @@
 }
 
 .info-tutor {
-    width: 386px;
-    height: 93px;
+    width: 100%;
+    min-height: 93px;
+    max-height: 250px;
     position: absolute;
+    overflow-y: auto;
     bottom: 0;
     background-color: rgba(15, 34, 51, 0.6);
 }
-
+.tutor-background{
+    height: 514px;
+}
 .name-tutor {
     font-size: 22px;
     font-weight: 600;
@@ -68,17 +72,17 @@
 
 .info-left {
     position: relative;
-    width: 386px;
     height: 514px;
 }
 
 .info-right {
-    width: 386px;
     height: 514px;
 }
 
 .content-info-right {
-    max-width: 291px;
+    max-width: 100%;
+    max-height: 420px;
+    overflow-y: auto;
     font-size: 20px;
 }
 
@@ -184,7 +188,7 @@
 }
 
 .bottom-package {
-    font-size: 21pt;
+    font-size: 17pt;
     padding-top: 3rem;
 }
 

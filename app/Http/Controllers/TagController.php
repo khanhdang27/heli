@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -93,18 +94,19 @@ class TagController extends Controller
         return back()->with('success', 'Update success!');
     }
 
-    public function destroy(Tag $post_tag)
+    public function destroy(Tag $tag)
     {
-
-//        try {
-//            $post_tag->softDelete();
-//            return response([
-//                'message' => 'Delete success!'
-//            ]);
-//        } catch (\Exception $exception) {
-//            return response([
-//                'message' => 'Cannot delete course'
-//            ], 400);
-//        }
+        try {
+            $post = Post::query()->where('tag_id', $tag->id)->delete();
+            $tag->delete();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            return response([
+                'message' => 'Cannot delete',
+                'detail' =>$exception->getMessage()
+            ], 400);
+        }
     }
 }

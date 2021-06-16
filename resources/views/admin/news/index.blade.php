@@ -51,13 +51,10 @@
                                 @foreach($news as $value)
                                     <tr>
                                         <td>
-                                            {{substr($value->updated_at,0,10)}}
+                                            {{$value->date}}
                                         </td>
                                         <td>
                                             {{$value->title}}
-                                        </td>
-                                        <td>
-                                            {{$value->content}}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

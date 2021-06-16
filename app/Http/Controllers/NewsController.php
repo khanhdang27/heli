@@ -40,15 +40,17 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $newsValidate = $request->validate([
+            'date' => 'required',
            'title' => 'required',
            'content' => 'required',
-           'file' => 'file'
+           'file' => 'file|required'
         ]);
 
         $fileController = new FileController();
         $file_id = $fileController->store($request);
 
         $news = new News([
+            'date' => $newsValidate['date'],
             'title' => $newsValidate['title'],
             'content' => $newsValidate['content'],
             'file_id' => $file_id
@@ -66,7 +68,7 @@ class NewsController extends Controller
     public function show()
     {
         $news = News::query()->orderByDesc('created_at')->get();
-        return view('news-page',[
+        return view('news.news-page',[
             'news' => $news
         ]);
     }
@@ -104,6 +106,13 @@ class NewsController extends Controller
     //         ->with('success','Update success');
     // }
 
+    public function newsDetail($id)
+    {
+        $news = News::where('id',$id)->first();
+        return view('news.news-detail',[
+            'news' => $news
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *
