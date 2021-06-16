@@ -5,6 +5,7 @@
 @section('content')
     @php
         use App\Utilities\SelectionByClass;
+        use Illuminate\Support\Facades\Auth;
     @endphp
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
@@ -45,12 +46,21 @@
                                 <img class="img-question" src="/file/{{$post->file_id}}">
                             @endif
                         </div>
-                        <div class="text-28">
+                        <div class="text-28 d-flex">
                             <span class="mr-3"><img class="ic-action"
                                                     src="{{asset("images/ic/ic_bookmark.svg")}}"></span>
 
-                            <button id="likePost" class="mr-5 border-0 bg-white text-primary"><img class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">{{$post->like_no}}</button>
-                            <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}</span>
+                            @if(empty($userLike))
+                                <button id="likePost" class="mr-5 border-0 bg-white text-primary">
+                                    <img id="like" class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">
+                                    <img id="liked" style="display: none" class="ic-action" src="{{asset("images/ic/ic_fullHeart.svg")}}">
+                                </button>
+                            @else
+                                <button id="unlike" class="mr-5 border-0 bg-white text-primary">
+                                    <img class="ic-action" src="{{asset("images/ic/ic_fullHeart.svg")}}">
+                                </button>
+                            @endif
+                                <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}</span>
 
                         </div>
                     </div>
@@ -61,7 +71,7 @@
                             </button>
                         </div>
                         <p class="text-28 pt-2 ">
-                            @if($post->block==0)
+                            @if($post->block==1)
                                 @lang('keywords.solved')
                             @else
                                 @lang('keywords.waitingForAnswer')
@@ -81,7 +91,10 @@
                         {!! Form::open(['url' => URL::route('site.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
                             {{ Form::label('detail', 'Content') }}
-                            {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3','required']) }}
+                            {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3']) }}
+                            @error('detail')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="custom-file ">
                             {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
@@ -94,9 +107,9 @@
 
                 </div>
             @endif
-{{--            @php--}}
-{{--                $post_id= $post->id;--}}
-{{--            @endphp--}}
+            {{--            @php--}}
+            {{--                $post_id= $post->id;--}}
+            {{--            @endphp--}}
 
             @foreach($comments as $value)
                 <x-forum.forum-comment :comment=$value>
@@ -115,25 +128,25 @@
         </script>
     @endpush
     @push('likePost')
-    <script>
-        $(function () {
-            $('#likePost').click(function (e) {
-                e.preventDefault();
-                var post_id = {{$post->id}};
-                var user_id = {{$post->user_id}};
-
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: "POST",
-                    url: "{{ route('site.user-like.store') }}",
-                    data: {post_id: post_id, user_id:user_id}
-                })
-                console.log("ok");
+        <script>
+            $(function () {
+                $('#likePost').click(function (e) {
+                    e.preventDefault();
+                    var post_id = {{$post->id}};
+                    var user_id = {{\Illuminate\Support\Facades\Auth::user()->id}};
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "POST",
+                        url: "{{ route('site.user-like.store') }}",
+                        data: {post_id: post_id, user_id: user_id}
+                    })
+                    document.getElementById('like').style.display = 'none';
+                    document.getElementById('liked').style.display = 'block';
+                });
             });
-        });
-    </script>
+        </script>
     @endpush
 @endsection
 

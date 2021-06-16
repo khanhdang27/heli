@@ -6,23 +6,21 @@
             @lang('keywords.starTutorTeam')
         </div>
         <div class="container-fluid content-team-page">
-            <div class="row">
+            <div class="row w-100 m-0">
                 @foreach(\App\Models\Tutor::all() as $value)
-                    <div class="col-xl-6 col-sm d-flex justify-content-center">
+                    <div class="col-xl-6 col-lg d-flex justify-content-center">
                         <div class="card-team">
-                            <div class="row">
-                                <div class="col-sm info-left">
-                                    <div class="thumb"
-                                         style="background-image: url({{asset("images/ava.jpg")}})"></div>
-                                    <div
-                                        class="d-flex flex-column align-items-center justify-content-center info-tutor text-white">
+                            <div class="row m-0">
+                                <div class="col-sm-6 info-left p-0">
+                                    <div class="thumb" style="background-image: url({{asset("images/ava.jpg")}})"></div>
+                                    <div class="d-flex flex-column align-items-center justify-content-center info-tutor text-white">
                                         <div class="name-tutor">{{ $value->full_name }}</div>
-                                        <div class="position-tutor">Tutor/Admission Consultant</div>
+                                        <div class="position-tutor text-center">Tutor/Admission Consultant</div>
                                     </div>
                                 </div>
-                                <div class="col-sm ">
-                                    <div class="info-right bg-dark d-flex flex-column justify-content-between">
-                                        <div class="content-info-right text-white pt-3 pl-3">
+                                <div class="col-sm-6 info-right p-0">
+                                    <div class="bg-dark d-flex flex-column justify-content-between pt-5 px-3 pb-3 tutor-background">
+                                        <div class="content-info-right text-white">
                                             <div>{{ $value->tutor_info }}</div>
                                             <br>
                                             <div>► {{ $value->tutor_level }}</div>

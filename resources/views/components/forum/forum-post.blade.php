@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <img src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                 <div class="pl-3 pt-2">
-                    <p class="text-25">{{$post->user->name}}</p>
+                    <p class="text-25 text-break">{{$post->user->name}}</p>
                     <p class="text-primary">{{ substr($post->created_at,0,10) }}</p>
                 </div>
             </div>

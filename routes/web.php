@@ -31,6 +31,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::put('reset-password', 'Auth\ChangePasswordController@update')->name('resetPassword');
 
         Route::get('news', 'NewsController@show')->name('news');
+        Route::get('news/{id}', 'NewsController@newsDetail')->name('news-detail');
         Route::get('teams', function () {
             return view('team-page');
         })->name('teams');
