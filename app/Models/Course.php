@@ -81,4 +81,8 @@ class Course extends Model implements TranslatableContract
     {
         return $this->belongsToMany(User::class, 'student_courses', 'course_id', 'student_id');
     }
+    public function userLike()
+    {
+        return $this->morphMany(UserLike::class,'userLikeable');
+    }
 }

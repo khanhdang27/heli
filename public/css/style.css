@@ -177,6 +177,7 @@ body {
 }
 
 .item-header {
+    font-size: 14px;
     padding: 0 0 0 1rem !important;
 }
 
@@ -571,7 +572,7 @@ video {
     font-weight: 600;
 }
 
-.text-advertisement {
+.text-banner {
     text-align: center;
     max-width: 405px;
 }

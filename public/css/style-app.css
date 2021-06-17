@@ -210,12 +210,12 @@
   outline: none;
 }
 
-.text-25 {
+.text-comment {
   font-size: 18.7pt;
   color: var(--primary);
 }
 
-.text-28 {
+.text-forum {
   font-size: 21pt;
   color: var(--primary);
 }
