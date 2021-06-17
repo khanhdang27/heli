@@ -12,7 +12,7 @@
                 <div class="news-item">
                     <div class="show-news-item">
                         @foreach($news as $item)
-                            <a class="news-title text-primary">
+                            <a class=" text-primary">
                                 {{substr($item->updated_at,-14,6)}}
                                 {{$item->title}}
                             </a>

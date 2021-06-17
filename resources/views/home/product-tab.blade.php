@@ -1,6 +1,6 @@
-<div class="mx-auto container-product">
+<div class="container-fluid">
     <!-- Nav pills -->
-    <ul class="nav nav-pills menu-category mb-5" role="tablist">
+    <ul class="nav nav-pills menu-category" role="tablist">
         <li class="nav-item">
             <a class="nav-link active category-link" data-toggle="pill" href="#home">
                 <img class="menu-img" src="{{asset("images/IGCSE_cover.jpg")}}">
@@ -47,29 +47,24 @@
         </li>
     </ul>
     <!-- Tab panes -->
+    <h1 class="text-primary text-primary" id="tab-title">
+        @lang('keywords.hotCourseSeries')
+    </h1>
     <div class="tab-content">
         <div id="home" class="container-fluid tab-pane active">
-            <div class="heading-title text-primary" id="tab-title">
-                @lang('keywords.hotCourseSeries')
-            </div>
+            Tab 1
             {{--                <x-product.course-list></x-product.course-list>--}}
         </div>
-        <div id="menu1" class="container-fluid tab-pane fade"><br>
-            <div class="heading-title text-primary" id="tab-title">
-                @lang('keywords.hotCourseSeries')
-            </div>
+        <div id="menu1" class="container-fluid tab-pane fade">
+            Tab 2
             {{--                <x-product.course-list></x-product.course-list>--}}
         </div>
-        <div id="menu2" class="container-fluid tab-pane fade"><br>
-            <div class="heading-title text-primary" id="tab-title">
-                @lang('keywords.hotCourseSeries')
-            </div>
+        <div id="menu2" class="container-fluid tab-pane fade">
+            Tab 3
             {{--                <x-product.course-list></x-product.course-list>--}}
         </div>
-        <div id="menu3" class="container-fluid tab-pane fade"><br>
-            <div class="heading-title text-primary" id="tab-title">
-                @lang('keywords.hotCourseSeries')
-            </div>
+        <div id="menu3" class="container-fluid tab-pane fade">
+            Tab 4
             {{--                <x-product.course-list></x-product.course-list>--}}
         </div>
     </div>

@@ -1,3 +1,7 @@
+html {
+    font-size: 14pt;
+}
+
 .color-primary {
     svg {
         fill: var(--primary);
@@ -6,19 +10,6 @@
 
 .color-secondary {
     fill: var(--secondary);
-}
-.navbar-home {
-    background-color: var(--white);
-    border: 0;
-    padding: 1.1rem 1.6rem;
-    a {
-        color: var(--primary);
-        font-size: 15pt;
-    }
-    a:hover {
-        text-decoration: none;
-        color: var(--primary);
-    }
 }
 
 .dropdown-menu {
@@ -32,36 +23,13 @@
     }
 }
 
-.my-dropdown-menu {
-    background-color: var(--dark);
-    padding: 1.2rem 1rem;
-    border: 2px solid var(--secondary);
-    border-radius: 0;
-}
-
-.dropdown-lang {
-    background-color: var(--dark);
-    border: 2px solid var(--secondary);
-    border-radius: 0;
-}
-
-.already-member {
-    a {
-        color: #fff;
-    }
-    a:hover {
-        color: var(--secondary);
-    }
-}
-
-.heading-title {
-    color: var(--primary);
-}
-
-.sub-header {
-    a {
-        color: var(--secondary);
-    }
+.search {
+    border: 2px solid #0B487D;
+    border-radius: 20px;
+    padding: 0.2rem !important;
+    width: 309px;
+    height: 37px;
+    background-color: #fff;
 }
 
 .footer {
@@ -83,17 +51,17 @@
     }
 }
 
+.list-news {
+    height: 20rem;
+    overflow-y: auto;
+}
+
 .top-news-page {
     background-color: var(--dark);
     font-size: 45pt;
     color: var(--secondary);
     font-weight: 600;
     padding: 2.54rem 0;
-}
-
-.news-title {
-    font-size: 22pt;
-    color: var(--primary);
 }
 
 .title-course {

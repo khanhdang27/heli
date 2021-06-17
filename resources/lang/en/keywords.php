@@ -50,7 +50,7 @@ return [
     'registerNowToExperience' => 'Register now to experience',
     'registerNowFree' => 'Register Now For Free',
     'tryItNow' => 'Try it now',
-    'discountProduct' => 'Latest Discount Courses',
+    'latestDiscountProduct' => 'Latest Discount Courses',
     'welcomeOffer' => 'Welcome Offer',
     'recommendedForYou' => 'Recommended for you',
     'hotCourseSeries' => 'Hot Course Series',

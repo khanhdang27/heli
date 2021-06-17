@@ -50,7 +50,7 @@ return [
     'registerNowToExperience' => '立即註冊體驗',
     'registerNowFree' => '立即免費註冊',
     'tryItNow' => '立即試看',
-    'discountProduct' => '最新優惠課程',
+    'latestDiscountProduct' => '最新優惠課程',
     'welcomeOffer' => '迎新優惠',
     'recommendedForYou' => '推薦的給你',
     'hotCourseSeries' => '熱⾨課程系列',

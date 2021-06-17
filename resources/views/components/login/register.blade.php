@@ -52,7 +52,7 @@
                                 </button>
                             </div>
                         {!! Form::close() !!}
-                        <div class="already-member text-center">
+                        <div class="text-center text-white">
                             <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">@lang('keywords.alreadyMember')</a>
                         </div>
                     </div>

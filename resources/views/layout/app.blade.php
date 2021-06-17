@@ -12,7 +12,6 @@
             integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
             crossorigin="anonymous"></script>
     <link href="{{ asset('css/app.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/style-app.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-logged.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-calendar.css')}}" rel="stylesheet">

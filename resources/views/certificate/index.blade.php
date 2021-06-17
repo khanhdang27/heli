@@ -33,10 +33,10 @@
                 </form>
             </div>
             <div class="container-fluid p-0">
-                <div class="container-fluid product-recommend">
-                    <div class="heading-title" id="tab-title">
+                <div class="container-fluid">
+                    <h1 class="text-primary" id="tab-title">
                         英文
-                    </div>
+                    </h1>
                     <div class="d-flex flex-wrap">
                         <div class="pr-3">
                             <a class="product-hover" href="{{URL::route('site.course.index')}}">

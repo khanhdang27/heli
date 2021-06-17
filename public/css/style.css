@@ -23,43 +23,12 @@ body {
     background-size: cover;
 }
 
-
-/*HEADER-----------------------------------------*/
-
-.header-top {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    width: 17rem;
-}
-
-.item-mentorTeam {
-    padding-right: 0.5rem;
-}
-
 .dropdown-items {
     min-width: 9.2rem;
 }
 
 .dropdown-menu {
     z-index: 1002;
-}
-
-.btn-cart {
-    border: none;
-    background-color: #fff;
-}
-
-.btn-cart:hover {
-    cursor: pointer;
-}
-
-.btn-cart:focus {
-    outline: none;
 }
 
 .btn-header {
@@ -81,36 +50,8 @@ body {
     outline: none !important;
 }
 
-.btn-language {
-    width: 5.8rem;
-}
-
-.language-item {
-    min-width: 5.86rem;
-}
-
 .banner {
     position: relative;
-}
-
-.dropdown-item {
-    color: #fff;
-}
-
-.nav-item {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-.search {
-    border: 2px solid #0B487D;
-    border-radius: 20px;
-    padding: 0.2rem !important;
-    width: 309px;
-    height: 37px;
-    background-color: #fff;
 }
 
 .category {
@@ -367,11 +308,6 @@ body {
 
 .product-tab {
     padding-bottom: 4.6rem;
-}
-
-.container-product {
-    max-width: 1767px;
-    padding: 0 !important;
 }
 
 .menu-category {
@@ -829,12 +765,6 @@ video {
 
 .bottom-btn {
     max-width: 559px;
-}
-
-.already-member {
-    max-width: 559px;
-    font-size: 22.5pt;
-    margin-top: 2.6rem;
 }
 
 .text-login-left {
