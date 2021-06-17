@@ -10,7 +10,7 @@ class SelectionByClass{
      * @param ClassName $className
      * @param  Str $column name of field to show
      * @param Integer $key id
-     * @param Integer $sort default is SORT_ASC PHP sort flag [ Option SORT_DESC | SORT_ASC ] 
+     * @param Integer $sort default is SORT_ASC PHP sort flag [ Option SORT_DESC | SORT_ASC ]
      * @param Integer $sort_by default is $column [ Option ]
      * @return Set $options
      */

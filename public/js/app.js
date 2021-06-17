@@ -37683,6 +37683,7 @@ function toNumber (val) {
   return isNaN(n) ? val : n
 }
 
+<<<<<<< HEAD
 /**
  * Make a map and return a function for checking if a key
  * is in that map.
@@ -37700,6 +37701,10 @@ function makeMap (
     ? function (val) { return map[val.toLowerCase()]; }
     : function (val) { return map[val]; }
 }
+=======
+__webpack_require__(/*! C:\wamp\www\Helios\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp\www\Helios\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> e5b24a9d7ac8050e1cca459338dead70cb837c00
 
 /**
  * Check if a tag is a built-in tag.

@@ -45,9 +45,6 @@
                                         Email
                                     </th>
                                     <th>
-                                        Password
-                                    </th>
-                                    <th>
                                         Role
                                     </th>
                                     <th></th>
@@ -57,16 +54,13 @@
                                 @foreach($roleUsers as $value)
                                     <tr>
                                         <td class="goal-project">
-                                            {{ $value->name }}
+                                            {{ $value->name}}
                                         </td>
                                         <td class="goal-project">
                                             {{ $value->email }}
                                         </td>
                                         <td class="goal-project">
-                                            {{ $value->password }}
-                                        </td>
-                                        <td class="goal-project">
-                                            {{ $value->role_name }}
+                                            {{ $value->roles[0]->name}}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

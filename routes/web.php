@@ -33,6 +33,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email');
 
         Route::get('news', 'NewsController@show')->name('news');
+        Route::get('news/{id}', 'NewsController@newsDetail')->name('news-detail');
         Route::get('teams', function () {
             return view('team-page');
         })->name('teams');

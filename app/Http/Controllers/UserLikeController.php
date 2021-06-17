@@ -15,9 +15,9 @@ class UserLikeController extends Controller
             $input
         );
 
-        if($userLike->save()){
-            $post = Post::find($userLike->post_id);
-            $post->like_no = $post->like_no+1;
+        if ($userLike->save()) {
+            $post = Post::find($userLike->like_ref);
+            $post->like_no = $post->like_no + 1;
             $post->save();
         }
     }

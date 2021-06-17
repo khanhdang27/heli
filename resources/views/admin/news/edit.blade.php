@@ -21,17 +21,23 @@
                     <div class="card-body">
                         <div class="card-body">
                             {!! Form::open(['route' => ['admin.news.update', $news->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
-                            @csrf
-                            <div class="form-group ">
-                                {{ Form::label('title', 'News Title') }}
-                                {{ Form::text('title', old('title'),['class' => 'form-control'] ) }}
-                                @error('title')
+                            <div class="form-group">
+                                {{ Form::label('date', 'Date') }}
+                                {{ Form::date('date', $news->date,['class' => 'form-control'] ) }}
+                                @error('date')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('content', 'News Content') }}
-                                {{ Form::text('content', old('content'),['class' => 'form-control'] ) }}
+                                {{ Form::label('title', 'News Title') }}
+                                {{ Form::text('title', $news->title,['class' => 'form-control'] ) }}
+                                @error('title')
+                                <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('content', 'News content') }}
+                                {{ Form::textarea('content', $news->content, ['id'=>'ckeditor']) }}
                                 @error('content')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
@@ -40,13 +46,6 @@
                                 {{ Form::label('file_id', 'News File') }}
                                 {{ Form::file('file_id', old('file_id'),['class' => 'form-control'] ) }}
                                 @error('file_id')
-                                <div class="alert text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                {{ Form::label('content', 'News content') }}
-                                {{ Form::textarea('content', $news->content, ['id'=>'ckeditor']) }}
-                                @error('content')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

@@ -12,8 +12,8 @@
                 <div class="news-item">
                     <div class="show-news-item">
                         @foreach($news as $item)
-                            <a class=" text-primary">
-                                {{substr($item->updated_at,-14,6)}}
+                            <a href="{{ route('site.news-detail',$item->id) }}" class="news-title text-primary">
+                                {{$item->date}}
                                 {{$item->title}}
                             </a>
                         @endforeach

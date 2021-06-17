@@ -14,9 +14,25 @@
                     </div>
                     <div class="text-primary bottom-package w-75 mb-3">
                         <p class="pb-3">** {{$documentItem->course_material_origin}}</p>
+                        <p class="m-0">{{$documentItem->course_material_name}}</p>
+                        <p class="m-0">
+                            {{substr(
+                            $documentItem->course_material_description,
+                            0,
+                            strpos($documentItem->course_material_description,
+                            " ",
+                            50))}}
+                            <span class="collapse" id="description{{$documentItem->id}}">
+                            {{substr(
+                            $documentItem->course_material_description,
+                            strpos($documentItem->course_material_description,
+                            " ",
+                            50),
+                            strlen($documentItem->course_material_description))}}
+                        </span>
+                        </p>
 
-                        <p>{{$documentItem->course_material_name}}</p>
-                        {{$documentItem->course_material_description}}
+                        <a data-toggle="collapse" data-target="#description{{$documentItem->id}}">More... &raquo;</a>
                     </div>
                 </div>
             @endforeach

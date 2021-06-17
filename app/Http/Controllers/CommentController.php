@@ -39,19 +39,23 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $input = $request->validate([
+            'post_id' => 'required',
+            'file_id' => '',
+            'detail' => 'required'
+        ]);
         if (!empty($request->file)) {
             $fileController = new FileController();
-            $input = $request->all();
-
-            $file_id = $fileController->store($request);
 
             $input['user_id'] = Auth::user()->id;
-            unset($input['type']);
-            unset($input['ref']);
-            unset($input['file']);
-            $input['file_id'] = $file_id;
+            $input['file_id'] = $fileController->store($request);
 
-            $comment = new Comment($input);
+            $comment = new Comment([
+                'user_id' => Auth::user()->id,
+                'post_id' => $input['post_id'],
+                'file_id' => $input['file_id'],
+                'detail' => $input['detail']
+            ]);
 
             if ($comment->save()) {
                 $post = Post::find($comment->post_id);
@@ -61,13 +65,11 @@ class CommentController extends Controller
             return back();
         }
         else{
-            $input = $request->all();
-            $input['user_id'] = Auth::user()->id;
-            unset($input['type']);
-            unset($input['ref']);
-            unset($input['file']);
-            $comment = new Comment($input);
-
+            $comment = new Comment([
+                'user_id' => Auth::user()->id,
+                'post_id' => $input['post_id'],
+                'detail' => $input['detail']
+            ]);
             if ($comment->save()) {
                 $post = Post::find($comment->post_id);
                 $post->comment_no = $post->comment_no + 1;
