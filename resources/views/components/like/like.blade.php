@@ -31,7 +31,7 @@ foreach ($userLike as $usLikePost) {
         var like = new Vue({
             el: '#likePost{{$post->id}}',
             data: {
-                seen: true,
+                return : true
             },
             methods: {
                 myClickHandler: function () {
@@ -42,6 +42,8 @@ foreach ($userLike as $usLikePost) {
                     })
                     .then(function (response) {
                         console.info(response);
+                        document.querySelector("#liked").style.display = "inline-block";
+                        document.querySelector("#like").style.display = "none";
                     })
                     .catch(function (error) {
                         console.error(error);
