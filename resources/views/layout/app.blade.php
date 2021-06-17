@@ -30,6 +30,7 @@
 <script src="{{ asset('js/toastr.min.js')}}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 @stack('likePost')
 @include('layout.footer')
 </div>

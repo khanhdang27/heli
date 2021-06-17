@@ -14,22 +14,30 @@
                     <ul class="nav nav-pills menu-tab" role="tablist">
                         <li class="nav-item ">
                             <a class="nav-link active category-link-text" data-toggle="pill" href="#home">
-                                @lang('keywords.coursePage.courseOverview')
+                                <h4>
+                                    @lang('keywords.coursePage.courseOverview')
+                                </h4>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link category-link-text" data-toggle="pill" href="#menu1">
-                                @lang('keywords.coursePage.courseFrequency')
+                                <h4>
+                                    @lang('keywords.coursePage.courseFrequency')
+                                </h4>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link category-link-text" data-toggle="pill" href="#menu2">
-                                @lang('keywords.coursePage.mentorIntroduction')
+                                <h4>
+                                    @lang('keywords.coursePage.mentorIntroduction')
+                                </h4>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link category-link-text" data-toggle="pill" href="#menu3">
-                                @lang('keywords.coursePage.studentEvaluation')
+                                <h4>
+                                    @lang('keywords.coursePage.studentEvaluation')
+                                </h4>
                             </a>
                         </li>
                     </ul>

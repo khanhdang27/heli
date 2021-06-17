@@ -1,4 +1,4 @@
-<div class="modal fade modal-login" id="registerModalComponent">
+<div class="modal fade " id="registerModalComponent">
     <div class="modal-dialog modal-login-xl">
         <div class="modal-content  modal-register-component">
             <div class="modal-header btn-close">

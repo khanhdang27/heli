@@ -1,4 +1,4 @@
-<div class="modal fade modal-login" id="registerModal">
+<div class="modal fade " id="registerModal">
     <div class="modal-dialog modal-login-xl">
         <div class="modal-content modal-login-content">
             <div class="modal-header btn-close">
@@ -8,31 +8,31 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-6 login-left d-flex flex-column justify-content-center">
-                        <div class="text-login-left text-center">
+                        <div class="text-login-left text-secondary text-center">
                             @lang('keywords.registerModal.freeRegistration')<br>
                             @lang('keywords.registerModal.experienceCourse')<br> 
                             @lang('keywords.registerModal.onlineAndRealTimeCourse')<br>
                         </div>
                     </div>
-                    <div class="col-sm login-right">
+                    <div class="col-sm">
                         <div class="box-btn-login">
-                            <div class="btn-register-now btn-login btn-secondary">
+                            <button class="btn-register-now btn-login btn-secondary">
                                 <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}">
                                 </div>@lang('keywords.loginWithFb')
-                            </div>
-                            <div class="btn-register-now btn-login btn-secondary">
+                            </button>
+                            <button class="btn-register-now btn-login btn-secondary">
                                 <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}">
                                 </div>@lang('keywords.loginWithGg')
-                            </div>
-                            <div class="btn-register-now btn-login btn-secondary">
+                            </button>
+                            <button class="btn-register-now btn-login btn-secondary">
                                 <div class="box-ic ic-ap"><img class="ic" id="ap"
                                                                 src="{{asset("images/ic/ic_apple.svg")}}">
                                 </div>@lang('keywords.loginWithAp')
-                            </div>
+                            </button>
                         </div>
                         <div class="line-or d-flex align-items-center text-white">
                             <hr>
-                            <span class="text-or">or</span>
+                            <span class="py-2">or</span>
                             <hr>
                         </div>
                         {!! Form::open(['id'=>'registerForm']) !!}
@@ -52,9 +52,14 @@
                                 </button>
                             </div>
                         {!! Form::close() !!}
-                        <div class="text-center text-white">
-                            <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">@lang('keywords.alreadyMember')</a>
+                        <div class="mt-3 line-or">
+                            <a class="text-white" href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">
+                                <h4 class="text-center">
+                                    @lang('keywords.alreadyMember')
+                                </h4>
+                            </a>
                         </div>
+                        
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-<div class="modal fade modal-login" id="loginModal">
+<div class="modal fade" id="loginModal">
     <div class="modal-dialog modal-login-xl">
         <div class="modal-content modal-login-content mx-auto">
             <div class="modal-header btn-close">
@@ -8,12 +8,12 @@
             <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6 d-flex justify-content-center align-items-center">
-                            <div class="text-login-left text-center">
+                            <div class="text-login-left text-secondary text-center text-secondary">
                                 @lang('keywords.loginModal.welcomeBack')<br>
                                 @lang('keywords.loginModal.loginToContinueCourse')
                             </div>
                         </div>
-                        <div class="col-sm login-right">
+                        <div class="col-sm">
 
                             <div class="box-btn-login">
                                 <div class="btn-register-now btn-login btn-secondary">
@@ -32,7 +32,7 @@
                             </div>
                             <div class="line-or d-flex align-items-center text-white">
                                 <hr>
-                                <span class="text-or">or</span>
+                                <span class="py-2">or</span>
                                 <hr>
                             </div>
                             @csrf
@@ -72,9 +72,11 @@
                                         @lang('keywords.rememberMe')
                                     </div>
                                 </div>
-                                <div class="col-sm text-right p-0 col-forget-pw">
+                                <div class="col-sm text-right p-0">
                                     <a href="{{route('site.backpack.auth.password.reset')}}">@lang('keywords.forgotPass')</a><br>
-                                    <a href="#">@lang('keywords.register')</a>
+                                    <a href="#" data-toggle="modal" data-target="#registerModal" >
+                                        @lang('keywords.register')
+                                    </a>
                                 </div>
 
                             </div>

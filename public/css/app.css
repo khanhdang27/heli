@@ -1,5 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);
-/*!
+@import url(https://fonts.googleapis.com/css?family=Nunito);/*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
@@ -499,7 +498,7 @@ mark,
 }
 
 .blockquote-footer::before {
-  content: "\2014\00A0";
+  content: "\2014\A0";
 }
 
 .img-fluid {
@@ -8244,6 +8243,7 @@ button.bg-dark:focus {
 .user-select-all {
   -webkit-user-select: all !important;
      -moz-user-select: all !important;
+      -ms-user-select: all !important;
           user-select: all !important;
 }
 
@@ -10978,13 +10978,15 @@ html {
 }
 
 .footer .title-foot {
-  font-size: 18pt;
-  font-weight: 600;
   margin-bottom: 0;
 }
 
+.footer span {
+  font-size: 13pt;
+}
+
 .footer a {
-  font-size: 16pt;
+  font-size: 13pt;
   color: var(--secondary);
 }
 
@@ -11022,7 +11024,7 @@ form#certificate_form option:checked {
 
 .top-news-page {
   background-color: var(--dark);
-  font-size: 45pt;
+  font-size: 30pt;
   color: var(--secondary);
   font-weight: 600;
   padding: 2.54rem 0;
@@ -11061,10 +11063,6 @@ form#certificate_form option:checked {
   color: var(--white);
 }
 
-.text-login-left {
-  color: var(--secondary);
-}
-
 .btn-x {
   color: var(--secondary);
 }
@@ -11095,17 +11093,12 @@ form#certificate_form option:checked {
 }
 
 .menu-tab a {
-  font-size: 22.5pt;
+  font-size: 16pt;
   color: var(--primary);
-  font-weight: 600;
 }
 
 .share-bar {
   font-size: 15pt;
-  color: var(--primary);
-}
-
-.product p {
   color: var(--primary);
 }
 
@@ -11159,5 +11152,4 @@ form#certificate_form option:checked {
   font-size: 21pt;
   color: var(--primary);
 }
-
 

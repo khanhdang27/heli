@@ -1,9 +1,9 @@
-<div class="product bg-white border-secondary p-4">
+<div class="bg-white border border-secondary p-4 text-primary">
     <div class="mb-3 title-course">
-        <p class="m-0">{{$courseDetail->course_name}}</p>
+        <p class="m-0">Course Name {{$courseDetail->course_name}}</p>
     </div>
-    <p class="m-0 teacher-name">{{$courseDetail->tutor->full_name}}</p>
-    <p class="price">HKD{{$courseDetail->course_price}}</p>
+    <p class="m-0 teacher-name">Tutor Name: {{$courseDetail->tutor->full_name}}</p>
+    <h2 class="font-weight-bold">HKD: {{$courseDetail->course_price}}$</h2>
     @if(\Illuminate\Support\Facades\Auth::check())
         <a href="{{route('site.order.create', ['course_id'=>$courseDetail->id])}}">
             <div class="btn-primary mt-3 btn-register-now product-btn">
@@ -17,6 +17,8 @@
     @endif
     <div class="d-flex share-bar">
         <span class="mr-2"><img width="36" src="{{ asset("images/ic/ic_share.svg")}}"></span>
-        <p class="text-20 pt-1">@lang('keywords.coursePage.shareCourse')</p>
+        <a href="#">
+            <h2 class="pt-1">@lang('keywords.coursePage.shareCourse')</h2>
+        </a>
     </div>
 </div>

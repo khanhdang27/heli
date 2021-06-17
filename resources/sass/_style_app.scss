@@ -36,13 +36,15 @@ html {
     color: var(--secondary);
     line-height: 1.45;
     padding: 4.48rem 0;
+
     .title-foot {
-        font-size: 18pt;
-        font-weight: 600;
         margin-bottom: 0;
     }
+    span {
+        font-size: 13pt;
+    }
     a {
-        font-size: 16pt;
+        font-size: 13pt;
         color: var(--secondary);
     }
     a:hover {
@@ -80,7 +82,7 @@ form#certificate_form {
 
 .top-news-page {
     background-color: var(--dark);
-    font-size: 45pt;
+    font-size: 30pt;
     color: var(--secondary);
     font-weight: 600;
     padding: 2.54rem 0;
@@ -121,9 +123,6 @@ form#certificate_form {
     }
 }
 
-.text-login-left {
-    color: var(--secondary);
-}
 
 .btn-x {
     color: var(--secondary);
@@ -158,9 +157,8 @@ form#certificate_form {
 
 .menu-tab {
     a {
-        font-size: 22.5pt;
+        font-size: 16pt;
         color: var(--primary);
-        font-weight: 600;
     }
 }
 
@@ -169,11 +167,6 @@ form#certificate_form {
     color: var(--primary);
 }
 
-.product {
-    p {
-        color: var(--primary);
-    }
-}
 
 .btn-hashtag {
     background-color: var(--primary);

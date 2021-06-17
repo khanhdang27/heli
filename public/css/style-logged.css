@@ -150,27 +150,17 @@
     margin-top: 2rem;
 }
 
-.price {
-    font-size: 26.5pt;
-    font-weight: 600;
-    margin: 3.2rem 0;
-}
 
 .tab-item-content {
     max-width: 846px;
 }
 
 .content-info {
-    font-size: 18.7pt;
-}
-
-.title {
-    font-size: 26.5pt;
-    font-weight: 600;
+    font-size: 16pt;
 }
 
 .text-intro {
-    font-size: 18.7pt;
+    font-size: 16pt;
 }
 
 .bottom-package {

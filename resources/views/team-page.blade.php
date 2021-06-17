@@ -8,7 +8,7 @@
         <div class="container-fluid content-team-page">
             <div class="row">
                 @foreach(\App\Models\Tutor::all() as $value)
-                    <div class="col-xl-6 col-sm d-flex justify-content-center">
+                    <div class="col-6 col-sm-6 d-flex justify-content-center">
                         <div class="card-team">
                             <div class="row">
                                 <div class="col-sm info-left">
