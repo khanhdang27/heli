@@ -15,7 +15,9 @@
                 </div>
             </div>
             <div class="text-dark">
-                {!! $news->content !!}
+                <span>
+                    {!! $news->content !!}
+                </span>
             </div>
         </div>
     </div>

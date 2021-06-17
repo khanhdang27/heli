@@ -19,6 +19,7 @@ class CreateNewsTable extends Migration
             $table->string('content');
             $table->foreignId('file_id')
                 ->constrained('file');
+            $table->date('announcement_date');
             $table->timestamps();
             $table->softDeletes();
         });
