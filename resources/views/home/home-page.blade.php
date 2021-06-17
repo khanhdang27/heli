@@ -6,7 +6,6 @@
 
     <div class="banner">
         @include('categories-bar')
-
         @if(Auth::user()==null)
             <x-home.banner :banner=$banners></x-home.banner>
         @else
@@ -15,7 +14,7 @@
                 <h1 class="text-center text-secondary">
                     @lang('keywords.latestNewsPage')
                 </h1>
-                <div class="list-news">
+                <div class="list-news w-50 mx-auto">
                     @foreach($news as $item)
                     <h3 class="text-primary">
                         <a class="text-primary">
@@ -31,9 +30,9 @@
     </div>
     @if (empty($courses[0]))
         <div class="d-flex justify-content-center">
-            <H3>
+            <h3>
                 No Data Of Course
-            </H3>
+            </h3>
         </div>
     @else
     <div class="body-content">
@@ -64,7 +63,7 @@
             </div>
         @endif
         <div class="product-tab">
-            @include('home.product-tab')
+            <x-home.product-tab :courseItem=$courses></x-home.product-tab>
         </div>
         @if(Auth::user()==null)
             <x-home.step-register></x-home.step-register>
@@ -90,12 +89,12 @@
                 <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
             </div>
         @endif
-        @if(Auth::user()==null)
+        @if(Auth::check())
             <div class="free-class-container">
                 <div class="position-relative d-flex align-items-center">
                     <div class="border-right-radius border-primary">
                         <div class="text-content d-flex justify-content-end text-primary">
-                        <span class="text-advertisement">
+                        <span class="text-information">
                             @lang('keywords.freeTrialClass')
                         </span>
                         </div>

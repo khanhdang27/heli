@@ -10998,6 +10998,28 @@ html {
   overflow-y: auto;
 }
 
+form#certificate_form select {
+  font-size: 13pt;
+  border: 0px var(--dark) solid;
+  background: var(--dark) 0.5;
+  color: var(--secondary);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+form#certificate_form option {
+  padding: 0.2rem 1rem;
+  font-size: 14pt;
+  border: 2px var(--secondary) solid;
+  background: var(--dark) 0.5;
+  color: var(--primary);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+form#certificate_form option:checked {
+  background: var(--primary) 0.5;
+  color: var(--secondary);
+}
+
 .top-news-page {
   background-color: var(--dark);
   font-size: 45pt;

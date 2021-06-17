@@ -9,7 +9,7 @@
                 <div class="mx-auto">
                     <div class="d-flex align-items-center">
                         <div class="text-content pr-5 d-flex text-secondary">
-                            <span class="text-advertisement">
+                            <span class="text-information">
                                 @lang('keywords.freeTrialClass')
                             </span>
                         </div>
