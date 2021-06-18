@@ -24,7 +24,7 @@ class UserLike extends Model
 //    public function course(){
 //        return $this->morphTo(Course::class);
 //    }
-    public function userLikeable()
+    public function likeable()
     {
         return $this->morphTo();
     }

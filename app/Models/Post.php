@@ -24,6 +24,6 @@ class Post extends Model
     }
     public function userLike()
     {
-        return $this->morphMany(UserLike::class,'userLikeable');
+        return $this->hasMany(UserLike::class,'like_ref_id');
     }
 }

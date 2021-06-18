@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\Lecture;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
+use App\Models\UserLike;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
@@ -86,21 +87,24 @@ class CourseController extends Controller
      * @param $id
      * @return View
      */
-    public function show($id)
+    public function show(Course $course)
     {
-        $courseDetail = Course::where('id',$id)
-            ->with('subject','tutor','courseMaterial')
-            ->first();
-
+        $courseDetail = Course::with('subject','tutor','courseMaterial')
+            ->with(['userLike' => function ($q){
+                if (Auth::check()) {
+                    return $q->where('user_id', Auth::user()->id );
+                }
+            }])
+            ->find($course->id);
         $student_course  = null;
         if (Auth::check()){
             $student_course = StudentCourses::where([
-                'course_id'=> $id, 'student_id'=>Auth::user()->id
+                'course_id'=> $course->id, 'student_id'=>Auth::user()->id
             ])->first();
-        } 
+        }
         return view('course.course-page',[
             'courseDetail' => $courseDetail,
-            'student_course' => $student_course
+            'student_course' => $student_course,
         ]);
     }
 

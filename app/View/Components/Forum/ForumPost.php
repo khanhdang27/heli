@@ -7,16 +7,14 @@ use Illuminate\View\Component;
 class ForumPost extends Component
 {
     public $post;
-    public $userLike;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($post, $userLike)
+    public function __construct($post)
     {
         $this->post = $post;
-        $this->userLike = $userLike;
     }
 
     /**
@@ -28,7 +26,6 @@ class ForumPost extends Component
     {
         return view('components.forum.forum-post',[
             'post' => $this->post,
-            'userLike' => $this->userLike
         ]);
     }
 }
