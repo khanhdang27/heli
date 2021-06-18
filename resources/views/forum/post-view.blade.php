@@ -49,7 +49,7 @@
                         <div class="text-forum d-flex">
                             <span class="mr-3"><img class="ic-action"
                                                     src="{{asset("images/ic/ic_bookmark.svg")}}"></span>
-                            <x-like.like :userLike=$userLike :post=$post :likeModule={{\App\Models\UserLike::$POST}}></x-like.like>
+                            <x-like.like :userLike=$userLike :post=$post :likeModule=\App\Models\UserLike::$POST></x-like.like>
                             <span>
                                 <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}
                             </span>
