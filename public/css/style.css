@@ -1,8 +1,3 @@
-@font-face {
-    font-family: PingFangTC;
-    src: url('/fonts/PingFang.ttc') format('truetype');
-}
-
 html,
 body {
     font-size: 10.5pt;
@@ -538,7 +533,7 @@ video {
 
 @media screen and (max-width: 714px) {
     .btn-register-now {
-        font-size:15pt;
+        font-size: 15pt;
     }
 }
 

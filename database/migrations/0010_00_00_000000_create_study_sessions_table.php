@@ -16,8 +16,8 @@ class CreateStudySessionsTable extends Migration
         Schema::create('study_sessions', function (Blueprint $table) {
             $table->id();
             $table->string('session_name');
-            $table->date('session_start');
-            $table->date('session_end');
+            $table->dateTime('session_start');
+            $table->dateTime('session_end');
             $table->timestamps();
         });
     }

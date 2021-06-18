@@ -1,3 +1,8 @@
+@font-face {
+    font-family: PingFangTC;
+    src: url('/helios/public/fonts/PingFang.ttc') format('truetype');
+}
+
 html {
     font-size: 14pt;
 }
@@ -36,7 +41,6 @@ html {
     color: var(--secondary);
     line-height: 1.45;
     padding: 4.48rem 0;
-
     .title-foot {
         margin-bottom: 0;
     }
@@ -65,18 +69,18 @@ form#certificate_form {
         background: var(--dark) 0.5;
         color: var(--secondary);
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-    }
-    option {
-        padding: 0.2rem 1rem;
-        font-size: 14pt;
-        border: 2px var(--secondary) solid;
-        background: var(--dark) 0.5;
-        color: var(--primary);
-        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-    }
-    option:checked {
-        background: var(--primary) 0.5;
-        color: var(--secondary);
+        option {
+            padding: 0.2rem 1rem;
+            font-size: 14pt;
+            border: 2px var(--secondary) solid;
+            background: var(--dark) 0.5;
+            color: var(--primary);
+            text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        }
+        option:checked {
+            background: var(--primary) 0.5;
+            color: var(--secondary);
+        }
     }
 }
 
@@ -123,7 +127,6 @@ form#certificate_form {
     }
 }
 
-
 .btn-x {
     color: var(--secondary);
 }
@@ -166,7 +169,6 @@ form#certificate_form {
     font-size: 15pt;
     color: var(--primary);
 }
-
 
 .btn-hashtag {
     background-color: var(--primary);

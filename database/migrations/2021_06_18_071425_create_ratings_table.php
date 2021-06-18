@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersTable extends Migration
+class CreateRatingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,17 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->string('payment_id');
-            $table->foreignId('course_id')
-                ->constrained('courses')
-                ->cascadeOnDelete();
-            $table->double('price');
-            $table->double('discount');
-            $table->double('total');
-            $table->integer('status');
+            $table->integer('rating')->default(0);
+            $table->integer('ratingable_id'); // morphic Models
+            $table->integer('ratingable_type'); // comment, post, course
             $table->timestamps();
             $table->softDeletes();
+
         });
     }
 
@@ -38,6 +34,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('ratings');
     }
 }

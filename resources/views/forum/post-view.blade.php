@@ -53,7 +53,6 @@
                             <span>
                                 <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}
                             </span>
-
                         </div>
                     </div>
                     <div class="col-sm-3 d-flex flex-column justify-content-between align-items-end">

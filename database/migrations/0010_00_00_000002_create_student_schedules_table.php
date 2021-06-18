@@ -22,7 +22,14 @@ class CreateStudentSchedulesTable extends Migration
             $table->foreignId('study_session_id')
                 ->constrained('study_sessions')
                 ->cascadeOnDelete();
+            $table->foreignId('student_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
+            $table->foreignId('tutor_id')
+                ->constrained('tutors')
+                ->cascadeOnDelete();
             $table->boolean('is_test');
+            $table->unique(['course_id', 'study_session_id', 'tutor_id', 'is_test']);
             $table->date('date');
             $table->text('note');
             $table->timestamps();

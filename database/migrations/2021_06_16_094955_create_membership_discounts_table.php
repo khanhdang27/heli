@@ -15,7 +15,7 @@ class CreateMembershipDiscountsTable extends Migration
     {
         Schema::create('membership_discount', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('membership_id')->constrained('membership');
+            $table->foreignId('membership_id')->constrained('memberships');
             $table->foreignId('discount_id')->constrained('discounts');
             $table->unique(['course_id', 'discount_id']);
             $table->softDeletes();

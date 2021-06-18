@@ -15,15 +15,21 @@ class CreateCourseSchedulesTable extends Migration
     {
         Schema::create('course_schedules', function (Blueprint $table) {
             $table->id();
-            $table->text('lecture_name');
+            $table->foreignId('lecture_id')
+                ->constrained('lectures')
+                ->cascadeOnDelete();
             $table->foreignId('course_id')
                 ->constrained('courses')
                 ->cascadeOnDelete();
             $table->foreignId('study_session_id')
                 ->constrained('study_sessions')
                 ->cascadeOnDelete();
+            $table->foreignId('tutor_id')
+                ->constrained('tutors')
+                ->cascadeOnDelete();
             $table->boolean('is_test');
             $table->date('date');
+            $table->unique(['course_id', 'study_session_id', 'tutor_id', 'is_test']);
             $table->timestamps();
             $table->softDeletes();
         });
