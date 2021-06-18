@@ -29,7 +29,7 @@ class CreateCourseSchedulesTable extends Migration
                 ->cascadeOnDelete();
             $table->boolean('is_test');
             $table->date('date');
-            $table->unique(['course_id', 'study_session_id', 'tutor_id', 'is_test']);
+            $table->unique(['course_id', 'study_session_id', 'tutor_id', 'is_test', 'date'], 'course_schedules_unique');
             $table->timestamps();
             $table->softDeletes();
         });

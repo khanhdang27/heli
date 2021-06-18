@@ -23,7 +23,6 @@ class CreateRatingsTable extends Migration
             $table->integer('ratingable_type'); // comment, post, course
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

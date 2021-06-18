@@ -17,7 +17,8 @@ class CreateMembershipDiscountsTable extends Migration
             $table->id();
             $table->foreignId('membership_id')->constrained('memberships');
             $table->foreignId('discount_id')->constrained('discounts');
-            $table->unique(['course_id', 'discount_id']);
+            $table->unique(['membership_id', 'discount_id']);
+            $table->double('discount_value');
             $table->softDeletes();
             $table->timestamps();
         });
