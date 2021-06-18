@@ -3,9 +3,9 @@
         {!! $courseDetail->course_overview !!}
     </div>
     <div class="pt-5 note-package">
-        <div class="title text-primary">
+        <h1 class="text-primary font-weight-bold">
             @lang('keywords.coursePage.notePackage')
-        </div>
+        </h1>
         <div class="row">
             @foreach($courseDetail->courseMaterial as $documentItem)
                 <div class="col-sm-6">

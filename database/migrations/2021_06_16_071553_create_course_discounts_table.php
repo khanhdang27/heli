@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserRolesTable extends Migration
+class CreateCourseDiscountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_role', function (Blueprint $table) {
+        Schema::create('course_discounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->notNull();
-            $table->integer('role_id')->notNull();
-            $table->timestamps();
-            $table->unique(['user_id', 'role_id']);
+            $table->foreignId('course_id')->constrained('courses');
+            $table->foreignId('discount_id')->constrained('discounts');
+            $table->unique(['course_id', 'discount_id']);
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -30,6 +30,6 @@ class CreateUserRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_user');
+        Schema::dropIfExists('course_discounts');
     }
 }

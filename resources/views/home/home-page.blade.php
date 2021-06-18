@@ -5,24 +5,24 @@
 @section('content')
 
     <div class="banner">
-    @include('categories-bar')
+        @include('categories-bar')
         @if(Auth::user()==null)
             <x-home.banner :banner=$banners></x-home.banner>
         @else
-            <!-- #region Video -->
-            <div class="top-page-loggedin">
-                <div class="container text-center title-news text-secondary">
+            <br>
+            <div class="container pt-5">
+                <h1 class="text-center text-secondary">
                     @lang('keywords.latestNewsPage')
-                </div>
-                <div class="news-item">
-                    <div class="show-news-item">
-                        @foreach($news as $item)
-                            <a href="{{ route('site.news-detail',$item->id) }}" class="news-title text-primary">
-                                {{$item->date}}
-                                {{$item->title}}
-                            </a>
-                        @endforeach
-                    </div>
+                </h1>
+                <div class="list-news w-50 mx-auto">
+                    @foreach($news as $item)
+                    <h3 class="text-primary">
+                        <a class="text-primary">
+                            {{substr($item->updated_at,-14,6)}}
+                            {{$item->title}}
+                        </a>
+                    </h3>
+                    @endforeach
                 </div>
             </div>
             <!-- #endregion -->
@@ -30,40 +30,40 @@
     </div>
     @if (empty($courses[0]))
         <div class="d-flex justify-content-center">
-            <H3>
+            <h3>
                 No Data Of Course
-            </H3>
+            </h3>
         </div>
     @else
     <div class="body-content">
-        <div class="mx-auto discount-product">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <p class="heading-title">
-                        @lang('keywords.discountProduct')
-                    </p>
+                    <h1 class="text-primary">
+                        @lang('keywords.latestDiscountProduct')
+                    </h1>
                     <x-product.course-list :courseItem=$courses>
                     </x-product.course-list>
                 </div>
                 <div class="col-lg-6 col-12 welcome-offer">
-                    <p class="heading-title">
+                    <h1 class="text-primary">
                         @lang('keywords.welcomeOffer')
-                    </p>
+                    </h1>
                     <x-product.course-list :courseItem=$courses>
                     </x-product.course-list>
                 </div>
             </div>
         </div>
         @if(Auth::user()!=null)
-            <div class="mx-auto product-recommend">
-                <div class="heading-title" id="tab-title">
+            <div class="container-fluid">
+                <h1 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
-                </div>
+                </h1>
                 <x-product.course-list :courseItem=$courses></x-product.course-list>
             </div>
         @endif
         <div class="product-tab">
-            @include('home.product-tab')
+            <x-home.product-tab :courseItem=$courses></x-home.product-tab>
         </div>
         @if(Auth::user()==null)
             <x-home.step-register></x-home.step-register>
@@ -89,12 +89,12 @@
                 <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
             </div>
         @endif
-        @if(Auth::user()==null)
+        @if(Auth::check())
             <div class="free-class-container">
                 <div class="position-relative d-flex align-items-center">
                     <div class="border-right-radius border-primary">
                         <div class="text-content d-flex justify-content-end text-primary">
-                        <span class="text-advertisement">
+                        <span class="text-information">
                             @lang('keywords.freeTrialClass')
                         </span>
                         </div>

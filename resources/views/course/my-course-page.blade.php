@@ -10,18 +10,18 @@
         @include('layout.sub-header')
         <div class="container-fluid pt-5 pl-0 pr-0">
             <div class="container-fluid p-0 ">
-                <div class="container-fluid product-recommend">
-                    <div class="heading-title" id="tab-title">
+                <div class="container-fluid">
+                    <h1 class="text-primary" id="tab-title">
                         我已購買的課程
-                    </div>
+                    </h1>
                     <x-product.course-list
                         :courseItem=$courses>
                     </x-product.course-list>
                 </div>
-                <div class="container-fluid product-recommend">
-                    <div class="heading-title" id="tab-title">
+                <div class="container-fluid">
+                    <h1 class="text-primary" id="tab-title">
                         我已購買的課程
-                    </div>
+                    </h1>
                     <x-product.course-list
                         :courseItem=$courses>
                     </x-product.course-list>

@@ -58,10 +58,10 @@
                 </form>
             </div>
             <div class="container-fluid p-0">
-                <div class="container-fluid product-recommend">
-                    <div class="heading-title" id="tab-title">
+                <div class="container-fluid ">
+                    <h1 class="text-primary" id="tab-title">
                         {{$subject->subject_name}}
-                    </div>
+                    </h1>
                     <div class="d-flex flex-wrap">
                         @foreach($productList as $item)
                             <div class="pr-3">

@@ -1,6 +1,6 @@
 @font-face {
     font-family: PingFangTC;
-    src: url('../fonts/PingFang.ttc') format('truetype');
+    src: url('/fonts/PingFang.ttc') format('truetype');
 }
 
 html,
@@ -23,43 +23,12 @@ body {
     background-size: cover;
 }
 
-
-/*HEADER-----------------------------------------*/
-
-.header-top {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    width: 17rem;
-}
-
-.item-mentorTeam {
-    padding-right: 0.5rem;
-}
-
 .dropdown-items {
     min-width: 9.2rem;
 }
 
 .dropdown-menu {
     z-index: 1002;
-}
-
-.btn-cart {
-    border: none;
-    background-color: #fff;
-}
-
-.btn-cart:hover {
-    cursor: pointer;
-}
-
-.btn-cart:focus {
-    outline: none;
 }
 
 .btn-header {
@@ -81,36 +50,8 @@ body {
     outline: none !important;
 }
 
-.btn-language {
-    width: 5.8rem;
-}
-
-.language-item {
-    min-width: 5.86rem;
-}
-
 .banner {
     position: relative;
-}
-
-.dropdown-item {
-    color: #fff;
-}
-
-.nav-item {
-    padding-left: 2rem;
-    padding-right: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-.search {
-    border: 2px solid #0B487D;
-    border-radius: 20px;
-    padding: 0.2rem !important;
-    width: 309px;
-    height: 37px;
-    background-color: #fff;
 }
 
 .category {
@@ -177,6 +118,7 @@ body {
 }
 
 .item-header {
+    font-size: 14px;
     padding: 0 0 0 1rem !important;
 }
 
@@ -265,21 +207,12 @@ body {
 }
 
 .title-product {
-    font-size: 20px;
-    font-weight: 400;
-    width: 85px;
+    width: 25%;
     padding: 0.6rem 0;
     text-align: center;
 }
 
-.product-box {
-    width: 390px;
-    height: 421px;
-    margin-top: 2.8rem;
-}
-
 .content-product {
-    background-color: #7B3939;
     height: 323px;
     display: flex;
     align-items: center;
@@ -329,11 +262,11 @@ body {
 
 .card-name-product {
     min-height: 125px;
-    font-size: 21px;
+    font-size: 16pt;
 }
 
-.product-box2 {
-    width: 380px;
+.product-box {
+    width: 25rem;
     margin-top: 2.8rem;
 }
 
@@ -342,11 +275,6 @@ body {
     align-items: center;
     justify-content: flex-end;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-}
-
-.price-bar2 {
-    font-size: 15pt;
-    font-weight: 600;
 }
 
 .text-multiline-truncate {
@@ -367,11 +295,6 @@ body {
 
 .product-tab {
     padding-bottom: 4.6rem;
-}
-
-.container-product {
-    max-width: 1767px;
-    padding: 0 !important;
 }
 
 .menu-category {
@@ -571,7 +494,7 @@ video {
     font-weight: 600;
 }
 
-.text-advertisement {
+.text-information {
     text-align: center;
     max-width: 405px;
 }
@@ -601,14 +524,12 @@ video {
 }
 
 .btn-register-now {
-    font-size: 30pt;
-    color: #fff;
-    border-radius: 50px;
-    margin-top: 5rem;
+    font-size: 20pt;
+    border-radius: 4rem;
+    margin-top: 3rem;
     text-align: center;
     padding: 0.5rem 3rem;
-    border: none;
-    cursor: pointer;
+    color: var(--white);
 }
 
 .btn-register-now:focus {
@@ -617,7 +538,7 @@ video {
 
 @media screen and (max-width: 714px) {
     .btn-register-now {
-        font-size: 25px;
+        font-size:15pt;
     }
 }
 
@@ -705,12 +626,12 @@ video {
 }
 
 .btn-login {
-    font-size: 21pt;
-    padding: 0.5rem 3.6rem;
+    font-size: 16pt;
+    padding: 0.5rem 2rem;
     max-width: 475px;
     display: flex;
     text-align: center;
-    margin: 0.84rem auto 0 auto;
+    margin: 0.8rem auto 0 auto;
 }
 
 .box-ic {
@@ -745,16 +666,10 @@ video {
 
 .line-or {
     max-width: 559px;
-    font-size: 30pt;
+    font-size: 20pt;
     justify-items: center;
-    margin: 2.7rem 0;
+    margin: 1rem 0;
 }
-
-.text-or {
-    padding: 0 2.56rem;
-}
-
-.login-right {}
 
 .input-login {
     max-width: 559px;
@@ -831,15 +746,9 @@ video {
     max-width: 559px;
 }
 
-.already-member {
-    max-width: 559px;
-    font-size: 22.5pt;
-    margin-top: 2.6rem;
-}
-
 .text-login-left {
     width: fit-content;
-    font-size: 30pt;
+    font-size: 25pt;
 }
 
 .btn-close {

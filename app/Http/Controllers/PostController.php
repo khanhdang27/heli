@@ -21,9 +21,11 @@ class PostController extends Controller
     {
         $posts = Post::with('postTag', 'user')->orderByDesc('created_at')->get();
         $tags = Tag::where('tag_type',1)->get();
+        $userLike = UserLike::where('user_id',Auth::user()->id)->get();
         return view('forum.forum-page', [
             'posts' => $posts,
-            'tags' => $tags
+            'tags' => $tags,
+            'userLike' => $userLike
         ]);
     }
 
@@ -90,7 +92,7 @@ class PostController extends Controller
     {
         $postTag = Tag::where('id', $post->tag_id)->first();
         $comments = Comment::with('user', 'post')->where('post_id', $post->id)->get();
-        $userLike = UserLike::where('post_id',$post->id)->where('user_id',Auth::user()->id)->first();
+        $userLike = UserLike::where('post_id',$post->id)->where('user_id',Auth::user()->id)->get();
         return view('forum.post-view', [
             'post' => $post,
             'postTag' => $postTag,

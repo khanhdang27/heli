@@ -29,16 +29,16 @@
                         <div class="d-flex">
                             <img src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                             <div class="pl-3 pt-2">
-                                <p class="text-25">{{$post->user->name}}</p>
+                                <p class="text-comment">{{$post->user->name}}</p>
                                 <p class="text-20-blue">{{$post->created_at}}</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <p class="question text-28">
+                        <p class="question text-forum">
                             {{$post->title}}
                         </p>
-                        <p class="question text-28">
+                        <p class="question text-forum">
                             {{$post->content}}
                         </p>
                         <div class="pt-3 pb-3 ">
@@ -46,21 +46,13 @@
                                 <img class="img-question" src="/file/{{$post->file_id}}">
                             @endif
                         </div>
-                        <div class="text-28 d-flex">
+                        <div class="text-forum d-flex">
                             <span class="mr-3"><img class="ic-action"
                                                     src="{{asset("images/ic/ic_bookmark.svg")}}"></span>
-
-                            @if(empty($userLike))
-                                <button id="likePost" class="mr-5 border-0 bg-white text-primary">
-                                    <img id="like" class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">
-                                    <img id="liked" style="display: none" class="ic-action" src="{{asset("images/ic/ic_fullHeart.svg")}}">
-                                </button>
-                            @else
-                                <button id="unlike" class="mr-5 border-0 bg-white text-primary">
-                                    <img class="ic-action" src="{{asset("images/ic/ic_fullHeart.svg")}}">
-                                </button>
-                            @endif
-                                <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}</span>
+                            <x-like.like :userLike=$userLike :post=$post :likeModule={{\App\Models\UserLike::$POST}}></x-like.like>
+                            <span>
+                                <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}
+                            </span>
 
                         </div>
                     </div>
@@ -70,7 +62,7 @@
                                 {{$postTag->tag_name}}
                             </button>
                         </div>
-                        <p class="text-28 pt-2 ">
+                        <p class="text-forum pt-2 ">
                             @if($post->block==1)
                                 @lang('keywords.solved')
                             @else
@@ -88,7 +80,8 @@
                         Add your answer
                     </p>
                     <div class="card card-body">
-                        {!! Form::open(['url' => URL::route('site.comment.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
+                        {!! Form::open(['url' => URL::route('site.comment.store',['type'=>'post', 'ref'=>0]),
+                                        'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
                             {{ Form::label('detail', 'Content') }}
                             {{ Form::textarea('detail',old('content'),['class' => 'form-control', 'rows' => '3']) }}
@@ -107,10 +100,6 @@
 
                 </div>
             @endif
-            {{--            @php--}}
-            {{--                $post_id= $post->id;--}}
-            {{--            @endphp--}}
-
             @foreach($comments as $value)
                 <x-forum.forum-comment :comment=$value>
 
@@ -124,27 +113,6 @@
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
-        </script>
-    @endpush
-    @push('likePost')
-        <script>
-            $(function () {
-                $('#likePost').click(function (e) {
-                    e.preventDefault();
-                    var post_id = {{$post->id}};
-                    var user_id = {{\Illuminate\Support\Facades\Auth::user()->id}};
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        type: "POST",
-                        url: "{{ route('site.user-like.store') }}",
-                        data: {post_id: post_id, user_id: user_id}
-                    })
-                    document.getElementById('like').style.display = 'none';
-                    document.getElementById('liked').style.display = 'block';
-                });
             });
         </script>
     @endpush

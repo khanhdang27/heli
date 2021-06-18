@@ -12,14 +12,13 @@
         <ul class="navbar-nav ml-auto mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
                 <div class="dropdown d-flex align-items-center show">
-                    <a class="sub-item dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    <a class="text-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                        data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         IGCSE
                     </a>
-                    <div class="dropdown-menu my-dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-menu my-dropdown-menu bg-dark border border-secondary" aria-labelledby="dropdownMenuLink">
                         @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id') as $key => $value)
-                            {{--                        <a class="dropdown-item" id="show-subject" href="#" >{{$value}}</a>--}}
                             <a class="btn dropdown-item certificate-nav-item"
                                href="{{ route('site.get_subject_by_parent', $key) }}" role="button">
                                 {{$value}}

@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -66,6 +67,7 @@ class RegisterController extends Controller
         $input = $request->all();
         $random = Str::random(10);
         if (!empty($input['email'])) {
+            DB::beginTransaction();
             try {
                 $array = explode('@', $input['email']);
                 $name = reset($array);
@@ -81,25 +83,25 @@ class RegisterController extends Controller
                 $send_mail = new SendMail();
                 $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
                 Mail::to($input['email'])->send($send_mail);
-
+                DB::commit();
                 return response()->json(
                     [
                         'status' => 200,
                         'message' => 'succeed'
                     ], 200);
-            } catch (Throwable $th) {
+            } catch (\Throwable $th) {
+                DB::rollBack();
                 return response()->json(
                     [
-                        'status' => 409,
-                        'message' => $th->getMessage()
-                    ], 409);
+                        'status' => 400,
+                        'message' => 'mail is duplicate'
+                    ], 400);
             }
-
         }
         return response()->json(
             [
                 'status' => 400,
-                'message' => 'fails'
+                'message' => 'mail is empty'
             ], 400);
     }
 

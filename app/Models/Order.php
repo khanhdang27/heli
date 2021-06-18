@@ -73,7 +73,6 @@ class Order extends Model
             case self::$requires_action:
                 return Redirect::to($intent->next_action->redirect_to_url->url);
             default:
-                dd($intent);
                 break;
         }
         $this->payment_id = $intent->id;

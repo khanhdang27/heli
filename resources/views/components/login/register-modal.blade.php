@@ -1,4 +1,4 @@
-<div class="modal fade modal-login" id="registerModalComponent">
+<div class="modal fade " id="registerModalComponent">
     <div class="modal-dialog modal-login-xl">
         <div class="modal-content  modal-register-component">
             <div class="modal-header btn-close">
@@ -9,7 +9,7 @@
                 <div class="mx-auto">
                     <div class="d-flex align-items-center">
                         <div class="text-content pr-5 d-flex text-secondary">
-                            <span class="text-advertisement">
+                            <span class="text-information">
                                 @lang('keywords.freeTrialClass')
                             </span>
                         </div>

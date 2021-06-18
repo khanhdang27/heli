@@ -39,19 +39,19 @@
                         <div class="d-flex">
                             <img src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                             <div class="pl-3 pt-2">
-                                <p class="text-25">Kenny Or</p>
+                                <p class="text-comment">Kenny Or</p>
                                 <p class="text-20-blue">10/03/2021</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <p class="question text-28">
+                        <p class="question text-forum">
                             請問呢題點做？
                         </p>
                         <div class="pt-3 pb-3 ">
                             <img class="img-question" src="{{asset("images/question.jpg")}}">
                         </div>
-                        <div class="text-28">
+                        <div class="text-forum">
                             <span class="mr-3"><img class="ic-action"
                                                     src="{{asset("images/ic/ic_bookmark.svg")}}"></span>
                             <span class="mr-5"><img class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">1</span>
@@ -65,7 +65,7 @@
                                 #數學
                             </button>
                         </div>
-                        <p class="text-28 pt-2 ">已解決</p>
+                        <p class="text-forum pt-2 ">已解決</p>
                     </div>
                 </div>
             </div>
@@ -75,26 +75,26 @@
                         <div class="d-flex">
                             <img src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                             <div class="pl-3 pt-2">
-                                <p class="text-25">Kenny Or</p>
+                                <p class="text-comment">Kenny Or</p>
                                 <p class="text-20-blue">10/03/2021</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <p class="question text-28">
+                        <p class="question text-forum">
                             希望幫到你
                         </p>
                         <div class="pt-3 pb-3 ">
                             <img class="img-question" src="{{asset("images/answer.jpg")}}">
                         </div>
-                        <div class="text-28 d-flex">
+                        <div class="text-forum d-flex">
                             <span class="mr-5"><img class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">1</span>
                             <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">2</span>
 
                         </div>
                     </div>
                     <div class="col-sm-3 d-flex flex-column justify-content-end">
-                        <div class="d-flex text-28 pt-2 m-0">
+                        <div class="d-flex text-forum pt-2 m-0">
                             <span class="mr-2"><img src="{{asset("images/ic/ic_star.svg")}}" width="40"></span>
                             <span class="pt-1">最佳答案</span>
                         </div>

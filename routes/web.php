@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::view('card-pay','card-pay');
+
 Route::redirect('', 'site/', 301);
 
 Route::group(['middleware' => 'language'], function () {
@@ -23,12 +23,14 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('', 'HomeController@index')->name('home');
 
         Route::post('register', 'Auth\RegisterController@register')->name('register');
-
         Route::post('login', 'Auth\LoginController@login')->name('userLogin');
-
         Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
+        Route::post('password/update', 'Auth\ChangePasswordController@update')->name('userUpdatePassword');
 
-        Route::put('reset-password', 'Auth\ChangePasswordController@update')->name('resetPassword');
+        Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('backpack.auth.password.reset');
+        Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+        Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('backpack.auth.password.reset.token');
+        Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email');
 
         Route::get('news', 'NewsController@show')->name('news');
         Route::get('news/{id}', 'NewsController@newsDetail')->name('news-detail');
@@ -58,10 +60,6 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('forumAnswer', function () {
             return view('forum.post-view');
         })->name('forumAnswers');
-
-        // Route::get('/forgot-password', function () {
-        //     return view('login.forgot-password');
-        // })->name('forgot-password');
 
         Route::middleware('auth')->group(function () {
 
@@ -143,7 +141,8 @@ Route::group(['middleware' => 'language'], function () {
         });
     });
 });
-// //Auth::routes();
+
+Auth::routes();
 
 
 //Up videos

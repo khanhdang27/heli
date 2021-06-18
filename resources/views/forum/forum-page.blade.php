@@ -47,8 +47,7 @@
         </div>
         <div class="container-fluid pb-5 ml-auto mr-auto body-forum-page">
             @foreach($posts as $value)
-                <x-forum.forum-post :post=$value>
-
+                <x-forum.forum-post :post=$value :userLike=$userLike>
                 </x-forum.forum-post>
             @endforeach
             {{--            <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">--}}

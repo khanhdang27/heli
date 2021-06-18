@@ -22,4 +22,8 @@ class Post extends Model
     {
         return $this->belongsTo(Tag::class,'tag_id');
     }
+    public function userLike()
+    {
+        return $this->morphMany(UserLike::class,'userLikeable');
+    }
 }

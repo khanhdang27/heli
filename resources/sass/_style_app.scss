@@ -1,3 +1,7 @@
+html {
+    font-size: 14pt;
+}
+
 .color-primary {
     svg {
         fill: var(--primary);
@@ -6,19 +10,6 @@
 
 .color-secondary {
     fill: var(--secondary);
-}
-.navbar-home {
-    background-color: var(--white);
-    border: 0;
-    padding: 1.1rem 1.6rem;
-    a {
-        color: var(--primary);
-        font-size: 15pt;
-    }
-    a:hover {
-        text-decoration: none;
-        color: var(--primary);
-    }
 }
 
 .dropdown-menu {
@@ -32,49 +23,28 @@
     }
 }
 
-.my-dropdown-menu {
-    background-color: var(--dark);
-    padding: 1.2rem 1rem;
-    border: 2px solid var(--secondary);
-    border-radius: 0;
-}
-
-.dropdown-lang {
-    background-color: var(--dark);
-    border: 2px solid var(--secondary);
-    border-radius: 0;
-}
-
-.already-member {
-    a {
-        color: #fff;
-    }
-    a:hover {
-        color: var(--secondary);
-    }
-}
-
-.heading-title {
-    color: var(--primary);
-}
-
-.sub-header {
-    a {
-        color: var(--secondary);
-    }
+.search {
+    border: 2px solid #0B487D;
+    border-radius: 20px;
+    padding: 0.2rem !important;
+    width: 309px;
+    height: 37px;
+    background-color: #fff;
 }
 
 .footer {
     color: var(--secondary);
     line-height: 1.45;
     padding: 4.48rem 0;
+
     .title-foot {
-        font-size: 18pt;
-        font-weight: 600;
         margin-bottom: 0;
     }
+    span {
+        font-size: 13pt;
+    }
     a {
-        font-size: 16pt;
+        font-size: 13pt;
         color: var(--secondary);
     }
     a:hover {
@@ -83,17 +53,39 @@
     }
 }
 
+.list-news {
+    height: 20rem;
+    overflow-y: auto;
+}
+
+form#certificate_form {
+    select {
+        font-size: 13pt;
+        border: 0px var(--dark) solid;
+        background: var(--dark) 0.5;
+        color: var(--secondary);
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
+    option {
+        padding: 0.2rem 1rem;
+        font-size: 14pt;
+        border: 2px var(--secondary) solid;
+        background: var(--dark) 0.5;
+        color: var(--primary);
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    }
+    option:checked {
+        background: var(--primary) 0.5;
+        color: var(--secondary);
+    }
+}
+
 .top-news-page {
     background-color: var(--dark);
-    font-size: 45pt;
+    font-size: 30pt;
     color: var(--secondary);
     font-weight: 600;
     padding: 2.54rem 0;
-}
-
-.news-title {
-    font-size: 22pt;
-    color: var(--primary);
 }
 
 .title-course {
@@ -131,9 +123,6 @@
     }
 }
 
-.text-login-left {
-    color: var(--secondary);
-}
 
 .btn-x {
     color: var(--secondary);
@@ -168,9 +157,8 @@
 
 .menu-tab {
     a {
-        font-size: 22.5pt;
+        font-size: 16pt;
         color: var(--primary);
-        font-weight: 600;
     }
 }
 
@@ -179,11 +167,6 @@
     color: var(--primary);
 }
 
-.product {
-    p {
-        color: var(--primary);
-    }
-}
 
 .btn-hashtag {
     background-color: var(--primary);
@@ -225,12 +208,12 @@
     outline: none;
 }
 
-.text-25 {
+.text-comment {
     font-size: 18.7pt;
     color: var(--primary);
 }
 
-.text-28 {
+.text-forum {
     font-size: 21pt;
     color: var(--primary);
 }
