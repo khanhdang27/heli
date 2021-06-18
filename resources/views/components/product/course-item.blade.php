@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="ic-heart w-25 text-right">
-                    <img src={{asset("images/ic/ic_heart.svg")}}>
+                    <x-like.like :likeRef=$course :likeModule=\App\Models\UserLike::$COURSE></x-like.like>
                 </div>
             </div>
             <div class="d-flex">

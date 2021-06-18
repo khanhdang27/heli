@@ -49,7 +49,8 @@
                         <div class="text-forum d-flex">
                             <span class="mr-3"><img class="ic-action"
                                                     src="{{asset("images/ic/ic_bookmark.svg")}}"></span>
-                            <x-like.like :userLike=$userLike :post=$post :likeModule=\App\Models\UserLike::$POST></x-like.like>
+
+                            <x-like.like :likeRef=$post :likeModule=\App\Models\UserLike::$POST></x-like.like>
                             <span>
                                 <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}
                             </span>
@@ -59,7 +60,7 @@
                     <div class="col-sm-3 d-flex flex-column justify-content-between align-items-end">
                         <div>
                             <button class="btn-hashtag text-20">
-                                {{$postTag->tag_name}}
+                                {{$post->postTag->tag_name}}
                             </button>
                         </div>
                         <p class="text-forum pt-2 ">
@@ -100,11 +101,11 @@
 
                 </div>
             @endif
-            @foreach($comments as $value)
-                <x-forum.forum-comment :comment=$value>
+{{--            @foreach($post->comments as $value)--}}
+{{--                <x-forum.forum-comment :comment=$value>--}}
 
-                </x-forum.forum-comment>
-            @endforeach
+{{--                </x-forum.forum-comment>--}}
+{{--            @endforeach--}}
         </div>
     </div>
     @push('inputFile')

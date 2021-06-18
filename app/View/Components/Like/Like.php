@@ -6,18 +6,16 @@ use Illuminate\View\Component;
 
 class Like extends Component
 {
-    public $userLike;
-    public $post;
+    public $likeRef;
     public $likeModule;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($userLike, $post, $likeModule)
+    public function __construct($likeModule,$likeRef)
     {
-        $this->userLike=$userLike;
-        $this->post=$post;
+        $this->likeRef=$likeRef;
         $this->likeModule=$likeModule;
     }
 
@@ -29,8 +27,7 @@ class Like extends Component
     public function render()
     {
         return view('components.like.like',[
-            'userLike' => $this->userLike,
-            'post' => $this->post,
+            'likeRef' => $this->likeRef,
             'likeModule' => $this->likeModule
         ]);
     }

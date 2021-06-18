@@ -1,57 +1,75 @@
 <?php
+
+use App\Models\Course;
 use App\Models\Post;
 use App\Models\UserLike;
 
 /** @var UserLike[] $userLike */
 /** @var Post $post */
-
-$like = 0;
-
-foreach ($userLike as $usLikePost) {
-    if ($usLikePost->post_id == $post->id) {
+/** @var Course $course */
+//add 'or $usLikePost->like_ref_id == $course->id' in condition if
+$like = 1;
+foreach ($likeRef->userLike as $usLikePost) {
+    if ($usLikePost->like_ref_id == $likeRef->id &&
+        $usLikePost->like_module == $likeModule &&
+        $usLikePost->user_id == \Illuminate\Support\Facades\Auth::check()
+        ? \Illuminate\Support\Facades\Auth::user()->id
+        : 0
+    ) {
         $like = 1;
         break;
     }
 }
 ?>
-@if($like==0)
-    <button id="likePost{{$post->id}}" class="mr-5 border-0 bg-white text-primary" v-on:click="myClickHandler">
-        <img class="ic-action" id="like" class="ic-action" src="{{asset("images/ic/ic_heart.svg")}}">
-        <img class="ic-action" id="liked" style="display: none" class="ic-action" src="{{asset("images/ic/ic_fullHeart.svg")}}">
-        {{$post->like_no}}
+
+    <button id="like{{$likeRef->id}}" class="mr-5 border-0 bg-white text-primary" v-on:click="clicklike">
+        <img class="ic-action"
+             id="like{{$likeRef->id}}"
+             class="ic-action"
+             src="{{ $like == 0 ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}}">
+        {{$likeRef->like_no}}
     </button>
-@else
-    <button id="unlike" class="mr-5 border-0 bg-white text-primary">
-        <img class="ic-action" src="{{asset("images/ic/ic_fullHeart.svg")}}">
-        {{$post->like_no}}
-    </button>
-@endif
 @push('likePost')
     <script>
         var like = new Vue({
-            el: '#likePost{{$post->id}}',
+            el: '#like{{$likeRef->id}}',
             data: {
-                return : true
+                return: true
             },
             methods: {
-                myClickHandler: function () {
-                    axios.post("{{ route('site.user-like.store') }}", {
-                        like_ref: {{$post->id}},
-                        user_id: {{\Illuminate\Support\Facades\Auth::user()->id}},
-                        like_module: {{$likeModule}}
-                    })
-                    .then(function (response) {
-                        console.info(response);
-                        document.querySelector("#liked").style.display = "inline-block";
-                        document.querySelector("#like").style.display = "none";
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-                }
+                clicklike: function (){
+                    if ({{$like}}  == '0') {
+                        axios.post("{{ route('site.user-like.store') }}", {
+                            like_ref_id: {{$likeRef->id}},
+                            user_id: {{\Illuminate\Support\Facades\Auth::user()->id ?? 0}},
+                            like_module: {{$likeModule}}
+                        })
+                            .then(function (response) {
+                                console.info(response);
+                                document.querySelector("#like{{$likeRef->id}}").attributes.src = "asset('images/ic/ic_heart.svg')";
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
+                    } else  {
+                        axios.put("{{route('site.user-like.update',$likeRef->id)}}",{
+                            like_ref_id: {{$likeRef->id}},
+                            user_id: {{\Illuminate\Support\Facades\Auth::user()->id ?? 0}},
+                            like_module: {{$likeModule}}
+                        })
+                            .then(function (response) {
+                                console.info(response);
+                                document.querySelector("#like{{$likeRef->id}}").attributes.src = "{{asset('images/ic/ic_fullHeart.svg')}}";
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
+                    }
+
+                },
+
             },
 
-        })
-
+        });
     </script>
 @endpush

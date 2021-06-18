@@ -23,7 +23,7 @@
                     <img class="ic-action" src="{{asset("images/ic/ic_bookmark.svg")}}">
                 </span>
                 <span>
-                    <x-like.like :userLike=$userLike :post=$post :likeModule=\App\Models\UserLike::$POST></x-like.like>
+                    <x-like.like :likeRef=$post :likeModule=\App\Models\UserLike::$POST></x-like.like>
                 </span>
                 <a href="{{ route('site.post.show', $post->id)}}">
                     <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">
