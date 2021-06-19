@@ -20,31 +20,34 @@
                 </div>
                 <div class="card-body">
                     <div class="card-body">
-                        {!! Form::open(['route' => 'admin.discount.store']) !!}
+                        {!! Form::open(['route' => ['admin.discount.update', $discount->id], 'method'=> 'put']) !!}
                         <div class="form-group">
                             {{ Form::label('name', 'Discount Name') }}
-                            {{ Form::text('name', null,['class' => 'form-control'] ) }}
+                            {{ Form::text('name', $discount->name,
+                            ['class' => 'form-control'] ) }}
                             @error('name')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             {{ Form::label('start_date', 'Date Start') }}
-                            {{ Form::date('start_date', null,['class' => 'form-control'] ) }}
+                            {{ Form::date('start_date', $discount->start_date, ['class' => 'form-control'] ) }}
                             @error('start_date')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             {{ Form::label('end_date', 'Date End') }}
-                            {{ Form::date('end_date', null,['class' => 'form-control'] ) }}
+                            {{ Form::date('end_date', $discount->end_date,
+                            ['class' => 'form-control'] ) }}
                             @error('end_date')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group">
                             {{ Form::label('description', 'Description') }}
-                            {{ Form::textarea('description', null,[
+                            {{ Form::textarea('description', $discount->description,
+                            [
                                 'class' => 'form-control',
                                 'rows' => 3, 
                                 ]) }}

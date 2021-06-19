@@ -41,9 +41,9 @@ class NewsController extends Controller
     {
         $newsValidate = $request->validate([
             'date' => 'required',
-           'title' => 'required',
-           'content' => 'required',
-           'file' => 'file|required'
+            'title' => 'required',
+            'content' => 'required',
+            'file' => 'file|required'
         ]);
 
         $fileController = new FileController();

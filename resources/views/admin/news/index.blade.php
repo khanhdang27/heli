@@ -11,9 +11,8 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    News
+                                    Discounts
                                 </h4>
-
                             </div>
                             <div class="col-auto">
 
@@ -69,9 +68,9 @@
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                       data-url="{{ route('admin.news.destroy', $value->id) }}"
-                                                       class="dropdown-item delete-item">
-                                                        Delete
+                                                        onclick="itemDelete('{{ route('admin.news.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
                                                     </a>
                                                 </div>
                                             </div>

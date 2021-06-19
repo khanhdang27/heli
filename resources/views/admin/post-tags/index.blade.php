@@ -66,9 +66,11 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.tag.destroy', $value->id) }}" >
-                                                        Delete
-                                                    </button>
+                                                    <a href="javascript:void(0)"
+                                                        onclick="itemDelete('{{ route('admin.tag.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>

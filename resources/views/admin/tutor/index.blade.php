@@ -110,9 +110,9 @@
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                       data-url="{{ route('admin.tutor.destroy', $value->id) }}"
-                                                       class="dropdown-item delete-item">
-                                                        Delete
+                                                        onclick="itemDelete('{{ route('admin.tutor.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
                                                     </a>
                                                 </div>
                                             </div>

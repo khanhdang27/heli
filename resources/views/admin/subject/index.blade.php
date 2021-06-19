@@ -92,18 +92,11 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.subject.destroy', $value->id) }}" >
-                                                        Delete
-                                                    </button>
-{{--                                                    <form action="{{ route('admin.subject.updateActive', $value->id) }}"--}}
-{{--                                                          method="post">--}}
-{{--                                                        @csrf--}}
-{{--                                                        @method('put')--}}
-{{--                                                        <button class="dropdown-item delete-item" type="submit">--}}
-{{--                                                            Delete--}}
-{{--                                                        </button>--}}
-
-{{--                                                    </form>--}}
+                                                    <a href="javascript:void(0)"
+                                                        onclick="itemDelete('{{ route('admin.subject.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>

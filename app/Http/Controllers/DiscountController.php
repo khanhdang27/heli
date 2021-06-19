@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Discount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DiscountController extends Controller
 {
@@ -14,7 +15,10 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        //
+        $discount = Discount::query()->get();
+        return view('admin.discount.index',[
+            'discount' => $discount
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class DiscountController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.discount.create');
     }
 
     /**
@@ -35,7 +39,27 @@ class DiscountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'name' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'description' => 'required',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            Discount::create($input);
+            DB::commit();
+            return redirect()->back()->with('success','Save Success');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error','Save Error');
+
+        }
+        
+
     }
 
     /**
@@ -57,7 +81,9 @@ class DiscountController extends Controller
      */
     public function edit(Discount $discount)
     {
-        //
+        return view('admin.discount.edit',[
+            'discount' => $discount
+         ]);
     }
 
     /**
@@ -69,7 +95,15 @@ class DiscountController extends Controller
      */
     public function update(Request $request, Discount $discount)
     {
-        //
+        $discount->update(
+            $request->validate([
+                'name' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+                'description' => 'required',
+            ])
+        );
+        return back()->with('success', 'Update success!');
     }
 
     /**
@@ -80,6 +114,8 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount)
     {
-        //
+        $discount->delete();
+        return back()->with('success', 'Delete success!');
+
     }
 }
