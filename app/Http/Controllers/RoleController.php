@@ -105,7 +105,6 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-
     {
         $this->validate($request, [
             'name' => 'required',

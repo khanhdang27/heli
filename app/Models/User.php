@@ -83,7 +83,7 @@ class User extends Authenticatable
 
     public function avatar()
     {
-        return $this->morphToMany(File::class, 'file_refer');
+        return $this->morphOne(File::class, 'fileable');
     }
 
     public function student()

@@ -73,6 +73,6 @@ class Tutor extends Model implements TranslatableContract
 
     public function avatar()
     {
-        return $this->hasOne(File::class, 'referer');
+        return $this->morphOne(File::class, 'fileable');
     }
 }

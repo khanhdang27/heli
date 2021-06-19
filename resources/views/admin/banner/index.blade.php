@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>
                                             <img
-                                                src="{{ Storage::url($value->banner_photo) }}"
+                                                src="{{ route('file.show', ['file'=> $value->image])}}"
                                                 width="50px;" height="60px;" alt="">
                                         </td>
                                         <td>
