@@ -8,14 +8,16 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
+
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Price Tags
+                                    Membership
                                 </h4>
                             </div>
                             <div class="col-auto">
+
                                 <!-- Button -->
-                                <a href="{{ route('admin.discount.create') }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('admin.membership.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                          stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                          class="css-i6dzq1">
@@ -25,6 +27,7 @@
                                     </svg>
                                     Add
                                 </a>
+
                             </div>
                         </div> <!-- / .row -->
                     </div>
@@ -35,38 +38,23 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        Course
+                                        Name
                                     </th>
                                     <th>
-                                        Member Group
+                                        Base Point
                                     </th>
-                                    <th>
-                                        Recommend
-                                    </th>
-                                    <th>
-                                        Description
-                                    </th>
-                                    
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($courses_priceTag as $value)
+                                @foreach($memberships as $value)
                                     <tr>
                                         <td>
-                                            @dd($value->course)
-                                            {{$value->course->name}}
+                                            {{$value->name}}
                                         </td>
                                         <td>
-                                            {{$value->membership->name}}
+                                            {{$value->base_point}}
                                         </td>
-                                        <td>
-                                            {{$value->recommended}}
-                                        </td>
-                                        <td>
-                                            {{$value->description}}
-                                        </td>
-                                        
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
@@ -75,12 +63,12 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.discount.edit', $value->id) }}"
+                                                    <a href="{{ route('admin.membership.edit', $value->id) }}"
                                                        class="dropdown-item">
-                                                        Edit
+                                                            Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                        onclick="itemDelete('{{ route('admin.discount.destroy', $value->id) }}')"
+                                                        onclick="itemDelete('{{ route('admin.membership.destroy', $value->id) }}')"
                                                         class="dropdown-item delete-item">
                                                             Delete
                                                     </a>
@@ -105,7 +93,5 @@
 @endpush
 @push('js')
     <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-
     <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
-
 @endpush

@@ -14,8 +14,8 @@ class CourseMembershipDiscountController extends Controller
      */
     public function index()
     {
-        $courses_priceTag = CourseMembershipDiscount::query()->all();
-        return view('admin.price-tag.index', [
+        $courses_priceTag = CourseMembershipDiscount::all();
+        return view('admin.course-member-discount.index', [
             'courses_priceTag' => $courses_priceTag,
         ]);
     }

@@ -7,6 +7,7 @@ use App\Http\Requests\Course\CreateCourseRequest;
 use App\Http\Requests\Course\CreateVideoRequest;
 use App\Http\Requests\Course\UpdateVideoRequest;
 use App\Models\Course;
+use App\Models\CourseMembershipDiscount;
 use App\Models\Lecture;
 use App\Models\Membership;
 use App\Models\MembershipCourse;
@@ -84,19 +85,22 @@ class CourseController extends Controller
             $course = Course::create(
                 $input
             );
-            $memberships = Membership::query()->all();
+            $memberships = Membership::all();
     
             foreach ( $memberships as $membership ) {
-                MembershipCourse::create([
+                $membershipCourse = MembershipCourse::create([
                     'membership_id'=> $membership->id,
                     'course_id' => $course->id,
                     'price_value' => $course->course_price
                 ]);
+
+                CourseMembershipDiscount::create([
+                    'membership_course_id' => $membershipCourse->id,
+                ]); 
             }
             DB::commit();
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
-            //throw $th;
             DB::rollBack();
             return back()->with('error', 'Create Error!');
 

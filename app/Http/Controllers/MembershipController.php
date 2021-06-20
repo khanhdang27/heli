@@ -14,7 +14,10 @@ class MembershipController extends Controller
      */
     public function index()
     {
-        //
+        $memberships = Membership::all();
+        return view('admin.membership.index',[
+            'memberships' => $memberships
+        ]);
     }
 
     /**
@@ -24,7 +27,7 @@ class MembershipController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.membership.create');
     }
 
     /**
@@ -35,7 +38,15 @@ class MembershipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'name'=>'required',
+            'base_point'=>'required|integer',
+        ]);
+
+        $membership = Membership::create(
+            $input
+        );
+        return back()->with('success', 'Create success');
     }
 
     /**

@@ -97,12 +97,7 @@
                         <i class="fe fe-clipboard"></i> Banners
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.user.index') active @endif"
-                       href="{{ route('admin.user.index') }}">
-                        <i class="fe fe-clipboard"></i> Membership
-                    </a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.tag.index') active @endif"
                        href="{{ route('admin.tag.index') }}">
@@ -133,7 +128,18 @@
                         <i class="fe fe-clipboard"></i> Discount
                     </a>
                 </li>
-                
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.price-tag.index') active @endif"
+                       href="{{ route('admin.price-tag.index') }}">
+                        <i class="fe fe-clipboard"></i> Price Publish
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.membership.index') active @endif"
+                       href="{{ route('admin.membership.index') }}">
+                        <i class="fe fe-clipboard"></i> Membership
+                    </a>
+                </li>
             </ul>
             <!-- Divider -->
             <hr class="navbar-divider my-3">

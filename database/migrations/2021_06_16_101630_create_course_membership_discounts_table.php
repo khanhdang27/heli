@@ -16,15 +16,11 @@ class CreateCourseMembershipDiscountsTable extends Migration
         // as a price tag
         Schema::create('course_membership_discounts', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('discounts_id')->nullable();
-            $table->double('membership_course_id')->nullable();
-            $table->double('course_discount_id')->nullable();
-
-            $table->foreignId('membership_id')->constrained('memberships');
-            $table->foreignId('course_id')->constrained('courses');
-            $table->boolean('recommended');
+            $table->bigInteger('course_discount_id')->nullable();
+            $table->bigInteger('membership_course_id')->constrained('membership_course');            
+            $table->boolean('recommended')->default(false);
             // price_tag wil be a function
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

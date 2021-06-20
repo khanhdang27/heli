@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class NewsController extends Controller
@@ -15,7 +17,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::query()->get();
+        $news = News::all();
         return view('admin.news.index',[
             'news' => $news
         ]);
@@ -46,17 +48,31 @@ class NewsController extends Controller
             'file' => 'file|required'
         ]);
 
-        $fileController = new FileController();
-        $file_id = $fileController->store($request);
+        DB::beginTransaction();
+        try {
 
-        $news = new News([
-            'date' => $newsValidate['date'],
-            'title' => $newsValidate['title'],
-            'content' => $newsValidate['content'],
-            'file_id' => $file_id
-        ]);
-        $news->save();
-        return back()->with('success', 'Create success');
+            $news = new News([
+                'date' => $newsValidate['date'],
+                'title' => $newsValidate['title'],
+                'content' => $newsValidate['content'],
+            ]);
+            $news->save();
+
+            $file = File::storeFile(
+                $newsValidate['file'],
+                News::class,
+                $news->id,
+            );
+
+            DB::commit();
+            return back()->with('success', 'Create success');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', 'Create error');
+            //throw $th;
+        }
+
     }
 
     /**
