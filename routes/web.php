@@ -123,7 +123,8 @@ Route::group(['middleware' => 'language'], function () {
             Route::resource('roles', 'RoleController');
 
             Route::resource('discount', 'DiscountController');
-
+            
+            Route::resource('price-tag', 'CourseMembershipDiscountController');
         });
     });
 });

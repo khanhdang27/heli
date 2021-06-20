@@ -17,10 +17,8 @@ class CreateCourseMembershipDiscountsTable extends Migration
         Schema::create('course_membership_discounts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('discounts_id')->nullable();
-            $table->double('membership_discount_id')->nullable();
-            $table->double('membership_discount_value')->nullable();
+            $table->double('membership_course_id')->nullable();
             $table->double('course_discount_id')->nullable();
-            $table->double('course_discount_value')->nullable();
 
             $table->foreignId('membership_id')->constrained('memberships');
             $table->foreignId('course_id')->constrained('courses');

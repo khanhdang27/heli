@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\MembershipDiscount;
+use App\Models\MembershipCourse;
 use Illuminate\Http\Request;
 
-class MembershipDiscountController extends Controller
+class MembershipCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class MembershipDiscountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\MembershipDiscount  $membershipDiscount
+     * @param  \App\MembershipCourse  $membershipCourse
      * @return \Illuminate\Http\Response
      */
-    public function show(MembershipDiscount $membershipDiscount)
+    public function show(MembershipCourse $membershipCourse)
     {
         //
     }
@@ -52,10 +52,10 @@ class MembershipDiscountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\MembershipDiscount  $membershipDiscount
+     * @param  \App\MembershipCourse  $membershipCourse
      * @return \Illuminate\Http\Response
      */
-    public function edit(MembershipDiscount $membershipDiscount)
+    public function edit(MembershipCourse $membershipCourse)
     {
         //
     }
@@ -64,10 +64,10 @@ class MembershipDiscountController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MembershipDiscount  $membershipDiscount
+     * @param  \App\MembershipCourse  $membershipCourse
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MembershipDiscount $membershipDiscount)
+    public function update(Request $request, MembershipCourse $membershipCourse)
     {
         //
     }
@@ -75,10 +75,10 @@ class MembershipDiscountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MembershipDiscount  $membershipDiscount
+     * @param  \App\MembershipCourse  $membershipCourse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MembershipDiscount $membershipDiscount)
+    public function destroy(MembershipCourse $membershipCourse)
     {
         //
     }

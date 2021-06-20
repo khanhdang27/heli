@@ -8,6 +8,8 @@ use App\Http\Requests\Course\CreateVideoRequest;
 use App\Http\Requests\Course\UpdateVideoRequest;
 use App\Models\Course;
 use App\Models\Lecture;
+use App\Models\Membership;
+use App\Models\MembershipCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
 use App\Models\UserLike;
@@ -16,6 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -75,10 +78,29 @@ class CourseController extends Controller
      */
     public function store(CreateCourseRequest $request)
     {
-        Course::create(
-            $request->validated()
-        );
-        return back()->with('success', 'Create success!');
+        $input = $request->validated();
+        DB::beginTransaction();
+        try {
+            $course = Course::create(
+                $input
+            );
+            $memberships = Membership::query()->all();
+    
+            foreach ( $memberships as $membership ) {
+                MembershipCourse::create([
+                    'membership_id'=> $membership->id,
+                    'course_id' => $course->id,
+                    'price_value' => $course->course_price
+                ]);
+            }
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return back()->with('error', 'Create Error!');
+
+        }
     }
 
     /**
@@ -159,78 +181,78 @@ class CourseController extends Controller
         }
     }
 
-    public function videoList(Course $course)
-    {
-        $course->load('videos.translations');
-        return view('admin.course.video.index', [
-            'course' => $course
-        ]);
-    }
+    // public function videoList(Course $course)
+    // {
+    //     $course->load('videos.translations');
+    //     return view('admin.course.video.index', [
+    //         'course' => $course
+    //     ]);
+    // }
 
-    public function createVideo(Course $course)
-    {
-        return view('admin.course.video.create', [
-            'course' => $course
-        ]);
-    }
+    // public function createVideo(Course $course)
+    // {
+    //     return view('admin.course.video.create', [
+    //         'course' => $course
+    //     ]);
+    // }
 
-    public function storeVideo(Course $course, CreateVideoRequest $request)
-    {
-        $lecture = new Lecture(
-            $request->validated()
-        );
-        $lecture->course_video_file = $request->file('course_video_file')->store('video', 'local');
-        $course->videos()->save($lecture);
-        return redirect()->route('admin.course.video.index', $course->id)
-            ->with('success', 'Create success!');
-    }
+    // public function storeVideo(Course $course, CreateVideoRequest $request)
+    // {
+    //     $lecture = new Lecture(
+    //         $request->validated()
+    //     );
+    //     $lecture->course_video_file = $request->file('course_video_file')->store('video', 'local');
+    //     $course->videos()->save($lecture);
+    //     return redirect()->route('admin.course.video.index', $course->id)
+    //         ->with('success', 'Create success!');
+    // }
 
-    public function downloadVideo(Course $course, Lecture $lecture)
-    {
-        return response()->download(storage_path('app/' . $lecture->course_video_file));
-    }
+    // public function downloadVideo(Course $course, Lecture $lecture)
+    // {
+    //     return response()->download(storage_path('app/' . $lecture->course_video_file));
+    // }
 
-    public function editVideo(Course $course, Lecture $lecture)
-    {
-        $lecture->load('translations');
-        return view('admin.course.video.edit', [
-            'course'      => $course,
-            'lecture' => $lecture
-        ]);
-    }
+    // public function editVideo(Course $course, Lecture $lecture)
+    // {
+    //     $lecture->load('translations');
+    //     return view('admin.course.video.edit', [
+    //         'course'      => $course,
+    //         'lecture' => $lecture
+    //     ]);
+    // }
 
-    public function updateVideo(Course $course, Lecture $lecture, UpdateVideoRequest $request)
-    {
-        $fileDelete = $lecture->course_video_file;
-        $changeFile = false;
-        $lecture->fill(
-            $request->validated()
-        );
-        if ($request->hasFile('course_video_file')) {
-            $lecture->course_video_file = $request->file('course_video_file')->store('video', 'local');
-            $changeFile = true;
-        }
+    // public function updateVideo(Course $course, Lecture $lecture, UpdateVideoRequest $request)
+    // {
+    //     $fileDelete = $lecture->course_video_file;
+    //     $changeFile = false;
+    //     $lecture->fill(
+    //         $request->validated()
+    //     );
+    //     if ($request->hasFile('course_video_file')) {
+    //         $lecture->course_video_file = $request->file('course_video_file')->store('video', 'local');
+    //         $changeFile = true;
+    //     }
 
-        $lecture->save();
-        if ($changeFile) {
-            Storage::disk('local')->delete($fileDelete);
-        }
-        return redirect()->route('admin.course.video.index', $course->id)
-            ->with('success', 'Create success!');
-    }
+    //     $lecture->save();
+    //     if ($changeFile) {
+    //         Storage::disk('local')->delete($fileDelete);
+    //     }
+    //     return redirect()->route('admin.course.video.index', $course->id)
+    //         ->with('success', 'Create success!');
+    // }
 
-    public function destroyVideo(Course $course, Lecture $lecture)
-    {
-        try {
-            $lecture->delete();
-            Storage::delete($lecture->course_video_file);
-            return response([
-                'message' => 'Delete success!'
-            ]);
-        } catch (\Exception $exception) {
-            return response([
-                'message' => 'Cannot delete video!'
-            ], 400);
-        }
-    }
+    // public function destroyVideo(Course $course, Lecture $lecture)
+    // {
+    //     try {
+    //         $lecture->delete();
+    //         Storage::delete($lecture->course_video_file);
+    //         return response([
+    //             'message' => 'Delete success!'
+    //         ]);
+    //     } catch (\Exception $exception) {
+    //         return response([
+    //             'message' => 'Cannot delete video!'
+    //         ], 400);
+    //     }
+    // }
 }

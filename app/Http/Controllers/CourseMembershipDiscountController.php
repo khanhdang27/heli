@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CourseMembershipDiscount;
+use App\Models\CourseMembershipDiscount;
 use Illuminate\Http\Request;
 
 class CourseMembershipDiscountController extends Controller
@@ -14,7 +14,10 @@ class CourseMembershipDiscountController extends Controller
      */
     public function index()
     {
-        //
+        $courses_priceTag = CourseMembershipDiscount::query()->all();
+        return view('admin.price-tag.index', [
+            'courses_priceTag' => $courses_priceTag,
+        ]);
     }
 
     /**
@@ -41,7 +44,7 @@ class CourseMembershipDiscountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\CourseMembershipDiscount  $courseMembershipDiscount
+     * @param  \App\Models\CourseMembershipDiscount  $courseMembershipDiscount
      * @return \Illuminate\Http\Response
      */
     public function show(CourseMembershipDiscount $courseMembershipDiscount)
@@ -52,7 +55,7 @@ class CourseMembershipDiscountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\CourseMembershipDiscount  $courseMembershipDiscount
+     * @param  \App\Models\CourseMembershipDiscount  $courseMembershipDiscount
      * @return \Illuminate\Http\Response
      */
     public function edit(CourseMembershipDiscount $courseMembershipDiscount)
@@ -64,7 +67,7 @@ class CourseMembershipDiscountController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CourseMembershipDiscount  $courseMembershipDiscount
+     * @param  \App\Models\CourseMembershipDiscount  $courseMembershipDiscount
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, CourseMembershipDiscount $courseMembershipDiscount)
@@ -75,7 +78,7 @@ class CourseMembershipDiscountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\CourseMembershipDiscount  $courseMembershipDiscount
+     * @param  \App\Models\CourseMembershipDiscount  $courseMembershipDiscount
      * @return \Illuminate\Http\Response
      */
     public function destroy(CourseMembershipDiscount $courseMembershipDiscount)

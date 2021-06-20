@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Membership extends Model
+class MembershipCourse extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'memberships';
+    protected $table = 'membership_course';
 
     public $timestamps = TRUE;
 
