@@ -35,6 +35,8 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::resource('roles', 'RoleController');
 
+    Route::get('apply-discount/{id}', 'DiscountController@apply')->name('discount.apply');
+    Route::put('apply-discount/{id}', 'DiscountController@storeApply')->name('discount.apply-courses');
     Route::resource('discount', 'DiscountController');
 
     Route::resource('price-tag', 'CourseMembershipDiscountController');

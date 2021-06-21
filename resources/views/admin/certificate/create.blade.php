@@ -24,10 +24,16 @@
                             <div class="form-group ">
                                 {{ Form::label('certificate_code', 'Code') }}
                                 {{ Form::text('certificate_code', old('certificate_code'),['class' => 'form-control'] ) }}
+                                @error('certificate_code')
+                                    <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('certificate_name', 'Name') }}
                                 {{ Form::text('certificate_name', old('certificate_name'),['class' => 'form-control'] ) }}
+                                @error('certificate_name')
+                                    <div class="alert text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}

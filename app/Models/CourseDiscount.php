@@ -9,8 +9,17 @@ use Astrotomic\Translatable\Translatable;
 class CourseDiscount extends Model
 {
     use Translatable, SoftDeletes;
-    protected $table = 'course_discount';
+    protected $table = 'course_discounts';
     protected $guarded = [];
     protected $filterable = [];
 
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function discount()
+    {
+        return $this->belongsTo(Discount::class);
+    }
 }

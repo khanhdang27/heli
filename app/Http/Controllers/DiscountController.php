@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Discount;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -56,10 +58,7 @@ class DiscountController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('error','Save Error');
-
         }
-        
-
     }
 
     /**
@@ -117,5 +116,48 @@ class DiscountController extends Controller
         $discount->delete();
         return back()->with('success', 'Delete success!');
 
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Discount  $discount
+     * @return \Illuminate\Http\Response
+     */
+    public function apply($id)
+    {
+        $discount = Discount::find($id);
+        $courses = Course::query()->get();
+        return view('admin.discount.apply',compact('discount', 'courses'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Discount  $discount
+     * @return \Illuminate\Http\Response
+     */
+    public function storeApply($id, Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            foreach ($request->input('course_id') as $key => $value) {
+                if (empty($request->input('discount_'.$value))) {
+                    DB::rollback();
+                    return  back()->withErrors(['discount_'.$value=> 'Discount value is required']);
+                }
+                
+            }
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->with(['errors'=> "Update Error"]);
+        }
+        dd($request->input());
+
+        $discount = Discount::find($id);
+        $courses = Course::query()->get();
+        return view('admin.discount.apply',compact('discount', 'courses'));
     }
 }

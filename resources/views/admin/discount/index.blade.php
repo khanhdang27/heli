@@ -73,9 +73,13 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="{{ route('admin.discount.apply', $value->id) }}"
+                                                       class="dropdown-item">
+                                                            Apply Discount
+                                                    </a>
                                                     <a href="{{ route('admin.discount.edit', $value->id) }}"
                                                        class="dropdown-item">
-                                                        Edit
+                                                            Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
                                                         onclick="itemDelete('{{ route('admin.discount.destroy', $value->id) }}')"

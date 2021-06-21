@@ -14,4 +14,14 @@ class MembershipCourse extends Model
     public $timestamps = TRUE;
 
     protected $guarded = [];
+
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
 }

@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-auto">
                                 <!-- Button -->
-                                <a href="{{ route('admin.discount.create') }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('admin.price-tag.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                          stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                          class="css-i6dzq1">
@@ -54,11 +54,10 @@
                                 @foreach($courses_priceTag as $value)
                                     <tr>
                                         <td>
-                                            @dd($value->course)
-                                            {{$value->course->name}}
+                                            {{$value->membershipCourses->course->course_name}}
                                         </td>
                                         <td>
-                                            {{$value->membership->name}}
+                                            {{$value->membershipCourses->membership->name}}
                                         </td>
                                         <td>
                                             {{$value->recommended}}
@@ -66,7 +65,6 @@
                                         <td>
                                             {{$value->description}}
                                         </td>
-                                        
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
@@ -75,12 +73,12 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.discount.edit', $value->id) }}"
+                                                    <a href="{{ route('admin.price-tag.edit', $value->id) }}"
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                        onclick="itemDelete('{{ route('admin.discount.destroy', $value->id) }}')"
+                                                        onclick="itemDelete('{{ route('admin.price-tag.destroy', $value->id) }}')"
                                                         class="dropdown-item delete-item">
                                                             Delete
                                                     </a>

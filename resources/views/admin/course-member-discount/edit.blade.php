@@ -12,72 +12,54 @@
 
                             <!-- Title -->
                             <h4 class="card-header-title">
-                                Create Discount 
+                                Edit Price 
                             </h4>
 
+                            <h5 class="text-dark">
+                                {{$price_tag->membershipCourses->course->course_name}} - 
+                                {{$price_tag->membershipCourses->membership->name}}
+                            </h5>
                         </div>
                     </div> <!-- / .row -->
                 </div>
                 <div class="card-body">
-                    <div class="card-body">
-                        {!! Form::open(['route' => ['admin.discount.update', $discount->id], 'method'=> 'put']) !!}
-                        <div class="form-group">
-                            {{ Form::label('name', 'Discount Name') }}
-                            {{ Form::text('name', $discount->name,
-                            ['class' => 'form-control'] ) }}
-                            @error('name')
+                    {!! Form::open(['route' => ['admin.price-tag.update', $price_tag->id], 'method'=> 'put']) !!}
+                    <div class="form-group">
+                        {{ Form::label('recommend', 'Recommend') }}
+                        <br>
+                        {{ Form::radio('recommend', 'true', $price_tag->recommended == 1, ['id'=>'recommend_yes']) }} <label for="recommend_yes">yes</label>
+                        <br>
+                        {{ Form::radio('recommend', 'false', $price_tag->recommended == 0,['id'=>'recommend_no']) }} <label for="recommend_no">no</label>
+                        @error('recommend')
                             <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('start_date', 'Date Start') }}
-                            {{ Form::date('start_date', $discount->start_date, ['class' => 'form-control'] ) }}
-                            @error('start_date')
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('description', 'Date Start') }}
+                        {{ Form::textarea('description', $price_tag->description, ['class' => 'form-control', 'rows'=>3] ) }}
+                        @error('description')
                             <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('end_date', 'Date End') }}
-                            {{ Form::date('end_date', $discount->end_date,
-                            ['class' => 'form-control'] ) }}
-                            @error('end_date')
-                            <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('description', 'Description') }}
-                            {{ Form::textarea('description', $discount->description,
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('price_value', 'Description') }}
+                        {{ Form::number('price_value', $price_tag->membershipCourses->price_value,
                             [
                                 'class' => 'form-control',
                                 'rows' => 3, 
-                                ]) }}
-                            @error('description')
-                            <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        
-                        {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
-                        {!! Form::close() !!}
+                            ]) }}
+                        @error('price_value')
+                        <div class="alert text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
+                    
+                    {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
+                    {!! Form::close() !!}
                 </div>
             </div>
-
+            @dd($price_tag);
         </div>
     </div> <!-- / .row -->
 </div>
-    {{-- <script>
-        window.onload = function () {
-            CKEDITOR.replace('ckeditor');
-        };
-    </script>
-    @push('inputFile')
-        <script>
-            // Add the following code if you want the name of the file appear on select
-            $(".custom-file-input").on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
-        </script>
-    @endpush --}}
 @endsection
 

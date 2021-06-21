@@ -50,14 +50,6 @@ class Course extends Model implements TranslatableContract
     protected $guarded = [];
     public array $translatedAttributes = ['course_name', 'course_description'];
 
-    protected $filterable = [
-        'certificate',
-        'is_hot',
-        'latest_discount',
-        'welcome_offer',
-        'course_name',
-        'subject'
-    ];
 
     public function videos()
     {
