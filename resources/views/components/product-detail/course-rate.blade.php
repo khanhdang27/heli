@@ -6,6 +6,9 @@ $courseName = 'IELTS 英文課程 第一部分講解';
 $date = '10/03/2021'
 ?>
 <div>
+    @if(\Illuminate\Support\Facades\Auth::check())
+        <x-comment.comment :refComment=$courseDetail :commentModule=\App\Models\UserComment::$COURSE></x-comment.comment>
+    @endif
     <div class="pt-3 reviews">
         <div class="row review-bar">
             <div class="col-xl-3 avatar-review">

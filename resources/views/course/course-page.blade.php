@@ -56,7 +56,7 @@
                                 </x-product-detail.course-tutor>
                         </div>
                         <div id="menu3" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
-                            <x-product-detail.course-rate/>
+                            <x-product-detail.course-rate :courseDetail=$courseDetail></x-product-detail.course-rate>
                         </div>
                     </div>
                 </div>

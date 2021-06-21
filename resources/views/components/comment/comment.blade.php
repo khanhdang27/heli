@@ -19,7 +19,7 @@
         @enderror
     </div>
     {{ Form::text('ref_id',$refComment->id,['hidden'=>true]) }}
-{{--    {{ Form::text('ref_module',$commentModule,['hidden'=>true]) }}--}}
+    {{ Form::text('ref_module',$commentModule,['hidden'=>true]) }}
     {{ Form::submit('Save', ['class'=>'btn btn-primary mt-2']) }}
     {!! Form::close() !!}
 </div>

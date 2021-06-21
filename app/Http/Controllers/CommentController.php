@@ -41,6 +41,7 @@ class CommentController extends Controller
     {
         $input = $request->validate([
             'ref_id' => 'required',
+            'ref_module'=>'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'detail' => 'required'
         ]);
@@ -53,15 +54,17 @@ class CommentController extends Controller
             $comment = new UserComment([
                 'user_id' => Auth::user()->id,
                 'ref_id' => $input['ref_id'],
-                'ref_module' =>1,
+                'ref_module' =>$input['ref_module'],
                 'file_id' => $input['file_id'],
                 'detail' => $input['detail']
             ]);
 
             if ($comment->save()) {
-                $post = Post::find($comment->post_id);
-                $post->comment_no = $post->comment_no + 1;
-                $post->save();
+                if ($input['ref_module']==1){
+                    $post = Post::find($comment->ref_id);
+                    $post->comment_no = $post->comment_no + 1;
+                    $post->save();
+                }
             }
             return back();
         }
@@ -69,13 +72,15 @@ class CommentController extends Controller
             $comment = new UserComment([
                 'user_id' => Auth::user()->id,
                 'ref_id' => $input['ref_id'],
-                'ref_module' =>1,
+                'ref_module' =>$input['ref_module'],
                 'detail' => $input['detail']
             ]);
             if ($comment->save()) {
-                $post = Post::find($comment->ref_id);
-                $post->comment_no = $post->comment_no + 1;
-                $post->save();
+                if ($input['ref_module']==1){
+                    $post = Post::find($comment->ref_id);
+                    $post->comment_no = $post->comment_no + 1;
+                    $post->save();
+                }
             }
             return back();
         }

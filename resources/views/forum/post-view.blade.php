@@ -78,7 +78,7 @@
                     <h3 class="text-primary">
                         Add your answer
                     </h3>
-                    <x-forum.comment-item :refComment=$post :commentModule=\App\Models\UserComment::$POST></x-forum.comment-item>
+                    <x-comment.comment :refComment=$post :commentModule=\App\Models\UserComment::$POST></x-comment.comment>
 
                 </div>
             @endif
