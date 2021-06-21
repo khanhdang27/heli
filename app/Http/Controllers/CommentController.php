@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\UserComment;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -40,8 +40,8 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'post_id' => 'required',
-            'file_id' => '',
+            'ref_id' => 'required',
+            'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'detail' => 'required'
         ]);
         if (!empty($request->file)) {
@@ -50,9 +50,10 @@ class CommentController extends Controller
             $input['user_id'] = Auth::user()->id;
             $input['file_id'] = $fileController->store($request);
 
-            $comment = new Comment([
+            $comment = new UserComment([
                 'user_id' => Auth::user()->id,
-                'post_id' => $input['post_id'],
+                'ref_id' => $input['ref_id'],
+                'ref_module' =>1,
                 'file_id' => $input['file_id'],
                 'detail' => $input['detail']
             ]);
@@ -65,13 +66,14 @@ class CommentController extends Controller
             return back();
         }
         else{
-            $comment = new Comment([
+            $comment = new UserComment([
                 'user_id' => Auth::user()->id,
-                'post_id' => $input['post_id'],
+                'ref_id' => $input['ref_id'],
+                'ref_module' =>1,
                 'detail' => $input['detail']
             ]);
             if ($comment->save()) {
-                $post = Post::find($comment->post_id);
+                $post = Post::find($comment->ref_id);
                 $post->comment_no = $post->comment_no + 1;
                 $post->save();
             }
@@ -85,7 +87,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(UserComment $comment)
     {
         //
     }
@@ -96,7 +98,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(UserComment $comment)
     {
         //
     }
@@ -108,7 +110,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, UserComment $comment)
     {
         //
     }
@@ -119,7 +121,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(UserComment $comment)
     {
         //
     }

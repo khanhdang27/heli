@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use App\Models\Post;
 
-class Comment extends Model
+class UserComment extends Model
 {
+    static $POST=1;
+    static $COURSE=2;
     use SoftDeletes;
     protected $table = 'comments';
     protected $guarded = [];
@@ -20,5 +22,13 @@ class Comment extends Model
     }
     public function post() {
         return $this->belongsTo(Post::class);
+    }
+    public function userLike()
+    {
+        return $this->hasMany(UserLike::class, 'like_ref_id');
+    }
+    public function commentable()
+    {
+        return $this->morphTo();
     }
 }

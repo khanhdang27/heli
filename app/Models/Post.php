@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use SoftDeletes;
+
     protected $table = 'posts';
     protected $guarded = [];
 
@@ -20,10 +21,16 @@ class Post extends Model
 
     public function postTag()
     {
-        return $this->belongsTo(Tag::class,'tag_id');
+        return $this->belongsTo(Tag::class, 'tag_id');
     }
+
     public function userLike()
     {
-        return $this->hasMany(UserLike::class,'like_ref_id');
+        return $this->hasMany(UserLike::class, 'like_ref_id');
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(UserComment::class,'ref_id');
     }
 }

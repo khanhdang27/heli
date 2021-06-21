@@ -10,7 +10,7 @@ class UserLike extends Model
 {
     static $POST = 1;
     static $COURSE = 2;
-    static $BLOG = 3;
+    static $COMMENT = 3;
     use SoftDeletes;
     protected $table = 'user_likes';
     protected $guarded = [];
@@ -18,12 +18,7 @@ class UserLike extends Model
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }
-//    public function post(){
-//        return $this->morphTo(Post::class);
-//    }
-//    public function course(){
-//        return $this->morphTo(Course::class);
-//    }
+
     public function likeable()
     {
         return $this->morphTo();

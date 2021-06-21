@@ -1,19 +1,20 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Forum;
 
 use Illuminate\View\Component;
 
 class CommentItem extends Component
 {
+    public $refComment;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($refComment)
     {
-        //
+        $this->refComment=$refComment;
     }
 
     /**
@@ -24,6 +25,8 @@ class CommentItem extends Component
     public function render()
     {
 
-        return view('components.comment-item');
+        return view('components.forum.comment-item',[
+            'refComment' =>$this->refComment
+        ]);
     }
 }

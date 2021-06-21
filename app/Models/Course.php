@@ -97,4 +97,8 @@ class Course extends Model implements TranslatableContract
     {
         return $this->hasMany(UserLike::class,'like_ref_id');
     }
+    public function comment()
+    {
+        return $this->hasMany(UserComment::class,'ref_id');
+    }
 }

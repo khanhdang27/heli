@@ -117,5 +117,9 @@ return [
         'incorrect' => '電子郵件或密碼不正確',
         'pleaseEnterEmail' => '請輸入您的郵箱!',
         'pleaseCheckEmail' => '請檢查您的電子郵件!',
+    ],
+    'forum' =>[
+        'bestAnswer' => '最佳答案'
     ]
+
 ];

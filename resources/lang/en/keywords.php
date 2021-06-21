@@ -117,5 +117,8 @@ return [
         'incorrect' => 'Email or password incorrect',
         'pleaseEnterEmail' => 'Please enter your email!',
         'pleaseCheckEmail' => 'Please check your email!',
+    ],
+    'forum' =>[
+        'bestAnswer' => 'Best answer'
     ]
 ];

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\UserComment;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\UserLike;
@@ -93,8 +93,13 @@ class PostController extends Controller
         $_post = Post::with( 'user', 'postTag')->with(['userLike'=>function ($q){
             return $q->where('user_id', Auth::user()->id);
         }])->find($post->id);
+        $comment = UserComment::with(['userLike'=>function ($q){
+            return $q->where('user_id',Auth::user()->id);
+        }])->where('ref_id',$post->id)->get();
+//        dd($comment);
         return view('forum.post-view', [
             'post' => $_post,
+            'comment' => $comment
         ]);
     }
 

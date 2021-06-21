@@ -21,9 +21,9 @@ class CreateUserLikesTable extends Migration
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->integer('like_ref'); // morphic Models
+            $table->integer('like_ref_id'); // morphic Models
             $table->integer('like_module'); // comment, post, course
-            $table->integer('like_style')->default(1);
+            $table->integer('like_ref_type')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
