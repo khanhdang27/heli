@@ -57,7 +57,7 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-            @dd($price_tag);
+            @dd($price_tag->courseDiscounts);
         </div>
     </div> <!-- / .row -->
 </div>

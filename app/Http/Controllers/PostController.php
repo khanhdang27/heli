@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
-use App\Models\UserComment;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Models\UserLike;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,11 +82,9 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $_post = Post::with( 'user', 'postTag')->find($post->id);
-        // $comment = UserComment::where('ref_id',$post->id)->get();
-//        dd($comment);
+
         return view('forum.post-view', [
             'post' => $_post,
-            'comment' => []
         ]);
     }
 

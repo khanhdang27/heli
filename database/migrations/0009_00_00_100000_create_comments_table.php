@@ -20,7 +20,6 @@ class CreateCommentsTable extends Migration
                 ->cascadeOnDelete();
             $table->bigInteger('commentable_id');
             $table->string('commentable_type');
-            $table->bigInteger('file_id')->nullable()->default(null);
             $table->bigInteger('tag_user')->nullable()->default(null);
             $table->text('detail');
             $table->bigInteger('like_no')->default(0);

@@ -44,7 +44,7 @@
                                 @foreach($courses as $value)
                                     <tr>
                                         <td>
-                                            {{ Form::checkbox( 'course_id[]', $value->id, false, ['class'=>'form-control']) }}
+                                            {{ Form::checkbox('course_id[]', $value->id, false, ['class'=>'form-control']) }}
                                         </td>
                                         <td class="goal-project">
                                             {{ $value->course_name }}
@@ -57,7 +57,8 @@
                                         </td>
                                         <th>
                                             {{ Form::number( 'discount_'.$value->id, null, ['class'=>'form-control']) }}
-                                            @error('discount_'.$value->id)
+                                            {{'discount_'.$value->id}}
+                                            @error("{{'discount_'.$value->id}}")
                                                 <div class="alert text-danger">{{ $message }}</div>
                                             @enderror
                                         </th>

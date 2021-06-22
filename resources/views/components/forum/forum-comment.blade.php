@@ -20,9 +20,8 @@
 
             </div>
             <div class="text-forum d-flex">
-                <x-like.like :likeRef=$comment :likeModule=\App\Models\Comment::class></x-like.like>
-                <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}"></span>
-
+                <x-like.like :likeRef=$comment :likeModule=\App\Models\UserComment::class></x-like.like>
+                {{-- <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}"></span> --}}
             </div>
         </div>
         <div class="col-xl-3 d-flex flex-column justify-content-end">

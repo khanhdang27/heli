@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\UserComment;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
@@ -45,44 +47,34 @@ class CommentController extends Controller
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'detail' => 'required'
         ]);
-        if (!empty($request->file)) {
-            $fileController = new FileController();
 
-            $input['user_id'] = Auth::user()->id;
-            $input['file_id'] = $fileController->store($request);
+        DB::beginTransaction();
 
-            $comment = new UserComment([
+        try {
+            $comment = UserComment::create([
                 'user_id' => Auth::user()->id,
-                'ref_id' => $input['ref_id'],
-                'ref_module' =>$input['ref_module'],
-                'file_id' => $input['file_id'],
+                'commentable_id' => $input['ref_id'],
+                'commentable_type' =>$input['ref_module'],
                 'detail' => $input['detail']
             ]);
 
-            if ($comment->save()) {
-                if ($input['ref_module']==1){
-                    $post = Post::find($comment->ref_id);
-                    $post->comment_no = $post->comment_no + 1;
-                    $post->save();
-                }
+            if(!empty($input['file_id'])){
+                $file = File::storeFile($input['file'],UserComment::class, $comment->id);
             }
-            return back();
-        }
-        else{
-            $comment = new UserComment([
-                'user_id' => Auth::user()->id,
-                'ref_id' => $input['ref_id'],
-                'ref_module' =>$input['ref_module'],
-                'detail' => $input['detail']
-            ]);
-            if ($comment->save()) {
-                if ($input['ref_module']==1){
-                    $post = Post::find($comment->ref_id);
-                    $post->comment_no = $post->comment_no + 1;
-                    $post->save();
-                }
-            }
-            return back();
+
+            $refer = $input['ref_module']::find($input['ref_id']);
+            
+            $refer->comment_no = $refer->comment_no + 1;
+            $refer->save();
+ 
+            DB::commit();
+
+            // dd($comment, $refer);
+            return back()->with('success', 'Save success');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+            return back()->with('error', 'Save error');
         }
     }
 

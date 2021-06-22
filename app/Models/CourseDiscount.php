@@ -3,12 +3,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Astrotomic\Translatable\Translatable;
 
 
 class CourseDiscount extends Model
 {
-    use Translatable, SoftDeletes;
+    use SoftDeletes;
     protected $table = 'course_discounts';
     protected $guarded = [];
     protected $filterable = [];

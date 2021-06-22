@@ -31,6 +31,7 @@ class UserLikeController extends Controller
             ]);
         } catch (\Throwable $th) {
             //throw $th;
+            dd($th);
             DB::rollBack();
             return new JsonResponse([
                 'status'=> 400,
@@ -67,7 +68,6 @@ class UserLikeController extends Controller
         } catch (\Throwable $th) {
             // throw ;
             DB::rollback();
-            dd($th);
             return new JsonResponse([
                 'status'=> 400,
                 'message' => 'fails'

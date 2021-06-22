@@ -25,7 +25,7 @@ class UserComment extends Model
     }
     public function likeable()
     {
-        return $this->morphOne(UserLike::class, 'likeable');
+        return $this->morphMany(UserLike::class, 'likeable');
     }
     public function commentable()
     {

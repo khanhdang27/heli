@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\CourseDiscount;
+use App\Models\CourseMembershipDiscount;
 use App\Models\Discount;
-use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -140,24 +141,38 @@ class DiscountController extends Controller
     public function storeApply($id, Request $request)
     {
         DB::beginTransaction();
+        $input = $request->input();
+        
         try {
             foreach ($request->input('course_id') as $key => $value) {
-                if (empty($request->input('discount_'.$value))) {
+                if (empty($input['discount_'.$value])) {
                     DB::rollback();
-                    return  back()->withErrors(['discount_'.$value=> 'Discount value is required']);
+                    return  back()->withErrors(['discount_'.$value => 'Discount value is required']);
                 }
-                
+                $courseDiscourse = CourseDiscount::create([
+                    'course_id' => $value,
+                    'discount_id' => $id,
+                    'discount_value' => $input['discount_'.$value]
+                ]);
+
+                DB::enableQueryLog();
+                $priceTags = CourseMembershipDiscount::with(['membershipCourses'=> function ($query) use ($value){
+                       return $query->where('course_id', $value);
+                    }])->get();
+
+                foreach ($priceTags as $priceTag) {
+                    $priceTag->course_discount_id = $courseDiscourse->id;
+                    $priceTag->save();
+                }
+
+                return back()->with(['succeed'=> "Update Succeed"]);
             }
 
             DB::commit();
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollback();
             return back()->with(['errors'=> "Update Error"]);
         }
-        dd($request->input());
-
-        $discount = Discount::find($id);
-        $courses = Course::query()->get();
-        return view('admin.discount.apply',compact('discount', 'courses'));
     }
 }
