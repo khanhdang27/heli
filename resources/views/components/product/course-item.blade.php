@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="ic-heart w-25 text-right">
-                    <x-like.like :likeRef=$course :likeModule=\App\Models\UserLike::$COURSE></x-like.like>
+                    <x-like.like :likeRef=$course :likeModule=\App\Models\Course::class></x-like.like>
                 </div>
             </div>
             <div class="d-flex">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\UserComment;
 use App\Models\Post;
 use App\Models\Tag;
@@ -9,6 +10,7 @@ use App\Models\UserLike;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -19,10 +21,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('postTag', 'user')->with(['userLike'=>function ($q){
-            return $q->where('user_id', Auth::user()->id);
-        }])->orderByDesc('created_at')->get();
-        $tags = Tag::where('tag_type',1)->get();
+        $posts = Post::with('postTag', 'user')->orderByDesc('created_at')->get();
+        $tags = Tag::where('tag_type',Tag::$POST)->get();
         return view('forum.forum-page', [
             'posts' => $posts,
             'tags' => $tags,
@@ -49,36 +49,29 @@ class PostController extends Controller
     {
         if (empty($request->tag_id))
         {
-            return back()->with('success','Tag not found');
+            return back()->with('error','Tag not found');
         }
-        elseif(!empty($request->file) and !empty($request->tag_id))
-        {
-            $fileController = new FileController();
-            $input = $request->all();
+        $input = $request->all();
 
-            $file_id = $fileController->store($request);
+        DB::beginTransaction();
 
-            $input['user_id'] = Auth::user()->id;
-            unset($input['type']);
-            unset($input['ref']);
-            unset($input['file']);
-            $input['file_id'] = $file_id;
-            $post = new Post(
-                $input
-            );
-            $post->save();
-            return back();
-        }else{
-            $input = $request->all();
-            $input['user_id'] = Auth::user()->id;
-            unset($input['type']);
-            unset($input['ref']);
-            unset($input['file']);
-            $post = new Post(
-                $input
-            );
-            $post->save();
-            return back();
+        try {
+            $post = Post::create([
+                'title' => $input['title'],
+                'content' => $input['content'],
+                'tag_id' => $input['tag_id'],
+                'user_id' => Auth::user()->id
+            ]);
+
+            if(!empty($input['file'])){
+                $file = File::storeFile($input['file'],Post::class, $post->id);
+            }
+
+            DB::commit();
+            return back()->with('success', 'Save success');
+        } catch (\Throwable $th) {
+            DB::rollBack();;
+            return back()->with('error', 'Save error');
         }
     }
 
@@ -90,16 +83,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $_post = Post::with( 'user', 'postTag')->with(['userLike'=>function ($q){
-            return $q->where('user_id', Auth::user()->id);
-        }])->find($post->id);
-        $comment = UserComment::with(['userLike'=>function ($q){
-            return $q->where('user_id',Auth::user()->id);
-        }])->where('ref_id',$post->id)->get();
+        $_post = Post::with( 'user', 'postTag')->find($post->id);
+        // $comment = UserComment::where('ref_id',$post->id)->get();
 //        dd($comment);
         return view('forum.post-view', [
             'post' => $_post,
-            'comment' => $comment
+            'comment' => []
         ]);
     }
 

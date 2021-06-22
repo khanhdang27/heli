@@ -20,7 +20,6 @@ class CreatePostsTable extends Migration
                 ->cascadeOnDelete();
             $table->text('title')->nullable()->default(null);
             $table->text('content')->nullable()->default(null);
-            $table->bigInteger('file_id')->nullable()->default(null);
             $table->bigInteger('like_no')->default(0);
             $table->bigInteger('comment_no')->default(0);
             $table->boolean('close_post')->default(0);

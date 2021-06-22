@@ -5,6 +5,7 @@
 @section('content')
     @php
         use App\Utilities\SelectionByClass;
+
     @endphp
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
@@ -41,7 +42,6 @@
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5 float-right']) }}
                         {!! Form::close() !!}
                     </div>
-
                 </div>
             @endif
         </div>
@@ -50,14 +50,7 @@
                 <x-forum.forum-post :post=$value>
                 </x-forum.forum-post>
             @endforeach
-            {{--            <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">--}}
-            {{--                <button class="btn-read-more">--}}
-            {{--                    @lang('keywords.blog-page.readMore')--}}
-            {{--                    <img src="{{asset("images/ic/ic_drop.svg")}}" width="65">--}}
-            {{--                </button>--}}
-            {{--            </div>--}}
         </div>
-
     </div>
     @push('inputFile')
         <script>

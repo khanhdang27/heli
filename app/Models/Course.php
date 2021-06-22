@@ -85,7 +85,7 @@ class Course extends Model implements TranslatableContract
     {
         return $this->hasMany(Discount::class);
     }
-    public function userLike()
+    public function likeable()
     {
         return $this->morphOne(UserLike::class,'likeable');
     }

@@ -116,11 +116,6 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $courseDetail = Course::with('subject','tutor','courseMaterial')
-            ->with(['userLike' => function ($q){
-                if (Auth::check()) {
-                    return $q->where('user_id', Auth::user()->id );
-                }
-            }])
             ->find($course->id);
         $student_course  = null;
         if (Auth::check()){

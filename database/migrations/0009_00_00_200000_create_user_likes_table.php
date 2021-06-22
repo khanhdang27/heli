@@ -20,7 +20,7 @@ class CreateUserLikesTable extends Migration
                 ->cascadeOnDelete();
             $table->integer('like_style')->default(1);
             $table->integer('likeable_id'); // morphic Models
-            $table->integer('likeable_type'); // comment, post, course
+            $table->string('likeable_type'); // comment, post, course
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\PostTag;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,13 +23,18 @@ class Post extends Model
         return $this->belongsTo(Tag::class, 'tag_id');
     }
 
-    public function userLike()
+    public function likeable()
     {
-        return $this->morphOne(UserLike::class,'likeable');
+        return $this->morphMany(UserLike::class,'likeable');
     }
     
     public function comment()
     {
-        return $this->morphOne(UserComment::class,'commentable');
+        return $this->morphMany(UserComment::class,'commentable');
+    }
+
+    public function image()
+    {
+        return $this->morphOne(File::class, 'fileable');
     }
 }

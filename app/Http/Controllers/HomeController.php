@@ -29,11 +29,6 @@ class HomeController extends Controller
     {
         $banners = Banner::query()->first();
         $courses = Course::with('subject','tutor','courseMaterial')
-            ->with(['userLike' => function ($q){
-                if (Auth::check()) {
-                    return $q->where('user_id', Auth::user()->id );
-                }
-            }])
             ->get();
         $courseVideo = Course::with('tutor')->first();
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();

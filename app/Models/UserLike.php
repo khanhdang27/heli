@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserLike extends Model
 {
-    static $POST = 1;
-    static $COURSE = 2;
-    static $COMMENT = 3;
     use SoftDeletes;
     protected $table = 'user_likes';
     protected $guarded = [];

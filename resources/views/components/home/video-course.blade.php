@@ -29,7 +29,7 @@ $list_video = [
             <img src="{{asset('images/ic/ic_star_border.svg')}}" width="35">
             <p class="point mb-0 text-primary ml-3">4.5/5</p>
         </div>
-        <x-like.like :likeRef=$courseDetail :likeModule=\App\Models\UserLike::$COURSE></x-like.like>
+        <x-like.like :likeRef=$courseDetail :likeModule=\App\Models\Course::class></x-like.like>
     </div>
     <div class="row">
         <div class="col-sm-8">

@@ -23,9 +23,9 @@ class UserComment extends Model
     public function post() {
         return $this->belongsTo(Post::class);
     }
-    public function userLike()
+    public function likeable()
     {
-        return $this->hasMany(UserLike::class, 'like_ref_id');
+        return $this->morphOne(UserLike::class, 'likeable');
     }
     public function commentable()
     {

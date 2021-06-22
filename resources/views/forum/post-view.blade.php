@@ -49,7 +49,7 @@
                             <span class="mr-3"><img class="ic-action"
                                                     src="{{asset("images/ic/ic_bookmark.svg")}}"></span>
 
-                        <x-like.like :likeRef=$post :likeModule=\App\Models\UserLike::$POST></x-like.like>
+                        <x-like.like :likeRef=$post :likeModule=\App\Models\Post::class></x-like.like>
                         <span>
                                 <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">{{$post->comment_no}}
                             </span>
@@ -78,7 +78,7 @@
                     <h3 class="text-primary">
                         Add your answer
                     </h3>
-                    <x-comment.comment :refComment=$post :commentModule=\App\Models\UserComment::$POST></x-comment.comment>
+                    <x-comment.comment :refComment=$post :commentModule=\App\Models\Post::class></x-comment.comment>
 
                 </div>
             @endif

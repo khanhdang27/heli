@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\UserLike;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,42 +13,65 @@ class UserLikeController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $userLike = new UserLike(
-            $input
-        );
-        if ($userLike->save())
-            if ($input['like_module'] == 1) {
-                $post = Post::find($userLike->like_ref_id);
-                $post->like_no = $post->like_no + 1;
-                $post->save();
-            }
+        DB::beginTransaction();
+        try {
+            $userLike = UserLike::create([
+                'user_id' => $input['user_id'],
+                'likeable_id' => $input['like_ref_id'],
+                'likeable_type' => $input['like_module']
+            ]);
+
+            $refer = $input['like_module']::find($userLike->likeable_id);
+            $refer->like_no = $refer->like_no + 1;
+            $refer->save();
+            DB::commit();
+            return new JsonResponse([
+                'status'=> 200,
+                'message' => 'succeed'
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return new JsonResponse([
+                'status'=> 400,
+                'message' => 'fails'
+            ], 400);
+        }
     }
 
     public function update(Request $request)
     {
         $input = $request->all();
-        $userLike = UserLike::where([
-            ['user_id','=',$input['user_id']],
-            ['like_ref_id','=',$input['like_ref_id']],
-            ['like_module','=',$input['like_module']],
-        ])->first();
-//        $userLike->like_ref_type = 0;
+        $modelTable = explode('\\' ,$input['like_module'])[2];
+        $userLike = UserLike::where('user_id', '=', $input['user_id'])
+            ->where('likeable_id', '=', $input['like_ref_id'])
+            ->where('likeable_type', 'like', '%'.$modelTable.'%' )->first();
+
         DB::beginTransaction();
 
         try {
-            $userLike->delete();
-            if ($input['like_module']==1) {
-                $post = Post::find($input['like_ref_id']);
+            if ($userLike) {
+                $userLike->delete();
+                $refer = $input['like_module']::find($input['like_ref_id']);
+                if ($refer->like_no != 0 ) {
+                    $refer->like_no = $refer->like_no -1;
+                    $refer->save();
+                }
             }
-            if ($post->like_no > 0) {
-                $post->like_no = $post->like_no - 1;
-            }
-            $post->save();
-
             DB::commit();
+
+            return new JsonResponse([
+                'status'=> 200,
+                'message' => 'succeed'
+            ]);
         } catch (\Throwable $th) {
             // throw ;
             DB::rollback();
+            dd($th);
+            return new JsonResponse([
+                'status'=> 400,
+                'message' => 'fails'
+            ], 400);
         }
         
     }
