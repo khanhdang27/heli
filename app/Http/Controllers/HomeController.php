@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Course;
+use App\Models\CourseMembershipDiscount;
+use App\Models\MembershipCourse;
 use App\Models\News;
 use App\Models\UserLike;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -28,6 +32,14 @@ class HomeController extends Controller
     public function index()
     {
         $banners = Banner::query()->first();
+
+        // DB::enableQueryLog();
+        $value = 1;
+        $_courses = CourseMembershipDiscount::with(['membershipCourses.membership'=> function ($query) use ($value){
+            $query->where('id', $value);
+         }])->get();
+
+        dd($_courses);
         $courses = Course::with('subject','tutor','courseMaterial')
             ->get();
         $courseVideo = Course::with('tutor')->first();

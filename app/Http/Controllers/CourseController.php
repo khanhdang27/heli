@@ -96,7 +96,7 @@ class CourseController extends Controller
 
                 CourseMembershipDiscount::create([
                     'membership_course_id' => $membershipCourse->id,
-                ]); 
+                ]);
             }
             DB::commit();
             return back()->with('success', 'Create success!');

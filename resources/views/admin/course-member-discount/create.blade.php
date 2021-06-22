@@ -9,12 +9,10 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Create Discount 
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -62,19 +60,6 @@
         </div>
     </div> <!-- / .row -->
 </div>
-    {{-- <script>
-        window.onload = function () {
-            CKEDITOR.replace('ckeditor');
-        };
-    </script>
-    @push('inputFile')
-        <script>
-            // Add the following code if you want the name of the file appear on select
-            $(".custom-file-input").on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
-        </script>
-    @endpush --}}
+    
 @endsection
 

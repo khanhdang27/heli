@@ -51,7 +51,7 @@ class Course extends Model implements TranslatableContract
     public array $translatedAttributes = ['course_name', 'course_description'];
 
 
-    public function videos()
+    public function Lecture()
     {
         return $this->hasMany(Lecture::class, 'course_id');
     }
@@ -85,12 +85,16 @@ class Course extends Model implements TranslatableContract
     {
         return $this->hasMany(Discount::class);
     }
+
     public function likeable()
     {
         return $this->morphMany(UserLike::class,'likeable');
     }
+    
     public function comment()
     {
         return $this->morphMany(UserComment::class,'commentable');
     }
+
+    
 }

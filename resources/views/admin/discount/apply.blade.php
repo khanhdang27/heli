@@ -57,8 +57,7 @@
                                         </td>
                                         <th>
                                             {{ Form::number( 'discount_'.$value->id, null, ['class'=>'form-control']) }}
-                                            {{'discount_'.$value->id}}
-                                            @error("{{'discount_'.$value->id}}")
+                                            @error('discount_'.$value->id)
                                                 <div class="alert text-danger">{{ $message }}</div>
                                             @enderror
                                         </th>

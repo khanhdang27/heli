@@ -37,7 +37,9 @@
                     </div>
                 </div>
                 <div class="ic-heart w-25 text-right">
-                    <x-like.like :likeRef=$course :likeModule=\App\Models\Course::class></x-like.like>
+                    @if (Auth::check())
+                        <x-like.like :likeRef=$course :likeModule=\App\Models\Course::class></x-like.like>
+                    @endif
                 </div>
             </div>
             <div class="d-flex">

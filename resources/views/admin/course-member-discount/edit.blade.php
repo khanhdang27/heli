@@ -41,23 +41,29 @@
                             <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                    @if(!empty($price_tag->courseDiscounts))
+                        <div class="form-group">
+                            {{ Form::label('discount', 'Discount') }}
+                            {{ Form::number('discount', $price_tag->courseDiscounts->discount_value,
+                                ['class' => 'form-control']) }}
+                            @error('discount')
+                                <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    @endif
                     <div class="form-group">
                         {{ Form::label('price_value', 'Description') }}
                         {{ Form::number('price_value', $price_tag->membershipCourses->price_value,
-                            [
-                                'class' => 'form-control',
-                                'rows' => 3, 
-                            ]) }}
+                            ['class' => 'form-control',]) }}
                         @error('price_value')
-                        <div class="alert text-danger">{{ $message }}</div>
+                            <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    
+
                     {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                     {!! Form::close() !!}
                 </div>
             </div>
-            @dd($price_tag->courseDiscounts);
         </div>
     </div> <!-- / .row -->
 </div>
