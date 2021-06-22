@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\UserLike;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserLikeController extends Controller
 {
@@ -31,11 +32,23 @@ class UserLikeController extends Controller
             ['like_module','=',$input['like_module']],
         ])->first();
 //        $userLike->like_ref_type = 0;
-        $userLike->delete();
-        if ($input['like_module']==1)
-        $post = Post::find($input['like_ref_id']);
-        if ($post->like_no > 0)
-        $post->like_no = $post->like_no - 1;
-        $post->save();
+        DB::beginTransaction();
+
+        try {
+            $userLike->delete();
+            if ($input['like_module']==1) {
+                $post = Post::find($input['like_ref_id']);
+            }
+            if ($post->like_no > 0) {
+                $post->like_no = $post->like_no - 1;
+            }
+            $post->save();
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            // throw ;
+            DB::rollback();
+        }
+        
     }
 }

@@ -26,11 +26,11 @@ class Post extends Model
 
     public function userLike()
     {
-        return $this->hasMany(UserLike::class, 'like_ref_id');
+        return $this->morphOne(UserLike::class,'likeable');
     }
-
+    
     public function comment()
     {
-        return $this->hasMany(UserComment::class,'ref_id');
+        return $this->morphOne(UserComment::class,'commentable');
     }
 }

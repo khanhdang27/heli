@@ -1,5 +1,4 @@
-<?php
-
+@php
 use App\Models\Course;
 use App\Models\Post;
 use App\Models\UserLike;
@@ -22,15 +21,15 @@ foreach ($likeRef->userLike as $usLikePost) {
         break;
     }
 }
-?>
+@endphp
 
 <button id="like{{$likeRef->id}}" class="mr-5 border-0 bg-white text-primary" v-on:click="clicklike">
     <img class="ic-action"
          id="like_style{{$likeRef->id}}"
          src="{{ $like == 0 ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}}">
-    @if($likeModule==1 or $likeModule==3)
-        <span>{{$likeRef->like_no}}</span>
-    @endif
+        @if($likeModule== UserLike::$POST or $likeModule==UserLike::$COMMENT)
+            <span>{{$likeRef->like_no}}</span>
+        @endif
 </button>
 @push('likePost')
     <script>
