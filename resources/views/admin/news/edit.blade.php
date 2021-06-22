@@ -20,7 +20,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => ['admin.news.update', $news->id], 'method'=> 'put', 'enctype' => 'multipart/form-data']) !!}
+                            {!! Form::open(['route' => ['admin.news.update', $news->id], 'method'=> 'put']) !!}
                             <div class="form-group">
                                 {{ Form::label('date', 'Date') }}
                                 {{ Form::date('date', $news->date,['class' => 'form-control'] ) }}

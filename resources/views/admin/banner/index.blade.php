@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>
                                             <img
-                                                src="{{ Storage::url($value->banner_photo) }}"
+                                                src="{{ route('file.show', ['file'=> $value->image])}}"
                                                 width="50px;" height="60px;" alt="">
                                         </td>
                                         <td>
@@ -71,9 +71,9 @@
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                       data-url="{{ route('admin.banner.destroy', $value->id) }}"
-                                                       class="dropdown-item delete-item">
-                                                        Delete
+                                                        onclick="itemDelete('{{ route('admin.banner.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
                                                     </a>
                                                 </div>
                                             </div>

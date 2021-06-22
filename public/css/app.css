@@ -10940,6 +10940,11 @@ a.text-dark:focus {
   }
 }
 
+@font-face {
+  font-family: PingFangTC;
+  src: url("/helios/public/fonts/PingFang.ttc") format("truetype");
+}
+
 html {
   font-size: 14pt;
 }
@@ -11008,7 +11013,7 @@ form#certificate_form select {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 
-form#certificate_form option {
+form#certificate_form select option {
   padding: 0.2rem 1rem;
   font-size: 14pt;
   border: 2px var(--secondary) solid;
@@ -11017,7 +11022,7 @@ form#certificate_form option {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 
-form#certificate_form option:checked {
+form#certificate_form select option:checked {
   background: var(--primary) 0.5;
   color: var(--secondary);
 }

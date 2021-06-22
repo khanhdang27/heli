@@ -18,8 +18,8 @@ class CreateCommentsTable extends Migration
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->integer('ref_id'); // morphic Models
-            $table->integer('ref_module'); // post, course
+            $table->bigInteger('commentable_id');
+            $table->string('commentable_type');
             $table->bigInteger('file_id')->nullable()->default(null);
             $table->bigInteger('tag_user')->nullable()->default(null);
             $table->text('detail');

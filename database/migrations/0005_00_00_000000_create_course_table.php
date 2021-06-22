@@ -25,6 +25,7 @@ class CreateCourseTable extends Migration
             $table->integer('type');
             $table->longText('course_overview');
             $table->double('course_price');
+            $table->boolean('published')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

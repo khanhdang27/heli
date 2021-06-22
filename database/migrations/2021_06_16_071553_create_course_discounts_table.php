@@ -18,6 +18,7 @@ class CreateCourseDiscountsTable extends Migration
             $table->foreignId('course_id')->constrained('courses');
             $table->foreignId('discount_id')->constrained('discounts');
             $table->unique(['course_id', 'discount_id']);
+            $table->double('discount_value');
             $table->softDeletes();
             $table->timestamps();
         });

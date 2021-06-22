@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Astrotomic\Translatable\Translatable;
 
 class Discount extends Model
 {
-    use Translatable, SoftDeletes;
-    protected $table = 'discount';
+    use SoftDeletes;
+    protected $table = 'discounts';
     protected $guarded = [];
     protected $filterable = [];
 

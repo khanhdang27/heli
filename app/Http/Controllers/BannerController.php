@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Banner\CreateBannerRequest;
 use App\Models\Banner;
+use App\Models\File;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class BannerController extends Controller
 {
@@ -46,14 +48,26 @@ class BannerController extends Controller
         if (!empty($old_banner)){
             $old_banner->delete();
         }
-        $fileController = new FileController();
-        $file_id = $fileController->store($request);
-        $banner = Banner::create([
-            'banner_title' => $request->input('banner_title'),
-            'banner_background' => $file_id
-        ]);
-        $banner->save();
-        return back()->with('success', 'Save success');
+        $input = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            $banner = Banner::create([
+                'banner_title' => $request->input('banner_title'),
+            ]);
+
+            if(!empty($input['file'])){
+                $file = File::storeFile($input['file'],Banner::class, $banner->id);
+            }
+
+            DB::commit();
+            return back()->with('success', 'Save success');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', 'Save error');
+        }
     }
 
     /**

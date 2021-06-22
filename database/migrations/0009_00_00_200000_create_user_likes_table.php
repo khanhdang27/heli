@@ -15,15 +15,12 @@ class CreateUserLikesTable extends Migration
     {
         Schema::create('user_likes', function (Blueprint $table) {
             $table->id();
-//            $table->foreignId('post_id')
-//                ->constrained('posts')
-//                ->cascadeOnDelete();
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->integer('like_ref_id'); // morphic Models
-            $table->integer('like_module'); // comment, post, course
-            $table->integer('like_ref_type')->default(1);
+            $table->integer('like_style')->default(1);
+            $table->integer('likeable_id'); // morphic Models
+            $table->integer('likeable_type'); // comment, post, course
             $table->timestamps();
             $table->softDeletes();
         });
