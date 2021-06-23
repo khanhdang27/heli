@@ -40,7 +40,7 @@
                     <div class="d-flex flex-wrap">
                         <div class="pr-3">
                             <a class="product-hover" href="{{URL::route('site.course.index')}}">
-                                <x-product.course-list :courseItem=$courses>
+                                <x-product.course-list :courses=$courses>
                                 </x-product.course-list>
                             </a>
                         </div>

@@ -28,7 +28,7 @@
             <!-- #endregion -->
         @endif
     </div>
-    @if (empty($courses[0]))
+    @if (empty($courses_with_group))
         <div class="d-flex justify-content-center">
             <h3>
                 No Data Of Course
@@ -42,14 +42,14 @@
                     <h1 class="text-primary">
                         @lang('keywords.latestDiscountProduct')
                     </h1>
-                    <x-product.course-list :courseItem=$courses>
+                    <x-product.course-list :courses=$courses_with_group>
                     </x-product.course-list>
                 </div>
                 <div class="col-lg-6 col-12 welcome-offer">
                     <h1 class="text-primary">
                         @lang('keywords.welcomeOffer')
                     </h1>
-                    <x-product.course-list :courseItem=$courses>
+                    <x-product.course-list :courses=$courses_with_group>
                     </x-product.course-list>
                 </div>
             </div>
@@ -59,11 +59,11 @@
                 <h1 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
                 </h1>
-                <x-product.course-list :courseItem=$courses></x-product.course-list>
+                <x-product.course-list :courses=$courses_with_group></x-product.course-list>
             </div>
         @endif
         <div class="product-tab">
-            <x-home.product-tab :courseItem=$courses></x-home.product-tab>
+            <x-home.product-tab :courses=$courses_with_group></x-home.product-tab>
         </div>
         @if(Auth::user()==null)
             <x-home.step-register></x-home.step-register>

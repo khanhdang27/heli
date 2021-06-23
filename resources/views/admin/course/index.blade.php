@@ -100,6 +100,11 @@
                                                     
                                                     <a href="{{ route('admin.price-tag.index') }}"
                                                         class="dropdown-item">
+                                                            Manage Lecture
+                                                    </a>
+
+                                                    <a href="{{ route('admin.price-tag.index') }}"
+                                                        class="dropdown-item">
                                                             Publish
                                                     </a>
 

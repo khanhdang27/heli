@@ -33,20 +33,23 @@ class HomeController extends Controller
     {
         $banners = Banner::query()->first();
 
-        // DB::enableQueryLog();
-        $value = 1;
-        $_courses = CourseMembershipDiscount::with(['membershipCourses.membership'=> function ($query) use ($value){
-            $query->where('id', $value);
-         }])->get();
+        $courses_with_group = CourseMembershipDiscount::with(
+            'membershipCourses', 
+            'courseDiscounts', 
+            'membershipCourses.course',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        )
+        ->whereHas('membershipCourses', function ($query) {
+            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+         })->get();
 
-        dd($_courses);
-        $courses = Course::with('subject','tutor','courseMaterial')
-            ->get();
         $courseVideo = Course::with('tutor')->first();
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
         return view('home.home-page',[
             'banners' => $banners,
-            'courses' => $courses,
+            'courses_with_group' => $courses_with_group,
             'courseVideo'=>$courseVideo,
             'news' => $news,
         ]);

@@ -6,15 +6,15 @@ use Illuminate\View\Component;
 
 class ProductTab extends Component
 {
-    public $courseItem;
+    public $courses;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($courseItem)
+    public function __construct($courses)
     {
-        $this->courseItem=$courseItem;
+        $this->courses=$courses;
     }
 
     /**
@@ -25,7 +25,7 @@ class ProductTab extends Component
     public function render()
     {
         return view('components.home.product-tab',[
-            'courseItem'=>$this->courseItem
+            'courses'=>$this->courses
         ]);
     }
 }

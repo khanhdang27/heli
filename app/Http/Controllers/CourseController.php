@@ -115,8 +115,21 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        $courseDetail = Course::with('subject','tutor','courseMaterial')
-            ->find($course->id);
+
+        $courses_with_group = CourseMembershipDiscount::with(
+            'membershipCourses', 
+            'courseDiscounts', 
+            'membershipCourses.course',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        )
+        ->whereHas('membershipCourses', function ($query) {
+            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+         })->whereHas('membershipCourses.course', function ($query) use ($course){
+            return $query->where('id', $course->id);
+         })->first();
+
         $student_course  = null;
         if (Auth::check()){
             $student_course = StudentCourses::where([
@@ -124,7 +137,7 @@ class CourseController extends Controller
             ])->first();
         }
         return view('course.course-page',[
-            'courseDetail' => $courseDetail,
+            'courseDetail' => $courses_with_group,
             'student_course' => $student_course,
         ]);
     }

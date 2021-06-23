@@ -52,16 +52,16 @@
     </h1>
     <div class="tab-content">
         <div id="home" class="container-fluid tab-pane active">
-            <x-product.course-list :courseItem=$courseItem></x-product.course-list>
+            <x-product.course-list :courses=$courses></x-product.course-list>
         </div>
         <div id="menu1" class="container-fluid tab-pane fade">
-            <x-product.course-list :courseItem=$courseItem></x-product.course-list>
+            <x-product.course-list :courses=$courses></x-product.course-list>
         </div>
         <div id="menu2" class="container-fluid tab-pane fade">
-            <x-product.course-list :courseItem=$courseItem></x-product.course-list>
+            <x-product.course-list :courses=$courses></x-product.course-list>
         </div>
         <div id="menu3" class="container-fluid tab-pane fade">
-            <x-product.course-list :courseItem=$courseItem></x-product.course-list>
+            <x-product.course-list :courses=$courses></x-product.course-list>
         </div>
     </div>
 </div>

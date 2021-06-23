@@ -154,10 +154,9 @@ class DiscountController extends Controller
                     'discount_id' => $id,
                     'discount_value' => $input['discount_'.$value]
                 ]);
-
-                $priceTags = CourseMembershipDiscount::with(['membershipCourses'=> function ($query) use ($value){
+                $priceTags = CourseMembershipDiscount::with('membershipCourses')->whereHas('membershipCourses', function ($query) use ($value){
                        return $query->where('course_id', $value);
-                    }])->get();
+                    })->get();
 
                 foreach ($priceTags as $priceTag) {
                     $priceTag->course_discount_id = $courseDiscourse->id;
@@ -169,7 +168,7 @@ class DiscountController extends Controller
             DB::commit();
             return back()->with(['success'=> "Update Succeed"]);
         } catch (\Throwable $th) {
-            dd($th);
+            
             DB::rollback();
             return back()->with(['errors'=> "Update Error"]);
         }
