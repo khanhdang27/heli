@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Lecture;
+use App\Models\Lecture;
 use Illuminate\Http\Request;
 
 class LectureController extends Controller
@@ -41,7 +41,7 @@ class LectureController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Lecture  $lecture
+     * @param  \App\Models\Lecture  $lecture
      * @return \Illuminate\Http\Response
      */
     public function show(Lecture $lecture)
@@ -52,7 +52,7 @@ class LectureController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Lecture  $lecture
+     * @param  \App\Models\Lecture  $lecture
      * @return \Illuminate\Http\Response
      */
     public function edit(Lecture $lecture)
@@ -64,7 +64,7 @@ class LectureController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Lecture  $lecture
+     * @param  \App\Models\Lecture  $lecture
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Lecture $lecture)
@@ -75,7 +75,7 @@ class LectureController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Lecture  $lecture
+     * @param  \App\Models\Lecture  $lecture
      * @return \Illuminate\Http\Response
      */
     public function destroy(Lecture $lecture)
