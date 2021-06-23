@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CreateCourseRequest;
-use App\Http\Requests\Course\CreateVideoRequest;
-use App\Http\Requests\Course\UpdateVideoRequest;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\Lecture;
@@ -13,10 +11,9 @@ use App\Models\Membership;
 use App\Models\MembershipCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
-use App\Models\UserLike;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -195,17 +192,23 @@ class CourseController extends Controller
 
     public function lectures(Course $course)
     {
-        # code...
+        $_course = Course::find($course->id)->with('lectures')->first();
+        return view('admin.course.lecture.index', [
+            'course' => $_course
+        ]);
     }
 
     public function createLecture(Course $course)
     {
-        # code...
+        return view('admin.course.lecture.create', [
+            'course' => $course
+        ]);
     }
 
-    public function storeLecture(Course $course)
+    public function storeLecture(Request $request ,Course $course)
     {
-        # code...
+        $input = $request->input();
+        dd($input);
     }
 
     public function editLecture(Course $course, Lecture $lecture)

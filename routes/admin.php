@@ -20,7 +20,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('tutor', 'TutorController');
 
     Route::get('course/{course}/lecture', 'CourseController@lectures')->name('course.lecture.list'); 
-    Route::get('course/{course}/lecture', 'CourseController@createLecture')->name('course.lecture.create'); 
+    Route::get('course/{course}/lecture/create', 'CourseController@createLecture')->name('course.lecture.create'); 
     Route::post('course/{course}/lecture', 'CourseController@storeLecture')->name('course.lecture.store'); 
     Route::get('course/{course}/lecture/{lecture}', 'CourseController@editLecture')->name('course.lecture.edit'); 
     Route::put('course/{course}/lecture/{lecture}', 'CourseController@updateLecture')->name('course.lecture.update'); 

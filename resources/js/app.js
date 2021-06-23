@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('./vimeo-upload');
 
 window.Vue = require('vue');
 

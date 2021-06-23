@@ -98,7 +98,7 @@
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     
-                                                    <a href="{{ route('admin.price-tag.index') }}"
+                                                    <a href="{{ route('admin.course.lecture.list', $value->id) }}"
                                                         class="dropdown-item">
                                                             Manage Lecture
                                                     </a>
