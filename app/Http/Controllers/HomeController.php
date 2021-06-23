@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
-use App\Models\MembershipCourse;
 use App\Models\News;
-use App\Models\UserLike;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -34,7 +30,7 @@ class HomeController extends Controller
         $banners = Banner::query()->first();
 
         $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses', 
+            'membershipCourses',
             'courseDiscounts', 
             'membershipCourses.course',
             'membershipCourses.course.subject',
@@ -44,7 +40,7 @@ class HomeController extends Controller
         ->whereHas('membershipCourses', function ($query) {
             return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
          })->get();
-
+         
         $courseVideo = Course::with('tutor')->first();
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
         return view('home.home-page',[

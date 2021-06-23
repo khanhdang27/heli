@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-xl-4">
                     @if (empty($student_course))
-                    <x-product-detail.buy-course :courseDetail=$course>
+                    <x-product-detail.buy-course :courseDetail=$courseDetail>
                     </x-product-detail.buy-course>
                     @endif
                 </div>

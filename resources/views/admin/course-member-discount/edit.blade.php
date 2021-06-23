@@ -27,15 +27,15 @@
                     <div class="form-group">
                         {{ Form::label('recommend', 'Recommend') }}
                         <br>
-                        {{ Form::radio('recommend', 'true', $price_tag->recommended == 1, ['id'=>'recommend_yes']) }} <label for="recommend_yes">yes</label>
+                        {{ Form::radio('recommend', true, $price_tag->recommended == 1, ['id'=>'recommend_yes']) }} <label for="recommend_yes">yes</label>
                         <br>
-                        {{ Form::radio('recommend', 'false', $price_tag->recommended == 0,['id'=>'recommend_no']) }} <label for="recommend_no">no</label>
+                        {{ Form::radio('recommend', false, $price_tag->recommended == 0,['id'=>'recommend_no']) }} <label for="recommend_no">no</label>
                         @error('recommend')
                             <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        {{ Form::label('description', 'Date Start') }}
+                        {{ Form::label('description', 'Description') }}
                         {{ Form::textarea('description', $price_tag->description, ['class' => 'form-control', 'rows'=>3] ) }}
                         @error('description')
                             <div class="alert text-danger">{{ $message }}</div>

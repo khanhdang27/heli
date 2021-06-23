@@ -47,7 +47,7 @@ class PostController extends Controller
     {
         if (empty($request->tag_id))
         {
-            return back()->with('error','Tag not found');
+            return back()->with('errors','Tag not found');
         }
         $input = $request->all();
 
@@ -69,7 +69,7 @@ class PostController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();;
-            return back()->with('error', 'Save error');
+            return back()->with('errors', 'Save error');
         }
     }
 

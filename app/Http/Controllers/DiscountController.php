@@ -58,7 +58,7 @@ class DiscountController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('error','Save Error');
+            return redirect()->back()->with('errors','Save Error');
         }
     }
 

@@ -69,7 +69,7 @@ class NewsController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Create error');
+            return back()->with('errors', 'Create error');
             //throw $th;
         }
 

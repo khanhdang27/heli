@@ -1,11 +1,15 @@
+@php
+    $course = $courseDetail->membershipCourses->course;
+@endphp
+
 <div class="bg-white border border-secondary p-4 text-primary">
     <div class="mb-3 title-course">
-        <p class="m-0">Course Name {{$courseDetail->course_name}}</p>
+        <p class="m-0">Course Name {{$course->course_name}}</p>
     </div>
-    <p class="m-0 teacher-name">Tutor Name: {{$courseDetail->tutor->full_name}}</p>
-    <h2 class="font-weight-bold">HKD: {{$courseDetail->course_price}}$</h2>
+    <p class="m-0 teacher-name">Tutor Name: {{$course->tutor->full_name}}</p>
+    <h2 class="font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>
     @if(\Illuminate\Support\Facades\Auth::check())
-        <a href="{{route('site.order.create', ['course_id'=>$courseDetail->id])}}">
+        <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
             <div class="btn-primary mt-3 btn-register-now product-btn">
                 @lang('keywords.coursePage.buyNow')
             </div>

@@ -1,5 +1,5 @@
 @php
-    $course_card = $course->membershipCourses->course->first();
+    $course_card = $course->membershipCourses->course;
 @endphp
 
 <div class="pr-3">
@@ -47,7 +47,9 @@
             </div>
             <div class="d-flex">
                 <a class="product-hover ml-auto" href="{{URL::route('site.course.show',$course_card->id)}}">
+                    @if($course->getDiscount() > 0)
                     <h5> <del class="text-gray">HK$ {{$course->getPrice()}} / @lang('keywords.course-item.section')</del> </h5>
+                    @endif
                     <h4 class="font-weight-bold">
                         HK$ {{$course->getPriceDiscount()}} / @lang('keywords.course-item.section') >
                     </h4>

@@ -42,15 +42,13 @@
                     <h1 class="text-primary">
                         @lang('keywords.latestDiscountProduct')
                     </h1>
-                    <x-product.course-list :courses=$courses_with_group>
-                    </x-product.course-list>
+                    <x-product.course-list :courses=$courses_with_group></x-product.course-list>
                 </div>
                 <div class="col-lg-6 col-12 welcome-offer">
                     <h1 class="text-primary">
                         @lang('keywords.welcomeOffer')
                     </h1>
-                    <x-product.course-list :courses=$courses_with_group>
-                    </x-product.course-list>
+                    <x-product.course-list :courses=$courses_with_group></x-product.course-list>
                 </div>
             </div>
         </div>

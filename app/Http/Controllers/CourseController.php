@@ -46,8 +46,12 @@ class CourseController extends Controller
 
     public function my()
     {
-        $courses = Course::with('tutor', 'translations', 'student')
-            ->whereHas('student', function (Builder $query) {
+        $courses = CourseMembershipDiscount::with(
+            'membershipCourses',  
+            'membershipCourses.course',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.student'
+        )->whereHas('membershipCourses.course.student', function (Builder $query) {
                 $query->where('student_id', Auth::user()->id);
             })->get();
 
@@ -99,7 +103,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Create Error!');
+            return back()->with('errors', 'Create Error!');
 
         }
     }

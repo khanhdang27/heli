@@ -37,7 +37,7 @@ class CourseMembershipDiscount extends Model
 
     public function getDiscount()
     {
-        if ($this->courseDiscounts()) {
+        if ($this->courseDiscounts) {
 
             return $this->courseDiscounts->discount_value;
         }

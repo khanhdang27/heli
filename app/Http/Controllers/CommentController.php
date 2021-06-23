@@ -74,7 +74,7 @@ class CommentController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             dd($th);
-            return back()->with('error', 'Save error');
+            return back()->with('errors', 'Save error');
         }
     }
 
