@@ -51,9 +51,7 @@ class OrderController extends Controller
                 'membershipCourses.course.subject',
                 'membershipCourses.course.tutor',
                 'membershipCourses.course.courseMaterial'
-            )->whereHas('membershipCourses', function ($query) {
-                return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
-             })->get();
+            )->where('id', $course_id)->first();
 
             $student_bought = StudentCourses::query()->where([
                 'course_id' => $courses_with_group->membershipCourses->course_id,
@@ -70,6 +68,9 @@ class OrderController extends Controller
                         'course_price'=> $courses_with_group->getPrice(),
                         'discount'=> $courses_with_group->getDiscount(), //$course_detail->discount,
                         'total'=> $courses_with_group->getPriceDiscount(),
+                        'membership' => $courses_with_group->courseDiscounts->course_id,
+                        'membership_discount' => $courses_with_group->membershipCourses->price_value,
+                        'discount_info' => $courses_with_group->courseDiscounts->discount_id
                     ]);
                     $result = $order->createPaymentIntent($paymentMethods[0]);
     
@@ -85,19 +86,21 @@ class OrderController extends Controller
                         }
                         DB::commit();
 
-                        return view('order.order-detail', ['order' => $result]);
+                        return redirect(route('order.order.show', $result->id));
+                        // view('order.order-detail', ['order' => $result]);
                     }
                 } catch (\Throwable $th) {
                     DB::rollback();
+                    dd($th);
                     return redirect(route('site.home'))->with('errors', 'Buy Fails');
                 }
                 
             } else {
-                $order = Order::with('course')->where('course_id',$course_id)->first();
-                return view('order.order-detail', ['order' => $order]);
+                $order = Order::with('course')->where('course_id',$course_id)
+                    ->where('user_id',Auth::user()->id)->first();
+                 return redirect(route('order.order.show', $order->id));
+                // return view('order.order-detail', ['order' => $order]);
             }
-            
-            
         }
     }
 
@@ -120,7 +123,10 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        
+        $order = Order::with('course')
+            ->find($id);
+        // dd($order);
+        return view('order.order-detail', ['order' => $order]);
     }
 
     /**

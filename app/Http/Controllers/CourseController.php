@@ -121,6 +121,8 @@ class CourseController extends Controller
             'membershipCourses', 
             'courseDiscounts', 
             'membershipCourses.course',
+            'membershipCourses.course.lecture',
+            'membershipCourses.course.comment',
             'membershipCourses.course.subject',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
@@ -209,10 +211,27 @@ class CourseController extends Controller
         ]);
     }
 
-    public function storeLecture(Request $request ,Course $course)
+    public function storeLecture(Request $request, Course $course)
     {
         $input = $request->input();
-        dd($input);
+        DB::beginTransaction();
+
+        try {
+            $lecture = Lecture::create([
+                'course_id' => $course->id,
+                'lectures_name' => $input['lectures_name'],
+                'lectures_description' => $input['lectures_description'],
+                'video_resource' => $input['video_resource'],
+                'is_live' => $input['is_live'],
+                'course_schedule_id' => 0//$input['course_schedule_id']
+            ]);
+
+            DB::commit();
+            return response()->json(['status' => 200, 'message' => 'succeed']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['status' => 400, 'message' => 'fails'], 400);
+        }
     }
 
     public function editLecture(Course $course, Lecture $lecture)

@@ -48,16 +48,13 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div id="home" class="container-fluid pt-5 mb-5  tab-pane active">
-                            <x-product-detail.course-overview :courseDetail=$course>
-
-                            </x-product-detail.course-overview>
+                            <x-product-detail.course-overview :courseDetail=$course></x-product-detail.course-overview>
                         </div>
                         <div id="menu1" class="container-fluid pb-5 tab-pane fade">
                             <x-product-detail.online-class/>
                         </div>
                         <div id="menu2" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
-                                <x-product-detail.course-tutor :courseDetail=$course>
-                                </x-product-detail.course-tutor>
+                            <x-product-detail.course-tutor :courseDetail=$course></x-product-detail.course-tutor>
                         </div>
                         <div id="menu3" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
                             <x-product-detail.course-rate :courseDetail=$course></x-product-detail.course-rate>
@@ -66,8 +63,7 @@
                 </div>
                 <div class="col-xl-4">
                     @if (empty($student_course))
-                    <x-product-detail.buy-course :courseDetail=$courseDetail>
-                    </x-product-detail.buy-course>
+                    <x-product-detail.buy-course :courseDetail=$courseDetail></x-product-detail.buy-course>
                     @endif
                 </div>
             </div>

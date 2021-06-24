@@ -4,17 +4,17 @@ namespace App\View\Components\ProductDetail;
 
 use Illuminate\View\Component;
 
-class LectureCourse extends Component
+class CourseComment extends Component
 {
-    public $videoId;
+    public $comment;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($videoId)
+    public function __construct( $comment)
     {
-        $this->videoId = $videoId;
+        $this->comment = $comment;
     }
 
     /**
@@ -24,9 +24,8 @@ class LectureCourse extends Component
      */
     public function render()
     {
-
-        return view('components.product-detail.lecture-course', [
-            'videoId'=> $this->videoId
+        return view('components.product-detail.course-comment', [
+            'comment' => $this->comment
         ]);
     }
 }

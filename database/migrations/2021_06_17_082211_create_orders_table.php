@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
                 ->constrained('courses')
                 ->cascadeOnDelete();
             $table->bigInteger('membership'); // membership_level
-            $table->double('membership_discourse'); // membership_discount_value
+            $table->double('membership_discount'); // membership_discount_value
             $table->bigInteger('discount_info'); // discount_detail
             $table->double('course_price'); // course raw
             $table->double('course_discount'); // percent when course apply discount

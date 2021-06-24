@@ -26,6 +26,9 @@ class CreateCourseTable extends Migration
             $table->longText('course_overview');
             $table->double('course_price');
             $table->boolean('published')->default(false);
+            $table->bigInteger('comment_no')->default(0);
+            $table->bigInteger('rating_no')->default(0);
+            $table->bigInteger('rating_average')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

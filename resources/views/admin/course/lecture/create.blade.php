@@ -1,8 +1,8 @@
 @php
 
-    use App\Utilities\SelectionByClass;
-    use App\Models\Tutor;
-    use App\Models\Subject;
+use App\Utilities\SelectionByClass;
+use App\Models\Tutor;
+use App\Models\Subject;
 
 @endphp
 
@@ -54,9 +54,7 @@
                                 </div>
                             </div>
                         </div>
-                        
                         {!! Form::close() !!}
-
                     </div>
                 </div>
 
@@ -66,7 +64,6 @@
 
 
     <script type="text/javascript">
-
         /**
          * Called when files are dropped on to the drop target or selected by the browse button.
          * For each file, uploads the content to Drive & displays the results when complete.
@@ -117,12 +114,10 @@
 
                             /* add stringify the json object for displaying in a text area */
                             var pretty = JSON.stringify(this.metadata[index], null, 2)
-
-                            // console.log(pretty) /* echo server data */
     
                             axios.post("{{ route('admin.course.lecture.store', $course->id)}}", {
-                                    lectures_name: index.name,
-                                    lectures_description: index.description,
+                                    lectures_name: this.metadata[index].name,
+                                    lectures_description: this.metadata[index].description,
                                     video_resource: videoId,
                                     is_live: false
                                 }).then(function (response) {
@@ -133,12 +128,10 @@
                                     console.error(error);
                                 });
                         }
-
                         showMessage('<strong>Upload Successful</strong>: check uploaded video @ <a href="' + url + '">' + url + '</a>. Open the Console for the response details.')
                     }
                 })).upload()
             }
-
 
             // /* local function: show a user message */
             function showMessage(html, type) {

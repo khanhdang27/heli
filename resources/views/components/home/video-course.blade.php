@@ -1,24 +1,12 @@
 <?php
-$list_video = [
-    '課程簡介',
-    '第一部分：閱讀文章技巧一',
-    '第一部分：閱讀文章技巧二',
-    '第一部分：閱讀文章技巧三',
-    '第一部分：閱讀文章技巧四',
-    '第一部分：閱讀文章技巧五',
-    '第一部分：閱讀文章技巧六',
-    '第一部分：閱讀文章技巧七',
-    '第一部分：閱讀文章技巧八',
-    '第一部分：閱讀文章技巧九',
-    '第一部分：閱讀文章技巧十',
-    '第一部分：閱讀文章技巧十一',
-    '第一部分：閱讀文章技巧十二',
-];
+$list_lecture = $courseDetail->lecture
 
 ?>
-<div class="container-fluid show-video">
-    <div class="mb-3 title-course">
-        <p class="m-0">{{$courseDetail->course_description}}</p>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<div class="container-fluid show-video" id="video-lecture">
+    <div class="mb-3 ">
+        <h1 class="m-0">{{$courseDetail->course_description}}</h1>
     </div>
     <p class="teacher-name text-primary">{{$courseDetail->tutor->full_name}}</p>
     <div class="d-flex top-course-detail justify-content-between mb-5">
@@ -35,16 +23,30 @@ $list_video = [
     </div>
     <div class="row">
         <div class="col-sm-8">
-            <x-product-detail.lecture-course></x-product-detail.lecture-course>
+            <x-product-detail.lecture-course :videoId='566506789' ></x-product-detail.lecture-course>
         </div>
         <div class="col-sm-4">
             <div class="box-list-video text-primary">
                 <ol>
-                    @foreach($list_video as $item)
-                        <li>{{$item}}</li>
+                    @foreach($list_lecture as $item)
+                        <li v-on:click="clickLecture" data-id="{{$item->video_resource}}">{{$item->lectures_name}}</li>
                     @endforeach
                 </ol>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    var videoLecture = new Vue({
+        el: "#video-lecture",
+        data: {
+            videoId: '',
+        },
+        methods: {
+            clickLecture: function () {
+                console.log(event.target.data)
+            }
+        }
+    });
+</script>

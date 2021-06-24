@@ -92,12 +92,6 @@ form#certificate_form {
     padding: 2.54rem 0;
 }
 
-.title-course {
-    color: var(--primary);
-    font-size: 22pt;
-    font-weight: 600;
-}
-
 .teacher-name {
     color: var(--primary);
     font-size: 18.5pt;
@@ -210,12 +204,8 @@ form#certificate_form {
     outline: none;
 }
 
-.text-comment {
-    font-size: 18.7pt;
-    color: var(--primary);
-}
-
-.text-forum {
-    font-size: 21pt;
-    color: var(--primary);
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -33,9 +33,12 @@ class Order extends Model
         $_order = new Order();
         $_order->user_id =  $data['user_id'];
         $_order->course_id = $data['course_id'];
-        $_order->price =  $data['course_price'];
-        $_order->discount =  $data['discount'];
-        $_order->total =  $data['total'];
+        $_order->course_price =  $data['course_price'];
+        $_order->course_discount =  $data['discount'];
+        $_order->final_price =  $data['total'];
+        $_order->membership = $data['membership']; 
+        $_order->membership_discount = $data['membership_discount']; 
+        $_order->discount_info = $data['discount_info'];
         return $_order;
     }
 
@@ -45,7 +48,7 @@ class Order extends Model
         );
 
         $payment_intent = $stripe->paymentIntents->create([
-            'amount' => $this->price * 100,
+            'amount' => $this->course_price * 100,
             'currency' => 'hkd',
             'payment_method' => $payment->id,
             'confirm' => true,
@@ -53,8 +56,8 @@ class Order extends Model
             'metadata' => [
                 'course_id'=> $this->course_id,
                 'user_id' => $this->user_id,
-                'price' => $this->price,
-                'discount' => 0,//$this->discount,
+                'price' => $this->course_price,
+                'discount' => $this->course_discount,//$this->discount,
             ],
             'return_url' => config('app.home_url'). '/payment'
         ]);
@@ -76,7 +79,7 @@ class Order extends Model
                 break;
         }
         $this->payment_id = $intent->id;
-        $this->total = $this->price *(1 - $this->discount);
+        $this->final_price = $this->course_price *(1 - $this->course_discount/100);
 
         $this->save();
         return $this->fresh();

@@ -32,15 +32,12 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-
                                 <!-- Title -->
                                 <h4 class="card-header-title">
                                     Courses
                                 </h4>
-
                             </div>
                             <div class="col-auto">
-
                                 <!-- Button -->
                                 <a href="{{ route('admin.course.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
@@ -52,7 +49,6 @@
                                     </svg>
                                     Add
                                 </a>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>
@@ -97,17 +93,14 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    
                                                     <a href="{{ route('admin.course.lecture.list', $value->id) }}"
                                                         class="dropdown-item">
                                                             Manage Lecture
                                                     </a>
-
                                                     <a href="{{ route('admin.price-tag.index') }}"
                                                         class="dropdown-item">
                                                             Publish
                                                     </a>
-
                                                     <a href="{{ route('admin.course.edit', $value->id) }}"
                                                         class="dropdown-item">
                                                             Edit
@@ -117,11 +110,9 @@
                                                         class="dropdown-item delete-item">
                                                             Delete
                                                     </a>
-                                                    
                                                 </div>
                                             </div>
                                         </td>
-
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -132,7 +123,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div> <!-- / .row -->
     </div>
