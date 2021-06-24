@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\CourseMembershipDiscount;
+use App\Models\Membership;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class CourseMembershipDiscountController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -25,11 +27,11 @@ class CourseMembershipDiscountController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function create()
     {
-        //
+        return view('admin.course-member-discount.create');
     }
 
     /**
