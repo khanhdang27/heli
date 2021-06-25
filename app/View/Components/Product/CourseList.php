@@ -7,14 +7,18 @@ use Illuminate\View\Component;
 class CourseList extends Component
 {
     public $courses;
+    public $typeOfUI;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($courses)
+    public function __construct($courses, $typeOfUI)
     {
         $this->courses=$courses;
+        $this->typeOfUI=$typeOfUI;
+
     }
 
     /**
@@ -25,7 +29,8 @@ class CourseList extends Component
     public function render()
     {
         return view('components.product.course-list',[
-            'courses'=>$this->courses
+            'courses'=>$this->courses,
+            'typeOfUI' => $this->typeOfUI
         ]);
     }
 }

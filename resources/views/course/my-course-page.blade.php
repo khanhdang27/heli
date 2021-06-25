@@ -14,13 +14,13 @@
                     <h1 class="text-primary" id="tab-title">
                         我已購買的課程
                     </h1>
-                    <x-product.course-list :courses=$courses></x-product.course-list>
+                    <x-product.course-list :courses=$courses typeOfUI="normal"></x-product.course-list>
                 </div>
                 <div class="container-fluid">
                     <h1 class="text-primary" id="tab-title">
                         我已購買的課程
                     </h1>
-                    <x-product.course-list :courses=$courses></x-product.course-list>
+                    <x-product.course-list :courses=$courses typeOfUI="normal"></x-product.course-list>
                    
                 </div>
             </div>

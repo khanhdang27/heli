@@ -8,6 +8,8 @@ use App\Models\Subject;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\Certificate\CreateCertificateRequest;
 use App\Models\Course;
+use App\Models\CourseMembershipDiscount;
+use Illuminate\Support\Facades\Auth;
 
 class CertificateController extends Controller
 {
@@ -60,12 +62,24 @@ class CertificateController extends Controller
     {
         $subject = Subject::with('certificate')->get();
 
+        $courses_with_group = CourseMembershipDiscount::with(
+            'membershipCourses',
+            'courseDiscounts', 
+            'membershipCourses.course',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        )
+        ->whereHas('membershipCourses', function ($query) {
+            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+         })->get();
+
         $courses = Course::with('subject','tutor', 'certificate')->get();
 
         return view('certificate.index', [
             'certificate'=> $certificate,
             'subject' => $subject,
-            'courses' => $courses,
+            'courses' => $courses_with_group,
         ]);
     }
 
@@ -108,6 +122,6 @@ class CertificateController extends Controller
     public function destroy(Certificate $certificate)
     {
         $as = $certificate->delete();
-        dd($as);
+        // dd($as);
     }
 }

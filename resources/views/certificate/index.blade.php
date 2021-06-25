@@ -12,7 +12,7 @@
             <div class="title-subject text-primary text-center">
                 {{$certificate->certificate_name}}
             </div>
-            <div class="container-fluid sort text-primary mb-4 d-flex">
+            <div class="container-fluid text-primary mb-4 d-flex">
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form>
                     <label class="radio-inline mr-5">
@@ -32,18 +32,15 @@
                     </label>
                 </form>
             </div>
-            <div class="container-fluid p-0">
-                <div class="container-fluid">
-                    <h1 class="text-primary" id="tab-title">
-                        英文
-                    </h1>
-                    <div class="d-flex flex-wrap">
-                        <div class="pr-3">
-                            <a class="product-hover" href="{{URL::route('site.course.index')}}">
-                                <x-product.course-list :courses=$courses>
-                                </x-product.course-list>
-                            </a>
-                        </div>
+            <div class="container-fluid">
+                <h1 class="text-primary" id="tab-title">
+                    英文
+                </h1>
+                <div class="d-flex flex-wrap">
+                    <div class="pr-3">
+                        <a class="product-hover" href="{{URL::route('site.course.index')}}">
+                            <x-product.course-list :courses=$courses typeOfUI="certificate_filter"></x-product.course-list>
+                        </a>
                     </div>
                 </div>
             </div>

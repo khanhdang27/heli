@@ -1,6 +1,6 @@
 @font-face {
     font-family: PingFangTC;
-    src: url('/helios/public/fonts/PingFang.ttc') format('truetype');
+    src: url('/Helios_v2/public/fonts/PingFang.ttc') format('truetype');
 }
 
 html {
@@ -40,7 +40,7 @@ html {
 .footer {
     color: var(--secondary);
     line-height: 1.45;
-    padding: 4.48rem 0;
+    padding: 4.48rem 10rem;
     .title-foot {
         margin-bottom: 0;
     }
@@ -54,6 +54,12 @@ html {
     a:hover {
         text-decoration: none;
         color: var(--white);
+    }
+}
+
+@media (max-width: 991px) {
+    .footer {
+        padding: 4.48rem 0;
     }
 }
 
@@ -90,6 +96,12 @@ form#certificate_form {
     color: var(--secondary);
     font-weight: 600;
     padding: 2.54rem 0;
+}
+
+.title-course {
+    color: var(--primary);
+    font-size: 22pt;
+    font-weight: 600;
 }
 
 .teacher-name {
@@ -204,8 +216,266 @@ form#certificate_form {
     outline: none;
 }
 
-.text-overflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.text-comment {
+    font-size: 18.7pt;
+    color: var(--primary);
+}
+
+.text-forum {
+    font-size: 21pt;
+    color: var(--primary);
+}
+
+.btn-register-now {
+    font-size: 30pt;
+    color: #fff;
+    border-radius: 50px;
+    margin-top: 5rem;
+    text-align: center;
+    padding: 0.5rem 3rem;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-register-now:focus {
+    outline: none;
+}
+
+
+/*GUEST PRAISE-----------------------------------------*/
+
+.title-card {
+    font-weight: 600;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 12rem;
+}
+
+.praise-box {
+    margin-bottom: 12rem;
+    .praise {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .avatar-guest {
+        border-radius: 200px;
+        width: 251px;
+        top: -125px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+    .avatar {
+        border-radius: 200px;
+    }
+    .content-praise {
+        font-size: 16pt;
+        padding: 10rem 1.3rem 3rem 1.3rem;
+        position: unset;
+        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+    }
+    .content-praise p {
+        margin-bottom: 3rem;
+    }
+}
+
+//PRODUCT BOX COMPONENT
+.product-box {
+    width: 100%;
+    margin-top: 2.8rem;
+    .title-product {
+        width: 25%;
+        padding: 0.6rem 0;
+        text-align: center;
+    }
+    .content-top {
+        text-align: center;
+    }
+    .content-product {
+        height: 323px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-left: 0;
+        .color-bar {
+            width: 15px;
+            height: 258px;
+            background-image: linear-gradient(to right, #E6C06C, #FBB03B);
+            margin: auto;
+        }
+        .body-product-content {
+            height: 258px;
+            padding: 1.76rem;
+            font-size: 15.7pt;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            .content-bot {
+                border: 1px solid;
+                padding: 2rem 1.5rem;
+                text-align: center;
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            @media (max-width: 1200px) {}
+        }
+    }
+    .bottom-product2 {
+        height: 220px;
+        align-items: center;
+        justify-content: flex-end;
+        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+        .card-name-product {
+            min-height: 125px;
+            font-size: 16pt;
+            .text-multiline-truncate {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                height: 110px;
+            }
+        }
+    }
+}
+
+
+/*TAB PRODUCT-----------------------------------------*/
+
+.product-tab {
+    padding-bottom: 4.6rem;
+    .menu-category {
+        height: 226px;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu-img {
+        width: 184px;
+    }
+    #menu-img4 {
+        padding-top: 2.9rem;
+        padding-bottom: 2.9rem;
+    }
+    .menu-category-text {
+        display: none;
+    }
+    @media screen and (max-width: 1200px) {
+        .menu-category {
+            display: none;
+        }
+        .menu-category-text {
+            display: flex !important;
+        }
+    }
+}
+
+.menu-category-text {
+    height: 226px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*SHOW VIDEO-----------------------------------------*/
+
+.container-video {
+    border-top: 3px solid;
+    border-bottom: 3px solid;
+}
+
+.show-video {
+    max-width: 1438px;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+    iframe {
+        width: 100%;
+    }
+    .box-list-video {
+        font-size: 22.5pt;
+        max-width: 550px;
+        height: 420px;
+        overflow-y: auto;
+    }
+}
+
+.rating-bar {
+    max-width: 421px;
+    padding-bottom: 3rem;
+}
+
+.rating-point {
+    font-size: 18.7pt;
+}
+
+.ic-heart {
+    width: 51px;
+}
+
+//FOOTER
+.footer-builder {
+    border: 2px solid;
+}
+
+
+/*STEP FOR REGISTER-----------------------------------------*/
+
+.step-for-register {
+    padding-bottom: 3.6rem;
+    .content-step {
+        max-width: 1320px;
+        margin: 0 auto;
+        #step2 {
+            margin: 0 7rem;
+        }
+        .circle-step {
+            width: 88px;
+            height: 88px;
+            border-radius: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 17.3pt;
+            font-weight: 600;
+        }
+        .title-step {
+            font-weight: 600;
+        }
+        .row-step {
+            padding: 5rem 0 3rem 0;
+        }
+        .col-step {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 2rem;
+        }
+    }
+    .dot-bar {
+        width: 289px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .list-dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 20px;
+    }
+    #btn-register-step {
+        font-size: 18.7pt;
+    }
+    @media screen and (max-width: 800px) {
+        .row-step {
+            display: none;
+        }
+        .content-step {
+            padding-top: 1rem;
+        }
+        .title-step {
+            padding: 1.5rem 0 0 0;
+        }
+    }
 }

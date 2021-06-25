@@ -42,13 +42,13 @@
                     <h1 class="text-primary">
                         @lang('keywords.latestDiscountProduct')
                     </h1>
-                    <x-product.course-list :courses=$courses_with_group></x-product.course-list>
+                    <x-product.course-list :courses=$courses_with_group typeOfUI="lasted"></x-product.course-list>
                 </div>
                 <div class="col-lg-6 col-12 welcome-offer">
                     <h1 class="text-primary">
                         @lang('keywords.welcomeOffer')
                     </h1>
-                    <x-product.course-list :courses=$courses_with_group></x-product.course-list>
+                    <x-product.course-list :courses=$courses_with_group typeOfUI="welcome"></x-product.course-list>
                 </div>
             </div>
         </div>
@@ -57,11 +57,11 @@
                 <h1 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
                 </h1>
-                <x-product.course-list :courses=$courses_with_group></x-product.course-list>
+                <x-product.course-list :courses=$courses_with_group typeOfUI="recommended"></x-product.course-list>
             </div>
         @endif
         <div class="product-tab">
-            <x-home.product-tab :courses=$courses_with_group></x-home.product-tab>
+            <x-home.product-tab :courses=$courses_with_group typeOfUI="recommended"></x-home.product-tab>
         </div>
         @if(Auth::user()==null)
             <x-home.step-register></x-home.step-register>
