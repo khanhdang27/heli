@@ -1,7 +1,9 @@
-<?php
-$list_lecture = $courseDetail->lecture
+@php
+$list_lecture = $courseDetail->lecture;
 
-?>
+$fisrt_lecture = $list_lecture->first();
+$defaultSource = "https://player.vimeo.com/video/".$fisrt_lecture->video_resource."?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713"
+@endphp
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 <div class="container-fluid show-video" id="video-lecture">
@@ -23,13 +25,23 @@ $list_lecture = $courseDetail->lecture
     </div>
     <div class="row">
         <div class="col-sm-8">
-            <x-product-detail.lecture-course :videoId='566506789' ></x-product-detail.lecture-course>
+            <iframe
+                id="videoView"
+                src={{$defaultSource}}
+                width="840" 
+                height="420" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture" 
+                allowfullscreen 
+                title="Default name"></iframe>
         </div>
         <div class="col-sm-4">
             <div class="box-list-video text-primary">
                 <ol>
                     @foreach($list_lecture as $item)
-                        <li v-on:click="clickLecture" data-id="{{$item->video_resource}}">{{$item->lectures_name}}</li>
+                        <li role="button" v-on:click="clickLecture" data-id="{{$item->video_resource}}" >
+                            {{$item->lectures_name}}
+                        </li>
                     @endforeach
                 </ol>
             </div>
@@ -41,11 +53,12 @@ $list_lecture = $courseDetail->lecture
     var videoLecture = new Vue({
         el: "#video-lecture",
         data: {
-            videoId: '',
+            videoLink: "",
         },
         methods: {
             clickLecture: function () {
-                console.log(event.target.data)
+                this.videoLink = "https://player.vimeo.com/video/"+event.target.getAttribute('data-id')+"?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713"
+                document.getElementById('videoView').src = this.videoLink
             }
         }
     });

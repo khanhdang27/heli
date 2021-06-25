@@ -24,7 +24,6 @@ class LectureCourse extends Component
      */
     public function render()
     {
-
         return view('components.product-detail.lecture-course', [
             'videoId'=> $this->videoId
         ]);
