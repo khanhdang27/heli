@@ -1,0 +1,25 @@
+
+.table{
+    width: 100% !important;
+    .text-description {
+        max-width: 300px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    @media (max-width: 768px) {
+        .text-description{
+            max-width: 100px;
+        }
+    }
+    thead th{
+        border-bottom: unset !important;
+    }
+    .dropdown-item {
+        color: #000000 !important;
+        font-size: .8125rem;
+    }
+}
+.dataTables_scrollBody{
+    border-bottom: unset !important;
+}

@@ -1,0 +1,32 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito);
+.table {
+  width: 100% !important;
+}
+
+.table .text-description {
+  max-width: 300px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .table .text-description {
+    max-width: 100px;
+  }
+}
+
+.table thead th {
+  border-bottom: unset !important;
+}
+
+.table .dropdown-item {
+  color: #000000 !important;
+  font-size: .8125rem;
+}
+
+.dataTables_scrollBody {
+  border-bottom: unset !important;
+}
+
+

@@ -20,6 +20,12 @@
                                     <label>Name</label>
                                     <input type="text" class="form-control" name="name" value="{{ request('name') }}">
                                 </div>
+                                {{--                                <div class="col-md-6">--}}
+                                {{--                                    <label>Subject</label>--}}
+                                {{--                                    <select name="subject" class="form-control">--}}
+                                {{--                                        <option value="">-- All --</option>--}}
+                                {{--                                    </select>--}}
+                                {{--                                </div>--}}
                             </div>
                             <div class="form-row mt-2 justify-content-end">
                                 <button class="btn btn-primary">Filter</button>
@@ -32,12 +38,15 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
+
                                 <!-- Title -->
                                 <h4 class="card-header-title">
                                     Courses
                                 </h4>
+
                             </div>
                             <div class="col-auto">
+
                                 <!-- Button -->
                                 <a href="{{ route('admin.course.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
@@ -49,24 +58,28 @@
                                     </svg>
                                     Add
                                 </a>
+
                             </div>
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
                         <div class=" mb-0 " data-toggle="lists"
                              data-options="{&quot;valueNames&quot;: [&quot;goal-project&quot;, &quot;goal-status&quot;, &quot;goal-progress&quot;, &quot;goal-date&quot;]}">
-                            <table id="data-table" class="table table-sm table-nowrap card-table">
+                            <table id="course-table" class="table table-sm card-table">
                                 <thead>
                                 <tr>
                                     <th>
                                         Name
                                     </th>
+                                    {{--                                    <th>--}}
+                                    {{--                                        Tutor--}}
+                                    {{--                                    </th>--}}
                                     <th>
                                         <a href="#" class="text-muted">
                                             Price
                                         </a>
                                     </th>
-                                    <th>
+                                    <th class="text-description">
                                         Description
                                     </th>
                                     <th></th>
@@ -78,11 +91,13 @@
                                         <td class="goal-project">
                                             {{ $value->course_name }}
                                         </td>
-
+                                        {{--                                        <td class="goal-project">--}}
+                                        {{--                                            {{ $value->tutor['tutor_name'] }}--}}
+                                        {{--                                        </td>--}}
                                         <td class="goal-project">
                                             {{ $value->course_price }}
                                         </td>
-                                        <td>
+                                        <td class="text-description">
                                             {{ $value->translate('en')->course_description }}
                                         </td>
                                         <td class="text-right">
@@ -93,26 +108,23 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.course.lecture.list', $value->id) }}"
-                                                        class="dropdown-item">
-                                                            Manage Lecture
-                                                    </a>
-                                                    <a href="{{ route('admin.price-tag.index') }}"
-                                                        class="dropdown-item">
-                                                            Publish
-                                                    </a>
+                                                    {{--                                                    <a href="{{ route('admin.course.video.index', $value->id) }}"--}}
+                                                    {{--                                                       class="dropdown-item">--}}
+                                                    {{--                                                        Video--}}
+                                                    {{--                                                    </a>--}}
                                                     <a href="{{ route('admin.course.edit', $value->id) }}"
-                                                        class="dropdown-item">
-                                                            Edit
+                                                       class="dropdown-item">
+                                                        Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                        onclick="itemDelete('{{ route('admin.course.destroy', $value->id) }}')"
-                                                        class="dropdown-item delete-item">
-                                                            Delete
+                                                       data-url="{{ route('admin.course.destroy', $value->id) }}"
+                                                       class="dropdown-item delete-item">
+                                                        Delete
                                                     </a>
                                                 </div>
                                             </div>
                                         </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -123,6 +135,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div> <!-- / .row -->
     </div>
@@ -130,8 +143,22 @@
 
 @push('css')
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" id="stylesheetDark">
+    <style>
+
+    </style>
 @endpush
 @push('js')
     <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
+    <script>
+        $('#course-table').DataTable({
+            searching: false,
+            ordering: false,
+            paging:false,
+            // responsive: true,
+            scrollX:true,
+            info: false,
+
+        });
+    </script>
 @endpush
