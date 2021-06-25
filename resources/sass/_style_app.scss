@@ -22,6 +22,7 @@ html {
         color: var(--white);
         font-size: 15pt;
     }
+
     a:hover {
         background: none;
         color: var(--secondary);
@@ -41,23 +42,28 @@ html {
     color: var(--secondary);
     line-height: 1.45;
     padding: 4.48rem 10rem;
+
     .title-foot {
         margin-bottom: 0;
     }
+
     span {
         font-size: 13pt;
     }
+
     a {
         font-size: 13pt;
         color: var(--secondary);
     }
+
     a:hover {
         text-decoration: none;
         color: var(--white);
     }
 }
+
 @media (max-width: 991px) {
-    .footer{
+    .footer {
         padding: 4.48rem 0;
     }
 }
@@ -74,6 +80,7 @@ form#certificate_form {
         background: var(--dark) 0.5;
         color: var(--secondary);
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+
         option {
             padding: 0.2rem 1rem;
             font-size: 14pt;
@@ -82,6 +89,7 @@ form#certificate_form {
             color: var(--primary);
             text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
         }
+
         option:checked {
             background: var(--primary) 0.5;
             color: var(--secondary);
@@ -178,6 +186,7 @@ form#certificate_form {
 .btn-hashtag {
     background-color: var(--primary);
     color: var(--white);
+
     a {
         text-decoration: none;
     }
@@ -252,6 +261,7 @@ form#certificate_form {
 
 .praise-box {
     margin-bottom: 12rem;
+
     .praise {
         display: flex;
         flex-direction: column;
@@ -282,30 +292,36 @@ form#certificate_form {
         margin-bottom: 3rem;
     }
 }
+
 //PRODUCT BOX COMPONENT
 .product-box {
     width: 100%;
     margin-top: 2.8rem;
+
     .title-product {
         width: 25%;
         padding: 0.6rem 0;
         text-align: center;
     }
+
     .content-top {
         text-align: center;
     }
+
     .content-product {
         height: 323px;
         display: flex;
         align-items: center;
         width: 100%;
         margin-left: 0;
+
         .color-bar {
             width: 15px;
             height: 258px;
             background-image: linear-gradient(to right, #E6C06C, #FBB03B);
             margin: auto;
         }
+
         .body-product-content {
             height: 258px;
             padding: 1.76rem;
@@ -313,6 +329,7 @@ form#certificate_form {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
+
             .content-bot {
                 border: 1px solid;
                 padding: 2rem 1.5rem;
@@ -322,20 +339,24 @@ form#certificate_form {
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
+
             @media (max-width: 1200px) {
 
             }
         }
     }
+
     .bottom-product2 {
         height: 250px;
         align-items: center;
         justify-content: flex-end;
         box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+
         .card-name-product {
             min-height: 125px;
             font-size: 16pt;
-            .text-multiline-truncate{
+
+            .text-multiline-truncate {
                 overflow: hidden;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
@@ -350,14 +371,17 @@ form#certificate_form {
 
 .product-tab {
     padding-bottom: 4.6rem;
+
     .menu-category {
         height: 226px;
         justify-content: center;
         align-items: center;
     }
+
     .menu-img {
         width: 184px;
     }
+
     #menu-img4 {
         padding-top: 2.9rem;
         padding-bottom: 2.9rem;
@@ -395,9 +419,11 @@ form#certificate_form {
     max-width: 1438px;
     padding-top: 3rem;
     padding-bottom: 4rem;
-    iframe{
+
+    iframe {
         width: 100%;
     }
+
     .box-list-video {
         font-size: 22.5pt;
         max-width: 550px;
@@ -429,13 +455,16 @@ form#certificate_form {
 
 .step-for-register {
     padding-bottom: 3.6rem;
+
     .content-step {
         max-width: 1320px;
         margin: 0 auto;
+
         #step2 {
             margin: 0 7rem;
 
         }
+
         .circle-step {
             width: 88px;
             height: 88px;
@@ -446,12 +475,15 @@ form#certificate_form {
             font-size: 17.3pt;
             font-weight: 600;
         }
+
         .title-step {
             font-weight: 600;
         }
+
         .row-step {
             padding: 5rem 0 3rem 0;
         }
+
         .col-step {
             text-align: center;
             display: flex;
@@ -460,16 +492,19 @@ form#certificate_form {
             margin: 0 2rem;
         }
     }
+
     .dot-bar {
         width: 289px;
         display: flex;
         justify-content: space-between;
     }
+
     .list-dot {
         width: 15px;
         height: 15px;
         border-radius: 20px;
     }
+
     #btn-register-step {
         font-size: 18.7pt;
     }
@@ -487,4 +522,37 @@ form#certificate_form {
     }
 
 }
+
+/*STEP FOR REGISTER-----------------------------------------*/
+.body-news-page {
+    background-image: url("../images/BG_news.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    .container-news-page {
+        padding-bottom: 7rem;
+
+        .content-news-page {
+            margin-top: 8rem;
+            border-top: 2px solid;
+            border-bottom: 2px solid;
+
+            .show-news-item {
+                margin: 0 auto;
+                height: 320px;
+                width: 650px;
+                overflow-y: auto;
+                a:hover{
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
 

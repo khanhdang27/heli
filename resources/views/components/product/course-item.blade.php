@@ -1,7 +1,7 @@
 @php
     $course_card = $course->membershipCourses->course;
 
-    
+
 switch ($typeOfUI){
     case 'normal':
     case 'recommended':
@@ -21,7 +21,7 @@ switch ($typeOfUI){
 
 <div class="pr-3 {{ $class }}">
     <div class="product-box">
-        
+
         <div class="top-product">
             <div class="title-product bg-secondary">
                 <h4>{{ $course_card->subject->subject_name }}</h4>
@@ -72,7 +72,7 @@ switch ($typeOfUI){
                     <h5> <del class="text-gray">HK$ {{$course->getPrice()}} / @lang('keywords.course-item.section')</del> </h5>
                     @endif
                     <h4 class="font-weight-bold">
-{{--                        HK$ {{$course->getPriceDiscount()}} / @lang('keywords.course-item.section') >--}}
+                        HK$ {{$course->getPriceDiscount()}} / @lang('keywords.course-item.section') >
                     </h4>
                 </a>
             </div>

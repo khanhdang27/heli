@@ -9,7 +9,7 @@
         </div>
         <div class="container container-news-page">
             <div class="content-news-page border-secondary">
-                <div class="news-item">
+                <div class="p-5">
                     <div class="show-news-item mx-auto">
                         @foreach($news as $item)
                             <a href="{{ route('site.news-detail',$item->id) }}">
@@ -20,7 +20,7 @@
                             </a>
                         @endforeach
                         <a href="#">
-                            12/06 【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)
+                            <h2>12/06 【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)</h2>
                         </a>
                     </div>
 
