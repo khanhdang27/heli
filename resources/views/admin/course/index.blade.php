@@ -88,7 +88,7 @@
                                 <tbody class="list">
                                 @foreach($courses as $value)
                                     <tr>
-                                        <td class="goal-project">
+                                        <td class="goal-project text-description">
                                             {{ $value->course_name }}
                                         </td>
                                         {{--                                        <td class="goal-project">--}}
