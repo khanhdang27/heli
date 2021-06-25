@@ -8,12 +8,13 @@
             <div class="title-product bg-secondary">
                 <h4>{{ $course_card->subject->subject_name }}</h4>
             </div>
-            <div class="content-product d-flex" style="background-color: {{$course_card->subject->subject_color_background}} !important;">
-                <div class="color-bar">
+            <div class="content-product d-flex justify-content-center"
+                 style="background-color: {{$course_card->subject->subject_color_background}} !important;">
+                <div class="color-bar m-0">
                 </div>
                 <div class="body-product-content d-flex flex-column justify-content-between align-items-center"
-                        style="color: {{$course_card->subject->subject_color_text}} !important;">
-                    <div class="content-top text-wrap w-75">
+                     style="color: {{$course_card->subject->subject_color_text}} !important;">
+                    <div class="content-top text-wrap">
                         {{ $course_card->certificate->certificate_code }}<br>
                         @if($course_card->type==1)
                             @lang('keywords.course-item.liveCourse')
@@ -47,9 +48,11 @@
             </div>
             <div class="d-flex">
                 <a class="product-hover ml-auto" href="{{URL::route('site.course.show',$course_card->id)}}">
-                    <h5> <del class="text-gray">HK$ {{$course->getPrice()}} / @lang('keywords.course-item.section')</del> </h5>
+                    <h5>
+{{--                        <del class="text-gray">HK$ {{$course->getPrice()}} / @lang('keywords.course-item.section')</del>--}}
+                    </h5>
                     <h4 class="font-weight-bold">
-                        HK$ {{$course->getPriceDiscount()}} / @lang('keywords.course-item.section') >
+{{--                        HK$ {{$course->getPriceDiscount()}} / @lang('keywords.course-item.section') >--}}
                     </h4>
                 </a>
             </div>

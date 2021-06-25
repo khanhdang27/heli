@@ -10,13 +10,18 @@
         <div class="container container-news-page">
             <div class="content-news-page border-secondary">
                 <div class="news-item">
-                    <div class="show-news-item">
+                    <div class="show-news-item mx-auto">
                         @foreach($news as $item)
-                            <a href="{{ route('site.news-detail',$item->id) }}" class="news-title text-primary">
+                            <a href="{{ route('site.news-detail',$item->id) }}">
+                                <h2>
                                 {{$item->date}}
                                 {{$item->title}}
+                                </h2>
                             </a>
                         @endforeach
+                        <a href="#">
+                            12/06 【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)
+                        </a>
                     </div>
 
 {{--                    <div class="d-flex justify-content-center bottom-collapse">--}}

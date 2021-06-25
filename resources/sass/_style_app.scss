@@ -219,3 +219,42 @@ form#certificate_form {
     font-size: 21pt;
     color: var(--primary);
 }
+/* Video course---------------------------------*/
+.show-video {
+    max-width: 1438px;
+    padding: 3rem 0 4rem 0;
+    .top-course-detail {
+        max-width: 430px;
+    }
+    .box-list-video {
+        font-size: 22.5pt;
+        height: 420px;
+        overflow-y: auto;
+    }
+}
+/* News page-----------------------------------*/
+.body-news-page {
+    background-image: url("../images/BG_news.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    .container-news-page {
+        padding-bottom: 7rem;
+        .content-news-page {
+            margin-top: 8rem;
+            border-top: 2px solid;
+            border-bottom: 2px solid;
+            .news-item {
+                padding: 3rem;
+                .show-news-item {
+                    height: 320px;
+                    width: 650px;
+                    overflow-y: auto;
+                    a:hover{
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
