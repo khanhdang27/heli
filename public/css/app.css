@@ -11272,7 +11272,7 @@ form#certificate_form select option:checked {
 }
 
 .product-box .bottom-product2 {
-  height: 220px;
+  height: 250px;
   align-items: center;
   justify-content: flex-end;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
