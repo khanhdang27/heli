@@ -28,6 +28,7 @@
         "googleapis": "^74.2.0",
         "node-sass": "^4.14.1",
         "toastr": "^2.1.4",
-        "uuid": "^8.3.2"
+        "uuid": "^8.3.2",
+        "vimeo-upload": "^0.1.6"
     }
 }

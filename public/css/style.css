@@ -206,100 +206,6 @@ body {
 }
 
 
-/*PRODUCT BOX DISCOUNT-------------------------------------*/
-
-.discount-product {
-    max-width: 90%;
-    padding-bottom: 4.6rem;
-    padding-top: 3rem;
-}
-
-.heading-title {
-    font-size: 33px;
-    font-weight: 600;
-}
-
-.title-product {
-    width: 25%;
-    padding: 0.6rem 0;
-    text-align: center;
-}
-
-.content-product {
-    height: 323px;
-    display: flex;
-    align-items: center;
-}
-
-.color-bar {
-    margin-left: 3.76rem;
-    width: 15px;
-    height: 258px;
-    background-image: linear-gradient(to right, #E6C06C, #FBB03B);
-}
-
-.body-product-content {
-    height: 258px;
-    padding: 1.76rem;
-    font-size: 15.7pt;
-}
-
-.content-top {
-    text-align: center;
-}
-
-.content-bot {
-    border: 1px solid;
-    width: 195px;
-    padding: 2rem 2.5rem;
-}
-
-.bottom-product {
-    height: 53px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
-}
-
-.price-bar {
-    display: flex;
-    color: #0B487D;
-    font-size: 20px;
-    font-weight: 400;
-    padding-right: 1rem;
-}
-
-
-/*PRODUCT BOX 2---------------------------------------*/
-
-.card-name-product {
-    min-height: 125px;
-    font-size: 16pt;
-}
-
-.product-box {
-    width: 25rem;
-    margin-top: 2.8rem;
-}
-
-.bottom-product2 {
-    height: 220px;
-    align-items: center;
-    justify-content: flex-end;
-    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-}
-
-.text-multiline-truncate {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    display: -moz-box;
-    -moz-box-orient: vertical;
-}
-
-
 /*TAB PRODUCT-----------------------------------------*/
 
 .product-tab {
@@ -341,91 +247,33 @@ body {
 }
 
 
-/*STEP FOR REGISTER-----------------------------------------*/
+/* width */
 
-.step-for-register {
-    padding-bottom: 3.6rem;
-}
-
-.content-step {
-    max-width: 1320px;
-    margin: 0 auto;
-}
-
-#step2 {
-    margin: 0 7rem;
-}
-
-.circle-step {
-    width: 88px;
-    height: 88px;
-    border-radius: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 17.3pt;
-    font-weight: 600;
-}
-
-.title-step {
-    font-weight: 600;
-}
-
-.row-step {
-    padding: 5rem 0 3rem 0;
-}
-
-.col-step {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 2rem;
-}
-
-.dot-bar {
-    width: 289px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.list-dot {
-    width: 15px;
-    height: 15px;
-    border-radius: 20px;
-}
-
-#btn-register-step {
-    font-size: 18.7pt;
-}
-
-@media screen and (max-width: 800px) {
-    .row-step {
-        display: none;
-    }
-    .content-step {
-        padding-top: 1rem;
-    }
-    .title-step {
-        padding: 1.5rem 0 0 0;
-    }
+::-webkit-scrollbar {
+    width: 5px;
 }
 
 
-/*SHOW VIDEO-----------------------------------------*/
+/* Track */
 
-.container-video {
-    border-top: 3px solid;
-    border-bottom: 3px solid;
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #fff;
+    border-radius: 10px;
 }
 
-.ic-heart {
-    width: 51px;
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #0B487D;
+    border-radius: 10px;
 }
 
-video {
-    max-width: 100%;
-    height: auto;
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
 }
 
 
@@ -481,77 +329,6 @@ video {
     }
 }
 
-.btn-register-now {
-    font-size: 20pt;
-    border-radius: 4rem;
-    margin-top: 3rem;
-    text-align: center;
-    padding: 0.5rem 3rem;
-    color: var(--white);
-}
-
-.btn-register-now:focus {
-    outline: none;
-}
-
-@media screen and (max-width: 714px) {
-    .btn-register-now {
-        font-size: 15pt;
-    }
-}
-
-
-/*GUEST PRAISE-----------------------------------------*/
-
-.title-card {
-    font-weight: 600;
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 12rem;
-}
-
-.praise {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.avatar-guest {
-    border-radius: 200px;
-    width: 251px;
-    top: -125px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-}
-
-.avatar {
-    border-radius: 200px;
-}
-
-.content-praise {
-    font-size: 16pt;
-    padding: 10rem 1.3rem 3rem 1.3rem;
-    position: unset;
-    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
-}
-
-.content-praise p {
-    margin-bottom: 3rem;
-}
-
-.praise-box {
-    margin-bottom: 12rem;
-}
-
-
-/*FOOTER--------------------------------------------------------------------------------------------------*/
-
-.footer-builder {
-    border: 2px solid;
-}
-
-
 /*LOGIN MODAL--------------------------------------------------------------------------------------------------*/
 
 .modal-login-xl {
@@ -568,7 +345,8 @@ video {
     border-radius: 0;
     border: 3px solid #E6C06C;
     background-color: rgba(15, 34, 51, 0.8);
-    max-width: 100%;
+    max-width: 80%;
+    margin: auto;
     padding: 3rem 0;
 }
 
@@ -584,29 +362,17 @@ video {
 }
 
 .btn-login {
-    font-size: 16pt;
     padding: 0.5rem 2rem;
-    max-width: 475px;
     display: flex;
     text-align: center;
     margin: 0.8rem auto 0 auto;
+    border: none;
+    align-items: center;
+    border-radius: 4rem;
+    color: var(--white);
 }
-
-.box-ic {
-    width: 100px;
-}
-
-.ic-gg {
-    width: 102px;
-}
-
-.ic-ap {
-    width: 117px;
-}
-
-.ic {
-    width: 48px;
-    float: left;
+.login-title{
+    font-size: 20px;
 }
 
 #ap {
@@ -615,6 +381,17 @@ video {
 
 .btn-login:hover {
     cursor: pointer;
+}
+
+
+.btn-register-now:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 714px) {
+    .btn-register-now {
+        font-size: 15pt;
+    }
 }
 
 .line-or hr {
@@ -631,7 +408,7 @@ video {
 
 .input-login {
     max-width: 559px;
-    height: 77px;
+    height: 50px;
     border: 3px solid #E6C06C;
     border-radius: 50px;
     padding: 0.5rem;
@@ -682,22 +459,7 @@ video {
 }
 
 .bottom-form {
-    padding: 2.8rem 1rem 0 2.6rem;
-    max-width: 559px;
-}
-
-#btn-login {
-    border: none;
-    height: 77px;
-    align-items: center;
-    margin-top: 4.2rem;
-}
-
-#btn-register {
-    border: none;
-    height: 77px;
-    align-items: center;
-    margin-top: 2.6rem;
+    width: 100%;
 }
 
 .bottom-btn {

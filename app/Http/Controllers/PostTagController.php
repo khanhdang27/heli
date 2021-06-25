@@ -40,13 +40,12 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $tags = new Tag(
+        $tags =  Tag::create(
             $request->validate([
                 'tag_name' => 'required',
                 'tag_type' => 'required'
             ])
         );
-        $tags->save();
         return back()->with('success', 'Create success');
     }
 
@@ -88,7 +87,6 @@ class TagController extends Controller
                 'tag_name' => 'required'
             ])
         );
-        $tag->save();
         return back()->with('success', 'Update success!');
     }
 

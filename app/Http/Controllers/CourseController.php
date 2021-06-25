@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CreateCourseRequest;
-use App\Http\Requests\Course\CreateVideoRequest;
-use App\Http\Requests\Course\UpdateVideoRequest;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\Lecture;
@@ -13,10 +11,9 @@ use App\Models\Membership;
 use App\Models\MembershipCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
-use App\Models\UserLike;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -49,8 +46,12 @@ class CourseController extends Controller
 
     public function my()
     {
-        $courses = Course::with('tutor', 'translations', 'student')
-            ->whereHas('student', function (Builder $query) {
+        $courses = CourseMembershipDiscount::with(
+            'membershipCourses',  
+            'membershipCourses.course',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.student'
+        )->whereHas('membershipCourses.course.student', function (Builder $query) {
                 $query->where('student_id', Auth::user()->id);
             })->get();
 
@@ -102,7 +103,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Create Error!');
+            return back()->with('errors', 'Create Error!');
 
         }
     }
@@ -120,6 +121,8 @@ class CourseController extends Controller
             'membershipCourses', 
             'courseDiscounts', 
             'membershipCourses.course',
+            'membershipCourses.course.lecture',
+            'membershipCourses.course.comment',
             'membershipCourses.course.subject',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
@@ -195,17 +198,40 @@ class CourseController extends Controller
 
     public function lectures(Course $course)
     {
-        # code...
+        $_course = Course::find($course->id)->with('lectures')->first();
+        return view('admin.course.lecture.index', [
+            'course' => $_course
+        ]);
     }
 
     public function createLecture(Course $course)
     {
-        # code...
+        return view('admin.course.lecture.create', [
+            'course' => $course
+        ]);
     }
 
-    public function storeLecture(Course $course)
+    public function storeLecture(Request $request, Course $course)
     {
-        # code...
+        $input = $request->input();
+        DB::beginTransaction();
+
+        try {
+            $lecture = Lecture::create([
+                'course_id' => $course->id,
+                'lectures_name' => $input['lectures_name'],
+                'lectures_description' => $input['lectures_description'],
+                'video_resource' => $input['video_resource'],
+                'is_live' => $input['is_live'],
+                'course_schedule_id' => 0//$input['course_schedule_id']
+            ]);
+
+            DB::commit();
+            return response()->json(['status' => 200, 'message' => 'succeed']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['status' => 400, 'message' => 'fails'], 400);
+        }
     }
 
     public function editLecture(Course $course, Lecture $lecture)

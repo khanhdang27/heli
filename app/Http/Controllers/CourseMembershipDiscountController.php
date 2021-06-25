@@ -86,17 +86,18 @@ class CourseMembershipDiscountController extends Controller
         DB::beginTransaction();
 
         try {
-            $new_price_tag->recommend = $input->recommend;
-            $new_price_tag->description = $input->description;
-            $new_price_tag->membershipCourses->price_value = $input->price_value;
+            $new_price_tag->recommended = $input['recommend'];
+            $new_price_tag->description = $input['description'];
+            $new_price_tag->membershipCourses->price_value = $input['price_value'];
 
+            $new_price_tag->save();
             DB::commit();
 
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
-            //throw $th;
+            dd($th);
             DB::rollBack();
-            return back()->with('success', 'Update error!');
+            return back()->with('errors', 'Update error!');
         }
     }
 

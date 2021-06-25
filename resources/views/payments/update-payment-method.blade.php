@@ -33,6 +33,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <script>
+
     const stripe = Stripe("{{ config('app.stripe_key') }}");
 
     const elements = stripe.elements();

@@ -66,7 +66,7 @@ class BannerController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Save error');
+            return back()->with('errors', 'Save error');
         }
     }
 
@@ -134,5 +134,4 @@ class BannerController extends Controller
             ], 400);
         }
     }
-
 }

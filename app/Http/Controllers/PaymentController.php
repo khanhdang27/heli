@@ -53,7 +53,8 @@ class PaymentController extends Controller
      */
     public function addPayment(Request $request)
     {
-        $payment_method = Auth::user()->addPaymentMethod($request->payment_method);
+        $user = User::find(Auth::user()->id);
+        $payment_method = $user->addPaymentMethod($request->payment_method);
         return response()->json($payment_method);
     }
 
@@ -87,8 +88,9 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
+        $user = User::find(Auth::user()->id);
         return view('payments.update-payment-method', [
-            'intent' => Auth::user()->createSetupIntent()
+            'intent' => $user->createSetupIntent()
         ]);
     }
 

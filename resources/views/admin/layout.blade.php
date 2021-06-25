@@ -8,10 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <!-- Libs CSS -->
     <link rel="stylesheet" href="{{ asset('cpanel/assets/fonts/feather/feather.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/flatpickr/dist/flatpickr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/quill/dist/quill.core.css') }}">
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/select2/dist/css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/highlight.js/styles/vs2015.css') }}"> --}}
+    
     <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/dropzone/dist/min/dropzone.min.css') }}">
 
     <!-- Map -->
@@ -21,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme.min.css') }}" id="stylesheetLight">
     {{-- <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme-dark.min.css') }}" id="stylesheetDark"> --}}
     @stack('css')
-
+    <link href="{{ asset('css/toastr.css')}}" rel="stylesheet">
     <title>Helios</title>
 </head>
 <body>
@@ -44,21 +41,10 @@
 <script src="{{ asset('js/jquery-3.6.0.min.js')}}"></script>
 <script src="{{ asset('cpanel/assets/libs/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('cpanel/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-{{-- <script src="{{ asset('cpanel/assets/libs/@shopify/draggable/lib/es5/draggable.bundle.legacy.js') }}"></script>
-<script src="{{ asset('cpanel/assets/libs/autosize/dist/autosize.min.js') }}"></script> --}}
 <script src="{{ asset('cpanel/assets/libs/chart.js/dist/Chart.min.js') }}"></script>
-{{-- <script src="{{ asset('cpanel/assets/libs/dropzone/dist/min/dropzone.min.js') }}"></script> --}}
-{{-- <script src="{{ asset('cpanel/assets/libs/flatpickr/dist/flatpickr.min.js') }}"></script> --}}
-{{-- <script src="{{ asset('cpanel/assets/libs/highlightjs/highlight.pack.min.js') }}"></script>
-<script src="{{ asset('cpanel/assets/libs/jquery-mask-plugin/dist/jquery.mask.min.js') }}"></script>
-<script src="{{ asset('cpanel/assets/libs/list.js/dist/list.min.js') }}"></script> --}}
-{{--<script src="{{ asset('cpanel/assets/libs/quill/dist/quill.min.js') }}"></script>--}}
-{{-- <script src="{{ asset('cpanel/assets/libs/select2/dist/js/select2.min.js') }}"></script> --}}
+<script src="{{ asset('js/toastr.min.js')}}"></script>
 <script src="{{ asset('cpanel/assets/libs/chart.js/Chart.extension.min.js') }}"></script>
 <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
-<!-- Map -->
-{{-- <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script> --}}
-
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 

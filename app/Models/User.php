@@ -100,7 +100,7 @@ class User extends Authenticatable
     public function stripeOptions(array $options = []): array
     {
         return [
-            'api_key' => 'sk_test_51Iuf02FYqIFhKKLfqHh6xlpYKzBdmDYWe0ylghaylyNi1eFctKw9N68kLmAowDlEGpC2XQxa6fNbH5asSMhm6w3A00PUn7YWTi',
+            'api_key' => config('app.stripe_secret'),
             'stripe_version' => Cashier::STRIPE_VERSION,
         ];
     }

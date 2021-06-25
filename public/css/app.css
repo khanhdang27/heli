@@ -10942,7 +10942,7 @@ a.text-dark:focus {
 
 @font-face {
   font-family: PingFangTC;
-  src: url("/helios/public/fonts/PingFang.ttc") format("truetype");
+  src: url("/Helios_v2/public/fonts/PingFang.ttc") format("truetype");
 }
 
 html {
@@ -10979,7 +10979,7 @@ html {
 .footer {
   color: var(--secondary);
   line-height: 1.45;
-  padding: 4.48rem 0;
+  padding: 4.48rem 10rem;
 }
 
 .footer .title-foot {
@@ -10998,6 +10998,12 @@ html {
 .footer a:hover {
   text-decoration: none;
   color: var(--white);
+}
+
+@media (max-width: 991px) {
+  .footer {
+    padding: 4.48rem 0;
+  }
 }
 
 .list-news {
@@ -11158,120 +11164,285 @@ form#certificate_form select option:checked {
   color: var(--primary);
 }
 
-/* Video course---------------------------------*/
+.btn-register-now {
+  font-size: 30pt;
+  color: #fff;
+  border-radius: 50px;
+  margin-top: 5rem;
+  text-align: center;
+  padding: 0.5rem 3rem;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-register-now:focus {
+  outline: none;
+}
+
+/*GUEST PRAISE-----------------------------------------*/
+
+.title-card {
+  font-weight: 600;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 12rem;
+}
+
+.praise-box {
+  margin-bottom: 12rem;
+}
+
+.praise-box .praise {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.praise-box .avatar-guest {
+  border-radius: 200px;
+  width: 251px;
+  top: -125px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.praise-box .avatar {
+  border-radius: 200px;
+}
+
+.praise-box .content-praise {
+  font-size: 16pt;
+  padding: 10rem 1.3rem 3rem 1.3rem;
+  position: unset;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+}
+
+.praise-box .content-praise p {
+  margin-bottom: 3rem;
+}
+
+.product-box {
+  width: 100%;
+  margin-top: 2.8rem;
+}
+
+.product-box .title-product {
+  width: 25%;
+  padding: 0.6rem 0;
+  text-align: center;
+}
+
+.product-box .content-top {
+  text-align: center;
+}
+
+.product-box .content-product {
+  height: 323px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: 0;
+}
+
+.product-box .content-product .color-bar {
+  width: 15px;
+  height: 258px;
+  background-image: linear-gradient(to right, #E6C06C, #FBB03B);
+  margin: auto;
+}
+
+.product-box .content-product .body-product-content {
+  height: 258px;
+  padding: 1.76rem;
+  font-size: 15.7pt;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.product-box .content-product .body-product-content .content-bot {
+  border: 1px solid;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.product-box .bottom-product2 {
+  height: 250px;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-box .bottom-product2 .card-name-product {
+  min-height: 125px;
+  font-size: 16pt;
+}
+
+.product-box .bottom-product2 .card-name-product .text-multiline-truncate {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  height: 110px;
+}
+
+/*TAB PRODUCT-----------------------------------------*/
+
+.product-tab {
+  padding-bottom: 4.6rem;
+}
+
+.product-tab .menu-category {
+  height: 226px;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-tab .menu-img {
+  width: 184px;
+}
+
+.product-tab #menu-img4 {
+  padding-top: 2.9rem;
+  padding-bottom: 2.9rem;
+}
+
+.product-tab .menu-category-text {
+  display: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .product-tab .menu-category {
+    display: none;
+  }
+
+  .product-tab .menu-category-text {
+    display: flex !important;
+  }
+}
+
+.menu-category-text {
+  height: 226px;
+  justify-content: center;
+  align-items: center;
+}
+
+/*SHOW VIDEO-----------------------------------------*/
+
+.container-video {
+  border-top: 3px solid;
+  border-bottom: 3px solid;
+}
 
 .show-video {
   max-width: 1438px;
-  padding: 3rem 0 4rem 0;
+  padding-top: 3rem;
+  padding-bottom: 4rem;
 }
 
-.show-video .top-course-detail {
-  max-width: 430px;
+.show-video iframe {
+  width: 100%;
 }
 
 .show-video .box-list-video {
   font-size: 22.5pt;
+  max-width: 550px;
   height: 420px;
   overflow-y: auto;
 }
 
-/* News page-----------------------------------*/
-
-.body-news-page {
-  background-image: url(/images/BG_news.jpg?a21fac5423436d9cdd592352005542b4);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.rating-bar {
+  max-width: 421px;
+  padding-bottom: 3rem;
 }
 
-.body-news-page .container-news-page {
-  padding-bottom: 7rem;
+.rating-point {
+  font-size: 18.7pt;
 }
 
-.body-news-page .container-news-page .content-news-page {
-  margin-top: 8rem;
-  border-top: 2px solid;
-  border-bottom: 2px solid;
+.ic-heart {
+  width: 51px;
 }
 
-.body-news-page .container-news-page .content-news-page .news-item {
-  padding: 3rem;
+.footer-builder {
+  border: 2px solid;
 }
 
-.body-news-page .container-news-page .content-news-page .news-item .show-news-item {
-  height: 320px;
-  width: 650px;
-  overflow-y: auto;
+/*STEP FOR REGISTER-----------------------------------------*/
+
+.step-for-register {
+  padding-bottom: 3.6rem;
 }
 
-.body-news-page .container-news-page .content-news-page .news-item .show-news-item a:hover {
-  text-decoration: none;
+.step-for-register .content-step {
+  max-width: 1320px;
+  margin: 0 auto;
 }
 
-.rating {
-  display: inline-block;
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-  font-size: 50px;
+.step-for-register .content-step #step2 {
+  margin: 0 7rem;
 }
 
-.rating label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  cursor: pointer;
+.step-for-register .content-step .circle-step {
+  width: 88px;
+  height: 88px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17.3pt;
+  font-weight: 600;
 }
 
-.rating label input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
+.step-for-register .content-step .title-step {
+  font-weight: 600;
 }
 
-.rating label .icon {
-  float: left;
-  color: transparent;
+.step-for-register .content-step .row-step {
+  padding: 5rem 0 3rem 0;
 }
 
-.rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
-  text-shadow: 0 0 5px #fad000;
+.step-for-register .content-step .col-step {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2rem;
 }
 
-.rating label:last-child {
-  position: static;
+.step-for-register .dot-bar {
+  width: 289px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.rating label:last-child .icon {
-  color: #000;
+.step-for-register .list-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 20px;
 }
 
-.rating label:nth-child(1) {
-  z-index: 5;
+.step-for-register #btn-register-step {
+  font-size: 18.7pt;
 }
 
-.rating label:nth-child(2) {
-  z-index: 4;
-}
+@media screen and (max-width: 800px) {
+  .step-for-register .row-step {
+    display: none;
+  }
 
-.rating label:nth-child(3) {
-  z-index: 3;
-}
+  .step-for-register .content-step {
+    padding-top: 1rem;
+  }
 
-.rating label:nth-child(4) {
-  z-index: 2;
-}
-
-.rating label:nth-child(5) {
-  z-index: 1;
-}
-
-.rating:not(:hover) label input:checked ~ .icon,
-.rating:hover label:hover input ~ .icon {
-  color: #fad000;
+  .step-for-register .title-step {
+    padding: 1.5rem 0 0 0;
+  }
 }
 
 
