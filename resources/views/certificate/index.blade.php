@@ -36,13 +36,7 @@
                 <h1 class="text-primary" id="tab-title">
                     英文
                 </h1>
-                <div class="d-flex flex-wrap">
-                    <div class="pr-3">
-                        <a class="product-hover" href="{{URL::route('site.course.index')}}">
-                            <x-product.course-list :courses=$courses typeOfUI="certificate_filter"></x-product.course-list>
-                        </a>
-                    </div>
-                </div>
+                <x-product.course-list :courses=$courses typeOfUI="certificate_filter"></x-product.course-list>
             </div>
         </div>
     </div>

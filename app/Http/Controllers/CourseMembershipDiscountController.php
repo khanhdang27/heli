@@ -81,12 +81,15 @@ class CourseMembershipDiscountController extends Controller
     public function update(Request $request, CourseMembershipDiscount $price_tag)
     {
         $input = $request->input();
+
         $new_price_tag = CourseMembershipDiscount::with('membershipCourses')
                 ->where('id', $price_tag->id)->first();
         DB::beginTransaction();
 
         try {
-            $new_price_tag->recommended = $input['recommend'];
+            $new_price_tag->recommended = $input['recommend'] ?? false;
+            $new_price_tag->welcomes = $input['welcomes'] ?? false;
+            $new_price_tag->hot = $input['hot'] ?? false;
             $new_price_tag->description = $input['description'];
             $new_price_tag->membershipCourses->price_value = $input['price_value'];
 

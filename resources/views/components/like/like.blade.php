@@ -10,7 +10,6 @@ $liked = $likeRef->likeable->firstWhere('user_id', Auth::user()->id);
 $component = explode('\\',$likeModule)[2];
 
 @endphp
-
 <button id="like_{{$component}}_{{$likeRef->id}}" class="mr-5 border-0 bg-white text-primary" v-on:click="clicklike">
     <img class="ic-action"
          id="like_style_{{$component}}_{{$likeRef->id}}"
@@ -20,6 +19,7 @@ $component = explode('\\',$likeModule)[2];
             <span id="{{$component}}_like_no_{{$likeRef->id}}" >{{$likeRef->like_no}}</span>
         @endif
 </button>
+
 <script>
     var like = new Vue({
         el: '#like_{{$component}}_{{$likeRef->id}}',

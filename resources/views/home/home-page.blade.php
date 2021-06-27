@@ -5,8 +5,8 @@
 @section('content')
 
     <div class="banner">
-        @include('categories-bar')
-        @if(Auth::user()==null)
+        <x-home.categories :subjects=$subjects></x-home.categories>
+        @if(!Auth::check())
             <x-home.banner :banner=$banners></x-home.banner>
         @else
             <br>
@@ -28,13 +28,6 @@
             <!-- #endregion -->
         @endif
     </div>
-    @if (empty($courses_with_group))
-        <div class="d-flex justify-content-center">
-            <h3>
-                No Data Of Course
-            </h3>
-        </div>
-    @else
     <div class="body-content">
         <div class="container-fluid">
             <div class="row">
@@ -42,31 +35,31 @@
                     <h1 class="text-primary">
                         @lang('keywords.latestDiscountProduct')
                     </h1>
-                    <x-product.course-list :courses=$courses_with_group typeOfUI="lasted"></x-product.course-list>
+                    <x-product.course-list :courses=$course_latest typeOfUI="lasted"></x-product.course-list>
                 </div>
                 <div class="col-lg-6 col-12 welcome-offer">
                     <h1 class="text-primary">
                         @lang('keywords.welcomeOffer')
                     </h1>
-                    <x-product.course-list :courses=$courses_with_group typeOfUI="welcome"></x-product.course-list>
+                    <x-product.course-list :courses=$course_welcomes typeOfUI="welcome"></x-product.course-list>
                 </div>
             </div>
         </div>
-        @if(Auth::user()!=null)
+        @if(Auth::check())
             <div class="container-fluid">
                 <h1 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
                 </h1>
-                <x-product.course-list :courses=$courses_with_group typeOfUI="recommended"></x-product.course-list>
+                <x-product.course-list :courses=$course_recommended typeOfUI="recommended"></x-product.course-list>
             </div>
         @endif
         <div class="product-tab">
-            <x-home.product-tab :courses=$courses_with_group typeOfUI="recommended"></x-home.product-tab>
+            <x-home.product-tab :courses=$course_hot typeOfUI="hot"></x-home.product-tab>
         </div>
-        @if(Auth::user()==null)
+        @if(!Auth::check())
             <x-home.step-register></x-home.step-register>
         @endif
-        @if(Auth::user()==null)
+        @if(!Auth::check())
             <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
             <div class="d-flex justify-content-end pr-3">
                 <div class="text-left w-25">
@@ -77,9 +70,9 @@
                 </div>
             </div>
         @else
-            <div class="mx-auto container-video border-secondary mt-5">
+            <div class="mx-auto container-video border-secondary mt-5 pb-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
-                    <p class="text-33 text-primary">@lang('keywords.continueMyCourse')</p>
+                    <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
                     <button class="m-0 btn-register-now text-25 text-white btn-dark-blue btn-dark">
                         @lang('keywords.otherPurchasedCourses')
                     </button>
@@ -99,7 +92,7 @@
                     </div>
                     <div
                         class="circle-check position-absolute bg-primary d-flex justify-content-center align-items-center">
-                        <img width="133px" src="{{asset('images/ic/Group8.png')}}">
+                        <img width="100px" src="{{asset('images/ic/Group8.png')}}">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
@@ -113,5 +106,4 @@
             <x-home.review></x-home.review>
         @endif
     </div>
-    @endif
 @endsection
