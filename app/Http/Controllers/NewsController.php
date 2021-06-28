@@ -52,7 +52,7 @@ class NewsController extends Controller
         try {
 
             $news = new News([
-                'date' => $newsValidate['date'],
+                'announcement_date' => $newsValidate['date'],
                 'title' => $newsValidate['title'],
                 'content' => $newsValidate['content'],
             ]);

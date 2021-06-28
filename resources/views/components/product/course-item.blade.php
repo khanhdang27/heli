@@ -45,7 +45,6 @@
                 </div>
             </div>
         </div>
-
         <div class="bottom-product2 bg-white p-4">
             <div class="card-name-product d-flex justify-content-between">
                 <div class="name-product w-75 d-flex flex-column justify-content-between text-primary">

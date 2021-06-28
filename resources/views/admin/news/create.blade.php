@@ -9,12 +9,10 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-
                                 <!-- Title -->
                                 <h4 class="card-header-title">
                                     Create News
                                 </h4>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>
