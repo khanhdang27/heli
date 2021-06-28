@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogTags;
+use App\Models\File;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,20 +44,34 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $blog = new Blog([
-                'photo' => $request->file('photo')->store('photo'),
-                'title' => $request['title'],
-                'content' => $request['content']
-            ]
-        );
-        $blog->save();
-        foreach ($request['tag_id'] as $tag_id) {
-            $blogTag = new BlogTags([
-                'blog_id' => $blog->id,
-                'tag_id' => $tag_id
-            ]);
-            $blogTag->save();
+        DB::beginTransaction();
+        try {
+            $blog = Blog::create([
+                    'title' => $request['title'],
+                    'content' => $request['content']
+                ]
+            );
+            foreach ($request['tag_id'] as $tag_id) {
+                $blogTag = BlogTags::create([
+                    'blog_id' => $blog->id,
+                    'tag_id' => $tag_id
+                ]);
+            }
+            if (!empty($request['photo'])) {
+                $file = File::storeFile(
+                    $request['photo'],
+                    Blog::class,
+                    $blog->id,
+                );
+            }
+            
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+            return back()->with('errors', 'Create error');
         }
+        
         return back()->with('success', 'Create success');
     }
 

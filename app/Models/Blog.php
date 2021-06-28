@@ -14,4 +14,8 @@ class Blog extends Model
     public function tags() {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function photo(){
+        return $this->morphOne(File::class, 'fileable');
+    }
 }

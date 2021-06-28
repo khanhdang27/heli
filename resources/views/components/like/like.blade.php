@@ -4,15 +4,18 @@ use App\Models\Post;
 use App\Models\UserComment;
 use App\Models\UserLike;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
+
+$id_random = Str::random(2);
 
 $liked = $likeRef->likeable->firstWhere('user_id', Auth::user()->id);
 $component = explode('\\',$likeModule)[2];
 
 @endphp
-<button id="like_{{$component}}_{{$likeRef->id}}" class="mr-5 border-0 bg-white text-primary" v-on:click="clicklike">
+<button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="mr-5 border-0 bg-white text-primary" v-on:click="clicklike">
     <img class="ic-action"
-         id="like_style_{{$component}}_{{$likeRef->id}}"
+         id="like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}"
          src="{{ empty($liked) ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}}">
 
         @if($likeModule == Post::class || $likeModule== UserComment::class)
@@ -22,7 +25,7 @@ $component = explode('\\',$likeModule)[2];
 
 <script>
     var like = new Vue({
-        el: '#like_{{$component}}_{{$likeRef->id}}',
+        el: '#like_{{$component}}_{{$likeRef->id}}_{{$id_random}}',
         data: {
             return: true
         },
@@ -36,7 +39,7 @@ $component = explode('\\',$likeModule)[2];
                             like_module: String.raw`{{$likeModule}}`
                         }).then(function (response) {
                                 console.info(response);
-                                document.querySelector("#like_style_{{$component}}_{{$likeRef->id}}").src = "{{asset('images/ic/ic_fullHeart.svg')}}";
+                                document.querySelector("#like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}").src = "{{asset('images/ic/ic_fullHeart.svg')}}";
                                 document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no + 1}}";
                             })
                             .catch(function (error) {
@@ -49,7 +52,7 @@ $component = explode('\\',$likeModule)[2];
                             like_module: String.raw`{{$likeModule}}`
                         }).then(function (response) {
                                 console.info(response);
-                                document.querySelector("#like_style_{{$component}}_{{$likeRef->id}}").src = "{{asset('images/ic/ic_heart.svg')}}";
+                                document.querySelector("#like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}").src = "{{asset('images/ic/ic_heart.svg')}}";
                                 document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no - 1}}";
                             })
                             .catch(function (error) {

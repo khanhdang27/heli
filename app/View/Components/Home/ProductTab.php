@@ -16,12 +16,17 @@ class ProductTab extends Component
      *
      * @return void
      */
-    public function __construct($courses)
+    public function __construct(
+        $courseIGCSE,
+        $courseUKISET,
+        $courseIELTS,
+        $courseIAL
+    )
     {
-        $this->IGCSE = clone $courses; 
-        $this->UKISET = clone $courses; 
-        $this->IELTS = clone $courses; 
-        $this->IAL = clone $courses; 
+        $this->IGCSE = $courseIGCSE; 
+        $this->UKISET = $courseUKISET; 
+        $this->IELTS = $courseIELTS; 
+        $this->IAL = $courseIAL; 
     }
 
     /**
@@ -31,33 +36,12 @@ class ProductTab extends Component
      */
     public function render()
     {
-        // DB::enableQueryLog();
-
-        $this->IGCSE->whereHas('membershipCourses.course.subject.certificate', function ( $query )
-        {
-            return $query->where('id', 1);
-        })->get();
-        
-        $this->UKISET->whereHas('membershipCourses.course.subject.certificate', function ( $query )
-        {
-            return $query->where('id', 2);
-        })->get();
-        
-        $this->IELTS->whereHas('membershipCourses.course.subject.certificate', function ( $query )
-        {
-            return $query->where('id', 3);
-        })->get();
-        
-        $this->IAL->whereHas('membershipCourses.course.subject.certificate', function ( $query )
-        {
-            return $query->where('id', 4);
-        })->get();
 
         return view('components.home.product-tab',[
-            'courseIGCSE' => $this->IGCSE->get(),
-            'courseUKISET' => $this->UKISET->get(),
-            'courseIELTS' => $this->IELTS->get(),
-            'courseIAL' => $this->IAL->get(),
+            'courseIGCSE' => $this->IGCSE,
+            'courseUKISET' => $this->UKISET,
+            'courseIELTS' => $this->IELTS,
+            'courseIAL' => $this->IAL,
         ]);
     }
 }

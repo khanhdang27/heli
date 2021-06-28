@@ -26,7 +26,8 @@
                     @endforeach
                 </div>
                 <div class="w-100">
-                    <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block" src="{{Storage::url($blog->photo)}}">
+                    <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block" 
+                        src="{{asset('file/'.$blog->photo->id)}}">
                 </div>
             </div>
             <div class="text-dark">

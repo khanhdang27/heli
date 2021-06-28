@@ -61,8 +61,9 @@ class HomeController extends Controller
         $course_latest = clone $courses_with_group;
 
         $course_recommended = $course_recommended->where('recommended', 1)->get();
+
         $course_hot = $course_hot->where('hot', 1);
-        $course_welcomes = $course_welcomes->where('welcomes', true)->get();
+        $course_welcomes = $course_welcomes->where('welcomes', 1)->get();
         // DB::enableQueryLog();
 
         $course_latest = $course_latest->whereHas('courseDiscounts.discount', function($query){
@@ -70,9 +71,40 @@ class HomeController extends Controller
                 ->where('end_date','>=', DATE(NOW()));
         })->get();
 
+        $courseIGCSE= clone $course_hot;
+
+        $courseIGCSE->whereHas('membershipCourses.course.subject.certificate', function ( $query )
+        {
+            return $query->where('id', 1);
+        })->get();
+        
+        $courseUKISET= clone $course_hot;
+
+        $courseUKISET->whereHas('membershipCourses.course.subject.certificate', function ( $query )
+        {
+            return $query->where('id', 2);
+        })->get();
+        
+        $courseIELTS= clone $course_hot;
+
+        $courseIELTS->whereHas('membershipCourses.course.subject.certificate', function ( $query )
+        {
+            return $query->where('id', 3);
+        })->get();
+        
+        $courseIAL= clone $course_hot;
+
+        $courseIAL->whereHas('membershipCourses.course.subject.certificate', function ( $query )
+        {
+            return $query->where('id', 4);
+        })->get();
+
         // dd(DB::getQueryLog());
+
+
         $courseVideo = Course::with('tutor')->first();
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
+        
         return view('home.home-page',[
             'banners' => $banners,
             'courseVideo'=>$courseVideo,
@@ -81,7 +113,11 @@ class HomeController extends Controller
             'course_hot'=>$course_hot,
             'course_welcomes'=>$course_welcomes,
             'course_latest'=>$course_latest,
-            'subjects'=>$subjects
+            'subjects'=>$subjects,
+            'courseIGCSE' => $courseIGCSE->get(),
+            'courseUKISET' => $courseUKISET->get(),
+            'courseIELTS' => $courseIELTS->get(),
+            'courseIAL' => $courseIAL->get(),
         ]);
     }
 }

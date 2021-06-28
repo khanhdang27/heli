@@ -11,10 +11,10 @@ use App\Utilities\SelectionByClass;
         <span><img src="images/ic/ic-collapse.png" width="35"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <form class="form-inline my-1 mr-1" id="certificate_form">
+        <form class="form-inline my-1 mr-1" name="" id="certificate_form">
             <select form="certificate_form" class="form-control" name="certificate" onchange="this.form.submit()">
                 @foreach (SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id') as $key => $value)
-                    <option value="{{ $key }}" selected={{ $subjects[0]->certificate_id == $key ? 'selected' : null}} >{{ $value }}</option>
+                <option value="{{ $key }}" {{ $subjects[0]->certificate_id == $key ? 'selected="selected"' : null}} >{{ $value }}</option>
                 @endforeach
             </select>
         </form>
@@ -36,3 +36,4 @@ use App\Utilities\SelectionByClass;
         </form>
     </div>
 </nav>
+

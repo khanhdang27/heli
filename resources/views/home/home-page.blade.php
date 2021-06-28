@@ -46,7 +46,7 @@
             </div>
         @endif
         <div class="product-tab">
-            <x-home.product-tab :courses=$course_hot typeOfUI="hot"></x-home.product-tab>
+            <x-home.product-tab :courseIGCSE=$courseIGCSE :courseUKISET=$courseUKISET :courseIELTS=$courseIELTS :courseIAL=$courseIAL typeOfUI="hot"></x-home.product-tab>
         </div>
         @if(!Auth::check())
             <x-home.step-register></x-home.step-register>
