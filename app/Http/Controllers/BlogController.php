@@ -120,18 +120,21 @@ class BlogController extends Controller
     public function showBlogPage()
     {
         $blog_top = Blog::with('tags')->orderBy('view_no','desc')->first();
-        $blogs = Blog::with('tags')->orderBy('view_no','desc')->get();
-        $blog = Blog::with('tags')->orderBy('created_at','desc')->get();
-
+        $blogs_list = Blog::with('tags')->orderBy('view_no','desc')->get();
+        $blog_latest = Blog::with('tags')->orderBy('created_at','desc')->get();
+        $tags = Tag::where('tag_type',Tag::$BLOG)->get();
         return view('blog.blog-page',[
             'blog_top' => $blog_top,
-            'blog' => $blog,
-            'blogs' => $blogs
+            'blog' => $blog_latest,
+            'blogs' => $blogs_list,
+            'tags' => $tags
         ]);
     }
 
     public function viewBlog($id){
         $blogs = Blog::where('id',$id)->with('tags')->first();
+        $blogs->view_no = $blogs->view_no + 1;
+        $blogs->save();
         return view('blog.blog-view',[
             'blog'=>$blogs
         ]);

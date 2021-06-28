@@ -2049,7 +2049,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
   // Private data
 
   /* Library defaults, can be changed using the 'defaults' member method,
-   - api_url (string), vimeo api url
+    - api_url (string), vimeo api url
   - name (string), default video name
   - description (string), default video description
   - contentType (string), video content type
@@ -2063,7 +2063,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
   - onComplete (function), handler for onComplete event
   - onProgress (function), handler for onProgress event
   - onError (function), handler for onError event
-   */
+    */
 
 
   var defaults = {
@@ -2134,9 +2134,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof
 
   /*
     Override class defaults
-       Parameters:
+        Parameters:
       - opts (object): name value pairs
-   */
+    */
 
 
   me.prototype.defaults = function (opts) {

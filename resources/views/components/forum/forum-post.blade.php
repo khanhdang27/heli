@@ -33,7 +33,7 @@
         </div>
         <div class="col-xl-3 d-flex flex-column justify-content-between align-items-end">
             <div class="pt-3">
-                <button class="btn-hashtag text-20">
+                <button class="btn-hashtag h3">
                     {{$post->postTag->tag_name}}
                 </button>
             </div>

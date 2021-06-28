@@ -10,12 +10,12 @@
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.blog-page.learningColumn')
         </div>
-        <div class="container-fluid pb-5 body-content w-75">
-            <div class="pt-5 text-primary text-30">
-                <p>{{$blog->title}}</p>
-                <div class="d-flex">
-                    <p class="text-20 text-primary mr-5">{{ substr($blog->created_at,0,10) }}</p>
-                    <p class="text-20 text-primary"><img src="{{asset("images/ic/ic_eyeBlue.svg")}}" width="26">{{$blog->view_no}}</p>
+        <div class="container-fluid pb-5 w-75 bg-white">
+            <div class="pt-5 text-primary">
+                <p class="h1">{{$blog->title}}</p>
+                <div class="d-flex h4">
+                    <p class="mr-5">{{ substr($blog->created_at,0,10) }}</p>
+                    <p><img src="{{asset("images/ic/ic_eyeBlue.svg")}}" width="26">{{$blog->view_no}}</p>
                 </div>
 
                 <div class="d-flex flex-wrap justify-content-end">

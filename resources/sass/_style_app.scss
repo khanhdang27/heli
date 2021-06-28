@@ -71,6 +71,9 @@ html {
 .list-news {
     height: 20rem;
     overflow-y: auto;
+    a:hover{
+        text-decoration: none;
+    }
 }
 
 form#certificate_form {
@@ -186,7 +189,11 @@ form#certificate_form {
 .btn-hashtag {
     background-color: var(--primary);
     color: var(--white);
-
+    font-size: 16pt;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 28px;
+    margin: 0 0.5rem 0.5rem 0;
     a {
         text-decoration: none;
     }
@@ -198,7 +205,9 @@ form#certificate_form {
     background-color: var(--dark);
     color: var(--white);
 }
-
+.btn-hashtag:focus {
+    outline: none;
+}
 .btn-hashtag-small {
     background-color: var(--white);
     font-size: 12px;
@@ -211,7 +220,6 @@ form#certificate_form {
 }
 
 .btn-read-more {
-    font-size: 33.8pt;
     color: var(--primary);
     background-color: var(--white);
     border: 2px solid var(--primary);
@@ -522,7 +530,7 @@ form#certificate_form {
 
 }
 
-/*STEP FOR REGISTER-----------------------------------------*/
+/*NEWS PAGE-----------------------------------------*/
 .body-news-page {
     background-image: url("../images/BG_news.jpg");
     background-repeat: no-repeat;
@@ -549,8 +557,37 @@ form#certificate_form {
         }
     }
 }
+/*BLOG PAGE-----------------------------------------*/
+.info-article {
+    min-height: 185px;
+    background-color: rgba(15, 34, 51, 0.6);
+    a{
+        color: white;
+    }
+    a:hover{
+        text-decoration: none;
+        color: var(--secondary);
+    }
+}
+.post-spotlight {
+    height: 750px !important;
+}
 
+.popular-articles-item-image {
+    flex: 0 40%;
+}
 
+.popular-articles-item-content {
+    flex: 0 60%;
+    a:hover{
+        text-decoration: none;
+    }
+}
+
+.popular-articles-right {
+    max-height: 750px;
+    overflow-y: auto;
+}
 
 
 

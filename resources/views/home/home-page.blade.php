@@ -10,20 +10,12 @@
             <x-home.banner :banner=$banners></x-home.banner>
         @else
             <br>
-            <div class="container pt-5">
+            <div class="container pt-5 mt-5">
                 <h1 class="text-center text-secondary">
                     @lang('keywords.latestNewsPage')
                 </h1>
-                <div class="list-news w-50 mx-auto">
-                    @foreach($news as $item)
-                    <h3 class="text-primary">
-                        <a class="text-primary">
-                            {{substr($item->updated_at,-14,6)}}
-                            {{$item->title}}
-                        </a>
-                    </h3>
-                    @endforeach
-                </div>
+                <hr class="border-secondary">
+                <x-news.news :news=$news></x-news.news>
             </div>
             <!-- #endregion -->
         @endif

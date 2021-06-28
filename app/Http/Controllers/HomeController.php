@@ -33,10 +33,12 @@ class HomeController extends Controller
             $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query){
                 return $query->where('id', 1);
             })->get();
+        }else {
+            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query) use ($input){
+                return $query->where('id', $input['certificate']);
+            })->get();
         }
-        $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query) use ($input){
-            return $query->where('id', $input['certificate']);
-        })->get();
+
         $banners = Banner::query()->first();
 
         $courses_with_group = CourseMembershipDiscount::with(
@@ -57,7 +59,7 @@ class HomeController extends Controller
         $course_hot = clone $courses_with_group;
         $course_welcomes = clone $courses_with_group;
         $course_latest = clone $courses_with_group;
-        
+
         $course_recommended = $course_recommended->where('recommended', 1)->get();
         $course_hot = $course_hot->where('hot', 1);
         $course_welcomes = $course_welcomes->where('welcomes', true)->get();
