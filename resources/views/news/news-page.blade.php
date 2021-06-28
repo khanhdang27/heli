@@ -19,9 +19,6 @@
                                 </h2>
                             </a>
                         @endforeach
-                        <a href="#">
-                            <h2>12/06 【英國留學費用】英國升學讀書一年費用要幾錢? (大學學費+租金+生活費)</h2>
-                        </a>
                     </div>
 
 {{--                    <div class="d-flex justify-content-center bottom-collapse">--}}

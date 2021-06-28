@@ -5,8 +5,8 @@
 
     <div class="popular-articles-item-content">
         <div class="card-body">
-            <a href="{{route('site.view-blog',$item->id)}}" class="text-30">
-                {{$item->title}}
+            <a href="{{route('site.view-blog',$item->id)}}">
+                <h1 class="font-weight-normal">{{$item->title}}</h1>
             </a>
             <p class="card-text">
                 <span>{{ substr($item->created_at,0,10) }}</span><img class="ml-5"
