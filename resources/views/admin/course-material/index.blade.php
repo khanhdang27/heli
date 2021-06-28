@@ -66,7 +66,7 @@
                                         <td class="goal-project">
 {{--                                            {{ $value->material_file }}--}}
                                         </td>
-                                        <td>
+                                        <td class="text-description">
                                             {{ $value->translate('en')->course_material_description }}
                                         </td>
                                         <td>
@@ -84,7 +84,7 @@
                                                         class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    
+
                                                     <a href="javascript:void(0)"
                                                         onclick="itemDelete('{{ route('admin.course-material.destroy', $value->id) }}')"
                                                         class="dropdown-item delete-item">

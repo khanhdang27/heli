@@ -38,20 +38,20 @@
                                 {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
                                 {{ Form::text('course_name:sc', $course->translate('sc')->course_name, ['class' => 'form-control']) }}
                             </div>
-                            <div class="d-flex flex-wrap justify-content-between">
-                                <div class="form-group w-25">
+                            <div class="row justify-content-between">
+                                <div class="form-group col-12 col-md-4">
                                     {{ Form::label('subject_id', 'Subject') }}
                                     {{ Form::select('subject_id',
                                         SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),
                                         $course->subject->id, ['class' => 'form-control']) }}
                                 </div>
-                                <div class="form-group w-25">
+                                <div class="form-group col-12 col-md-4">
                                     {{ Form::label('tutor_id', 'Tutor') }}
                                     {{ Form::select('tutor_id',
                                         SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'),
                                         $course->tutor->id, ['class' => 'form-control']) }}
                                 </div>
-                                <div class="form-group w-25">
+                                <div class="form-group col-12 col-md-4">
                                     {{ Form::label('type', 'Type') }}
                                     {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],$course->type,['class'=>'form-control']) }}
                                 </div>

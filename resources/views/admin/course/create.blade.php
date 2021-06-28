@@ -40,16 +40,16 @@
                                 {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
                                 {{ Form::text('course_name:sc',old('course_name:sc'),['class' => 'form-control', 'required']) }}
                             </div>
-                            <div class="d-flex flex-wrap justify-content-between">
-                                <div class="form-group w-25">
+                            <div class="row justify-content-between">
+                                <div class="form-group col-12 col-md-4">
                                     {{ Form::label('subject_id', 'Subject') }}
                                     {{ Form::select('subject_id', SelectionByClass::getValues(Subject::class,'subject_name','id') ,null, ['class' => 'form-control']) }}
                                 </div>
-                                <div class="form-group w-25">
+                                <div class="form-group col-12 col-md-4">
                                     {{ Form::label('tutor_id', 'Tutor') }}
                                     {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
                                 </div>
-                                <div class="form-group w-25">
+                                <div class="form-group col-12 col-md-4">
                                     {{ Form::label('type', 'Type') }}
                                     {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],null,['class'=>'form-control']) }}
                                 </div>

@@ -11,7 +11,7 @@
             @lang('keywords.blog-page.learningColumn')
         </div>
         <div class="container-fluid pb-5 body-content w-75">
-            <div class="pt-5 text-primary text-30">
+            <div class="pt-5 text-primary h1">
                 <p>{{$blog->title}}</p>
                 <div class="d-flex">
                     <p class="text-20 text-primary mr-5">{{ substr($blog->created_at,0,10) }}</p>

@@ -56,7 +56,7 @@
                                 <tbody class="list">
                                 @foreach($blogs as $value)
                                     <tr>
-                                        <td class="goal-project">
+                                        <td class="goal-project text-description">
                                             {{$value->title}}
                                         </td>
                                         <td class="goal-project">
@@ -85,7 +85,7 @@
                                                         class="dropdown-item delete-item">
                                                             Delete
                                                     </a>
-                                                    
+
                                                 </div>
                                             </div>
                                         </td>
