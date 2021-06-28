@@ -14,6 +14,6 @@ class Certificate extends Model
 
     public function subject()
     {
-        return $this->hasMany(Subject::class, 'subject_id');
+        return $this->hasMany(Subject::class);
     }
 }

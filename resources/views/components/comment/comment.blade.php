@@ -1,9 +1,7 @@
 <div class="card container p-3">
-    <div class="card-header">
-        <h5 class="text-primary">
-            Add your answer
-        </h5>
-    </div>
+    <h5 class="text-primary">
+        Add your answer
+    </h5>
     {!! Form::open(['url' => URL::route('site.comment.store',['type'=>'post', 'ref'=>0]),
                 'enctype' => 'multipart/form-data', 'class' => 'form-inline justify-content-end']) !!}
     <div class="form-group w-50">

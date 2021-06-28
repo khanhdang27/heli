@@ -11011,6 +11011,10 @@ html {
   overflow-y: auto;
 }
 
+.list-news a:hover {
+  text-decoration: none;
+}
+
 form#certificate_form select {
   font-size: 13pt;
   border: 0px var(--dark) solid;
@@ -11116,6 +11120,11 @@ form#certificate_form select option:checked {
 .btn-hashtag {
   background-color: var(--primary);
   color: var(--white);
+  font-size: 16pt;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 28px;
+  margin: 0 0.5rem 0.5rem 0;
 }
 
 .btn-hashtag a {
@@ -11127,6 +11136,10 @@ form#certificate_form select option:checked {
   text-decoration: none;
   background-color: var(--dark);
   color: var(--white);
+}
+
+.btn-hashtag:focus {
+  outline: none;
 }
 
 .btn-hashtag-small {
@@ -11141,7 +11154,6 @@ form#certificate_form select option:checked {
 }
 
 .btn-read-more {
-  font-size: 33.8pt;
   color: var(--primary);
   background-color: var(--white);
   border: 2px solid var(--primary);
@@ -11792,6 +11804,138 @@ form#certificate_form select option:checked {
 .top-video {
   max-width: 1554px;
   margin-left: 5rem;
+}
+
+/*NEWS PAGE-----------------------------------------*/
+
+.body-news-page {
+  background-image: url(/images/BG_news.jpg?a21fac5423436d9cdd592352005542b4);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.body-news-page .container-news-page {
+  padding-bottom: 7rem;
+}
+
+.body-news-page .container-news-page .content-news-page {
+  margin-top: 8rem;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+}
+
+.body-news-page .container-news-page .content-news-page .show-news-item {
+  margin: 0 auto;
+  height: 320px;
+  width: 650px;
+  overflow-y: auto;
+}
+
+.body-news-page .container-news-page .content-news-page .show-news-item a:hover {
+  text-decoration: none;
+}
+
+/*BLOG PAGE-----------------------------------------*/
+
+.info-article {
+  min-height: 185px;
+  background-color: rgba(15, 34, 51, 0.6);
+}
+
+.info-article a {
+  color: white;
+}
+
+.info-article a:hover {
+  text-decoration: none;
+  color: var(--secondary);
+}
+
+.post-spotlight {
+  height: 750px !important;
+}
+
+.popular-articles-item-image {
+  flex: 0 40%;
+}
+
+.popular-articles-item-content {
+  flex: 0 60%;
+}
+
+.popular-articles-item-content a:hover {
+  text-decoration: none;
+}
+
+.popular-articles-right {
+  max-height: 750px;
+}
+
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #fad000;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #fad000;
 }
 
 

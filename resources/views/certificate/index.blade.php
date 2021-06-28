@@ -12,7 +12,7 @@
             <div class="title-subject text-primary text-center">
                 {{$certificate->certificate_name}}
             </div>
-            <div class="container-fluid text-primary mb-4 d-flex">
+            <div class="container-fluid text-primary mb-4 d-flex h2">
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form>
                     <label class="radio-inline mr-5">
@@ -32,12 +32,17 @@
                     </label>
                 </form>
             </div>
-            <div class="container-fluid">
-                <h1 class="text-primary" id="tab-title">
-                    英文
-                </h1>
-                <x-product.course-list :courses=$courses typeOfUI="certificate_filter"></x-product.course-list>
-            </div>
+            @foreach( $certificate->subject as $subject)
+                @php
+                $course = $courses->where('membershipCourses.course.subject_id',$subject->id)
+                @endphp
+                <div class="container-fluid">
+                    <h1 class="text-primary" id="tab-title">
+                        {{$subject->subject_name}}
+                    </h1>
+                    <x-product.course-list :courses=$course typeOfUI="certificate_filter"></x-product.course-list>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection

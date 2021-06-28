@@ -61,10 +61,11 @@ class CertificateController extends Controller
      */
     public function show(Certificate $certificate)
     {
+        $_certificate = Certificate::with('subject')->where('id', $certificate->id)->first();
         DB::enableQueryLog();
         $courses_with_group = CourseMembershipDiscount::with(
             'membershipCourses',
-            'courseDiscounts', 
+            'courseDiscounts',
             'membershipCourses.course',
             'membershipCourses.course.subject',
             'membershipCourses.course.subject.certificate',
@@ -77,12 +78,12 @@ class CertificateController extends Controller
         ->whereHas('membershipCourses.course.subject.certificate', function ($query) use ($certificate){
             return $query->where('id', $certificate->id);
          })->get();
-
+//        dd($courses_with_group);
         // dd(DB::getQueryLog());
 
         return view('certificate.index', [
             'courses' => $courses_with_group,
-            'certificate' => $certificate
+            'certificate' => $_certificate
         ]);
     }
 

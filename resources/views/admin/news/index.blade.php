@@ -50,7 +50,7 @@
                                 @foreach($news as $value)
                                     <tr>
                                         <td>
-                                            {{$value->date}}
+                                            {{$value->announcement_date}}
                                         </td>
                                         <td>
                                             {{$value->title}}

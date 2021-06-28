@@ -43,7 +43,7 @@ class NewsController extends Controller
     {
 
         $newsValidate = $request->validate([
-            'date' => 'required',
+            'announcement_date' => 'required',
             'title' => 'required',
             'content' => 'required',
             'file' => 'file|required'
@@ -52,7 +52,7 @@ class NewsController extends Controller
         try {
 
             $news = News::create([
-                'announcement_date' => $newsValidate['date'],
+                'announcement_date' => $newsValidate['announcement_date'],
                 'title' => $newsValidate['title'],
                 'content' => $newsValidate['content'],
             ]);
@@ -82,6 +82,7 @@ class NewsController extends Controller
     public function show()
     {
         $news = News::query()->orderByDesc('created_at')->get();
+
         return view('news.news-page',[
             'news' => $news
         ]);

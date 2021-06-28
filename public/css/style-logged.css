@@ -1,9 +1,283 @@
+.info-tutor {
+    width: 100%;
+    min-height: 93px;
+    max-height: 250px;
+    position: absolute;
+    overflow-y: auto;
+    bottom: 0;
+    background-color: rgba(15, 34, 51, 0.6);
+}
+.tutor-background{
+    height: 514px;
+}
+.name-tutor {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.position-tutor {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.info-left {
+    position: relative;
+    height: 514px;
+}
+
+.info-right {
+    height: 514px;
+}
+
+.content-info-right {
+    max-width: 100%;
+    max-height: 420px;
+    overflow-y: auto;
+    font-size: 20px;
+}
+
+.bottom-info-right {
+    margin: 0 0.8rem 0.8rem 0;
+}
+
+.ic-tutor img {
+    width: 59px;
+}
+
+.ic-tutor {
+    margin-right: 0.78rem;
+}
+
+
+/*SUB HEADER------------------------------------------------------------------------------------------*/
+
+.sub-header {
+    width: 100%;
+    border: 2px solid;
+    background-color: rgba(15, 34, 51, 0.8);
+}
+
+.left-sub {
+    width: 75%;
+}
+
+.right-sub {
+    width: 25%;
+}
+
+
+/*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
+
+.title-subject {
+    font-size: 33.8pt;
+    padding: 3rem 0;
+    font-weight: 600;
+}
+
+.sort {
+    font-size: 18.5pt;
+    max-width: 1767px;
+}
+
+.btn-sort {
+    width: 30px;
+    height: 20px;
+}
 
 
 
+/*COURSE PAGE-------------------------------------------------------------------------------*/
+
+.show-menu-tab {
+    max-width: 1500px;
+}
+
+.product {
+    max-width: 508px;
+    border: 3px solid;
+}
+
+.product-btn {
+    font-size: 21pt;
+    padding: 0.5rem 0 !important;
+}
+
+.share-bar {
+    margin-top: 2rem;
+}
 
 
+.tab-item-content {
+    max-width: 846px;
+}
+
+.content-info {
+    font-size: 16pt;
+}
+
+.text-intro {
+    font-size: 16pt;
+}
+
+.bottom-package {
+    font-size: 17pt;
+    padding-top: 3rem;
+}
+
+.text-20-blue {
+    font-size: 15pt;
+}
+
+.text-20-blue:hover {
+    text-decoration: none;
+}
+
+.content-review {
+    font-size: 18.7pt;
+}
+
+.avatar-review {
+    width: 147px;
+}
+
+.reviews {
+    max-width: 785px;
+    padding-bottom: 0.8rem;
+}
+
+.name-guest {
+    font-size: 18.7pt;
+    font-weight: 600;
+}
+
+.point {
+    font-size: 12.8pt;
+}
+
+.name-course {
+    font-size: 13.5pt;
+}
+
+.document-image:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
 
 
+/*COURSE PAGE 2-------------------------------------------------------------------------------*/
+
+.info-course {
+    width: 1500px;
+}
+
+.course {
+    max-width: 477px;
+}
+
+.info-course-right {
+    max-width: 421px;
+}
+
+.quantity {
+    font-size: 12pt;
+}
+
+.text25 {
+    font-size: 18.7pt;
+}
+
+.course-box {
+    max-width: 390px;
+    height: 421px;
+}
+
+.responsive {
+    width: 100%;
+    max-width: 368px;
+}
+
+.ava-responsive {
+    width: 100%;
+    max-width: 386px;
+    height: auto;
+}
 
 
+/*COURSE PAGE 3-------------------------------------------------------------------------------*/
+
+.video {
+    max-width: 1550px;
+}
+
+
+/*BLOG PAGE----------------------------------------------------------------*/
+.text-40 {
+    font-size: 30pt;
+    font-weight: 600;
+}
+
+.popular-item {
+    max-width: 100%;
+    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+}
+
+#latest {
+    height: 750px;
+}
+
+.thumb-article {
+    width: 100%;
+    height: 100%;
+}
+
+.main-photo {
+    height: 750px;
+}
+
+
+.text-12 {
+    font-size: 9pt;
+}
+
+.btn-hashtag-small:hover {
+    cursor: pointer;
+}
+
+.btn-hashtag-small:focus {
+    outline: none;
+}
+
+.text-30 {
+    font-size: 22.5pt;
+    color: #0B487D;
+    font-weight: 600;
+}
+
+.info-article-right {
+    width: 100%;
+}
+
+.list-article {
+    max-height: 800px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+
+/*FORUM PAGE-------------------------------------------------------------------*/
+
+.body-forum-page {
+    max-width: 75%;
+}
+
+.img-question {
+    width: 60%;
+}
+
+.ic-action {
+    width: 48px;
+}
+
+.row-question {
+    border-bottom: 1px solid;
+}

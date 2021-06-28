@@ -2,7 +2,7 @@
     use App\Utilities\SelectionByClass;
 @endphp
 <div>
-    <div class="container-fluid bg-dark p-1">
+    <div class="container-fluid bg-dark p-1 text-center">
         <span class="text-white text-justify text-center">
             <img src={{asset("images/ic/ic_wireless.svg")}}>【IELTS】新型冠狀病毒影響下的最新考試安排 ⾦鐘及尖沙咀英語教學中⼼暫停向公眾開放 ，直⾄另⾏通知 。如有其他需要，必須預約才可進入⼤樓 。更新⽇期: 2021年1⽉8⽇星期五
         </span>

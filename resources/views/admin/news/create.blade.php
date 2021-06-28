@@ -20,9 +20,9 @@
                         <div class="card-body">
                             {!! Form::open(['route' => 'admin.news.store', 'enctype' => 'multipart/form-data' ]) !!}
                             <div class="form-group">
-                                {{ Form::label('date', 'Date') }}
-                                {{ Form::date('date', old('date'),['class' => 'form-control'] ) }}
-                                @error('date')
+                                {{ Form::label('announcement_date', 'Date') }}
+                                {{ Form::date('announcement_date',null,['class' => 'form-control'] ) }}
+                                @error('announcement_date')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

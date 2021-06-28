@@ -49,14 +49,14 @@
         </div>
 
     </div>
-@php
-    $tkb[0] = array('start'=>'2021-06-14T13:00:00', 'end'=>'2021-06-14T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-    $tkb[1] = array('start'=>'2021-06-16T13:00:00', 'end'=>'2021-06-16T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-    $tkb[2] = array('start'=>'2021-06-18T13:00:00', 'end'=>'2021-06-18T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-    $tkb[3] = array('start'=>'2021-06-20T13:00:00', 'end'=>'2021-06-20T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-    $tkb[4] = array('start'=>'2021-06-22T13:00:00', 'end'=>'2021-06-22T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-    $tkb[5] = array('start'=>'2021-06-24T13:00:00', 'end'=>'2021-06-24T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-@endphp
+    @php
+        $tkb[0] = array('start'=>'2021-06-14T13:00:00', 'end'=>'2021-06-14T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[1] = array('start'=>'2021-06-16T13:00:00', 'end'=>'2021-06-16T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[2] = array('start'=>'2021-06-18T13:00:00', 'end'=>'2021-06-18T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[3] = array('start'=>'2021-06-20T13:00:00', 'end'=>'2021-06-20T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[4] = array('start'=>'2021-06-22T13:00:00', 'end'=>'2021-06-22T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[5] = array('start'=>'2021-06-24T13:00:00', 'end'=>'2021-06-24T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+    @endphp
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
@@ -67,22 +67,27 @@
                     center: 'prev title next',
                     right: null
                 },
+                googleCalendarApiKey: 'AIzaSyD7TfsO9cuJatNQyxQOcS5kAkFK8enPWF8',
                 initialDate: '{{date('Y-m-d')}}',
                 businessHours: true, // display business hours
                 selectable: true,
                 fixedWeekCount: false,
                 displayEventEnd: true,
+                eventSources: [{
+                    googleCalendarId: 'en.hong_kong.official#holiday@group.v.calendar.google.com',
+                },
+                    [
+                        @php
+                            foreach ($tkb as $e){
+                                echo('{');
+                                echo("title: '{$e['title']}',");
+                                echo("start: '{$e['start']}',");
+                                echo("end: '{$e['end']}',");
+                                echo('},');
+                            }
+                        @endphp
+                    ],
 
-                events: [
-                    @php
-                        foreach ($tkb as $e){
-                            echo('{');
-                            echo("title: '{$e['title']}',");
-                            echo("start: '{$e['start']}',");
-                            echo("end: '{$e['end']}',");
-                            echo('},');
-                        }
-                    @endphp
                 ],
                 eventTimeFormat: { // like '14:30:00'
                     hour: '2-digit',

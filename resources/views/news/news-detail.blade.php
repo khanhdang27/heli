@@ -8,16 +8,17 @@
             @lang('keywords.latestNewsPage')
         </div>
         <div class="container-fluid pb-5 body-content w-75">
-            <div class="pt-5 text-primary text-30">
-                <p>{{$news->date}} {{$news->title}}</p>
+            <div class="pt-5 text-primary">
+                <h2>{{$news->announcement_date}} {{$news->title}}</h2>
                 <div class="d-flex">
-                    <p class="text-20 text-primary mr-5">{{ substr($news->created_at,0,10) }}</p>
+                    <p class="text-primary mr-5">{{ substr($news->created_at,0,10) }}</p>
                 </div>
             </div>
+            <div class="mb-3 w-75 mx-auto">
+                <img src="{{ asset('/file/'.$news->file_ref->id)}}" width=100%>
+            </div>
             <div class="text-dark">
-                <span>
-                    {!! $news->content !!}
-                </span>
+                {!! $news->content !!}
             </div>
         </div>
     </div>
