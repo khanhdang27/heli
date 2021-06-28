@@ -8,7 +8,7 @@
     <div class="banner-info">
         <div class="banner-caption text-secondary">
             <div class="banner-title">
-                <p>{{ $banner->banner_title ?? null }}</p>
+                <p id="title-home-page">{{ $banner->banner_title ?? null }}</p>
             </div>
         </div>
         <div class="btn-register-free">
@@ -19,3 +19,4 @@
         </div>
     </div>
 </div>
+

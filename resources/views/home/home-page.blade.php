@@ -73,7 +73,7 @@
             <div class="mx-auto container-video border-secondary mt-5 pb-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
                     <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
-                    <button class="m-0 btn-register-now text-25 text-white btn-dark-blue btn-dark">
+                    <button class="m-0 btn-register-now h1 text-white btn-dark-blue btn-dark">
                         @lang('keywords.otherPurchasedCourses')
                     </button>
                 </div>
@@ -107,3 +107,30 @@
         @endif
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(function() {
+            var $quote = $("#title-home-page");
+
+            var $numWords = $quote.text().split(" ").length;
+            console.log($numWords);
+
+            if (($numWords >= 1) && ($numWords < 10)) {
+                $quote.css("font-size", "36px");
+            }
+            else if (($numWords >= 10) && ($numWords < 20)) {
+                $quote.css("font-size", "32px");
+            }
+            else if (($numWords >= 20) && ($numWords < 30)) {
+                $quote.css("font-size", "28px");
+            }
+            else if (($numWords >= 30) && ($numWords < 40)) {
+                $quote.css("font-size", "24px");
+            }
+            else {
+                $quote.css("font-size", "20px");
+            }
+
+        });
+    </script>
+@endpush
