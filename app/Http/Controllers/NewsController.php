@@ -41,23 +41,21 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+
         $newsValidate = $request->validate([
             'date' => 'required',
             'title' => 'required',
             'content' => 'required',
             'file' => 'file|required'
         ]);
-
         DB::beginTransaction();
         try {
 
-            $news = new News([
+            $news = News::create([
                 'announcement_date' => $newsValidate['date'],
                 'title' => $newsValidate['title'],
                 'content' => $newsValidate['content'],
             ]);
-            $news->save();
-
             $file = File::storeFile(
                 $newsValidate['file'],
                 News::class,

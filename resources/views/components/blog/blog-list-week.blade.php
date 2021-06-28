@@ -5,7 +5,7 @@
 
     <div class="popular-articles-item-content">
         <div class="card-body">
-            <a href="{{route('site.view-blog',$item->id)}}" class="text-30">
+            <a href="{{route('site.view-blog',$item->id)}}" class="h1">
                 {{$item->title}}
             </a>
             <p class="card-text">

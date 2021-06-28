@@ -55,7 +55,7 @@
                                                 src="{{ route('file.show', ['file'=> $value->image])}}"
                                                 width="50px;" height="60px;" alt="">
                                         </td>
-                                        <td>
+                                        <td class="text-description">
                                             {{$value->banner_title}}
                                         </td>
                                         <td class="text-right">

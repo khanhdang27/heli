@@ -58,7 +58,7 @@ class CourseMaterialController extends Controller
             $request->validated()
         );
         $course_material->save();
-        return back()->with('success', 'Delete success');
+        return back()->with('success', 'Create success');
     }
 
     /**
