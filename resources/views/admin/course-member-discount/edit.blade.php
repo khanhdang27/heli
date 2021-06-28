@@ -24,15 +24,32 @@
                 </div>
                 <div class="card-body">
                     {!! Form::open(['route' => ['admin.price-tag.update', $price_tag->id], 'method'=> 'put']) !!}
-                    <div class="form-group">
-                        {{ Form::label('recommend', 'Recommend') }}
-                        <br>
-                        {{ Form::radio('recommend', true, $price_tag->recommended == 1, ['id'=>'recommend_yes']) }} <label for="recommend_yes">yes</label>
-                        <br>
-                        {{ Form::radio('recommend', false, $price_tag->recommended == 0,['id'=>'recommend_no']) }} <label for="recommend_no">no</label>
-                        @error('recommend')
-                            <div class="alert text-danger">{{ $message }}</div>
-                        @enderror
+                    <div class="row">
+                        <div class="form-group col-4">
+                            {{ Form::label('recommend', 'Recommend') }}
+                            <br>
+                            {{ Form::checkbox('recommend', true, $price_tag->recommended == 1, ['data-toggle'=>"toggle"]) }}
+                            @error('recommend')
+                                <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group col-4">
+                            {{ Form::label('welcomes', 'Welcomes') }}
+                            <br>
+                            {{ Form::checkbox('welcomes', true, $price_tag->welcomes == 1, ['data-toggle'=>"toggle"]) }}
+                           
+                            @error('welcomes')
+                                <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group col-4">
+                            {{ Form::label('hot', 'Hot') }}
+                            <br>
+                            {{ Form::checkbox('hot', true, $price_tag->hot == 1, ['data-toggle'=>"toggle"]) }}
+                            @error('hot')
+                                <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     <div class="form-group">
                         {{ Form::label('description', 'Description') }}

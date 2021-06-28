@@ -42,7 +42,10 @@ class HomeController extends Controller
         $courses_with_group = CourseMembershipDiscount::with(
             'membershipCourses',
             'courseDiscounts',
+<<<<<<< HEAD
+=======
             'courseDiscounts.discount',
+>>>>>>> temp_master
             'membershipCourses.course',
             'membershipCourses.course.subject',
             'membershipCourses.course.subject.certificate',
@@ -51,6 +54,10 @@ class HomeController extends Controller
         )
         ->whereHas('membershipCourses', function ($query) {
             return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+<<<<<<< HEAD
+         })->get();
+
+=======
         });
 
         $course_recommended = clone $courses_with_group;
@@ -69,6 +76,7 @@ class HomeController extends Controller
         })->get();
 
         // dd(DB::getQueryLog());
+>>>>>>> temp_master
         $courseVideo = Course::with('tutor')->first();
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
         return view('home.home-page',[

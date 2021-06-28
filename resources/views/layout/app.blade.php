@@ -19,27 +19,29 @@
     <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
 </head>
 <body>
-@include('layout.header')
+    @include('layout.header')
 
-@yield('content')
-<script src="{{ asset('js/jquery-3.6.0.min.js')}}"></script>
-<script src="{{ asset('js/bootstrap.min.js')}}"></script>
-<script src="{{ asset('js/lib/main.js')}}"></script>
-<script src="{{ asset('js/home/app.js')}}"></script>
-<script src="{{ asset('js/toastr.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-@stack('likePost')
-@include('layout.footer')
-</div>
+    @yield('content')
 
-@stack('scripts')
-<script>
-    showSubjectNav("{{ route('site.get_subject_by_parent', '') }}", "{{ route('site.subject.show', '') }}")
-</script>
-@stack('scriptsLogin')
-@stack('inputFile')
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/lib/main.js') }}"></script>
+    <script src="{{ asset('js/home/app.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
 
+    @stack('likePost')
+    @stack('scripts')
+    @stack('scriptsLogin')
+    @stack('inputFile')
+
+    <script>
+        showSubjectNav("{{ route('site.get_subject_by_parent', '') }}", "{{ route('site.subject.show', '') }}")
+    </script>
+
+    
+    @include('layout.footer')
 </body>
 </html>

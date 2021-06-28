@@ -87,14 +87,12 @@ class CourseController extends Controller
                 $input
             );
             $memberships = Membership::all();
-    
             foreach ( $memberships as $membership ) {
                 $membershipCourse = MembershipCourse::create([
                     'membership_id'=> $membership->id,
                     'course_id' => $course->id,
                     'price_value' => $course->course_price
                 ]);
-
                 CourseMembershipDiscount::create([
                     'membership_course_id' => $membershipCourse->id,
                 ]);
@@ -104,7 +102,6 @@ class CourseController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('errors', 'Create Error!');
-
         }
     }
 
@@ -215,7 +212,6 @@ class CourseController extends Controller
     {
         $input = $request->input();
         DB::beginTransaction();
-
         try {
             $lecture = Lecture::create([
                 'course_id' => $course->id,

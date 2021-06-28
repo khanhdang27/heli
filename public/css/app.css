@@ -11239,7 +11239,6 @@ form#certificate_form select option:checked {
 
 .product-box .content-product {
   height: 323px;
-  display: flex;
   align-items: center;
   width: 100%;
   margin-left: 0;

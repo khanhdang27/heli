@@ -19,6 +19,8 @@ class CreateCourseMembershipDiscountsTable extends Migration
             $table->bigInteger('course_discount_id')->nullable();
             $table->bigInteger('membership_course_id')->constrained('membership_course');            
             $table->boolean('recommended')->default(false);
+            $table->boolean('welcomes')->default(false);
+            $table->boolean('hot')->default(false);
             // price_tag wil be a function
             $table->text('description')->nullable();
 

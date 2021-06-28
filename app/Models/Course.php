@@ -56,10 +56,10 @@ class Course extends Model implements TranslatableContract
         return $this->belongsTo(Tutor::class, 'tutor_id');
     }
 
-    public function certificate()
-    {
-        return $this->belongsTo(Certificate::class,'subject_id','id', Subject::class);
-    }
+    // public function certificate()
+    // {
+    //     return $this->belongsTo(Subject::class,'subject_id','id', Certificate::class);
+    // }
 
     public function subject()
     {

@@ -1,5 +1,7 @@
 @php
 use App\Utilities\SelectionByClass;
+
+
 @endphp
 
 <nav class="navbar navbar-expand-lg container-fluid category text-secondary position-absolute border-secondary">
@@ -9,21 +11,23 @@ use App\Utilities\SelectionByClass;
         <span><img src="images/ic/ic-collapse.png" width="35"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <form class="form-inline my-1 mr-auto" id="certificate_form">
+        <form class="form-inline my-1 mr-1" id="certificate_form">
             <select form="certificate_form" class="form-control" name="certificate" onchange="this.form.submit()">
                 @foreach (SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id') as $key => $value)
-                    <option value="{{ $key }}">{{ $value }}</option>
+                    <option value="{{ $key }}" selected={{ $subjects[0]->certificate_id == $key ? 'selected' : null}} >{{ $value }}</option>
                 @endforeach
             </select>
         </form>
         <div class="d-flex align-items-center flex-wrap" id="subject-nav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-
-                </li>
+                @foreach ($subjects as $item)
+                    <li class="nav-item">
+                        <a href="#" class="text-secondary nav-link"> {{ $item->subject_name }} </a>
+                    </li>
+                @endforeach
             </ul>
         </div>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="ml-auto form-inline my-2 my-lg-0">
             <div class="search mr-1">
                 <span class="ic-cart"><img src={{ asset('images/ic/ic_search.svg') }} width="26"></span>
                 <input class="ip-search" type="text" name="course"

@@ -1,25 +1,23 @@
 @php
     $course_card = $course->membershipCourses->course;
-
-
-switch ($typeOfUI){
-    case 'normal':
-    case 'recommended':
-    case 'certificate_filter':
-    case 'hot':
-        $class = 'col-lg-3';
-        break;
-    case 'welcome' :
-    case 'lasted' :
-        $class = 'col-lg-6';
-        break;
-    default:
-        $class = '';
-        break;
-}
+    switch ($typeOfUI){
+        case 'normal':
+        case 'recommended':
+        case 'certificate_filter':
+        case 'hot':
+            $class = 'col-lg-3';
+            break;
+        case 'welcome' :
+        case 'lasted' :
+            $class = 'col-lg-6';
+            break;
+        default:
+            $class = '';
+            break;
+    }
 @endphp
 
-<div class="pr-3 {{ $class }}">
+<div class="{{ $class }}">
     <div class="product-box">
 
         <div class="top-product">
@@ -34,7 +32,7 @@ switch ($typeOfUI){
                 <div class="body-product-content d-flex flex-column justify-content-between align-items-center col-9"
                         style="color: {{$course_card->subject->subject_color_text}}">
                     <div class="content-top text-wrap w-75">
-                        {{ $course_card->certificate->certificate_code }}<br>
+                        {{ $course_card->subject->certificate->certificate_code }}<br>
                         @if($course_card->type==1)
                             @lang('keywords.course-item.liveCourse')
                         @else
