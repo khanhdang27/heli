@@ -1,5 +1,9 @@
 @php
     $course = $courseDetail->membershipCourses->course;
+
+    // lecture
+    // courseMaterial
+    // dd(!empty($course->courseMaterial));
 @endphp
 
 @extends('layout.app')
@@ -10,7 +14,8 @@
     {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
     <div class="body-content">
         <div class="container-fluid">
-            <x-home.video-course :courseDetail=$course></x-home.video-course>
+            <x-product-detail.course-card-page :course=$course ></x-product-detail.course-card-page>
+            {{-- <x-home.video-course :courseDetail=$course></x-home.video-course> --}}
         </div>
         <div class="container-fluid d-flex justify-content-center pb-5">
             <div class="row container-fluid p-0 show-menu-tab">
