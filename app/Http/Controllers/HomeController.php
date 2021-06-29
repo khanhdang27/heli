@@ -60,16 +60,16 @@ class HomeController extends Controller
         $course_welcomes = clone $courses_with_group;
         $course_latest = clone $courses_with_group;
 
-        $course_recommended = $course_recommended->where('recommended', 1)->get();
+        $course_recommended = $course_recommended->where('recommended', 1)->limit(4)->get();
 
         $course_hot = $course_hot->where('hot', 1);
-        $course_welcomes = $course_welcomes->where('welcomes', 1)->get();
+        $course_welcomes = $course_welcomes->where('welcomes', 1)->limit(2)->get();
         // DB::enableQueryLog();
 
         $course_latest = $course_latest->whereHas('courseDiscounts.discount', function($query){
             return $query->where('start_date','<=', DATE(NOW()))
                 ->where('end_date','>=', DATE(NOW()));
-        })->get();
+        })->limit(2)->get();
 
         $courseIGCSE= clone $course_hot;
 
