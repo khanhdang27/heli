@@ -1,5 +1,5 @@
 @php
-    $list_lecture = $courseDetail->lectures;
+    $list_lecture = $courseDetail->lecture;
 
     // dd($courseDetail);
     $fisrt_lecture = $list_lecture->first();

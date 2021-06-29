@@ -90,7 +90,7 @@ class Course extends Model implements TranslatableContract
         return $this->morphMany(UserComment::class,'commentable');
     }
 
-    public function lectures()
+    public function lecture()
     {
         return $this->hasMany(Lecture::class);
     }
