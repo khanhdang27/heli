@@ -55,7 +55,7 @@
                 <h2 class="title-foot">@lang('keywords.footer.connection')</h2>
                 <span>@lang('keywords.footer.phone'): </span><a href="tel:852 2602 1668">+852 2602 1668</a><br>
                 <span>@lang('keywords.footer.whatsApp'): </span><a href="whatsapp://send?text=Hello!&phone=+85226021668">+852 9229 6725</a><br>
-                <a href="email:adminssions@helios-edu.com">adminssions@helios-edu.com</a>
+                <a href="mailto:adminssions@helios-edu.com">adminssions@helios-edu.com</a>
             </div>
             <div class="col-lg-2 ">
                 <h2 class="title-foot">@lang('keywords.footer.address')</h2>

@@ -54,12 +54,12 @@
                         <x-blog.blog-item-latest :blog=$value></x-blog.blog-item-latest>
                     @endforeach
                 </div>
-                <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">
-                    <button class="btn-read-more h1">
-                        @lang('keywords.blog-page.readMore')
-                        <img src="{{asset("images/ic/ic_drop.svg")}}" width="65">
-                    </button>
-                </div>
+{{--                <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">--}}
+{{--                    <button class="btn-read-more h1">--}}
+{{--                        @lang('keywords.blog-page.readMore')--}}
+{{--                        <img src="{{asset("images/ic/ic_drop.svg")}}" width="65">--}}
+{{--                    </button>--}}
+{{--                </div>--}}
             </div>
         </div>
     @endif

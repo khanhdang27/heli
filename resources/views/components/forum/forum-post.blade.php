@@ -14,8 +14,8 @@
                 {{$post->title}}
             </p>
             <div class="pt-3 pb-3 ">
-                @if($post->file_id!=null)
-                    <img class="img-question" src="{{asset('/file/'.$post->file_id)}}">
+                @if($post->image!=null)
+                    <img class="img-question" src="{{asset('/file/'.$post->image->id)}}">
                 @endif
             </div>
             <div class="text-forum">

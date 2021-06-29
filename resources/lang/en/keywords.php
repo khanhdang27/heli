@@ -119,6 +119,12 @@ return [
         'pleaseCheckEmail' => 'Please check your email!',
     ],
     'forum' =>[
-        'bestAnswer' => 'Best answer'
-    ]
+        'bestAnswer' => 'Best answer',
+        'addAnswer' => 'Add your answer'
+    ],
+    'rate' => [
+        'rateCourse' => 'Rate Course',
+        'addReview' => 'Add your review'
+    ],
+
 ];

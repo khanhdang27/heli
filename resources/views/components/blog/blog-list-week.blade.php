@@ -1,7 +1,7 @@
 <div class="card flex-md-row border-0">
     <div class="popular-articles-item-image d-flex ">
-        <img class="img-thumbnail rounded-0 align-items-center" src="{{Storage::url($item->photo)}}"
-             alt="Card image cap">
+        <img class="rounded-0 align-items-center" src="{{ asset('/file/'.$item->photo->id)}}"
+             alt="Card image cap" height=220 width=220>
     </div>
 
     <div class="popular-articles-item-content">

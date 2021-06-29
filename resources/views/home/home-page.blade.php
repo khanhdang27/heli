@@ -65,14 +65,14 @@
             <div class="mx-auto container-video border-secondary mt-5 pb-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
                     <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
-                    <button class="m-0 btn-register-now h1 text-white btn-dark-blue btn-dark">
-                        @lang('keywords.otherPurchasedCourses')
-                    </button>
+                    <a href="{{ route('site.user.course') }}" class="m-0 btn-register-now text-white btn-dark-blue btn-dark">
+                       <h2 class="mb-0 mt-2">@lang('keywords.otherPurchasedCourses')</h2>
+                    </a>
                 </div>
                 <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
             </div>
         @endif
-        @if(Auth::check())
+        @if(!Auth::check())
             <div class="free-class-container">
                 <div class="position-relative d-flex align-items-center">
                     <div class="border-right-radius border-primary">

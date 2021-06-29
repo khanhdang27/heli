@@ -24,7 +24,7 @@
             <!-- INDEX -->
             <div class="row row-question border-secondary pt-5 pb-5">
                 <div class="col-lg-3">
-                    <div class="d-flex text-primary">
+                    <div class="d-flex flex-wrap text-primary">
                         <img src="{{ asset('images/ava2.jpg') }}" width="98" height="98">
                         <div class="pl-3 pt-2">
                             <p class="text-comment">{{ $post->user->name }}</p>
@@ -40,8 +40,8 @@
                         {{ $post->content }}
                     </p>
                     <div class="pt-3 pb-3 ">
-                        @if ($post->file_id != null)
-                            <img class="img-question" src="{{ asset('/file/' . $post->file_id) }}">
+                        @if ($post->image != null)
+                            <img class="img-question" src="{{ asset('/file/' . $post->image->id) }}">
                         @endif
                     </div>
                     <div class="text-forum d-flex">

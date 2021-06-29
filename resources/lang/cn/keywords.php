@@ -119,7 +119,14 @@ return [
         'pleaseCheckEmail' => '請檢查您的電子郵件!',
     ],
     'forum' =>[
-        'bestAnswer' => '最佳答案'
-    ]
+        'bestAnswer' => '最佳答案',
+        'addAnswer' => '添加您的答案'
+    ],
+    'rate' => [
+        'rateCourse' => '課程評分',
+        'addReview' => '添加您的評論'
+    ],
+
+
 
 ];

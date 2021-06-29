@@ -1,7 +1,7 @@
 <div class="">
     <div class="row row-question pt-5 pb-5 border-secondary">
         <div class="col-xl-3">
-            <div class="d-flex text-primary">
+            <div class="d-flex flex-wrap text-primary">
                 <img src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                 <div class="pl-3 pt-2">
                     <p class="text-comment">{{$comment->user->name}}</p>
@@ -15,7 +15,7 @@
             </p>
             <div class="pt-3 pb-3 ">
                 @if($comment->file_id!=null)
-                    <img class="img-question" src="{{asset('/file/'.$comment->file_id)}}">
+                    <img class="img-question" src="{{asset('/file/'.$comment->image->id)}}">
                 @endif
 
             </div>

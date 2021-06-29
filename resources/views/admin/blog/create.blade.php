@@ -40,9 +40,9 @@
                             <div class="form-group">
                                 {{ Form::label('tag_id', 'Post tag') }}
 
-                                @foreach($postTag as $id => $tag)
-                                    {{ Form::checkbox('tag_id[]',$id,null) }}
-                                    {{ Form::label($tag, $tag) }}
+                                @foreach($tags as $tag)
+                                    {{ Form::checkbox('tag_id[]',$tag->id,null) }}
+                                    {{ Form::label($tag, $tag->tag_name) }}
                                 @endforeach
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}

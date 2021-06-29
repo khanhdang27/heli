@@ -97,7 +97,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" >
                         {{ Config::get('languages')[App::getLocale()] }}
                     </a>
-                    <div class="dropdown-menu bg-dark">
+                    <div class="dropdown-menu bg-dark border border-secondary dropdown-menu-language">
                         @foreach (Config::get('languages') as $lang => $language)
                             @if ($lang != App::getLocale())
                                 <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
