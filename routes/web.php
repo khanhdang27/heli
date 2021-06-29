@@ -16,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('', 'site/', 301);
 
-Route::resource('testctl','TestController');
-Route::view('mail','mail.mail');
 Route::group(['middleware' => 'language'], function () {
 
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);

@@ -84,7 +84,7 @@ class CertificateController extends Controller
             'membershipCourses.course.subject.certificate',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
-        )
+        )->where('publish',1)
         ->whereHas('membershipCourses', function ($query) {
             return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
          })

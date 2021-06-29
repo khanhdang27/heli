@@ -25,7 +25,7 @@
                 <div class="card-body">
                     {!! Form::open(['route' => ['admin.price-tag.update', $price_tag->id], 'method'=> 'put']) !!}
                     <div class="row">
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             {{ Form::label('recommend', 'Recommend') }}
                             <br>
                             {{ Form::checkbox('recommend', true, $price_tag->recommended == 1, ['data-toggle'=>"toggle"]) }}
@@ -33,7 +33,7 @@
                                 <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             {{ Form::label('welcomes', 'Welcomes') }}
                             <br>
                             {{ Form::checkbox('welcomes', true, $price_tag->welcomes == 1, ['data-toggle'=>"toggle"]) }}
@@ -42,11 +42,19 @@
                                 <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-3">
                             {{ Form::label('hot', 'Hot') }}
                             <br>
                             {{ Form::checkbox('hot', true, $price_tag->hot == 1, ['data-toggle'=>"toggle"]) }}
                             @error('hot')
+                                <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group col-3">
+                            {{ Form::label('publish', 'Publish') }}
+                            <br>
+                            {{ Form::checkbox('publish', true, $price_tag->publish == 1, ['data-toggle'=>"toggle"]) }}
+                            @error('publish')
                                 <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>

@@ -46,6 +46,8 @@ Route::get('forumAnswer', function () {
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('file/download/{file}', 'FileController@download')->name('file.download');
+
     Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
     Route::resource('payment', 'PaymentController');
     Route::resource('order', 'OrderController');

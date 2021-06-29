@@ -42,10 +42,6 @@ use App\Utilities\SelectionByClass;
                                 {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)') }}
                                 {{ Form::text('course_material_name:sc', old('course_material_name:sc'),['class' => 'form-control']) }}
                             </div>
-{{--                            <div class="form-group ">--}}
-{{--                                {{ Form::label('material_price', 'Price') }}--}}
-{{--                                {{ Form::text('material_price', old('material_price'),['class' => 'form-control']) }}--}}
-{{--                            </div>--}}
                             <div class="form-group ">
                                 {{ Form::label('course_material_description:en', 'Description (English)') }}
                                 {{ Form::textarea('course_material_description:en', old('course_material_description:en'),['class' => 'form-control']) }}
@@ -67,16 +63,18 @@ use App\Utilities\SelectionByClass;
                                 {{ Form::text('course_material_origin:cn', old('course_material_origin:cn'),['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('course_material_origin:sc', 'Material Origin (Simplify Chinese)') }}
+                                {{ Form::label('file', 'Material Origin (Simplify Chinese)') }}
                                 {{ Form::text('course_material_origin:sc', old('course_material_origin:sc'),['class' => 'form-control']) }}
+                            </div>
+                            <div class="form-group ">
+                                {{ Form::label('file', 'File') }}
+                                {{ Form::file('file', old('file'),['class' => 'form-control']) }}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div> <!-- / .row -->
     </div>

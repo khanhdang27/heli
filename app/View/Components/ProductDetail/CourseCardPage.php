@@ -24,6 +24,8 @@ class CourseCardPage extends Component
      */
     public function render()
     {
-        return view('components.product-detail.course-card-page', ['course'=> $this->course]);
+        return view('components.product-detail.course-card-page', [
+            'course'=> $this->course
+        ]);
     }
 }

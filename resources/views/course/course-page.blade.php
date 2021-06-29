@@ -1,9 +1,8 @@
 @php
-    $course = $courseDetail->membershipCourses->course;
 
-    // lecture
-    // courseMaterial
-    // dd(!empty($course->courseMaterial));
+use App\Models\Course;
+$course = $courseDetail->membershipCourses->course;
+
 @endphp
 
 @extends('layout.app')
@@ -12,12 +11,13 @@
 
 @section('content')
     {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
-    <div class="body-content">
-        <div class="container-fluid">
+    <div class="body-content container-fluid">
+        @if ( $course->type == Course::$LIVE )
             <x-product-detail.course-card-page :course=$course ></x-product-detail.course-card-page>
-            {{-- <x-home.video-course :courseDetail=$course></x-home.video-course> --}}
-        </div>
-        <div class="container-fluid d-flex justify-content-center pb-5">
+        @else
+            <x-home.video-course :courseDetail=$course></x-home.video-course>
+        @endif
+        <div class="d-flex justify-content-center pb-5">
             <div class="row container-fluid p-0 show-menu-tab">
                 <div class="col-xl-8 container-fluid">
                     <ul class="nav nav-pills menu-tab" role="tablist">

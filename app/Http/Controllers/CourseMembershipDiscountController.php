@@ -17,7 +17,6 @@ class CourseMembershipDiscountController extends Controller
      */
     public function index()
     {
-
         $courses_priceTag = CourseMembershipDiscount::with('membershipCourses.course', 'membershipCourses.membership')->get();
         return view('admin.course-member-discount.index', [
             'courses_priceTag' => $courses_priceTag,
@@ -90,6 +89,7 @@ class CourseMembershipDiscountController extends Controller
             $new_price_tag->recommended = $input['recommend'] ?? false;
             $new_price_tag->welcomes = $input['welcomes'] ?? false;
             $new_price_tag->hot = $input['hot'] ?? false;
+            $new_price_tag->publish = $input['publish'] ?? false;
             $new_price_tag->description = $input['description'];
             $new_price_tag->membershipCourses->price_value = $input['price_value'];
 

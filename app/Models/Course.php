@@ -43,6 +43,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Course extends Model implements TranslatableContract
 {
+    static $LIVE = 1;
+    static $RECORD = 2;
+
     use Translatable, SoftDeletes;
 
 

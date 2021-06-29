@@ -23,10 +23,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
     @yield('content')
 
-    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lib/main.js') }}"></script>
     <script src="{{ asset('js/home/app.js') }}"></script>

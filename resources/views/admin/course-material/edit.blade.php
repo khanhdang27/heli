@@ -65,6 +65,10 @@
                                 {{ Form::label('course_material_origin:sc', 'Material Origin (Simplify Chinese)') }}
                                 {{ Form::text('course_material_origin:sc', $material->translate('sc')->course_material_origin,['class' => 'form-control']) }}
                             </div>
+                            <div class="form-group ">
+                                {{ Form::label('file', 'File') }}
+                                {{ Form::file('file', old('file'),['class' => 'form-control']) }}
+                            </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>

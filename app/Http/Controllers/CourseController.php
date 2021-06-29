@@ -51,7 +51,8 @@ class CourseController extends Controller
             'membershipCourses.course',
             'membershipCourses.course.tutor',
             'membershipCourses.course.student'
-        )->whereHas('membershipCourses.course.student', function (Builder $query) {
+        )->where('publish',1)
+        ->whereHas('membershipCourses.course.student', function (Builder $query) {
                 $query->where('student_id', Auth::user()->id);
             })->get();
 
@@ -113,7 +114,6 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-
         $courses_with_group = CourseMembershipDiscount::with(
             'membershipCourses', 
             'courseDiscounts', 
@@ -123,7 +123,7 @@ class CourseController extends Controller
             'membershipCourses.course.subject',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
-        )
+        )->where('publish',1)
         ->whereHas('membershipCourses', function ($query) {
             return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
          })->whereHas('membershipCourses.course', function ($query) use ($course){
@@ -162,7 +162,7 @@ class CourseController extends Controller
             'membershipCourses.course.subject',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
-        )
+        )->where('publish',1)
         ->whereHas('membershipCourses', function ($query) {
             return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
          })->whereHas('membershipCourses.course', function ($query) use ($input){

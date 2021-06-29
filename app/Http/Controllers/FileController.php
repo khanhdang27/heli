@@ -111,9 +111,8 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function dowload(File $file)
+    public function download(File $file)
     {
-        $url = Storage::url($file->source);
         return Storage::download($file->source, $file->raw_name);
     }
 

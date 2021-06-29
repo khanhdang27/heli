@@ -1,4 +1,6 @@
 @php
+use App\Models\Course;
+
     $course_card = $course->membershipCourses->course;
     switch ($typeOfUI){
         case 'normal':
@@ -32,7 +34,7 @@
                         style="color: {{$course_card->subject->subject_color_text}}">
                     <div class="content-top text-wrap w-75">
                         {{ $course_card->subject->certificate->certificate_code }}<br>
-                        @if($course_card->type==1)
+                        @if($course_card->type== Course::$LIVE)
                             @lang('keywords.course-item.liveCourse')
                         @else
                             @lang('keywords.course-item.courseRecord')

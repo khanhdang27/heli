@@ -21,6 +21,7 @@ class CreateCourseMembershipDiscountsTable extends Migration
             $table->boolean('recommended')->default(false);
             $table->boolean('welcomes')->default(false);
             $table->boolean('hot')->default(false);
+            $table->boolean('publish')->default(false);
             // price_tag wil be a function
             $table->text('description')->nullable();
 
