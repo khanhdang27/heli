@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="body-content">
-        @include('layout.sub-header')
+        {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
         <div class="container-fluid pt-5 pb-5 pl-0 pr-0">
             <div class="video m-auto">
                 <div class="info-course-right">
@@ -19,8 +19,6 @@
                     <x-product-detail.lecture-course></x-product-detail.lecture-course>
                 </div>
             </div>
-
-
         </div>
     </div>
 @endsection

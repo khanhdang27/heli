@@ -1,7 +1,14 @@
+@php
+
+$array_column = $courseDiscount->toArray();
+
+@endphp
+
 
 @extends('admin.layout')
 @section('content')
     <div class="container-fluid mt-5">
+        {{-- @dd($array_column, $courses) --}}
         <div class="row">
             <div class="col-12">
                 <!-- Goals -->
@@ -44,7 +51,7 @@
                                 @foreach($courses as $value)
                                     <tr>
                                         <td>
-                                            {{ Form::checkbox('course_id[]', $value->id, false, ['class'=>'form-control']) }}
+                                            {{ Form::checkbox('course_id[]', $value->id, in_array($value->id, array_column($array_column, 'course_id')), ['class'=>'form-control']) }}
                                         </td>
                                         <td class="goal-project">
                                             {{ $value->course_name }}
@@ -56,15 +63,17 @@
                                             {{ $value->translate('en')->course_description }}
                                         </td>
                                         <th>
-                                            {{ Form::number( 'discount_'.$value->id, null, ['class'=>'form-control']) }}
+                                            {{ Form::number( 'discount_'.$value->id, $courseDiscount->firstWhere('course_id',$value->id)->discount_value ?? null, ['class'=>'form-control']) }}
                                             @error('discount_'.$value->id)
                                                 <div class="alert text-danger">{{ $message }}</div>
                                             @enderror
                                         </th>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            {!! $courses->render() !!}
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         </div>
                         {!! Form::close() !!}

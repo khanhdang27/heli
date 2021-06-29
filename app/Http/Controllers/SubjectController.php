@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\CreateSubjectRequest;
 use App\Models\Certificate;
+use App\Models\CourseMembershipDiscount;
 use App\Models\PostTag;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class SubjectController extends Controller
 {
@@ -65,10 +67,24 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        $certificates = Certificate::all();
+        $courses_with_group = CourseMembershipDiscount::with(
+            'membershipCourses',
+            'courseDiscounts',
+            'membershipCourses.course',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.subject.certificate',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        )
+        ->whereHas('membershipCourses', function ($query) {
+            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+         })->whereHas('membershipCourses.course', function ($query) use ($subject) {
+            return $query->where('subject_id', $subject->id);
+         })->get();
+
         return view('subject.index', [
             'subject' => $subject,
-            'certificate' => $certificates
+            'courses' => $courses_with_group
         ]);
     }
 
@@ -80,7 +96,6 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-
         return view('admin.subject.edit', [
             'subject' => $subject,
 

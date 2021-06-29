@@ -7,10 +7,11 @@ use App\Models\Certificate;
 use App\Models\Subject;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\Certificate\CreateCertificateRequest;
-use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class CertificateController extends Controller
 {
@@ -59,8 +60,20 @@ class CertificateController extends Controller
      * @param  Certificate $certificate
      * @return View
      */
-    public function show(Certificate $certificate)
+    public function show(Certificate $certificate, Request $request)
     {
+        $input = $request->input();
+        $subjects = null;
+        if (empty($input['certificate'])) {
+            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query){
+                return $query->where('id', 1);
+            })->get();
+        }else {
+            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query) use ($input){
+                return $query->where('id', $input['certificate']);
+            })->get();
+        }
+
         $_certificate = Certificate::with('subject')->where('id', $certificate->id)->first();
         DB::enableQueryLog();
         $courses_with_group = CourseMembershipDiscount::with(
@@ -78,12 +91,12 @@ class CertificateController extends Controller
         ->whereHas('membershipCourses.course.subject.certificate', function ($query) use ($certificate){
             return $query->where('id', $certificate->id);
          })->get();
-//        dd($courses_with_group);
         // dd(DB::getQueryLog());
 
         return view('certificate.index', [
             'courses' => $courses_with_group,
-            'certificate' => $_certificate
+            'certificate' => $_certificate,
+            'subjects' => $subjects
         ]);
     }
 

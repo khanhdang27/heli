@@ -36,11 +36,6 @@
     @stack('scripts')
     @stack('scriptsLogin')
     @stack('inputFile')
-
-    <script>
-        showSubjectNav("{{ route('site.get_subject_by_parent', '') }}", "{{ route('site.subject.show', '') }}")
-    </script>
-
     
     @include('layout.footer')
 </body>

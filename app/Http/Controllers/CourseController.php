@@ -143,6 +143,39 @@ class CourseController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param $id
+     * @return View
+     */
+    public function search(Request $request)
+    {
+        $input = $request->input('course');
+
+        $courses_with_group = CourseMembershipDiscount::with(
+            'membershipCourses', 
+            'courseDiscounts', 
+            'membershipCourses.course',
+            'membershipCourses.course.translations',
+            'membershipCourses.course.lecture',
+            'membershipCourses.course.comment',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        )
+        ->whereHas('membershipCourses', function ($query) {
+            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+         })->whereHas('membershipCourses.course', function ($query) use ($input){
+                return $query->whereTranslationLike('course_name', '%' .$input. '%');
+         })->get();
+
+        
+        return view('course.search',[
+            'courses' => $courses_with_group,
+        ]);
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param \App\Models\Course $course

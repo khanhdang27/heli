@@ -15,9 +15,6 @@ use App\Utilities\SelectionByClass;
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
         
         <div class="container-fluid p-0">
-            <div class="title-subject text-primary text-center">
-                {{ $subject->subject_name }}
-            </div>
             <div class="container-fluid sort text-primary mb-4 d-flex">
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form>

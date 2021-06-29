@@ -23,10 +23,9 @@ Route::get('teams', function () {
 
 Route::resource('subject', 'SubjectController');
 
-Route::get('get-subject-by-parent-id/{id}', 'SubjectController@getSubjectByParentId')->name('get_subject_by_parent');
-
 Route::resource('certificate', 'CertificateController');
 
+Route::get('course/search', 'CourseController@search')->name('course.search');
 Route::resource('course', 'CourseController');
 
 Route::get('lesson', function () {

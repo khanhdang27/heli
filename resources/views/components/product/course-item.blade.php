@@ -19,7 +19,6 @@
 
 <div class="{{ $class }}">
     <div class="product-box">
-
         <div class="top-product">
             <div class="title-product bg-secondary">
                 <h4>{{ $course_card->subject->subject_name }}</h4>
