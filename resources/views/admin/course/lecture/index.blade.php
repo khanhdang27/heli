@@ -75,20 +75,20 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($course->lectures as $value)
+                                @foreach($course->lectures as $lecture)
                                     <tr>
                                         <td class="goal-project">
-                                            {{ $value->lectures_name }}
+                                            {{ $lecture->lectures_name }}
                                         </td>
 
                                         <td class="goal-project">
-                                            {{ $value->lectures_description }}
+                                            {{ $lecture->lectures_description }}
                                         </td>
                                         <td>
-                                            {{ $value->video_resource }}
+                                            {{ $lecture->video_resource }}
                                         </td>
                                         <td>
-                                            {{ $value->is_live }}
+                                            {{ $lecture->is_live }}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -98,12 +98,9 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.course.lecture.edit', $course, $value) }}"
-                                                        class="dropdown-item">
-                                                            Edit
-                                                    </a>
+                                                    
                                                     <a href="javascript:void(0)"
-                                                        onclick="itemDelete('{{ route('admin.course.lecture.destroy', $course, $value) }}')"
+                                                        onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $lecture]) }}')"
                                                         class="dropdown-item delete-item">
                                                             Delete
                                                     </a>
