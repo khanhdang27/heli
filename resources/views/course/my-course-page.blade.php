@@ -7,7 +7,7 @@
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.coursePage.myCourses')
         </div>
-        @include('layout.sub-header')
+        {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
         <div class="container-fluid pt-5 pl-0 pr-0">
             <div class="container-fluid p-0 ">
                 <div class="container-fluid">

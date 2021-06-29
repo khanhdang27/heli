@@ -71,9 +71,6 @@
                                     <th>
                                         Name
                                     </th>
-                                    {{--                                    <th>--}}
-                                    {{--                                        Tutor--}}
-                                    {{--                                    </th>--}}
                                     <th>
                                         <a href="#" class="text-muted">
                                             Price
@@ -91,9 +88,6 @@
                                         <td class="goal-project text-description">
                                             {{ $value->course_name }}
                                         </td>
-                                        {{--                                        <td class="goal-project">--}}
-                                        {{--                                            {{ $value->tutor['tutor_name'] }}--}}
-                                        {{--                                        </td>--}}
                                         <td class="goal-project">
                                             {{ $value->course_price }}
                                         </td>
@@ -108,18 +102,22 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    {{--                                                    <a href="{{ route('admin.course.video.index', $value->id) }}"--}}
-                                                    {{--                                                       class="dropdown-item">--}}
-                                                    {{--                                                        Video--}}
-                                                    {{--                                                    </a>--}}
+                                                    <a href="{{ route('admin.course.lecture.list', $value->id) }}"
+                                                        class="dropdown-item">
+                                                            Manage Lecture
+                                                    </a>
+                                                    <a href="{{ route('admin.price-tag.index') }}"
+                                                        class="dropdown-item">
+                                                            Publish
+                                                    </a>
                                                     <a href="{{ route('admin.course.edit', $value->id) }}"
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                       data-url="{{ route('admin.course.destroy', $value->id) }}"
-                                                       class="dropdown-item delete-item">
-                                                        Delete
+                                                        onclick="itemDelete('{{ route('admin.course.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
                                                     </a>
                                                 </div>
                                             </div>

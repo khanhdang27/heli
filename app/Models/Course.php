@@ -50,7 +50,6 @@ class Course extends Model implements TranslatableContract
     protected $guarded = [];
     public array $translatedAttributes = ['course_name', 'course_description'];
 
-
     public function tutor()
     {
         return $this->belongsTo(Tutor::class, 'tutor_id');

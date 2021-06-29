@@ -102,7 +102,7 @@ class HomeController extends Controller
         // dd(DB::getQueryLog());
 
 
-        $courseVideo = Course::with('tutor')->first();
+        $courseVideo = Course::with('tutor', 'lecture')->first();
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
         
         return view('home.home-page',[

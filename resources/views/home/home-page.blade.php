@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="banner">
-        <x-home.categories :subjects=$subjects></x-home.categories>
+        <x-sub-header :subjects=$subjects page="home" ></x-sub-header>
         @if(!Auth::check())
             <x-home.banner :banner=$banners></x-home.banner>
         @else
