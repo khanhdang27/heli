@@ -7,12 +7,13 @@
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.navBar.subjectClassification')
         </div>
-        @include('layout.sub-header')
+        <x-sub-header :subjects=$subjects ></x-sub-header>
         <div class="container-fluid p-0">
             <div class="title-subject text-primary text-center">
                 {{$certificate->certificate_name}}
             </div>
             <div class="container-fluid text-primary mb-4 d-flex h2">
+
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form name="sort_course" >
                     <label class="radio-inline mr-5">

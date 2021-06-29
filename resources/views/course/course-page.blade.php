@@ -7,7 +7,7 @@
 @section('title','Course Page')
 
 @section('content')
-    @include('layout.sub-header')
+    {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
     <div class="body-content">
         <div class="container-fluid">
             <x-home.video-course :courseDetail=$course></x-home.video-course>

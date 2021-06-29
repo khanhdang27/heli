@@ -6,10 +6,7 @@
     <hr class="mt-0" />
     <div class="container mt-5 mb-5 pb-5">
 
-        @if (!empty($errors->bags)) 
-            @dd($errors)
-        @endif
-
+        
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

@@ -128,8 +128,11 @@ class DiscountController extends Controller
     public function apply($id)
     {
         $discount = Discount::find($id);
-        $courses = Course::query()->get();
-        return view('admin.discount.apply',compact('discount', 'courses'));
+        $courses = Course::query()->paginate(10);
+
+        $courseDiscount = CourseDiscount::with('course')->where('discount_id', $id)->paginate(10);
+
+        return view('admin.discount.apply',compact('discount', 'courses', 'courseDiscount'));
     }
 
     /**
@@ -147,11 +150,12 @@ class DiscountController extends Controller
             foreach ($request->input('course_id') as $key => $value) {
                 if (empty($input['discount_'.$value])) {
                     DB::rollback();
-                    return  back()->withErrors(['discount_'.$value => 'Discount value is required']);
+                    return back()->withErrors(['discount_'.$value => 'Discount value is required']);
                 }
-                $courseDiscourse = CourseDiscount::create([
+                $courseDiscourse = CourseDiscount::updateOrCreate([
                     'course_id' => $value,
                     'discount_id' => $id,
+                ],[
                     'discount_value' => $input['discount_'.$value]
                 ]);
                 $priceTags = CourseMembershipDiscount::with('membershipCourses')->whereHas('membershipCourses', function ($query) use ($value){
@@ -162,13 +166,12 @@ class DiscountController extends Controller
                     $priceTag->course_discount_id = $courseDiscourse->id;
                     $priceTag->save();
                 }
-
             }
             
             DB::commit();
             return back()->with(['success'=> "Update Succeed"]);
         } catch (\Throwable $th) {
-            
+            dd($th);
             DB::rollback();
             return back()->with(['errors'=> "Update Error"]);
         }

@@ -3,7 +3,10 @@
 @section('title','Calendar Page')
 
 @section('content')
-    @include('layout.sub-header')
+<div class="container-fluid text-center top-news-page">
+    @lang('keywords.starTutorTeam')
+</div>
+    {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
     <div class="container-fluid calendar">
         <div class="row">
             <div class="col-xl-7 pr-5">
