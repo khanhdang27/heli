@@ -36,6 +36,8 @@ class ChangePasswordController extends Controller
 
             Auth::guard()->login($user);
 
+            return redirect()->back();
+
         } else {
             return redirect()->back()->withErrors(['password'=>'wrong password']);
         }

@@ -1,12 +1,14 @@
 @php
+
 $list_lecture = $courseDetail->lecture;
-// dd($courseDetail);
 $fisrt_lecture = $list_lecture->first();
 
-$defaultSource = 'https://player.vimeo.com/video/' . $fisrt_lecture->video_resource . '?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713';
+$defaultSource = '';
+if (!empty($fisrt_lecture)) {
+    $defaultSource = 'https://player.vimeo.com/video/' . $fisrt_lecture->video_resource . '?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713';
+}
 @endphp
-
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+{{-- @if (!empty($fisrt_lecture)) --}}
 <div class="container-fluid show-video" id="video-lecture">
     <div class="bg-white mt-5">
         <div class="mb-3 text-primary">
@@ -61,3 +63,5 @@ $defaultSource = 'https://player.vimeo.com/video/' . $fisrt_lecture->video_resou
         }
     });
 </script>
+
+{{-- @endif --}}

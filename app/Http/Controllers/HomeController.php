@@ -104,7 +104,14 @@ class HomeController extends Controller
         if (Auth::check()) {
             $user_course = StudentCourses::query()->where('student_id', Auth::user()->id)->latest('created_at')->first();
             if (!empty($user_course)) {
-                $courseVideo = Course::with('tutor', 'lecture')->where('id', $user_course->course_id)->first();
+                $course = Course::with('tutor', 'lecture')->where('id', $user_course->course_id)->first();
+                if (empty($course->lecture[0])) {
+                    $courseVideo = Course::with('tutor', 'lecture')->where('id', 1)->first();
+                } else {
+                    $courseVideo = $course;
+                }
+            } else {
+                $courseVideo = Course::with('tutor', 'lecture')->where('id', 1)->first();
             }
         } else {
             $courseVideo = Course::with('tutor', 'lecture')->where('id', 1)->first();

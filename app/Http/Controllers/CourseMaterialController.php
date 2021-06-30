@@ -149,7 +149,6 @@ class CourseMaterialController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollback();
-            dd($th);
             return back()->with('errors', 'Create Fails');
 
         }

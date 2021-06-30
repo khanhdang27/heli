@@ -42,7 +42,7 @@ class OrderController extends Controller
                 'intent' => $_user->createSetupIntent()
             ]);
         } else {
-            $course_id = $request->query('product_id');
+            $product_id = $request->query('product_id');
 
             $courses_with_group = CourseMembershipDiscount::with(
                 'membershipCourses',
@@ -51,7 +51,7 @@ class OrderController extends Controller
                 'membershipCourses.course.subject',
                 'membershipCourses.course.tutor',
                 'membershipCourses.course.courseMaterial'
-            )->where('id', $course_id)->first();
+            )->where('id', $product_id)->first();
 
             $student_bought = StudentCourses::query()->where([
                 'course_id' => $courses_with_group->membershipCourses->course_id,
@@ -68,11 +68,13 @@ class OrderController extends Controller
                         'course_price'=> $courses_with_group->getPrice(),
                         'discount'=> $courses_with_group->getDiscount(), //$course_detail->discount,
                         'total'=> $courses_with_group->getPriceDiscount(),
-                        'membership' => $courses_with_group->courseDiscounts->course_id,
+                        'membership' => $courses_with_group->membershipCourses->membership_id,
                         'membership_discount' => $courses_with_group->membershipCourses->price_value,
-                        'discount_info' => $courses_with_group->courseDiscounts->discount_id
+                        'discount_info' => !empty($courses_with_group->courseDiscounts) ? $courses_with_group->courseDiscounts->discount_id : 0
                     ]);
                     $result = $order->createPaymentIntent($paymentMethods[0]);
+
+                    // dd($result);
     
                     if ($result instanceof RedirectResponse ) {
                         DB::commit();
@@ -80,13 +82,15 @@ class OrderController extends Controller
                     } else {
                         if ($result instanceof Order) {
                             $student_course = StudentCourses::create([
-                                'course_id' => (int) $course_id,
+                                'course_id' => (int) $courses_with_group->membershipCourses->course_id,
                                 'student_id' => Auth::user()->id
                             ]);
                         }
                         DB::commit();
 
-                        return redirect(route('order.order.show', $result->id));
+                        // dd($result);
+
+                        return redirect(route('site.order.show', $result->id));
                         // view('order.order-detail', ['order' => $result]);
                     }
                 } catch (\Throwable $th) {
@@ -96,9 +100,9 @@ class OrderController extends Controller
                 }
                 
             } else {
-                $order = Order::with('course')->where('course_id',$course_id)
+                $order = Order::with('course')->where('course_id',$student_bought->course_id)
                     ->where('user_id',Auth::user()->id)->first();
-                 return redirect(route('order.order.show', $order->id));
+                 return redirect(route('site.order.show', $order->id));
                 // return view('order.order-detail', ['order' => $order]);
             }
         }

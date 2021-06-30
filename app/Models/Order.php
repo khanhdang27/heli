@@ -42,6 +42,7 @@ class Order extends Model
         return $_order;
     }
 
+
     public function createPaymentIntent ($payment) {
         $stripe = new \Stripe\StripeClient(
             config('app.stripe_secret')
@@ -81,7 +82,8 @@ class Order extends Model
         $this->payment_id = $intent->id;
         $this->final_price = $this->course_price *(1 - $this->course_discount/100);
 
-        $this->save();
+        $result = $this->save();
+
         return $this->fresh();
     }
     

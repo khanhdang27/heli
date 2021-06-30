@@ -15,7 +15,9 @@
                     <form class="form-inline my-1 mr-1" name="" id="certificate_form">
                         <select form="certificate_form" class="form-control" name="certificate" onchange="this.form.submit()">
                             @foreach (SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id') as $key => $value)
-                                <option value="{{ $key }}" {{ app('request')->input('certificate') == $key ? 'selected="selected"' : null}} >{{ $value }}</option>
+                                @if ($key != 1)
+                                    <option value="{{ $key }}" {{ app('request')->input('certificate') == $key ? 'selected="selected"' : null}} >{{ $value }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </form>
@@ -23,7 +25,9 @@
             </li>
             <li class="nav-item active d-flex align-items-center flex-wrap">
                 @foreach ($subjects as $item)
+                    @if ($item->certificate_id != 1)
                     <a href="{{ route('site.subject.show', $item->id) }}" class="text-secondary nav-link"> {{ $item->subject_name }} </a>
+                    @endif
                 @endforeach
             </li>
         </ul>

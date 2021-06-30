@@ -54,7 +54,11 @@ class CourseController extends Controller
         )->where('publish',1)
         ->whereHas('membershipCourses.course.student', function (Builder $query) {
                 $query->where('student_id', Auth::user()->id);
-            })->get();
+            })
+            ->whereHas('membershipCourses', function (Builder $query) {
+                $query->where('membership_id', Auth::user()->membership_group);
+            })
+            ->get();
 
         return view('course.my-course-page', ['courses'=> $courses]);
     }
@@ -132,9 +136,14 @@ class CourseController extends Controller
 
         $student_course  = null;
         if (Auth::check()){
-            $student_course = StudentCourses::where([
-                'course_id'=> $course->id, 'student_id'=>Auth::user()->id
-            ])->first();
+            $student_course = StudentCourses::query()
+                ->where('course_id', $course->id)
+                ->where('student_id',Auth::user()->id)->first();
+
+            // dd($course->id, Auth::user()->id ,$student_course);
+        }
+        if (empty($courses_with_group)){
+            return redirect(route('site.home'));
         }
         return view('course.course-page',[
             'courseDetail' => $courses_with_group,
@@ -253,7 +262,6 @@ class CourseController extends Controller
                 'lectures_name' => $input['lectures_name'],
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
-                'is_live' => $input['is_live'],
                 'course_schedule_id' => 0//$input['course_schedule_id']
             ]);
 
@@ -261,6 +269,7 @@ class CourseController extends Controller
             return response()->json(['status' => 200, 'message' => 'succeed']);
         } catch (\Throwable $th) {
             DB::rollback();
+            // dd($th);
             return response()->json(['status' => 400, 'message' => 'fails'], 400);
         }
     }

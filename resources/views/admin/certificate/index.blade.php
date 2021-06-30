@@ -62,11 +62,11 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <a href="javascript:void(0)"
+                                                    {{-- <a href="javascript:void(0)"
                                                         onclick="itemDelete('{{ route('admin.certificate.destroy', $value->id) }}')"
                                                         class="dropdown-item delete-item">
                                                             Delete
-                                                    </a>
+                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </td>

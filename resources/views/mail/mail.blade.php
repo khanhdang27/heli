@@ -17,9 +17,10 @@
         }
 
         .head-mail {
-            display: flex;
-            flex-direction: column;
+            /* display: flex; */
+            /* flex-direction: column; */
             align-items: center;
+            justify-content: center;
             background-color: #FFFFFF;
             padding: 32px 16px 32px 16px;
         }
@@ -33,6 +34,7 @@
 
         .head-mail h1 {
             font-weight: bold;
+            text-align: center;
             margin-bottom: 0;
             color: #E6C06C;
         }
@@ -82,8 +84,10 @@
 <div class="mail">
     <div class="head-mail">
         <img src="{{asset('images/HeliosLogo.png')}}" width=200>
+        <br>
         <hr>
-        <h1>
+        <br>
+        <h1 >
             Welcome!
         </h1>
     </div>

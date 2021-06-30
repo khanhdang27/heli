@@ -28,7 +28,9 @@
                     </a>
                     <div class="dropdown-menu bg-dark py-1 px-1 border border-secondary">
                         @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_code', 'id') as $key => $value)
+                            @if ($key != 1)
                             <a class="dropdown-item" href="{{ URL::route('site.certificate.show',$key, true)}}">{{$value}}</a>
+                            @endif
                         @endforeach
                     </div>
                 </li>
