@@ -12,12 +12,12 @@
             <div class="title-subject text-primary text-center">
                 {{$certificate->certificate_name}}
             </div>
-            <div class="container-fluid text-primary mb-4 d-flex h2">
+            <div class="container-fluid text-primary my-4 d-flex h2 bg-white border border-primary">
 
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form name="sort_course" >
                     <label class="radio-inline mr-5">
-                        <input class="btn-sort" type="radio" value="lates" name="sortable" {{ app('request')->input('sort') == 'lates' ? 'checked' : null }}> @lang('keywords.upToDate')
+                        <input class="btn-sort" type="radio" value="latest" name="sortable" {{ app('request')->input('sort') == 'latest' ? 'checked' : null }}> @lang('keywords.upToDate')
                     </label>
                     <label class="radio-inline mr-5">
                         <input class="btn-sort" type="radio" value="price" name="sortable" {{ app('request')->input('sort') == 'price' ? 'checked' : null }}> @lang('keywords.price')

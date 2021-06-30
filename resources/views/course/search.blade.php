@@ -15,7 +15,7 @@ use App\Utilities\SelectionByClass;
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
         
         <div class="container-fluid p-0">
-            <div class="container-fluid sort text-primary mb-4 d-flex bg-white">
+            <div class="container-fluid sort text-primary mb-4 d-flex bg-white border border-primary">
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form>
                     <label class="radio-inline mr-5">

@@ -7,6 +7,7 @@ use App\Models\Certificate;
 use App\Models\Subject;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\Certificate\CreateCertificateRequest;
+use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -90,6 +91,29 @@ class CertificateController extends Controller
          })
         ->whereHas('membershipCourses.course.subject.certificate', function ($query) use ($certificate){
             return $query->where('id', $certificate->id);
+         })->when(!empty($input['sort']), function($query) use ($input) {
+            switch ($input['sort']) {
+                case 'latest':
+                    $query->orderBy('created_at', 'desc');
+                    break;
+                case 'price':
+                    $query->whereHas('membershipCourses.course', function ($query) {
+                        return $query->orderBy('course_price', 'asc');
+                    });
+                    break;
+                case 'live':
+                    $query->whereHas('membershipCourses.course', function ($query) {
+                        return $query->where('type', Course::$LIVE);
+                    });
+                    break;
+                case 'record':
+                    $query->whereHas('membershipCourses.course', function ($query) {
+                        return $query->where('type', Course::$RECORD);
+                    });
+                    break;
+                default:
+                    break;
+            }
          })->get();
         // dd(DB::getQueryLog());
 
@@ -138,7 +162,21 @@ class CertificateController extends Controller
      */
     public function destroy(Certificate $certificate)
     {
-        $as = $certificate->delete();
-        // dd($as);
+        // DB::beginTransaction();
+        // try {
+        //     $_courses = Course::whereHas('subject.certificate', function ($query) use ($certificate){
+        //         return $query->where('id', $certificate->id);
+        //     });
+        //     $_subjects = Subject::whereHas('certificate', function ($query) use ($certificate){
+        //         return $query->where('id', $certificate->id);
+        //     });
+        //     $_courses->delete();
+        //     $_subjects->delete();
+        //     $certificate->delete();
+        //     DB::commit();
+        // } catch (\Throwable $th) {
+        //     throw $th;
+        //     DB::rollback();
+        // }
     }
 }

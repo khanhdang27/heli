@@ -140,11 +140,11 @@ class SubjectController extends Controller
 
     public function destroy(Subject $subject)
     {
-        $active = $subject->status;
-        $subject->status = $active == 1 ? 0 : 0;
-        $subject->save();
+        // $active = $subject->status;
+        // $subject->status = $active == 1 ? 0 : 0;
+        // $subject->save();
 
-        return $subject->save();
+        // return $subject->save();
     }
 
     /**

@@ -14,7 +14,6 @@
                                 </h4>
                             </div>
                             <div class="col-auto">
-
                                 <!-- Button -->
                                 <a href="{{ route('admin.tag.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
@@ -26,7 +25,6 @@
                                     </svg>
                                     Add
                                 </a>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>
@@ -78,7 +76,6 @@
                                 @endforeach
                                 </tbody>
                             </table>
-
                             {{ $tags->render() }}
                         </div>
                     </div>

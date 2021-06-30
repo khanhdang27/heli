@@ -214,16 +214,16 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        try {
-            $course->delete();
-            return response([
-                'message' => 'Delete success!'
-            ]);
-        } catch (\Exception $exception) {
-            return response([
-                'message' => 'Cannot delete course'
-            ], 400);
-        }
+        // try {
+        //     $course->delete();
+        //     return response([
+        //         'message' => 'Delete success!'
+        //     ]);
+        // } catch (\Exception $exception) {
+        //     return response([
+        //         'message' => 'Cannot delete course'
+        //     ], 400);
+        // }
     }
 
     public function lectures(Course $course)
@@ -277,7 +277,16 @@ class CourseController extends Controller
 
     public function destroyLecture(Course $course, Lecture $lecture)
     {
-        # code...
+        try {
+            $lecture->delete();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            return response([
+                'message' => 'Cannot delete course'
+            ], 400);
+        }
     }
 
 }
