@@ -48,7 +48,6 @@ class Course extends Model implements TranslatableContract
 
     use Translatable, SoftDeletes;
 
-
     protected $table = 'courses';
     protected $guarded = [];
     public array $translatedAttributes = ['course_name', 'course_description'];
@@ -97,6 +96,4 @@ class Course extends Model implements TranslatableContract
     {
         return $this->hasMany(Lecture::class);
     }
-
-
 }

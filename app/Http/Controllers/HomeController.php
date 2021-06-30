@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\News;
+use App\Models\StudentCourses;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
@@ -75,34 +76,39 @@ class HomeController extends Controller
 
         $courseIGCSE->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
-            return $query->where('id', 1);
+            return $query->where('id', 2);
         })->get();
         
         $courseUKISET= clone $course_hot;
 
         $courseUKISET->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
-            return $query->where('id', 2);
+            return $query->where('id', 3);
         })->get();
         
         $courseIELTS= clone $course_hot;
 
         $courseIELTS->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
-            return $query->where('id', 3);
+            return $query->where('id', 4);
         })->get();
         
         $courseIAL= clone $course_hot;
 
         $courseIAL->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
-            return $query->where('id', 4);
+            return $query->where('id', 5);
         })->get();
 
-        // dd(DB::getQueryLog());
-
-
-        $courseVideo = Course::with('tutor', 'lecture')->first();
+        $courseVideo = null;
+        if (Auth::check()) {
+            $user_course = StudentCourses::query()->where('student_id', Auth::user()->id)->latest('created_at')->first();
+            if (!empty($user_course)) {
+                $courseVideo = Course::with('tutor', 'lecture')->where('id', $user_course->course_id)->first();
+            }
+        } else {
+            $courseVideo = Course::with('tutor', 'lecture')->where('id', 1)->first();
+        }
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
         
         return view('home.home-page',[

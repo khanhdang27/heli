@@ -11,7 +11,7 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Discounts
+                                    News
                                 </h4>
                             </div>
                             <div class="col-auto">
@@ -79,6 +79,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{$news->render()}}
                         </div>
                     </div>
                 </div>

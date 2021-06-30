@@ -74,6 +74,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $certificates->render() }}
                         </div>
                     </div>
                 </div>

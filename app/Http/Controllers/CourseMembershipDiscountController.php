@@ -17,7 +17,8 @@ class CourseMembershipDiscountController extends Controller
      */
     public function index()
     {
-        $courses_priceTag = CourseMembershipDiscount::with('membershipCourses.course', 'membershipCourses.membership')->get();
+        $courses_priceTag = CourseMembershipDiscount::with('membershipCourses.course', 'membershipCourses.membership')
+            ->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.course-member-discount.index', [
             'courses_priceTag' => $courses_priceTag,
         ]);

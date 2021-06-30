@@ -31,7 +31,7 @@ class TutorController extends Controller
             ->when(request('subject') != '', function (Builder $query) {
                 $query->where('subject_id', request('subject'));
             })
-            ->paginate(20)
+            ->paginate(15)
             ->withQueryString();
         return view('admin.tutor.index', [
             'tutors'   => $tutors,

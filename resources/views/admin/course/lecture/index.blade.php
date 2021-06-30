@@ -75,7 +75,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($course->lecture as $lecture)
+                                @foreach($lectures as $lecture)
                                     <tr>
                                         <td class="goal-project">
                                             {{ $lecture->lectures_name }}
@@ -104,15 +104,14 @@
                                                         class="dropdown-item delete-item">
                                                             Delete
                                                     </a>
-                                                    
                                                 </div>
                                             </div>
                                         </td>
-
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $lectures->render() }}
                         </div>
                     </div>
                 </div>

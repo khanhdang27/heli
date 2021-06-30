@@ -27,7 +27,7 @@ class CourseMaterialController extends Controller
             ->when(request('name') != '', function (Builder $query) {
                 $query->whereTranslationLike('course_material_name', '%' . request('name') . '%');
             })
-            ->paginate(20);
+            ->paginate(15);
         return view('admin.course-material.index', [
             'courseMaterial' => $courseMaterial,
             'course' => $course

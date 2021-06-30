@@ -36,7 +36,7 @@ class CourseController extends Controller
             ->when(request('tutor') != '', function (Builder $query) {
                 $query->where('tutor_id', request('tutor'));
             })
-            ->paginate(20)
+            ->paginate(15)
             ->withQueryString();
         return view('admin.course.index', [
             'courses' => $courses,
@@ -228,9 +228,11 @@ class CourseController extends Controller
 
     public function lectures(Course $course)
     {
-        $_course = Course::find($course->id)->with('lecture')->first();
+        $_course = $course->load('lecture');
+        $lectures = Lecture::query()->where('course_id', $_course->id)->paginate(15);
         return view('admin.course.lecture.index', [
-            'course' => $_course
+            'course' => $_course,
+            'lectures' => $lectures
         ]);
     }
 

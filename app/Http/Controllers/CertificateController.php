@@ -22,7 +22,7 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::all();
+        $certificates = Certificate::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.certificate.index',[
             'certificates' => $certificates,
         ]);

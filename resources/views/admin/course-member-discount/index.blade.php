@@ -89,6 +89,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $courses_priceTag->render() }}
                         </div>
                     </div>
                 </div>

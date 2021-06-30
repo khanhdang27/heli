@@ -18,7 +18,7 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        $discount = Discount::query()->get();
+        $discount = Discount::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.discount.index',[
             'discount' => $discount
         ]);
@@ -128,9 +128,9 @@ class DiscountController extends Controller
     public function apply($id)
     {
         $discount = Discount::find($id);
-        $courses = Course::query()->paginate(10);
+        $courses = Course::query()->paginate(15);
 
-        $courseDiscount = CourseDiscount::with('course')->where('discount_id', $id)->paginate(10);
+        $courseDiscount = CourseDiscount::with('course')->where('discount_id', $id)->paginate(15);
 
         return view('admin.discount.apply',compact('discount', 'courses', 'courseDiscount'));
     }

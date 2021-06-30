@@ -52,6 +52,7 @@
             <x-home.step-register></x-home.step-register>
         @endif
         @if(!Auth::check())
+            {{-- chau dang nhap --}}
             <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
             <div class="d-flex justify-content-end pr-3">
                 <div class="text-left w-25">
@@ -62,6 +63,7 @@
                 </div>
             </div>
         @else
+            {{-- da dang nhap --}}
             <div class="mx-auto container-video border-secondary mt-5 pb-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
                     <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>

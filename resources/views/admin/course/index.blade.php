@@ -127,9 +127,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="d-flex justify-content-center">
-                                {{ $courses->links() }}
-                            </div>
+                            {{ $courses->render() }}
                         </div>
                     </div>
                 </div>
