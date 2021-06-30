@@ -18,7 +18,7 @@ use App\Utilities\SelectionByClass;
             <div class="title-subject text-primary text-center">
                 {{ $subject->subject_name }}
             </div>
-            <div class="container-fluid sort text-primary mb-4 d-flex">
+            <div class="container-fluid sort text-primary mb-4 d-flex bg-white border border-primary">
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form>
                     <label class="radio-inline mr-5">

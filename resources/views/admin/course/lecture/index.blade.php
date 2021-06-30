@@ -75,7 +75,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($course->lectures as $lecture)
+                                @foreach($course->lecture as $lecture)
                                     <tr>
                                         <td class="goal-project">
                                             {{ $lecture->lectures_name }}

@@ -228,7 +228,7 @@ class CourseController extends Controller
 
     public function lectures(Course $course)
     {
-        $_course = Course::find($course->id)->with('lectures')->first();
+        $_course = Course::find($course->id)->with('lecture')->first();
         return view('admin.course.lecture.index', [
             'course' => $_course
         ]);

@@ -28,6 +28,7 @@ $course = $courseDetail->membershipCourses->course;
                                 </h4>
                             </a>
                         </li>
+                        @if ( $course->type == Course::$LIVE )
                         <li class="nav-item">
                             <a class="nav-link category-link-text" data-toggle="pill" href="#menu1">
                                 <h4>
@@ -35,6 +36,7 @@ $course = $courseDetail->membershipCourses->course;
                                 </h4>
                             </a>
                         </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link category-link-text" data-toggle="pill" href="#menu2">
                                 <h4>
@@ -55,9 +57,11 @@ $course = $courseDetail->membershipCourses->course;
                         <div id="home" class="container-fluid pt-5 mb-5  tab-pane active">
                             <x-product-detail.course-overview :courseDetail=$course></x-product-detail.course-overview>
                         </div>
+                        @if ( $course->type == Course::$LIVE )
                         <div id="menu1" class="container-fluid pb-5 tab-pane fade">
                             <x-product-detail.online-class/>
                         </div>
+                        @endif
                         <div id="menu2" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
                             <x-product-detail.course-tutor :courseDetail=$course></x-product-detail.course-tutor>
                         </div>

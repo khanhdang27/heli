@@ -26,7 +26,7 @@ Route::resource('subject', 'SubjectController');
 Route::resource('certificate', 'CertificateController');
 
 Route::get('course/search', 'CourseController@search')->name('course.search');
-Route::resource('course', 'CourseController');
+Route::resource('course', 'CourseController')->except(['index', 'update', 'store', 'delete']);
 
 Route::get('lesson', function () {
     return view('course.lesson-page');
