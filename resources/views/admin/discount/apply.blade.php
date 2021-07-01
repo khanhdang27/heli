@@ -60,7 +60,7 @@ $array_column = $courseDiscount->toArray();
                                             {{ $value->course_price }}
                                         </td>
                                         <td>
-                                            {{ $value->translate('en')->course_description }}
+                                            {{ $value->course_description }}
                                         </td>
                                         <th>
                                             {{ Form::number( 'discount_'.$value->id, $courseDiscount->firstWhere('course_id',$value->id)->discount_value ?? null, ['class'=>'form-control']) }}

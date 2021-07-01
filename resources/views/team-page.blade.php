@@ -7,7 +7,8 @@
         </div>
         <div class="container-fluid content-team-page">
             <div class="row w-100 m-0">
-                @foreach(\App\Models\Tutor::all() as $value)
+                @foreach(\App\Models\Tutor::all() as $key => $value)
+                    @if($value->id != 1) 
                     <div class="col-lg-6 d-flex justify-content-center">
                         <div class="card-team">
                             <div class="row m-0">
@@ -43,6 +44,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 @endforeach
             </div>
         </div>

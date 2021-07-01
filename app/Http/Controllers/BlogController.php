@@ -33,7 +33,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.create');
+        $tags = Tag::where('tag_type', Tag::$BLOG)->get();
+        return view('admin.blog.create', compact('tags'));
     }
 
     /**

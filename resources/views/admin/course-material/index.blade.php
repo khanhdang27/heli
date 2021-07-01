@@ -67,10 +67,10 @@
 {{--                                            {{ $value->material_file }}--}}
                                         </td>
                                         <td class="text-description">
-                                            {{ $value->translate('en')->course_material_description }}
+                                            {{ $value->course_material_description }}
                                         </td>
                                         <td>
-                                            {{ $value->translate('en')->course_material_origin }}
+                                            {{ $value->course_material_origin }}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

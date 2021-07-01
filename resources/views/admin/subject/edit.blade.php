@@ -31,15 +31,15 @@
                             </div>
                             <div class="form-group">
                                 {{ Form::label('subject_name:en', 'Name (English)') }}
-                                {{ Form::text('subject_name:en', $subject->translate('en')->subject_name, ['class' => 'form-control']) }}
+                                {{ Form::text('subject_name:en', $subject->subject_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('subject_name:cn', 'Name (Traditional Chinese)') }}
-                                {{ Form::text('subject_name:cn', $subject->translate('cn')->subject_name, ['class' => 'form-control']) }}
+                                {{ Form::text('subject_name:cn', $subject->subject_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('subject_name:sc', 'Name (Simplify Chinese)') }}
-                                {{ Form::text('subject_name:sc', $subject->translate('sc')->subject_name, ['class' => 'form-control']) }}
+                                {{ Form::text('subject_name:sc', $subject->subject_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('subject_color_background', 'Color)') }}

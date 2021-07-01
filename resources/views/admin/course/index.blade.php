@@ -92,7 +92,7 @@
                                             {{ $value->course_price }}
                                         </td>
                                         <td class="text-description">
-                                            {{ $value->translate('en')->course_description }}
+                                            {{ $value->course_description }}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
