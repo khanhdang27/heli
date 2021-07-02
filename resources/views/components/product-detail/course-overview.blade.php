@@ -19,7 +19,9 @@
                         <p class="pb-3">** {{ $documentItem->course_material_origin }}</p>
                         <p class="m-0">{{ $documentItem->course_material_name }}</p>
                         <p class="m-0">
-                            {{ substr($documentItem->course_material_description, 0, strpos($documentItem->course_material_description, ' ', 50)) }}
+                            {{ (strlen($documentItem->course_material_description) < 50 ) ?
+                                $documentItem->course_material_description 
+                                : substr($documentItem->course_material_description, 0, strpos($documentItem->course_material_description, ' ', 50)) }}
                         </p>
                     </div>
                 </div>
