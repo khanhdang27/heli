@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Certificate;
-use App\Models\Subject;
-use Illuminate\Contracts\View\View;
 use App\Http\Requests\Certificate\CreateCertificateRequest;
+use App\Models\Certificate;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
+use App\Models\Subject;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 
 class CertificateController extends Controller
 {
@@ -24,7 +23,7 @@ class CertificateController extends Controller
     public function index()
     {
         $certificates = Certificate::orderBy('created_at', 'desc')->paginate(15);
-        return view('admin.certificate.index',[
+        return view('admin.certificate.index', [
             'certificates' => $certificates,
         ]);
     }
@@ -42,7 +41,7 @@ class CertificateController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateCertificateRequest  $request
+     * @param CreateCertificateRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateCertificateRequest $request)
@@ -58,7 +57,7 @@ class CertificateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Certificate $certificate
+     * @param Certificate $certificate
      * @return View
      */
     public function show(Certificate $certificate, Request $request)
@@ -66,11 +65,11 @@ class CertificateController extends Controller
         $input = $request->input();
         $subjects = null;
         if (empty($input['certificate'])) {
-            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query){
+            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query) {
                 return $query->where('id', 1);
             })->get();
-        }else {
-            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query) use ($input){
+        } else {
+            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query) use ($input) {
                 return $query->where('id', $input['certificate']);
             })->get();
         }
@@ -85,36 +84,40 @@ class CertificateController extends Controller
             'membershipCourses.course.subject.certificate',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
-        )->where('publish',1)
-        ->whereHas('membershipCourses', function ($query) {
-            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
-         })
-        ->whereHas('membershipCourses.course.subject.certificate', function ($query) use ($certificate){
-            return $query->where('id', $certificate->id);
-         })->when(!empty($input['sort']), function($query) use ($input) {
-            switch ($input['sort']) {
-                case 'latest':
-                    $query->orderBy('created_at', 'desc');
-                    break;
-                case 'price':
-                    $query->whereHas('membershipCourses.course', function ($query) {
-                        return $query->orderBy('course_price', 'asc');
-                    });
-                    break;
-                case 'live':
-                    $query->whereHas('membershipCourses.course', function ($query) {
-                        return $query->where('type', Course::$LIVE);
-                    });
-                    break;
-                case 'record':
-                    $query->whereHas('membershipCourses.course', function ($query) {
-                        return $query->where('type', Course::$RECORD);
-                    });
-                    break;
-                default:
-                    break;
-            }
-         })->get();
+        )->where('publish', 1)
+            ->whereHas('membershipCourses', function ($query) {
+                return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+            })
+            ->whereHas('membershipCourses.course.subject.certificate', function ($query) use ($certificate) {
+                return $query->where('id', $certificate->id);
+            })->when(!empty($input['sort']), function ($query) use ($input) {
+                switch ($input['sort']) {
+                    case 'latest':
+                        $query->orderBy('created_at', 'desc');
+                        break;
+                    case 'price':
+                        $query->whereHas('membershipCourses.course', function ($query) {
+                            return $query->orderBy('course_price', 'asc');
+                        });
+                        break;
+                    case 'live':
+                        $query->whereHas('membershipCourses.course', function ($query) {
+                            return $query->where('type', Course::$LIVE);
+                        });
+                        break;
+                    case 'record':
+                        $query->whereHas('membershipCourses.course', function ($query) {
+                            return $query->where('type', Course::$RECORD);
+                        });
+                        break;
+                    case 'document':
+                        $query->whereHas('membershipCourses.course', function ($query){
+                            return $query->where('type', Course::$DOCUMENT);
+                        });
+                    default:
+                        break;
+                }
+            })->get();
         // dd(DB::getQueryLog());
 
         return view('certificate.index', [
@@ -127,12 +130,12 @@ class CertificateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Certificate  $certificate
+     * @param Certificate $certificate
      * @return View
      */
     public function edit(Certificate $certificate)
     {
-        return view('admin.certificate.edit',[
+        return view('admin.certificate.edit', [
             'certificate' => $certificate
         ]);
     }
@@ -140,8 +143,8 @@ class CertificateController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  CreateCertificateRequest  $request
-     * @param  Certificate  $certificate
+     * @param CreateCertificateRequest $request
+     * @param Certificate $certificate
      * @return \Illuminate\Http\RedirectResponse
      *
      */
@@ -157,7 +160,7 @@ class CertificateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Certificate  $certificate
+     * @param Certificate $certificate
      * @return \Illuminate\Http\Response
      */
     public function destroy(Certificate $certificate)

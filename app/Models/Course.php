@@ -45,7 +45,7 @@ class Course extends Model implements TranslatableContract
 {
     static $LIVE = 1;
     static $RECORD = 2;
-
+    static $DOCUMENT = 3;
     use Translatable, SoftDeletes;
 
     protected $table = 'courses';

@@ -24,7 +24,7 @@ Route::get('teams', function () {
 Route::resource('subject', 'SubjectController');
 
 Route::resource('certificate', 'CertificateController');
-
+Route::get('document/{id}','CertificateController@documentDetail')->name('document');
 Route::get('course/search', 'CourseController@search')->name('course.search');
 Route::resource('course', 'CourseController')->except(['index', 'update', 'store', 'delete']);
 
