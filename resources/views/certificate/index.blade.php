@@ -8,11 +8,11 @@
             @lang('keywords.navBar.subjectClassification')
         </div>
         <x-sub-header :subjects=$subjects ></x-sub-header>
-        <div class="container-fluid p-0">
+        <div class="container-fluid p-0 container-course">
             <div class="title-subject text-primary text-center">
                 {{$certificate->certificate_name}}
             </div>
-            <div class="container-fluid text-primary my-4 d-flex h2 bg-white border border-primary">
+            <div class="text-primary my-4 d-flex h2">
 
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form name="sort_course" >
@@ -37,7 +37,7 @@
                 @php
                 $course = $courses->where('membershipCourses.course.subject_id',$subject->id)
                 @endphp
-                <div class="container-fluid">
+                <div>
                     <h1 class="text-primary" id="tab-title">
                         {{$subject->subject_name}}
                     </h1>

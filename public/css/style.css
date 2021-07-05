@@ -45,9 +45,8 @@ body {
 }
 
 .btn-header {
-    font-size: 20px;
-    min-width: 85px;
-    height: 37px;
+    min-width: 58px;
+    height: 27px;
     border: none;
     border-radius: 20px;
     margin-left: 1rem;
@@ -280,6 +279,7 @@ body {
 /*FREE CLASS-----------------------------------------*/
 
 .free-class-container {
+    min-height: 590px;
     background-image: url("../images/freeclass-bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;

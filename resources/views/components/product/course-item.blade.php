@@ -22,7 +22,7 @@
 <div class="{{ $class }}">
     <div class="product-box">
         <div class="top-product">
-            <div class="title-product bg-secondary">
+            <div class="title-product bg-secondary text-primary">
                 <h4>{{ $course_card->subject->subject_name }}</h4>
             </div>
             <div class="content-product row"
@@ -51,13 +51,13 @@
         </div>
         <div class="bottom-product2 bg-white p-4">
             <div class="card-name-product d-flex justify-content-between">
-                <div class="name-product w-75 d-flex flex-column justify-content-between text-primary">
+                <div class="name-product w-75 text-primary">
                     <div class="text-multiline-truncate">
                         <p>
                             {{rtrim(mb_substr($course_card->course_description,0,100))}}
                         </p>
                     </div>
-                    <div class="pt-3">
+                    <div class="pt-3 align-bottom">
                         @if($course_card->type != Course::$DOCUMENT)
                             {{$course_card->tutor->full_name}}
                         @endif

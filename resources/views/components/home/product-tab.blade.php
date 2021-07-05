@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid container-course">
     <!-- Nav pills -->
     <ul class="nav nav-pills menu-category" role="tablist">
         <li class="nav-item">
@@ -51,16 +51,16 @@
         @lang('keywords.hotCourseSeries')
     </h1>
     <div class="tab-content">
-        <div id="menu1" class="container-fluid tab-pane active">
+        <div id="menu1" class="tab-pane active">
             <x-product.course-list :courses=$courseIGCSE typeOfUI="hot"></x-product.course-list>
         </div>
-        <div id="menu2" class="container-fluid tab-pane fade">
+        <div id="menu2" class="tab-pane fade">
             <x-product.course-list :courses=$courseUKISET typeOfUI="hot"></x-product.course-list>
         </div>
-        <div id="menu3" class="container-fluid tab-pane fade">
+        <div id="menu3" class="tab-pane fade">
             <x-product.course-list :courses=$courseIELTS typeOfUI="hot"></x-product.course-list>
         </div>
-        <div id="menu4" class="container-fluid tab-pane fade">
+        <div id="menu4" class="tab-pane fade">
             <x-product.course-list :courses=$courseIAL typeOfUI="hot"></x-product.course-list>
         </div>
     </div>

@@ -28,9 +28,9 @@ if (!empty($fisrt_lecture)) {
             @endif
         </div>
     </div>
-    
+
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-lg-8">
             <iframe id="videoView" src={{ $defaultSource }} width="840" height="420" frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Default name"></iframe>
         </div>

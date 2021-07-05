@@ -21,7 +21,7 @@
         @endif
     </div>
     <div class="body-content">
-        <div class="container-fluid">
+        <div class="container-fluid container-course">
             <div class="row">
                 <div class="col-lg-6 col-12">
                     <h1 class="text-primary">
@@ -38,7 +38,7 @@
             </div>
         </div>
         @if(Auth::check())
-            <div class="container-fluid">
+            <div class="container-fluid container-course">
                 <h1 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
                 </h1>
@@ -52,15 +52,13 @@
             <x-home.step-register></x-home.step-register>
         @endif
         @if(!Auth::check())
-            {{-- chau dang nhap --}}
+            {{-- chua dang nhap --}}
             <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
-            <div class="d-flex justify-content-end pr-3">
-                <div class="text-left w-25">
-                    <button class="btn-register-now mt-0 mb-4 btn-primary" id="" data-toggle="modal"
-                            data-target="#registerModal">
-                        <span>@lang('keywords.tryItNow')</span>
-                    </button>
-                </div>
+            <div class="w-75 mx-auto text-right">
+                <button class="btn-register-now mt-0 mb-5 btn-primary" id="" data-toggle="modal"
+                        data-target="#registerModal">
+                    <span>@lang('keywords.tryItNow')</span>
+                </button>
             </div>
         @else
             {{-- da dang nhap --}}
@@ -92,7 +90,7 @@
                 <div class="d-flex justify-content-center">
                     <button class="btn-register-now btn-primary" data-toggle="modal"
                             data-target="#registerModalComponent">
-                        <span>@lang('keywords.registerNowToExperience')</span>
+                        <span class="font-weight-bold">@lang('keywords.registerNowToExperience')</span>
                     </button>
                     <x-login.register-modal></x-login.register-modal>
                 </div>

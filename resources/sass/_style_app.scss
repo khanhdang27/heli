@@ -6,7 +6,13 @@
 html {
     font-size: 14pt;
 }
-
+.container-course{
+    max-width: 94%;
+    h1{
+        margin-top: 30px;
+        font-size: 26px;
+    }
+}
 .color-primary {
     svg {
         fill: var(--primary);
@@ -47,13 +53,15 @@ html {
     line-height: 1.45;
     padding: 4.48rem 10rem;
     .title-foot {
+        font-size: 14px;
+        font-weight: bold;
         margin-bottom: 0;
     }
     span {
-        font-size: 13pt;
+        font-size: 9pt;
     }
     a {
-        font-size: 13pt;
+        font-size: 9pt;
         color: var(--secondary);
     }
     a:hover {
@@ -243,14 +251,14 @@ form#certificate_form {
 }
 
 .btn-register-now {
-    font-size: 30pt;
+    font-size: 21.75pt;
     color: #fff;
     border-radius: 50px;
     margin-top: 5rem;
     text-align: center;
-    padding: 0.5rem 3rem;
+    padding: 0 3rem;
     border: none;
-    cursor: pointer;
+    min-height: 47px;
 }
 
 .btn-register-now:focus {
@@ -307,6 +315,7 @@ form#certificate_form {
     }
     .content-top {
         text-align: center;
+        font-size: 14px;
     }
     .content-product {
         height: 323px;
@@ -339,19 +348,21 @@ form#certificate_form {
         }
     }
     .bottom-product2 {
-        height: 250px;
+        height: 200px;
         align-items: center;
         justify-content: flex-end;
         box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
         .card-name-product {
-            min-height: 125px;
+            min-height: 100px;
             font-size: 16pt;
             .text-multiline-truncate {
                 overflow: hidden;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
-                height: 110px;
+            }
+            .name-product{
+                font-size: 12px;
             }
         }
     }
@@ -540,7 +551,6 @@ form#certificate_form {
         }
         .content-info-right {
             max-width: 100%;
-            max-height: 420px;
             overflow-y: auto;
             font-size: 20px;
         }
@@ -744,6 +754,7 @@ form#certificate_form {
 .popular-articles-item-content {
     flex: 0 60%;
     a {
+        font-size: 14px;
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 3;
@@ -795,7 +806,7 @@ form#certificate_form {
 }
 
 .title-article {
-    font-size: 2.25rem;
+    font-size: 14px;
     color: #fff;
     font-weight: 600;
     overflow: hidden;

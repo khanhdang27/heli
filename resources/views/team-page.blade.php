@@ -8,7 +8,7 @@
         <div class="container-fluid content-team-page">
             <div class="row w-100 m-0">
                 @foreach(\App\Models\Tutor::all() as $key => $value)
-                    @if($value->id != 1) 
+                    @if($value->id != 1)
                     <div class="col-lg-6 d-flex justify-content-center">
                         <div class="card-team">
                             <div class="row m-0">
@@ -28,17 +28,17 @@
                                             <div>► {{ $value->tutor_specialized }}</div>
                                             <div>► {{ $value->tutor_experience }}</div>
                                         </div>
-                                        <div class="d-flex justify-content-end bottom-info-right">
-                                            <div class="ic-tutor ic-light">
-                                                <img src={{asset("images/ic/ic_light.svg")}}>
-                                            </div>
-                                            <div class="ic-tutor ic-clock">
-                                                <img src={{asset("images/ic/ic_clock.svg")}}>
-                                            </div>
-                                            <div class="ic-tutor ic-az">
-                                                <img src={{asset("images/ic/ic_az.svg")}}>
-                                            </div>
-                                        </div>
+{{--                                        <div class="d-flex justify-content-end bottom-info-right">--}}
+{{--                                            <div class="ic-tutor ic-light">--}}
+{{--                                                <img src={{asset("images/ic/ic_light.svg")}}>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="ic-tutor ic-clock">--}}
+{{--                                                <img src={{asset("images/ic/ic_clock.svg")}}>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="ic-tutor ic-az">--}}
+{{--                                                <img src={{asset("images/ic/ic_az.svg")}}>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     </div>
                                 </div>
                             </div>
