@@ -10942,7 +10942,7 @@ a.text-dark:focus {
 
 @font-face {
   font-family: PingFangTC;
-  src: url("/Helios_v2/public/fonts/PingFang.ttc") format("truetype");
+  src: url("/helios/public/fonts/PingFang.ttc") format("truetype");
 }
 
 html {

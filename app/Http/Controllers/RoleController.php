@@ -17,10 +17,6 @@ class RoleController extends Controller
      */
     function __construct()
     {
-        // $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index', 'store']]);
-        // $this->middleware('permission:role-create', ['only' => ['create', 'store']]);
-        // $this->middleware('permission:role-edit', ['only' => ['edit', 'update']]);
-        // $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
 
     /**
@@ -32,14 +28,6 @@ class RoleController extends Controller
     {
         $roles = Role::with('permissions')->get();
         $permission = Permission::all();
-//        $rolePermissions = [];
-//        foreach ($roles as $value) {
-//            $rolePermission = DB::table("role_has_permissions")
-//                ->where("role_has_permissions.role_id", $value->id)
-////                ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-//                ->get();
-//            array_push($rolePermissions,$rolePermission);
-//        }
         return view('admin.roles.index', compact('roles','permission'));
     }
 
@@ -114,16 +102,30 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'permission' => 'required',
-        ]);
 
-        $role = Role::find($id);
-        $role->name = $request->input('name');
-        $role->save();
+        $inputs = $request->input();
+        $roles = Role::all();
+        $permission_names = Permission::all()->pluck('name');
+        $permissions = Permission::all();
 
-        $role->syncPermissions($request->input('permission'));
+        $role_has_permissions = DB::select('select * from role_has_permissions');
+
+        if (!empty($role_has_permissions)){
+            foreach ($roles as $role) {
+                foreach ($permission_names as $permission) {
+                    $role->revokePermissionTo($permission);
+                }
+            }
+        }
+
+        foreach ($roles as $role) {
+            foreach ($permissions as $permission) {
+                if (!empty($inputs['permission_'.$role->id.'_'.$permission->id])) {
+                    DB::insert('insert into role_has_permissions (permission_id, role_id) values (?, ?)', [$permission->id, $role->id]);
+                    $role_has_permissions = DB::select('select * from role_has_permissions');
+                }
+            }
+        }
         return redirect()->route('admin.roles.index')
             ->with('success', 'Role updated successfully');
     }

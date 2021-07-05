@@ -1,6 +1,6 @@
 @font-face {
     font-family: PingFangTC;
-    src: url('/Helios_v2/public/fonts/PingFang.ttc') format('truetype');
+    src: url('/helios/public/fonts/PingFang.ttc') format('truetype');
 }
 
 html {
@@ -22,7 +22,6 @@ html {
         color: var(--white);
         font-size: 15pt;
     }
-
     a:hover {
         background: none;
         color: var(--secondary);
@@ -47,20 +46,16 @@ html {
     color: var(--secondary);
     line-height: 1.45;
     padding: 4.48rem 10rem;
-
     .title-foot {
         margin-bottom: 0;
     }
-
     span {
         font-size: 13pt;
     }
-
     a {
         font-size: 13pt;
         color: var(--secondary);
     }
-
     a:hover {
         text-decoration: none;
         color: var(--white);
@@ -76,7 +71,6 @@ html {
 .list-news {
     height: 20rem;
     overflow-y: auto;
-
     a:hover {
         text-decoration: none;
     }
@@ -89,7 +83,6 @@ form#certificate_form {
         background: var(--dark) 0.5;
         color: var(--secondary);
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-
         option {
             padding: 0.2rem 1rem;
             font-size: 14pt;
@@ -98,7 +91,6 @@ form#certificate_form {
             color: var(--primary);
             text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
         }
-
         option:checked {
             background: var(--primary) 0.5;
             color: var(--secondary);
@@ -200,7 +192,6 @@ form#certificate_form {
     padding: 0.5rem 1rem;
     border-radius: 28px;
     margin: 0 0.5rem 0.5rem 0;
-
     a {
         text-decoration: none;
     }
@@ -278,13 +269,11 @@ form#certificate_form {
 
 .praise-box {
     margin-bottom: 12rem;
-
     .praise {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-
     .avatar-guest {
         border-radius: 200px;
         width: 251px;
@@ -293,18 +282,15 @@ form#certificate_form {
         right: 0;
         margin: 0 auto;
     }
-
     .avatar {
         border-radius: 200px;
     }
-
     .content-praise {
         font-size: 16pt;
         padding: 10rem 1.3rem 3rem 1.3rem;
         position: unset;
         box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
     }
-
     .content-praise p {
         margin-bottom: 3rem;
     }
@@ -314,30 +300,25 @@ form#certificate_form {
 .product-box {
     width: 100%;
     margin-top: 2.8rem;
-
     .title-product {
         width: 25%;
         padding: 0.6rem 0;
         text-align: center;
     }
-
     .content-top {
         text-align: center;
     }
-
     .content-product {
         height: 323px;
         align-items: center;
         width: 100%;
         margin-left: 0;
-
         .color-bar {
             width: 15px;
             height: 258px;
             background-image: linear-gradient(to right, #E6C06C, #FBB03B);
             margin: auto;
         }
-
         .body-product-content {
             height: 258px;
             padding: 1.76rem;
@@ -345,7 +326,6 @@ form#certificate_form {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-
             .content-bot {
                 border: 1px solid;
                 padding: 2rem 1.5rem;
@@ -355,23 +335,17 @@ form#certificate_form {
                 white-space: nowrap;
                 text-overflow: ellipsis;
             }
-
-            @media (max-width: 1200px) {
-
-            }
+            @media (max-width: 1200px) {}
         }
     }
-
     .bottom-product2 {
         height: 250px;
         align-items: center;
         justify-content: flex-end;
         box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-
         .card-name-product {
             min-height: 125px;
             font-size: 16pt;
-
             .text-multiline-truncate {
                 overflow: hidden;
                 display: -webkit-box;
@@ -383,30 +357,26 @@ form#certificate_form {
     }
 }
 
+
 /*TAB PRODUCT-----------------------------------------*/
 
 .product-tab {
     padding-bottom: 4.6rem;
-
     .menu-category {
         height: 226px;
         justify-content: center;
         align-items: center;
     }
-
     .menu-img {
         width: 184px;
     }
-
     #menu-img4 {
         padding-top: 2.9rem;
         padding-bottom: 2.9rem;
     }
-
     .menu-category-text {
         display: none;
     }
-
     @media screen and (max-width: 1200px) {
         .menu-category {
             display: none;
@@ -435,11 +405,9 @@ form#certificate_form {
     max-width: 1438px;
     padding-top: 3rem;
     padding-bottom: 4rem;
-
     iframe {
         width: 100%;
     }
-
     .box-list-video {
         font-size: 22.5pt;
         max-width: 550px;
@@ -461,26 +429,22 @@ form#certificate_form {
     width: 51px;
 }
 
-
 //FOOTER
 .footer-builder {
     border: 2px solid;
 }
 
+
 /*STEP FOR REGISTER-----------------------------------------*/
 
 .step-for-register {
     padding-bottom: 3.6rem;
-
     .content-step {
         max-width: 1320px;
         margin: 0 auto;
-
         #step2 {
             margin: 0 7rem;
-
         }
-
         .circle-step {
             width: 88px;
             height: 88px;
@@ -491,15 +455,12 @@ form#certificate_form {
             font-size: 17.3pt;
             font-weight: 600;
         }
-
         .title-step {
             font-weight: 600;
         }
-
         .row-step {
             padding: 5rem 0 3rem 0;
         }
-
         .col-step {
             text-align: center;
             display: flex;
@@ -508,23 +469,19 @@ form#certificate_form {
             margin: 0 2rem;
         }
     }
-
     .dot-bar {
         width: 289px;
         display: flex;
         justify-content: space-between;
     }
-
     .list-dot {
         width: 15px;
         height: 15px;
         border-radius: 20px;
     }
-
     #btn-register-step {
         font-size: 18.7pt;
     }
-
     @media screen and (max-width: 800px) {
         .row-step {
             display: none;
@@ -536,7 +493,6 @@ form#certificate_form {
             padding: 1.5rem 0 0 0;
         }
     }
-
 }
 
 
@@ -545,11 +501,9 @@ form#certificate_form {
 .content-team-page {
     max-width: 1614px;
     padding: 0 0 10.5rem 0;
-
     .card-team {
         margin-top: 3.4rem;
         width: 100%;
-
         .thumb {
             width: 100%;
             height: 100%;
@@ -557,7 +511,6 @@ form#certificate_form {
             background-position: center center;
             background-size: cover;
         }
-
         .info-tutor {
             width: 100%;
             min-height: 93px;
@@ -567,51 +520,42 @@ form#certificate_form {
             bottom: 0;
             background-color: rgba(15, 34, 51, 0.6);
         }
-
         .tutor-background {
             height: 514px;
         }
-
         .name-tutor {
             font-size: 22px;
             font-weight: 600;
         }
-
         .position-tutor {
             font-size: 22px;
             font-weight: 400;
         }
-
         .info-left {
             position: relative;
             height: 514px;
         }
-
         .info-right {
             height: 514px;
         }
-
         .content-info-right {
             max-width: 100%;
             max-height: 420px;
             overflow-y: auto;
             font-size: 20px;
         }
-
         .bottom-info-right {
             margin: 0 0.8rem 0.8rem 0;
         }
-
         .ic-tutor {
             margin-right: 0.78rem;
-
             img {
                 width: 59px;
             }
         }
-
     }
 }
+
 
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
@@ -620,6 +564,7 @@ form#certificate_form {
     border: 2px solid;
     background-color: rgba(15, 34, 51, 0.8);
 }
+
 
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 
@@ -638,6 +583,7 @@ form#certificate_form {
     width: 30px;
     height: 20px;
 }
+
 
 /*SHOW VIDEO------------------------------------------------------------------------------------*/
 
@@ -668,7 +614,6 @@ form#certificate_form {
 .share-bar {
     margin-top: 2rem;
 }
-
 
 .tab-item-content {
     max-width: 846px;
@@ -774,14 +719,13 @@ form#certificate_form {
 
 
 /*BLOG PAGE----------------------------------------------------------------*/
+
 .info-article {
     min-height: 185px;
     background-color: rgba(15, 34, 51, 0.6);
-
     a {
         color: white;
     }
-
     a:hover {
         text-decoration: none;
         color: var(--secondary);
@@ -799,7 +743,6 @@ form#certificate_form {
 
 .popular-articles-item-content {
     flex: 0 60%;
-
     a {
         overflow: hidden;
         display: -webkit-box;
@@ -807,7 +750,6 @@ form#certificate_form {
         -webkit-box-orient: vertical;
         text-overflow: ellipsis;
     }
-
     a:hover {
         text-decoration: none;
     }
@@ -928,7 +870,6 @@ form#certificate_form {
 .top-video {
     max-width: 1554px;
     margin-left: 5rem;
-
     a:hover {
         text-decoration: none;
     }
@@ -936,26 +877,23 @@ form#certificate_form {
 
 
 /*NEWS PAGE-----------------------------------------*/
+
 .body-news-page {
     background-image: url("../images/BG_news.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
     .container-news-page {
         padding-bottom: 7rem;
-
         .content-news-page {
             margin-top: 8rem;
             border-top: 2px solid;
             border-bottom: 2px solid;
-
             .show-news-item {
                 margin: 0 auto;
                 height: 320px;
                 width: 650px;
                 overflow-y: auto;
-
                 a:hover {
                     text-decoration: none;
                 }
@@ -963,5 +901,3 @@ form#certificate_form {
         }
     }
 }
-
-

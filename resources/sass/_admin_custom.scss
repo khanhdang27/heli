@@ -1,5 +1,4 @@
-
-.table{
+.table {
     width: 100% !important;
     .text-description {
         max-width: 300px;
@@ -8,11 +7,11 @@
         white-space: nowrap;
     }
     @media (max-width: 768px) {
-        .text-description{
+        .text-description {
             max-width: 100px;
         }
     }
-    thead th{
+    thead th {
         border-bottom: unset !important;
     }
     .dropdown-item {
@@ -20,6 +19,7 @@
         font-size: .8125rem;
     }
 }
-.dataTables_scrollBody{
+
+.dataTables_scrollBody {
     border-bottom: unset !important;
 }

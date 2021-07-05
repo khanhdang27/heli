@@ -93,20 +93,19 @@ class CertificateController extends Controller
             })->when(!empty($input['sort']), function ($query) use ($input) {
                 switch ($input['sort']) {
                     case 'latest':
-                        $query->orderBy('created_at', 'desc');
-                        break;
+                        return $query->orderBy('created_at', 'desc');
                     case 'price':
-                        $query->whereHas('membershipCourses.course', function ($query) {
+                        return $query->whereHas('membershipCourses.course', function ($query) {
                             return $query->orderBy('course_price', 'asc');
                         });
                         break;
                     case 'live':
-                        $query->whereHas('membershipCourses.course', function ($query) {
+                        return $query->whereHas('membershipCourses.course', function ($query) {
                             return $query->where('type', Course::$LIVE);
                         });
                         break;
                     case 'record':
-                        $query->whereHas('membershipCourses.course', function ($query) {
+                        return $query->whereHas('membershipCourses.course', function ($query) {
                             return $query->where('type', Course::$RECORD);
                         });
                         break;
