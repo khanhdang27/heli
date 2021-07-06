@@ -74,7 +74,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{ $certificates->render() }}
+                            {{ $certificates->links() }}
                         </div>
                     </div>
                 </div>

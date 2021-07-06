@@ -79,7 +79,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{$news->render()}}
+                            {{$news->links()}}
                         </div>
                     </div>
                 </div>

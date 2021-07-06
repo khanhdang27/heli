@@ -3,7 +3,7 @@
 @section('title','Subject Page')
 
 @section('content')
-    <div class="body-content">
+    <div class="body-content bg-course">
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.navBar.subjectClassification')
         </div>
@@ -35,7 +35,7 @@
             </div>
             @foreach( $certificate->subject as $subject)
                 @php
-                $course = $courses->where('membershipCourses.course.subject_id',$subject->id)
+                    $course = $courses->where('membershipCourses.course.subject_id',$subject->id)
                 @endphp
                 <div>
                     <h1 class="text-primary" id="tab-title">

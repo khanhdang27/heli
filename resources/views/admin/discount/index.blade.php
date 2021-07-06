@@ -64,7 +64,7 @@
                                         <td>
                                             {{$value->description}}
                                         </td>
-                                        
+
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
@@ -93,7 +93,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{$discount->render()}}
+                            {{$discount->links()}}
                         </div>
                     </div>
                 </div>

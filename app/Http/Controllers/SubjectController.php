@@ -24,7 +24,7 @@ class SubjectController extends Controller
     public function index()
     {
         $certificates = Certificate::all();
-        $subjects = Subject::where('status', 1)->latest()->get();
+        $subjects = Subject::where('status', 1)->latest()->paginate(15);
         return view('admin.subject.index', [
             'subjects' => $subjects,
             'certificates' =>$certificates

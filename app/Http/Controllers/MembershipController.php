@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Membership;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MembershipController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
-        $memberships = Membership::all();
+        $memberships = Membership::query()->paginate(15);
         return view('admin.membership.index',[
             'memberships' => $memberships
         ]);

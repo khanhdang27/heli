@@ -79,6 +79,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $memberships ->links() }}
                         </div>
                     </div>
                 </div>

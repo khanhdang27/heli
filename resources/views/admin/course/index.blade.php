@@ -127,7 +127,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{ $courses->render() }}
+                            {{ $courses->links() }}
                         </div>
                     </div>
                 </div>

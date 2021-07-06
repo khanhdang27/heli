@@ -8,14 +8,14 @@ use App\Utilities\SelectionByClass;
 
 @section('content')
 
-    <div class="body-content">
+    <div class="body-content bg-course">
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.navBar.subjectClassification')
         </div>
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
-        
-        <div class="container-fluid p-0">
-            <div class="container-fluid sort text-primary mb-4 d-flex bg-white border border-primary">
+
+        <div class="container-fluid p-0 container-course mt-5">
+            <div class="sort text-primary mb-4 d-flex">
                 <span class="mr-4">@lang('keywords.sort')</span>
                 <form>
                     <label class="radio-inline mr-5">
@@ -35,10 +35,8 @@ use App\Utilities\SelectionByClass;
                     </label>
                 </form>
             </div>
-            <div class="container-fluid p-0">
-                <div class="container-fluid ">
-                    <x-product.course-list :courses=$courses typeOfUI="certificate_filter"></x-product.course-list>
-                </div>
+            <div>
+                <x-product.course-list :courses=$courses typeOfUI="certificate_filter"></x-product.course-list>
             </div>
         </div>
     </div>

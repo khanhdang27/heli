@@ -30,11 +30,11 @@ if (!empty($fisrt_lecture)) {
     </div>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-8 bg-white">
             <iframe id="videoView" src={{ $defaultSource }} width="840" height="420" frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Default name"></iframe>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 bg-white">
             <div class="box-list-video text-primary">
                 <ol>
                     @foreach ($list_lecture as $item)

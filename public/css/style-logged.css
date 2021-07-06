@@ -44,12 +44,6 @@
 
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
-.sub-header {
-    width: 100%;
-    border: 2px solid;
-    background-color: rgba(15, 34, 51, 0.8);
-}
-
 .left-sub {
     width: 75%;
 }

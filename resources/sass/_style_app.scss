@@ -421,8 +421,7 @@ form#certificate_form {
     }
     .box-list-video {
         font-size: 22.5pt;
-        max-width: 550px;
-        height: 420px;
+        max-height: 420px;
         overflow-y: auto;
     }
 }
@@ -592,16 +591,6 @@ form#certificate_form {
 .btn-sort {
     width: 30px;
     height: 20px;
-}
-
-
-/*SHOW VIDEO------------------------------------------------------------------------------------*/
-
-.box-list-video {
-    font-size: 22.5pt;
-    max-width: 550px;
-    height: 420px;
-    overflow-y: auto;
 }
 
 

@@ -46,7 +46,7 @@
                                     <th>
                                         Description
                                     </th>
-                                    
+
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -89,7 +89,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{ $courses_priceTag->render() }}
+                            {{ $courses_priceTag->links() }}
                         </div>
                     </div>
                 </div>

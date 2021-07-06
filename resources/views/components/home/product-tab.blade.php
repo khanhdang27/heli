@@ -1,23 +1,23 @@
 <div class="container-fluid container-course">
     <!-- Nav pills -->
     <ul class="nav nav-pills menu-category" role="tablist">
-        <li class="nav-item">
+        <li class="nav-item px-5">
             <a class="nav-link active category-link" data-toggle="pill" href="#menu1">
                 <img class="menu-img" src="{{asset("images/IGCSE_cover.jpg")}}">
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item px-5">
             <a class="nav-link category-link" data-toggle="pill" href="#menu2">
                 <img class="menu-img" src="{{asset("images/Group173.jpg")}}">
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item px-5">
             <a class="nav-link category-link" data-toggle="pill" href="#menu3">
                 <img class="menu-img" src="{{asset("images/Group174.jpg")}}">
             </a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item px-5">
             <a class="nav-link category-link" data-toggle="pill" href="#menu4">
                 <img class="menu-img" id="menu-img4" src="{{asset("images/Group175.jpg")}}">
             </a>

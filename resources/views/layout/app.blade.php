@@ -60,7 +60,7 @@
           "brandSubTitle":"",
           "brandImg":"https://project.nironcrm.tk/helios/public/images/logo_chat.png",
           "welcomeText":"Hi there!\nHow can I help you?",
-          "messageText":"Hello, I have a question about {{page_link}}",
+          "messageText":"Hello, I have a question about Helios",
           "backgroundColor":"#e6c06c",
           "ctaText":"Start Chat",
           "borderRadius":"25",

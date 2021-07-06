@@ -93,7 +93,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{$blogs->render()}}
+                            {{$blogs->links()}}
                         </div>
                     </div>
                 </div>
