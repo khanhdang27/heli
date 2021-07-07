@@ -17,7 +17,7 @@
                 'enctype' => 'multipart/form-data', 'class' => 'form-inline justify-content-end']) !!}
     <div class="form-group w-50">
         {{ Form::label('detail', 'Image',['class'=>'sr-only']) }}
-        {{ Form::textarea('detail',old('content'),
+        {{ Form::textarea('detail',old('detail'),
                          ['class' => 'form-control mr-sm-2 w-100',
                          'rows' => '1',
                          'placeholder'=>'Content']) }}

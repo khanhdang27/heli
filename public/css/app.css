@@ -10959,7 +10959,7 @@ html {
 
 .dropdown-menu a {
   color: var(--white);
-  font-size: 15pt;
+  font-size: 12pt;
 }
 
 .dropdown-menu a:hover {
@@ -11847,6 +11847,16 @@ form#certificate_form select option:checked {
 
 .top-video a:hover {
   text-decoration: none;
+}
+
+.btn-option:hover {
+  text-decoration: none;
+  background-color: #f2f2f2;
+}
+
+.dropdown-menu-option a:hover {
+  text-decoration: none;
+  background-color: #f1f1f1;
 }
 
 /*NEWS PAGE-----------------------------------------*/

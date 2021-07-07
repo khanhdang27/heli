@@ -17,6 +17,7 @@
     <link href="{{ asset('css/style-calendar.css')}}" rel="stylesheet">
     <link href="{{ asset('css/toastr.css')}}" rel="stylesheet">
     <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
+    <link href="{{asset('cpanel/assets/fonts/feather/feather.min.css')}}" rel="stylesheet">
 </head>
 <body>
     @include('layout.header')
@@ -74,5 +75,6 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     </script>
+    <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
 </body>
 </html>

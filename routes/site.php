@@ -15,6 +15,9 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('backpack.auth.password.reset.token');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email');
 
+Route::get('/loginby/{provider}', 'SocialAccountController@redirectToProvider')->name('socialLogin');
+Route::get('/loginby/{provide}/callback', 'SocialAccountController@handleProviderCallback');
+
 Route::get('news', 'NewsController@show')->name('news');
 Route::get('news/{id}', 'NewsController@newsDetail')->name('news-detail');
 Route::get('teams', function () {

@@ -19,10 +19,10 @@
                                 <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}">
                                 </div>@lang('keywords.loginWithFb')
                             </div>
-                            <div class="btn-register-now btn-login btn-secondary">
+                            <a class="btn-register-now btn-login btn-secondary" href="{{route('site.socialLogin', 'google')}}">
                                 <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}">
                                 </div>@lang('keywords.loginWithGg')
-                            </div>
+                            </a>
                             <div class="btn-register-now btn-login btn-secondary">
                                 <div class="box-ic ic-ap"><img class="ic" id="ap"
                                                                 src="{{asset("images/ic/ic_apple.svg")}}">

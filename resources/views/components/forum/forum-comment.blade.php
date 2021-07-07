@@ -14,10 +14,9 @@
                 {{$comment->detail}}
             </p>
             <div class="pt-3 pb-3 ">
-                @if($comment->file_id!=null)
+                @if($comment->image!=null)
                     <img class="img-question" src="{{asset('/file/'.$comment->image->id)}}">
                 @endif
-
             </div>
             <div class="text-forum d-flex">
                 <x-like.like :likeRef=$comment :likeModule=\App\Models\UserComment::class></x-like.like>

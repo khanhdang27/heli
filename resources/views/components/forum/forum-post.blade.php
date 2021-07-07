@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+@endphp
 <div>
     <div class="row row-question border-secondary pt-5 pb-5 bg-white">
         <div class="col-xl-3">
@@ -10,9 +13,9 @@
             </div>
         </div>
         <div class="col-xl-6 p-0">
-            <p class="question text-forum">
+            <a class="question text-forum" href="{{ route('site.post.show', $post->id)}}">
                 {{$post->title}}
-            </p>
+            </a>
             <div class="pt-3 pb-3 ">
                 @if($post->image!=null)
                     <img class="img-question" src="{{asset('/file/'.$post->image->id)}}">
@@ -32,18 +35,23 @@
             </div>
         </div>
         <div class="col-xl-3 d-flex flex-column justify-content-between align-items-end">
-            <div class="pt-3">
-                <button class="btn-hashtag h3">
-                    {{$post->postTag->tag_name}}
-                </button>
+            @if($post->user_id == Auth::user()->id)
+            <x-forum.forum-edit :post=$post></x-forum.forum-edit>
+            @endif
+            <div>
+                <div class="pt-3 text-right">
+                    <button class="btn-hashtag h3">
+                        {{$post->postTag->tag_name}}
+                    </button>
+                </div>
+                <p class="text-forum pt-2 ">
+                    @if($post->block==1)
+                        @lang('keywords.solved')
+                    @else
+                        @lang('keywords.waitingForAnswer')
+                    @endif
+                </p>
             </div>
-            <p class="text-forum pt-2 ">
-                @if($post->block==1)
-                    @lang('keywords.solved')
-                @else
-                    @lang('keywords.waitingForAnswer')
-                @endif
-            </p>
         </div>
     </div>
 </div>
