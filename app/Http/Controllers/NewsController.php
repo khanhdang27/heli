@@ -83,7 +83,6 @@ class NewsController extends Controller
     public function show()
     {
         $news = News::query()->orderByDesc('created_at')->get();
-
         return view('news.news-page',[
             'news' => $news
         ]);

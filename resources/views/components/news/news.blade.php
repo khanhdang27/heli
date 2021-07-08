@@ -1,13 +1,37 @@
-<div class="list-news w-75 mx-auto">
-    @foreach($news as $item)
-        <a class="h2" href="{{ route('site.news-detail',$item->id) }}">
-            {{$item->announcement_date}}
-            {{$item->title}}
-        </a><br>
-    @endforeach
+<div id="showMore">
+    <div v-if="newsItem < reviews.length" v-for="newsItem in newsToShow">
+        <div class="w-75 mx-auto">
+            <a id="new_href" class="h2" href="">
+                @{{reviews[newsItem].announcement_date}}
+                @{{reviews[newsItem].title}}
+            </a><br>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-5"
+         v-if="newsToShow < reviews.length || reviews.length > newsToShow">
+        <button class="btn-more h5 bg-white text-primary border-primary" @click="newsToShow += 3">
+            @lang('keywords.more')
+            <img src="{{asset("images/ic/ic_drop.svg")}}" width="28">
+        </button>
+    </div>
 </div>
-{{--                    <div class="d-flex justify-content-center bottom-collapse">--}}
-{{--                        <button class="btn-more bg-white text-primary border-primary" id="btn-showNews"--}}
-{{--                                onclick="showNews()" type="submit">更多 <img--}}
-{{--                                src="{{asset("images/ic/ic_drop.svg")}}" width="28"></button>--}}
-{{--                    </div>--}}
+<input type="hidden" value="{{json_encode($news)}}" id="news">
+<script>
+    new Vue({
+        el: "#showMore",
+        data() {
+            return {
+                reviews:
+                    JSON.parse(document.getElementById('news').value)
+                ,
+                newsToShow: 8,
+                totalComments: 0
+            };
+        },
+        mounted() {
+            console.log(this.reviews)
+            this.totalComments = this.reviews.length
+            console.log(this.reviews.length)
+        }
+    })
+</script>

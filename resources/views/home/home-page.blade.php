@@ -15,7 +15,14 @@
                     @lang('keywords.latestNewsPage')
                 </h1>
                 <hr class="border-secondary">
-                <x-news.news :news=$news></x-news.news>
+                <div class="w-75 mx-auto">
+                    @foreach($news as $item)
+                        <a class="h2" href="{{ route('site.news-detail',$item->id) }}">
+                            {{$item->announcement_date}}
+                            {{$item->title}}
+                        </a><br>
+                    @endforeach
+                </div>
             </div>
             <!-- #endregion -->
         @endif

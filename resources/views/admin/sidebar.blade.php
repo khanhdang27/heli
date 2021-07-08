@@ -97,7 +97,7 @@
                         <i class="fe fe-clipboard"></i> Banners
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.tag.index') active @endif"
                        href="{{ route('admin.tag.index') }}">
@@ -138,6 +138,12 @@
                     <a class="nav-link @if(request()->route()->getName() == 'admin.membership.index') active @endif"
                        href="{{ route('admin.membership.index') }}">
                         <i class="fe fe-clipboard"></i> Membership
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.moderator.index') active @endif"
+                       href="{{ route('admin.moderator.index') }}">
+                        <i class="fe fe-clipboard"></i> Moderator
                     </a>
                 </li>
             </ul>

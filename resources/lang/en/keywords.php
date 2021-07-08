@@ -126,5 +126,6 @@ return [
         'rateCourse' => 'Rate Course',
         'addReview' => 'Add your review'
     ],
+    'more' => 'More'
 
 ];
