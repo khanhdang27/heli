@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('payment', 'PaymentController');
     Route::resource('order', 'OrderController');
     Route::resource('post', 'PostController');
+    Route::get('pin-comment/{post_id}/{comment_id}','PostController@pinComment')->name('pinComment');
     Route::resource('comment', 'CommentController');
     Route::resource('user-like', 'UserLikeController');
     Route::resource('profile', 'ProfileController');

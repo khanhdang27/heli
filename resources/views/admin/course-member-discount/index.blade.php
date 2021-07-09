@@ -41,12 +41,15 @@
                                         Member Group
                                     </th>
                                     <th>
+                                        Publish
+                                    </th>
+                                    <th>
                                         Recommend
                                     </th>
                                     <th>
                                         Description
                                     </th>
-                                    
+
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -58,6 +61,9 @@
                                         </td>
                                         <td>
                                             {{$value->membershipCourses->membership->name}}
+                                        </td>
+                                        <td>
+                                            {{$value->publish}}
                                         </td>
                                         <td>
                                             {{$value->recommended}}

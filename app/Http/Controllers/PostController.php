@@ -132,7 +132,21 @@ class PostController extends Controller
         }
     }
 
-
+    public function pinComment($post_id, $comment_id)
+    {
+        DB::beginTransaction();
+        try {
+            $post = Post::where('id', $post_id)->first();
+            $post->update([
+                'pin_comment' => $comment_id
+            ]);
+            DB::commit();
+            return back()->with('success', 'Save success');
+        }catch (Throwable $th){
+            DB::rollBack();
+            return back()->with('errors', 'Save error');
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *

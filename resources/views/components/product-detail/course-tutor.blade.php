@@ -8,17 +8,6 @@
         <div class="col-sm d-flex flex-column justify-content-end">
             <div class="name-tutor text-primary">{{ $courseDetail->tutor->full_name }}</div>
             <div class="position-tutor text-primary">Tutor/Admission Consultant</div>
-            <div class="d-flex mt-5 bottom-info-right">
-                <div class="ic-tutor ic-light">
-                    <img src="{{ asset("images/ic/ic_light.svg")}}">
-                </div>
-                <div class="ic-tutor ic-clock">
-                    <img src="{{ asset("images//ic/ic_clock.svg")}}">
-                </div>
-                <div class="ic-tutor ic-az">
-                    <img src="{{ asset("images/ic/ic_az.svg")}}">
-                </div>
-            </div>
         </div>
     </div>
     <div class="mt-5 container-fluid content-info text-primary">

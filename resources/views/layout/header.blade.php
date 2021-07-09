@@ -8,7 +8,7 @@
         </span>
     </div>
     <nav class="navbar navbar-expand-xl bg-white ">
-        <a class="navbar-brand" href="{{ URL::route('site.home') }}">
+        <a class="navbar-brand mr-5" href="{{ URL::route('site.home') }}">
             <img class="logo" width="150" src={{ asset("images/HeliosLogo.png")}}>
         </a>
         <button class="navbar-toggler navbar-toggler-right collapsed pr-0 pl-0 btn-collapse" type="button"
@@ -16,7 +16,7 @@
                 data-target="#navb" aria-expanded="false">
             <img src="{{asset("images/ic/ic-collapse.png")}}" width="40">
         </button>
-        <div class="navbar-collapse collapse" id="navb">
+        <div class="navbar-collapse collapse ml-3" id="navb">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item item-header">
                     <a class="nav-link"
@@ -51,14 +51,14 @@
             <div class="user-space d-flex ml-auto">
                 @if(Auth::check())
                     <div class="nav-item item-header">
-                        <a class="nav-link mr-1">
+                        <a class="nav-link px-0 mr-1">
                             @lang('keywords.navBar.welcomeBack')<br>
                             {{Auth::user()->name}}
                         </a>
                     </div>
-                    <div class="nav-item item-header dropdown p-0 border-0">
-                        <a class="btn btn-link bg-white" id="navbardrop" data-toggle="dropdown">
-                            <img src={{asset("images/ic/ic_user.svg")}} width="40">
+                    <div class="nav-item dropdown p-0 border-0">
+                        <a class="btn btn-link bg-white pt-3" id="navbardrop" data-toggle="dropdown">
+                            <img src={{asset("images/ic/ic_user.svg")}} width="24">
                         </a>
                         <div class="dropdown-menu bg-dark py-1 px-1 border border-secondary">
                             <a class="dropdown-item" href="{{ URL::route('site.profile.show', Auth::user()->id) }}">Profile</a>

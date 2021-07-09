@@ -29,4 +29,8 @@
   border-bottom: unset !important;
 }
 
+input.check-role {
+  transform: scale(1.7);
+}
+
 

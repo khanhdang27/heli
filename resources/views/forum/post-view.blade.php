@@ -54,7 +54,9 @@
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex flex-column justify-content-between align-items-end">
-                    <x-forum.forum-edit :post=$post></x-forum.forum-edit>
+                    @if($post->user_id == Auth::user()->id)
+                        <x-forum.forum-edit :post=$post></x-forum.forum-edit>
+                    @endif
                     <div>
                         <div class="pt-3 text-right">
                             <button class="btn-hashtag h3">
@@ -78,9 +80,9 @@
                     <x-comment.comment :refComment=$post :commentModule=\App\Models\Post::class></x-comment.comment>
                 </div>
             @endif
-            @foreach ($post->comment as $value)
-                <x-forum.forum-comment :comment=$value></x-forum.forum-comment>
-            @endforeach
+{{--            @foreach ($post->comment as $value)--}}
+                <x-forum.forum-comment :comment=$post></x-forum.forum-comment>
+{{--            @endforeach--}}
         </div>
     </div>
     @push('inputFile')

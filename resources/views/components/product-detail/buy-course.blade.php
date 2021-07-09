@@ -1,6 +1,6 @@
 @php
     use App\Models\Course;
-    $course = $courseDetail->membershipCourses->course;
+    $course = $courseDetail->membershipCourses->course
 @endphp
 
 <div class="bg-white border border-secondary p-4 text-primary">
@@ -27,8 +27,12 @@
     @endif
     <div class="d-flex share-bar">
         <span class="mr-2"><img width="36" src="{{ asset("images/ic/ic_share.svg")}}"></span>
-        <a href="#">
+        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+           aria-controls="collapseExample">
             <h2 class="pt-1">@lang('keywords.coursePage.shareCourse')</h2>
         </a>
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="sharethis-inline-share-buttons"></div>
     </div>
 </div>
