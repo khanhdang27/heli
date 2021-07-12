@@ -9,10 +9,10 @@ use App\Models\User;
 use App\Models\Post;
 
 class UserComment extends Model
-{
+{   use SoftDeletes;
     static $POST=1;
     static $COURSE=2;
-    use SoftDeletes;
+
     protected $table = 'comments';
     protected $guarded = [];
 
@@ -30,5 +30,9 @@ class UserComment extends Model
     public function commentable()
     {
         return $this->morphTo();
+    }
+    public function image()
+    {
+        return $this->morphOne(File::class, 'fileable')->latest();
     }
 }

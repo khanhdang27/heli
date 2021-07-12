@@ -1,9 +1,9 @@
 
 <div class="container-fluid show-video">
     <div class="row">
-        <div id="detail" class="col-8">
-            <div class="product-box row bg-white">
-                <div class="top-product col-6">
+        <div id="detail" class="col-lg-8">
+            <div class="product-box mt-0 row bg-white">
+                <div class="top-product col-lg-6">
                     <div class="content-product row" style="background-color: {{$course->subject->subject_color_background}}">
                         <div class="col-3">
                             <div class="color-bar">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6">
                     <div class="d-flex justify-content-between h-100">
                         <div class="name-product w-75 d-flex flex-column justify-content-between text-primary p-3">
                             <div class="text-multiline-truncate">
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div id="detail" class="col-4"></div>
+        <div id="detail" class="col-lg-4"></div>
     </div>
-    
+
 </div>

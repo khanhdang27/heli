@@ -13,6 +13,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SubjectController extends Controller
 {
@@ -140,6 +141,24 @@ class SubjectController extends Controller
 
     public function destroy(Subject $subject)
     {
+        DB::beginTransaction();
+        try {
+//            $_tutor = $subject->tutor->toArray();
+            $_course = $subject->course->toArray();
+            if (empty($_course) ){
+                $subject->delete();
+                DB::commit();
+                return response([
+                    'message' => 'Delete success!'
+                ]);
+            }
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => 'Cannot delete!'
+            ], 400);
+        }
+
         // $active = $subject->status;
         // $subject->status = $active == 1 ? 0 : 0;
         // $subject->save();

@@ -49,8 +49,8 @@ use \App\Utilities\MapData;
  */
 class Tutor extends Model implements TranslatableContract
 {
-    use Translatable;
-    
+    use Translatable, SoftDeletes;
+
 
     protected $table = 'tutors';
     protected $guarded = [];

@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="container-fluid pb-5">
         <table class="table mt-5">
             <thead>
             <tr>
@@ -33,7 +33,7 @@
             @foreach($permission as $item)
                 <tr>
                     <td >
-                        <label>
+                        <label class="mb-0">
                             {{$item->name}}
                         </label>
                     </td>
@@ -42,7 +42,7 @@
                             {{ Form::checkbox("permission_".$value->id."_".$item->id,
                                 null,
                                 $value->permissions->where('id', $item->id)->first(),
-                                array('class' => 'name')) }}
+                                array('class' => 'align-middle name check-role')) }}
                         </td>
                     @endforeach
                 </tr>

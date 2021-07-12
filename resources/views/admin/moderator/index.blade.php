@@ -1,14 +1,28 @@
 @extends('admin.layout')
 @section('content')
     <div class="container-fluid mt-5">
-        <div class="text-center alert alert-warning alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Make sure the <a href="{{ route('admin.certificate.index') }}"
-                             class="alert-link"><strong>Certificate</strong></a> already exists before adding the
-            Subject!
-        </div>
         <div class="row">
             <div class="col-12">
+                <div class="mb-3">
+                    <button class="btn btn-success" data-toggle="collapse" href="#Filter" role="button"
+                            aria-expanded="false" aria-controls="Filter">Filter
+                    </button>
+                </div>
+                <div class="card collapse" id="Filter">
+                    <div class="card-body">
+                        <form action="" method="get">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="name" value="{{ request('name') }}">
+                                </div>
+                            </div>
+                            <div class="form-row mt-2 justify-content-end">
+                                <button class="btn btn-primary">Filter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <!-- Goals -->
                 <div class="card">
                     <div class="card-header">
@@ -17,14 +31,12 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Subjects
+                                    Moderators
                                 </h4>
-
                             </div>
                             <div class="col-auto">
-
                                 <!-- Button -->
-                                <a href="{{ route('admin.subject.create') }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('admin.moderator.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
                                          stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                          class="css-i6dzq1">
@@ -34,53 +46,36 @@
                                     </svg>
                                     Add
                                 </a>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
                         <div class="table-responsive mb-0" data-toggle="lists"
                              data-options="{&quot;valueNames&quot;: [&quot;goal-project&quot;, &quot;goal-status&quot;, &quot;goal-progress&quot;, &quot;goal-date&quot;]}">
-                            <table id="data-table" class="table table-sm card-table">
+                            <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                 <tr>
-                                    <th>
-                                        <a href="#" class="text-muted ">
-                                            Subject Name
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <a href="#" class="text-muted ">
-                                            Certificate
-                                        </a>
-                                    </th>
-                                    <th>
-                                        Background color
-                                    </th>
-                                    <th>
-                                        Text color
-                                    </th>
+                                    <th> Name</th>
+                                    <th> Full name</th>
+                                    <th> Email</th>
+                                    <th> Phone</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($subjects as $value)
+                                @foreach($moderator as $value)
                                     <tr>
                                         <td class="goal-project">
-                                            {{ $value->subject_name }}
+                                            {{$value->user->name}}
                                         </td>
                                         <td class="goal-project">
-                                            {{ $value->certificate['certificate_name'] }}
+                                            {{ $value->full_name }}
                                         </td>
-                                        <td class="goal-progress">
-                                            <div
-                                                style="width: 50px; height: 30px; background-color: {{ $value->subject_color_background }}">
-                                            </div>
+                                        <td class="goal-status">
+                                            {{$value->user->email}}
                                         </td>
-                                        <td class="goal-progress">
-                                            <div
-                                                style="width: 50px; height: 30px;border: 1px solid black; background-color: {{ $value->subject_color_text }}">
-                                            </div>
+                                        <td class="goal-status">
+                                            {{$value->phone}}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -90,12 +85,12 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.subject.edit', $value->id) }}"
+                                                    <a href="{{ route('admin.moderator.edit', $value->id) }}"
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                       onclick="itemDelete('{{ route('admin.subject.destroy', $value->id) }}')"
+                                                       onclick="itemDelete('{{ route('admin.moderator.destroy', $value->id) }}')"
                                                        class="dropdown-item delete-item">
                                                         Delete
                                                     </a>
@@ -106,10 +101,13 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{ $subjects->links() }}
+                            <div class="d-flex justify-content-center">
+                                {{ $moderator->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div> <!-- / .row -->
     </div>
@@ -122,3 +120,4 @@
     <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
 @endpush
+

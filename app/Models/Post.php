@@ -27,7 +27,7 @@ class Post extends Model
     {
         return $this->morphMany(UserLike::class,'likeable');
     }
-    
+
     public function comment()
     {
         return $this->morphMany(UserComment::class,'commentable');
@@ -35,6 +35,6 @@ class Post extends Model
 
     public function image()
     {
-        return $this->morphOne(File::class, 'fileable');
+        return $this->morphOne(File::class, 'fileable')->latest();
     }
 }

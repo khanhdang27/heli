@@ -15,6 +15,9 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('backpack.auth.password.reset.token');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email');
 
+Route::get('/loginby/{provider}', 'SocialAccountController@redirectToProvider')->name('socialLogin');
+Route::get('/loginby/{provide}/callback', 'SocialAccountController@handleProviderCallback');
+
 Route::get('news', 'NewsController@show')->name('news');
 Route::get('news/{id}', 'NewsController@newsDetail')->name('news-detail');
 Route::get('teams', function () {
@@ -52,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('payment', 'PaymentController');
     Route::resource('order', 'OrderController');
     Route::resource('post', 'PostController');
+    Route::get('pin-comment/{post_id}/{comment_id}','PostController@pinComment')->name('pinComment');
     Route::resource('comment', 'CommentController');
     Route::resource('user-like', 'UserLikeController');
     Route::resource('profile', 'ProfileController');

@@ -61,6 +61,7 @@
                         <i class="fe fe-home"></i> Dashboards
                     </a>
                 </li> --}}
+                @role('super-admin|moderator')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.certificate.index') active @endif"
                        href="{{ route('admin.certificate.index') }}">
@@ -79,6 +80,7 @@
                         <i class="fe fe-clipboard"></i> Tutors
                     </a>
                 </li>
+                @endrole
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.course.index') active @endif"
                        href="{{ route('admin.course.index') }}">
@@ -91,13 +93,14 @@
                         <i class="fe fe-clipboard"></i> Materials
                     </a>
                 </li>
+                @role('super-admin|moderator')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.banner.index') active @endif"
                        href="{{ route('admin.banner.index') }}">
                         <i class="fe fe-clipboard"></i> Banners
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.tag.index') active @endif"
                        href="{{ route('admin.tag.index') }}">
@@ -116,12 +119,16 @@
                         <i class="fe fe-clipboard"></i> News
                     </a>
                 </li>
+                @endrole
+                @role(['super-admin'])
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.roles.index') active @endif"
                        href="{{ route('admin.roles.index') }}">
                         <i class="fe fe-clipboard"></i> Roles
                     </a>
                 </li>
+                @endrole
+                @role('super-admin|moderator')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.discount.index') active @endif"
                        href="{{ route('admin.discount.index') }}">
@@ -140,6 +147,15 @@
                         <i class="fe fe-clipboard"></i> Membership
                     </a>
                 </li>
+                @endrole
+                @role(['super-admin'])
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.moderator.index') active @endif"
+                       href="{{ route('admin.moderator.index') }}">
+                        <i class="fe fe-clipboard"></i> Moderator
+                    </a>
+                </li>
+                @endrole
             </ul>
             <!-- Divider -->
             <hr class="navbar-divider my-3">

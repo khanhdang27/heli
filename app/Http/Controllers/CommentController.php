@@ -58,15 +58,15 @@ class CommentController extends Controller
                 'detail' => $input['detail']
             ]);
 
-            if(!empty($input['file_id'])){
+            if(!empty($input['file'])){
                 $file = File::storeFile($input['file'],UserComment::class, $comment->id);
             }
 
             $refer = $input['ref_module']::find($input['ref_id']);
-            
+
             $refer->comment_no = $refer->comment_no + 1;
             $refer->save();
- 
+
             DB::commit();
 
             // dd($comment, $refer);

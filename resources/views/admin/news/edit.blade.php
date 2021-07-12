@@ -42,10 +42,10 @@
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="form-group ">
-                                {{ Form::label('file_id', 'News File') }}
-                                {{ Form::file('file_id', old('file_id'),['class' => 'form-control'] ) }}
-                                @error('file_id')
+                            <div class="custom-file ">
+                                {{ Form::label('file', 'News File',['class'=>'custom-file-label']) }}
+                                {{ Form::file('file',['class' => 'custom-file-input']) }}
+                                @error('file')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -57,4 +57,18 @@
             </div>
         </div> <!-- / .row -->
     </div>
+    <script>
+        window.onload = function () {
+            CKEDITOR.replace('ckeditor');
+        };
+    </script>
+    @push('inputFile')
+        <script>
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    @endpush
 @endsection

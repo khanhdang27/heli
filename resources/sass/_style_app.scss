@@ -26,7 +26,7 @@ html {
 .dropdown-menu {
     a {
         color: var(--white);
-        font-size: 15pt;
+        font-size: 12pt;
     }
     a:hover {
         background: none;
@@ -874,8 +874,16 @@ form#certificate_form {
         text-decoration: none;
     }
 }
-
-
+.btn-option:hover{
+    text-decoration: none;
+    background-color: #f2f2f2;
+}
+.dropdown-menu-option{
+    a:hover{
+        text-decoration: none;
+        background-color: #f1f1f1;
+    }
+}
 /*NEWS PAGE-----------------------------------------*/
 
 .body-news-page {

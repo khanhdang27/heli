@@ -54,18 +54,23 @@
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex flex-column justify-content-between align-items-end">
+                    @if($post->user_id == Auth::user()->id)
+                        <x-forum.forum-edit :post=$post></x-forum.forum-edit>
+                    @endif
                     <div>
-                        <button class="btn-hashtag">
-                            <h3 class="m-0">{{ $post->postTag->tag_name }}</h3>
-                        </button>
+                        <div class="pt-3 text-right">
+                            <button class="btn-hashtag h3">
+                                {{$post->postTag->tag_name}}
+                            </button>
+                        </div>
+                        <p class="text-forum pt-2 ">
+                            @if($post->block==1)
+                                @lang('keywords.solved')
+                            @else
+                                @lang('keywords.waitingForAnswer')
+                            @endif
+                        </p>
                     </div>
-                    <p class="text-forum pt-2 ">
-                        @if ($post->block == 1)
-                            @lang('keywords.solved')
-                        @else
-                            @lang('keywords.waitingForAnswer')
-                        @endif
-                    </p>
                 </div>
             </div>
             <!-- INDEX -->
@@ -75,9 +80,9 @@
                     <x-comment.comment :refComment=$post :commentModule=\App\Models\Post::class></x-comment.comment>
                 </div>
             @endif
-            @foreach ($post->comment as $value)
-                <x-forum.forum-comment :comment=$value></x-forum.forum-comment>
-            @endforeach
+{{--            @foreach ($post->comment as $value)--}}
+                <x-forum.forum-comment :comment=$post></x-forum.forum-comment>
+{{--            @endforeach--}}
         </div>
     </div>
     @push('inputFile')

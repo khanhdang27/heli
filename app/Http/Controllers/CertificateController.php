@@ -164,21 +164,44 @@ class CertificateController extends Controller
      */
     public function destroy(Certificate $certificate)
     {
-        // DB::beginTransaction();
-        // try {
-        //     $_courses = Course::whereHas('subject.certificate', function ($query) use ($certificate){
-        //         return $query->where('id', $certificate->id);
-        //     });
-        //     $_subjects = Subject::whereHas('certificate', function ($query) use ($certificate){
-        //         return $query->where('id', $certificate->id);
-        //     });
-        //     $_courses->delete();
-        //     $_subjects->delete();
-        //     $certificate->delete();
-        //     DB::commit();
-        // } catch (\Throwable $th) {
-        //     throw $th;
-        //     DB::rollback();
-        // }
+//        try {
+//            $_subjects = $certificate->subject->toArray();
+//            if (empty($_subjects)){
+//                $certificate->delete();
+//            }
+//            return response([
+//                'message' => 'Delete success!'
+//            ],200);
+//        } catch (\Exception $exception) {
+//            return response([
+//                'message' => 'Cannot delete',
+//                'error' => $exception->getMessage()
+//            ], 400);
+//        }
+         DB::beginTransaction();
+         try {
+//             $_courses = Course::whereHas('subject.certificate', function ($query) use ($certificate){
+//                 return $query->where('id', $certificate->id);
+//             });
+//             $_subjects = Subject::whereHas('certificate', function ($query) use ($certificate){
+//                 return $query->where('id', $certificate->id);
+//             })->get();
+//             $_courses->delete();
+//             $_subjects->delete();
+             $_subjects = $certificate->subject->toArray();
+             if (empty($_subjects)){
+                 $certificate->delete();
+                 DB::commit();
+                 return response([
+                     'message' => 'Delete success!'
+                 ]);
+             }
+         } catch (\Throwable $th) {
+             DB::rollback();
+             return response([
+                 'message' => 'Cannot delete',
+                 'detail' => $th->getMessage()
+             ], 400);
+         }
     }
 }
