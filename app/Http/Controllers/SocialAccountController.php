@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SocialAccount;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialAccountController extends Controller
@@ -21,13 +21,14 @@ class SocialAccountController extends Controller
         try {
             $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
+            dd($e);
             return redirect()->route('site.home');
         }
 
         $existingUser = User::where('email', $user->getEmail())->first();
 
         if ($existingUser) {
-            auth()->login($existingUser, true);
+            Auth::guard('login')->login($existingUser);
         } else {
             $newUser = new User([
                 'name' => $user->getName(),
