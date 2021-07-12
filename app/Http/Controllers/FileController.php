@@ -38,25 +38,6 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        // $type = $request->query('type');
-        // $image = $request->file('file');
-        // $fileInfo = $image->getClientOriginalName();
-        // $path = Storage::put($type, $image);
-        // try {
-        //     switch ($type) {
-        //         case 'avatar':
-        //             $file_type = File::$AVATAR;
-        //             break;
-
-        //         default:
-        //             $file_type = File::$UNDEFINED;
-        //     }
-        //     $file = new File(['referer'=> $request->query('ref') ?? 0, 'source'=>$path, 'file_type'=>$file_type, 'raw_name'=> $fileInfo, 'file_size'=> $image->getSize()/self::$MEGA_BITE, 'uploaded_by'=>Auth()->id(), 'status'=> 1]);
-        //     $file->save();
-        //     return $file->id;
-        // } catch (\Exception $e) {
-        //     throw $e;
-        // }
     }
 
     /**

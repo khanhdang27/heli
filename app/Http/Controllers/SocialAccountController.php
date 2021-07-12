@@ -6,7 +6,11 @@ use App\Models\SocialAccount;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class SocialAccountController extends Controller
 {
@@ -20,30 +24,45 @@ class SocialAccountController extends Controller
 
         try {
             $user = Socialite::driver($provider)->user();
+
+            $existingUser = User::where('email', $user->getEmail())->first();
+
+            if ($existingUser) {
+                Auth::login($existingUser);
+            } else {
+                DB::beginTransaction();
+                try{
+                    $newUser = new User([
+                        'name' => $user->getName(),
+                        'email' => $user->getEmail()
+                    ]);
+                    if ($newUser->save()){
+                        
+                        $random = Str::random(10);
+                        $newSocialAccount = new SocialAccount([
+                            'user_id' => $newUser->id,
+                            'social_id' => $user->getId(),
+                            'social_name' => $provider
+                        ]);
+                        $newSocialAccount->save();
+                        $stripeCustomer = $user->createAsStripeCustomer(['email' => $user->getEmail()]);
+
+                        $send_mail = new SendMail();
+                        $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
+                        Mail::to($user->getEmail())->send($send_mail);
+                        Auth::login($newSocialAccount);
+                    }
+                    DB::commit();
+                } catch (\Throwable $th) {
+                    DB::rollBack();
+                    return redirect()->with([''])->route('site.home');
+                }
+
+            }
+            return redirect()->route('site.home');
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->route('site.home');
         }
-
-        $existingUser = User::where('email', $user->getEmail())->first();
-
-        if ($existingUser) {
-            Auth::guard('login')->login($existingUser);
-        } else {
-            $newUser = new User([
-                'name' => $user->getName(),
-                'email' => $user->getEmail()
-            ]);
-            if ($newUser->save()){
-                $newSocialAccount = new SocialAccount([
-                    'user_id' => $newUser->id,
-                    'social_id' => $user->getId(),
-                    'social_name' => $provider
-                ]);
-                $newSocialAccount->save();
-            }
-        }
-        return redirect()->route('site.home');
     }
 
     /**

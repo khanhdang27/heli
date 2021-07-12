@@ -69,7 +69,6 @@ class BlogController extends Controller
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             return back()->with('errors', 'Create error');
         }
         

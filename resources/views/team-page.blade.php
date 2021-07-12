@@ -9,7 +9,7 @@
             <div class="row w-100 m-0">
                 @foreach(\App\Models\Tutor::all() as $key => $value)
                     @if($value->id != 1)
-                    <div class="col-lg-6 d-flex justify-content-center">
+                    <div class="col-lg-6 d-flex justify-content-center px-5">
                         <div class="card-team">
                             <div class="row m-0">
                                 <div class="col-sm-6 info-left p-0">

@@ -1,7 +1,12 @@
 <div class="col-lg-4 he">
     <div class="mt-2 popular-item" id="latest">
         <div class="thumb-article d-flex flex-column justify-content-end position-relative">
-            <img class="main-photo img-thumbnail border-0 p-0 rounded-0" src="{{ asset('/file/'.$blog->photo->id)}}">
+            
+            @if(empty($blog_top->photo))
+                <img class="main-photo img-thumbnail border-0 p-0 rounded-0" src="{{ asset('images/default-image.jpg')}}">
+            @else
+                <img class="main-photo img-thumbnail border-0 p-0 rounded-0" src="{{ asset('/file/'.$blog->photo->id)}}">
+            @endif
             <div class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
                 <a href="{{route('site.view-blog',$blog->id)}}"
                    class="h1 font-weight-bold title-article">

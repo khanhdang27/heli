@@ -19,7 +19,7 @@
         }
 @endphp
 
-<div class="{{ $class }}">
+<div class="{{ $class }} px-5">
     <div class="product-box">
         <div class="top-product">
             <div class="title-product bg-secondary text-primary">
@@ -31,7 +31,7 @@
                     <div class="color-bar">
                     </div>
                 </div>
-                <div class="body-product-content d-flex flex-column justify-content-between align-items-center col-9"
+                <div class="body-product-content d-flex flex-column justify-content-between align-items-center col-9 w-80"
                      style="color: {{$course_card->subject->subject_color_text}}">
                     <div class="content-top text-wrap w-75">
                         {{ $course_card->subject->certificate->certificate_code }}<br>

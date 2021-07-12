@@ -6,13 +6,15 @@
 html {
     font-size: 14pt;
 }
-.container-course{
-    max-width: 94%;
-    h1{
+
+.container-course {
+    max-width: 86%;
+    h1 {
         margin-top: 30px;
         font-size: 26px;
     }
 }
+
 .color-primary {
     svg {
         fill: var(--primary);
@@ -200,23 +202,23 @@ form#certificate_form {
     padding: 0.5rem 1rem;
     border-radius: 28px;
     margin: 0 0.5rem 0.5rem 0;
+    min-width: 120px;
     a {
         text-decoration: none;
     }
-}
-
-.btn-hashtag:hover {
-    cursor: pointer;
-    text-decoration: none;
-    background-color: var(--dark);
-    color: var(--white);
-}
-
-.btn-hashtag:focus {
-    outline: none;
+    &:hover {
+        cursor: pointer;
+        text-decoration: none;
+        background-color: var(--dark);
+        color: var(--white);
+    }
+    &:focus {
+        outline: none;
+    }
 }
 
 .btn-hashtag-small {
+    min-width: 75px;
     background-color: var(--white);
     font-size: 12px;
     color: var(--primary);
@@ -330,7 +332,7 @@ form#certificate_form {
         }
         .body-product-content {
             height: 258px;
-            padding: 1.76rem;
+            padding: 3.65rem;
             font-size: 15.7pt;
             position: absolute;
             left: 50%;
@@ -361,7 +363,7 @@ form#certificate_form {
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
             }
-            .name-product{
+            .name-product {
                 font-size: 12px;
             }
         }
@@ -874,16 +876,20 @@ form#certificate_form {
         text-decoration: none;
     }
 }
-.btn-option:hover{
+
+.btn-option:hover {
     text-decoration: none;
     background-color: #f2f2f2;
 }
-.dropdown-menu-option{
-    a:hover{
+
+.dropdown-menu-option {
+    a:hover {
         text-decoration: none;
         background-color: #f1f1f1;
     }
 }
+
+
 /*NEWS PAGE-----------------------------------------*/
 
 .body-news-page {

@@ -10950,7 +10950,7 @@ html {
 }
 
 .container-course {
-  max-width: 94%;
+  max-width: 86%;
 }
 
 .container-course h1 {
@@ -11141,6 +11141,7 @@ form#certificate_form select option:checked {
   padding: 0.5rem 1rem;
   border-radius: 28px;
   margin: 0 0.5rem 0.5rem 0;
+  min-width: 120px;
 }
 
 .btn-hashtag a {
@@ -11159,6 +11160,7 @@ form#certificate_form select option:checked {
 }
 
 .btn-hashtag-small {
+  min-width: 75px;
   background-color: var(--white);
   font-size: 12px;
   color: var(--primary);
@@ -11282,7 +11284,7 @@ form#certificate_form select option:checked {
 
 .product-box .content-product .body-product-content {
   height: 258px;
-  padding: 1.76rem;
+  padding: 3.65rem;
   font-size: 15.7pt;
   position: absolute;
   left: 50%;

@@ -1,7 +1,13 @@
 <div class="card flex-md-row border-0">
     <div class="popular-articles-item-image d-flex ">
+        
+        @if(empty($blog_top->photo))
+        <img class="rounded-0 align-items-center" src="{{ asset('images/default-image.jpg')}}"
+                alt="Card image cap" height=220 width=220>
+        @else
         <img class="rounded-0 align-items-center" src="{{ asset('/file/'.$item->photo->id)}}"
              alt="Card image cap" height=220 width=220>
+        @endif
     </div>
 
     <div class="popular-articles-item-content">
