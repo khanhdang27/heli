@@ -7,6 +7,13 @@ $defaultSource = '';
 if (!empty($fisrt_lecture)) {
     $defaultSource = 'https://player.vimeo.com/video/' . $fisrt_lecture->video_resource . '?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713';
 }
+
+$student_courses = Auth::user()->student_courses()->get();
+
+$is_bought = $student_courses[0]->course_id;
+
+dd($is_bought, $student_courses ,$fisrt_lecture);
+
 @endphp
 {{-- @if (!empty($fisrt_lecture)) --}}
 <div class="container-fluid show-video" id="video-lecture">
@@ -37,10 +44,16 @@ if (!empty($fisrt_lecture)) {
         <div class="col-lg-4 bg-white">
             <div class="box-list-video text-primary">
                 <ol>
-                    @foreach ($list_lecture as $item)
-                        <li role="button" v-on:click="clickLecture" data-id="{{ $item->video_resource }}">
-                            {{ $item->lectures_name }}
-                        </li>
+                    @foreach ($list_lecture as $index => $item)
+                        @if ($index == 0)
+                            <li role="button" v-on:click="clickLecture" data-id="{{ $item->video_resource }}">
+                                {{ $item->lectures_name }}
+                            </li>
+                        @else
+                            <li role="button" v-on:click="clickLecture" data-id="{{ $item->video_resource }}">
+                                {{ $item->lectures_name }}
+                            </li>
+                        @endif
                     @endforeach
                 </ol>
             </div>

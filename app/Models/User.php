@@ -93,6 +93,13 @@ class User extends Authenticatable
         return $this->hasOne(Student::class);
     }
 
+    public function student_courses () {
+        if ($this->hasRole('student')){
+            return $this->hasMany(StudentCourses::class, 'student_id');
+        }
+        return null;
+    } 
+
     /**
      * Get the default Stripe API options for the current Billable model.
      *
