@@ -13,7 +13,7 @@
         </div>
         <div class="container-fluid pt-5 pb-5">
             <div class="ml-auto mr-auto pl-5 d-flex flex-wrap w-75">
-                @foreach (SelectionByClass::getValues(\App\Models\Tag::class, 'tag_name', 'id') as $key => $value)
+                @foreach ($tags as $value)
                     <button class="btn-hashtag ml-3 mr-3" type="button">
                         {{ $value }}
                     </button>
@@ -45,11 +45,11 @@
                         @endif
                     </div>
                     <div class="text-forum d-flex">
-                        <span class="mr-3"><img class="ic-action" src="{{ asset('images/ic/ic_bookmark.svg') }}"></span>
+                        <span><img class="ic-action" src="{{ asset('images/ic/ic_bookmark.svg') }}"></span>
 
                         <x-like.like :likeRef=$post :likeModule=\App\Models\Post::class></x-like.like>
                         <span>
-                            <img class="ic-action" src="{{ asset('images/ic/ic_mess.svg') }}">{{ $post->comment_no }}
+                            <img class="ic-action ml-5" src="{{ asset('images/ic/ic_mess.svg') }}">{{ $post->comment_no }}
                         </span>
                     </div>
                 </div>

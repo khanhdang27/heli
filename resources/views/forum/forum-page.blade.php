@@ -3,19 +3,16 @@
 @section('title','Forum Page')
 
 @section('content')
-    @php
-        use App\Utilities\SelectionByClass;
-
-    @endphp
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.navBar.q&aArea')
         </div>
         <div class="container-fluid pt-5 pb-5">
             <div class="m-auto d-flex pl-5 flex-wrap w-75">
+
                 @foreach($tags as $value)
                     <button class="btn-hashtag ml-3 mr-3" type="button">
-                        {{ $value->tag_name }}
+                        {{ $value }}
                     </button>
                 @endforeach
             </div>
@@ -25,7 +22,7 @@
                         {!! Form::open(['url' => URL::route('site.post.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group">
                             {{ Form::label('tag_id', 'Tag') }}
-                            {{ Form::select('tag_id', SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id'),null, ['class' => 'form-control','required']) }}
+                            {{ Form::select('tag_id',$tags,null, ['class' => 'form-control','required']) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('title', 'Title') }}

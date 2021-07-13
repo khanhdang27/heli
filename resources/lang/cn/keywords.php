@@ -126,7 +126,8 @@ return [
         'rateCourse' => '課程評分',
         'addReview' => '添加您的評論'
     ],
-    'more' => '更多'
+    'more' => '更多',
+    'coursesIHavePurchased' => '我已購買的課程'
 
 
 ];

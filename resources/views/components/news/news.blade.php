@@ -1,9 +1,9 @@
 <div id="showMore">
-    <div v-if="newsItem < reviews.length" v-for="newsItem in newsToShow">
-        <div class="w-75 mx-auto">
+    <div v-if="newsItem <= reviews.length" v-for="newsItem in newsToShow">
+        <div class="mx-auto box-news">
             <a id="new_href" class="h2" href="">
-                @{{reviews[newsItem].announcement_date}}
-                @{{reviews[newsItem].title}}
+                @{{reviews[newsItem - 1].announcement_date}}
+                @{{reviews[newsItem - 1].title}}
             </a><br>
         </div>
     </div>

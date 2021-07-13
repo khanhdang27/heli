@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="banner">
-        <x-sub-header :subjects=$subjects page="home" ></x-sub-header>
+        <x-sub-header :subjects=$subjects page="home"></x-sub-header>
         @if(!Auth::check())
             <x-home.banner :banner=$banners></x-home.banner>
         @else
@@ -15,7 +15,7 @@
                     @lang('keywords.latestNewsPage')
                 </h1>
                 <hr class="border-secondary">
-                <div class="w-75 mx-auto">
+                <div class="mx-auto box-news">
                     @foreach($news as $item)
                         <a class="h2" href="{{ route('site.news-detail',$item->id) }}">
                             {{$item->announcement_date}}
@@ -53,7 +53,8 @@
             </div>
         @endif
         <div class="product-tab">
-            <x-home.product-tab :courseIGCSE=$courseIGCSE :courseUKISET=$courseUKISET :courseIELTS=$courseIELTS :courseIAL=$courseIAL typeOfUI="hot"></x-home.product-tab>
+            <x-home.product-tab :courseIGCSE=$courseIGCSE :courseUKISET=$courseUKISET :courseIELTS=$courseIELTS
+                                :courseIAL=$courseIAL typeOfUI="hot"></x-home.product-tab>
         </div>
         @if(!Auth::check())
             <x-home.step-register></x-home.step-register>
@@ -72,8 +73,9 @@
             <div class="mx-auto container-video border-secondary mt-5 pb-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
                     <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
-                    <a href="{{ route('site.user.course') }}" class="m-0 btn-register-now text-white btn-dark-blue btn-dark">
-                       <h2 class="mb-0 mt-2">@lang('keywords.otherPurchasedCourses')</h2>
+                    <a href="{{ route('site.user.course') }}"
+                       class="m-0 btn-register-now text-white btn-dark-blue btn-dark">
+                        <h2 class="mb-0 mt-2">@lang('keywords.otherPurchasedCourses')</h2>
                     </a>
                 </div>
                 <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
@@ -108,7 +110,7 @@
 @endsection
 @push('scripts')
     <script>
-        $(function() {
+        $(function () {
             var $quote = $("#title-home-page");
 
             var $numWords = $quote.text().split(" ").length;
@@ -116,17 +118,13 @@
 
             if (($numWords >= 1) && ($numWords < 10)) {
                 $quote.css("font-size", "36px");
-            }
-            else if (($numWords >= 10) && ($numWords < 20)) {
+            } else if (($numWords >= 10) && ($numWords < 20)) {
                 $quote.css("font-size", "32px");
-            }
-            else if (($numWords >= 20) && ($numWords < 30)) {
+            } else if (($numWords >= 20) && ($numWords < 30)) {
                 $quote.css("font-size", "28px");
-            }
-            else if (($numWords >= 30) && ($numWords < 40)) {
+            } else if (($numWords >= 30) && ($numWords < 40)) {
                 $quote.css("font-size", "24px");
-            }
-            else {
+            } else {
                 $quote.css("font-size", "20px");
             }
 

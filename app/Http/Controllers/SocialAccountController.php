@@ -20,30 +20,30 @@ class SocialAccountController extends Controller
 
         try {
             $user = Socialite::driver($provider)->user();
+            $existingUser = User::where('email', $user->getEmail())->first();
+
+            if ($existingUser) {
+                Auth::login($existingUser, true);
+            } else {
+                $newUser = new User([
+                    'name' => $user->getName(),
+                    'email' => $user->getEmail()
+                ]);
+                if ($newUser->save()){
+                    $newSocialAccount = new SocialAccount([
+                        'user_id' => $newUser->id,
+                        'social_id' => $user->getId(),
+                        'social_name' => $provider
+                    ]);
+                    $newSocialAccount->save();
+                }
+                Auth::login($newUser, true);
+            }
+            return redirect()->route('site.home');
         } catch (\Exception $e) {
-            dd($e);
             return redirect()->route('site.home');
         }
 
-        $existingUser = User::where('email', $user->getEmail())->first();
-
-        if ($existingUser) {
-            Auth::guard('login')->login($existingUser);
-        } else {
-            $newUser = new User([
-                'name' => $user->getName(),
-                'email' => $user->getEmail()
-            ]);
-            if ($newUser->save()){
-                $newSocialAccount = new SocialAccount([
-                    'user_id' => $newUser->id,
-                    'social_id' => $user->getId(),
-                    'social_name' => $provider
-                ]);
-                $newSocialAccount->save();
-            }
-        }
-        return redirect()->route('site.home');
     }
 
     /**
