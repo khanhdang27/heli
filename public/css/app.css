@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
+@charset "UTF-8";
+
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -11388,6 +11390,18 @@ form#certificate_form select option:checked {
   overflow-y: auto;
 }
 
+.show-video .box-list-video ol {
+  padding-left: 75px;
+}
+
+.show-video .box-list-video li.lecture-inactive::marker {
+  content: "🔒 " counter(list-item) ". ";
+}
+
+.show-video .box-list-video li {
+  display: list-item ". ";
+}
+
 .rating-bar {
   max-width: 421px;
   padding-bottom: 3rem;
@@ -11867,6 +11881,12 @@ form#certificate_form select option:checked {
 }
 
 /*NEWS PAGE-----------------------------------------*/
+
+.box-news {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 
 .body-news-page {
   background-image: url(/images/BG_news.jpg?a21fac5423436d9cdd592352005542b4);

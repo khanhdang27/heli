@@ -19,7 +19,7 @@
                                     @lang('keywords.course-item.courseRecord')
                                 @endif
                             </div>
-                            <div class="content-bot">
+                            <div class="content-bot" title="{{$course_card->course_name}}">
                                 {{$course->course_name}}
                             </div>
                         </div>

@@ -13,7 +13,7 @@ $liked = $likeRef->likeable->firstWhere('user_id', Auth::user()->id);
 $component = explode('\\',$likeModule)[2];
 
 @endphp
-<button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-5 border-0 bg-white text-primary" v-on:click="clicklike">
+<button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-1 border-0 bg-white text-primary" v-on:click="clicklike">
     <img class="ic-action"
          id="like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}"
          src="{{ empty($liked) ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}}">

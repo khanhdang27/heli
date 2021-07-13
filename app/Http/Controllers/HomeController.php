@@ -111,7 +111,9 @@ class HomeController extends Controller
                     $courseVideo = $course;
                 }
             } else {
-                $courseVideo = Course::with('tutor', 'lecture')->where('id', 1)->first();
+                $courseVideo = Course::with('tutor', 'lecture')->whereHas('lecture', function($query) {
+                    return $query->where(['id'=>1]);
+                })->first();
             }
         } else {
             $courseVideo = Course::with('tutor', 'lecture')->where('id', 1)->first();

@@ -425,6 +425,15 @@ form#certificate_form {
         font-size: 22.5pt;
         max-height: 420px;
         overflow-y: auto;
+        ol {
+            padding-left: 75px;
+        }
+        li.lecture-inactive::marker {
+            content: "🔒 " counter(list-item) ". ";
+        }
+        li {
+            display: list-item ". ";
+        }
     }
 }
 
@@ -891,9 +900,11 @@ form#certificate_form {
 
 
 /*NEWS PAGE-----------------------------------------*/
-.box-news{
+
+.box-news {
     width: fit-content;
 }
+
 .body-news-page {
     background-image: url("../images/BG_news.jpg");
     background-repeat: no-repeat;

@@ -43,7 +43,7 @@
                             Document
                         @endif
                     </div>
-                    <div class="content-bot">
+                    <div class="content-bot" title="{{$course_card->course_name}}">
                         {{$course_card->course_name}}
                     </div>
                 </div>
