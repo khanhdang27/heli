@@ -23,6 +23,8 @@ class CreateStudentCoursesTable extends Migration
                 ->foreignId('student_id')
                     ->constrained('users')
                     ->cascadeOnDelete();
+            $table->dateTime('latest_study');   
+            $table->bigInteger('lecture_study');
             $table->unique(['student_id', 'course_id']);
             $table->timestamps();
             $table->softDeletes();

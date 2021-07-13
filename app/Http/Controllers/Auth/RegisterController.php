@@ -71,7 +71,11 @@ class RegisterController extends Controller
                 $array = explode('@', $input['email']);
                 $name = reset($array);
                 $user = new User(['name' => $name, 'email' => $input['email'], 'password' => $random]);
-                $user->assignRole(['student']);
+                
+                $user->assignRole('student');
+                // var_dump($result);
+                // die();
+
                 $user->save();
 
                 $student = new Student(['user_id' => $user->id]);
@@ -90,6 +94,8 @@ class RegisterController extends Controller
                     ], 200);
             } catch (\Throwable $th) {
                 DB::rollBack();
+
+                // dd($th);
                 return response()->json(
                     [
                         'status' => 400,

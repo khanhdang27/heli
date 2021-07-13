@@ -32,7 +32,6 @@ class SocialAccountController extends Controller
             } else {
                 DB::beginTransaction();
                 try{
-                    
                     $newUser = new User([
                         'name' => $user->getName(),
                         'email' => $user->getEmail(),
