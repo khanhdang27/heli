@@ -891,7 +891,9 @@ form#certificate_form {
 
 
 /*NEWS PAGE-----------------------------------------*/
-
+.box-news{
+    width: fit-content;
+}
 .body-news-page {
     background-image: url("../images/BG_news.jpg");
     background-repeat: no-repeat;
