@@ -15,19 +15,19 @@
                     </div>
                     <div class="col-sm">
                         <div class="box-btn-login">
-                            <div class="btn-register-now btn-login btn-secondary">
+                            <a class="btn-register-now btn-login btn-secondary" href="{{route('site.socialLogin', 'facebook')}}">
                                 <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}">
                                 </div>@lang('keywords.loginWithFb')
-                            </div>
+                            </a>
                             <a class="btn-register-now btn-login btn-secondary" href="{{route('site.socialLogin', 'google')}}">
                                 <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}">
                                 </div>@lang('keywords.loginWithGg')
                             </a>
-                            <div class="btn-register-now btn-login btn-secondary">
+                            <a class="btn-register-now btn-login btn-secondary" href="#">
                                 <div class="box-ic ic-ap"><img class="ic" id="ap"
-                                                                src="{{asset("images/ic/ic_apple.svg")}}">
+                                    src="{{asset("images/ic/ic_apple.svg")}}">
                                 </div>@lang('keywords.loginWithAp')
-                            </div>
+                            </a>
                         </div>
                         <div class="line-or d-flex align-items-center text-white">
                             <hr>

@@ -32,29 +32,32 @@ class SocialAccountController extends Controller
             } else {
                 DB::beginTransaction();
                 try{
+                    
                     $newUser = new User([
                         'name' => $user->getName(),
-                        'email' => $user->getEmail()
+                        'email' => $user->getEmail(),
                     ]);
                     if ($newUser->save()){
                         
                         $random = Str::random(10);
-                        $newSocialAccount = new SocialAccount([
+                        $newUser_social = new SocialAccount([
                             'user_id' => $newUser->id,
                             'social_id' => $user->getId(),
                             'social_name' => $provider
                         ]);
-                        $newSocialAccount->save();
-                        $stripeCustomer = $user->createAsStripeCustomer(['email' => $user->getEmail()]);
+                        $newUser_social->save();
+                        $stripeCustomer = $newUser->createAsStripeCustomer(['email' => $user->getEmail()]);
 
-                        $send_mail = new SendMail();
-                        $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
-                        Mail::to($user->getEmail())->send($send_mail);
-                        Auth::login($newSocialAccount);
+                        // $send_mail = new SendMail();
+                        // $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
+                        // Mail::to($newUser->getEmail())->send($send_mail);
+                        Auth::login($newUser);
                     }
                     DB::commit();
                 } catch (\Throwable $th) {
                     DB::rollBack();
+
+                    dd($th);
                     return redirect()->with([''])->route('site.home');
                 }
 
