@@ -96,7 +96,7 @@ class User extends Authenticatable
     public function student_courses () {
         if ($this->hasRole('student')){
             return $this->hasMany(StudentCourses::class, 'student_id');
-        }   
+        }
         return null;
     } 
 
