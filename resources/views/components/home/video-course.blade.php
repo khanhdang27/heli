@@ -12,11 +12,12 @@ $is_bought = false;
 $student_courses = null;
 
 if (Auth::check() && !empty(Auth::user()->student_courses())) {
-
-    $student_courses = Auth::user()->student_courses()->get();
-    
-    $is_bought = $student_courses[0]->course_id == $fisrt_lecture->course_id;
+    if (Auth::user()->student_courses()->get()->count() > 0) {
+        $student_courses = Auth::user()->student_courses()->get();
+        $is_bought = $student_courses[0]->course_id == $fisrt_lecture->course_id;
+    }
 }
+
 
 @endphp
 {{-- @if (!empty($fisrt_lecture)) --}}

@@ -17,37 +17,57 @@
                 @endforeach
             </div>
             @if(!empty(\Illuminate\Support\Facades\Auth::user()))
-                <div class="container mt-4 mb-4">
-                    <div class="card card-body">
-                        {!! Form::open(['url' => URL::route('site.post.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
-                        <div class="form-group">
-                            {{ Form::label('tag_id', 'Tag') }}
-                            {{ Form::select('tag_id',$tags,null, ['class' => 'form-control','required']) }}
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('title', 'Title') }}
-                            {{ Form::text('title',old('title'),['class' => 'form-control']) }}
-                        </div>
-                        <div class="form-group ">
-                            {{ Form::label('content', 'Content') }}
-                            {{ Form::textarea('content',old('content'),['class' => 'form-control', 'rows' => '3']) }}
-                        </div>
-                        <div class="custom-file ">
-                            {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
-                            {{ Form::file('file',['class' => 'custom-file-input']) }}
-                        </div>
-                        {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5 float-right']) }}
+                <div class="w-75 mx-auto text-right mt-5">
+                    <a href="#" class="btn btn-secondary text-primary" data-toggle="modal"
+                       data-target="#modalCreate">
+                        <h3 class="mb-0">Post your question</h3>
+                    </a>
+                </div>
+                <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Post your question</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body pt-3">
+                                {!! Form::open(['url' => URL::route('site.post.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
+                                <div class="form-group">
+                                    {{ Form::label('tag_id', 'Tag') }}
+                                    {{ Form::select('tag_id',$tags,null, ['class' => 'form-control','required']) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ Form::label('title', 'Title') }}
+                                    {{ Form::text('title',old('title'),['class' => 'form-control']) }}
+                                </div>
+                                <div class="form-group ">
+                                    {{ Form::label('content', 'Content') }}
+                                    {{ Form::textarea('content',old('content'),['class' => 'form-control', 'rows' => '7']) }}
+                                </div>
+                                <div class="custom-file ">
+                                    {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
+                                    {{ Form::file('file',['class' => 'custom-file-input']) }}
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                {{ Form::submit('Submit', ['class'=>'btn btn-primary']) }}
+                            </div>
                         {!! Form::close() !!}
+                        </div>
                     </div>
                 </div>
-            @endif
         </div>
-        <div class="container-fluid pb-5 ml-auto mr-auto body-forum-page">
-            @foreach($posts as $value)
-                <x-forum.forum-post :post=$value>
-                </x-forum.forum-post>
-            @endforeach
-        </div>
+        @endif
+    </div>
+    <div class="container-fluid pb-5 ml-auto mr-auto body-forum-page">
+        @foreach($posts as $value)
+            <x-forum.forum-post :post=$value :tags=$tags>
+            </x-forum.forum-post>
+        @endforeach
+    </div>
     </div>
     @push('inputFile')
         <script>

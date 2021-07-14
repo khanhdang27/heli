@@ -3,7 +3,7 @@
 @endphp
 <div>
     <div class="row row-question border-secondary pt-5 pb-5 bg-white">
-        <div class="col-xl-3">
+        <div class="col-xl-3 p-0">
             <div class="d-flex flex-wrap">
                 <img class="mb-3" src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                 <div class="pl-3 pt-2">
@@ -36,7 +36,7 @@
         </div>
         <div class="col-xl-3 d-flex flex-column justify-content-between align-items-end">
             @if($post->user_id == Auth::user()->id)
-            <x-forum.forum-edit :post=$post></x-forum.forum-edit>
+            <x-forum.forum-edit :post=$post :tags=$tags></x-forum.forum-edit>
             @endif
             <div>
                 <div class="pt-3 text-right">

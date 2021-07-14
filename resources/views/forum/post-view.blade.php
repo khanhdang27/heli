@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-lg-3 d-flex flex-column justify-content-between align-items-end">
                     @if($post->user_id == Auth::user()->id)
-                        <x-forum.forum-edit :post=$post></x-forum.forum-edit>
+                        <x-forum.forum-edit :post=$post :tags=$tags></x-forum.forum-edit>
                     @endif
                     <div>
                         <div class="pt-3 text-right">

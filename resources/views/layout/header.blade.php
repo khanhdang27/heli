@@ -9,7 +9,7 @@
     </div>
     <nav class="navbar navbar-expand-xl bg-white ">
         <a class="navbar-brand mr-5" href="{{ URL::route('site.home') }}">
-            <img class="logo" width="150" src={{ asset("images/HeliosLogo.png")}}>
+            <img class="logo" width="150" src={{ asset("images/HeliosLogo.svg")}}>
         </a>
         <button class="navbar-toggler navbar-toggler-right collapsed pr-0 pl-0 btn-collapse" type="button"
                 data-toggle="collapse"

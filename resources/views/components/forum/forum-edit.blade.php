@@ -35,7 +35,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     {{ Form::label('tag_id', 'Tag') }}
-                    {{ Form::select('tag_id', SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id'),
+                    {{ Form::select('tag_id', $tags,
                                     $post->postTag->id,
                                     ['class' => 'form-control','required']) }}
                 </div>

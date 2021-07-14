@@ -7,14 +7,16 @@ use Illuminate\View\Component;
 class ForumEdit extends Component
 {
     public $post;
+    public $tags;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($post)
+    public function __construct($post, $tags)
     {
         $this->post=$post;
+        $this->tags=$tags;
     }
 
     /**
@@ -25,7 +27,8 @@ class ForumEdit extends Component
     public function render()
     {
         return view('components.forum.forum-edit',[
-            'post'=>$this->post
+            'post'=>$this->post,
+            'tags'=>$this->tags
         ]);
     }
 }

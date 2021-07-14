@@ -1,6 +1,6 @@
-<div class="modal fade " id="registerModalComponent">
-    <div class="modal-dialog modal-login-xl">
-        <div class="modal-content  modal-register-component">
+<div class="modal fade modal-index" id="registerModalComponent">
+    <div class="modal-dialog m-0 modal-login-xl h-100">
+        <div class="modal-content modal-register-component">
             <div class="modal-header btn-close">
                 <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
             </div>
