@@ -7,11 +7,11 @@
             case 'recommended':
             case 'certificate_filter':
             case 'hot':
-                $class = 'col-lg-3';
+                $class = 'col-lg-3 col-md-6';
                 break;
             case 'welcome' :
             case 'lasted' :
-                $class = 'col-lg-6';
+                $class = 'col-md-6';
                 break;
             default:
                 $class = '';
@@ -19,11 +19,11 @@
         }
 @endphp
 
-<div class="{{ $class }} px-5">
+<div class="{{ $class }} product-category-padding">
     <div class="product-box">
         <div class="top-product">
             <div class="title-product bg-secondary text-primary">
-                <h4>{{ $course_card->subject->subject_name }}</h4>
+                <h5>{{ $course_card->subject->subject_name }}</h5>
             </div>
             <div class="content-product row"
                  style="background-color: {{$course_card->subject->subject_color_background}}">

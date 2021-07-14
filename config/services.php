@@ -33,13 +33,13 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'https://project.nironcrm.tk/helios/public/site/loginby/google/callback',
+        'redirect' =>  env('APP_HOME_URL').'/loginby/google/callback',
     ],
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'https://project.nironcrm.tk/helios/public/site/loginby/facebook/callback',
+        'redirect' => env('APP_HOME_URL').'/loginby/facebook/callback',
     ]
 
 ];

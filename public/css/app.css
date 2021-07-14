@@ -10951,13 +10951,55 @@ html {
   font-size: 14pt;
 }
 
+h1,
+.h1 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+h5,
+.h5 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.banner-content {
+  width: 100%;
+  position: relative;
+}
+
+.banner-content .banner-info {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.banner-content .banner-info .banner-caption {
+  font-size: 50px;
+  font-weight: 400;
+  border-bottom: 2px solid;
+  width: 55.5vw;
+  height: auto;
+}
+
+.banner-content .banner-info .banner-caption p {
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
+  margin-bottom: 2.5vw;
+  line-height: 1.45;
+}
+
+.banner-content .banner-info .banner-caption .banner-title {
+  width: 75%;
+}
+
 .container-course {
   max-width: 86%;
 }
 
 .container-course h1 {
   margin-top: 30px;
-  font-size: 26px;
 }
 
 .color-primary svg {
@@ -11121,10 +11163,6 @@ form#certificate_form select option:checked {
   font-size: 18.7pt;
 }
 
-.content-step {
-  font-size: 18.7pt;
-}
-
 .menu-tab a {
   font-size: 16pt;
   color: var(--primary);
@@ -11260,7 +11298,10 @@ form#certificate_form select option:checked {
 }
 
 .product-box .title-product {
-  width: 25%;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 90px;
   padding: 0.6rem 0;
   text-align: center;
 }
@@ -11395,7 +11436,11 @@ form#certificate_form select option:checked {
 }
 
 .show-video .box-list-video li.lecture-inactive::marker {
-  content: "🔒 " counter(list-item) ". ";
+  content: "🔒︎ " counter(list-item) ". ";
+}
+
+.show-video .box-list-video li.lecture-active::marker {
+  content: "▶ " counter(list-item) ". ";
 }
 
 .show-video .box-list-video li {
@@ -11475,20 +11520,6 @@ form#certificate_form select option:checked {
 
 .step-for-register #btn-register-step {
   font-size: 18.7pt;
-}
-
-@media screen and (max-width: 800px) {
-  .step-for-register .row-step {
-    display: none;
-  }
-
-  .step-for-register .content-step {
-    padding-top: 1rem;
-  }
-
-  .step-for-register .title-step {
-    padding: 1.5rem 0 0 0;
-  }
 }
 
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
@@ -11914,6 +11945,85 @@ form#certificate_form select option:checked {
 
 .body-news-page .container-news-page .content-news-page .show-news-item a:hover {
   text-decoration: none;
+}
+
+@media screen and (max-width: 425px) {
+  .banner-content {
+    height: 600px;
+  }
+
+  .banner-content .banner-info {
+    top: 30% !important;
+    left: 60%;
+    width: 100%;
+  }
+
+  .banner-content .banner-info .banner-caption {
+    font-size: 25px;
+  }
+
+  .banner-content .banner-info .banner-caption .banner-title {
+    width: 100%;
+  }
+
+  .free {
+    font-size: 15px !important;
+  }
+
+  .container-course {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .banner-content {
+    height: 600px;
+  }
+
+  .banner-content .banner-info .banner-caption {
+    font-size: 30px;
+  }
+
+  .banner-content .banner-info .banner-caption .banner-title {
+    width: 100%;
+  }
+
+  .free {
+    font-size: 15px !important;
+  }
+
+  .product-category-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .container-course {
+    max-width: 100%;
+  }
+
+  .step-for-register {
+    padding-bottom: 3.6rem;
+  }
+
+  .step-for-register .content-step {
+    margin: 0 auto;
+  }
+
+  .step-for-register .content-step #step2 {
+    margin: 0 1rem;
+  }
+
+  .row-step {
+    display: none;
+  }
+
+  .content-step {
+    padding-top: 1rem;
+  }
+
+  .title-step {
+    padding: 1.5rem 0 0 0;
+  }
 }
 
 .rating {
