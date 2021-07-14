@@ -12,14 +12,14 @@ $is_bought = false;
 $student_courses = null;
 
 if (Auth::check() && !empty(Auth::user()->student_courses())) {
-    if (Auth::user()->student_courses()->get()->count() > 0) {
+    if (Auth::user()->student_courses()->get()->count()) {
+        
         $student_courses = Auth::user()->student_courses()->get();
         $is_bought = $student_courses[0]->course_id == $fisrt_lecture->course_id;
     }
 }
 
-
-@endphp
+@endphp 
 {{-- @if (!empty($fisrt_lecture)) --}}
 <div class="container-fluid show-video" id="video-lecture">
     <div class="bg-white mt-5">
@@ -43,15 +43,17 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
 
     <div class="row">
         <div class="col-lg-8 bg-white">
-            <iframe id="videoView" src={{ $defaultSource }} width="840" height="420" frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Default name"></iframe>
+            <div class="embed-responsive embed-responsive-4by3">
+                <iframe id="videoView" src={{ $defaultSource }} class="embed-responsive-item" frameborder="0"
+                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Default name"></iframe>
+            </div>
         </div>
         <div class="col-lg-4 bg-white">
             <div class="box-list-video text-primary">
                 <ol>
                     @foreach ($list_lecture as $index => $item)
                         @if ($index == 0)
-                            <li role="button" v-on:click="clickLecture" data-id="{{ $item->video_resource }}">
+                            <li class="lecture-active" role="button" v-on:click="clickLecture" data-id="{{ $item->video_resource }}">
                                 {{ $item->lectures_name }}
                             </li>
                         @else

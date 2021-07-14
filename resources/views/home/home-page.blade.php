@@ -108,26 +108,3 @@
         @endif
     </div>
 @endsection
-@push('scripts')
-    <script>
-        $(function () {
-            var $quote = $("#title-home-page");
-
-            var $numWords = $quote.text().split(" ").length;
-            console.log($numWords);
-
-            if (($numWords >= 1) && ($numWords < 10)) {
-                $quote.css("font-size", "36px");
-            } else if (($numWords >= 10) && ($numWords < 20)) {
-                $quote.css("font-size", "32px");
-            } else if (($numWords >= 20) && ($numWords < 30)) {
-                $quote.css("font-size", "28px");
-            } else if (($numWords >= 30) && ($numWords < 40)) {
-                $quote.css("font-size", "24px");
-            } else {
-                $quote.css("font-size", "20px");
-            }
-
-        });
-    </script>
-@endpush
