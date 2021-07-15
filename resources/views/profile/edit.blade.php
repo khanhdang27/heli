@@ -16,13 +16,13 @@
                 </ul>
             </div>
         @endif
-        <div class="card mx-auto pt-5 pb-5 pl-3 pr-3 mb-5">
+        <div class="card mx-auto py-5 px-3 mb-5">
             <div class="row">
                 <div class="col-md-4 text-center">
                     @if(empty(Auth::user()->avatar))
-                        <img src="{{ asset('images/user_default.png')}}">
+                        <img width="150" height="150" class="img-thumbnail" src="{{ asset('images/user_default.png')}}">
                     @else
-                        <img src="{{ asset('/file/'.Auth::user()->avatar->id)}}">
+                        <img width="150" height="150" class="img-thumbnail" src="{{ asset('/file/'.Auth::user()->avatar->id)}}">
                     @endif
                     <div class="p-3 d-flex justify-content-center align-items-center">
                         <img src="{{ asset('images/ic/ic_search.svg') }}">

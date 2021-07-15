@@ -8,9 +8,9 @@
         <div class="card mx-auto card-profile pt-5 pb-5 pl-3 pr-3 mb-5">
             <div class="mx-auto grid-width-30">
                 @if(empty(Auth::user()->avatar))
-                    <img width="150" height="150" class="rounded" src="{{asset('images/user_default.png')}}">
+                    <img width="150" height="150" class="img-thumbnail rounded" src="{{asset('images/user_default.png')}}">
                 @else
-                    <img width="150" height="150" class="rounded" src="{{asset('/file/'.Auth::user()->avatar->id)}}">
+                    <img width="150" height="150" class="img-thumbnail rounded" src="{{asset('/file/'.Auth::user()->avatar->id)}}">
                 @endif
             </div>
             <h5 class="card-title text-center font-weight-bold text-30 mt-5">
