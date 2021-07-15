@@ -77,28 +77,28 @@ class HomeController extends Controller
         $courseIGCSE->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
             return $query->where('id', 2);
-        })->get();
+        })->limit(4)->get();
         
         $courseUKISET= clone $course_hot;
 
         $courseUKISET->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
             return $query->where('id', 3);
-        })->get();
+        })->limit(4)->get();
         
         $courseIELTS= clone $course_hot;
 
         $courseIELTS->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
             return $query->where('id', 4);
-        })->get();
+        })->limit(4)->get();
         
         $courseIAL= clone $course_hot;
 
         $courseIAL->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
             return $query->where('id', 5);
-        })->get();
+        })->limit(4)->get();
 
         $courseVideo = null;
         if (Auth::check()) {
