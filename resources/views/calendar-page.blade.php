@@ -3,7 +3,7 @@
 @section('title','Calendar Page')
 
 @section('content')
-<div class="container-fluid text-center top-news-page">
+<div class="container-fluid text-center top-news-page h1">
     @lang('keywords.starTutorTeam')
 </div>
     {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}

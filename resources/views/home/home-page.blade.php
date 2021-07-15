@@ -31,24 +31,24 @@
         <div class="container-fluid container-course">
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <h1 class="text-primary">
+                    <h2 class="text-primary">
                         @lang('keywords.latestDiscountProduct')
-                    </h1>
+                    </h2>
                     <x-product.course-list :courses=$course_latest typeOfUI="lasted"></x-product.course-list>
                 </div>
                 <div class="col-lg-6 col-12 welcome-offer">
-                    <h1 class="text-primary">
+                    <h2 class="text-primary">
                         @lang('keywords.welcomeOffer')
-                    </h1>
+                    </h2>
                     <x-product.course-list :courses=$course_welcomes typeOfUI="welcome"></x-product.course-list>
                 </div>
             </div>
         </div>
         @if(Auth::check())
             <div class="container-fluid container-course">
-                <h1 class="text-primary" id="tab-title">
+                <h2 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
-                </h1>
+                </h2>
                 <x-product.course-list :courses=$course_recommended typeOfUI="recommended"></x-product.course-list>
             </div>
         @endif
@@ -86,9 +86,9 @@
                 <div class="position-relative d-flex align-items-center">
                     <div class="border-right-radius border-primary">
                         <div class="text-content d-flex justify-content-end text-primary">
-                        <span class="text-information">
-                            @lang('keywords.freeTrialClass')
-                        </span>
+                            <h1 class="text-information text-content">
+                                @lang('keywords.freeTrialClass')
+                            </h1>
                         </div>
                     </div>
                     <div

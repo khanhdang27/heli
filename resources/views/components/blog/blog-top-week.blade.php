@@ -9,7 +9,7 @@
         @endif
         <div class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
             <a href="{{route('site.view-blog',$blog_top->id)}}"
-               class="font-weight-bold title-article">
+               class="h2 font-weight-bold title-article">
                 {{ $blog_top->title }}
             </a>
             <div class="d-flex justify-content-between flex-wrap pb-3">

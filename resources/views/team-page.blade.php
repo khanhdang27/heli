@@ -2,7 +2,7 @@
 @section('title','Team Page')
 @section('content')
     <div class="body-content">
-        <div class="container-fluid text-center top-news-page">
+        <div class="container-fluid text-center top-news-page h1">
             @lang('keywords.starTutorTeam')
         </div>
         <div class="container-fluid content-team-page">
@@ -20,7 +20,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6 info-right p-0">
-                                    <div class="bg-dark d-flex flex-column justify-content-between pt-5 px-3 pb-3 tutor-background">
+                                    <div class="bg-dark d-flex flex-column justify-content-between pt-5 px-5 pb-3 tutor-background">
                                         <div class="content-info-right text-white">
                                             <div>{{ $value->tutor_info }}</div>
                                             <br>

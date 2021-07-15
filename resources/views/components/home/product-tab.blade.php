@@ -47,9 +47,9 @@
         </li>
     </ul>
     <!-- Tab panes -->
-    <h1 class="text-primary text-primary" id="tab-title">
+    <h2 class="text-primary text-primary" id="tab-title">
         @lang('keywords.hotCourseSeries')
-    </h1>
+    </h2>
     <div class="tab-content">
         <div id="menu1" class="tab-pane active">
             <x-product.course-list :courses=$courseIGCSE typeOfUI="hot"></x-product.course-list>

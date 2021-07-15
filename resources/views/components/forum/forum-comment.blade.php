@@ -12,17 +12,16 @@
             </div>
         </div>
         <div class="col-xl-6">
-            <p class="question text-forum">
+            <p class="question h2 text-primary">
                 {{$item->detail}}
             </p>
-            <div class="pt-3 pb-3 ">
+            <div class="py-3">
                 @if($item->image!=null)
-                    <img class="img-question" src="{{asset('/file/'.$item->image->id)}}">
+                    <img class="img-question border" src="{{asset('/file/'.$item->image->id)}}">
                 @endif
             </div>
             <div class="text-forum d-flex">
                 <x-like.like :likeRef=$comment :likeModule=\App\Models\UserComment::class></x-like.like>
-                {{-- <span><img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}"></span> --}}
             </div>
         </div>
         <div class="col-xl-3 d-flex flex-column justify-content-between text-right">
@@ -45,7 +44,7 @@
             <div class="d-flex justify-content-end text-forum pt-2 m-0">
                 @if($comment->pin_comment == $item->id)
                     <span class="mr-2"><img src="{{asset("images/ic/ic_star.svg")}}" width="40"></span>
-                    <span class="pt-1">@lang('keywords.forum.bestAnswer')</span>
+                    <span class="h2 text-primary pt-1">@lang('keywords.forum.bestAnswer')</span>
                 @endif
             </div>
         </div>

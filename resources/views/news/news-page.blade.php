@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="body-news-page">
-        <div class="container-fluid text-center top-news-page">
+        <div class="container-fluid text-center top-news-page h1">
             @lang('keywords.latestNewsPage')
         </div>
         <div class="container container-news-page">

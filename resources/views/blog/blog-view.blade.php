@@ -7,7 +7,7 @@
         use App\Utilities\SelectionByClass;
     @endphp
     <div class="body-content">
-        <div class="container-fluid text-center top-news-page">
+        <div class="container-fluid text-center top-news-page h1">
             @lang('keywords.blog-page.learningColumn')
         </div>
         <div class="container-fluid pb-5 w-75 bg-white">
@@ -25,13 +25,12 @@
                         </button>
                     @endforeach
                 </div>
-                <div class="w-100 mt-3">
-
+                <div class="w-75">
                     @if(empty($blog->photo))
-                        <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block h-50"
+                        <img class="img-thumbnail border p-0 w-75 mx-auto d-block h-50" 
                             src="{{asset('images/default-image.jpg')}}">
                     @else
-                        <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block"
+                        <img class="img-thumbnail border p-0 w-75 mx-auto d-block" 
                             src="{{asset('file/'.$blog->photo->id)}}">
                     @endif
                 </div>

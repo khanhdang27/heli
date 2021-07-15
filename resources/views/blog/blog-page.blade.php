@@ -17,7 +17,7 @@
         </div>
     @else
         <div class="body-content">
-            <div class="container-fluid text-center top-news-page">
+            <div class="container-fluid text-center top-news-page h1">
                 @lang('keywords.blog-page.learningColumn')
             </div>
             <div class="container-fluid pt-5 pb-5">
@@ -29,11 +29,11 @@
                     @endforeach
                 </div>
             </div>
-            <div class="w-75 ml-auto mr-auto pb-5 body-blog-page">
-                <h1 class="font-weight-bold text-primary">
+            <div class="container-fluid ml-auto mr-auto pb-5 body-blog-page">
+                <h2 class="font-weight-bold text-primary bg-white">
                     @lang('keywords.blog-page.popularArticlesThisWeek')
-                </h1>
-                <div class="row mt-5">
+                </h2>
+                <div class="row">
                     <!--Component blog top this week-->
                     <div class="col-xl-7 px-4 post-spotlight mb-5">
                         <x-blog.blog-top-week :blogs=$blog_top></x-blog.blog-top-week>

@@ -19,7 +19,7 @@ $component = explode('\\',$likeModule)[2];
          src="{{ empty($liked) ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}}">
 
         @if($likeModule == Post::class || $likeModule== UserComment::class)
-            <span id="{{$component}}_like_no_{{$likeRef->id}}" >{{$likeRef->like_no}}</span>
+            <span class="h2 " id="{{$component}}_like_no_{{$likeRef->id}}" >{{$likeRef->like_no}}</span>
         @endif
 </button>
 

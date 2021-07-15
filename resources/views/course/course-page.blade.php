@@ -21,8 +21,8 @@
 
             </div>
         @endif
-        <div class="d-flex justify-content-center pb-5">
-            <div class="row container-fluid p-0 show-menu-tab">
+        <div class="container-fluid show-video">
+            <div class="row container-fluid p-0 flex-column-reverse flex-md-row">
                 @if($course->type == Course::$DOCUMENT)
                     <div class="col-xl-8 bg-white">
                         @foreach($course->courseMaterial as $value)
@@ -48,35 +48,35 @@
                     </div>
                 @else
                     <div class="col-xl-8 container-fluid">
-                        <ul class="nav nav-pills menu-tab" role="tablist">
+                        <ul class="nav nav-pills" role="tablist">
                             <li class="nav-item ">
                                 <a class="nav-link active category-link-text" data-toggle="pill" href="#home">
-                                    <h4>
+                                    <h1>
                                         @lang('keywords.coursePage.courseOverview')
-                                    </h4>
+                                    </h1>
                                 </a>
                             </li>
                             @if ( $course->type == Course::$LIVE )
                                 <li class="nav-item">
                                     <a class="nav-link category-link-text" data-toggle="pill" href="#menu1">
-                                        <h4>
+                                        <h1>
                                             @lang('keywords.coursePage.courseFrequency')
-                                        </h4>
+                                        </h1>
                                     </a>
                                 </li>
                             @endif
                             <li class="nav-item">
                                 <a class="nav-link category-link-text" data-toggle="pill" href="#menu2">
-                                    <h4>
+                                    <h1>
                                         @lang('keywords.coursePage.mentorIntroduction')
-                                    </h4>
+                                    </h1>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link category-link-text" data-toggle="pill" href="#menu3">
-                                    <h4>
+                                    <h1>
                                         @lang('keywords.coursePage.studentEvaluation')
-                                    </h4>
+                                    </h1>
                                 </a>
                             </li>
                         </ul>
