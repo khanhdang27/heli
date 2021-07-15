@@ -43,7 +43,7 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
 
     <div class="row">
         <div class="col-lg-8 bg-white">
-            <div class="embed-responsive embed-responsive-4by3">
+            <div class="embed-responsive embed-responsive-16by9">
                 <iframe id="videoView" src={{ $defaultSource }} class="embed-responsive-item" frameborder="0"
                     allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Default name"></iframe>
             </div>

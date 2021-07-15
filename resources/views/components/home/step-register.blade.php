@@ -2,25 +2,19 @@
     <div class="content-step">
         <div class="row row-step justify-content-center">
             <div class="circle-step bg-secondary text-primary">
-                <h1>
-                    Step 1
-                </h1>
+                Step 1
             </div>
             <div class="col-sm-3 col-step">
                 @include('dot-bar')
             </div>
             <div class="circle-step bg-secondary text-primary">
-                <h1>
-                    Step 2
-                </h1>
+                Step 2
             </div>
             <div class="col-sm-3 col-step">
                 @include('dot-bar')
             </div>
             <div class="circle-step bg-secondary text-primary">
-                <h1>
-                    Step 3
-                </h1>
+                Step 3
             </div>
         </div>
     </div>

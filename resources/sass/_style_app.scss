@@ -20,7 +20,9 @@ h5,
 }
 
 .banner-content {
-    width: 100%;
+    img {
+        width: 100%;
+    }
     position: relative;
     .banner-info {
         z-index: 1000;
@@ -51,6 +53,11 @@ h5,
     h1 {
         margin-top: 30px;
     }
+}
+
+.product-category-padding {
+    padding-left: 3rem;
+    padding-right: 3rem;
 }
 
 .color-primary {
