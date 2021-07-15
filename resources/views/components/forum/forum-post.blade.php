@@ -5,7 +5,7 @@
     <div class="row row-question border-secondary pt-5 pb-5 bg-white">
         <div class="col-xl-3 p-0">
             <div class="d-flex flex-wrap">
-                <img class="mb-3" src="{{asset("images/ava2.jpg")}}" width="98" height="98">
+                <img class="mb-3 border border-secondary" src="{{asset("images/ava2.jpg")}}" width="98" height="98">
                 <div class="pl-3 pt-2">
                     <p class="text-comment">{{$post->user->name}}</p>
                     <p class="text-primary">{{ substr($post->created_at,0,10) }}</p>

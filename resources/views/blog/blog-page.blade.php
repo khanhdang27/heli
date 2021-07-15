@@ -30,9 +30,9 @@
                 </div>
             </div>
             <div class="container-fluid ml-auto mr-auto pb-5 body-blog-page">
-                <p class="h1 font-weight-bold text-primary">
+                <h2 class="font-weight-bold text-primary bg-white">
                     @lang('keywords.blog-page.popularArticlesThisWeek')
-                </p>
+                </h2>
                 <div class="row">
                     <!--Component blog top this week-->
                     <div class="col-xl-7 post-spotlight mb-5">

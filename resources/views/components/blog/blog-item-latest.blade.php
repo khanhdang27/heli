@@ -2,14 +2,14 @@
     <div class="mt-2 popular-item" id="latest">
         <div class="thumb-article d-flex flex-column justify-content-end position-relative">
             
-            @if(empty($blog_top->photo))
+            @if(empty($blog->photo))
                 <img class="main-photo img-thumbnail border-0 p-0 rounded-0" src="{{ asset('images/default-image.jpg')}}">
             @else
                 <img class="main-photo img-thumbnail border-0 p-0 rounded-0" src="{{ asset('/file/'.$blog->photo->id)}}">
             @endif
             <div class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
                 <a href="{{route('site.view-blog',$blog->id)}}"
-                   class="h1 font-weight-bold title-article">
+                   class="h4 font-weight-bold title-article">
                     {{ $blog->title }}
                 </a>
                 <div class="d-flex justify-content-between flex-wrap">

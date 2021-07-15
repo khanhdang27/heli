@@ -7,9 +7,11 @@
     bottom: 0;
     background-color: rgba(15, 34, 51, 0.6);
 }
-.tutor-background{
+
+.tutor-background {
     height: 514px;
 }
+
 .name-tutor {
     font-size: 22px;
     font-weight: 600;
@@ -72,7 +74,6 @@
 }
 
 
-
 /*COURSE PAGE-------------------------------------------------------------------------------*/
 
 .show-menu-tab {
@@ -92,7 +93,6 @@
 .share-bar {
     margin-top: 2rem;
 }
-
 
 .tab-item-content {
     max-width: 846px;
@@ -145,6 +145,7 @@
     font-size: 13.5pt;
 }
 
+
 /*COURSE PAGE 2-------------------------------------------------------------------------------*/
 
 .info-course {
@@ -192,6 +193,7 @@
 
 
 /*BLOG PAGE----------------------------------------------------------------*/
+
 .text-40 {
     font-size: 30pt;
     font-weight: 600;
@@ -205,16 +207,6 @@
 #latest {
     height: 750px;
 }
-
-.thumb-article {
-    width: 100%;
-    height: 100%;
-}
-
-.main-photo {
-    height: 750px;
-}
-
 
 .text-12 {
     font-size: 9pt;
