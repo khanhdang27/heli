@@ -22,7 +22,6 @@
                 @foreach($item->tags as $tag)
                     <button class="btn-hashtag-small bg-primary text-white">
                         {{$tag->tag_name}}
-
                     </button>
                 @endforeach
             </p>

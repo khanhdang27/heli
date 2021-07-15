@@ -64,4 +64,27 @@
     .title-step {
         padding: 1.5rem 0 0 0;
     }
+    .show-video {
+        max-width: 100%;
+        .h1 {
+            font-size: 25px;
+        }
+        .h2 {
+            font-size: 20px;
+        }
+    }
+    .nav-link {
+        h1 {
+            font-size: 16px;
+        }
+    }
+    .rating {
+        height: 20px;
+        line-height: 10px;
+        font-size: 15px;
+    }
+    .buy-course-box {
+        margin-left: 0rem;
+        margin-right: 0rem;
+    }
 }

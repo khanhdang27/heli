@@ -11122,6 +11122,11 @@ form#certificate_form select option:checked {
   color: var(--secondary);
 }
 
+.buy-course-box {
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
 .top-news-page {
   background-color: var(--dark);
   color: var(--secondary);
@@ -11180,11 +11185,6 @@ form#certificate_form select option:checked {
 
 .bottom-form {
   font-size: 18.7pt;
-}
-
-.menu-tab a {
-  font-size: 16pt;
-  color: var(--primary);
 }
 
 .share-bar {
@@ -11430,7 +11430,7 @@ form#certificate_form select option:checked {
 }
 
 .show-video {
-  max-width: 1438px;
+  max-width: 85%;
   padding-top: 3rem;
   padding-bottom: 4rem;
 }
@@ -11633,10 +11633,6 @@ form#certificate_form select option:checked {
 }
 
 /*COURSE PAGE-------------------------------------------------------------------------------*/
-
-.show-menu-tab {
-  max-width: 1500px;
-}
 
 .product {
   max-width: 508px;
@@ -11953,6 +11949,72 @@ form#certificate_form select option:checked {
   text-decoration: none;
 }
 
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #fad000;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #fad000;
+}
+
 @media screen and (max-width: 425px) {
   .banner-content {
     height: 600px;
@@ -12030,72 +12092,33 @@ form#certificate_form select option:checked {
   .title-step {
     padding: 1.5rem 0 0 0;
   }
-}
 
-.rating {
-  display: inline-block;
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-  font-size: 50px;
-}
+  .show-video {
+    max-width: 100%;
+  }
 
-.rating label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  cursor: pointer;
-}
+  .show-video .h1 {
+    font-size: 25px;
+  }
 
-.rating label input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
+  .show-video .h2 {
+    font-size: 20px;
+  }
 
-.rating label .icon {
-  float: left;
-  color: transparent;
-}
+  .nav-link h1 {
+    font-size: 16px;
+  }
 
-.rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
-  text-shadow: 0 0 5px #fad000;
-}
+  .rating {
+    height: 20px;
+    line-height: 10px;
+    font-size: 15px;
+  }
 
-.rating label:last-child {
-  position: static;
-}
-
-.rating label:last-child .icon {
-  color: #000;
-}
-
-.rating label:nth-child(1) {
-  z-index: 5;
-}
-
-.rating label:nth-child(2) {
-  z-index: 4;
-}
-
-.rating label:nth-child(3) {
-  z-index: 3;
-}
-
-.rating label:nth-child(4) {
-  z-index: 2;
-}
-
-.rating label:nth-child(5) {
-  z-index: 1;
-}
-
-.rating:not(:hover) label input:checked ~ .icon,
-.rating:hover label:hover input ~ .icon {
-  color: #fad000;
+  .buy-course-box {
+    margin-left: 0rem;
+    margin-right: 0rem;
+  }
 }
 
 

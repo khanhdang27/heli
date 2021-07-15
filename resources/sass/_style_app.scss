@@ -170,6 +170,11 @@ form#certificate_form {
     }
 }
 
+.buy-course-box {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
 .top-news-page {
     background-color: var(--dark);
     color: var(--secondary);
@@ -232,13 +237,6 @@ form#certificate_form {
 
 .bottom-form {
     font-size: 18.7pt;
-}
-
-.menu-tab {
-    a {
-        font-size: 16pt;
-        color: var(--primary);
-    }
 }
 
 .share-bar {
@@ -462,7 +460,7 @@ form#certificate_form {
 }
 
 .show-video {
-    max-width: 1438px;
+    max-width: 85%;
     padding-top: 3rem;
     padding-bottom: 4rem;
     iframe {
@@ -644,10 +642,6 @@ form#certificate_form {
 
 
 /*COURSE PAGE-------------------------------------------------------------------------------*/
-
-.show-menu-tab {
-    max-width: 1500px;
-}
 
 .product {
     max-width: 508px;

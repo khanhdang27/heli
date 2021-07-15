@@ -3,16 +3,16 @@
     $course = $courseDetail->membershipCourses->course
 @endphp
 
-<div class="bg-white border border-secondary p-4 text-primary">
+<div class="bg-white border border-secondary p-5 text-primary buy-course-box">
     <div class="mb-3 title-course">
-        <p class="m-0">
+        <p class="h1 m-0">
             {{$course->course_name}}
         </p>
     </div>
     @if($course->type != Course::$DOCUMENT)
-        <p class="m-0 h1">Tutor Name: {{$course->tutor->full_name}}</p>
+        <p class="my-5 h4">{{$course->tutor->full_name}}</p>
     @endif
-    <h2 class="font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>
+    <h2 class="my-5 font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>
     @if(\Illuminate\Support\Facades\Auth::check())
         <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
             <div class="btn-primary mt-3 btn-register-now product-btn">
