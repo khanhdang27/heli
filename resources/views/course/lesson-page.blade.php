@@ -13,7 +13,7 @@
                         第一部分講解
                         實時直播 (共6堂）
                     </p>
-                    <p class="m-0 teacher-name">Ms. Polly Leung</p>
+                    <p class="m-0 h1">Ms. Polly Leung</p>
                 </div>
                 <div class="pt-5">
                     <x-product-detail.lecture-course></x-product-detail.lecture-course>

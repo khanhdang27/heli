@@ -8,7 +8,7 @@
     use Illuminate\Support\Facades\Auth;
     @endphp
     <div class="body-content bg-white">
-        <div class="container-fluid text-center top-news-page">
+        <div class="container-fluid text-center top-news-page h1">
             @lang('keywords.navBar.q&aArea')
         </div>
         <div class="container-fluid pt-5 pb-5">
@@ -33,23 +33,26 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <p class="question text-forum">
+                    <p class="question h2 text-primary">
                         {{ $post->title }}
                     </p>
-                    <p class="question text-forum">
+                    <p class="question h5">
                         {{ $post->content }}
                     </p>
-                    <div class="pt-3 pb-3 ">
+                    <div class="py-3 ">
                         @if ($post->image != null)
-                            <img class="img-question" src="{{ asset('/file/' . $post->image->id) }}">
+                            <img class="img-question border border-radius" src="{{ asset('/file/' . $post->image->id) }}">
                         @endif
                     </div>
                     <div class="text-forum d-flex">
-                        <span><img class="ic-action" src="{{ asset('images/ic/ic_bookmark.svg') }}"></span>
+                        <span><img class="ic-action " src="{{ asset('images/ic/ic_bookmark.svg') }}"></span>
 
                         <x-like.like :likeRef=$post :likeModule=\App\Models\Post::class></x-like.like>
                         <span>
-                            <img class="ic-action ml-5" src="{{ asset('images/ic/ic_mess.svg') }}">{{ $post->comment_no }}
+                            <img class="ic-action ml-5" src="{{ asset('images/ic/ic_mess.svg') }}">
+                            <span class="h2 text-primary">
+                                {{ $post->comment_no }}
+                            </span>
                         </span>
                     </div>
                 </div>
@@ -63,7 +66,7 @@
                                 {{$post->postTag->tag_name}}
                             </button>
                         </div>
-                        <p class="text-forum pt-2 ">
+                        <p class="h2 text-primary pt-2">
                             @if($post->block==1)
                                 @lang('keywords.solved')
                             @else
@@ -80,9 +83,7 @@
                     <x-comment.comment :refComment=$post :commentModule=\App\Models\Post::class></x-comment.comment>
                 </div>
             @endif
-{{--            @foreach ($post->comment as $value)--}}
                 <x-forum.forum-comment :comment=$post></x-forum.forum-comment>
-{{--            @endforeach--}}
         </div>
     </div>
     @push('inputFile')

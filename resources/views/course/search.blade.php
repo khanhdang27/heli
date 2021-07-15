@@ -9,7 +9,7 @@ use App\Utilities\SelectionByClass;
 @section('content')
 
     <div class="body-content bg-course">
-        <div class="container-fluid text-center top-news-page">
+        <div class="container-fluid text-center top-news-page h1">
             @lang('keywords.navBar.subjectClassification')
         </div>
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}

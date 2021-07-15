@@ -13,12 +13,12 @@
             </div>
         </div>
         <div class="col-xl-6 p-0">
-            <a class="question text-forum" href="{{ route('site.post.show', $post->id)}}">
+            <a class="question h1 text-primary" href="{{ route('site.post.show', $post->id)}}">
                 {{$post->title}}
             </a>
-            <div class="pt-3 pb-3 ">
+            <div class="py-3">
                 @if($post->image!=null)
-                    <img class="img-question" src="{{asset('/file/'.$post->image->id)}}">
+                    <img class="img-question border" src="{{asset('/file/'.$post->image->id)}}">
                 @endif
             </div>
             <div class="text-forum">
@@ -28,9 +28,11 @@
                 <span>
                     <x-like.like :likeRef=$post :likeModule=\App\Models\Post::class></x-like.like>
                 </span>
-                <a href="{{ route('site.post.show', $post->id)}}">
+                <a class="ml-3" href="{{ route('site.post.show', $post->id)}}">
                     <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">
-                    {{$post->comment_no}}
+                    <span class="h2 text-primary">
+                        {{$post->comment_no}}
+                    </span>
                 </a>
             </div>
         </div>
@@ -44,7 +46,7 @@
                         {{$post->postTag->tag_name}}
                     </button>
                 </div>
-                <p class="text-forum pt-2 ">
+                <p class="h2 text-primary pt-2 ">
                     @if($post->block==1)
                         @lang('keywords.solved')
                     @else

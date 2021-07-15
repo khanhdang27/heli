@@ -10,7 +10,7 @@
         </p>
     </div>
     @if($course->type != Course::$DOCUMENT)
-        <p class="m-0 teacher-name">Tutor Name: {{$course->tutor->full_name}}</p>
+        <p class="m-0 h1">Tutor Name: {{$course->tutor->full_name}}</p>
     @endif
     <h2 class="font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>
     @if(\Illuminate\Support\Facades\Auth::check())

@@ -7,7 +7,7 @@
         use App\Utilities\SelectionByClass;
     @endphp
     <div class="body-content">
-        <div class="container-fluid text-center top-news-page">
+        <div class="container-fluid text-center top-news-page h1">
             @lang('keywords.blog-page.learningColumn')
         </div>
         <div class="container-fluid pb-5 w-75 bg-white">

@@ -4,10 +4,11 @@
     </div>
     <div class="card content-praise text-primary border-0">
         <div class="card-body p-0">
-            <p class="text-center">
+            <p>
                {{$content}}
             </p>
-            <div>
+            <br>
+            <div class="mt-5">
                 {{$name}}
                 <br/>
                 {{$school}}

@@ -4,16 +4,15 @@
 
 @section('content')
     <div class="body-content">
-        <div class="container-fluid text-center top-news-page">
+        <div class="container-fluid text-center top-news-page h1">
             @lang('keywords.navBar.q&aArea')
         </div>
         <div class="container-fluid pt-5 pb-5">
             <div class="m-auto d-flex pl-5 flex-wrap w-75">
-
                 @foreach($tags as $value)
-                    <button class="btn-hashtag ml-3 mr-3" type="button">
+                    <a class="btn btn-hashtag ml-3 mr-3" href="#">
                         {{ $value }}
-                    </button>
+                    </a>
                 @endforeach
             </div>
             @if(!empty(\Illuminate\Support\Facades\Auth::user()))

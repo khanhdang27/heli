@@ -10953,13 +10953,30 @@ html {
 
 h1,
 .h1 {
-  font-size: 25px;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+h2,
+.h2 {
+  font-size: 26px;
+  font-weight: 500;
+}
+
+h4,
+.h4 {
+  font-size: 20px;
   font-weight: 500;
 }
 
 h5,
 .h5 {
   font-size: 16px;
+  font-weight: 500;
+}
+
+.course-title {
+  font-size: 30px;
   font-weight: 500;
 }
 
@@ -11001,7 +11018,7 @@ h5,
   max-width: 86%;
 }
 
-.container-course h1 {
+.container-course h2 {
   margin-top: 30px;
 }
 
@@ -11107,7 +11124,6 @@ form#certificate_form select option:checked {
 
 .top-news-page {
   background-color: var(--dark);
-  font-size: 30pt;
   color: var(--secondary);
   font-weight: 600;
   padding: 2.54rem 0;
@@ -11117,11 +11133,6 @@ form#certificate_form select option:checked {
   color: var(--primary);
   font-size: 22pt;
   font-weight: 600;
-}
-
-.teacher-name {
-  color: var(--primary);
-  font-size: 18.5pt;
 }
 
 .category-link.active {
@@ -11237,11 +11248,6 @@ form#certificate_form select option:checked {
   color: var(--primary);
 }
 
-.text-forum {
-  font-size: 21pt;
-  color: var(--primary);
-}
-
 .btn-register-now {
   font-size: 21.75pt;
   color: #fff;
@@ -11273,7 +11279,7 @@ form#certificate_form select option:checked {
 .praise-box .praise {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
 }
 
 .praise-box .avatar-guest {
@@ -11290,7 +11296,6 @@ form#certificate_form select option:checked {
 }
 
 .praise-box .content-praise {
-  font-size: 16pt;
   padding: 10rem 1.3rem 3rem 1.3rem;
   position: unset;
   box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
@@ -11343,6 +11348,7 @@ form#certificate_form select option:checked {
 }
 
 .product-box .content-product .body-product-content .content-bot {
+  font-size: 14px;
   border: 1px solid;
   padding: 2rem 1.5rem;
   text-align: center;
@@ -11434,7 +11440,6 @@ form#certificate_form select option:checked {
 }
 
 .show-video .box-list-video {
-  font-size: 22.5pt;
   max-height: 420px;
   overflow-y: auto;
 }

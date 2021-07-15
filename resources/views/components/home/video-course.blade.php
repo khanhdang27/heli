@@ -24,9 +24,9 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
 <div class="container-fluid show-video" id="video-lecture">
     <div class="bg-white mt-5">
         <div class="mb-3 text-primary">
-            <h1 class="m-0">{{ $courseDetail->course_description }}</h1>
+            <div class="h1 m-0">{{ $courseDetail->course_description }}</div>
         </div>
-        <p class="teacher-name text-primary">{{ $courseDetail->tutor->full_name }}</p>
+        <p class="h2 text-primary">{{ $courseDetail->tutor->full_name }}</p>
         <div class="d-flex top-course-detail justify-content-between mb-5">
             <div class="d-flex align-items-center text-primary">
                 @for ($i = 0; $i < 4; $i++)
@@ -53,11 +53,11 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
                 <ol>
                     @foreach ($list_lecture as $index => $item)
                         @if ($index == 0)
-                            <li class="lecture-active" role="button" v-on:click="clickLecture" data-id="{{ $item->video_resource }}">
+                            <li class="lecture-active h2" role="button" v-on:click="clickLecture" data-id="{{ $item->video_resource }}">
                                 {{ $item->lectures_name }}
                             </li>
                         @else
-                            <li class="lecture-{{ $is_bought ? 'active' : 'inactive'}}" role="button" v-on:click="clickLecture" data-id="{{  $is_bought  ? $item->video_resource : null }}">
+                            <li class="lecture-{{ $is_bought ? 'active' : 'inactive'}} h2" role="button" v-on:click="clickLecture" data-id="{{  $is_bought  ? $item->video_resource : null }}">
                                 {{ $item->lectures_name }}
                             </li>
                         @endif
