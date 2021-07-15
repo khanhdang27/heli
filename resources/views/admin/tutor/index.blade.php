@@ -85,8 +85,8 @@
                                 @foreach($tutors as $value)
                                     <tr>
                                         <td>
-                                            @if($value->avatar)
-                                                <img type="image/jpg" src="/file/{{$value->avatar->id}}" width="75" height="75"/>
+                                            @if(!empty($value->user->avatar))
+                                                <img type="image/jpg" src="{{asset('/file/'.$value->user->avatar->id)}}" width="75" height="75"/>
                                             @else
                                             avatar
                                             @endif

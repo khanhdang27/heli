@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tutor\CreateTutorRequest;
 use App\Http\Requests\Tutor\UpdateTutorRequest;
+use App\Models\File;
 use App\Models\Subject;
 use App\Models\Tutor;
 use App\Models\TutorTeachSubject;
@@ -68,6 +69,14 @@ class TutorController extends Controller
             ]);
 
             $_user->save();
+
+            if (!empty($request['photo'])) {
+                $file = File::storeFile(
+                    $request['photo'],
+                    User::class,
+                    $_user->id,
+                );
+            }
 
             $_subject = $_request['subject_id'];
 

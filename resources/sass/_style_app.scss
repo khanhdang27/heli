@@ -765,7 +765,7 @@ form#certificate_form {
 /*BLOG PAGE----------------------------------------------------------------*/
 
 .info-article {
-    min-height: 185px;
+    min-height: 166px;
     background-color: rgba(15, 34, 51, 0.6);
     a {
         color: white;
@@ -777,7 +777,7 @@ form#certificate_form {
 }
 
 .post-spotlight {
-    height: 750px !important;
+    height: 581px !important;
 }
 
 .popular-articles-item-image {
@@ -801,7 +801,7 @@ form#certificate_form {
 }
 
 .popular-articles-right {
-    max-height: 750px;
+    max-height: 633px;
     overflow-y: auto;
 }
 
@@ -827,7 +827,7 @@ form#certificate_form {
 }
 
 #latest {
-    height: 750px;
+    height: 502px;
 }
 
 .thumb-article {
@@ -835,8 +835,12 @@ form#certificate_form {
     height: 100%;
 }
 
+.main-photo-top{
+    height: 581px;
+}
+
 .main-photo {
-    height: 750px;
+    height: 502px;
 }
 
 .title-article {

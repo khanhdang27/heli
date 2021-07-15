@@ -65,13 +65,13 @@ class BlogController extends Controller
                     $blog->id,
                 );
             }
-            
+
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('errors', 'Create error');
         }
-        
+
         return back()->with('success', 'Create success');
     }
 
@@ -134,9 +134,10 @@ class BlogController extends Controller
 
     public function showBlogPage()
     {
-        $blog_top = Blog::with('tags')->orderBy('view_no','desc')->first();
-        $blogs_list = Blog::with('tags')->orderBy('view_no','desc')->get();
-        $blog_latest = Blog::with('tags')->orderBy('created_at','desc')->get();
+        $allBlog = Blog::with('tags')->get();
+        $blog_top = $allBlog->sortByDesc('view_no')->first();
+        $blogs_list = $allBlog->sortByDesc('view_no');
+        $blog_latest = $allBlog->sortByDesc('created_at')->forPage(1,9);
         $tags = Tag::where('tag_type',Tag::$BLOG)->get();
         return view('blog.blog-page',[
             'blog_top' => $blog_top,

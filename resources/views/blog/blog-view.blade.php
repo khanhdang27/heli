@@ -25,13 +25,13 @@
                         </button>
                     @endforeach
                 </div>
-                <div class="w-100">
-                    
-                    @if(empty($blog_top->photo))
-                        <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block h-50" 
+                <div class="w-100 mt-3">
+
+                    @if(empty($blog->photo))
+                        <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block h-50"
                             src="{{asset('images/default-image.jpg')}}">
                     @else
-                        <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block" 
+                        <img class="img-thumbnail border-0 rounded-0 p-0 w-75 mx-auto d-block"
                             src="{{asset('file/'.$blog->photo->id)}}">
                     @endif
                 </div>

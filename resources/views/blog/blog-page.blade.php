@@ -29,17 +29,17 @@
                     @endforeach
                 </div>
             </div>
-            <div class="container-fluid ml-auto mr-auto pb-5 body-blog-page">
-                <p class="h1 font-weight-bold text-primary">
+            <div class="w-75 ml-auto mr-auto pb-5 body-blog-page">
+                <h1 class="font-weight-bold text-primary">
                     @lang('keywords.blog-page.popularArticlesThisWeek')
-                </p>
-                <div class="row">
+                </h1>
+                <div class="row mt-5">
                     <!--Component blog top this week-->
-                    <div class="col-xl-7 post-spotlight mb-5">
+                    <div class="col-xl-7 px-4 post-spotlight mb-5">
                         <x-blog.blog-top-week :blogs=$blog_top></x-blog.blog-top-week>
                     </div>
                     <!--Component blog list this week-->
-                    <div class="col-xl-5 popular-articles-right">
+                    <div class="col-xl-5 px-4 popular-articles-right">
                         @foreach($blogs as $item)
                             <x-blog.blog-list-week :blog=$item></x-blog.blog-list-week>
                         @endforeach

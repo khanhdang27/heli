@@ -28,24 +28,41 @@
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body d-flex">
-                        <div class="card-body">
+                        <div class="card-body" id="createTutor">
                             {!! Form::open(['route'=> 'admin.tutor.store', 'enctype' => 'multipart/form-data']) !!}
                             @csrf
-                            <div class="form-group ">
-                                {{ Form::label('name', 'Name') }}
-                                {{ Form::text('name', old('name'), ['class'=>'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('email', 'Tutor email') }}
-                                {{ Form::email('email', old('email'), ['class'=>'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('password', 'Password') }}
-                                {{ Form::password('password', ['class'=>'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('full_name', 'Full name') }}
-                                {{ Form::text('full_name', old('full_name'), ['class'=>'form-control']) }}
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="form-group ">
+                                        {{ Form::label('name', 'Name') }}
+                                        {{ Form::text('name', old('name'), ['class'=>'form-control']) }}
+                                    </div>
+                                    <div class="form-group ">
+                                        {{ Form::label('email', 'Tutor email') }}
+                                        {{ Form::email('email', old('email'), ['class'=>'form-control']) }}
+                                    </div>
+                                    <div class="form-group ">
+                                        {{ Form::label('password', 'Password') }}
+                                        {{ Form::password('password', ['class'=>'form-control']) }}
+                                    </div>
+                                    <div class="form-group ">
+                                        {{ Form::label('full_name', 'Full name') }}
+                                        {{ Form::text('full_name', old('full_name'), ['class'=>'form-control']) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 pb-4">
+                                    <p class="mb-2 text-center">Tutor photo</p>
+                                    <div class="border p-4">
+                                        <div class="custom-file mb-3">
+                                            {{ Form::label('photo', 'Image',['class'=>'custom-file-label']) }}
+                                            {{ Form::file('photo',['class' => 'custom-file-input', '@change'=>'onFileChange']) }}
+                                        </div>
+                                        <div id="preview" class="mb-4">
+                                            <img v-if="url" :src="url" width=100% />
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('subject_id', 'Subject') }}
@@ -108,5 +125,29 @@
 
         </div> <!-- / .row -->
     </div>
-
+    <script>
+        const displayPhoto = new Vue({
+            el: '#createTutor',
+            data() {
+                return {
+                    url: null,
+                }
+            },
+            methods: {
+                onFileChange(e) {
+                    const file = e.target.files[0];
+                    this.url = URL.createObjectURL(file);
+                }
+            }
+        })
+    </script>
+    @push('inputFile')
+        <script>
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    @endpush
 @endsection

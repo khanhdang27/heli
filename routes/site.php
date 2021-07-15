@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('comment', 'CommentController');
     Route::resource('user-like', 'UserLikeController');
     Route::resource('profile', 'ProfileController');
+    Route::put('uploadAvatar','ProfileController@uploadAvatar')->name('uploadAvatar');
 
     Route::prefix('my/')->name('user.')->group(function () {
         Route::get('course', 'CourseController@my')->name('course');

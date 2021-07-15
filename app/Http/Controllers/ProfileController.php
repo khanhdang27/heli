@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Student;
 use App\Models\Tutor;
 use App\Models\User;
@@ -35,7 +36,7 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -52,7 +53,7 @@ class ProfileController extends Controller
     public function show($user_id)
     {
         $student = Student::where('user_id', $user_id)->first();
-        return view('profile.index',[
+        return view('profile.index', [
             'student' => $student
         ]);
     }
@@ -66,16 +67,16 @@ class ProfileController extends Controller
     public function edit($user_id)
     {
         $student = Student::where('user_id', $user_id)->first();
-        return view('profile.edit',[
-            'student'=>$student
+        return view('profile.edit', [
+            'student' => $student
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param User $user
      * @return RedirectResponse
      */
     public function update(Request $request, User $user)
@@ -83,17 +84,16 @@ class ProfileController extends Controller
         $input = $request->all();
         $user_id = Auth::user()->id;
         $user = User::whereId($user_id)->first();
-        if(Auth::user()->hasRole('student')){
+        if (Auth::user()->hasRole('student')) {
             $student = Student::where('user_id', $user_id)->first();
             $student->update(
-                ['user_id'=>$user_id, 'full_name'=>$input['full_name'], 'day_of_birth'=>$input['day_of_birth'],'phone_no'=>$input['phone_no']]
+                ['user_id' => $user_id, 'full_name' => $input['full_name'], 'day_of_birth' => $input['day_of_birth'], 'phone_no' => $input['phone_no']]
             );
             $student->save();
-        }
-        elseif(Auth::user()->hasRole('tutor')){
+        } elseif (Auth::user()->hasRole('tutor')) {
             $tutor = Tutor::where('user_id', $user_id)->first();
             $tutor->update(
-                ['user_id'=>$user_id, 'full_name'=>$input['full_name'], 'day_of_birth'=>$input['day_of_birth'],'phone_no'=>$input['phone_no']]
+                ['user_id' => $user_id, 'full_name' => $input['full_name'], 'day_of_birth' => $input['day_of_birth'], 'phone_no' => $input['phone_no']]
             );
             $tutor->save();
         }
@@ -103,10 +103,29 @@ class ProfileController extends Controller
 
     }
 
+    public function uploadAvatar(Request $request)
+    {
+        $input = $request->all();
+        $user = User::where('id', Auth::user()->id)->first();
+        if (!empty($request['photo'])) {
+            $alreadyFile = File::query()->where('fileable_id', Auth::user()->id)
+                ->where('fileable_type', 'App\Models\User')->first();
+            if (!empty($alreadyFile)){
+                $alreadyFile->delete();
+            }
+            $file = File::storeFile(
+                $input['photo'],
+                User::class,
+                $user->id,
+            );
+        }
+        return back()->with('success', 'Update success');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
