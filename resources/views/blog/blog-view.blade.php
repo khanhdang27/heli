@@ -18,7 +18,7 @@
                     <p><img src="{{asset("images/ic/ic_eyeBlue.svg")}}" width="26">{{$blog->view_no}}</p>
                 </div>
 
-                <div class="d-flex flex-wrap justify-content-end">
+                <div class="d-flex flex-wrap justify-content-end mb-3">
                     @foreach($blog->tags as $tag)
                         <button class="btn-hashtag">
                             {{$tag->tag_name}}
@@ -27,15 +27,15 @@
                 </div>
                 <div class="w-75">
                     @if(empty($blog->photo))
-                        <img class="img-thumbnail border p-0 w-75 mx-auto d-block h-50" 
+                        <img class="img-thumbnail border p-0 w-75 mx-auto d-block h-50"
                             src="{{asset('images/default-image.jpg')}}">
                     @else
-                        <img class="img-thumbnail border p-0 w-75 mx-auto d-block" 
+                        <img class="img-thumbnail border p-0 w-75 mx-auto d-block"
                             src="{{asset('file/'.$blog->photo->id)}}">
                     @endif
                 </div>
             </div>
-            <div class="text-dark">
+            <div class="text-dark mt-3">
                 {!! $blog->content !!}
             </div>
         </div>

@@ -29,7 +29,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="container-fluid ml-auto mr-auto pb-5 body-blog-page">
+            <div class="w-75 ml-auto mr-auto pb-5 body-blog-page">
                 <h2 class="font-weight-bold text-primary bg-white">
                     @lang('keywords.blog-page.popularArticlesThisWeek')
                 </h2>

@@ -581,11 +581,11 @@ form#certificate_form {
             height: 514px;
         }
         .name-tutor {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 600;
         }
         .position-tutor {
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 400;
         }
         .info-left {
@@ -598,7 +598,7 @@ form#certificate_form {
         .content-info-right {
             max-width: 100%;
             overflow-y: auto;
-            font-size: 20px;
+            font-size: 14px;
         }
         .bottom-info-right {
             margin: 0 0.8rem 0.8rem 0;
@@ -781,6 +781,14 @@ form#certificate_form {
 .popular-articles-item-image {
     width: 100%;
     flex: 0 40%;
+    .img-blog{
+        width: 185px;
+        height: 185px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+    }
 }
 
 .popular-articles-item-content {
@@ -820,7 +828,6 @@ form#certificate_form {
 
 .popular-item {
     max-width: 100%;
-    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
 
 #latest {
