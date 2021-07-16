@@ -24,7 +24,7 @@
                         {{$tag->tag_name}}
                     </button>
                 @endforeach
-            </div>
+            </p>
         </div>
     </div>
 

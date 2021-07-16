@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'locale' => env('DEFAULT_LOCALE', 'en'),
+    'locale' => 'cn',
 
 
     /*

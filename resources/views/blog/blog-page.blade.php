@@ -45,9 +45,9 @@
                         @endforeach
                     </div>
                 </div>
-                <p class="pt-5 h1 font-weight-bold text-primary">
+                <h1 class="pt-5 font-weight-bold text-primary">
                     @lang('keywords.blog-page.latestArticles')
-                </p>
+                </h1>
                 <div class="row">
                     <!--Component Latest Blog List-->
                     @foreach($blog as $value)

@@ -27,7 +27,7 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
             <div class="h1 m-0">{{ $courseDetail->course_description }}</div>
         </div>
         <p class="h2 text-primary">{{ $courseDetail->tutor->full_name }}</p>
-        <div class="d-flex top-course-detail justify-content-between mb-5">
+        <div class="d-flex flex-sm-wrap top-course-detail justify-content-between mb-5">
             <div class="d-flex align-items-center text-primary">
                 @for ($i = 0; $i < 4; $i++)
                     <img src="{{ asset('images/ic/ic_star.svg') }}" width="35">

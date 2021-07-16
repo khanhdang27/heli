@@ -6,7 +6,6 @@
     <hr class="mt-0"/>
     <div class="container mt-5 mb-5 pb-5">
 
-
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

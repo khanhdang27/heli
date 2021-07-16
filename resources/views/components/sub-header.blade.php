@@ -1,6 +1,18 @@
 @php
     use \App\Utilities\SelectionByClass;
 
+
+    $default_certificate = 2;
+    if (app('request')->input('certificate') != 1 && !empty(app('request')->input('certificate'))){
+        $default_certificate = app('request')->input('certificate');
+    }
+
+   $url = 'site.home';
+   if ($page != 'home') {
+        $cer_show = explode('/', app('request')->path())[2];
+        $url = 'site.certificate.show';
+   }
+
 @endphp
 
 <nav class="navbar navbar-expand-xl container-fluid sub-header border-secondary">
@@ -10,19 +22,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <ul class="navbar-nav {{ $page != 'home' ? "mx-auto" : null }} mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <div class="dropdown d-flex align-items-center show">
-                    <form class="form-inline my-1 mr-1" name="" id="certificate_form">
-                        <select form="certificate_form" class="form-control" name="certificate"
-                                onchange="this.form.submit()">
-                            @foreach (SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id') as $key => $value)
-                                @if ($key != 1)
-                                    <option
-                                        value="{{ $key }}" {{ app('request')->input('certificate') == $key ? 'selected="selected"' : null}} >{{ $value }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </form>
+            <li class="nav-item dropdown">
+
+                <a class="h5 nav-link dropdown-toggle text-secondary" href="#" id="navbarCer" data-toggle="dropdown" >
+                    {{SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id')[$default_certificate] }}
+                </a>
+
+                <div class="dropdown-menu bg-dark border border-secondary dropdown-menu-language">
+                    @foreach (SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id') as $key => $value)
+                        @if ($key != 1)
+                            @if ($page != 'home')
+                            <a class="dropdown-item" href="{{ route($url, $cer_show). '?certificate='.$key }}"> {{$value}}</a>
+                            @else 
+                            <a class="dropdown-item" href="{{ route($url, ['certificate'=>$key]) }}"> {{$value}}</a>
+                            @endif
+                        @endif
+                    @endforeach
                 </div>
             </li>
             @foreach ($subjects as $item)

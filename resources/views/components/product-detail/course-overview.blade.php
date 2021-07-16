@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <div class="mt-5">
                         <a href="{{ route('site.file.download', $documentItem->file) }}">
-                            <img class="border-0 p-0 " height="430" src="{{ asset('images/book_icon.png') }}">
+                            <img class="border-0 p-0 img-thumbnail" height="430" src="{{ asset('images/book_icon.png') }}">
                         </a>
                         
                     </div>
