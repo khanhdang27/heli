@@ -25,9 +25,9 @@
                     <div class="card-body">
                         <div class="card-body">
                             {!! Form::open(['route' => 'admin.blog.store', 'enctype' => 'multipart/form-data' ]) !!}
-                            <div class="form-group ">
-                                {{ Form::label('photo', 'Photo') }}
-                                {{ Form::file('photo', ['class' => 'form-control']) }}
+                            <div class="custom-file mb-5">
+                                {{ Form::label('photo', 'Photo',['class'=>'custom-file-label']) }}
+                                {{ Form::file('photo',['class' => 'custom-file-input']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('title', 'Title') }}
@@ -40,9 +40,9 @@
                             <div class="form-group">
                                 {{ Form::label('tag_id', 'Post tag') }}
 
-                                @foreach($postTag as $id => $tag)
-                                    {{ Form::checkbox('tag_id[]',$id,null) }}
-                                    {{ Form::label($tag, $tag) }}
+                                @foreach($tags as $tag)
+                                    {{ Form::checkbox('tag_id[]',$tag->id,null) }}
+                                    {{ Form::label($tag, $tag->tag_name) }}
                                 @endforeach
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
@@ -60,6 +60,15 @@
             CKEDITOR.replace('ckeditor');
         };
     </script>
+    @push('inputFile')
+        <script>
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    @endpush
 
 @endsection
 

@@ -1,19 +1,22 @@
-<div class="modal fade modal-login" id="registerModalComponent">
-    <div class="modal-dialog modal-login-xl">
-        <div class="modal-content  modal-register-component">
+<div class="modal fade modal-index" id="registerModalComponent">
+    <div class="modal-dialog m-0 modal-login-xl h-100">
+        <div class="modal-content modal-register-component">
             <div class="modal-header btn-close">
                 <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
             </div>
             <!-- Modal body -->
             <div class="modal-body modal-body-login">
+                
                 <div class="mx-auto">
-                    <div class="d-flex align-items-center">
-                        <div class="text-content pr-5 d-flex text-secondary">
-                            <span class="text-advertisement">
-                                @lang('keywords.freeTrialClass')
-                            </span>
+                    <div class="position-relative d-flex align-items-center">
+                        <div class="mx-5">
+                            <div class="text-content d-flex justify-content-center text-secondary">
+                                <h1 class="text-information text-content">
+                                    @lang('keywords.freeTrialClass')
+                                </h1>
+                            </div>
                         </div>
-                        <div class="circle-check bg-secondary d-flex justify-content-center align-items-center">
+                        <div class="circle-check position-absolute bg-secondary d-flex justify-content-center align-items-center mx-5">
                             <img width="133px" src="{{asset('images/ic/Group8.png')}}">
                         </div>
                     </div>

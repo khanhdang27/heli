@@ -4,17 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CreateCourseRequest;
-use App\Http\Requests\Course\CreateVideoRequest;
-use App\Http\Requests\Course\UpdateVideoRequest;
 use App\Models\Course;
+use App\Models\CourseMembershipDiscount;
 use App\Models\Lecture;
+use App\Models\Membership;
+use App\Models\MembershipCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -34,7 +36,7 @@ class CourseController extends Controller
             ->when(request('tutor') != '', function (Builder $query) {
                 $query->where('tutor_id', request('tutor'));
             })
-            ->paginate(20)
+            ->paginate(15)
             ->withQueryString();
         return view('admin.course.index', [
             'courses' => $courses,
@@ -44,10 +46,19 @@ class CourseController extends Controller
 
     public function my()
     {
-        $courses = Course::with('tutor', 'translations', 'student')
-            ->whereHas('student', function (Builder $query) {
+        $courses = CourseMembershipDiscount::with(
+            'membershipCourses',  
+            'membershipCourses.course',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.student'
+        )->where('publish',1)
+        ->whereHas('membershipCourses.course.student', function (Builder $query) {
                 $query->where('student_id', Auth::user()->id);
-            })->get();
+            })
+            ->whereHas('membershipCourses', function (Builder $query) {
+                $query->where('membership_id', Auth::user()->membership_group);
+            })
+            ->get();
 
         return view('course.my-course-page', ['courses'=> $courses]);
     }
@@ -74,10 +85,29 @@ class CourseController extends Controller
      */
     public function store(CreateCourseRequest $request)
     {
-        Course::create(
-            $request->validated()
-        );
-        return back()->with('success', 'Create success!');
+        $input = $request->validated();
+        DB::beginTransaction();
+        try {
+            $course = Course::create(
+                $input
+            );
+            $memberships = Membership::all();
+            foreach ( $memberships as $membership ) {
+                $membershipCourse = MembershipCourse::create([
+                    'membership_id'=> $membership->id,
+                    'course_id' => $course->id,
+                    'price_value' => $course->course_price
+                ]);
+                CourseMembershipDiscount::create([
+                    'membership_course_id' => $membershipCourse->id,
+                ]);
+            }
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('errors', 'Create Error!');
+        }
     }
 
     /**
@@ -86,21 +116,71 @@ class CourseController extends Controller
      * @param $id
      * @return View
      */
-    public function show($id)
+    public function show(Course $course)
     {
-        $courseDetail = Course::where('id',$id)
-            ->with('subject','tutor','courseMaterial')
-            ->first();
+        $courses_with_group = CourseMembershipDiscount::with(
+            'membershipCourses', 
+            'courseDiscounts', 
+            'membershipCourses.course',
+            'membershipCourses.course.lecture',
+            'membershipCourses.course.comment',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        )->where('publish',1)
+        ->whereHas('membershipCourses', function ($query) {
+            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+         })->whereHas('membershipCourses.course', function ($query) use ($course){
+            return $query->where('id', $course->id);
+         })->first();
 
         $student_course  = null;
         if (Auth::check()){
-            $student_course = StudentCourses::where([
-                'course_id'=> $id, 'student_id'=>Auth::user()->id
-            ])->first();
-        } 
+            $student_course = StudentCourses::query()
+                ->where('course_id', $course->id)
+                ->where('student_id',Auth::user()->id)->first();
+
+            // dd($course->id, Auth::user()->id ,$student_course);
+        }
+        if (empty($courses_with_group)){
+            return redirect(route('site.home'));
+        }
         return view('course.course-page',[
-            'courseDetail' => $courseDetail,
-            'student_course' => $student_course
+            'courseDetail' => $courses_with_group,
+            'student_course' => $student_course,
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $id
+     * @return View
+     */
+    public function search(Request $request)
+    {
+        $input = $request->input('course');
+
+        $courses_with_group = CourseMembershipDiscount::with(
+            'membershipCourses', 
+            'courseDiscounts', 
+            'membershipCourses.course',
+            'membershipCourses.course.translations',
+            'membershipCourses.course.lecture',
+            'membershipCourses.course.comment',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        )->where('publish',1)
+        ->whereHas('membershipCourses', function ($query) {
+            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+         })->whereHas('membershipCourses.course', function ($query) use ($input){
+                return $query->whereTranslationLike('course_name', '%' .$input. '%');
+         })->get();
+
+        
+        return view('course.search',[
+            'courses' => $courses_with_group,
         ]);
     }
 
@@ -143,8 +223,71 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
+        // try {
+        //     $course->delete();
+        //     return response([
+        //         'message' => 'Delete success!'
+        //     ]);
+        // } catch (\Exception $exception) {
+        //     return response([
+        //         'message' => 'Cannot delete course'
+        //     ], 400);
+        // }
+    }
+
+    public function lectures(Course $course)
+    {
+        $_course = $course->load('lecture');
+        $lectures = Lecture::query()->where('course_id', $_course->id)->paginate(15);
+        return view('admin.course.lecture.index', [
+            'course' => $_course,
+            'lectures' => $lectures
+        ]);
+    }
+
+    public function createLecture(Course $course)
+    {
+        return view('admin.course.lecture.create', [
+            'course' => $course
+        ]);
+    }
+
+    public function storeLecture(Request $request, Course $course)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
         try {
-            $course->delete();
+            $lecture = Lecture::create([
+                'course_id' => $course->id,
+                'lectures_name' => $input['lectures_name'],
+                'lectures_description' => $input['lectures_description'],
+                'video_resource' => $input['video_resource'],
+                'course_schedule_id' => 0//$input['course_schedule_id']
+            ]);
+
+            DB::commit();
+            return response()->json(['status' => 200, 'message' => 'succeed']);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            // dd($th);
+            return response()->json(['status' => 400, 'message' => 'fails'], 400);
+        }
+    }
+
+    public function editLecture(Course $course, Lecture $lecture)
+    {
+        # code...
+    }
+
+    public function updateLecture(Course $course, Lecture $lecture)
+    {
+        # code...
+    }
+
+    public function destroyLecture(Course $course, Lecture $lecture)
+    {
+        try {
+            $lecture->delete();
             return response([
                 'message' => 'Delete success!'
             ]);
@@ -155,78 +298,4 @@ class CourseController extends Controller
         }
     }
 
-    public function videoList(Course $course)
-    {
-        $course->load('videos.translations');
-        return view('admin.course.video.index', [
-            'course' => $course
-        ]);
-    }
-
-    public function createVideo(Course $course)
-    {
-        return view('admin.course.video.create', [
-            'course' => $course
-        ]);
-    }
-
-    public function storeVideo(Course $course, CreateVideoRequest $request)
-    {
-        $lecture = new Lecture(
-            $request->validated()
-        );
-        $lecture->course_video_file = $request->file('course_video_file')->store('video', 'local');
-        $course->videos()->save($lecture);
-        return redirect()->route('admin.course.video.index', $course->id)
-            ->with('success', 'Create success!');
-    }
-
-    public function downloadVideo(Course $course, Lecture $lecture)
-    {
-        return response()->download(storage_path('app/' . $lecture->course_video_file));
-    }
-
-    public function editVideo(Course $course, Lecture $lecture)
-    {
-        $lecture->load('translations');
-        return view('admin.course.video.edit', [
-            'course'      => $course,
-            'lecture' => $lecture
-        ]);
-    }
-
-    public function updateVideo(Course $course, Lecture $lecture, UpdateVideoRequest $request)
-    {
-        $fileDelete = $lecture->course_video_file;
-        $changeFile = false;
-        $lecture->fill(
-            $request->validated()
-        );
-        if ($request->hasFile('course_video_file')) {
-            $lecture->course_video_file = $request->file('course_video_file')->store('video', 'local');
-            $changeFile = true;
-        }
-
-        $lecture->save();
-        if ($changeFile) {
-            Storage::disk('local')->delete($fileDelete);
-        }
-        return redirect()->route('admin.course.video.index', $course->id)
-            ->with('success', 'Create success!');
-    }
-
-    public function destroyVideo(Course $course, Lecture $lecture)
-    {
-        try {
-            $lecture->delete();
-            Storage::delete($lecture->course_video_file);
-            return response([
-                'message' => 'Delete success!'
-            ]);
-        } catch (\Exception $exception) {
-            return response([
-                'message' => 'Cannot delete video!'
-            ], 400);
-        }
-    }
 }

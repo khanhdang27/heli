@@ -3,45 +3,114 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="{{ asset('css/app.css')}}" rel="stylesheet">
-    <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
     <style>
-        body{
+        body {
             font-size: 16px;
+            color: #0B487D;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+        .mail {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .head-mail {
+            /* display: flex; */
+            /* flex-direction: column; */
+            align-items: center;
+            justify-content: center;
+            background-color: #FFFFFF;
+            padding: 32px 16px 32px 16px;
+        }
+
+        .head-mail hr {
+            width: 100%;
+            height: 1px;
+            background-color: #cccccc;
+            border: none;
+        }
+
+        .head-mail h1 {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0;
+            color: #E6C06C;
+        }
+
+        .body-mail {
+            background-color: #FFFFFF;
+            padding: 16px;
+        }
+
+        .body-mail h3 {
+            font-weight: bold;
+        }
+
+        .body-mail p {
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        .body-mail span {
+            font-weight: normal;
+        }
+
+        .body-mail h4 {
+            font-weight: normal;
+        }
+
+        .footer-mail {
+            background-color: #294157;
+        }
+
+        .footer-mail div {
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .footer-mail p {
+            margin: 0;
+            text-align: center;
+            padding: 16px 0 16px 0;
+            color: #FFFFFF;
         }
     </style>
 </head>
 <body>
 
-<div class="mx-auto" style="max-width: 600px">
-    <div class="bg-secondary w-100 py-4 px-3 d-flex flex-column align-items-center">
-        <img class="mx-auto" src="{{asset('images/HeliosLogo.png')}}" width=200>
-        <hr class="w-100" style="background-color: #cccccc">
-        <h1 class="text-center font-weight-bold text-white">
+<div class="mail">
+    <div class="head-mail">
+        <img src="{{asset('images/HeliosLogo.png')}}" width=200>
+        <br>
+        <hr>
+        <br>
+        <h1 >
             Welcome!
         </h1>
     </div>
-    <div class="bg-white w-100 p-4">
-        <h3 class="font-weight-bold text-primary">
+    <div class="body-mail">
+        <h3>
             {{$title}}
         </h3>
-        <p class="font-weight-bold mb-3">Password: <span class="font-weight-normal">{{ $password }}</span></p>
-        <p>
-            If you have any questions contact us with this link <span class="text-primary">admissions@helios-edu.com</span>.
-        </p>
-        <hr class="" style="background-color: #cccccc; border-top: 2px solid #cccccc">
+        <p>Password: <span>{{$password}}</span></p>
+        <h4>
+            If you have any questions contact us with this link
+            <span style="color: #00b0e8">admissions@helios-edu.com</span>.
+        </h4>
     </div>
-    <div class="w-100" style="background-color: #f0f0f0">
-        <div class="d-flex justify-content-center pt-3">
+    <div class="footer-mail">
+        <div>
             <a href="whatsapp://send?text=Hello!&phone=+85226021668">
-                <img class="mr-3" src="{{asset('images/ic/image-4.png')}}" width=32>
+                <img style="margin-right: 16px" src="{{asset('images/ic/image-4.png')}}" width=32>
             </a>
-            <a href="#">
+            <a href="mailto:adminssions@helios-edu.com">
                 <img src="{{asset('images/ic/image-3.png')}}" width=32>
             </a>
-
         </div>
-        <p class="text-center pt-3 pb-3">
+        <p>
             Helios Education
         </p>
     </div>

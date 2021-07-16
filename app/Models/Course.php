@@ -6,8 +6,6 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use \App\Utilities\MapData;
-
 /**
  * App\Models\Course
  *
@@ -45,27 +43,24 @@ use \App\Utilities\MapData;
  */
 class Course extends Model implements TranslatableContract
 {
+    static $LIVE = 1;
+    static $RECORD = 2;
+    static $DOCUMENT = 3;
     use Translatable, SoftDeletes;
-
 
     protected $table = 'courses';
     protected $guarded = [];
     public array $translatedAttributes = ['course_name', 'course_description'];
-
-    public function videos()
-    {
-        return $this->hasMany(Lecture::class, 'course_id');
-    }
 
     public function tutor()
     {
         return $this->belongsTo(Tutor::class, 'tutor_id');
     }
 
-    public function certificate()
-    {
-        return $this->belongsTo(Certificate::class,'subject_id','id', Subject::class);
-    }
+    // public function certificate()
+    // {
+    //     return $this->belongsTo(Subject::class,'subject_id','id', Certificate::class);
+    // }
 
     public function subject()
     {
@@ -80,5 +75,25 @@ class Course extends Model implements TranslatableContract
     public function student()
     {
         return $this->belongsToMany(User::class, 'student_courses', 'course_id', 'student_id');
+    }
+
+    public function discount()
+    {
+        return $this->hasMany(Discount::class);
+    }
+
+    public function likeable()
+    {
+        return $this->morphMany(UserLike::class,'likeable');
+    }
+
+    public function comment()
+    {
+        return $this->morphMany(UserComment::class,'commentable');
+    }
+
+    public function lecture()
+    {
+        return $this->hasMany(Lecture::class);
     }
 }

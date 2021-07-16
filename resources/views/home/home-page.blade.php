@@ -5,109 +5,101 @@
 @section('content')
 
     <div class="banner">
-    @include('categories-bar')
-        @if(Auth::user()==null)
+        <x-sub-header :subjects=$subjects page="home"></x-sub-header>
+        @if(!Auth::check())
             <x-home.banner :banner=$banners></x-home.banner>
         @else
-            <!-- #region Video -->
-            <div class="top-page-loggedin">
-                <div class="container text-center title-news text-secondary">
+            <br>
+            <div class="container pt-5 mt-5">
+                <h1 class="text-center text-secondary">
                     @lang('keywords.latestNewsPage')
-                </div>
-                <div class="news-item">
-                    <div class="show-news-item">
-                        @foreach($news as $item)
-                            <a class="news-title text-primary">
-                                {{substr($item->updated_at,-14,6)}}
-                                {{$item->title}}
-                            </a>
-                        @endforeach
-                    </div>
+                </h1>
+                <hr class="border-secondary">
+                <div class="mx-auto box-news">
+                    @foreach($news as $item)
+                        <a class="h2" href="{{ route('site.news-detail',$item->id) }}">
+                            {{$item->announcement_date}}
+                            {{$item->title}}
+                        </a><br>
+                    @endforeach
                 </div>
             </div>
             <!-- #endregion -->
         @endif
     </div>
-    @if (empty($courses[0]))
-        <div class="d-flex justify-content-center">
-            <H3>
-                No Data Of Course
-            </H3>
-        </div>
-    @else
     <div class="body-content">
-        <div class="mx-auto discount-product">
+        <div class="container-fluid container-course">
             <div class="row">
                 <div class="col-lg-6 col-12">
-                    <p class="heading-title">
-                        @lang('keywords.discountProduct')
-                    </p>
-                    <x-product.course-list :courseItem=$courses>
-                    </x-product.course-list>
+                    <h2 class="text-primary">
+                        @lang('keywords.latestDiscountProduct')
+                    </h2>
+                    <x-product.course-list :courses=$course_latest typeOfUI="lasted"></x-product.course-list>
                 </div>
                 <div class="col-lg-6 col-12 welcome-offer">
-                    <p class="heading-title">
+                    <h2 class="text-primary">
                         @lang('keywords.welcomeOffer')
-                    </p>
-                    <x-product.course-list :courseItem=$courses>
-                    </x-product.course-list>
+                    </h2>
+                    <x-product.course-list :courses=$course_welcomes typeOfUI="welcome"></x-product.course-list>
                 </div>
             </div>
         </div>
-        @if(Auth::user()!=null)
-            <div class="mx-auto product-recommend">
-                <div class="heading-title" id="tab-title">
+        @if(Auth::check())
+            <div class="container-fluid container-course">
+                <h2 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
-                </div>
-                <x-product.course-list :courseItem=$courses></x-product.course-list>
+                </h2>
+                <x-product.course-list :courses=$course_recommended typeOfUI="recommended"></x-product.course-list>
             </div>
         @endif
         <div class="product-tab">
-            @include('home.product-tab')
+            <x-home.product-tab :courseIGCSE=$courseIGCSE :courseUKISET=$courseUKISET :courseIELTS=$courseIELTS
+                                :courseIAL=$courseIAL typeOfUI="hot"></x-home.product-tab>
         </div>
-        @if(Auth::user()==null)
+        @if(!Auth::check())
             <x-home.step-register></x-home.step-register>
         @endif
-        @if(Auth::user()==null)
+        @if(!Auth::check())
+            {{-- chua dang nhap --}}
             <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
-            <div class="d-flex justify-content-end pr-3">
-                <div class="text-left w-25">
-                    <button class="btn-register-now mt-0 mb-4 btn-primary" id="" data-toggle="modal"
-                            data-target="#registerModal">
-                        <span>@lang('keywords.tryItNow')</span>
-                    </button>
-                </div>
+            <div class="w-75 mx-auto text-right">
+                <button class="btn-register-now mt-0 mb-5 btn-primary" id="" data-toggle="modal"
+                        data-target="#registerModal">
+                    <span>@lang('keywords.tryItNow')</span>
+                </button>
             </div>
         @else
-            <div class="mx-auto container-video border-secondary mt-5">
+            {{-- da dang nhap --}}
+            <div class="mx-auto container-video border-secondary mt-5 pb-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
-                    <p class="text-33 text-primary">@lang('keywords.continueMyCourse')</p>
-                    <button class="m-0 btn-register-now text-25 text-white btn-dark-blue btn-dark">
-                        @lang('keywords.otherPurchasedCourses')
-                    </button>
+                    <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
+                    <a href="{{ route('site.user.course') }}"
+                       class="m-0 btn-register-now text-white btn-dark-blue btn-dark">
+                        <h2 class="mb-0 mt-2">@lang('keywords.otherPurchasedCourses')</h2>
+                    </a>
                 </div>
                 <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
             </div>
         @endif
-        @if(Auth::user()==null)
+        @if(!Auth::check())
             <div class="free-class-container">
                 <div class="position-relative d-flex align-items-center">
                     <div class="border-right-radius border-primary">
                         <div class="text-content d-flex justify-content-end text-primary">
-                        <span class="text-advertisement">
-                            @lang('keywords.freeTrialClass')
-                        </span>
+                            <h1 class="text-information text-content">
+                                @lang('keywords.freeTrialClass')
+                            </h1>
                         </div>
                     </div>
                     <div
                         class="circle-check position-absolute bg-primary d-flex justify-content-center align-items-center">
-                        <img width="133px" src="{{asset('images/ic/Group8.png')}}">
+                        <img width="100px" src="{{asset('images/ic/Group8.png')}}">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
                     <button class="btn-register-now btn-primary" data-toggle="modal"
                             data-target="#registerModalComponent">
-                        <span>@lang('keywords.registerNowToExperience')</span>
+                        <span class="font-weight-bold">@lang('keywords.registerNowToExperience')</span>
                     </button>
                     <x-login.register-modal></x-login.register-modal>
                 </div>
@@ -115,5 +107,4 @@
             <x-home.review></x-home.review>
         @endif
     </div>
-    @endif
 @endsection

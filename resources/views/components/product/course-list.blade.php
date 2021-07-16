@@ -1,4 +1,8 @@
-<div class="d-flex flex-row flex-wrap pb-5">
-    <x-product.course-item :course=$courseItem>
-    </x-product.course-item>
+<div class="pb-5 row">
+
+    
+    @foreach($courses as $value)
+        <x-product.course-item :course=$value typeOfUI={{$typeOfUI}}>
+        </x-product.course-item>
+    @endforeach
 </div>

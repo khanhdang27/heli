@@ -7,15 +7,18 @@ use Illuminate\View\Component;
 class CourseItem extends Component
 {
     public $course;
+    public $typeOfUI;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($course)
+    public function __construct($course, $typeOfUI)
     {
         $this->course = $course;
+        $this->typeOfUI=$typeOfUI;
+
     }
 
     /**
@@ -26,7 +29,8 @@ class CourseItem extends Component
     public function render()
     {
         return view('components.product.course-item', [
-            'course' => $this->course
+            'course' => $this->course,
+            'typeOfUI' => $this->typeOfUI
         ]);
     }
 }

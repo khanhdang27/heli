@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class CourseRate extends Component
 {
+    public $courseDetail;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($courseDetail)
     {
-        //
+        $this->courseDetail=$courseDetail;
     }
 
     /**
@@ -23,6 +24,8 @@ class CourseRate extends Component
      */
     public function render()
     {
-        return view('components.product-detail.course-rate');
+        return view('components.product-detail.course-rate',[
+            'courseDetail' => $this->courseDetail
+        ]);
     }
 }

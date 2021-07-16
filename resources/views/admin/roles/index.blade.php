@@ -1,46 +1,55 @@
 @extends('admin.layout')
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Role Management</h2>
-        </div>
-        <div class="pull-right">
-            @can('role-create')
-                <a class="btn btn-success" href="{{ route('admin.roles.create') }}"> Create New Role</a>
-            @endcan
-        </div>
-    </div>
-</div>
-@if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-@endif
 
-<table class="table table-bordered">
-  <tr>
-     <th>No</th>
-     <th>Name</th>
-     <th width="280px">Action</th>
-  </tr>
-    @foreach ($roles as $key => $role)
-    <tr>
-        <td>{{ ++$i }}</td>
-        <td>{{ $role->name }}</td>
-        <td>
-            <a class="btn btn-info" href="{{ route('admin.roles.show',$role->id) }}">Show</a>
-            @can('role-edit')
-                <a class="btn btn-primary" href="{{ route('admin.roles.edit',$role->id) }}">Edit</a>
-            @endcan
-            @can('role-delete')
-                {!! Form::open(['method' => 'DELETE','route' => ['admin.roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}
-            @endcan
-        </td>
-    </tr>
-    @endforeach
-</table>
-{!! $roles->render() !!}
+{{-- @dd($roles) --}}
+<div>
+    {!! Form::open(['url'=> route('admin.roles.update', 1), 'method'=>'PUT']) !!}
+    @csrf
+    <div class="container-fluid mt-2">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+                <div class="pull-left py-3">
+                    <h2>Role Management</h2>
+                </div>
+                <div class="pull-right text-right">
+                    @can('role-create')
+                        {{Form::submit('Save Permissions', ['class'=>'btn btn-primary'])}}
+                    @endcan
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid pb-5">
+        <table class="table mt-5">
+            <thead>
+            <tr>
+                <th class="text-dark" scope="col">Permission</th>
+                @foreach($roles as $value)
+                    <th class="text-dark text-center" scope="col">{{$value->name}}</th>
+                @endforeach
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($permission as $item)
+                <tr>
+                    <td >
+                        <label class="mb-0">
+                            {{$item->name}}
+                        </label>
+                    </td>
+                    @foreach($roles as $value)
+                        <td class="text-center">
+                            {{ Form::checkbox("permission_".$value->id."_".$item->id,
+                                null,
+                                $value->permissions->where('id', $item->id)->first(),
+                                array('class' => 'align-middle name check-role')) }}
+                        </td>
+                    @endforeach
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+    {!! Form::close() !!}
+</div>
 @endsection

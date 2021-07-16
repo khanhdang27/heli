@@ -1,70 +1,79 @@
-<div class="modal fade modal-login" id="registerModal">
-
-    <div class="modal-dialog modal-login-xl">
-
+<div class="modal fade modal-index" id="registerModal">
+    <div class="modal-dialog h-100 m-0 modal-login-xl">
         <div class="modal-content modal-login-content">
             <div class="modal-header btn-close">
                 <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
             </div>
-            <!-- Modal body -->
-            <div class="modal-body">
+            <div class="my-auto pb-5">
+                <!-- Modal body -->
+                <div class="modal-body">
                     <div class="row">
-                        <div class="col-sm-6 login-left d-flex flex-column justify-content-center">
-                            <div class="text-login-left text-center">
+                        <div class="col-sm-6 login-left d-flex flex-column justify-content-center align-items-center">
+                            <div class="text-login-left text-secondary text-center">
                                 @lang('keywords.registerModal.freeRegistration')<br>
-                                @lang('keywords.registerModal.experienceCourse')<br> 
+                                @lang('keywords.registerModal.experienceCourse')<br>
                                 @lang('keywords.registerModal.onlineAndRealTimeCourse')<br>
                             </div>
                         </div>
-                        <div class="col-sm login-right">
-
+                        <div class="col-sm">
                             <div class="box-btn-login">
-                                <div class="btn-register-now btn-login btn-secondary">
-                                    <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}">
-                                    </div>@lang('keywords.loginWithFb')
-                                </div>
-                                <div class="btn-register-now btn-login btn-secondary">
-                                    <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}">
-                                    </div>@lang('keywords.loginWithGg')
-                                </div>
-                                <div class="btn-register-now btn-login btn-secondary">
-                                    <div class="box-ic ic-ap"><img class="ic" id="ap"
-                                                                   src="{{asset("images/ic/ic_apple.svg")}}">
-                                    </div>@lang('keywords.loginWithAp')
-                                </div>
+                                <a class="btn-register-now btn-login btn-secondary"
+                                   href="{{route('site.socialLogin', 'facebook')}}">
+                                    <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
+                                                                   width="33px">
+                                    </div>
+                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithFb')</h2>
+                                </a>
+                                <a class="btn-register-now btn-login btn-secondary"
+                                   href="{{route('site.socialLogin', 'google')}}">
+                                    <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
+                                                                   width="33px">
+                                    </div>
+                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithGg')</h2>
+                                </a>
+                                <a class="btn-register-now btn-login btn-secondary" href="#">
+                                    <div class="box-ic ic-ap"><img class="ic" src="{{asset("images/ic/ic_apple.svg")}}"
+                                                                   width="33px">
+                                    </div>
+                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithAp')</h2>
+                                </a>
                             </div>
                             <div class="line-or d-flex align-items-center text-white">
                                 <hr>
-                                <span class="text-or">or</span>
+                                <span class="p-3">or</span>
                                 <hr>
                             </div>
                             {!! Form::open(['id'=>'registerForm']) !!}
-                                <div class="input-login d-flex justify-content-center align-items-center mb-3">
-                                    {{ Form::email('email',null,[
-                                                    'class'=>'input-login-item',
-                                                    'placeholder'=>'Email',
-                                                    'autocomplete'=>'off'
-                                        ]) }}
-                                </div>
-                                <div class="bottom-btn">
-                                    
-                                    <button class='btn-login btn-secondary btn-register-now'
+                            <div class="input-login d-flex justify-content-center align-items-center">
+                                {{ Form::email('email',null,[
+                                                'class'=>'input-login-item',
+                                                'placeholder'=>'Email',
+                                                'autocomplete'=>'off'
+                                    ]) }}
+                            </div>
+                            <div class="bottom-btn mt-5 pt-3">
+                                <button class='btn-login btn-secondary btn-register-now'
                                         id='btn-register'>
-                                        {{__('Register')}}
-                                        <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none" role="status" aria-hidden="true"></span>
-                                        <span class="sr-only">Loading...</span>
-                                    </button>
-
-                                </div>
+                                    {{__('Register')}}
+                                    <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none"
+                                          role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">Loading...</span>
+                                </button>
+                            </div>
                             {!! Form::close() !!}
-                            <div class="already-member text-center">
-                                <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">@lang('keywords.alreadyMember')</a>
+                            <div class="mt-5 line-or">
+                                <a class="text-white" href="#" data-toggle="modal" data-target="#loginModal"
+                                   data-dismiss="modal">
+                                    <h4 class="text-center">
+                                        @lang('keywords.alreadyMember')
+                                    </h4>
+                                </a>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -89,27 +98,27 @@
                     url: "{{ route('site.register') }}",
                     data: formData
                 }).done(function (data) {
-                    console.log('data :>> ', data);
                     if (data.status == 200) {
                         spinner.addClass('d-none')
                         toastr["success"]("@lang('keywords.toast.pleaseCheckEmail')", "@lang('keywords.toast.registerSuccess')");
-                        button_regis.addClass("disabled")
-
-                    } else if (data.status == 409) {
+                        button_regis.removeClass("disabled")
+                    }
+                }).fail(function (data, textStatus, errorThrown) {
+                    if (data.status == 400) {
                         spinner.addClass('d-none')
-                        toastr["error"]('',"mail is duplicate");
-                        button_regis.addClass("disabled")
-                    
+                        toastr["error"](data.responseJSON.message, 'Error');
+                        button_regis.removeClass("disabled")
                     } else {
                         spinner.addClass('d-none')
-                        toastr["error"]('',"@lang('keywords.toast.pleaseEnterEmail')");
-                        button_regis.addClass("disabled")
+                        toastr["error"](data.responseJSON.message, 'Error');
+                        button_regis.removeClass("disabled")
                     }
                 });
             });
         });
         toastRegister();
-        function toastRegister(){
+
+        function toastRegister() {
             toastr.options = {
                 "closeButton": true,
                 "newestOnTop": false,

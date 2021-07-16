@@ -18,12 +18,11 @@ class CreateCommentsTable extends Migration
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->foreignId('post_id')
-                ->constrained('posts')
-                ->cascadeOnDelete();
-            $table->bigInteger('file_id')->nullable()->default(null);
+            $table->bigInteger('commentable_id');
+            $table->string('commentable_type');
             $table->bigInteger('tag_user')->nullable()->default(null);
             $table->text('detail');
+            $table->bigInteger('like_no')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

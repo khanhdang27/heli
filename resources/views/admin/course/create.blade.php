@@ -26,7 +26,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => 'admin.course.store', 'enctype'=>'multipart/form-data']) !!}
+                            {!! Form::open(['route' => 'admin.course.store', 'enctype'=>'multipart/form-data', 'id'=>'create_course']) !!}
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('course_name:en', 'Course Name (English)') }}
@@ -40,18 +40,22 @@
                                 {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
                                 {{ Form::text('course_name:sc',old('course_name:sc'),['class' => 'form-control', 'required']) }}
                             </div>
-                            <div class="d-flex flex-wrap justify-content-between">
-                                <div class="form-group w-25">
+                            <div class="row justify-content-between">
+                                <div class="form-group col-12 col-md-4">
                                     {{ Form::label('subject_id', 'Subject') }}
                                     {{ Form::select('subject_id', SelectionByClass::getValues(Subject::class,'subject_name','id') ,null, ['class' => 'form-control']) }}
                                 </div>
-                                <div class="form-group w-25">
-                                    {{ Form::label('tutor_id', 'Tutor') }}
-                                    {{ Form::select('tutor_id', SelectionByClass::getValues(Tutor::class,'full_name','id') ,null, ['class' => 'form-control']) }}
-                                </div>
-                                <div class="form-group w-25">
+                                <div class="form-group col-12 col-md-4">
                                     {{ Form::label('type', 'Type') }}
-                                    {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],null,['class'=>'form-control']) }}
+                                    {{ Form::select('type',
+                                            [1=>'Live course', 2=>'Course recorded video', 3=>'Only documents'],
+                                                null,['class'=>'form-control', 'v-on:change'=>"setDefaultInvisible"]) }}
+                                </div>
+                                <div class="form-group col-12 col-md-4" id="tutor">
+                                    {{ Form::label('tutor_id', 'Tutor') }}
+                                    {{ Form::select('tutor_id',
+                                            SelectionByClass::getValues(Tutor::class,'full_name','id') ,
+                                                null, ['class' => 'form-control']) }}
                                 </div>
                             </div>
                             <div class="form-group ">
@@ -80,7 +84,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div> <!-- / .row -->
     </div>
@@ -89,5 +92,22 @@
         window.onload = function () {
             CKEDITOR.replace('ckeditor');
         };
+    </script>
+    <script>
+
+        var create_course = new Vue({
+            el: '#create_course',
+            methods:
+                {
+                    setDefaultInvisible() {
+                        let type = document.getElementById('type');
+                        console.log(type.value);
+                        if (type.value === "3")
+                            document.getElementById('tutor').hidden = true;
+
+                    }
+                }
+        })
+
     </script>
 @endsection

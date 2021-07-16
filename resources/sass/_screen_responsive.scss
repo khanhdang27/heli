@@ -1,0 +1,90 @@
+@media screen and (max-width: 425px) {
+    .banner-content {
+        height: 600px;
+        .banner-info {
+            top: 30% !important;
+            left: 60%;
+            width: 100%;
+            .banner-caption {
+                font-size: 25px;
+                .banner-title {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .free {
+        font-size: 15px !important;
+    }
+    .container-course {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .banner-content {
+        height: 600px;
+        .banner-info {
+            // top: 30% !important;
+            // left: 60%;
+            // width: 100%;
+            .banner-caption {
+                font-size: 30px;
+                .banner-title {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .free {
+        font-size: 15px !important;
+    }
+    .product-category-padding {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .container-course {
+        max-width: 100%;
+    }
+    .step-for-register {
+        padding-bottom: 3.6rem;
+        .content-step {
+            margin: 0 auto;
+            #step2 {
+                margin: 0 1rem;
+            }
+        }
+    }
+    .row-step {
+        display: none;
+    }
+    .content-step {
+        padding-top: 1rem;
+    }
+    .title-step {
+        padding: 1.5rem 0 0 0;
+    }
+    .show-video {
+        max-width: 100%;
+        .h1 {
+            font-size: 25px;
+        }
+        .h2 {
+            font-size: 20px;
+        }
+    }
+    .nav-link {
+        h1 {
+            font-size: 16px;
+        }
+    }
+    .rating {
+        height: 20px;
+        line-height: 10px;
+        font-size: 15px;
+    }
+    .buy-course-box {
+        margin-left: 0rem;
+        margin-right: 0rem;
+    }
+}

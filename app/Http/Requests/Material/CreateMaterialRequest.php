@@ -26,14 +26,13 @@ class CreateMaterialRequest extends FormRequest
             'course_material_name:en' => 'required',
             'course_material_name:cn' => 'required',
             'course_material_name:sc' => 'required',
-//           course_ 'material_price' => 'required|integer|min:0',
             'course_material_description:en' => 'required',
             'course_material_description:cn' => 'required',
             'course_material_description:sc' => 'required',
             'course_material_origin:en' => 'required',
             'course_material_origin:cn' => 'required',
             'course_material_origin:sc' => 'required',
-
+            'file' => 'file|required',
         ];
     }
 }

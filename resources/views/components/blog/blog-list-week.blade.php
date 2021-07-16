@@ -1,26 +1,29 @@
-<div class="card flex-md-row border-0" >
-    <div class="popular-articles-item-image d-flex ">
-        <img class="img-thumbnail rounded-0 align-items-center" src="{{Storage::url($item->photo)}}" alt="Card image cap">
+<div class="card flex-md-row border-0">
+    <div class="popular-articles-item-image d-flex popular-item">
+        @if(empty($item->photo))
+        <img class="img-thumbnail border-0 p-0 rounded-0 align-items-center" src="{{ asset('images/default-image.jpg')}}"
+                alt="Card image cap" height=220 width=220>
+        @else
+        <img class="img-thumbnail border-0 rounded-0 align-items-center" src="{{ asset('/file/'.$item->photo->id)}}"
+             alt="Card image cap" height=220 width=220>
+        @endif
     </div>
 
     <div class="popular-articles-item-content">
         <div class="card-body">
-            <a href="{{route('site.view-blog',$item->id)}}" class="text-30">
+            <a class="h4" href="{{route('site.view-blog',$item->id)}}">
                 {{$item->title}}
             </a>
-            <p class="card-text">
-                <span>{{ substr($item->created_at,0,10) }}</span><img class="ml-5"
-                                                                      src={{asset("images/ic/ic_eyeBlue.svg")}}>{{ $item->view_no }}
+            <p class="card-text h4 text-primary">
+                <span>{{ substr($item->created_at,0,10) }}</span>
+                <img class="ml-5" src={{asset("images/ic/ic_eyeBlue.svg")}}>{{ $item->view_no }}
             </p>
             <p class="d-flex flex-wrap">
-                @if(!empty($item->tags))
-                    @foreach($item->tags as $tag)
-                        <button class="btn-hashtag text-12">
-                            {{$tag->tag_name}}
-
-                        </button>
-                    @endforeach
-                @endif
+                @foreach($item->tags as $tag)
+                    <button class="btn-hashtag-small bg-primary text-white">
+                        {{$tag->tag_name}}
+                    </button>
+                @endforeach
             </p>
         </div>
     </div>

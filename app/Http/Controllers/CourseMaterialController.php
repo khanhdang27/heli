@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Material\CreateMaterialRequest;
 use App\Models\Course;
 use App\Models\CourseMaterial;
+use App\Models\File;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class CourseMaterialController extends Controller
 {
@@ -25,7 +27,7 @@ class CourseMaterialController extends Controller
             ->when(request('name') != '', function (Builder $query) {
                 $query->whereTranslationLike('course_material_name', '%' . request('name') . '%');
             })
-            ->paginate(20);
+            ->paginate(15);
         return view('admin.course-material.index', [
             'courseMaterial' => $courseMaterial,
             'course' => $course
@@ -54,11 +56,36 @@ class CourseMaterialController extends Controller
     public function store(CreateMaterialRequest $request)
     {
 
-        $course_material = new CourseMaterial(
-            $request->validated()
-        );
-        $course_material->save();
-        return back()->with('success', 'Delete success');
+        $input = $request->validated();
+        
+        DB::beginTransaction();
+        try {
+            $course_material = CourseMaterial::create([
+                'course_id' => $input['course_id'],
+                'course_material_name:en' => $input['course_material_name:en'],
+                'course_material_name:cn' => $input['course_material_name:cn'],
+                'course_material_name:sc' => $input['course_material_name:sc'],
+                'course_material_description:en' => $input['course_material_description:en'],
+                'course_material_description:cn' => $input['course_material_description:cn'],
+                'course_material_description:sc' => $input['course_material_description:sc'],
+                'course_material_origin:en' => $input['course_material_origin:en'],
+                'course_material_origin:cn' => $input['course_material_origin:cn'],
+                'course_material_origin:sc' => $input['course_material_origin:sc'],
+            ]);
+
+            if (!empty($input['file'])){
+                $file = File::storeFile($input['file'],CourseMaterial::class, $course_material->id);
+            }
+
+            DB::commit();
+            return back()->with('success', 'Create success');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            dd($th);
+            return back()->with('errors', 'Create Fails');
+
+        }
     }
 
     /**
@@ -89,11 +116,42 @@ class CourseMaterialController extends Controller
      */
     public function update(CreateMaterialRequest $request, CourseMaterial $course_material)
     {
-        $course_material->update(
-            $request->validated()
-        );
-        $course_material->save();
-        return back()->with('success', 'Update success!');
+        $input = $request->validated();
+        
+        DB::beginTransaction();
+        try {
+            $course_material = CourseMaterial::updateOrCreate(
+                ['id'=> $course_material->id],
+                [
+                    'course_id' => $input['course_id'],
+                    'course_material_name:en' => $input['course_material_name:en'],
+                    'course_material_name:cn' => $input['course_material_name:cn'],
+                    'course_material_name:sc' => $input['course_material_name:sc'],
+                    'course_material_description:en' => $input['course_material_description:en'],
+                    'course_material_description:cn' => $input['course_material_description:cn'],
+                    'course_material_description:sc' => $input['course_material_description:sc'],
+                    'course_material_origin:en' => $input['course_material_origin:en'],
+                    'course_material_origin:cn' => $input['course_material_origin:cn'],
+                    'course_material_origin:sc' => $input['course_material_origin:sc']
+                ]
+            );
+
+            if (!empty($input['file'])){
+                $file_old = File::query()
+                    ->where('fileable_type',CourseMaterial::class)
+                        ->where('fileable_id',$course_material->id)->first();
+                $file_old->delete();
+                $file = File::storeFile($input['file'],CourseMaterial::class, $course_material->id);
+            }
+
+            DB::commit();
+            return back()->with('success', 'Create success');
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            return back()->with('errors', 'Create Fails');
+
+        }
     }
 
 

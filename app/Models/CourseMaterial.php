@@ -50,4 +50,9 @@ class CourseMaterial extends Model implements TranslatableContract
     protected $guarded = [];
     public array $translatedAttributes = ['course_material_name', 'course_material_description', 'course_material_origin'];
 
+    public function file()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
+
 }

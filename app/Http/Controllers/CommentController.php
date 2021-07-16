@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\File;
+use App\Models\UserComment;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class CommentController extends Controller
@@ -39,41 +41,40 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->file)) {
-            $fileController = new FileController();
-            $input = $request->all();
+        $input = $request->validate([
+            'ref_id' => 'required',
+            'ref_module'=>'required',
+            'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'detail' => 'required'
+        ]);
 
-            $file_id = $fileController->store($request);
+        DB::beginTransaction();
 
-            $input['user_id'] = Auth::user()->id;
-            unset($input['type']);
-            unset($input['ref']);
-            unset($input['file']);
-            $input['file_id'] = $file_id;
+        try {
+            $comment = UserComment::create([
+                'user_id' => Auth::user()->id,
+                'commentable_id' => $input['ref_id'],
+                'commentable_type' =>$input['ref_module'],
+                'detail' => $input['detail']
+            ]);
 
-            $comment = new Comment($input);
-
-            if ($comment->save()) {
-                $post = Post::find($comment->post_id);
-                $post->comment_no = $post->comment_no + 1;
-                $post->save();
+            if(!empty($input['file'])){
+                $file = File::storeFile($input['file'],UserComment::class, $comment->id);
             }
-            return back();
-        }
-        else{
-            $input = $request->all();
-            $input['user_id'] = Auth::user()->id;
-            unset($input['type']);
-            unset($input['ref']);
-            unset($input['file']);
-            $comment = new Comment($input);
 
-            if ($comment->save()) {
-                $post = Post::find($comment->post_id);
-                $post->comment_no = $post->comment_no + 1;
-                $post->save();
-            }
-            return back();
+            $refer = $input['ref_module']::find($input['ref_id']);
+
+            $refer->comment_no = $refer->comment_no + 1;
+            $refer->save();
+
+            DB::commit();
+
+            // dd($comment, $refer);
+            return back()->with('success', 'Save success');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            dd($th);
+            return back()->with('errors', 'Save error');
         }
     }
 
@@ -83,7 +84,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(UserComment $comment)
     {
         //
     }
@@ -94,7 +95,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(UserComment $comment)
     {
         //
     }
@@ -106,7 +107,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, UserComment $comment)
     {
         //
     }
@@ -117,7 +118,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(UserComment $comment)
     {
         //
     }

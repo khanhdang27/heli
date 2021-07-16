@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Tutor;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -25,6 +24,11 @@ class CreateCourseTable extends Migration
             $table->integer('type');
             $table->longText('course_overview');
             $table->double('course_price');
+            $table->boolean('published')->default(false);
+            $table->bigInteger('like_no')->default(0);
+            $table->bigInteger('comment_no')->default(0);
+            $table->bigInteger('rating_no')->default(0);
+            $table->bigInteger('rating_average')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

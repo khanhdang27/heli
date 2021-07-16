@@ -19,7 +19,6 @@ class CreateBlogsTable extends Migration
             $table->text('content');
             $table->bigInteger('view_no')->default(0);
             $table->timestamps();
-            $table->string('photo')->nullable()->default(null);
             $table->softDeletes();
         });
     }

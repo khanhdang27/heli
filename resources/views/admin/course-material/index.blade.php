@@ -61,18 +61,16 @@
                                             {{ $value->course_material_name }}
                                         </td>
                                         <td class="goal-project">
-{{--                                            <img--}}
-{{--                                                src="{{ \Illuminate\Support\Facades\Storage::url($value->material_image) }}"--}}
-{{--                                                width="50px;" height="60px;" alt="">--}}
+
                                         </td>
                                         <td class="goal-project">
 {{--                                            {{ $value->material_file }}--}}
                                         </td>
-                                        <td>
-                                            {{ $value->translate('en')->course_material_description }}
+                                        <td class="text-description">
+                                            {{ $value->course_material_description }}
                                         </td>
                                         <td>
-                                            {{ $value->translate('en')->course_material_origin }}
+                                            {{ $value->course_material_origin }}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -86,10 +84,11 @@
                                                         class="dropdown-item">
                                                         Edit
                                                     </a>
+
                                                     <a href="javascript:void(0)"
-                                                       data-url="{{ URL::route('admin.course-material.destroy',$value->id) }}"
-                                                       class="dropdown-item delete-item">
-                                                        Delete
+                                                        onclick="itemDelete('{{ route('admin.course-material.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
                                                     </a>
                                                 </div>
                                             </div>

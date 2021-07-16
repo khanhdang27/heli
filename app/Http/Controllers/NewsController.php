@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class NewsController extends Controller
@@ -15,7 +17,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::query()->get();
+        $news = News::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.news.index',[
             'news' => $news
         ]);
@@ -39,22 +41,37 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+
         $newsValidate = $request->validate([
-           'title' => 'required',
-           'content' => 'required',
-           'file' => 'file'
+            'announcement_date' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+            'file' => 'file|required'
         ]);
+        DB::beginTransaction();
+        try {
 
-        $fileController = new FileController();
-        $file_id = $fileController->store($request);
+            $news = News::create([
+                'announcement_date' => $newsValidate['announcement_date'],
+                'title' => $newsValidate['title'],
+                'content' => $newsValidate['content'],
+            ]);
+            $file = File::storeFile(
+                $newsValidate['file'],
+                News::class,
+                $news->id,
+            );
 
-        $news = new News([
-            'title' => $newsValidate['title'],
-            'content' => $newsValidate['content'],
-            'file_id' => $file_id
-        ]);
-        $news->save();
-        return back()->with('success', 'Create success');
+            DB::commit();
+            return back()->with('success', 'Create success');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            // dd($th);
+            return back()->with('errors', 'Create error');
+            //throw $th;
+        }
+
     }
 
     /**
@@ -66,7 +83,7 @@ class NewsController extends Controller
     public function show()
     {
         $news = News::query()->orderByDesc('created_at')->get();
-        return view('news-page',[
+        return view('news.news-page',[
             'news' => $news
         ]);
     }
@@ -104,6 +121,13 @@ class NewsController extends Controller
     //         ->with('success','Update success');
     // }
 
+    public function newsDetail($id)
+    {
+        $news = News::where('id',$id)->first();
+        return view('news.news-detail',[
+            'news' => $news
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *

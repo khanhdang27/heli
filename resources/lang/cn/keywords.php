@@ -36,8 +36,8 @@ return [
         'myAccount' => '我的帳號',
         'myCourses' => '我的課程',
         'mySchedule' => '我的⽇程表',
-        'phone' => '電話: +852 2602 1668',
-        'whatsApp' => 'WhatsApp: +852 9229 6725',
+        'phone' => '電話',
+        'whatsApp' => 'WhatsApp',
         'headOffice' => 'Helios Education (總店)',
         'CausewayBay' => '銅鑼灣',
         'street' => '⽊星街 9 號',
@@ -50,7 +50,7 @@ return [
     'registerNowToExperience' => '立即註冊體驗',
     'registerNowFree' => '立即免費註冊',
     'tryItNow' => '立即試看',
-    'discountProduct' => '最新優惠課程',
+    'latestDiscountProduct' => '最新優惠課程',
     'welcomeOffer' => '迎新優惠',
     'recommendedForYou' => '推薦的給你',
     'hotCourseSeries' => '熱⾨課程系列',
@@ -117,5 +117,17 @@ return [
         'incorrect' => '電子郵件或密碼不正確',
         'pleaseEnterEmail' => '請輸入您的郵箱!',
         'pleaseCheckEmail' => '請檢查您的電子郵件!',
-    ]
+    ],
+    'forum' =>[
+        'bestAnswer' => '最佳答案',
+        'addAnswer' => '添加您的答案'
+    ],
+    'rate' => [
+        'rateCourse' => '課程評分',
+        'addReview' => '添加您的評論'
+    ],
+    'more' => '更多',
+    'coursesIHavePurchased' => '我已購買的課程'
+
+
 ];

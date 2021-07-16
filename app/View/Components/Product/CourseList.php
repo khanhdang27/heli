@@ -6,15 +6,19 @@ use Illuminate\View\Component;
 
 class CourseList extends Component
 {
-    public $courseItem;
+    public $courses;
+    public $typeOfUI;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($courseItem)
+    public function __construct($courses, $typeOfUI)
     {
-        $this->courseItem=$courseItem;
+        $this->courses=$courses;
+        $this->typeOfUI=$typeOfUI;
+
     }
 
     /**
@@ -25,7 +29,8 @@ class CourseList extends Component
     public function render()
     {
         return view('components.product.course-list',[
-            'courseItem'=>$this->courseItem
+            'courses'=>$this->courses,
+            'typeOfUI' => $this->typeOfUI
         ]);
     }
 }

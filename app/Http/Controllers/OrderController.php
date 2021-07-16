@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
+use App\Models\CourseMembershipDiscount;
 use Illuminate\Http\Request;
 use Laravel\Cashier\Cashier;
 use App\Models\Order;
 use App\Models\StudentCourses;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -35,45 +37,74 @@ class OrderController extends Controller
             return $paymentMethod->asStripePaymentMethod();
         });
         if (empty($paymentMethods[0])) {
+            $_user = User::find(Auth::user()->id);
             return view('payments.update-payment-method', [
-                'intent' => Auth::user()->createSetupIntent()
+                'intent' => $_user->createSetupIntent()
             ]);
         } else {
-            $course_id = $request->query('course_id');
+            $product_id = $request->query('product_id');
+
+            $courses_with_group = CourseMembershipDiscount::with(
+                'membershipCourses',
+                'courseDiscounts', 
+                'membershipCourses.course',
+                'membershipCourses.course.subject',
+                'membershipCourses.course.tutor',
+                'membershipCourses.course.courseMaterial'
+            )->where('id', $product_id)->first();
 
             $student_bought = StudentCourses::query()->where([
-                'course_id' => $course_id,
+                'course_id' => $courses_with_group->membershipCourses->course_id,
                 'student_id' => Auth::user()->id
             ])->first();
 
             if (empty($student_bought)){
-                $course_detail = Course::findOrFail($course_id);
-                $order = Order::create_instance([
-                    'user_id'=> Auth::user()->id,
-                    'course_id'=> $course_detail->id,
-                    'course_price'=> $course_detail->course_price,
-                    'discount'=> 0, //$course_detail->discount,
-                    'total'=> $course_detail->total,
-                ]);
-                $result = $order->createPaymentIntent($paymentMethods[0]);
 
-                if ($result instanceof RedirectResponse ) {
-                    return $result;
-                } else {
-                    if ($result instanceof Order) {
-                        $student_course = StudentCourses::create([
-                            'course_id' => (int) $course_id,
-                            'student_id' => Auth::user()->id
-                        ]);
+                DB::beginTransaction();
+                try {
+                    $order = Order::create_instance([
+                        'user_id'=> Auth::user()->id,
+                        'course_id'=> $courses_with_group->membershipCourses->course_id,
+                        'course_price'=> $courses_with_group->getPrice(),
+                        'discount'=> $courses_with_group->getDiscount(), //$course_detail->discount,
+                        'total'=> $courses_with_group->getPriceDiscount(),
+                        'membership' => $courses_with_group->membershipCourses->membership_id,
+                        'membership_discount' => $courses_with_group->membershipCourses->price_value,
+                        'discount_info' => !empty($courses_with_group->courseDiscounts) ? $courses_with_group->courseDiscounts->discount_id : 0
+                    ]);
+                    $result = $order->createPaymentIntent($paymentMethods[0]);
+
+                    // dd($result);
+    
+                    if ($result instanceof RedirectResponse ) {
+                        DB::commit();
+                        return $result;
+                    } else {
+                        if ($result instanceof Order) {
+                            $student_course = StudentCourses::create([
+                                'course_id' => (int) $courses_with_group->membershipCourses->course_id,
+                                'student_id' => Auth::user()->id
+                            ]);
+                        }
+                        DB::commit();
+
+                        // dd($result);
+
+                        return redirect(route('site.order.show', $result->id));
+                        // view('order.order-detail', ['order' => $result]);
                     }
-                    return view('order.order-detail', ['order' => $result]);
+                } catch (\Throwable $th) {
+                    DB::rollback();
+                    dd($th);
+                    return redirect(route('site.home'))->with('errors', 'Buy Fails');
                 }
+                
             } else {
-                $order = Order::with('course')->where('course_id',$course_id)->first();
-                return view('order.order-detail', ['order' => $order]);
+                $order = Order::with('course')->where('course_id',$student_bought->course_id)
+                    ->where('user_id',Auth::user()->id)->first();
+                 return redirect(route('site.order.show', $order->id));
+                // return view('order.order-detail', ['order' => $order]);
             }
-            
-            
         }
     }
 
@@ -85,7 +116,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->query());
+        // dd($request->query());
     }
 
     /**
@@ -96,7 +127,10 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        
+        $order = Order::with('course')
+            ->find($id);
+        // dd($order);
+        return view('order.order-detail', ['order' => $order]);
     }
 
     /**

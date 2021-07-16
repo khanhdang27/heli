@@ -49,8 +49,8 @@ use \App\Utilities\MapData;
  */
 class Tutor extends Model implements TranslatableContract
 {
-    use Translatable;
-    
+    use Translatable, SoftDeletes;
+
 
     protected $table = 'tutors';
     protected $guarded = [];
@@ -73,6 +73,6 @@ class Tutor extends Model implements TranslatableContract
 
     public function avatar()
     {
-        return $this->hasOne(File::class, 'referer');
+        return $this->morphOne(File::class, 'fileable');
     }
 }

@@ -36,8 +36,8 @@ return [
         'myAccount' => 'My Account',
         'myCourses' => 'My Courses',
         'mySchedule' => 'My Schedule',
-        'phone' => 'Phone: +852 2602 1668',
-        'whatsApp' => 'WhatsApp: +852 9229 6725',
+        'phone' => 'Phone',
+        'whatsApp' => 'WhatsApp',
         'headOffice' => 'Helios Education (Head Office)',
         'CausewayBay' => 'Causeway Bay',
         'street' => '9 Star Street',
@@ -50,7 +50,7 @@ return [
     'registerNowToExperience' => 'Register now to experience',
     'registerNowFree' => 'Register Now For Free',
     'tryItNow' => 'Try it now',
-    'discountProduct' => 'Latest Discount Courses',
+    'latestDiscountProduct' => 'Latest Discount Courses',
     'welcomeOffer' => 'Welcome Offer',
     'recommendedForYou' => 'Recommended for you',
     'hotCourseSeries' => 'Hot Course Series',
@@ -117,5 +117,16 @@ return [
         'incorrect' => 'Email or password incorrect',
         'pleaseEnterEmail' => 'Please enter your email!',
         'pleaseCheckEmail' => 'Please check your email!',
-    ]
+    ],
+    'forum' =>[
+        'bestAnswer' => 'Best answer',
+        'addAnswer' => 'Add your answer'
+    ],
+    'rate' => [
+        'rateCourse' => 'Rate Course',
+        'addReview' => 'Add your review'
+    ],
+    'more' => 'More',
+    'coursesIHavePurchased' => 'Courses I have purchased'
+
 ];

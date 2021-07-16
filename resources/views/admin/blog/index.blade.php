@@ -56,7 +56,7 @@
                                 <tbody class="list">
                                 @foreach($blogs as $value)
                                     <tr>
-                                        <td class="goal-project">
+                                        <td class="goal-project text-description">
                                             {{$value->title}}
                                         </td>
                                         <td class="goal-project">
@@ -80,9 +80,12 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.blog.destroy', $value->id) }}" >
-                                                        Delete
-                                                    </button>
+                                                    <a href="javascript:void(0)"
+                                                        onclick="itemDelete('{{ route('admin.blog.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
+                                                    </a>
+
                                                 </div>
                                             </div>
                                         </td>
@@ -90,6 +93,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{$blogs->links()}}
                         </div>
                     </div>
                 </div>

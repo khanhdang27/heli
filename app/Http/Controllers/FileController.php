@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Storage;
 class FileController extends Controller
 {
 
-    private static $MEGA_BITE = 1000000;
-
     /**
      * Display a listing of the resource.
      *
@@ -40,25 +38,6 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        $type = $request->query('type');
-        $image = $request->file('file');
-        $fileInfo = $image->getClientOriginalName();
-        $path = Storage::put($type, $image);
-        try {
-            switch ($type) {
-                case 'avatar':
-                    $file_type = File::$AVATAR;
-                    break;
-
-                default:
-                    $file_type = File::$UNDEFINED;
-            }
-            $file = new File(['referer'=> $request->query('ref') ?? 0, 'source'=>$path, 'file_type'=>$file_type, 'raw_name'=> $fileInfo, 'file_size'=> $image->getSize()/self::$MEGA_BITE, 'uploaded_by'=>Auth()->id(), 'status'=> 1]);
-            $file->save();
-            return $file->id;
-        } catch (\Exception $e) {
-            throw $e;
-        }
     }
 
     /**
@@ -113,22 +92,9 @@ class FileController extends Controller
      * @param  \App\File  $file
      * @return \Illuminate\Http\Response
      */
-    public function dowload(File $file)
+    public function download(File $file)
     {
-        $url = Storage::url($file->source);
         return Storage::download($file->source, $file->raw_name);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\File  $file
-     * @return \Illuminate\Http\Response
-     */
-    public function findFileBy($referer)
-    {
-        $files = File::where('referer',$referer);
-
-        return $files;
-    }
 }

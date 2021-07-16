@@ -16,9 +16,8 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('content');
-            $table->foreignId('file_id')
-                ->constrained('file');
+            $table->text('content');
+            $table->date('announcement_date');
             $table->timestamps();
             $table->softDeletes();
         });

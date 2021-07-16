@@ -13,7 +13,6 @@
                                 <h4 class="card-header-title">
                                     News
                                 </h4>
-
                             </div>
                             <div class="col-auto">
 
@@ -51,13 +50,10 @@
                                 @foreach($news as $value)
                                     <tr>
                                         <td>
-                                            {{substr($value->updated_at,0,10)}}
+                                            {{$value->announcement_date}}
                                         </td>
                                         <td>
                                             {{$value->title}}
-                                        </td>
-                                        <td>
-                                            {{$value->content}}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -72,9 +68,9 @@
                                                         Edit
                                                     </a>
                                                     <a href="javascript:void(0)"
-                                                       data-url="{{ route('admin.news.destroy', $value->id) }}"
-                                                       class="dropdown-item delete-item">
-                                                        Delete
+                                                        onclick="itemDelete('{{ route('admin.news.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
                                                     </a>
                                                 </div>
                                             </div>
@@ -83,6 +79,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{$news->links()}}
                         </div>
                     </div>
                 </div>

@@ -3,50 +3,63 @@
 @section('title','Subject Page')
 
 @section('content')
-    <div class="body-content">
-        <div class="container-fluid text-center top-news-page">
+    <div class="body-content bg-course">
+        <div class="container-fluid text-center top-news-page h1 mb-0">
             @lang('keywords.navBar.subjectClassification')
         </div>
-        @include('layout.sub-header')
-        <div class="container-fluid p-0">
+        <x-sub-header :subjects=$subjects ></x-sub-header>
+        <div class="container-fluid p-0 container-course">
             <div class="title-subject text-primary text-center">
                 {{$certificate->certificate_name}}
             </div>
-            <div class="container-fluid sort text-primary mb-4 d-flex">
+            <div class="text-primary my-4 d-flex h2">
+
                 <span class="mr-4">@lang('keywords.sort')</span>
-                <form>
+                <form name="sort_course" >
                     <label class="radio-inline mr-5">
-                        <input class="btn-sort" type="radio" name="optradio" checked> @lang('keywords.upToDate')
+                        <input class="btn-sort" type="radio" value="latest" name="sortable" {{ app('request')->input('sort') == 'latest' ? 'checked' : null }}> @lang('keywords.upToDate')
                     </label>
                     <label class="radio-inline mr-5">
-                        <input class="btn-sort" type="radio" name="optradio"> @lang('keywords.price')
+                        <input class="btn-sort" type="radio" value="price" name="sortable" {{ app('request')->input('sort') == 'price' ? 'checked' : null }}> @lang('keywords.price')
                     </label>
                     <label class="radio-inline mr-5">
-                        <input class="btn-sort" type="radio" name="optradio">@lang('keywords.liveCourses')
+                        <input class="btn-sort" type="radio" value="live" name="sortable" {{ app('request')->input('sort') == 'live' ? 'checked' : null }}>@lang('keywords.liveCourses')
                     </label>
                     <label class="radio-inline mr-5">
-                        <input class="btn-sort" type="radio" name="optradio">@lang('keywords.recordALesson')
+                        <input class="btn-sort" type="radio" value="record" name="sortable" {{ app('request')->input('sort') == 'record' ? 'checked' : null }}>@lang('keywords.recordALesson')
                     </label>
                     <label style="color: red" class="radio-inline mr-5 ">
-                        <input class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
+                        <input class="btn-sort" type="radio" value="document" name="sortable" {{ app('request')->input('sort') == 'document' ? 'checked' : null }}>@lang('keywords.learningMaterial')
                     </label>
                 </form>
             </div>
-            <div class="container-fluid p-0">
-                <div class="container-fluid product-recommend">
-                    <div class="heading-title" id="tab-title">
-                        英文
-                    </div>
-                    <div class="d-flex flex-wrap">
-                        <div class="pr-3">
-                            <a class="product-hover" href="{{URL::route('site.course.index')}}">
-                                <x-product.course-list :courseItem=$courses>
-                                </x-product.course-list>
-                            </a>
-                        </div>
-                    </div>
+            @foreach( $certificate->subject as $subject)
+                @php
+                    $course = $courses->where('membershipCourses.course.subject_id',$subject->id)
+                @endphp
+                <div>
+                    <h1 class="text-primary" id="tab-title">
+                        {{$subject->subject_name}}
+                    </h1>
+                    <x-product.course-list :courses=$course typeOfUI="certificate_filter"></x-product.course-list>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
+
+<script>
+
+    var rad = document.sort_course.sortable;
+    var prev = null;
+    for (var i = 0; i < rad.length; i++) {
+        rad[i].addEventListener('change', function() {
+            // (prev) ? console.log(prev.value): null;
+            if (this !== prev) {
+                prev = this;
+            }
+            console.log(this.value)
+            window.location.href = "{{ route('site.certificate.show',$certificate->id) }}"+"?sort="+this.value
+        });
+    }
+    </script>
 @endsection

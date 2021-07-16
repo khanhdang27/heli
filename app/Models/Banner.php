@@ -27,7 +27,12 @@ class Banner extends Model
     use SoftDeletes;
     protected $table = 'banners';
     protected $guarded = [];
+    protected $fillable = [];
 
     public $timestamps = TRUE;
 
+    public function image()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
 }

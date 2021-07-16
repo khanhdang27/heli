@@ -1,48 +1,91 @@
-<?php
-$list_video = [
-    '課程簡介',
-    '第一部分：閱讀文章技巧一',
-    '第一部分：閱讀文章技巧二',
-    '第一部分：閱讀文章技巧三',
-    '第一部分：閱讀文章技巧四',
-    '第一部分：閱讀文章技巧五',
-    '第一部分：閱讀文章技巧六',
-    '第一部分：閱讀文章技巧七',
-    '第一部分：閱讀文章技巧八',
-    '第一部分：閱讀文章技巧九',
-    '第一部分：閱讀文章技巧十',
-    '第一部分：閱讀文章技巧十一',
-    '第一部分：閱讀文章技巧十二',
-];
+@php
 
-?>
-<div class="container-fluid show-video">
-    <div class="mb-3 title-course">
-        <p class="m-0">{{$courseDetail->course_description}}</p>
-    </div>
-    <p class="teacher-name text-primary">{{$courseDetail->tutor->full_name}}</p>
-    <div class="d-flex top-course-detail justify-content-between mb-5">
-        <div class="d-flex align-items-center">
-            @for ($i = 0; $i < 4; $i++)
-                <img src="{{asset('images/ic/ic_star.svg')}}" width="35">
-            @endfor
-            <img src="{{asset('images/ic/ic_star_border.svg')}}" width="35">
-            <p class="point mb-0 text-primary ml-3">4.5/5</p>
+$list_lecture = $courseDetail->lecture;
+$fisrt_lecture = $list_lecture->first();
+
+$defaultSource = '';
+if (!empty($fisrt_lecture)) {
+    $defaultSource = 'https://player.vimeo.com/video/' . $fisrt_lecture->video_resource . '?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713';
+}
+
+$is_bought = false;
+$student_courses = null;
+
+if (Auth::check() && !empty(Auth::user()->student_courses())) {
+    if (Auth::user()->student_courses()->get()->count()) {
+        
+        $student_courses = Auth::user()->student_courses()->get();
+        $is_bought = $student_courses[0]->course_id == $fisrt_lecture->course_id;
+    }
+}
+
+@endphp 
+{{-- @if (!empty($fisrt_lecture)) --}}
+<div class="container-fluid show-video" id="video-lecture">
+    <div class="bg-white mt-5">
+        <div class="mb-3 text-primary">
+            <div class="h1 m-0">{{ $courseDetail->course_description }}</div>
         </div>
-        <img src="{{asset('images/ic/ic_heart.svg')}}" width="45">
+        <p class="h2 text-primary">{{ $courseDetail->tutor->full_name }}</p>
+        <div class="d-flex flex-sm-wrap top-course-detail justify-content-between mb-5">
+            <div class="d-flex align-items-center text-primary">
+                @for ($i = 0; $i < 4; $i++)
+                    <img src="{{ asset('images/ic/ic_star.svg') }}" width="35">
+                @endfor
+                <img src="{{ asset('images/ic/ic_star_border.svg') }}" width="35">
+                <h4 class="mb-0 ml-3">4.5/5</h4>
+            </div>
+            @if (Auth::check())
+                <x-like.like :likeRef=$courseDetail :likeModule=\App\Models\Course::class></x-like.like>
+            @endif
+        </div>
     </div>
+
     <div class="row">
-        <div class="col-sm-8">
-            <x-product-detail.lecture-course></x-product-detail.lecture-course>
+        <div class="col-lg-8 bg-white">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe id="videoView" src={{ $defaultSource }} class="embed-responsive-item" frameborder="0"
+                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Default name"></iframe>
+            </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-lg-4 bg-white">
             <div class="box-list-video text-primary">
                 <ol>
-                    @foreach($list_video as $item)
-                        <li>{{$item}}</li>
+                    @foreach ($list_lecture as $index => $item)
+                        @if ($index == 0)
+                            <li class="lecture-active h2" role="button" v-on:click="clickLecture" data-id="{{ $item->video_resource }}">
+                                {{ $item->lectures_name }}
+                            </li>
+                        @else
+                            <li class="lecture-{{ $is_bought ? 'active' : 'inactive'}} h2" role="button" v-on:click="clickLecture" data-id="{{  $is_bought  ? $item->video_resource : null }}">
+                                {{ $item->lectures_name }}
+                            </li>
+                        @endif
                     @endforeach
                 </ol>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    var videoLecture = new Vue({
+        el: "#video-lecture",
+        data: {
+            videoLink: "",
+        },
+        methods: {
+            clickLecture: function() {
+                if (event.target.getAttribute('data-id')) {
+                    this.videoLink = "https://player.vimeo.com/video/" + event.target.getAttribute('data-id') +
+                        "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713"
+                    document.getElementById('videoView').src = this.videoLink
+                } else {
+                    alert("you not buy this course yet")
+                }
+            }
+        }
+    });
+</script>
+
+{{-- @endif --}}

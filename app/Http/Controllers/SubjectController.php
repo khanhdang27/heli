@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\CreateSubjectRequest;
 use App\Models\Certificate;
+use App\Models\CourseMembershipDiscount;
 use App\Models\PostTag;
 use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SubjectController extends Controller
 {
@@ -22,7 +25,7 @@ class SubjectController extends Controller
     public function index()
     {
         $certificates = Certificate::all();
-        $subjects = Subject::where('status', 1)->latest()->get();
+        $subjects = Subject::where('status', 1)->latest()->paginate(15);
         return view('admin.subject.index', [
             'subjects' => $subjects,
             'certificates' =>$certificates
@@ -65,10 +68,24 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        $certificates = Certificate::all();
+        $courses_with_group = CourseMembershipDiscount::with(
+            'membershipCourses',
+            'courseDiscounts',
+            'membershipCourses.course',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.subject.certificate',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        )->where('publish',1)
+        ->whereHas('membershipCourses', function ($query) {
+            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+         })->whereHas('membershipCourses.course', function ($query) use ($subject) {
+            return $query->where('subject_id', $subject->id);
+         })->get();
+
         return view('subject.index', [
             'subject' => $subject,
-            'certificate' => $certificates
+            'courses' => $courses_with_group
         ]);
     }
 
@@ -80,7 +97,6 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-
         return view('admin.subject.edit', [
             'subject' => $subject,
 
@@ -125,11 +141,29 @@ class SubjectController extends Controller
 
     public function destroy(Subject $subject)
     {
-        $active = $subject->status;
-        $subject->status = $active == 1 ? 0 : 0;
-        $subject->save();
+        DB::beginTransaction();
+        try {
+//            $_tutor = $subject->tutor->toArray();
+            $_course = $subject->course->toArray();
+            if (empty($_course) ){
+                $subject->delete();
+                DB::commit();
+                return response([
+                    'message' => 'Delete success!'
+                ]);
+            }
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => 'Cannot delete!'
+            ], 400);
+        }
 
-        return $subject->save();
+        // $active = $subject->status;
+        // $subject->status = $active == 1 ? 0 : 0;
+        // $subject->save();
+
+        // return $subject->save();
     }
 
     /**

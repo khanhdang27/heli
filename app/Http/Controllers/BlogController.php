@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogTags;
+use App\Models\File;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.blog.index', [
             'blogs' => $blogs
         ]);
@@ -32,7 +33,8 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.create');
+        $tags = Tag::where('tag_type', Tag::$BLOG)->get();
+        return view('admin.blog.create', compact('tags'));
     }
 
     /**
@@ -43,20 +45,33 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $blog = new Blog([
-                'photo' => $request->file('photo')->store('photo'),
-                'title' => $request['title'],
-                'content' => $request['content']
-            ]
-        );
-        $blog->save();
-        foreach ($request['tag_id'] as $tag_id) {
-            $blogTag = new BlogTags([
-                'blog_id' => $blog->id,
-                'tag_id' => $tag_id
-            ]);
-            $blogTag->save();
+        DB::beginTransaction();
+        try {
+            $blog = Blog::create([
+                    'title' => $request['title'],
+                    'content' => $request['content']
+                ]
+            );
+            foreach ($request['tag_id'] as $tag_id) {
+                $blogTag = BlogTags::create([
+                    'blog_id' => $blog->id,
+                    'tag_id' => $tag_id
+                ]);
+            }
+            if (!empty($request['photo'])) {
+                $file = File::storeFile(
+                    $request['photo'],
+                    Blog::class,
+                    $blog->id,
+                );
+            }
+
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('errors', 'Create error');
         }
+
         return back()->with('success', 'Create success');
     }
 
@@ -119,19 +134,23 @@ class BlogController extends Controller
 
     public function showBlogPage()
     {
-        $blog_top = Blog::with('tags')->orderBy('view_no','desc')->first();
-        $blogs = Blog::with('tags')->orderBy('view_no','desc')->get();
-        $blog = Blog::with('tags')->orderBy('created_at','desc')->get();
-
+        $allBlog = Blog::with('tags')->get();
+        $blog_top = $allBlog->sortByDesc('view_no')->first();
+        $blogs_list = $allBlog->sortByDesc('view_no');
+        $blog_latest = $allBlog->sortByDesc('created_at')->forPage(1,9);
+        $tags = Tag::where('tag_type',Tag::$BLOG)->get();
         return view('blog.blog-page',[
             'blog_top' => $blog_top,
-            'blog' => $blog,
-            'blogs' => $blogs
+            'blog' => $blog_latest,
+            'blogs' => $blogs_list,
+            'tags' => $tags
         ]);
     }
 
     public function viewBlog($id){
         $blogs = Blog::where('id',$id)->with('tags')->first();
+        $blogs->view_no = $blogs->view_no + 1;
+        $blogs->save();
         return view('blog.blog-view',[
             'blog'=>$blogs
         ]);

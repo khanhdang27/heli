@@ -7,7 +7,11 @@
     <div class="container-fluid mt-5 mb-5 pb-5">
         <div class="card mx-auto card-profile pt-5 pb-5 pl-3 pr-3 mb-5">
             <div class="mx-auto grid-width-30">
-                <img width="150" height="150" class="rounded" src="{{asset('images/user_default.png')}}">
+                @if(empty(Auth::user()->avatar))
+                    <img width="150" height="150" class="img-thumbnail rounded" src="{{asset('images/user_default.png')}}">
+                @else
+                    <img width="150" height="150" class="img-thumbnail rounded" src="{{asset('/file/'.Auth::user()->avatar->id)}}">
+                @endif
             </div>
             <h5 class="card-title text-center font-weight-bold text-30 mt-5">
                 {{Auth::user()->name}}
@@ -47,7 +51,8 @@
                 </tr>
             </table>
             <div class="text-right">
-                <a href="{{ route('site.profile.edit',Auth::user()->id) }}" class="font-weight-bold">Update your profile</a>
+                <a href="{{ route('site.profile.edit',Auth::user()->id) }}" class="font-weight-bold">Update your
+                    profile</a>
             </div>
         </div>
     </div>

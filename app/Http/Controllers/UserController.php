@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateUserRequest;
-use App\Models\Role;
-use App\Models\RoleUser;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -19,8 +17,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        
-        $member = User::with('roles')->where(['name'=> 'student'])->get();
+        $member = User::with('student','roles')->whereHas('roles', function ($query) {
+            $query->where('name','student');
+        })->get();
         return view('admin.user.index', [
             'roleUsers' => $member
         ]);
@@ -48,9 +47,10 @@ class UserController extends Controller
         $user = new User(
             $request->validated()
         );
+        $user->assignRole(['student']);
         $user->save();
-        $roleUser = new RoleUser(['user_id' => $user->id, 'role_id' => '2']);
-        $roleUser->save();
+        $student = new Student(['user_id'=>$user->id]);
+        $student->save();
         return back()->with('success', 'Save success');
     }
 

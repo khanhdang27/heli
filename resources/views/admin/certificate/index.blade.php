@@ -62,6 +62,11 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
+                                                     <a href="javascript:void(0)"
+                                                        onclick="itemDelete('{{ route('admin.certificate.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
@@ -69,6 +74,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $certificates->links() }}
                         </div>
                     </div>
                 </div>

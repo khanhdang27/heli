@@ -1,22 +1,38 @@
-<div class="product bg-white border-secondary p-4">
+@php
+    use App\Models\Course;
+    $course = $courseDetail->membershipCourses->course
+@endphp
+
+<div class="bg-white border border-secondary p-5 text-primary buy-course-box">
     <div class="mb-3 title-course">
-        <p class="m-0">{{$courseDetail->course_name}}</p>
+        <p class="h1 m-0">
+            {{$course->course_name}}
+        </p>
     </div>
-    <p class="m-0 teacher-name">{{$courseDetail->tutor->full_name}}</p>
-    <p class="price">HKD{{$courseDetail->course_price}}</p>
+    @if($course->type != Course::$DOCUMENT)
+        <p class="my-5 h4">{{$course->tutor->full_name}}</p>
+    @endif
+    <h2 class="my-5 font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>
     @if(\Illuminate\Support\Facades\Auth::check())
-        <a href="{{route('site.order.create', ['course_id'=>$courseDetail->id])}}">
+        <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
             <div class="btn-primary mt-3 btn-register-now product-btn">
                 @lang('keywords.coursePage.buyNow')
             </div>
         </a>
     @else
-        <button class="btn-register-now m-0 btn-primary product-btn p-0 w-100" data-toggle="modal" data-target="#registerModal">
+        <button class="btn-register-now m-0 btn-primary product-btn p-0 w-100" data-toggle="modal"
+                data-target="#registerModal">
             <span>@lang('keywords.coursePage.registerNow')</span>
         </button>
     @endif
     <div class="d-flex share-bar">
         <span class="mr-2"><img width="36" src="{{ asset("images/ic/ic_share.svg")}}"></span>
-        <p class="text-20 pt-1">@lang('keywords.coursePage.shareCourse')</p>
+        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+           aria-controls="collapseExample">
+            <h2 class="pt-1">@lang('keywords.coursePage.shareCourse')</h2>
+        </a>
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div class="sharethis-inline-share-buttons"></div>
     </div>
 </div>

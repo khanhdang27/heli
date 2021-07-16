@@ -14,7 +14,6 @@
                                 </h4>
                             </div>
                             <div class="col-auto">
-
                                 <!-- Button -->
                                 <a href="{{ route('admin.tag.create') }}" class="btn btn-sm btn-success">
                                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
@@ -26,7 +25,6 @@
                                     </svg>
                                     Add
                                 </a>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>
@@ -66,9 +64,11 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <button class="dropdown-item" id="delete-item" value="{{ route('admin.tag.destroy', $value->id) }}" >
-                                                        Delete
-                                                    </button>
+                                                    <a href="javascript:void(0)"
+                                                        onclick="itemDelete('{{ route('admin.tag.destroy', $value->id) }}')"
+                                                        class="dropdown-item delete-item">
+                                                            Delete
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
@@ -76,6 +76,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            {{ $tags->links() }}
                         </div>
                     </div>
                 </div>

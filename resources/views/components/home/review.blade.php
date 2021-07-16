@@ -27,9 +27,8 @@
     ]
 ?>
 <div class="justify-content-center">
-    <h1 class="title-card text-primary">客戶的表揚</h1>
+    <h2 class="title-card text-primary">客戶的表揚</h2>
     <div class="guest-praise-container">
-
         <div class="d-flex w-75 flex-lg-nowrap flex-wrap m-auto">
             @foreach($praiseList as $item)
                 <div class="praise-box ml-4 mr-4">
