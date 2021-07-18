@@ -426,23 +426,12 @@ form#certificate_form {
         align-items: center;
     }
     .menu-img {
-        width: 184px;
-    }
-    #menu-img4 {
-        padding-top: 2.9rem;
-        padding-bottom: 2.9rem;
+        width: 150px;
     }
     .menu-category-text {
         display: none;
     }
-    @media screen and (max-width: 1200px) {
-        .menu-category {
-            display: none;
-        }
-        .menu-category-text {
-            display: flex !important;
-        }
-    }
+    
 }
 
 .menu-category-text {

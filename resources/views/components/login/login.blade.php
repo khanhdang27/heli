@@ -44,7 +44,7 @@
                             </div>
                             @csrf
                             {!! Form::open(['id'=>'formLogin']) !!}
-                            <div class="input-login d-flex justify-content-center align-items-center mb-3">
+                            <div class="input-login d-flex justify-content-center align-items-center mb-1">
                                 {{ Form::email('email',null,[
                                                 'class'=>'input-login-item',
                                                 'placeholder'=>'Email'
@@ -57,7 +57,7 @@
                                     ])
                                 }}
                             </div>
-                            <div class="row align-items-center bottom-form mt-5 line-or">
+                            <div class="row align-items-center bottom-form mt-2 line-or">
                                 <div class="col-sm">
                                     <div class="remember text-white d-flex">
                                         <label class="rememberCheck mr-3" for="rememberCheck">
@@ -75,7 +75,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="bottom-btn mt-5">
+                            <div class="bottom-btn mt-2">
                                 <button
                                     class='btn-login btn-secondary btn-register-now'
                                     id='btn-login' type="submit">

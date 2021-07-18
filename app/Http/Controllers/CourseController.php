@@ -134,17 +134,17 @@ class CourseController extends Controller
             return $query->where('id', $course->id);
          })->first();
 
+         if (empty($courses_with_group)){
+            return redirect(route('site.home'));
+        }
+
         $student_course  = null;
         if (Auth::check()){
             $student_course = StudentCourses::query()
                 ->where('course_id', $course->id)
                 ->where('student_id',Auth::user()->id)->first();
-
-            // dd($course->id, Auth::user()->id ,$student_course);
         }
-        if (empty($courses_with_group)){
-            return redirect(route('site.home'));
-        }
+        
         return view('course.course-page',[
             'courseDetail' => $courses_with_group,
             'student_course' => $student_course,
