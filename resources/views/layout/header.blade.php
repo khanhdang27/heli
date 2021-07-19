@@ -82,7 +82,7 @@
 
             </div>
             <ul class="navbar-nav ml-1">
-                @if (Auth::check())
+                @if (Auth::check() && Auth::User()->hasRole('student'))
                     <li class="nav-item item-header p-2">
                         <a class="nav-link"
                             href="{{ route('site.user.course') }}">@lang('keywords.footer.myCourses')

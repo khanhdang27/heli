@@ -31,6 +31,7 @@ $component = explode('\\',$likeModule)[2];
         },
         methods: {
             clicklike: function () {
+                console.log("click");
                 @if(Auth::check())
                     if ({{empty($liked) ? 'true' : 'false' }} ) {
                         axios.post("{{ route('site.user-like.store')}}", {
