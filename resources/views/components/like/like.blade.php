@@ -16,7 +16,7 @@ $component = explode('\\',$likeModule)[2];
 <button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-1 border-0 bg-white text-primary" v-on:click="clicklike">
     <img class="ic-action"
          id="like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}"
-         src="{{ empty($liked) ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}}">
+         src="{{ empty($liked->like_style) ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}}">
 
         @if($likeModule == Post::class || $likeModule== UserComment::class)
             <span class="h2 " id="{{$component}}_like_no_{{$likeRef->id}}" >{{$likeRef->like_no}}</span>
@@ -24,16 +24,15 @@ $component = explode('\\',$likeModule)[2];
 </button>
 
 <script>
-    var like = new Vue({
+    var like_{{ $id_random }} = new Vue({
         el: '#like_{{$component}}_{{$likeRef->id}}_{{$id_random}}',
         data: {
             return: true
         },
         methods: {
             clicklike: function () {
-                console.log("click");
                 @if(Auth::check())
-                    if ({{empty($liked) ? 'true' : 'false' }} ) {
+                    if ({{empty($liked->like_style) ? 'true' : 'false' }} ) {
                         axios.post("{{ route('site.user-like.store')}}", {
                             like_ref_id: {{$likeRef->id}},
                             user_id: {{Auth::user()->id}},

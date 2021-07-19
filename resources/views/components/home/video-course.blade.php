@@ -1,12 +1,23 @@
 @php
 
-$list_lecture = $courseDetail->lecture;
-$fisrt_lecture = $list_lecture->first();
+$lecture_default = null;
 
 $defaultSource = '';
-if (!empty($fisrt_lecture)) {
-    $defaultSource = 'https://player.vimeo.com/video/' . $fisrt_lecture->video_resource . '?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713';
+$list_lecture = $courseDetail->lecture;
+
+if (empty($latesLecture)) {
+    $lecture_default = $list_lecture->first();
+    
+} else {
+    $lecture_default = $courseDetail->lecture->first(function($item) use ($latesLecture) {
+                return $item->id == $latesLecture;
+            });
 }
+
+if (!empty($lecture_default)) {
+    $defaultSource = 'https://player.vimeo.com/video/' . $lecture_default->video_resource . '?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713';
+}
+
 
 $is_bought = false;
 $student_courses = null;
@@ -15,20 +26,19 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
     if (Auth::user()->student_courses()->get()->count()) {
         
         $student_courses = Auth::user()->student_courses()->get();
-        $is_bought = $student_courses[0]->course_id == $fisrt_lecture->course_id;
+        $is_bought = $student_courses[0]->course_id == $lecture_default->course_id;
     }
 }
 
-@endphp 
-{{-- @if (!empty($fisrt_lecture)) --}}
-<div class="container-fluid show-video" id="video-lecture">
+@endphp
+
+<div class="container-fluid show-video">
     <div class="bg-white mt-5">
         <div class="mb-3 text-primary">
             <div class="h1 m-0">{{ $courseDetail->course_name }}</div>
 
-            <div class="h1 m-0">{{ $courseDetail->lecture->first(function($item) use ($latesLecture, $fisrt_lecture) {
-                $checker = $latesLecture ? $latesLecture : $fisrt_lecture->id;
-                return $item->id == $checker;
+            <div class="h1 m-0">{{ $courseDetail->lecture->first(function($item) use ($lecture_default) {
+                return $item->id == $lecture_default->id;
             })->lectures_name }}</div>
         </div>
         <p class="h2 text-primary">{{ $courseDetail->tutor->full_name }}</p>
@@ -46,7 +56,7 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="video-lecture">
         <div class="col-lg-8 bg-white">
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe id="videoView" src={{ $defaultSource }} class="embed-responsive-item" frameborder="0"
