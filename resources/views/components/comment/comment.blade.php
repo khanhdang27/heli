@@ -1,3 +1,5 @@
+
+
 <div class="card container p-3">
 
     @if($commentModule == App\Models\Course::class)
