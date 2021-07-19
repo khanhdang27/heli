@@ -56,12 +56,21 @@ use App\Utilities\SelectionByClass;
                     @endforeach
                 </div>
                 <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">
-                    <button class="btn-read-more h5">
+                    <a class="btn btn-read-more h5" href="#" id="loadMore">
                         @lang('keywords.blog-page.readMore')
                         <img src="{{ asset('images/ic/ic_drop.svg') }}" width="65">
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
+        <script>
+            $(function () {
+                $(".blog-item-latest-display").slice(0,9).show();
+                $("#loadMore").click(function (e) {
+                    e.preventDefault();
+                    $(".blog-item-latest-display:hidden").slice(0, 6).slideDown();
+                });
+            });
+        </script>
     @endif
 @endsection
