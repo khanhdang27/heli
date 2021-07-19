@@ -11022,6 +11022,11 @@ h5,
   margin-top: 30px;
 }
 
+.product-category-row {
+  margin-left: -42px;
+  margin-right: -42px;
+}
+
 .product-category-padding {
   padding-left: 3rem;
   padding-right: 3rem;
@@ -11555,12 +11560,12 @@ form#certificate_form select option:checked {
 }
 
 .content-team-page .card-team .name-tutor {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
 }
 
 .content-team-page .card-team .position-tutor {
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -11576,7 +11581,7 @@ form#certificate_form select option:checked {
 .content-team-page .card-team .content-info-right {
   max-width: 100%;
   overflow-y: auto;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .content-team-page .card-team .bottom-info-right {
@@ -11758,6 +11763,15 @@ form#certificate_form select option:checked {
   flex: 0 40%;
 }
 
+.popular-articles-item-image .img-blog {
+  width: 185px;
+  height: 185px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+}
+
 .popular-articles-item-content {
   flex: 0 60%;
 }
@@ -11797,7 +11811,6 @@ form#certificate_form select option:checked {
 
 .popular-item {
   max-width: 100%;
-  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
 
 #latest {
@@ -12059,6 +12072,11 @@ form#certificate_form select option:checked {
   .product-category-padding {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .product-category-row {
+    margin-left: -14px;
+    margin-right: -14px;
   }
 
   .container-course {

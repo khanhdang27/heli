@@ -32,9 +32,6 @@
     .banner-content {
         height: 600px;
         .banner-info {
-            // top: 30% !important;
-            // left: 60%;
-            // width: 100%;
             .banner-caption {
                 font-size: 30px;
                 .banner-title {
@@ -49,6 +46,10 @@
     .product-category-padding {
         padding-left: 1rem;
         padding-right: 1rem;
+    }
+    .product-category-row {
+        margin-left: -14px;
+        margin-right: -14px;
     }
     .container-course {
         max-width: 100%;
@@ -98,6 +99,6 @@
         display: none;
     }
     .menu-category-text {
-        display: flex ;
+        display: flex;
     }
 }

@@ -84,7 +84,7 @@ class Course extends Model implements TranslatableContract
 
     public function likeable()
     {
-        return $this->morphOne(UserLike::class,'likeable');
+        return $this->morphMany(UserLike::class,'likeable');
     }
 
     public function comment()

@@ -7,8 +7,6 @@ use App\Utilities\SelectionByClass;
 @section('title', 'Blog Page')
 
 @section('content')
-
-
     @if (empty($blog_top))
         <div class="d-flex justify-content-center">
             <H3>

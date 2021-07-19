@@ -26,7 +26,9 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
     if (Auth::user()->student_courses()->get()->count()) {
         
         $student_courses = Auth::user()->student_courses()->get();
-        $is_bought = $student_courses[0]->course_id == $lecture_default->course_id;
+
+        $is_bought = $student_courses->firstWhere('course_id', $lecture_default->course_id);
+
     }
 }
 

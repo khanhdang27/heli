@@ -139,7 +139,7 @@ class BlogController extends Controller
         $blogs_list = clone $allBlog;
         $blog_latest = clone $allBlog;
         $blog_top = $allBlog->sortByDesc('view_no')->first();
-        $blogs_list = $allBlog->sortByDesc('view_no');
+        $blogs_list = $allBlog->sortByDesc('view_no')->take(5);
         $blog_latest = $allBlog->sortByDesc('created_at');
 
         $tags = Tag::where('tag_type',Tag::$BLOG)->get();

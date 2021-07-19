@@ -11,7 +11,7 @@ $id_random = Str::random(2);
 
 $liked = $likeRef->likeable;
 
-$liked = empty($liked) ? 0 : $liked->like_style;
+$liked = empty($liked[0]) ? 0 : $liked[0]->like_style;
 $component = explode('\\',$likeModule)[2];
 
 @endphp

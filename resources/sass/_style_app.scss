@@ -72,6 +72,11 @@ h5,
     }
 }
 
+.product-category-row {
+    margin-left: -42px;
+    margin-right: -42px;
+}
+
 .product-category-padding {
     padding-left: 3rem;
     padding-right: 3rem;
@@ -431,7 +436,6 @@ form#certificate_form {
     .menu-category-text {
         display: none;
     }
-    
 }
 
 .menu-category-text {
@@ -770,7 +774,7 @@ form#certificate_form {
 .popular-articles-item-image {
     width: 100%;
     flex: 0 40%;
-    .img-blog{
+    .img-blog {
         width: 185px;
         height: 185px;
         background-repeat: no-repeat;
@@ -828,7 +832,7 @@ form#certificate_form {
     height: 100%;
 }
 
-.main-photo-top{
+.main-photo-top {
     height: 581px;
 }
 
