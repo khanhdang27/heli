@@ -95,10 +95,10 @@ use App\Models\Subject;
                 ;(new VimeoUpload({
                     name: document.getElementById('lectures_name').value,
                     description: document.getElementById('lectures_description').value,
-                    private: false,
+                    private: true,
                     file: files[0],
                     token: '93db9f4146dbaa7c7616f83cc7ea1580',
-                    upgrade_to_1080: false,
+                    upgrade_to_1080: true,
                     onError: function(data) {
                         showMessage('<strong>Error</strong>: ' + JSON.parse(data).error, 'danger')
                     },

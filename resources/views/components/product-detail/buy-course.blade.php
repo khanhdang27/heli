@@ -13,12 +13,14 @@
         <p class="my-5 h4">{{$course->tutor->full_name}}</p>
     @endif
     <h2 class="my-5 font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>
-    @if(\Illuminate\Support\Facades\Auth::check())
+    @if(Auth::check())
+        @if(Auth::user()->stripe_id != null)
         <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
             <div class="btn-primary mt-3 btn-register-now product-btn">
                 @lang('keywords.coursePage.buyNow')
             </div>
         </a>
+        @endif
     @else
         <button class="btn-register-now m-0 btn-primary product-btn p-0 w-100" data-toggle="modal"
                 data-target="#registerModal">

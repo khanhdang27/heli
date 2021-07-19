@@ -1,4 +1,4 @@
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 576px) {
     .banner-content {
         height: 600px;
         .banner-info {
@@ -21,7 +21,14 @@
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
+    .menu-img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
     .banner-content {
         height: 600px;
         .banner-info {
@@ -86,5 +93,11 @@
     .buy-course-box {
         margin-left: 0rem;
         margin-right: 0rem;
+    }
+    .menu-category {
+        display: none;
+    }
+    .menu-category-text {
+        display: flex ;
     }
 }

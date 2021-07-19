@@ -2,6 +2,11 @@
 
     use App\Models\Course;
     $course = $courseDetail->membershipCourses->course;
+    $latesLecture = null;
+    if(!empty($student_course)){
+        $latesLecture = $student_course->lecture_study;
+    }
+    
 
 @endphp
 
@@ -15,7 +20,7 @@
         @if ( $course->type == Course::$LIVE )
             <x-product-detail.course-card-page :course=$course></x-product-detail.course-card-page>
         @elseif($course->type == Course::$RECORD )
-            <x-home.video-course :courseDetail=$course></x-home.video-course>
+            <x-home.video-course :courseDetail=$course :latesLecture=$latesLecture></x-home.video-course>
         @else
             <div class="mt-5">
 

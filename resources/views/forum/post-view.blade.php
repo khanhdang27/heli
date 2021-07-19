@@ -14,7 +14,7 @@
         <div class="container-fluid pt-5 pb-5">
             <div class="ml-auto mr-auto pl-5 d-flex flex-wrap w-75">
                 @foreach ($tags as $value)
-                    <button class="btn-hashtag ml-3 mr-3" type="button">
+                    <button class="btn-hashtag mx-3" type="button">
                         {{ $value }}
                     </button>
                 @endforeach
