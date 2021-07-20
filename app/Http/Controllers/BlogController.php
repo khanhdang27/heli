@@ -134,13 +134,13 @@ class BlogController extends Controller
 
     public function showBlogPage()
     {
-        $allBlog = Blog::with('tags')->get();
+        $allBlog = Blog::with('tags');
         $blog_top = clone $allBlog;
         $blogs_list = clone $allBlog;
         $blog_latest = clone $allBlog;
-        $blog_top = $allBlog->sortByDesc('view_no')->first();
-        $blogs_list = $allBlog->sortByDesc('view_no')->take(5);
-        $blog_latest = $allBlog->sortByDesc('created_at');
+        $blog_top = $blog_top->orderBy('view_no','desc')->first();
+        $blogs_list = $blogs_list->orderBy('view_no','desc')->limit(5)->get();
+        $blog_latest = $blog_latest->orderBy('created_at','desc')->paginate(9);
 
         $tags = Tag::where('tag_type',Tag::$BLOG)->get();
 
