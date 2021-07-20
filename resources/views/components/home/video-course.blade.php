@@ -7,7 +7,7 @@ $list_lecture = $courseDetail->lecture;
 
 if (empty($latesLecture)) {
     $lecture_default = $list_lecture->first();
-    
+
 } else {
     $lecture_default = $courseDetail->lecture->first(function($item) use ($latesLecture) {
                 return $item->id == $latesLecture;
@@ -24,7 +24,7 @@ $student_courses = null;
 
 if (Auth::check() && !empty(Auth::user()->student_courses())) {
     if (Auth::user()->student_courses()->get()->count()) {
-        
+
         $student_courses = Auth::user()->student_courses()->get();
 
         $is_bought = $student_courses->firstWhere('course_id', $lecture_default->course_id);
@@ -46,11 +46,16 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
         <p class="h2 text-primary">{{ $courseDetail->tutor->full_name }}</p>
         <div class="d-flex flex-sm-wrap top-course-detail justify-content-between mb-5">
             <div class="d-flex align-items-center text-primary">
-                @for ($i = 0; $i < 4; $i++)
+                @php
+                    $rate = (int)floor($courseDetail->rating_average);
+                @endphp
+                @for ($i = 0; $i < $rate; $i++)
                     <img src="{{ asset('images/ic/ic_star.svg') }}" width="35">
                 @endfor
-                <img src="{{ asset('images/ic/ic_star_border.svg') }}" width="35">
-                <h4 class="mb-0 ml-3">4.5/5</h4>
+                @for ($i = 0; $i < 5-$rate; $i++)
+                    <img src="{{ asset('images/ic/ic_star_border.svg') }}" width="35">
+                @endfor
+                <h4 class="mb-0 ml-3">{{$courseDetail->rating_average}}/5</h4>
             </div>
             @if (Auth::check())
                 <x-like.like :likeRef=$courseDetail :likeModule=\App\Models\Course::class></x-like.like>
@@ -70,15 +75,15 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
                 <ol>
                     @foreach ($list_lecture as $index => $item)
                         @if ($index == 0)
-                            <li class="lecture-active h2" role="button" v-on:click="clickLecture" 
+                            <li class="lecture-active h2" role="button" v-on:click="clickLecture"
                                 data-id="{{ $item->video_resource }}"
                                 data-lecture={{ $item->id }}>
                                 {{ $item->lectures_name }}
                             </li>
                         @else
-                            <li class="lecture-{{ $is_bought ? 'active' : 'inactive'}} h2" 
-                                role="button" 
-                                v-on:click="clickLecture" 
+                            <li class="lecture-{{ $is_bought ? 'active' : 'inactive'}} h2"
+                                role="button"
+                                v-on:click="clickLecture"
                                 data-id="{{  $is_bought  ? $item->video_resource : null }}"
                                 data-lecture={{ $item->id }} >
                                 {{ $item->lectures_name }}
@@ -100,7 +105,7 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
         methods: {
             clickLecture: function() {
                 if (event.target.getAttribute('data-id')) {
-                    /** 
+                    /**
                     *@TODO Update logic load page
                     */
                     // this.videoLink = "https://player.vimeo.com/video/" + event.target.getAttribute('data-id') +
