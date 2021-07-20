@@ -1,12 +1,13 @@
 <div id="showMore">
     <div v-if="itemIndex <= reviews.length" v-for="itemIndex in newsToShow">
         <div class="mx-auto box-news">
-            <a id="new_href" class="h2" href="">
-
-                @{{itemIndex}}.
-                @{{ reviews[itemIndex-1].announcement_date }}
-                @{{ reviews[itemIndex-1].title }}
-            </a><br>
+            <div class="py-2">
+                <a id="new_href" class="h2" href="">
+                    @{{itemIndex}}.
+                    @{{ reviews[itemIndex-1].announcement_date }}
+                    @{{ reviews[itemIndex-1].title }}
+                </a><br>
+            </div>
         </div> 
     </div>
     <div class="d-flex justify-content-center mt-5">
@@ -25,14 +26,12 @@
         data() {
             return {
                 reviews: JSON.parse(document.getElementById('news').textContent),
-                newsToShow: 8,
-                totalComments: 0
+                newsToShow: 7,
+                totalComments: 0  
             };
         },
         mounted() {
-            console.log(this.reviews[0])
             this.totalComments = this.reviews.length
-            // console.log(this.reviews.length)
         }
     })
 </script>

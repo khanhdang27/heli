@@ -17,10 +17,13 @@
                 <hr class="border-secondary">
                 <div class="mx-auto box-news">
                     @foreach ($news as $item)
-                        <a class="h2" href="{{ route('site.news-detail', $item->id) }}">
-                            {{ $item->announcement_date }}
-                            {{ $item->title }}
-                        </a><br>
+                        <div class=" my-2">
+                            <a class="h2" href="{{ route('site.news-detail', $item->id) }}">
+                                {{ $item->announcement_date }}
+                                {{ $item->title }}
+                            </a><br>
+                        </div>
+                        
                     @endforeach
                 </div>
             </div>

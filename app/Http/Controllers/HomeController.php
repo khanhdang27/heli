@@ -58,7 +58,7 @@ class HomeController extends Controller
 
         [$courseVideo, $latesLecture] = $this->getCourseVideo();
 
-        $news = News::query()->orderByDesc('created_at')->limit(8)->get();
+        $news = News::query()->orderByDesc('created_at')->limit(15)->get();
         
         return view('home.home-page',[
             'banners' => $banners,

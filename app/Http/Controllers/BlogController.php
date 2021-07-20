@@ -135,15 +135,15 @@ class BlogController extends Controller
     public function showBlogPage()
     {
         $allBlog = Blog::with('tags')->get();
-        $blog_top = clone $allBlog; 
+        $blog_top = clone $allBlog;
         $blogs_list = clone $allBlog;
         $blog_latest = clone $allBlog;
         $blog_top = $allBlog->sortByDesc('view_no')->first();
-        $blogs_list = $allBlog->sortByDesc('view_no');
-        $blog_latest = $allBlog->sortByDesc('created_at')->forPage(1,9);
-        
+        $blogs_list = $allBlog->sortByDesc('view_no')->take(5);
+        $blog_latest = $allBlog->sortByDesc('created_at');
+
         $tags = Tag::where('tag_type',Tag::$BLOG)->get();
-        
+
         return view('blog.blog-page',[
             'blog_top' => $blog_top,
             'blog' => $blog_latest,
@@ -161,7 +161,7 @@ class BlogController extends Controller
         })->get();
 
         $tags = Tag::where('tag_type',Tag::$BLOG)->get();
-        
+
         return view('blog.blog-page-tag',[
             'blogs' => $blogs,
             'tags' => $tags
