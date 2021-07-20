@@ -5,7 +5,7 @@
     @if($commentModule == App\Models\Course::class)
         <div class="d-flex flex-wrap justify-content-end align-items-center">
             <h4 class="text-primary mb-0 mr-5">@lang('keywords.rate.rateCourse'):</h4>
-            <x-rating.rating></x-rating.rating>
+            <x-rating.rating :course=$refComment></x-rating.rating>
         </div>
         <h5 class="text-primary">
             @lang('keywords.rate.addReview')

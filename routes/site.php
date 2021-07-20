@@ -61,7 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('user-like', 'UserLikeController');
     Route::resource('profile', 'ProfileController');
     Route::put('uploadAvatar','ProfileController@uploadAvatar')->name('uploadAvatar');
-    
+    Route::resource('rating', 'RatingController');
+
     Route::resource('lecture', 'LectureController');
 
     Route::prefix('my/')->name('user.')->group(function () {

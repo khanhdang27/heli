@@ -21,14 +21,14 @@
             color: transparent;
         }
         input:focus:not(:checked) ~ .icon:last-child {
-            color: #000;
+            color: #969696;
             text-shadow: 0 0 5px #fad000;
         }
     }
     label:last-child{
         position: static;
         .icon {
-            color: #000;
+            color: #969696;
         }
     }
     label:nth-child(1) {
