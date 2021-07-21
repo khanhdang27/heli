@@ -47,7 +47,7 @@ class CourseController extends Controller
     public function my()
     {
         $courses = CourseMembershipDiscount::with(
-            'membershipCourses',  
+            'membershipCourses',
             'membershipCourses.course',
             'membershipCourses.course.tutor',
             'membershipCourses.course.student'
@@ -119,13 +119,14 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses', 
-            'courseDiscounts', 
+            'membershipCourses',
+            'courseDiscounts',
             'membershipCourses.course',
             'membershipCourses.course.lecture',
             'membershipCourses.course.comment',
             'membershipCourses.course.subject',
             'membershipCourses.course.tutor',
+            'membershipCourses.course.ratings',
             'membershipCourses.course.courseMaterial'
         )->where('publish',1)
         ->whereHas('membershipCourses', function ($query) {
@@ -144,7 +145,7 @@ class CourseController extends Controller
                 ->where('course_id', $course->id)
                 ->where('student_id',Auth::user()->id)->first();
         }
-        
+
         return view('course.course-page',[
             'courseDetail' => $courses_with_group,
             'student_course' => $student_course,
@@ -162,8 +163,8 @@ class CourseController extends Controller
         $input = $request->input('course');
 
         $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses', 
-            'courseDiscounts', 
+            'membershipCourses',
+            'courseDiscounts',
             'membershipCourses.course',
             'membershipCourses.course.translations',
             'membershipCourses.course.lecture',
@@ -178,7 +179,7 @@ class CourseController extends Controller
                 return $query->whereTranslationLike('course_name', '%' .$input. '%');
          })->get();
 
-        
+
         return view('course.search',[
             'courses' => $courses_with_group,
         ]);
