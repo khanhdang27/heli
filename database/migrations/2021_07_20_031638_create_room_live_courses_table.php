@@ -23,9 +23,9 @@ class CreateRoomLiveCoursesTable extends Migration
                 ->cascadeOnDelete();
             $table->dateTime('start_date');
             $table->integer('number_session');
+            $table->integer('number_member');
             $table->integer('number_member_maximum');
-            $table->integer('number_member_maximum');
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

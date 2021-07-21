@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\RoomLiveCourse;
+use App\Models\RoomLiveCourse;
 use Illuminate\Http\Request;
 
 class RoomLiveCourseController extends Controller

@@ -9,7 +9,7 @@
             {{$course->course_name}}
         </p>
     </div>
-    @if($course->type != Course::$DOCUMENT)
+    @if($course->type != Course::DOCUMENT)
         <p class="my-5 h4">{{$course->tutor->full_name}}</p>
     @endif
     <h2 class="my-5 font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>

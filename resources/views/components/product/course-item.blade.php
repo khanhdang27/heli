@@ -35,9 +35,9 @@
                      style="color: {{$course_card->subject->subject_color_text}}">
                     <div class="content-top text-wrap w-75">
                         {{ $course_card->subject->certificate->certificate_code }}<br>
-                        @if($course_card->type== Course::$LIVE)
+                        @if($course_card->type== Course::LIVE)
                             @lang('keywords.course-item.liveCourse')
-                        @elseif($course_card->type== Course::$RECORD)
+                        @elseif($course_card->type== Course::RECORD)
                             @lang('keywords.course-item.courseRecord')
                         @else
                             Document
@@ -58,7 +58,7 @@
                         </p>
                     </div>
                     <div class="pt-3 align-bottom">
-                        @if($course_card->type != Course::$DOCUMENT)
+                        @if($course_card->type != Course::DOCUMENT)
                             {{$course_card->tutor->full_name}}
                         @endif
                     </div>
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="d-flex">
-                @if($course_card->type== Course::$DOCUMENT)
+                @if($course_card->type== Course::DOCUMENT)
                     <a class="product-hover ml-auto" href="{{URL::route('site.course.show',$course_card->id)}}">
                         @if($course->getDiscount() > 0)
                             <h5>

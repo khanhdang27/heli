@@ -19,6 +19,13 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::resource('tutor', 'TutorController');
 
+    Route::get('course/{course}/rooms', 'CourseController@rooms')->name('course.room.list');
+    Route::get('course/{course}/rooms/create', 'CourseController@createRoom')->name('course.room.create');
+    Route::post('course/{course}/rooms', 'CourseController@storeRoom')->name('course.room.store');
+    Route::get('course/{course}/rooms/{room}', 'CourseController@editRoom')->name('course.room.edit');
+    Route::put('course/{course}/rooms/{room}', 'CourseController@updateRoom')->name('course.room.update');
+    Route::delete('course/{course}/rooms/{room}', 'CourseController@destroyRoom')->name('course.room.destroy');
+
     Route::get('course/{course}/lecture', 'CourseController@lectures')->name('course.lecture.list');
     Route::get('course/{course}/lecture/create', 'CourseController@createLecture')->name('course.lecture.create');
     Route::post('course/{course}/lecture', 'CourseController@storeLecture')->name('course.lecture.store');
@@ -48,5 +55,8 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('price-tag', 'CourseMembershipDiscountController');
 
     Route::resource('membership', 'MembershipController');
+
     Route::resource('moderator', 'ModeratorController');
+
+    Route::resource('study-session', 'StudySessionController');
 });

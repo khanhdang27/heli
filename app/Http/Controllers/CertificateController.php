@@ -101,17 +101,17 @@ class CertificateController extends Controller
                         break;
                     case 'live':
                         return $query->whereHas('membershipCourses.course', function ($query) {
-                            return $query->where('type', Course::$LIVE);
+                            return $query->where('type', Course::LIVE);
                         });
                         break;
                     case 'record':
                         return $query->whereHas('membershipCourses.course', function ($query) {
-                            return $query->where('type', Course::$RECORD);
+                            return $query->where('type', Course::RECORD);
                         });
                         break;
                     case 'document':
                         $query->whereHas('membershipCourses.course', function ($query){
-                            return $query->where('type', Course::$DOCUMENT);
+                            return $query->where('type', Course::DOCUMENT);
                         });
                     default:
                         break;
