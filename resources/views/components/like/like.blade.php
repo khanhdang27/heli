@@ -10,8 +10,11 @@ use Illuminate\Support\Str;
 $id_random = Str::random(2);
 
 $liked = $likeRef->likeable;
+$user_liked = $liked->filter(function($item) {
+    return $item->user_id == Auth::user()->id;
+})->first();
 
-$liked = empty($liked[0]) ? 0 : $liked[0]->like_style;
+$liked = empty($user_liked) ? 0 : $user_liked->like_style;
 $component = explode('\\',$likeModule)[2];
 
 @endphp

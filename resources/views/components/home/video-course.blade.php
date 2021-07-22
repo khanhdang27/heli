@@ -37,7 +37,7 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
 <div class="container-fluid show-video">
     <div class="bg-white mt-5">
         <div class="mb-3 text-primary">
-            <div class="h1 m-0">{{ $courseDetail->course_name }}</div>
+            <div class="h1 m-0">{{ $courseDetail->course_description }}</div>
 
             <div class="h1 m-0">{{ $courseDetail->lecture->first(function($item) use ($lecture_default) {
                 return $item->id == $lecture_default->id;
