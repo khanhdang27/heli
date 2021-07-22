@@ -19,7 +19,7 @@ use App\Models\StudySession;
                             <div class="col">
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Edit Course
+                                    Edit Room
                                 </h4>
                             </div>
                         </div> <!-- / .row -->
@@ -34,8 +34,13 @@ use App\Models\StudySession;
                                 $room->study_session_id
                                 ) }}
                         </div>
-                        <div class="form-group ">
 
+                        <div class="form-group ">
+                            {{ Form::label('room_live_code', 'Live Code') }}
+                            {{ Form::text('room_live_code',$room->room_live_code,['class' => 'form-control', 'required', 'id'=> 'start_date']) }}
+                        </div>
+
+                        <div class="form-group ">
                             {{ Form::label('start_date', 'Date Start') }}
                             {{ Form::date('start_date',$room->start_date,['class' => 'form-control', 'required', 'id'=> 'start_date']) }}
                         </div>

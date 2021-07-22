@@ -21,7 +21,8 @@ class CreateRoomLiveCoursesTable extends Migration
             $table->foreignId('study_session_id')
                 ->constrained('study_sessions')
                 ->cascadeOnDelete();
-            $table->dateTime('start_date');
+            $table->text('room_live_code');
+            $table->date('start_date');
             $table->integer('number_session');
             $table->integer('number_member');
             $table->integer('number_member_maximum');
