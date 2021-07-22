@@ -103,9 +103,13 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="{{ route('admin.course.room.edit', ['course'=>$course, 'room'=>$room]) }}"
+                                                        class="dropdown-item">
+                                                        Edit
+                                                    </a>
                                                     
                                                     <a href="javascript:void(0)"
-                                                        onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $lecture]) }}')"
+                                                        onclick="itemDelete('{{ route('admin.course.room.destroy', ['course' => $course, 'room' => $room]) }}')"
                                                         class="dropdown-item delete-item">
                                                             Delete
                                                     </a>

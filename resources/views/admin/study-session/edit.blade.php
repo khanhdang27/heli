@@ -1,6 +1,9 @@
-@php
-    use \App\Utilities\SelectionByClass;
-@endphp
+<?php
+/**
+ * @var \Collective\Html\FormBuilder
+ */
+use App\Utilities\SelectionByClass;
+?>
 
 @extends('admin.layout')
 @section('content')
@@ -13,70 +16,66 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Edit Material
+                                    Study Session
                                 </h4>
                             </div>
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => ['admin.course-material.update', $material->id],'method'=>'put', 'enctype'=>'multipart/form-data']) !!}
+                            {!! Form::open(['route' => 'admin.study-session.store', 'enctype'=>'multipart/form-data']) !!}
+                            <div class="form-group ">
+                                {{ Form::label('session_name', 'Session Name') }}
+                                {{ Form::text('session_name', $studySession->session_name, ['class' => 'form-control']) }}
+                            </div>
 
-                            <div class="form-group ">
-                                {{ Form::label('course_id', 'Course') }}
-                                {{ Form::select('course_id', SelectionByClass::getValues(\App\Models\Course::class,'course_name','id') ,null, ['class' => 'form-control']) }}
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <div class='input-group input-group-merge' id='datetimepickerstart'>
+                                       <input type='text' class="form-control" 
+                                        aria-describedby="inputGroup"
+                                        name="session_start"
+                                        value={{explode(' ', $studySession->session_start)[1]}}
+                                       />
+                                       <span id="inputGroup" class="input-group-text">
+                                            <span class="fe fe-clock"></span>
+                                       </span>
+                                    </div>
+                                 </div>
+                                <div class="form-group col-6">
+                                    <div class='input-group input-group-merge' id='datetimepickerend'>
+                                       <input type='text' class="form-control" 
+                                        aria-describedby="inputGroup"
+                                        name="session_end"
+                                        value={{explode(' ', $studySession->session_end)[1]}}
+                                       />
+                                       <span id="inputGroup" class="input-group-text">
+                                            <span class="fe fe-clock"></span>
+                                       </span>
+                                    </div>
+                                 </div>
                             </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_name:en', 'Material Name (English)') }}
-                                {{ Form::text('course_material_name:en', $material->course_material_name,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_name:cn', 'Material Name (Traditional Chinese)') }}
-                                {{ Form::text('course_material_name:cn', $material->course_material_name,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)') }}
-                                {{ Form::text('course_material_name:sc',$material->course_material_name,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_description:en', 'Description (English)') }}
-                                {{ Form::textarea('course_material_description:en', $material->course_material_description,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_description:cn', 'Description (Traditional Chinese)') }}
-                                {{ Form::textarea('course_material_description:cn', $material->course_material_description,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_description:sc', 'Description (Simplify Chinese)') }}
-                                {{ Form::textarea('course_material_description:sc', $material->course_material_description,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_origin:en', 'Material Origin (English)') }}
-                                {{ Form::text('course_material_origin:en', $material->course_material_origin,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_origin:cn', 'Material Origin (Traditional Chinese)') }}
-                                {{ Form::text('course_material_origin:cn', $material->course_material_origin,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('course_material_origin:sc', 'Material Origin (Simplify Chinese)') }}
-                                {{ Form::text('course_material_origin:sc', $material->course_material_origin,['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('file', 'File') }}
-                                {{ Form::file('file', old('file'),['class' => 'form-control']) }}
-                            </div>
-                            {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
+                            
+                            {{ Form::submit('Save', ['class'=>'btn btn-primary my-5']) }}
                             {!! Form::close() !!}
                         </div>
-
                     </div>
                 </div>
             </div>
         </div> <!-- / .row -->
     </div>
-@endsection
 
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepickerstart').datetimepicker({
+                format: 'LT'
+            });
+            $('#datetimepickerend').datetimepicker({
+                format: 'LT'
+            });
+        });
+    </script>
+
+@endsection

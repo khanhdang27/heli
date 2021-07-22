@@ -56,10 +56,10 @@
                                             {{ $value->session_name }}
                                         </td>
                                         <td class="goal-project">
-                                            {{ $value->session_start }}
+                                            {{ explode(' ', $value->session_start)[1] }}
                                         </td>
                                         <td class="goal-project">
-                                            {{ $value->session_end }}
+                                            {{ explode(' ', $value->session_end)[1] }}
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -73,7 +73,6 @@
                                                         class="dropdown-item">
                                                         Edit
                                                     </a>
-
                                                     <a href="javascript:void(0)"
                                                         onclick="itemDelete('{{ route('admin.study-session.destroy', $value->id) }}')"
                                                         class="dropdown-item delete-item">

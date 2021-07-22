@@ -153,7 +153,7 @@ class CertificateController extends Controller
             $request->validated()
         );
         return redirect()->route('admin.certificate.index')
-            ->with('success', 'update success');
+            ->with('success', 'Update success');
     }
 
     /**

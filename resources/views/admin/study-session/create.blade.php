@@ -27,16 +27,33 @@ use App\Utilities\SelectionByClass;
                         <div class="card-body">
                             {!! Form::open(['route' => 'admin.study-session.store', 'enctype'=>'multipart/form-data']) !!}
                             <div class="form-group ">
-                                {{ Form::label('session_name', 'Course') }}
+                                {{ Form::label('session_name', 'Session Name') }}
                                 {{ Form::text('session_name', null,['class' => 'form-control']) }}
                             </div>
-                            <div class="form-group ">
-                                {{ Form::label('session_start', 'Course') }}
-                                {{ Form::date('session_start', \Carbon\Carbon::now(), ['class' => 'form-control']) }}
-                            </div>
-                            <div class="form-group ">
-                                {{ Form::label('session_end', 'Course') }}
-                                {{ Form::date('session_end', \Carbon\Carbon::now(), ['class' => 'form-control']) }}
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <div class='input-group input-group-merge' id='datetimepickerstart'>
+                                       <input type='text' class="form-control" 
+                                        aria-describedby="inputGroup"
+                                        name="session_start"
+                                       />
+                                       <span id="inputGroup" class="input-group-text">
+                                            <span class="fe fe-clock"></span>
+                                       </span>
+                                    </div>
+                                 </div>
+                                <div class="form-group col-6">
+                                    <div class='input-group input-group-merge' id='datetimepickerend'>
+                                       <input type='text' class="form-control" 
+                                        aria-describedby="inputGroup"
+                                        name="session_end"
+                                       />
+                                       <span id="inputGroup" class="input-group-text">
+                                            <span class="fe fe-clock"></span>
+                                       </span>
+                                    </div>
+                                 </div>
                             </div>
                             
                             {{ Form::submit('Save', ['class'=>'btn btn-primary my-5']) }}
@@ -47,4 +64,16 @@ use App\Utilities\SelectionByClass;
             </div>
         </div> <!-- / .row -->
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepickerstart').datetimepicker({
+                format: 'LT'
+            });
+            $('#datetimepickerend').datetimepicker({
+                format: 'LT'
+            });
+        });
+    </script>
+
 @endsection

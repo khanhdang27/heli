@@ -15,9 +15,11 @@ use App\Models\Tutor;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Carbon;
+
 
 class CourseController extends Controller
 {
@@ -315,23 +317,32 @@ class CourseController extends Controller
         ]);
     }
 
+    public function editRoom(Course $course, RoomLiveCourse $room)
+    {
+        return view('admin.course.room.edit', [
+            'course' => $course,
+            'room' => $room
+        ]);
+    }
+
     public function storeRoom(Request $request, Course $course)
     {
         $input = $request->input();
         DB::beginTransaction();
         try {
+            // $date = date('Y-m-d h:m:s', strtotime( $input['start_date']));
+
+            // dd($date);
             $room = RoomLiveCourse::create([
                 'course_id' => $course->id,
                 'study_session_id' => $input['study_session_id'],
-                'start_date' => $input['start_date'],
+                'start_date' => date('Y-m-d', strtotime( $input['start_date'])),
                 'number_session' => $input['number_session'],
-                'number_member' => $input['number_member'],
+                'number_member' => 0,
                 'number_member_maximum' => $input['number_member_maximum'],
             ]);
 
-            $date = date('d-m-Y', strtotime('+1 week', $input['start_date']));
-
-            dd($date);
+        
             // for ($i=0; $i < $input['number_member'] - 1; $i++) { 
             //     var_dump();
             // }
@@ -340,7 +351,7 @@ class CourseController extends Controller
             return response()->json(['status' => 200, 'message' => 'succeed']);
         } catch (\Throwable $th) {
             DB::rollback();
-            // dd($th);
+            dd($th);
             return response()->json(['status' => 400, 'message' => 'fails'], 400);
         }
     }
