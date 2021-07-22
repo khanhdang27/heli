@@ -17,9 +17,9 @@
 @section('content')
     {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
     <div class="body-content container-fluid">
-        @if ( $course->type == Course::$LIVE )
+        @if ( $course->type == Course::LIVE )
             <x-product-detail.course-card-page :course=$course></x-product-detail.course-card-page>
-        @elseif($course->type == Course::$RECORD )
+        @elseif($course->type == Course::RECORD )
             <x-home.video-course :courseDetail=$course :latesLecture=$latesLecture></x-home.video-course>
         @else
             <div class="mt-5">
@@ -28,7 +28,7 @@
         @endif
         <div class="container-fluid show-video">
             <div class="row container-fluid p-0 flex-column-reverse flex-md-row">
-                @if($course->type == Course::$DOCUMENT)
+                @if($course->type == Course::DOCUMENT)
                     <div class="col-xl-8 bg-white">
                         @foreach($course->courseMaterial as $value)
                             <div class="col-sm-6">
@@ -61,7 +61,7 @@
                                     </h1>
                                 </a>
                             </li>
-                            @if ( $course->type == Course::$LIVE )
+                            @if ( $course->type == Course::LIVE )
                                 <li class="nav-item">
                                     <a class="nav-link category-link-text" data-toggle="pill" href="#menu1">
                                         <h1>
@@ -91,7 +91,7 @@
                                 <x-product-detail.course-overview
                                     :courseDetail=$course></x-product-detail.course-overview>
                             </div>
-                            @if ( $course->type == Course::$LIVE )
+                            @if ( $course->type == Course::LIVE )
                                 <div id="menu1" class="container-fluid pb-5 tab-pane fade">
                                     <x-product-detail.online-class/>
                                 </div>

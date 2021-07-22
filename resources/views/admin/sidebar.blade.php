@@ -180,6 +180,14 @@
                     </div>
                 </li>
                 @endrole
+                @role(['super-admin'])
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.study-session.index') active @endif"
+                       href="{{ route('admin.study-session.index') }}">
+                        <i class="fe fe-clipboard"></i> Study Session
+                    </a>
+                </li>
+                @endrole
             </ul>
             <!-- Divider -->
             <hr class="navbar-divider my-3">
