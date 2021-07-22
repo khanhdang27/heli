@@ -23,7 +23,8 @@
                 <a href="#" id="sidebarIcon" class="dropdown-toggle" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     <div class="avatar avatar-sm avatar-online">
-                        <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg") }}" class="avatar-img rounded-circle"
+                        <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg") }}"
+                             class="avatar-img rounded-circle"
                              alt="...">
                     </div>
                 </a>
@@ -44,7 +45,8 @@
             <!-- Form -->
             <form class="mt-4 mb-3 d-md-none">
                 <div class="input-group input-group-rounded input-group-merge">
-                    <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
+                    <input type="search" class="form-control form-control-rounded form-control-prepended"
+                           placeholder="Search" aria-label="Search">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fe fe-search"></span>
@@ -154,6 +156,28 @@
                        href="{{ route('admin.moderator.index') }}">
                         <i class="fe fe-clipboard"></i> Moderator
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#collapseUserManager" role="button"
+                       aria-expanded="false" aria-controls="collapseUserManager">
+                        <i class="fe fe-clipboard"></i> User Manager
+                    </a>
+                    <div class="collapse" id="collapseUserManager">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.student') active @endif"
+                                   href="{{ route('admin.user-manager.student') }}">Student</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.tutor') active @endif"
+                                   href="{{ route('admin.user-manager.tutor') }}">Tutor</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.moderator') active @endif"
+                                   href="{{ route('admin.user-manager.moderator') }}">Moderator</a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 @endrole
             </ul>

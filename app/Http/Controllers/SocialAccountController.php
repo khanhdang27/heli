@@ -12,6 +12,7 @@ use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use Spatie\Newsletter\NewsletterFacade;
 
 class SocialAccountController extends Controller
 {
@@ -49,6 +50,10 @@ class SocialAccountController extends Controller
                         ]);
                         $newUser_social->save();
                         $stripeCustomer = $newUser->createAsStripeCustomer(['email' => $user->getEmail()]);
+
+                        if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
+                            NewsletterFacade::subscribe($user->getEmail());
+                        }
 
                         $send_mail = new SendMail();
                         $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);

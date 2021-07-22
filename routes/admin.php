@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'login'])
     ->name('login');
@@ -49,4 +49,16 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::resource('membership', 'MembershipController');
     Route::resource('moderator', 'ModeratorController');
+
+    Route::get('manager-moderator', 'UserManagerController@moderatorIndex')->name('user-manager.moderator');
+    Route::get('manager-moderator/edit/{id}', 'UserManagerController@moderatorEdit')->name('user-manager.moderator.edit');
+    Route::put('manager-moderator/update/{id}', 'UserManagerController@moderatorEdit')->name('user-manager.moderator.update');
+
+    Route::get('manager-student', 'UserManagerController@studentIndex')->name('user-manager.student');
+    Route::get('manager-student/edit/{id}', 'UserManagerController@studentEdit')->name('user-manager.student.edit');
+    Route::put('manager-student/update/{id}', 'UserManagerController@studentEdit')->name('user-manager.student.update');
+
+    Route::get('manager-tutor', 'UserManagerController@tutorIndex')->name('user-manager.tutor');
+    Route::get('manager-tutor/edit/{id}', 'UserManagerController@tutorEdit')->name('user-manager.tutor.edit');
+    Route::put('manager-tutor/update/{id}', 'UserManagerController@tutorEdit')->name('user-manager.tutor.update');
 });

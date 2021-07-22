@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Spatie\Newsletter\NewsletterFacade;
 
 
 class RegisterController extends Controller
@@ -71,7 +72,7 @@ class RegisterController extends Controller
                 $array = explode('@', $input['email']);
                 $name = reset($array);
                 $user = new User(['name' => $name, 'email' => $input['email'], 'password' => $random]);
-                
+
                 $user->assignRole('student');
                 $user->save();
 
@@ -79,6 +80,10 @@ class RegisterController extends Controller
                 $student->save();
 
                 $stripeCustomer = $user->createAsStripeCustomer(['email' => $input['email']]);
+
+                if ($input['subscribe']== 'on' and !(NewsletterFacade::isSubscribed($input['email']))){
+                    NewsletterFacade::subscribe($input['email']);
+                }
 
                 $send_mail = new SendMail();
                 $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
