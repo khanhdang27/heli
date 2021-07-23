@@ -19,6 +19,7 @@
         }
 @endphp
 
+@if (!empty($course_card))
 <div class="{{ $class }} product-category-padding">
     <div class="product-box">
         <div class="top-product">
@@ -100,3 +101,5 @@
         </div>
     </div>
 </div>
+
+@endif

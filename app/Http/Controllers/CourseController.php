@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CreateCourseRequest;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
+use App\Models\CourseSchedule;
 use App\Models\Lecture;
 use App\Models\Membership;
 use App\Models\MembershipCourse;
 use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
+use App\Models\StudentSchedule;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -304,7 +306,7 @@ class CourseController extends Controller
     public function rooms(Course $course)
     {
         $_course = $course->load('rooms');
-        $rooms = RoomLiveCourse::query()->where('course_id', $_course->id)->paginate(15);
+        $rooms = RoomLiveCourse::with('studySession')->where('course_id', $_course->id)->paginate(15);
         return view('admin.course.room.index', [
             'course' => $_course,
             'rooms' => $rooms
@@ -326,14 +328,21 @@ class CourseController extends Controller
         ]);
     }
 
+    public function listScheduleByRoom(Course $course, RoomLiveCourse $room)
+    {
+        $study_schedules = CourseSchedule::with('room')->paginate(15);
+        return view('admin.course.room.shedulers', [
+            'course' => $course,
+            'room' => $room,
+            'schedules' => $study_schedules
+        ]);
+    }
+
     public function storeRoom(Request $request, Course $course)
     {
         $input = $request->input();
         DB::beginTransaction();
         try {
-            // $date = date('Y-m-d h:m:s', strtotime( $input['start_date']));
-
-            // dd($date);
             $room = RoomLiveCourse::create([
                 'course_id' => $course->id,
                 'study_session_id' => $input['study_session_id'],
@@ -343,17 +352,37 @@ class CourseController extends Controller
                 'number_member_maximum' => $input['number_member_maximum'],
             ]);
 
-        
-            // for ($i=0; $i < $input['number_member'] - 1; $i++) { 
-            //     var_dump();
-            // }
+            for ($i=0; $i < $input['number_session']; $i++) {
+                CourseSchedule::create([
+                    'course_id' => $course->id,
+                    'study_session_id' => $input['study_session_id'],
+                    'tutor_id' => $course->tutor_id,
+                    'is_test' => false,
+                    'date' => Carbon::create($input['start_date'])->addWeek($i)->format('Y-m-d')
+                ]);
+            }
 
             DB::commit();
-            return response()->json(['status' => 200, 'message' => 'succeed']);
+            return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
             dd($th);
-            return response()->json(['status' => 400, 'message' => 'fails'], 400);
+            return back()->with('error', 'Create error!');
         }
     }
+
+    public function destroyRoom(Course $course, Lecture $lecture)
+    {
+        try {
+            $lecture->delete();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            return response([
+                'message' => 'Cannot delete course'
+            ], 400);
+        }
+    }
+
 }

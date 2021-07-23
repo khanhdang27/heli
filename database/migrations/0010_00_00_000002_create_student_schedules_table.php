@@ -15,8 +15,8 @@ class CreateStudentSchedulesTable extends Migration
     {
         Schema::create('student_schedules', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('lecture_id')
-                ->constrained('lectures')
+            $table->foreignId('room_live_course_id')
+                ->constrained('room_live_courses')
                 ->cascadeOnDelete();
             $table->foreignId('course_id')
                 ->constrained('courses')

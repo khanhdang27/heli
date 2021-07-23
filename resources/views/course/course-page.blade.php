@@ -93,7 +93,7 @@
                             </div>
                             @if ( $course->type == Course::LIVE )
                                 <div id="menu1" class="container-fluid pb-5 tab-pane fade">
-                                    <x-product-detail.online-class/>
+                                    <x-product-detail.online-class :courseDetail=$course/>
                                 </div>
                             @endif
                             <div id="menu2" class="container-fluid pt-5 pb-5 tab-pane fade"><br>

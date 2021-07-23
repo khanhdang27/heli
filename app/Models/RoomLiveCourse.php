@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\StudySession;
+use App\Models\StudySession;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -21,6 +21,6 @@ class RoomLiveCourse extends Model
 
     public function studySession()
     {
-        return $this->hasOne(StudySession::class);
+        return $this->belongsTo(StudySession::class);
     }
 }

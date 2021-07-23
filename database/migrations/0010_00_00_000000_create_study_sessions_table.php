@@ -18,7 +18,7 @@ class CreateStudySessionsTable extends Migration
             $table->string('session_name');
             $table->dateTime('session_start');
             $table->dateTime('session_end');
-            $table->sortDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
