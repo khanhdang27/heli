@@ -30,12 +30,6 @@
                                     </div>
                                     <h2 class="mx-auto mb-0">@lang('keywords.loginWithGg')</h2>
                                 </a>
-                                <a class="btn-register-now btn-login btn-secondary" href="#">
-                                    <div class="box-ic ic-ap"><img class="ic" src="{{asset("images/ic/ic_apple.svg")}}"
-                                                                   width="33px">
-                                    </div>
-                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithAp')</h2>
-                                </a>
                             </div>
                             <div class="line-or d-flex align-items-center text-white">
                                 <hr>

@@ -23,38 +23,43 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open() !!}
-                            @csrf
+                            {!! Form::open(['route' => ['admin.user-manager.tutor.update', $tutor->id],
+                                            'method'=> 'put','enctype' => 'multipart/form-data']) !!}
                             <div class="form-group ">
                                 {{ Form::label('name', 'Name') }}
                                 {{ Form::text('name', $tutor->user->name, ['class'=>'form-control']) }}
                             </div>
+                            @error('name')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             <div class="form-group ">
-                                {{ Form::label('tutor_name', 'Full name') }}
-                                {{ Form::text('tutor_name', $tutor->full_name, ['class' => 'form-control']) }}
+                                {{ Form::label('full_name', 'Full name') }}
+                                {{ Form::text('full_name', $tutor->full_name, ['class' => 'form-control']) }}
                             </div>
+                            @error('full_name')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             <div class="form-group ">
                                 {{ Form::label('email', 'Email') }}
                                 {{ Form::email('email', $tutor->user->email, ['class' => 'form-control']) }}
                             </div>
+                            @error('email')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             <div class="form-group ">
-                                {{ Form::label('date_of_birth', 'Date of birth') }}
-                                {{ Form::email('date_of_birth', $tutor->date_of_birth, ['class' => 'form-control']) }}
+                                {{ Form::label('day_of_birth', 'Date of birth') }}
+                                {{ Form::date('day_of_birth', $tutor->date_of_birth, ['class' => 'form-control']) }}
                             </div>
+                            @error('day_of_birth')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             <div class="form-group ">
                                 {{ Form::label('phone_no', 'Phone') }}
-                                {{ Form::email('phone_no', $tutor->phone_no, ['class' => 'form-control']) }}
+                                {{ Form::text('phone_no', $tutor->phone_no, ['class' => 'form-control']) }}
                             </div>
-                            <div class="form-group ">
-
-                                {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id',
-                                    SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),
-                                    $tutor->subject[0]->id,
-                                    ['class' => 'form-control'])
-                                }}
-                            </div>
-
+                            @error('phone_no')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                             {{ Form::submit('Save', ['class' => 'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>

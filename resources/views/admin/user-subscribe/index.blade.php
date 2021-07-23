@@ -31,22 +31,22 @@
 
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Students
+                                    Members
                                 </h4>
                             </div>
-{{--                            <div class="col-auto">--}}
-{{--                                <!-- Button -->--}}
-{{--                                <a href="{{ route('admin.tutor.create') }}" class="btn btn-sm btn-success">--}}
-{{--                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"--}}
-{{--                                         stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"--}}
-{{--                                         class="css-i6dzq1">--}}
-{{--                                        <circle cx="12" cy="12" r="10"></circle>--}}
-{{--                                        <line x1="12" y1="8" x2="12" y2="16"></line>--}}
-{{--                                        <line x1="8" y1="12" x2="16" y2="12"></line>--}}
-{{--                                    </svg>--}}
-{{--                                    Add--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
+                            <div class="col-auto">
+                                <!-- Button -->
+                                <a href="{{ route('admin.user-subscribe.create') }}" class="btn btn-sm btn-success">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"
+                                         stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                         class="css-i6dzq1">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                    </svg>
+                                    Add
+                                </a>
+                            </div>
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
@@ -55,45 +55,25 @@
                             <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                 <tr>
-                                    <th>
-                                        Photo
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        Email
-                                    </th>
-                                    <th>
-                                        Membership Group
-                                    </th>
-                                    <th>
-                                        Active/Inactive
-                                    </th>
+                                    <th> Email</th>
+                                    <th> Status</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach($students as $value)
+                                @foreach($listMember as $member)
                                     <tr>
-                                        <td>
-                                            @if(!empty($value->user->avatar))
-                                                <img type="image/jpg" src="{{asset('/file/'.$value->user->avatar->id)}}" width="75" height="75"/>
-                                            @else
-                                                <img src="{{asset('images/photo_default.svg')}}" width="75">
-                                            @endif
+                                        <td class="goal-project">
+                                            {{$member['email_address']}}
                                         </td>
                                         <td class="goal-project">
-                                            {{ $value->full_name }}
-                                        </td>
-                                        <td class="goal-status">
-                                            {{ $value->user->email }}
-                                        </td>
-                                        <td class="goal-status">
-                                            {{ $value->user->membership->name }}
-                                        </td>
-                                        <td class="goal-status">
-                                            0
+                                            @if($member['status'] == 'subscribed')
+                                                <span class="text-success">●</span>
+                                                {{$member['status']}}
+                                            @else
+                                                <span class="text-warning">●</span>
+                                                {{$member['status']}}
+                                            @endif
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">
@@ -103,15 +83,17 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.user-manager.student.edit', $value->id) }}"
-                                                       class="dropdown-item">
-                                                        Edit
-                                                    </a>
-                                                    {{-- <a href="javascript:void(0)"
-                                                        onclick="itemDelete('{{ route('admin.tutor.destroy', $value->id) }}')"
-                                                        class="dropdown-item delete-item">
-                                                            Delete
-                                                    </a> --}}
+                                                    @if($member['status'] == 'subscribed')
+                                                        {!! Form::open(['route' => 'admin.user-subscribe.unsubscribe', 'enctype' => 'multipart/form-data' ]) !!}
+                                                        {{ Form::hidden('email',$member['email_address']) }}
+                                                        {{ Form::submit('Unsubscribe', ['class'=>'dropdown-item']) }}
+                                                        {!! Form::close() !!}
+                                                    @else
+                                                        <a class="dropdown-item">
+                                                            Unsubscribe
+                                                        </a>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </td>
@@ -120,7 +102,7 @@
                                 </tbody>
                             </table>
                             <div class="d-flex justify-content-center">
-                                {{ $students->links() }}
+
                             </div>
                         </div>
                     </div>
@@ -138,3 +120,5 @@
     <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
 @endpush
+
+

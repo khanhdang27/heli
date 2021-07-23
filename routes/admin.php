@@ -60,14 +60,20 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::get('manager-moderator', 'UserManagerController@moderatorIndex')->name('user-manager.moderator');
     Route::get('manager-moderator/edit/{id}', 'UserManagerController@moderatorEdit')->name('user-manager.moderator.edit');
-    Route::put('manager-moderator/update/{id}', 'UserManagerController@moderatorEdit')->name('user-manager.moderator.update');
+    Route::put('manager-moderator/update/{id}', 'UserManagerController@moderatorUpdate')->name('user-manager.moderator.update');
 
     Route::get('manager-student', 'UserManagerController@studentIndex')->name('user-manager.student');
     Route::get('manager-student/edit/{id}', 'UserManagerController@studentEdit')->name('user-manager.student.edit');
-    Route::put('manager-student/update/{id}', 'UserManagerController@studentEdit')->name('user-manager.student.update');
+    Route::put('manager-student/update/{id}', 'UserManagerController@studentUpdate')->name('user-manager.student.update');
 
     Route::get('manager-tutor', 'UserManagerController@tutorIndex')->name('user-manager.tutor');
     Route::get('manager-tutor/edit/{id}', 'UserManagerController@tutorEdit')->name('user-manager.tutor.edit');
-    Route::put('manager-tutor/update/{id}', 'UserManagerController@tutorEdit')->name('user-manager.tutor.update');
+    Route::put('manager-tutor/update/{id}', 'UserManagerController@tutorUpdate')->name('user-manager.tutor.update');
+
+    Route::get('user-subscribe','UserSubscribeController@listSubscribe')->name('user-subscribe');
+    Route::get('user-subscribe/create','UserSubscribeController@create')->name('user-subscribe.create');
+    Route::post('user-subscribe/subscribe', 'UserSubscribeController@addSubscribe')->name('user-subscribe.subscribe');
+    Route::post('user-subscribe/unsubscribe', 'UserSubscribeController@unsubscribe')->name('user-subscribe.unsubscribe');
+
     Route::resource('study-session', 'StudySessionController');
 });

@@ -182,6 +182,14 @@
                 @endrole
                 @role(['super-admin'])
                 <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.user-subscribe') active @endif"
+                       href="{{ route('admin.user-subscribe') }}">
+                        <i class="fe fe-clipboard"></i> User Subscribe
+                    </a>
+                </li>
+                @endrole
+                @role(['super-admin'])
+                <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.study-session.index') active @endif"
                        href="{{ route('admin.study-session.index') }}">
                         <i class="fe fe-clipboard"></i> Study Session

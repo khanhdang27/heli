@@ -20,7 +20,8 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open() !!}
+                            {!! Form::open(['route' => ['admin.user-manager.moderator.update', $moderator->id],
+                                            'method'=> 'put','enctype' => 'multipart/form-data']) !!}
                             <div class="form-group ">
                                 {{ Form::label('name', 'Name') }}
                                 {{ Form::text('name', $moderator->user->name, ['class'=>'form-control']) }}
@@ -47,13 +48,6 @@
                                 {{ Form::email('email', $moderator->user->email, ['class'=>'form-control']) }}
                             </div>
                             @error('email')
-                            <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
-                            <div class="form-group ">
-                                {{ Form::label('phone', 'Phone') }}
-                                {{ Form::email('phone', $moderator->user->phone, ['class'=>'form-control']) }}
-                            </div>
-                            @error('phone')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
