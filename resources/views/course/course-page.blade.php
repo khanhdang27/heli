@@ -1,13 +1,11 @@
 @php
 
-    use App\Models\Course;
-    $course = $courseDetail->membershipCourses->course;
-    $latesLecture = null;
-    if(!empty($student_course)){
-        $latesLecture = $student_course->lecture_study;
-    }
-    
-
+use App\Models\Course;
+$course = $courseDetail->membershipCourses->course;
+$latesLecture = null;
+if(!empty($student_course)){
+    $latesLecture = $student_course->lecture_study;
+}
 @endphp
 
 @extends('layout.app')
@@ -18,7 +16,7 @@
     {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
     <div class="body-content container-fluid">
         @if ( $course->type == Course::LIVE )
-            <x-product-detail.course-card-page :course=$course></x-product-detail.course-card-page>
+            <x-product-detail.course-card-page :course=$course :studentCourse=$student_course></x-product-detail.course-card-page>
         @elseif($course->type == Course::RECORD )
             <x-home.video-course :courseDetail=$course :latesLecture=$latesLecture></x-home.video-course>
         @else

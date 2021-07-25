@@ -1,29 +1,29 @@
 <form class="rating">
     @csrf
     <label>
-        <input type="radio" name="stars" value="1"/>
+        <input class="stars-input" type="radio" name="stars" value="1"/>
         <span class="icon">★</span>
     </label>
     <label>
-        <input type="radio" name="stars" value="2"/>
-        <span class="icon">★</span>
-        <span class="icon">★</span>
-    </label>
-    <label>
-        <input type="radio" name="stars" value="3"/>
-        <span class="icon">★</span>
+        <input class="stars-input" type="radio" name="stars" value="2"/>
         <span class="icon">★</span>
         <span class="icon">★</span>
     </label>
     <label>
-        <input type="radio" name="stars" value="4"/>
-        <span class="icon">★</span>
+        <input class="stars-input" type="radio" name="stars" value="3"/>
         <span class="icon">★</span>
         <span class="icon">★</span>
         <span class="icon">★</span>
     </label>
     <label>
-        <input type="radio" name="stars" value="5"/>
+        <input class="stars-input" type="radio" name="stars" value="4"/>
+        <span class="icon">★</span>
+        <span class="icon">★</span>
+        <span class="icon">★</span>
+        <span class="icon">★</span>
+    </label>
+    <label>
+        <input class="stars-input" type="radio" name="stars" value="5"/>
         <span class="icon">★</span>
         <span class="icon">★</span>
         <span class="icon">★</span>
@@ -33,7 +33,7 @@
 </form>
 
 <script>
-    $(':radio').change(function () {
+    $('.stars-input').change(function () {
         var rate_no = this.value;
         console.log('New star rating: ' + rate_no);
         $.ajax({

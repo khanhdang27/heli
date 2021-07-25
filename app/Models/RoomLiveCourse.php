@@ -16,11 +16,12 @@ class RoomLiveCourse extends Model
 
     public function course()
     {
-        return $this->hasOne(Course::class);
+        return $this->belongsTo(Course::class);
     }
 
     public function studySession()
     {
         return $this->belongsTo(StudySession::class);
     }
+
 }

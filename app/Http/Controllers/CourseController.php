@@ -127,11 +127,14 @@ class CourseController extends Controller
             'membershipCourses',
             'courseDiscounts',
             'membershipCourses.course',
+            'membershipCourses.course.rooms',
             'membershipCourses.course.lecture',
             'membershipCourses.course.comment',
             'membershipCourses.course.subject',
             'membershipCourses.course.tutor',
             'membershipCourses.course.ratings',
+            'membershipCourses.course.rooms.studySession',
+            'membershipCourses.course.schedule',
             'membershipCourses.course.courseMaterial'
         )->where('publish',1)
         ->whereHas('membershipCourses', function ($query) {

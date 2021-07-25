@@ -27,7 +27,7 @@ class CreateCourseSchedulesTable extends Migration
             $table->foreignId('tutor_id')
                 ->constrained('tutors')
                 ->cascadeOnDelete();
-            $table->boolean('is_test');
+            $table->boolean('is_test')->default('false');
             $table->date('date');
             $table->unique(['course_id', 'study_session_id', 'tutor_id', 'is_test', 'date'], 'course_schedules_unique');
             $table->timestamps();

@@ -961,3 +961,22 @@ input.check-subscribe{
         }
     }
 }
+
+.room-selection {
+    input[type="radio"] {
+        opacity: 0;
+    }
+    label {
+        display: inline-block;
+        padding: 4px 11px;
+        font-family: Arial;
+        font-size: 16px;
+        cursor: pointer;
+    }
+      
+    input[type="radio"]:checked + label {
+        border-style: solid;
+        border-color: var(--primary);
+        
+    }
+}
