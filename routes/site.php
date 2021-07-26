@@ -31,10 +31,6 @@ Route::get('document/{id}','CertificateController@documentDetail')->name('docume
 Route::get('course/search', 'CourseController@search')->name('course.search');
 Route::resource('course', 'CourseController')->except(['index', 'update', 'store', 'delete']);
 
-Route::get('lesson', function () {
-    return view('course.lesson-page');
-})->name('lesson');
-
 Route::get('blog-view', function () {
     return view('blog.blog-view');
 })->name('blog-view');
@@ -64,6 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('rating', 'RatingController');
 
     Route::resource('lecture', 'LectureController');
+
+    
+    Route::get('live/{id}', 'LiveController@show')->name('live_show');
 
     Route::prefix('my/')->name('user.')->group(function () {
         Route::get('course', 'CourseController@my')->name('course');

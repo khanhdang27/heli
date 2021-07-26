@@ -11163,6 +11163,10 @@ form#certificate_form select option:checked {
   background-color: var(--white);
 }
 
+input.check-subscribe {
+  transform: scale(1.7);
+}
+
 .bottom-form a {
   color: var(--white);
 }
@@ -11951,6 +11955,23 @@ form#certificate_form select option:checked {
   text-decoration: none;
 }
 
+.room-selection input[type="radio"] {
+  opacity: 0;
+}
+
+.room-selection label {
+  display: inline-block;
+  padding: 4px 11px;
+  font-family: Arial;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.room-selection input[type="radio"]:checked + label {
+  border-style: solid;
+  border-color: var(--primary);
+}
+
 .rating {
   display: inline-block;
   position: relative;
@@ -11980,7 +12001,7 @@ form#certificate_form select option:checked {
 }
 
 .rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
+  color: #969696;
   text-shadow: 0 0 5px #fad000;
 }
 
@@ -11989,7 +12010,7 @@ form#certificate_form select option:checked {
 }
 
 .rating label:last-child .icon {
-  color: #000;
+  color: #969696;
 }
 
 .rating label:nth-child(1) {
@@ -12124,9 +12145,9 @@ form#certificate_form select option:checked {
   }
 
   .rating {
-    height: 20px;
-    line-height: 10px;
-    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 30px;
   }
 
   .buy-course-box {

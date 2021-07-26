@@ -26,6 +26,8 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('course/{course}/rooms/{room}', 'CourseController@updateRoom')->name('course.room.update');
     Route::delete('course/{course}/rooms/{room}', 'CourseController@destroyRoom')->name('course.room.destroy');
 
+    Route::get('course/{course}/rooms/{room}/schedule', 'CourseController@listScheduleByRoom')->name('course.room.scheduler');
+    
     Route::get('course/{course}/lecture', 'CourseController@lectures')->name('course.lecture.list');
     Route::get('course/{course}/lecture/create', 'CourseController@createLecture')->name('course.lecture.create');
     Route::post('course/{course}/lecture', 'CourseController@storeLecture')->name('course.lecture.store');

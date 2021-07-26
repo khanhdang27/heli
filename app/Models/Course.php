@@ -73,4 +73,9 @@ class Course extends Model implements TranslatableContract
     {
         return $this->hasMany(RoomLiveCourse::class);
     }
+
+    public function schedule()
+    {
+        return $this->hasMany(CourseSchedule::class);
+    }
 }

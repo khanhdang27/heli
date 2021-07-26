@@ -81,7 +81,7 @@
                                 @foreach($rooms as $room)
                                     <tr>
                                         <td class="goal-project">
-                                            {{ $room->study_session_id }}
+                                            {{ $room->studySession->session_name }}
                                         </td>
                                         <td class="goal-project">
                                             {{ $room->start_date }}
@@ -103,6 +103,10 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="{{ route('admin.course.room.scheduler', ['course'=>$course, 'room'=>$room]) }}"
+                                                        class="dropdown-item">
+                                                        Scheduler
+                                                    </a>
                                                     <a href="{{ route('admin.course.room.edit', ['course'=>$course, 'room'=>$room]) }}"
                                                         class="dropdown-item">
                                                         Edit
