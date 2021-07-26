@@ -30,7 +30,7 @@ class CreateStudentSchedulesTable extends Migration
             $table->foreignId('student_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
-            $table->boolean('is_test')->default('false');
+            $table->boolean('is_test')->default(false);
             $table->date('date');
             $table->text('note')->nullable();
             $table->unique(['course_id', 'study_session_id', 'is_test', 'student_id', 'date'], 'student_schedules_unique');
