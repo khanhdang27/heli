@@ -27,19 +27,24 @@
                             @csrf
                             <div class="form-group">
                                 {{ Form::label('certificate_id', 'Certificate') }}
-                                {{ Form::select('certificate_id', SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id'),$subject->certificate_id, ['class' => 'form-control']) }}
+                                {{ Form::select('certificate_id', 
+                                array_filter(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id'), function($var, $id)
+                                    {
+                                        return $id != 1;
+                                    }, ARRAY_FILTER_USE_BOTH)
+                                ,$subject->certificate_id, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('subject_name:en', 'Name (English)') }}
-                                {{ Form::text('subject_name:en', $subject->subject_name, ['class' => 'form-control']) }}
+                                {{ Form::text('subject_name:en', $subject->translate('en')->subject_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('subject_name:cn', 'Name (Traditional Chinese)') }}
-                                {{ Form::text('subject_name:cn', $subject->subject_name, ['class' => 'form-control']) }}
+                                {{ Form::text('subject_name:cn', $subject->translate('cn')->subject_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('subject_name:sc', 'Name (Simplify Chinese)') }}
-                                {{ Form::text('subject_name:sc', $subject->subject_name, ['class' => 'form-control']) }}
+                                {{ Form::text('subject_name:sc', $subject->translate('sc')->subject_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('subject_color_background', 'Color)') }}

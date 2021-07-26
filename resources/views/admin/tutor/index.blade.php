@@ -75,9 +75,6 @@
                                     <th>
                                         Name
                                     </th>
-                                    <th>
-                                        Subject
-                                    </th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -95,7 +92,6 @@
                                             {{ $value->full_name }}
                                         </td>
                                         <td class="goal-status">
-
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

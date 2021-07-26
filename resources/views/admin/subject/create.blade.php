@@ -26,9 +26,13 @@
                             {!! Form::open(['route' => 'admin.subject.store', 'enctype' => 'multipart/form-data' ]) !!}
                             @csrf
                             <div class="form-group ">
-
                                 {{ Form::label('certificate_id', 'Certificate') }}
-                                {{ Form::select('certificate_id', SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id'),null, ['class' => 'form-control']) }}
+                                {{ Form::select('certificate_id', 
+                                    array_filter(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id'), function($var, $id)
+                                    {
+                                        return $id != 1;
+                                    }, ARRAY_FILTER_USE_BOTH)
+                                    , null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('subject_name:en', 'Name (English)') }}

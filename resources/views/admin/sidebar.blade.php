@@ -8,9 +8,8 @@
         </button>
 
         <!-- Brand -->
-        <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
-            <img src="{{ asset('images/HeliosLogo.png') }}" class="navbar-brand-img
-              mx-auto" alt="...">
+        <a class="navbar-brand " href="{{ route('admin.dashboard') }}">
+            <img src="{{ asset('images/HeliosLogo.svg') }}" class="navbar-brand-img mx-auto bg-white border rounded" alt="...">
         </a>
 
         <!-- User (xs) -->

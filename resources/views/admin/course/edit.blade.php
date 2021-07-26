@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-body">
                         <div class="card-body">
-                            {!! Form::open(['route' => ['admin.course.update', $course->id], 'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
+                            {!! Form::open(['route' => ['admin.course.update', $course->id], 'method' => 'put', 'enctype' => 'multipart/form-data', 'id'=>'create_course']) !!}
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('course_name:en', 'Course Name (English)') }}
@@ -41,14 +41,21 @@
                             <div class="row justify-content-between">
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('subject_id', 'Subject') }}
-                                    {{ Form::select('subject_id',
-                                        SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),
-                                        $course->subject->id, ['class' => 'form-control']) }}
+                                    {{ Form::select('subject_id', 
+                                        array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
+                                        {
+                                            return $id != 1;
+                                        }, ARRAY_FILTER_USE_BOTH) , 
+                                        $course->subject->id, ['class' => 'form-control']) 
+                                    }}
                                 </div>
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('tutor_id', 'Tutor') }}
                                     {{ Form::select('tutor_id',
-                                        SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'),
+                                        array_filter(SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'), function($var, $id)
+                                            {
+                                                return $id != 1;
+                                            }, ARRAY_FILTER_USE_BOTH),
                                         $course->tutor->id, ['class' => 'form-control']) }}
                                 </div>
                                 <div class="form-group col-12 col-md-4">
@@ -89,5 +96,22 @@
         window.onload = function () {
             CKEDITOR.replace('ckeditor');
         };
+    </script>
+    <script>
+        var create_course = new Vue({
+            el: '#create_course',
+            methods:
+                {
+                    setDefaultInvisible() {
+                        let type = document.getElementById('type');
+                        console.log(type.value);
+                        if (type.value === "3") {
+                            document.getElementById('tutor').hidden = true;
+                        } else {
+                            document.getElementById('tutor').hidden = false;
+                        }
+                    }
+                }
+        })
     </script>
 @endsection

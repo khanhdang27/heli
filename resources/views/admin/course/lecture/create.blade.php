@@ -36,11 +36,6 @@ use App\Models\Subject;
                             {{ Form::label('lectures_description', 'Description') }}
                             {{ Form::text('lectures_description',old('lectures_description'),['class' => 'form-control', 'required', 'id'=> 'lectures_description']) }}
                         </div>
-                        
-                        <div class="form-group ">
-                            {{ Form::label('is_live', 'Live') }}
-                            {{ Form::text('is_live',old('is_live'),['class' => 'form-control', 'required']) }}
-                        </div>
                         <div class="form-group ">
                             Pick up video
                             <label class="btn btn-block btn-info">
@@ -95,9 +90,9 @@ use App\Models\Subject;
                 ;(new VimeoUpload({
                     name: document.getElementById('lectures_name').value,
                     description: document.getElementById('lectures_description').value,
-                    private: true,
+                    private: false,
                     file: files[0],
-                    token: '93db9f4146dbaa7c7616f83cc7ea1580',
+                    token: 'a4e21d56502edc34f8e27e0244fc46b9',
                     upgrade_to_1080: true,
                     onError: function(data) {
                         showMessage('<strong>Error</strong>: ' + JSON.parse(data).error, 'danger')

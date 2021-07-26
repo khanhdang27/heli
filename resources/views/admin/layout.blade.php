@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/highlight.js/styles/vs2015.css') }}">
     <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/dropzone/dist/min/dropzone.min.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" integrity="sha256-b5ZKCi55IX+24Jqn638cP/q3Nb2nlx+MH/vMMqrId6k=" crossorigin="anonymous" />
+
+    <link rel='stylesheet' id='flatpickr-style-css'  href='https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css?ver=5.2.4' type='text/css' media='all' />
+
     <!-- Map -->
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet'/>
     <!-- Theme CSS -->
@@ -65,16 +67,13 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha256-5YmaxAwMjIpMrVlK84Y/+NjCpKnFYa8bWWBbUHSBGfU=" crossorigin="anonymous"></script>
-
-
 
 @stack('js')
 @stack('inputFile')
 @stack('ck-editor-init')
 <!-- Plugin file -->
 
-
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/flatpickr?ver=5.2.4'></script>
 
 </body>
 </html>
