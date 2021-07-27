@@ -28,7 +28,11 @@ use App\Utilities\SelectionByClass;
                             {!! Form::open(['route' => 'admin.course-material.store', 'enctype'=>'multipart/form-data']) !!}
                             <div class="form-group ">
                                 {{ Form::label('course_id', 'Course') }}
-                                {{ Form::select('course_id', SelectionByClass::getValues(\App\Models\Course::class,'course_name','id') ,null, ['class' => 'form-control']) }}
+                                {{ Form::select('course_id', array_filter(SelectionByClass::getValues(\App\Models\Course::class,'course_name','id'), function($var, $id)
+                                {
+                                    return $id != 1;
+                                }, ARRAY_FILTER_USE_BOTH) , 
+                                null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_material_name:en', 'Material Name (English)') }}
