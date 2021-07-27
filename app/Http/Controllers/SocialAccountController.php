@@ -11,8 +11,8 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Session;
 use Spatie\Newsletter\NewsletterFacade;
+
 
 class SocialAccountController extends Controller
 {
@@ -50,7 +50,6 @@ class SocialAccountController extends Controller
                         ]);
                         $newUser_social->save();
                         $stripeCustomer = $newUser->createAsStripeCustomer(['email' => $user->getEmail()]);
-
                         if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
                             NewsletterFacade::subscribe($user->getEmail());
                         }
