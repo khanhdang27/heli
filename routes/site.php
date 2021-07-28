@@ -60,7 +60,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('rating', 'RatingController');
 
     Route::resource('lecture', 'LectureController');
-
     
     Route::get('live/{id}', 'LiveController@show')->name('live_show');
 

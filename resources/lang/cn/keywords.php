@@ -112,6 +112,7 @@ return [
     'toast' =>[
         'loginSuccess' => '登錄成功',
         'loginFailed' => '登錄失敗',
+        'loginInactive' => '登录无效',
         'registerSuccess' => '註冊成功',
         'pleaseEnterEmailPass' => '請輸入您的電子郵件和密碼!',
         'incorrect' => '電子郵件或密碼不正確',

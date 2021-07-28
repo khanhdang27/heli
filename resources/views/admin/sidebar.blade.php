@@ -75,12 +75,7 @@
                         <i class="fe fe-clipboard"></i> Subjects
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.tutor.index') active @endif"
-                       href="{{ route('admin.tutor.index') }}">
-                        <i class="fe fe-clipboard"></i> Tutors
-                    </a>
-                </li>
+                
                 @endrole
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.course.index') active @endif"
@@ -150,12 +145,6 @@
                 </li>
                 @endrole
                 @role(['super-admin'])
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.moderator.index') active @endif"
-                       href="{{ route('admin.moderator.index') }}">
-                        <i class="fe fe-clipboard"></i> Moderator
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#collapseUserManager" role="button"
                        aria-expanded="false" aria-controls="collapseUserManager">

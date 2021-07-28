@@ -107,15 +107,15 @@
                     url: "{{ route('site.userLogin') }}",
                     data: formData
                 }).done(function (data) {
+                    spinner.addClass('d-none')
                     if (data['message'] == 'success') {
-                        spinner.addClass('d-none')
                         toastr["success"]("@lang('keywords.toast.loginSuccess')");
                         location.reload()
                     } else if (data['message'] == 'empty') {
-                        spinner.addClass('d-none')
                         toastr["error"]("", "@lang('keywords.toast.pleaseEnterEmailPass')");
+                    } else if (data['message'] == 'inactive') {
+                        toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginInactive')");
                     } else {
-                        spinner.addClass('d-none')
                         toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
                     }
                 })

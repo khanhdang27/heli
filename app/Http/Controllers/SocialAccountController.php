@@ -30,6 +30,9 @@ class SocialAccountController extends Controller
             $existingUser = User::where('email', $user->getEmail())->first();
 
             if ($existingUser) {
+                if ($existingUser->active == 0) {
+                    return redirect()->route('site.home')->with(['error' => 'This account is inactive']);
+                }
                 Auth::login($existingUser);
             } else {
                 DB::beginTransaction();
@@ -62,14 +65,12 @@ class SocialAccountController extends Controller
                     DB::commit();
                 } catch (\Throwable $th) {
                     DB::rollBack();
-                    dd($th);
-                    return redirect()->with([''])->route('site.home');
+                    return redirect()->route('site.home')->with(['error' => $th->getMessage()]);
                 }
             }
             return redirect()->route('site.home');
         } catch (\Throwable $th) {
-            dd($th);
-            return redirect()->route('site.home');
+            return redirect()->route('site.home')->with(['error' => $th->getMessage()]);
         }
     }
 

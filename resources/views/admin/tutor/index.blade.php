@@ -85,7 +85,7 @@
                                             @if(!empty($value->user->avatar))
                                                 <img type="image/jpg" src="{{asset('/file/'.$value->user->avatar->id)}}" width="75" height="75"/>
                                             @else
-                                            avatar
+                                                <img src="{{asset('images/photo_default.svg')}}" width="75">
                                             @endif
                                         </td>
                                         <td class="goal-project">
