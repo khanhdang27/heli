@@ -1,4 +1,4 @@
-{{--{{dd($comment)}}--}}
+
 <div class="">
     <div class="row row-question pt-3 pb-3 border-secondary bg-white">
         <div class="col-xl-2">

@@ -36,11 +36,6 @@ use App\Models\Subject;
                             {{ Form::label('lectures_description', 'Description') }}
                             {{ Form::text('lectures_description',old('lectures_description'),['class' => 'form-control', 'required', 'id'=> 'lectures_description']) }}
                         </div>
-                        
-                        <div class="form-group ">
-                            {{ Form::label('is_live', 'Live') }}
-                            {{ Form::text('is_live',old('is_live'),['class' => 'form-control', 'required']) }}
-                        </div>
                         <div class="form-group ">
                             Pick up video
                             <label class="btn btn-block btn-info">
@@ -97,7 +92,7 @@ use App\Models\Subject;
                     description: document.getElementById('lectures_description').value,
                     private: true,
                     file: files[0],
-                    token: '93db9f4146dbaa7c7616f83cc7ea1580',
+                    token: 'a4e21d56502edc34f8e27e0244fc46b9',
                     upgrade_to_1080: true,
                     onError: function(data) {
                         showMessage('<strong>Error</strong>: ' + JSON.parse(data).error, 'danger')
@@ -106,6 +101,9 @@ use App\Models\Subject;
                         updateProgress(data.loaded / data.total)
                     },
                     onComplete: function(videoId, index) {
+                        
+                        console.log(videoId)
+                        console.log(index)
                         var url = 'https://vimeo.com/' + videoId
 
                         if (index > -1) {
@@ -119,10 +117,8 @@ use App\Models\Subject;
                                     lectures_name: this.metadata[index].name,
                                     lectures_description: this.metadata[index].description,
                                     video_resource: videoId,
-                                    is_live: false
                                 }).then(function (response) {
                                     console.info(response);
-                                   
                                 })
                                 .catch(function (error) {
                                     console.error(error);
@@ -137,7 +133,6 @@ use App\Models\Subject;
             function showMessage(html, type) {
                 /* hide progress bar */
                 document.getElementById('progress-container').style.display = 'none'
-
                 /* display alert message */
                 var element = document.createElement('div')
                 element.setAttribute('class', 'alert alert-' + (type || 'success'))

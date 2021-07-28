@@ -15,7 +15,7 @@ if (empty($latesLecture)) {
 }
 
 if (!empty($lecture_default)) {
-    $defaultSource = 'https://player.vimeo.com/video/' . $lecture_default->video_resource . '?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713';
+    $defaultSource = 'https://player.vimeo.com/video/' . $lecture_default->video_resource . '?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id='.config('vimeo_app_id');
 }
 
 
@@ -105,13 +105,7 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
         methods: {
             clickLecture: function() {
                 if (event.target.getAttribute('data-id')) {
-                    /**
-                    *@TODO Update logic load page
-                    */
-                    // this.videoLink = "https://player.vimeo.com/video/" + event.target.getAttribute('data-id') +
-                    //     "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=217713"
-                    // document.getElementById('videoView').src = this.videoLink
-
+                   
                     let user_id = {{ Auth::check() ? Auth::user()->id : 0 }};
                     let lecture_id = event.target.getAttribute('data-lecture');
 

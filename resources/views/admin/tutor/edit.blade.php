@@ -1,4 +1,5 @@
 @php
+use App\Models\Subject;
 use App\Utilities\SelectionByClass;
 @endphp
 
@@ -46,7 +47,10 @@ use App\Utilities\SelectionByClass;
 
                                 {{ Form::label('subject_id', 'Subject') }}
                                 {{ Form::select('subject_id',
-                                    SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),
+                                    array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
+                                    {
+                                        return $id != 1;
+                                    }, ARRAY_FILTER_USE_BOTH),
                                     $tutor->subject[0]->id,
                                     ['class' => 'form-control'])
                                 }}

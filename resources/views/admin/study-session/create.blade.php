@@ -33,29 +33,14 @@ use App\Utilities\SelectionByClass;
 
                             <div class="row">
                                 <div class="form-group col-6">
-                                    <div class='input-group input-group-merge' id='datetimepickerstart'>
-                                       <input type='text' class="form-control" 
-                                        aria-describedby="inputGroup"
-                                        name="session_start"
-                                       />
-                                       <span id="inputGroup" class="input-group-text">
-                                            <span class="fe fe-clock"></span>
-                                       </span>
-                                    </div>
-                                 </div>
+                                    <input type='text' class="form-control date" name="session_start" />
+                                </div>
                                 <div class="form-group col-6">
-                                    <div class='input-group input-group-merge' id='datetimepickerend'>
-                                       <input type='text' class="form-control" 
-                                        aria-describedby="inputGroup"
-                                        name="session_end"
-                                       />
-                                       <span id="inputGroup" class="input-group-text">
-                                            <span class="fe fe-clock"></span>
-                                       </span>
-                                    </div>
+                                    <input type='text' class="form-control date" name="session_end" />
                                  </div>
                             </div>
-                            
+
+
                             {{ Form::submit('Save', ['class'=>'btn btn-primary my-5']) }}
                             {!! Form::close() !!}
                         </div>
@@ -66,13 +51,15 @@ use App\Utilities\SelectionByClass;
     </div>
 
     <script type="text/javascript">
-        $(function () {
-            $('#datetimepickerstart').datetimepicker({
-                format: 'LT'
-            });
-            $('#datetimepickerend').datetimepicker({
-                format: 'LT'
-            });
+        $(document).ready(function () {
+            var config =  {
+                enableTime: true,
+                noCalendar: true,
+                dateFormat: "H:i",
+                defaultDate: "00:00"
+            };
+
+            $('input.date').flatpickr(config);
         });
     </script>
 

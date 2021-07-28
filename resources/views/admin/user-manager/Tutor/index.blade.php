@@ -64,9 +64,7 @@
                                     <th>
                                         Email
                                     </th>
-                                    <th>
-                                        Active/Inactive
-                                    </th>
+                                    <th> Active/Inactive</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -97,7 +95,7 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.user-manager.tutor.edit', $value->id) }}"
+                                                    <a href="{{ route('admin.tutor.edit', $value->id) }}"
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>

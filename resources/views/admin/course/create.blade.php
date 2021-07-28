@@ -43,7 +43,13 @@
                             <div class="row justify-content-between">
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('subject_id', 'Subject') }}
-                                    {{ Form::select('subject_id', SelectionByClass::getValues(Subject::class,'subject_name','id') ,null, ['class' => 'form-control']) }}
+                                    {{ Form::select('subject_id', 
+                                        array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
+                                        {
+                                            return $id != 1;
+                                        }, ARRAY_FILTER_USE_BOTH) , 
+                                        null, ['class' => 'form-control']) 
+                                    }}
                                 </div>
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('type', 'Type') }}
@@ -54,8 +60,11 @@
                                 <div class="form-group col-12 col-md-4" id="tutor">
                                     {{ Form::label('tutor_id', 'Tutor') }}
                                     {{ Form::select('tutor_id',
-                                            SelectionByClass::getValues(Tutor::class,'full_name','id') ,
-                                                null, ['class' => 'form-control']) }}
+                                         array_filter(SelectionByClass::getValues(Tutor::class,'full_name','id'), function($var, $id)
+                                        {
+                                            return $id != 1;
+                                        }, ARRAY_FILTER_USE_BOTH) ,
+                                        null, ['class' => 'form-control']) }}
                                 </div>
                             </div>
                             <div class="form-group ">
@@ -94,16 +103,17 @@
         };
     </script>
     <script>
-
         var create_course = new Vue({
             el: '#create_course',
             methods:
                 {
                     setDefaultInvisible() {
                         let type = document.getElementById('type');
-                        console.log(type.value);
-                        if (type.value === "3")
+                        if (type.value === "3") {
                             document.getElementById('tutor').hidden = true;
+                        } else {
+                            document.getElementById('tutor').hidden = false;
+                        }
 
                     }
                 }

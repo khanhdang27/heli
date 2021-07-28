@@ -62,8 +62,8 @@
                             </div>
                         </div> <!-- / .row -->
                     </div>
-                    <div class="card-body">
-                        <div class=" mb-0 " data-toggle="lists"
+                    <div class="card-body h-100">
+                        <div class=" mb-0" data-toggle="lists"
                              data-options="{&quot;valueNames&quot;: [&quot;goal-project&quot;, &quot;goal-status&quot;, &quot;goal-progress&quot;, &quot;goal-date&quot;]}">
                             <table id="course-table" class="table table-sm card-table h-100">
                                 <thead>

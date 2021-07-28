@@ -112,6 +112,7 @@ return [
     'toast' =>[
         'loginSuccess' => 'Login success',
         'loginFailed' => 'Login failed',
+        'loginInactive' => 'Login Inactive',
         'registerSuccess' => 'Register success',
         'pleaseEnterEmailPass' => 'Please enter your email and password!',
         'incorrect' => 'Email or password incorrect',

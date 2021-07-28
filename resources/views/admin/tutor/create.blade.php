@@ -66,7 +66,10 @@
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id',SelectionByClass::getValues(Subject::class,'subject_name','id'),null, ['class' => 'form-control']) }}
+                                {{ Form::select('subject_id',array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
+                                {
+                                    return $id != 1;
+                                }, ARRAY_FILTER_USE_BOTH), null, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:en', 'Tutor Info (English)') }}

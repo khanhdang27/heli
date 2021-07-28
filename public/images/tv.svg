@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="135" height="135" viewBox="0 0 135 135">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_156" data-name="Rectangle 156" width="135" height="135" transform="translate(165.997 1105)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="Mask_Group_30" data-name="Mask Group 30" transform="translate(-165.997 -1105)" clip-path="url(#clip-path)">
+    <g id="tv" transform="translate(166 1105)">
+      <g id="tv-2" data-name="tv">
+        <g id="tv-3" data-name="tv">
+          <rect id="Rectangle_157" data-name="Rectangle 157" width="135" height="135" transform="translate(-0.003)" fill="#0b487d" opacity="0"/>
+          <path id="Path_162" data-name="Path 162" d="M87.634,24.588H67.378L80.356,11.667a5.665,5.665,0,0,0-8.012-8.012L53.781,22.275,35.217,3.655a5.665,5.665,0,0,0-8.012,8.012L40.183,24.588H19.927A16.927,16.927,0,0,0,3,41.515V97.938a16.927,16.927,0,0,0,16.927,16.927H87.634a16.927,16.927,0,0,0,16.927-16.927V41.515A16.927,16.927,0,0,0,87.634,24.588Zm5.642,73.35a5.642,5.642,0,0,1-5.642,5.642H19.927a5.642,5.642,0,0,1-5.642-5.642v-39.5A5.642,5.642,0,0,1,19.927,52.8H87.634a5.642,5.642,0,0,1,5.642,5.642Z" transform="translate(13.927 9.266)" fill="#0b487d"/>
+        </g>
+        <text id="直播班A" transform="translate(34.997 94)" fill="#0b487d" font-size="17" font-family="YuGothicUI-Regular, Yu Gothic UI"><tspan x="0" y="0">直播班</tspan><tspan y="0" font-family="SegoeUI, Segoe UI">A</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

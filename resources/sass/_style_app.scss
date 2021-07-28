@@ -80,7 +80,7 @@ h5,
 .product-category-padding {
     padding-left: 3rem;
     padding-right: 3rem;
-    &:hover{
+    &:hover {
         cursor: pointer;
         transform: translate3d(0, -7px, 0);
         transition: all 0.5s;
@@ -216,7 +216,7 @@ form#certificate_form {
     background-color: var(--white);
 }
 
-input.check-subscribe{
+input.check-subscribe {
     transform: scale(1.7);
 }
 
@@ -320,7 +320,7 @@ input.check-subscribe{
     padding: 0 3rem;
     border: none;
     min-height: 47px;
-    &:hover{
+    &:hover {
         transform: translate3d(0, -1px, 0);
         transition: all 0.5s;
         box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.20);
@@ -984,10 +984,8 @@ input.check-subscribe{
         font-size: 16px;
         cursor: pointer;
     }
-
-    input[type="radio"]:checked + label {
+    input[type="radio"]:checked+label {
         border-style: solid;
         border-color: var(--primary);
-
     }
 }

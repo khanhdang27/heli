@@ -68,7 +68,7 @@ class Course extends Model implements TranslatableContract
     {
         return $this->hasMany(Rating::class, 'ratingable_id');
     }
-
+    
     public function rooms()
     {
         return $this->hasMany(RoomLiveCourse::class);
