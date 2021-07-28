@@ -14,7 +14,7 @@
         <div class="container-fluid pt-5 pb-5">
             <div class="ml-auto mr-auto pl-5 d-flex flex-wrap w-75">
                 @foreach ($tags as $value)
-                    <button class="btn-hashtag ml-3 mr-3" type="button">
+                    <button class="btn-hashtag mx-3" type="button">
                         {{ $value }}
                     </button>
                 @endforeach
@@ -25,7 +25,11 @@
             <div class="row row-question border-secondary pt-5 pb-5">
                 <div class="col-lg-3">
                     <div class="d-flex flex-wrap text-primary">
-                        <img src="{{ asset('images/ava2.jpg') }}" width="98" height="98">
+                        @if(empty($post->user->avatar))
+                            <img class="mb-3 border border-secondary" src="{{asset("images/photo_default.svg")}}" width="98" height="98">
+                        @else
+                            <img class="mb-3 border border-secondary" src="{{asset('/file/'.$post->user->avatar->id)}}" width="98" height="98">
+                        @endif
                         <div class="pl-3 pt-2">
                             <p class="text-comment">{{ $post->user->name }}</p>
                             <h3 class="m-0">{{ substr($post->created_at, 0, 10) }}</h3>

@@ -98,7 +98,7 @@ class User extends Authenticatable
             return $this->hasMany(StudentCourses::class, 'student_id');
         }
         return null;
-    } 
+    }
 
     /**
      * Get the default Stripe API options for the current Billable model.
@@ -112,5 +112,9 @@ class User extends Authenticatable
             'api_key' => config('app.stripe_secret'),
             'stripe_version' => Cashier::STRIPE_VERSION,
         ];
+    }
+
+    public function membership(){
+        return $this->belongsTo(Membership::class, 'membership_group');
     }
 }

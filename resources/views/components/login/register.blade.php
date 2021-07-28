@@ -31,12 +31,6 @@
                                     </div>
                                     <h2 class="mx-auto mb-0">@lang('keywords.loginWithGg')</h2>
                                 </a>
-                                <a class="btn-register-now btn-login btn-secondary" href="#">
-                                    <div class="box-ic ic-ap"><img class="ic" src="{{asset("images/ic/ic_apple.svg")}}"
-                                                                   width="33px">
-                                    </div>
-                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithAp')</h2>
-                                </a>
                             </div>
                             <div class="line-or d-flex align-items-center text-white">
                                 <hr>
@@ -50,6 +44,12 @@
                                                 'placeholder'=>'Email',
                                                 'autocomplete'=>'off'
                                     ]) }}
+                            </div>
+                            <div class="form-group form-check mt-5">
+                                <input type="checkbox" class="form-check-input check-subscribe" id="subscribe" name="subscribe">
+                                <label class="form-check-label h4 text-white ml-3" for="subscribe">
+                                    {{__('Subscribe to our Newsletter')}}
+                                </label>
                             </div>
                             <div class="bottom-btn mt-5 pt-3">
                                 <button class='btn-login btn-secondary btn-register-now'
