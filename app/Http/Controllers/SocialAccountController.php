@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 use App\Mail\SendMail;
+use App\Models\Student;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
@@ -46,6 +47,9 @@ class SocialAccountController extends Controller
                     $newUser->assignRole('student');
 
                     if ($newUser->save()){
+                        
+                        $student = new Student(['user_id' => $newUser->id]);
+                        $student->save();
                         $newUser_social = new SocialAccount([
                             'user_id' => $newUser->id,
                             'social_id' => $user->getId(),

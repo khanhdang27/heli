@@ -71,8 +71,4 @@ class Tutor extends Model implements TranslatableContract
         return $this->belongsToMany(Tutor::class, TutorTeachCourse::class);
     }
 
-    public function avatar()
-    {
-        return $this->morphOne(File::class, 'fileable');
-    }
 }

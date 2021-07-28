@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tutor\CreateTutorRequest;
 use App\Http\Requests\Tutor\UpdateTutorRequest;
+use Illuminate\Http\Request;
 use App\Models\File;
 use App\Models\Subject;
 use App\Models\Tutor;
@@ -12,6 +13,7 @@ use App\Models\TutorTeachSubject;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TutorController extends Controller
@@ -61,15 +63,31 @@ class TutorController extends Controller
      */
     public function store(CreateTutorRequest $request)
     {
-        if ($_request = $request->validated()) {
+        DB::beginTransaction();
+        try {
+            $_request = $request->validate([
+                'name' => 'required',
+                'full_name' => 'required',
+                'subject_id' => 'required',
+                'tutor_info:en' => 'required',
+                'tutor_info:cn' => 'required',
+                'tutor_info:sc' => 'required',
+                'tutor_level:en' => 'required',
+                'tutor_level:cn' => 'required',
+                'tutor_level:sc' => 'required',
+                'tutor_experience:en' => 'required',
+                'tutor_experience:cn' => 'required',
+                'tutor_experience:sc' => 'required',
+                'tutor_specialized:en' => 'required',
+                'tutor_specialized:cn' => 'required',
+                'tutor_specialized:sc' => 'required',
+            ]);
             $_user = new User([
                 "name" => $_request["name"],
                 "email" => $_request["email"],
                 "password" => $_request["password"]
             ]);
-
             $_user->save();
-
             if (!empty($request['photo'])) {
                 $file = File::storeFile(
                     $request['photo'],
@@ -77,9 +95,7 @@ class TutorController extends Controller
                     $_user->id,
                 );
             }
-
             $_subject = $_request['subject_id'];
-
             $tutor = new Tutor([
                 "user_id" => $_user->id,
                 "full_name" => $_request["full_name"],
@@ -100,9 +116,14 @@ class TutorController extends Controller
 
             $tutorTeachSubject = new TutorTeachSubject(['tutor_id' => $tutor->id, 'subject_id' => $_subject]);
             $tutorTeachSubject->save();
-        };
-
-        return back()->with('success', 'Create success');
+    
+            DB::commit();
+            return back()->with('success', 'Create success');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+        
     }
 
     /**
@@ -137,21 +158,73 @@ class TutorController extends Controller
      * @param \App\Models\Tutor $tutor
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateTutorRequest $request, Tutor $tutor)
+    public function update(Request $request, Tutor $tutor)
     {
-        $tutor->fill(
-            $request->validated()
-        );
-//        $imageDelete = null;
-//        if ($request->hasFile('tutor_photo')) {
-//            $imageDelete = $tutor->tutor_photo;
-//            $tutor->tutor_photo = $request->file('tutor_photo')->store('photo');
-//        }
-        $tutor->save();
-//        if ($imageDelete) {
-//            Storage::delete($imageDelete);
-//        }
-        return back()->with('success', 'Update success!');
+        DB::beginTransaction();
+        try {
+            $input = $request->validate([
+                'name' => 'required',
+                'full_name' => 'required',
+                'subject_id' => 'required',
+                'tutor_info:en' => 'required',
+                'tutor_info:cn' => 'required',
+                'tutor_info:sc' => 'required',
+                'tutor_level:en' => 'required',
+                'tutor_level:cn' => 'required',
+                'tutor_level:sc' => 'required',
+                'tutor_experience:en' => 'required',
+                'tutor_experience:cn' => 'required',
+                'tutor_experience:sc' => 'required',
+                'tutor_specialized:en' => 'required',
+                'tutor_specialized:cn' => 'required',
+                'tutor_specialized:sc' => 'required',
+            ]);
+            
+            $user = User::find($tutor->user_id);
+            $user->name = $input['name'];
+            $tutor->fill([
+                'full_name' => $input['full_name'],
+                'tutor_info:en' => $input['tutor_info:en'],
+                'tutor_info:cn' => $input['tutor_info:cn'],
+                'tutor_info:sc' => $input['tutor_info:sc'],
+                'tutor_level:en' => $input['tutor_level:en'],
+                'tutor_level:cn' => $input['tutor_level:cn'],
+                'tutor_level:sc' => $input['tutor_level:sc'],
+                'tutor_experience:en' => $input['tutor_experience:en'],
+                'tutor_experience:cn' => $input['tutor_experience:cn'],
+                'tutor_experience:sc' => $input['tutor_experience:sc'],
+                'tutor_specialized:en' => $input['tutor_specialized:en'],
+                'tutor_specialized:cn' => $input['tutor_specialized:cn'],
+                'tutor_specialized:sc' => $input['tutor_specialized:sc']
+            ]);
+
+            if (!empty($request['photo'])) {
+                if (!empty($tutor->avatar())) {
+                    $tutor->avatar()->delete();
+                }
+                $file = File::storeFile(
+                    $request['photo'],
+                    User::class,
+                    $user->id,
+                );
+            }
+            $_oldTutorTeachSubject = TutorTeachSubject::where('tutor_id', $tutor->id)
+                                        ->where('subject_id', $input['subject_id'])->first();
+            if (empty($_oldTutorTeachSubject)) {
+                $_teachSubject = TutorTeachSubject::where('tutor_id', $tutor->id)->first();
+                $_teachSubject->delete();
+                $tutorTeachSubject = new TutorTeachSubject(['tutor_id' => $tutor->id, 'subject_id' => $input['subject_id']]);
+                $tutorTeachSubject->save();
+            }
+            $tutor->save();
+            DB::commit();
+
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('error', $th->getMessage());
+        }
+
     }
 
     /**

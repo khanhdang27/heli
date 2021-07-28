@@ -61,7 +61,6 @@
                                             <img v-if="url" :src="url" width=100% />
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="form-group ">

@@ -168,44 +168,7 @@
                     </div>
                 </li>
                 @endrole
-                @role(['super-admin'])
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.user-subscribe') active @endif"
-                       href="{{ route('admin.user-subscribe') }}">
-                        <i class="fe fe-clipboard"></i> User Subscribe
-                    </a>
-                </li>
-                @endrole
-                @role(['super-admin'])
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.study-session.index') active @endif"
-                       href="{{ route('admin.study-session.index') }}">
-                        <i class="fe fe-clipboard"></i> Study Session
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#collapseUserManager" role="button"
-                       aria-expanded="false" aria-controls="collapseUserManager">
-                        <i class="fe fe-clipboard"></i> User Manager
-                    </a>
-                    <div class="collapse" id="collapseUserManager">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.student') active @endif"
-                                   href="{{ route('admin.user-manager.student') }}">Student</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.tutor') active @endif"
-                                   href="{{ route('admin.user-manager.tutor') }}">Tutor</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.moderator') active @endif"
-                                   href="{{ route('admin.user-manager.moderator') }}">Moderator</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                @endrole
+                
                 @role(['super-admin'])
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.user-subscribe') active @endif"

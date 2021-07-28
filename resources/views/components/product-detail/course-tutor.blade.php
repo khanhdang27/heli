@@ -2,7 +2,11 @@
     <div class="row">
         <div class="col-sm">
             <div>
-                <img class="ava-responsive" height="514" src="{{ asset("images/ava.jpg") }}">
+                @if (!empty($courseDetail->tutor->user->avatar)) 
+                <img class="ava-responsive" height="514" src="{{ asset("file/".$courseDetail->tutor->user->avatar->id) }}"> 
+                @else
+                <img class="ava-responsive" height="514" src="{{ asset("images/user_default.png") }}">
+                @endif
             </div>
         </div>
         <div class="col-sm d-flex flex-column justify-content-end">
