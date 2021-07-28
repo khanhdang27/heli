@@ -7,14 +7,16 @@ use Illuminate\View\Component;
 class CourseCardPage extends Component
 {
     public $course;
+    public $studentCourse;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($course)
+    public function __construct($course, $studentCourse)
     {
         $this->course = $course;
+        $this->studentCourse = $studentCourse;
     }
 
     /**
@@ -25,7 +27,8 @@ class CourseCardPage extends Component
     public function render()
     {
         return view('components.product-detail.course-card-page', [
-            'course'=> $this->course
+            'course'=> $this->course,
+            'studentCourse' => $this->studentCourse
         ]);
     }
 }

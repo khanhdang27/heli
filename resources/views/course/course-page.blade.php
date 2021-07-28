@@ -2,7 +2,10 @@
 
     use App\Models\Course;
     $course = $courseDetail->membershipCourses->course;
-
+    $latesLecture = null;
+    if(!empty($student_course)){
+        $latesLecture = $student_course->lecture_study;
+    }
 @endphp
 
 @extends('layout.app')
@@ -12,10 +15,11 @@
 @section('content')
     {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
     <div class="body-content container-fluid">
-        @if ( $course->type == Course::$LIVE )
-            <x-product-detail.course-card-page :course=$course></x-product-detail.course-card-page>
-        @elseif($course->type == Course::$RECORD )
-            <x-home.video-course :courseDetail=$course></x-home.video-course>
+        @if ( $course->type == Course::LIVE )
+            <x-product-detail.course-card-page :course=$course
+                                               :studentCourse=$student_course></x-product-detail.course-card-page>
+        @elseif($course->type == Course::RECORD )
+            <x-home.video-course :courseDetail=$course :latesLecture=$latesLecture></x-home.video-course>
         @else
             <div class="mt-5">
 
@@ -23,7 +27,7 @@
         @endif
         <div class="container-fluid show-video">
             <div class="row container-fluid p-0 flex-column-reverse flex-md-row">
-                @if($course->type == Course::$DOCUMENT)
+                @if($course->type == Course::DOCUMENT)
                     <div class="col-xl-8 bg-white">
                         @foreach($course->courseMaterial as $value)
                             <div class="col-sm-6">
@@ -56,7 +60,7 @@
                                     </h1>
                                 </a>
                             </li>
-                            @if ( $course->type == Course::$LIVE )
+                            @if ( $course->type == Course::LIVE )
                                 <li class="nav-item">
                                     <a class="nav-link category-link-text" data-toggle="pill" href="#menu1">
                                         <h1>
@@ -86,9 +90,9 @@
                                 <x-product-detail.course-overview
                                     :courseDetail=$course></x-product-detail.course-overview>
                             </div>
-                            @if ( $course->type == Course::$LIVE )
+                            @if ( $course->type == Course::LIVE )
                                 <div id="menu1" class="container-fluid pb-5 tab-pane fade">
-                                    <x-product-detail.online-class/>
+                                    <x-product-detail.online-class :courseDetail=$course></x-product-detail.online-class>
                                 </div>
                             @endif
                             <div id="menu2" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
@@ -103,9 +107,111 @@
                 <div class="col-xl-4">
                     @if (empty($student_course))
                         <x-product-detail.buy-course :courseDetail=$courseDetail></x-product-detail.buy-course>
+                    @else
+
+                        <div class="card text-primary mb-5">
+                            <div class="card-header">
+                                <h5 class="font-weight-bold mb-0">Examination</h5>
+                            </div>
+                            <div class="card-body">
+                                @foreach($courseDetail->membershipCourses->course->examinations as $item)
+                                    @php
+                                        $submit = $item->submitExams;
+                                        $submitItem = $submit->filter(function($query) {
+                                            return $query->student_id == Auth::user()->id;
+                                        })->first();
+                                    @endphp
+                                    <div class="border-bottom">
+                                        <div class="d-flex justify-content-between flex-wrap">
+                                            <p>
+                                                {{$item->title}} (deadline: {{$item->deadline}})
+                                            </p>
+                                            @if(empty($submitItem))
+                                                <a href="#" data-toggle="modal"
+                                                   data-target="#modalUploadAvatar">Submit</a>
+                                            @endif
+                                            <a href="{{ route('site.file.download', $item->file) }}">Download</a>
+                                            <div class="modal fade" id="modalUploadAvatar" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Submit
+                                                                examination</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        {!! Form::open(['url' => URL::route('site.submit-examination'),
+                                                                                            'enctype' => 'multipart/form-data',
+                                                                                            'id' => 'submitExam_'.$item->id
+                                                                                            ]) !!}
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                {{ Form::text('examination_id', $item->id, ['class' => 'form-control', 'hidden' => true]) }}
+                                                            </div>
+                                                            <div class="form-group">
+                                                                {{ Form::label('title','Title') }}
+                                                                {{ Form::text('title',old('title'), ['class' => 'form-control']) }}
+                                                            </div>
+                                                            @error('title')
+                                                            <div class="alert text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                            <div class="form-group">
+                                                                {{ Form::label('description','Description') }}
+                                                                {{ Form::textarea('description',old('description'), ['class' => 'form-control',
+                                                                                  'rows' => '3']) }}
+                                                            </div>
+                                                            @error('description')
+                                                            <div class="alert text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                            <p>Your exam</p>
+                                                            <div class="d-flex">
+                                                                <div class="custom-file ">
+                                                                    {{ Form::label('file','File',['class'=>'custom-file-label']) }}
+                                                                    {{ Form::file('file',['class'=>' custom-file-input']) }}
+                                                                </div>
+                                                                @error('file')
+                                                                <div class="alert text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            {{ Form::submit('Save', ['class'=>'btn btn-primary ml-auto',
+                                                                                     'form' => 'submitExam_'.$item->id]) }}
+                                                        </div>
+                                                        {!! Form::close() !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul>
+                                            @if(!empty($submitItem))
+                                                <li>
+                                                    <div class="d-flex justify-content-between">
+                                                        {{ $submitItem->title }} - {{ $submitItem->description }}
+                                                        <a href="{{route('site.unsubmit-examination',$submitItem->id)}}" class="font-weight-bold">Cancel</a>
+                                                    </div>
+
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
+    @push('inputFile')
+        <script>
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    @endpush
 @endsection

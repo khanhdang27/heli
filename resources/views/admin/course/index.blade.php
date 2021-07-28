@@ -20,12 +20,12 @@
                                     <label>Name</label>
                                     <input type="text" class="form-control" name="name" value="{{ request('name') }}">
                                 </div>
-                                {{--                                <div class="col-md-6">--}}
-                                {{--                                    <label>Subject</label>--}}
-                                {{--                                    <select name="subject" class="form-control">--}}
-                                {{--                                        <option value="">-- All --</option>--}}
-                                {{--                                    </select>--}}
-                                {{--                                </div>--}}
+                                {{-- <div class="col-md-6">--}}
+                                {{-- <label>Subject</label>--}}
+                                {{-- <select name="subject" class="form-control">--}}
+                                {{-- <option value="">-- All --</option>--}}
+                                {{-- </select>--}}
+                                {{-- </div>--}}
                             </div>
                             <div class="form-row mt-2 justify-content-end">
                                 <button class="btn btn-primary">Filter</button>
@@ -102,10 +102,17 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.course.lecture.list', $value->id) }}"
-                                                        class="dropdown-item">
-                                                            Manage Lecture
-                                                    </a>
+                                                    @if ($value->type == \App\Models\Course::RECORD)
+                                                        <a href="{{ route('admin.course.lecture.list', $value->id) }}"
+                                                            class="dropdown-item">
+                                                                Manage Lecture
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('admin.course.room.list', $value->id) }}"
+                                                            class="dropdown-item">
+                                                                Manage Room Live
+                                                        </a>
+                                                    @endif
                                                     <a href="{{ route('admin.price-tag.index') }}"
                                                         class="dropdown-item">
                                                             Publish
@@ -114,11 +121,6 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    {{-- <a href="javascript:void(0)"
-                                                        onclick="itemDelete('{{ route('admin.course.destroy', $value->id) }}')"
-                                                        class="dropdown-item delete-item">
-                                                            Delete
-                                                    </a> --}}
                                                 </div>
                                             </div>
                                         </td>

@@ -29,20 +29,25 @@
                     <div class="d-flex justify-content-between h-100">
                         <div class="name-product w-75 d-flex flex-column justify-content-between text-primary p-3">
                             <div class="text-multiline-truncate">
-                                <h2>
+                                <a class="h2" href="{{ empty($studentCourse) ? '#' : route('site.live_show', $studentCourse->room_id) }}" >
                                     {{rtrim(mb_substr($course->course_description,0,100))}}
-                                </h2>
+                                </a>
                             </div>
                             <div class="h4 mt-auto">
                                 {{$course->tutor->full_name}}
                             </div>
                             <div class="d-flex justify-content-between mb-5">
                                 <div class="d-flex align-items-center text-primary">
-                                    @for ($i = 0; $i < 4; $i++)
-                                        <img src="{{asset('images/ic/ic_star.svg')}}" width="35">
+                                    @php
+                                        $rate = (int)floor($course->rating_average);
+                                    @endphp
+                                    @for ($i = 0; $i < $rate; $i++)
+                                        <img src="{{ asset('images/ic/ic_star.svg') }}" width="35">
                                     @endfor
-                                    <img src="{{asset('images/ic/ic_star_border.svg')}}" width="35">
-                                    <h4 class="mb-0 ml-3">4.5/5</h4>
+                                    @for ($i = 0; $i < 5-$rate; $i++)
+                                        <img src="{{ asset('images/ic/ic_star_border.svg') }}" width="35">
+                                    @endfor
+                                    <h4 class="mb-0 ml-3">{{$course->rating_average}}/5</h4>
                                 </div>
                                 <div class="ml-auto">
                                     @if(Auth::check())

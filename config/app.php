@@ -183,7 +183,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         App\Providers\GoogleDriveServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Spatie\Newsletter\NewsletterServiceProvider::class,
     ],
 
     /*
@@ -239,6 +240,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
     ],
 
 ];

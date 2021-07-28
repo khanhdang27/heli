@@ -30,7 +30,6 @@ class UpdateModeratorRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required|min:8',
             'full_name' => 'required',
             'phone' => 'required'
         ];

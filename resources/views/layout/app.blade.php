@@ -18,6 +18,8 @@
     <link href="{{ asset('css/toastr.css')}}" rel="stylesheet">
     <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
     <link href="{{asset('cpanel/assets/fonts/feather/feather.min.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script type="text/javascript"
             src="https://platform-api.sharethis.com/js/sharethis.js#property=60e7b308b06e7600197f484d&product=inline-share-buttons"
             async="async"></script>
@@ -27,6 +29,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
 @yield('content')
@@ -35,7 +40,7 @@
 <script src="{{ asset('js/lib/main.js') }}"></script>
 <script src="{{ asset('js/home/app.js') }}"></script>
 <script src="{{ asset('js/toastr.min.js') }}"></script>
-
+</script>
 @stack('likePost')
 @stack('scripts')
 @stack('scriptsLogin')
@@ -79,5 +84,6 @@
     x.parentNode.insertBefore(s, x);
 </script>
 <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
+
 </body>
 </html>

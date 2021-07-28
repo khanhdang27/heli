@@ -9,14 +9,19 @@ use Illuminate\Support\Str;
 
 $id_random = Str::random(2);
 
-$liked = $likeRef->likeable->firstWhere('user_id', Auth::user()->id);
+$liked = $likeRef->likeable;
+$user_liked = $liked->filter(function($item) {
+    return $item->user_id == Auth::user()->id;
+})->first();
+
+$liked = empty($user_liked) ? 0 : $user_liked->like_style;
 $component = explode('\\',$likeModule)[2];
 
 @endphp
 <button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-1 border-0 bg-white text-primary" v-on:click="clicklike">
     <img class="ic-action"
          id="like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}"
-         src="{{ empty($liked) ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}}">
+         src="{{ $liked == 0 ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}} ">
 
         @if($likeModule == Post::class || $likeModule== UserComment::class)
             <span class="h2 " id="{{$component}}_like_no_{{$likeRef->id}}" >{{$likeRef->like_no}}</span>
@@ -24,15 +29,18 @@ $component = explode('\\',$likeModule)[2];
 </button>
 
 <script>
-    var like = new Vue({
+    var like_{{ $id_random }} = new Vue({
         el: '#like_{{$component}}_{{$likeRef->id}}_{{$id_random}}',
-        data: {
-            return: true
+        data() {
+            return {
+                likeable: {{ $liked }}
+            }
         },
         methods: {
             clicklike: function () {
                 @if(Auth::check())
-                    if ({{empty($liked) ? 'true' : 'false' }} ) {
+                    console.log(this.likeable);
+                    if (this.likeable == 0) {
                         axios.post("{{ route('site.user-like.store')}}", {
                             like_ref_id: {{$likeRef->id}},
                             user_id: {{Auth::user()->id}},
@@ -40,7 +48,9 @@ $component = explode('\\',$likeModule)[2];
                         }).then(function (response) {
                                 console.info(response);
                                 document.querySelector("#like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}").src = "{{asset('images/ic/ic_fullHeart.svg')}}";
-                                document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no + 1}}";
+                                if(document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}")){
+                                    document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no + 1}}";
+                                }
                             })
                             .catch(function (error) {
                                 console.error(error);
@@ -53,14 +63,17 @@ $component = explode('\\',$likeModule)[2];
                         }).then(function (response) {
                                 console.info(response);
                                 document.querySelector("#like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}").src = "{{asset('images/ic/ic_heart.svg')}}";
-                                document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no - 1}}";
+                                if(document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}")){
+                                    document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no - 1}}";
+                                }
                             })
                             .catch(function (error) {
                                 console.error(error);
                             });
                     }
+                    window.location.reload()
                 @else
-                    console.log("test")
+                    console.log("none login")
                     alert("need to login to reaction");
                 @endif
             },

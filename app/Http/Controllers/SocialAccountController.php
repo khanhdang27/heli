@@ -11,6 +11,8 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Mail\SendMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
+use Spatie\Newsletter\NewsletterFacade;
 
 class SocialAccountController extends Controller
 {
@@ -32,13 +34,15 @@ class SocialAccountController extends Controller
             } else {
                 DB::beginTransaction();
                 try{
+                    $random = Str::random(10);
                     $newUser = new User([
                         'name' => $user->getName(),
                         'email' => $user->getEmail(),
+                        'password' => $random
                     ]);
+                    $newUser->assignRole('student');
+
                     if ($newUser->save()){
-                        
-                        $random = Str::random(10);
                         $newUser_social = new SocialAccount([
                             'user_id' => $newUser->id,
                             'social_id' => $user->getId(),
@@ -47,22 +51,25 @@ class SocialAccountController extends Controller
                         $newUser_social->save();
                         $stripeCustomer = $newUser->createAsStripeCustomer(['email' => $user->getEmail()]);
 
-                        // $send_mail = new SendMail();
-                        // $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
-                        // Mail::to($newUser->getEmail())->send($send_mail);
+                        if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
+                            NewsletterFacade::subscribe($user->getEmail());
+                        }
+
+                        $send_mail = new SendMail();
+                        $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
+                        Mail::to($user->getEmail())->send($send_mail);
                         Auth::login($newUser);
                     }
                     DB::commit();
                 } catch (\Throwable $th) {
                     DB::rollBack();
-
                     dd($th);
                     return redirect()->with([''])->route('site.home');
                 }
-
             }
             return redirect()->route('site.home');
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
+            dd($th);
             return redirect()->route('site.home');
         }
     }

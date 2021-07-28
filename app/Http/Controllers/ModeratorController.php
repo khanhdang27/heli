@@ -111,7 +111,6 @@ class ModeratorController extends Controller
                 $user->update([
                     'name' => $requestModerator['name'],
                     'email' => $requestModerator['email'],
-                    'password' => $requestModerator['password'],
                 ]);
                 $moderator->update([
                     'full_name' => $requestModerator['full_name'],
