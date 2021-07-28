@@ -25,7 +25,7 @@ class SubjectController extends Controller
     public function index()
     {
         $certificates = Certificate::all();
-        $subjects = Subject::where('status', 1)->latest()->paginate(15);
+        $subjects = Subject::where('status', 1)->where('id','!=', 1)->latest()->paginate(15);
         return view('admin.subject.index', [
             'subjects' => $subjects,
             'certificates' =>$certificates
@@ -39,7 +39,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $certificates = Certificate::all();
+        $certificates = Certificate::all()->where('id','!=', 1);
         return view('admin.subject.create',[
             'certificates' => $certificates
         ]);
@@ -69,6 +69,7 @@ class SubjectController extends Controller
     public function show(Subject $subject)
     {
         $courses_with_group = CourseMembershipDiscount::with(
+            'translations',
             'membershipCourses',
             'courseDiscounts',
             'membershipCourses.course',

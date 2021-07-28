@@ -25,7 +25,7 @@
             <li class="nav-item dropdown">
 
                 <a class="h5 nav-link dropdown-toggle text-secondary" href="#" id="navbarCer" data-toggle="dropdown" >
-                    {{SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id')[$default_certificate] }}
+                    {{ SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id')[$default_certificate] }}
                 </a>
 
                 <div class="dropdown-menu bg-dark border border-secondary dropdown-menu-language">

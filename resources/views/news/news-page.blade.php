@@ -13,7 +13,6 @@
                     <x-news.news :news=$news></x-news.news>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

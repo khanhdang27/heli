@@ -49,13 +49,6 @@
                             @error('email')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
-                            <div class="form-group ">
-                                {{ Form::label('password', 'Password') }}
-                                {{ Form::password('password', ['class'=>'form-control']) }}
-                            </div>
-                            @error('password')
-                            <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
                         </div>

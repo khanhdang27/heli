@@ -11022,6 +11022,11 @@ h5,
   margin-top: 30px;
 }
 
+.product-category-row {
+  margin-left: -42px;
+  margin-right: -42px;
+}
+
 .product-category-padding {
   padding-left: 3rem;
   padding-right: 3rem;
@@ -11156,6 +11161,10 @@ form#certificate_form select option:checked {
 
 .input-login {
   background-color: var(--white);
+}
+
+input.check-subscribe {
+  transform: scale(1.7);
 }
 
 .bottom-form a {
@@ -11394,26 +11403,11 @@ form#certificate_form select option:checked {
 }
 
 .product-tab .menu-img {
-  width: 184px;
-}
-
-.product-tab #menu-img4 {
-  padding-top: 2.9rem;
-  padding-bottom: 2.9rem;
+  width: 150px;
 }
 
 .product-tab .menu-category-text {
   display: none;
-}
-
-@media screen and (max-width: 1200px) {
-  .product-tab .menu-category {
-    display: none;
-  }
-
-  .product-tab .menu-category-text {
-    display: flex !important;
-  }
 }
 
 .menu-category-text {
@@ -11570,12 +11564,12 @@ form#certificate_form select option:checked {
 }
 
 .content-team-page .card-team .name-tutor {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
 }
 
 .content-team-page .card-team .position-tutor {
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -11591,7 +11585,7 @@ form#certificate_form select option:checked {
 .content-team-page .card-team .content-info-right {
   max-width: 100%;
   overflow-y: auto;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .content-team-page .card-team .bottom-info-right {
@@ -11773,6 +11767,15 @@ form#certificate_form select option:checked {
   flex: 0 40%;
 }
 
+.popular-articles-item-image .img-blog {
+  width: 185px;
+  height: 185px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+}
+
 .popular-articles-item-content {
   flex: 0 60%;
 }
@@ -11812,7 +11815,6 @@ form#certificate_form select option:checked {
 
 .popular-item {
   max-width: 100%;
-  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
 
 #latest {
@@ -11953,6 +11955,23 @@ form#certificate_form select option:checked {
   text-decoration: none;
 }
 
+.room-selection input[type="radio"] {
+  opacity: 0;
+}
+
+.room-selection label {
+  display: inline-block;
+  padding: 4px 11px;
+  font-family: Arial;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.room-selection input[type="radio"]:checked + label {
+  border-style: solid;
+  border-color: var(--primary);
+}
+
 .rating {
   display: inline-block;
   position: relative;
@@ -11982,7 +12001,7 @@ form#certificate_form select option:checked {
 }
 
 .rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
+  color: #969696;
   text-shadow: 0 0 5px #fad000;
 }
 
@@ -11991,7 +12010,7 @@ form#certificate_form select option:checked {
 }
 
 .rating label:last-child .icon {
-  color: #000;
+  color: #969696;
 }
 
 .rating label:nth-child(1) {
@@ -12019,7 +12038,7 @@ form#certificate_form select option:checked {
   color: #fad000;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 576px) {
   .banner-content {
     height: 600px;
   }
@@ -12047,7 +12066,14 @@ form#certificate_form select option:checked {
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
+  .menu-img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
   .banner-content {
     height: 600px;
   }
@@ -12067,6 +12093,11 @@ form#certificate_form select option:checked {
   .product-category-padding {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .product-category-row {
+    margin-left: -14px;
+    margin-right: -14px;
   }
 
   .container-course {
@@ -12114,14 +12145,22 @@ form#certificate_form select option:checked {
   }
 
   .rating {
-    height: 20px;
-    line-height: 10px;
-    font-size: 15px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 30px;
   }
 
   .buy-course-box {
     margin-left: 0rem;
     margin-right: 0rem;
+  }
+
+  .menu-category {
+    display: none;
+  }
+
+  .menu-category-text {
+    display: flex;
   }
 }
 

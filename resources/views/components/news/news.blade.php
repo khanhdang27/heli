@@ -1,37 +1,37 @@
 <div id="showMore">
-    <div v-if="newsItem <= reviews.length" v-for="newsItem in newsToShow">
+    <div v-if="itemIndex <= reviews.length" v-for="itemIndex in newsToShow">
         <div class="mx-auto box-news">
-            <a id="new_href" class="h2" href="">
-                @{{reviews[newsItem - 1].announcement_date}}
-                @{{reviews[newsItem - 1].title}}
-            </a><br>
+            <div class="py-2">
+                <a id="new_href" class="h2" href="">
+                    @{{itemIndex}}.
+                    @{{ reviews[itemIndex-1].announcement_date }}
+                    @{{ reviews[itemIndex-1].title }}
+                </a><br>
+            </div>
         </div> 
     </div>
-    <div class="d-flex justify-content-center mt-5"
-         v-if="newsToShow <= reviews.length || reviews.length > newsToShow">
+    <div class="d-flex justify-content-center mt-5">
         <button class="btn-more h5 bg-white text-primary border-primary" @click="newsToShow += 3">
             @lang('keywords.more')
             <img src="{{asset("images/ic/ic_drop.svg")}}" width="28">
         </button>
     </div>
 </div>
-<input type="hidden" value="{{json_encode($news)}}" id="news">
+<span class="d-none" id="news">
+    {{$news->toJson()}}
+</span>
 <script>
     new Vue({
         el: "#showMore",
         data() {
             return {
-                reviews:
-                    JSON.parse(document.getElementById('news').value)
-                ,
-                newsToShow: 8,
-                totalComments: 0
+                reviews: JSON.parse(document.getElementById('news').textContent),
+                newsToShow: 7,
+                totalComments: 0  
             };
         },
         mounted() {
-            console.log(this.reviews)
             this.totalComments = this.reviews.length
-            console.log(this.reviews.length)
         }
     })
 </script>

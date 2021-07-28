@@ -1,12 +1,18 @@
 @extends('layout.app')
 
-@section('title','Home Page')
+@section('title', 'Home Page')
 
 @section('content')
 
     <div class="banner">
         <x-sub-header :subjects=$subjects page="home"></x-sub-header>
-        @if(!Auth::check())
+        @if ($message = Session::get('error'))
+        <div class="alert alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $message }}</strong>
+        </div>
+        @endif
+        @if (!Auth::check())
             <x-home.banner :banner=$banners></x-home.banner>
         @else
             <br>
@@ -16,11 +22,14 @@
                 </h1>
                 <hr class="border-secondary">
                 <div class="mx-auto box-news">
-                    @foreach($news as $item)
-                        <a class="h2" href="{{ route('site.news-detail',$item->id) }}">
-                            {{$item->announcement_date}}
-                            {{$item->title}}
-                        </a><br>
+                    @foreach ($news as $item)
+                        <div class=" my-2">
+                            <a class="h2" href="{{ route('site.news-detail', $item->id) }}">
+                                {{ $item->announcement_date }}
+                                {{ $item->title }}
+                            </a><br>
+                        </div>
+                        
                     @endforeach
                 </div>
             </div>
@@ -44,7 +53,7 @@
                 </div>
             </div>
         </div>
-        @if(Auth::check())
+        @if (Auth::check())
             <div class="container-fluid container-course">
                 <h2 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
@@ -54,17 +63,17 @@
         @endif
         <div class="product-tab">
             <x-home.product-tab :courseIGCSE=$courseIGCSE :courseUKISET=$courseUKISET :courseIELTS=$courseIELTS
-                                :courseIAL=$courseIAL typeOfUI="hot"></x-home.product-tab>
+                :courseIAL=$courseIAL typeOfUI="hot"></x-home.product-tab>
         </div>
-        @if(!Auth::check())
+        @if (!Auth::check())
             <x-home.step-register></x-home.step-register>
         @endif
-        @if(!Auth::check())
+        @if (!Auth::check())
             {{-- chua dang nhap --}}
             <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
             <div class="w-75 mx-auto text-right">
                 <button class="btn-register-now mt-0 mb-5 btn-primary" id="" data-toggle="modal"
-                        data-target="#registerModal">
+                    data-target="#registerModal">
                     <span>@lang('keywords.tryItNow')</span>
                 </button>
             </div>
@@ -74,14 +83,14 @@
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
                     <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
                     <a href="{{ route('site.user.course') }}"
-                       class="m-0 btn-register-now text-white btn-dark-blue btn-dark">
+                        class="m-0 btn-register-now text-white btn-dark-blue btn-dark">
                         <h2 class="mb-0 mt-2">@lang('keywords.otherPurchasedCourses')</h2>
                     </a>
                 </div>
-                <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
+                <x-home.video-course :courseDetail=$courseVideo :latesLecture=$latesLecture></x-home.video-course>
             </div>
         @endif
-        @if(!Auth::check())
+        @if (!Auth::check())
             <div class="free-class-container">
                 <div class="position-relative d-flex align-items-center">
                     <div class="border-right-radius border-primary">
@@ -91,14 +100,12 @@
                             </h1>
                         </div>
                     </div>
-                    <div
-                        class="circle-check position-absolute bg-primary d-flex justify-content-center align-items-center">
-                        <img width="100px" src="{{asset('images/ic/Group8.png')}}">
+                    <div class="circle-check position-absolute bg-primary d-flex justify-content-center align-items-center">
+                        <img width="100px" src="{{ asset('images/ic/Group8.png') }}">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button class="btn-register-now btn-primary" data-toggle="modal"
-                            data-target="#registerModalComponent">
+                    <button class="btn-register-now btn-primary" data-toggle="modal" data-target="#registerModalComponent">
                         <span class="font-weight-bold">@lang('keywords.registerNowToExperience')</span>
                     </button>
                     <x-login.register-modal></x-login.register-modal>
@@ -107,4 +114,5 @@
             <x-home.review></x-home.review>
         @endif
     </div>
+
 @endsection

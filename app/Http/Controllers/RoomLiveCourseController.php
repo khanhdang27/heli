@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\StudentWishList;
+use App\Models\RoomLiveCourse;
 use Illuminate\Http\Request;
 
-class StudentWishListController extends Controller
+class RoomLiveCourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class StudentWishListController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\StudentWishList  $studentWishList
+     * @param  \App\Model\RoomLiveCourse  $roomLiveCourse
      * @return \Illuminate\Http\Response
      */
-    public function show(StudentWishList $studentWishList)
+    public function show(RoomLiveCourse $roomLiveCourse)
     {
         //
     }
@@ -52,10 +52,10 @@ class StudentWishListController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\StudentWishList  $studentWishList
+     * @param  \App\Model\RoomLiveCourse  $roomLiveCourse
      * @return \Illuminate\Http\Response
      */
-    public function edit(StudentWishList $studentWishList)
+    public function edit(RoomLiveCourse $roomLiveCourse)
     {
         //
     }
@@ -64,10 +64,10 @@ class StudentWishListController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\StudentWishList  $studentWishList
+     * @param  \App\Model\RoomLiveCourse  $roomLiveCourse
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentWishList $studentWishList)
+    public function update(Request $request, RoomLiveCourse $roomLiveCourse)
     {
         //
     }
@@ -75,10 +75,10 @@ class StudentWishListController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\StudentWishList  $studentWishList
+     * @param  \App\Model\RoomLiveCourse  $roomLiveCourse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StudentWishList $studentWishList)
+    public function destroy(RoomLiveCourse $roomLiveCourse)
     {
         //
     }

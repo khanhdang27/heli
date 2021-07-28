@@ -7,6 +7,9 @@ return [
 
     'home_url' => env('APP_HOME_URL', ''),
 
+    'vimeo_app_id' => env('VIMEO_APP_ID', ''),
+    'vimeo_token' => env('VIMEO_TOKEN', ''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -85,7 +88,7 @@ return [
     |
     */
 
-    'locale' => 'cn',
+    'locale' => 'en',
 
 
     /*
@@ -182,7 +185,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\GoogleDriveServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Spatie\Newsletter\NewsletterServiceProvider::class,
     ],
 
     /*
@@ -237,6 +241,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
     ],
 
 ];

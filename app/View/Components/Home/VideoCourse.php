@@ -12,9 +12,10 @@ class VideoCourse extends Component
      *
      * @return void
      */
-    public function __construct($courseDetail)
+    public function __construct($courseDetail, $latesLecture = null)
     {
-        $this->courseDetail=$courseDetail;
+        $this->courseDetail = $courseDetail;
+        $this->latesLecture =  $latesLecture;
     }
 
     /**
@@ -25,7 +26,8 @@ class VideoCourse extends Component
     public function render()
     {
         return view('components.home.video-course',[
-            'courseDetail' => $this->courseDetail
+            'courseDetail' => $this->courseDetail,
+            'latesLecture' => $this->latesLecture
         ]);
     }
 }

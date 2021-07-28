@@ -21,7 +21,6 @@ class CreateLectureTable extends Migration
             $table->string('lectures_name');
             $table->text('lectures_description');
             $table->string('video_resource');
-            $table->integer('course_schedule_id');
             $table->timestamps();
             $table->softDeletes();
         });

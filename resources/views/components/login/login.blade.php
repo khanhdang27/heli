@@ -30,12 +30,6 @@
                                     </div>
                                     <h2 class="mx-auto mb-0">@lang('keywords.loginWithGg')</h2>
                                 </a>
-                                <a class="btn-register-now btn-login btn-secondary" href="#">
-                                    <div class="box-ic ic-ap"><img class="ic" src="{{asset("images/ic/ic_apple.svg")}}"
-                                                                   width="33px">
-                                    </div>
-                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithAp')</h2>
-                                </a>
                             </div>
                             <div class="line-or d-flex align-items-center text-white">
                                 <hr>
@@ -44,7 +38,7 @@
                             </div>
                             @csrf
                             {!! Form::open(['id'=>'formLogin']) !!}
-                            <div class="input-login d-flex justify-content-center align-items-center mb-3">
+                            <div class="input-login d-flex justify-content-center align-items-center mb-1">
                                 {{ Form::email('email',null,[
                                                 'class'=>'input-login-item',
                                                 'placeholder'=>'Email'
@@ -57,7 +51,7 @@
                                     ])
                                 }}
                             </div>
-                            <div class="row align-items-center bottom-form mt-5 line-or">
+                            <div class="row align-items-center bottom-form mt-2 line-or">
                                 <div class="col-sm">
                                     <div class="remember text-white d-flex">
                                         <label class="rememberCheck mr-3" for="rememberCheck">
@@ -75,7 +69,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="bottom-btn mt-5">
+                            <div class="bottom-btn mt-2">
                                 <button
                                     class='btn-login btn-secondary btn-register-now'
                                     id='btn-login' type="submit">
@@ -113,15 +107,15 @@
                     url: "{{ route('site.userLogin') }}",
                     data: formData
                 }).done(function (data) {
+                    spinner.addClass('d-none')
                     if (data['message'] == 'success') {
-                        spinner.addClass('d-none')
                         toastr["success"]("@lang('keywords.toast.loginSuccess')");
                         location.reload()
                     } else if (data['message'] == 'empty') {
-                        spinner.addClass('d-none')
                         toastr["error"]("", "@lang('keywords.toast.pleaseEnterEmailPass')");
+                    } else if (data['message'] == 'inactive') {
+                        toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginInactive')");
                     } else {
-                        spinner.addClass('d-none')
                         toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
                     }
                 })

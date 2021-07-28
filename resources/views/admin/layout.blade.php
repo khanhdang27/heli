@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/highlight.js/styles/vs2015.css') }}">
     <link rel="stylesheet" href="{{ asset('cpanel/assets/libs/dropzone/dist/min/dropzone.min.css') }}">
+
+    <link rel='stylesheet' id='flatpickr-style-css'  href='https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css?ver=5.2.4' type='text/css' media='all' />
+
     <!-- Map -->
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet'/>
-
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme.min.css') }}" id="stylesheetLight">
-
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
-
     <link rel="stylesheet" type="text/css" href="{{asset('css/admin.css')}}">
     @stack('css')
 
@@ -56,15 +56,8 @@
 <script src="{{ asset('cpanel/assets/libs/highlightjs/highlight.pack.min.js') }}"></script>
 <script src="{{ asset('cpanel/assets/libs/jquery-mask-plugin/dist/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('cpanel/assets/libs/list.js/dist/list.min.js') }}"></script>
-{{--<script src="{{ asset('cpanel/assets/libs/quill/dist/quill.min.js') }}"></script>--}}
 <script src="{{ asset('cpanel/assets/libs/select2/dist/js/select2.min.js') }}"></script>
-{{--<script src="{{ asset('cpanel/assets/libs/chart.js/Chart.extension.min.js') }}"></script>--}}
 <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
-
-<!-- Map -->
-{{-- <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script> --}}
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
 <script>
@@ -73,13 +66,14 @@
     });
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 
 @stack('js')
 @stack('inputFile')
 @stack('ck-editor-init')
 <!-- Plugin file -->
 
-
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/flatpickr?ver=5.2.4'></script>
 
 </body>
 </html>

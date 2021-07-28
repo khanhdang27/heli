@@ -62,7 +62,6 @@
                         </a>
                         <div class="dropdown-menu bg-dark py-1 px-1 border border-secondary">
                             <a class="dropdown-item" href="{{ URL::route('site.profile.show', Auth::user()->id) }}">Profile</a>
-                            <a class="dropdown-item" href="#">Settings</a>
                             <a class="dropdown-item" href="{{ URL::route('site.userLogout')}}">Log out</a>
                         </div>
                     </div>
@@ -83,7 +82,7 @@
 
             </div>
             <ul class="navbar-nav ml-1">
-                @if (Auth::check())
+                @if (Auth::check() && Auth::User()->hasRole('student'))
                     <li class="nav-item item-header p-2">
                         <a class="nav-link"
                             href="{{ route('site.user.course') }}">@lang('keywords.footer.myCourses')

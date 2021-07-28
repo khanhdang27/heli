@@ -3,6 +3,9 @@
 @section('title','Course Page')
 
 @section('content')
+    @php
+        $room_live_course = $room->room_live_course;
+    @endphp
     <div class="body-content">
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
         <div class="container-fluid pt-5 pb-5 pl-0 pr-0">
@@ -51,7 +54,7 @@
                     <div id="detail" class="col-lg-4"></div>
                 </div>
                 <div class="pt-5">
-                    <x-product-detail.lecture-course></x-product-detail.lecture-course>
+                    <x-product-detail.lecture-course videoId={{$room_live_course}}></x-product-detail.lecture-course>
                 </div>
             </div>
         </div>

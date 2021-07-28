@@ -72,9 +72,19 @@ h5,
     }
 }
 
+.product-category-row {
+    margin-left: -42px;
+    margin-right: -42px;
+}
+
 .product-category-padding {
     padding-left: 3rem;
     padding-right: 3rem;
+    &:hover {
+        cursor: pointer;
+        transform: translate3d(0, -7px, 0);
+        transition: all 0.5s;
+    }
 }
 
 .color-primary {
@@ -206,6 +216,10 @@ form#certificate_form {
     background-color: var(--white);
 }
 
+input.check-subscribe {
+    transform: scale(1.7);
+}
+
 .bottom-form {
     a {
         color: var(--white);
@@ -306,6 +320,11 @@ form#certificate_form {
     padding: 0 3rem;
     border: none;
     min-height: 47px;
+    &:hover {
+        transform: translate3d(0, -1px, 0);
+        transition: all 0.5s;
+        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.20);
+    }
 }
 
 .btn-register-now:focus {
@@ -318,12 +337,13 @@ form#certificate_form {
 .title-card {
     font-weight: 600;
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 12rem;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
 }
 
 .praise-box {
-    margin-bottom: 12rem;
+    margin-bottom: 5rem;
+    max-width: 380px;
     .praise {
         display: flex;
         flex-direction: column;
@@ -426,22 +446,10 @@ form#certificate_form {
         align-items: center;
     }
     .menu-img {
-        width: 184px;
-    }
-    #menu-img4 {
-        padding-top: 2.9rem;
-        padding-bottom: 2.9rem;
+        width: 150px;
     }
     .menu-category-text {
         display: none;
-    }
-    @media screen and (max-width: 1200px) {
-        .menu-category {
-            display: none;
-        }
-        .menu-category-text {
-            display: flex !important;
-        }
     }
 }
 
@@ -581,11 +589,11 @@ form#certificate_form {
             height: 514px;
         }
         .name-tutor {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 600;
         }
         .position-tutor {
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 400;
         }
         .info-left {
@@ -598,7 +606,7 @@ form#certificate_form {
         .content-info-right {
             max-width: 100%;
             overflow-y: auto;
-            font-size: 20px;
+            font-size: 14px;
         }
         .bottom-info-right {
             margin: 0 0.8rem 0.8rem 0;
@@ -781,6 +789,14 @@ form#certificate_form {
 .popular-articles-item-image {
     width: 100%;
     flex: 0 40%;
+    .img-blog {
+        width: 185px;
+        height: 185px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+    }
 }
 
 .popular-articles-item-content {
@@ -820,7 +836,6 @@ form#certificate_form {
 
 .popular-item {
     max-width: 100%;
-    box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
 
 #latest {
@@ -832,7 +847,7 @@ form#certificate_form {
     height: 100%;
 }
 
-.main-photo-top{
+.main-photo-top {
     height: 581px;
 }
 
@@ -955,5 +970,22 @@ form#certificate_form {
                 }
             }
         }
+    }
+}
+
+.room-selection {
+    input[type="radio"] {
+        opacity: 0;
+    }
+    label {
+        display: inline-block;
+        padding: 4px 11px;
+        font-family: Arial;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    input[type="radio"]:checked+label {
+        border-style: solid;
+        border-color: var(--primary);
     }
 }

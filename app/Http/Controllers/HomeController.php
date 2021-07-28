@@ -42,6 +42,101 @@ class HomeController extends Controller
 
         $banners = Banner::query()->first();
 
+        [
+            $course_recommended,
+            $course_hot,
+            $course_welcomes,
+            $course_latest 
+        ] = $this->getDuplicateCourseByGroupUser();
+
+        [
+            $courseIGCSE,
+            $courseIELTS,
+            $courseUKISET,
+            $courseIAL
+        ] = $this->getCourseHotByTag($course_hot);
+
+        [$courseVideo, $latesLecture] = $this->getCourseVideo();
+
+        $news = News::query()->orderByDesc('created_at')->limit(15)->get();
+        
+        return view('home.home-page',[
+            'banners' => $banners,
+            'courseVideo'=>$courseVideo,
+            'latesLecture' => $latesLecture,
+            'news' => $news,
+            'course_recommended'=>$course_recommended,
+            'course_hot'=>$course_hot,
+            'course_welcomes'=>$course_welcomes,
+            'course_latest'=>$course_latest,
+            'subjects'=>$subjects,
+            'courseIGCSE' => $courseIGCSE->get(),
+            'courseUKISET' => $courseUKISET->get(),
+            'courseIELTS' => $courseIELTS->get(),
+            'courseIAL' => $courseIAL->get(),
+        ]);
+    }
+
+    function getCourseVideo() {
+        if (Auth::check()) {
+            $user_course = StudentCourses::where('student_id', Auth::user()->id)->latest('latest_study')->first();
+            if (empty($user_course)) {
+                $course = Course::with('tutor', 'lecture')->whereHas('lecture', function($query) {
+                    return $query->where(['id'=>1]);
+                })->first();
+
+                return [$course, null];
+            } else {
+                $course = Course::with('tutor', 'lecture')->where('id', $user_course->course_id)->first();
+                if (empty($course->lecture[0])) {
+                    $course = Course::with('tutor', 'lecture')->where('id', 1)->first();
+                    return [$course, null];
+                } else {
+                    return [$course, $user_course->lecture_study];
+                }
+            }
+        } else {
+            return [Course::with('tutor', 'lecture')->where('id', 1)->first(), null];
+        }
+    }
+
+    function getCourseHotByTag($course_hot)
+    {
+        $courseIGCSE= clone $course_hot;
+        $courseIELTS= clone $course_hot;
+        $courseUKISET= clone $course_hot;
+        $courseIAL= clone $course_hot;
+
+        $courseIGCSE->whereHas('membershipCourses.course.subject.certificate', function ( $query )
+        {
+            return $query->where('id', 2);
+        })->limit(4)->get();
+        
+        $courseUKISET->whereHas('membershipCourses.course.subject.certificate', function ( $query )
+        {
+            return $query->where('id', 3);
+        })->limit(4)->get();
+        
+        $courseIELTS->whereHas('membershipCourses.course.subject.certificate', function ( $query )
+        {
+            return $query->where('id', 4);
+        })->limit(4)->get();
+        
+        $courseIAL->whereHas('membershipCourses.course.subject.certificate', function ( $query )
+        {
+            return $query->where('id', 5);
+        })->limit(4)->get();
+
+        return [
+            $courseIGCSE,
+            $courseIELTS,
+            $courseUKISET,
+            $courseIAL
+        ];
+    }
+
+    function getDuplicateCourseByGroupUser()
+    {
         $courses_with_group = CourseMembershipDiscount::with(
             'membershipCourses',
             'courseDiscounts',
@@ -60,80 +155,21 @@ class HomeController extends Controller
         $course_hot = clone $courses_with_group;
         $course_welcomes = clone $courses_with_group;
         $course_latest = clone $courses_with_group;
-
+        
         $course_recommended = $course_recommended->where('recommended', 1)->limit(4)->get();
-
         $course_hot = $course_hot->where('hot', 1);
         $course_welcomes = $course_welcomes->where('welcomes', 1)->limit(2)->get();
-        // DB::enableQueryLog();
-
         $course_latest = $course_latest->whereHas('courseDiscounts.discount', function($query){
             return $query->where('start_date','<=', DATE(NOW()))
                 ->where('end_date','>=', DATE(NOW()));
         })->limit(2)->get();
 
-        $courseIGCSE= clone $course_hot;
-
-        $courseIGCSE->whereHas('membershipCourses.course.subject.certificate', function ( $query )
-        {
-            return $query->where('id', 2);
-        })->limit(4)->get();
-        
-        $courseUKISET= clone $course_hot;
-
-        $courseUKISET->whereHas('membershipCourses.course.subject.certificate', function ( $query )
-        {
-            return $query->where('id', 3);
-        })->limit(4)->get();
-        
-        $courseIELTS= clone $course_hot;
-
-        $courseIELTS->whereHas('membershipCourses.course.subject.certificate', function ( $query )
-        {
-            return $query->where('id', 4);
-        })->limit(4)->get();
-        
-        $courseIAL= clone $course_hot;
-
-        $courseIAL->whereHas('membershipCourses.course.subject.certificate', function ( $query )
-        {
-            return $query->where('id', 5);
-        })->limit(4)->get();
-
-        $courseVideo = null;
-        if (Auth::check()) {
-            $user_course = StudentCourses::query()->where('student_id', Auth::user()->id)->latest('created_at')->first();
-            if (!empty($user_course)) {
-                $course = Course::with('tutor', 'lecture')->where('id', $user_course->course_id)->first();
-                if (empty($course->lecture[0])) {
-                    $courseVideo = Course::with('tutor', 'lecture')->where('id', 1)->first();
-                } else {
-                    $courseVideo = $course;
-                }
-            } else {
-                $courseVideo = Course::with('tutor', 'lecture')->whereHas('lecture', function($query) {
-                    return $query->where(['id'=>1]);
-                })->first();
-            }
-        } else {
-            $courseVideo = Course::with('tutor', 'lecture')->where('id', 1)->first();
-        }
-        $news = News::query()->orderByDesc('created_at')->limit(8)->get();
-        
-        return view('home.home-page',[
-            'banners' => $banners,
-            'courseVideo'=>$courseVideo,
-            'news' => $news,
-            'course_recommended'=>$course_recommended,
-            'course_hot'=>$course_hot,
-            'course_welcomes'=>$course_welcomes,
-            'course_latest'=>$course_latest,
-            'subjects'=>$subjects,
-            'courseIGCSE' => $courseIGCSE->get(),
-            'courseUKISET' => $courseUKISET->get(),
-            'courseIELTS' => $courseIELTS->get(),
-            'courseIAL' => $courseIAL->get(),
-        ]);
+        return [
+            $course_recommended,
+            $course_hot,
+            $course_welcomes,
+            $course_latest
+        ];
     }
 }
 

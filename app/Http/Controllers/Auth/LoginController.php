@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,14 +48,27 @@ class LoginController extends Controller
         if (empty($request->get('email'))) {
             return response()->json([
                 'status' => 400,
-                'message' => 'empty'
+                'message' => 'email is not register'
+            ]);
+        }
+        $userLogin = User::where('email', $request->get('email'))->first();
+        if ($userLogin->active != 1) {
+            return response()->json([
+                'status' => 401,
+                'message' => 'inactive'
             ]);
         }
 
-        if (Auth::attempt($request->validate([
+        $input = $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
-        ]))) {
+            'password' => 'required',
+        ]);
+
+        if (Auth::attempt([
+            'email' => $input['email'],
+            'password' => $input['password'],
+            'active' => 1
+        ])) {
             return response()->json([
                 'status' => 200,
                 'message' => 'success'

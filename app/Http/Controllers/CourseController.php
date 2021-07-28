@@ -6,17 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CreateCourseRequest;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
+use App\Models\CourseSchedule;
 use App\Models\Lecture;
 use App\Models\Membership;
 use App\Models\MembershipCourse;
+use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
+use App\Models\StudentSchedule;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Carbon;
+
 
 class CourseController extends Controller
 {
@@ -47,7 +52,7 @@ class CourseController extends Controller
     public function my()
     {
         $courses = CourseMembershipDiscount::with(
-            'membershipCourses',  
+            'membershipCourses',
             'membershipCourses.course',
             'membershipCourses.course.tutor',
             'membershipCourses.course.student'
@@ -119,14 +124,19 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses', 
-            'courseDiscounts', 
+            'membershipCourses',
+            'courseDiscounts',
             'membershipCourses.course',
+            'membershipCourses.course.rooms',
             'membershipCourses.course.lecture',
             'membershipCourses.course.comment',
             'membershipCourses.course.subject',
             'membershipCourses.course.tutor',
-            'membershipCourses.course.courseMaterial'
+            'membershipCourses.course.ratings',
+            'membershipCourses.course.rooms.studySession',
+            'membershipCourses.course.schedule',
+            'membershipCourses.course.courseMaterial',
+            'membershipCourses.course.examinations'
         )->where('publish',1)
         ->whereHas('membershipCourses', function ($query) {
             return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
@@ -134,17 +144,17 @@ class CourseController extends Controller
             return $query->where('id', $course->id);
          })->first();
 
+         if (empty($courses_with_group)){
+            return redirect(route('site.home'));
+        }
+
         $student_course  = null;
         if (Auth::check()){
             $student_course = StudentCourses::query()
                 ->where('course_id', $course->id)
                 ->where('student_id',Auth::user()->id)->first();
+        }
 
-            // dd($course->id, Auth::user()->id ,$student_course);
-        }
-        if (empty($courses_with_group)){
-            return redirect(route('site.home'));
-        }
         return view('course.course-page',[
             'courseDetail' => $courses_with_group,
             'student_course' => $student_course,
@@ -162,8 +172,8 @@ class CourseController extends Controller
         $input = $request->input('course');
 
         $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses', 
-            'courseDiscounts', 
+            'membershipCourses',
+            'courseDiscounts',
             'membershipCourses.course',
             'membershipCourses.course.translations',
             'membershipCourses.course.lecture',
@@ -178,7 +188,7 @@ class CourseController extends Controller
                 return $query->whereTranslationLike('course_name', '%' .$input. '%');
          })->get();
 
-        
+
         return view('course.search',[
             'courses' => $courses_with_group,
         ]);
@@ -262,7 +272,6 @@ class CourseController extends Controller
                 'lectures_name' => $input['lectures_name'],
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
-                'course_schedule_id' => 0//$input['course_schedule_id']
             ]);
 
             DB::commit();
@@ -298,4 +307,85 @@ class CourseController extends Controller
         }
     }
 
+    public function rooms(Course $course)
+    {
+        $_course = $course->load('rooms');
+        $rooms = RoomLiveCourse::with('studySession')->where('course_id', $_course->id)->paginate(15);
+        return view('admin.course.room.index', [
+            'course' => $_course,
+            'rooms' => $rooms
+        ]);
+    }
+
+    public function createRoom(Course $course)
+    {
+        return view('admin.course.room.create', [
+            'course' => $course
+        ]);
+    }
+
+    public function editRoom(Course $course, RoomLiveCourse $room)
+    {
+        return view('admin.course.room.edit', [
+            'course' => $course,
+            'room' => $room
+        ]);
+    }
+
+    public function listScheduleByRoom(Course $course, RoomLiveCourse $room)
+    {
+        $study_schedules = CourseSchedule::with('room')->paginate(15);
+        return view('admin.course.room.shedulers', [
+            'course' => $course,
+            'room' => $room,
+            'schedules' => $study_schedules
+        ]);
+    }
+
+    public function storeRoom(Request $request, Course $course)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $room = RoomLiveCourse::create([
+                'course_id' => $course->id,
+                'study_session_id' => $input['study_session_id'],
+                'start_date' => date('Y-m-d', strtotime( $input['start_date'])),
+                'number_session' => $input['number_session'],
+                'number_member' => 0,
+                'number_member_maximum' => $input['number_member_maximum'],
+            ]);
+
+            for ($i=0; $i < $input['number_session']; $i++) {
+                CourseSchedule::create([
+                    'course_id' => $course->id,
+                    'study_session_id' => $input['study_session_id'],
+                    'tutor_id' => $course->tutor_id,
+                    'is_test' => false,
+                    'date' => Carbon::create($input['start_date'])->addWeek($i)->format('Y-m-d')
+                ]);
+            }
+
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return back()->with('error', 'Create error!');
+        }
+    }
+
+    public function destroyRoom(Course $course, Lecture $lecture)
+    {
+        try {
+            $lecture->delete();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            return response([
+                'message' => 'Cannot delete course'
+            ], 400);
+        }
+    }
 }
