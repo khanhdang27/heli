@@ -73,19 +73,26 @@
                                     <tr>
                                         <td>
                                             @if(!empty($value->user->avatar))
-                                                <img type="image/jpg" src="{{asset('/file/'.$value->user->avatar->id)}}" width="75" height="75"/>
+                                                <img type="image/jpg" src="{{asset('/file/'.$value->user->avatar->id)}}"
+                                                     width="75" height="75"/>
                                             @else
                                                 <img src="{{asset('images/photo_default.svg')}}" width="75">
                                             @endif
                                         </td>
-                                        <td class="goal-project">
+                                        <td class="goal-project align-middle text-wrap">
                                             {{ $value->full_name }}
                                         </td>
-                                        <td class="goal-status">
+                                        <td class="goal-status align-middle text-wrap">
                                             {{ $value->user->email }}
                                         </td>
-                                        <td class="goal-status">
-                                            0
+                                        <td class="goal-status align-middle">
+                                            @if($value->user->active == 1)
+                                                <a href="{{ route('admin.user-manager.change-status', $value->user->id) }}"
+                                                   class="btn btn-warning py-0">Inactive</a>
+                                            @else
+                                                <a href="{{ route('admin.user-manager.change-status', $value->user->id) }}"
+                                                   class="btn btn-success py-0">Active</a>
+                                            @endif
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

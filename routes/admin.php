@@ -71,13 +71,15 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('manager-tutor/edit/{id}', 'UserManagerController@tutorEdit')->name('user-manager.tutor.edit');
     Route::put('manager-tutor/update/{id}', 'UserManagerController@tutorUpdate')->name('user-manager.tutor.update');
 
-    Route::get('user-subscribe','UserSubscribeController@listSubscribe')->name('user-subscribe');
-    Route::get('user-subscribe/create','UserSubscribeController@create')->name('user-subscribe.create');
+    Route::get('change-status/{id}', 'UserManagerController@changeStatusUser')->name('user-manager.change-status');
+
+    Route::get('user-subscribe', 'UserSubscribeController@listSubscribe')->name('user-subscribe');
+    Route::get('user-subscribe/create', 'UserSubscribeController@create')->name('user-subscribe.create');
     Route::post('user-subscribe/subscribe', 'UserSubscribeController@addSubscribe')->name('user-subscribe.subscribe');
     Route::post('user-subscribe/unsubscribe', 'UserSubscribeController@unsubscribe')->name('user-subscribe.unsubscribe');
 
     Route::resource('study-session', 'StudySessionController');
     Route::resource('examination', 'ExaminationController');
-    Route::get('manage-examination/index/{id}','ExaminationController@manageExamination')->name('manage-examination');
-    Route::get('manage-examination/create/{id}','ExaminationController@addExamination')->name('manage-examination.create');
+    Route::get('manage-examination/index/{id}', 'ExaminationController@manageExamination')->name('manage-examination');
+    Route::get('manage-examination/create/{id}', 'ExaminationController@addExamination')->name('manage-examination.create');
 });

@@ -197,4 +197,25 @@ class UserManagerController extends Controller
             return back()->with('errors', 'Save error');
         }
     }
+
+    public function changeStatusUser($id)
+    {
+        $user = User::where('id', $id)->first();
+        DB::beginTransaction();
+        try {
+            if ($user->active == 1){
+                $user->active = 0;
+                $user->save();
+            } else{
+                $user->active = 1;
+                $user->save();
+            }
+            DB::commit();
+            return back()->with('success', 'Save success');
+        } catch (\Throwable $th)
+        {
+            DB::rollBack();
+            return back()->with('error', 'Save error');
+        }
+    }
 }
