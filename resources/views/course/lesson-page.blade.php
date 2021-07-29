@@ -6,7 +6,6 @@
     @php
         $course = $room->course;
         $live_code = $room->room_live_code;
-
     @endphp
     <div class="body-content">
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
