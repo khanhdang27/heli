@@ -6,21 +6,21 @@
             </div>
             <!-- Modal body -->
             <div class="modal-body modal-body-login">
-                
+
                 <div class="mx-auto">
-                    <div class="position-relative d-flex align-items-center">
-                        <div class="mx-5">
-                            <div class="text-content d-flex justify-content-center text-secondary">
-                                <h1 class="text-information text-content">
-                                    @lang('keywords.freeTrialClass')
-                                </h1>
+                    <div class="row align-items-center">
+                        <div class="col-sm-7">
+                            <h1 class="text-secondary text-information mx-auto">
+                                @lang('keywords.freeTrialClass')
+                            </h1>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="bg-secondary mx-auto rounded-circle circle-register d-flex justify-content-center align-items-center">
+                                <img width="133px" height="133px" src="{{asset('images/ic/Group8.png')}}">
                             </div>
                         </div>
-                        <div class="circle-check position-absolute bg-secondary d-flex justify-content-center align-items-center mx-5">
-                            <img width="133px" src="{{asset('images/ic/Group8.png')}}">
-                        </div>
                     </div>
-                    <div class="d-flex justify-content-center">
+                    <div class="text-center">
                         <button class="btn-register-now btn-secondary" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">
                             <span>@lang('keywords.registerNowToExperience')</span>
                         </button>
