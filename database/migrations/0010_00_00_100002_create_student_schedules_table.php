@@ -18,15 +18,9 @@ class CreateStudentSchedulesTable extends Migration
             $table->foreignId('course_id')
                 ->constrained('courses')
                 ->cascadeOnDelete();
-            $table->foreignId('room_live_course_id')
-                ->constrained('room_live_courses')
-                ->cascadeOnDelete();
-            $table->foreignId('study_session_id')
-                ->constrained('study_sessions')
-                ->cascadeOnDelete();
-            $table->foreignId('tutor_id')
-                ->constrained('tutors')
-                ->cascadeOnDelete();
+            $table->bigInteger('room_live_course_id')->nullable();
+            $table->bigInteger('study_session_id')->nullable();
+            $table->bigInteger('tutor_id')->nullable();
             $table->foreignId('student_id')
                 ->constrained('users')
                 ->cascadeOnDelete();

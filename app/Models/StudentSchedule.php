@@ -15,6 +15,11 @@ class StudentSchedule extends Model
 
     protected $guarded = [];
 
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
     public function tutor()
     {
         return $this->belongsTo(Tutor::class);

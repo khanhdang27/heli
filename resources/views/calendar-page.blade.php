@@ -38,13 +38,13 @@
                 <div class="event-calendar">
                     <div class="d-flex flex-wrap mb-5">
                         <div class="mr-5 mb-3">
-                            <img src="{{asset("images/bookmark.png")}}" width="142">
+                            <img src="{{asset("images/bookmark.png")}}" width="50">
                         </div>
                         <div class="mr-5 mb-3">
-                            <img src="{{asset("images/bookmark.png")}}" width="142">
+                            <img src="{{asset("images/bookmark.png")}}" width="50">
                         </div>
                         <div>
-                            <img src="{{asset("images/bookmark.png")}}" width="142">
+                            <img src="{{asset("images/bookmark.png")}}" width="50">
                         </div>
                     </div>
                 </div>
@@ -53,12 +53,12 @@
 
     </div>
     @php
-        $tkb[0] = array('start'=>'2021-06-14T13:00:00', 'end'=>'2021-06-14T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[1] = array('start'=>'2021-06-16T13:00:00', 'end'=>'2021-06-16T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[2] = array('start'=>'2021-06-18T13:00:00', 'end'=>'2021-06-18T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[3] = array('start'=>'2021-06-20T13:00:00', 'end'=>'2021-06-20T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[4] = array('start'=>'2021-06-22T13:00:00', 'end'=>'2021-06-22T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[5] = array('start'=>'2021-06-24T13:00:00', 'end'=>'2021-06-24T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[0] = array('start'=>'2021-07-14T13:00:00', 'end'=>'2021-07-14T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[1] = array('start'=>'2021-07-16T13:00:00', 'end'=>'2021-07-16T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[2] = array('start'=>'2021-07-18T13:00:00', 'end'=>'2021-07-18T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[3] = array('start'=>'2021-07-20T13:00:00', 'end'=>'2021-07-20T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[4] = array('start'=>'2021-07-22T13:00:00', 'end'=>'2021-07-22T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $tkb[5] = array('start'=>'2021-07-24T13:00:00', 'end'=>'2021-07-24T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
     @endphp
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -71,7 +71,7 @@
                     right: null
                 },
                 googleCalendarApiKey: 'AIzaSyD7TfsO9cuJatNQyxQOcS5kAkFK8enPWF8',
-                initialDate: '{{date('Y-m-d')}}',
+                initialDate: '{{date("Y-m-d")}}',
                 businessHours: true, // display business hours
                 selectable: true,
                 fixedWeekCount: false,
@@ -81,11 +81,11 @@
                 },
                     [
                         @php
-                            foreach ($tkb as $e){
+                            foreach ($schedule as $item){
                                 echo('{');
-                                echo("title: '{$e['title']}',");
-                                echo("start: '{$e['start']}',");
-                                echo("end: '{$e['end']}',");
+                                echo("title: '{$item->course->course_name}',");
+                                echo("start: '{$item->date}T00:00',");
+                                echo("end: '{$item->date}T24:00',");
                                 echo('},');
                             }
                         @endphp
@@ -104,4 +104,5 @@
         });
 
     </script>
+
 @endsection

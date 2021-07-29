@@ -16,7 +16,6 @@
 
                             </div>
                             <div class="col-auto">
-
                                 <!-- Button -->
                                 <a href="{{ route('admin.manage-examination.create', $course_id) }}"
                                    class="btn btn-sm btn-success">
@@ -93,6 +92,7 @@
                                                                     <th>
                                                                         Date
                                                                     </th>
+                                                                    <th></th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody class="list">
@@ -109,6 +109,11 @@
                                                                         </td>
                                                                         <td class="goal-project">
                                                                             {{$submitItem->created_at}}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="{{ route('site.file.download', $submitItem->file) }}">
+                                                                                <i class="fe fe-download"></i> File
+                                                                            </a>
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -127,10 +132,7 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a href="{{ route('admin.examination.edit', $value->id) }}"
-                                                       class="dropdown-item">
-                                                        Edit
-                                                    </a>
+                                                    
                                                     <a href="javascript:void(0)"
                                                        onclick="itemDelete('{{ route('admin.examination.destroy', $value->id) }}')"
                                                        class="dropdown-item delete-item">

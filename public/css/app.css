@@ -10980,6 +10980,12 @@ h5,
   font-weight: 500;
 }
 
+.free {
+  min-height: 2.45vw;
+  font-size: 25px !important;
+  border: none;
+}
+
 .banner-content {
   position: relative;
 }
@@ -11295,7 +11301,7 @@ input.check-subscribe {
 
 .praise-box {
   margin-bottom: 5rem;
-  max-width: 380px;
+  max-width: 310px;
 }
 
 .praise-box .praise {
@@ -11324,7 +11330,7 @@ input.check-subscribe {
 }
 
 .praise-box .content-praise p {
-  margin-bottom: 3rem;
+  font-size: 12px;
 }
 
 .product-box {
@@ -11540,6 +11546,11 @@ input.check-subscribe {
 
 .step-for-register #btn-register-step {
   font-size: 18.7pt;
+}
+
+.circle-register {
+  width: 206px;
+  height: 206px;
 }
 
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
@@ -12051,41 +12062,6 @@ input.check-subscribe {
   color: #fad000;
 }
 
-@media screen and (max-width: 576px) {
-  .banner-content {
-    height: 600px;
-  }
-
-  .banner-content .banner-info {
-    top: 30% !important;
-    left: 60%;
-    width: 100%;
-  }
-
-  .banner-content .banner-info .banner-caption {
-    font-size: 25px;
-  }
-
-  .banner-content .banner-info .banner-caption .banner-title {
-    width: 100%;
-  }
-
-  .free {
-    font-size: 15px !important;
-  }
-
-  .container-course {
-    max-width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .menu-img {
-    width: 120px;
-    height: 120px;
-  }
-}
-
 @media screen and (max-width: 1200px) {
   .banner-content {
     height: 600px;
@@ -12097,10 +12073,6 @@ input.check-subscribe {
 
   .banner-content .banner-info .banner-caption .banner-title {
     width: 100%;
-  }
-
-  .free {
-    font-size: 15px !important;
   }
 
   .product-category-padding {
@@ -12174,6 +12146,47 @@ input.check-subscribe {
 
   .menu-category-text {
     display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .menu-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .btn-register-now {
+    padding: 0px 1rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .banner-content {
+    height: 600px;
+  }
+
+  .banner-content .banner-info {
+    top: 30% !important;
+    left: 60%;
+    width: 100%;
+  }
+
+  .banner-content .banner-info .banner-caption {
+    font-size: 20px;
+  }
+
+  .banner-content .banner-info .banner-caption .banner-title {
+    width: 100%;
+  }
+
+  .free {
+    min-height: 2.45vw;
+    font-size: 20px;
+    border: none;
+  }
+
+  .container-course {
+    max-width: 100%;
   }
 }
 

@@ -101,19 +101,30 @@ class BannerController extends Controller
 
     public function update(CreateBannerRequest $request, Banner $banner)
     {
-        $banner->fill(
-            $request->validated()
-        );
-        $imageDelete = null;
-        if ($request->hasFile('banner_photo')) {
-            $imageDelete = $banner->banner_photo;
-            $banner->banner_photo = $request->file('banner_photo')->store('photo');
+        $old_banner = Banner::all()->first();
+        if (!empty($old_banner)){
+            $old_banner->delete();
         }
-        $banner->save();
-        if ($imageDelete) {
-            Storage::delete($imageDelete);
+        $input = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            $banner = Banner::create([
+                'banner_title' => $request->input('banner_title'),
+            ]);
+
+            if(!empty($input['file'])){
+                $file = File::storeFile($input['file'],Banner::class, $banner->id);
+            }
+
+            DB::commit();
+            return back()->with('success', 'Save success');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('errors', 'Save error');
         }
-        return back()->with('success', 'Update success!');
     }
 
     /**

@@ -84,7 +84,6 @@
                                 {{ $submitItem->title }} - {{ $submitItem->description }}
                                 <a href="{{route('site.unsubmit-examination',$submitItem->id)}}" class="font-weight-bold">Cancel</a>
                             </div>
-
                         </li>
                     @endif
                 </ul>

@@ -22,14 +22,19 @@
                         <div class="card-body">
                             <div class="mb-3">
                                 <img
-                                    src="{{ Storage::url($banner->banner_photo) }}"
+                                    src="{{ asset('/file/'.$banner->image->id) }}"
                                     width="80px;" height="90px;" alt="">
                             </div>
                             {!! Form::open(['route' => ['admin.banner.update',$banner->id],'method'=>'put', 'enctype'=>'multipart/form-data'])  !!}
                             @csrf
+
+                            <div class="form-group ">
+                                {{ Form::label('banner_title', 'Banner title') }}
+                                {{ Form::text('banner_title', $banner->banner_title,['class' => 'form-control'] ) }}
+                            </div>
                             <div class="custom-file ">
                                 {{ Form::label('file', 'File', ['class' => 'custom-file-label']) }}
-                                {{ Form::file('banner_photo', ['class' => 'custom-file-input', 'required'])}}
+                                {{ Form::file('file', ['class' => 'custom-file-input', 'required'])}}
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}

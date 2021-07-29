@@ -10,12 +10,10 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-
                                 <!-- Title -->
                                 <h4 class="card-header-title">
                                     Create Banner
                                 </h4>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>

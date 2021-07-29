@@ -68,8 +68,6 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('my/')->name('user.')->group(function () {
         Route::get('course', 'CourseController@my')->name('course');
-        Route::get('calendar', function () {
-            return view('calendar-page');
-        })->name('calendar');
+        Route::get('calendar', 'ScheduleController@index')->name('calendar');
     });
 });

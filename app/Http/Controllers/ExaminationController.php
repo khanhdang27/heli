@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Examination;
 use App\Models\File;
+use App\Models\StudentCourses;
+use App\Models\StudentSchedule;
 use App\Models\SubmitExamination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,10 +23,10 @@ class ExaminationController extends Controller
     public function index()
     {
         $courses = Course::with('tutor', 'translations')
-            ->when(request('name') != '', function (Builder $query) {
+            ->when(request('name') != '', function ($query) {
                 $query->whereTranslationLike('course_name', '%' . request('name') . '%');
             })
-            ->when(request('tutor') != '', function (Builder $query) {
+            ->when(request('tutor') != '', function ($query) {
                 $query->where('tutor_id', request('tutor'));
             })
             ->paginate(15)
@@ -87,6 +89,23 @@ class ExaminationController extends Controller
             if (!empty($input['file'])) {
                 $file = File::storeFile($input['file'], Examination::class, $newExam->id);
             }
+
+            $_studentsCourses =  StudentCourses::where('course_id', $input['course_id'])->get();
+
+            foreach ($_studentsCourses as $_studentsCourse) {
+                StudentSchedule::create([
+                    'course_id'=> $input['course_id'],
+                    'room_live_course_id' => 0,
+                    'study_session_id' => 0,
+                    'tutor_id' => $_studentsCourse->course->tutor_id,
+                    'student_id' => $_studentsCourse->student_id,
+                    'date' => $input['deadline'],
+                    'is_test' => true,
+                    'note' => $input['title']
+                ]);
+            }
+
+            
             DB::commit();
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
