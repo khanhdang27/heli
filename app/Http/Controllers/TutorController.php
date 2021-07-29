@@ -145,7 +145,7 @@ class TutorController extends Controller
      */
     public function edit(Tutor $tutor)
     {
-        $tutor->load(['translations', 'user', 'subject', 'avatar']);
+        $tutor->load(['translations', 'user', 'subject']);
         return view('admin.tutor.edit', [
             'tutor'    => $tutor,
         ]);
@@ -199,8 +199,8 @@ class TutorController extends Controller
             ]);
 
             if (!empty($request['photo'])) {
-                if (!empty($tutor->avatar())) {
-                    $tutor->avatar()->delete();
+                if (!empty($tutor->user->avatar)) {
+                    $tutor->user->avatar->delete();
                 }
                 $file = File::storeFile(
                     $request['photo'],
