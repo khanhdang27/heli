@@ -29,7 +29,7 @@
                     <div class="d-flex justify-content-between h-100">
                         <div class="name-product w-75 d-flex flex-column justify-content-between text-primary p-3">
                             <div class="text-multiline-truncate">
-                                <a class="h2" href="{{ empty($studentCourse) ? '#' : route('site.live_show', $studentCourse->room_id) }}" >
+                                <a class="h2" href="{{ empty($studentCourse) ? '#' : route('site.live_show', $studentCourse->room_live_course_id) }}" >
                                     {{rtrim(mb_substr($course->course_description,0,100))}}
                                 </a>
                             </div>

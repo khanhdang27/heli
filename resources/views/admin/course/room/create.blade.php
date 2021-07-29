@@ -30,7 +30,7 @@ use App\Models\StudySession;
                         <div class="form-group ">
                             {{ Form::label('study_session_id', 'Study Session') }}
                             {{ Form::select('study_session_id', 
-                                SelectionByClass::getValues(StudySession::class,'session_name','id')) }}
+                                SelectionByClass::getValues(StudySession::class,'session_name','id'), null,['class' => 'form-control']) }}
                         </div>
 
                         <div class="form-group ">

@@ -16,15 +16,22 @@
     @if(Auth::check())
         @if(Auth::user()->stripe_id != null)
             @if ($course->type == Course::LIVE)
-                <form id="form-room" class="form-inline" action="{{route('site.order.create', ['product_id'=>$courseDetail->id] )}}" method="get">
-                    @csrf
-                    <input name="product_id" value="{{$courseDetail->id}}" form="form-room" required hidden>
-                    <button type="submit" class="btn-primary mt-3 btn-register-now product-btn">
-                        <div class="px-3">
-                            @lang('keywords.coursePage.buyNow')
-                        </div>
-                    </button>
-                </form>
+                <div id="buy_live">
+                    <form 
+                        id="form-room" 
+                        class="form-inline"
+                        method="get"
+                        v-on:submit="buyCourse"
+                    >
+                        @csrf
+                        <input name="product_id" value="{{$courseDetail->id}}" form="form-room" required hidden>
+                        <button type="submit" class="btn-primary mt-3 btn-register-now product-btn">
+                            <div class="px-3">
+                                @lang('keywords.coursePage.buyNow')
+                            </div>
+                        </button>
+                    </form>
+                </div>
             @else
                 <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
                     <div class="btn-primary mt-3 btn-register-now product-btn">
@@ -50,3 +57,32 @@
         <div class="sharethis-inline-share-buttons"></div>
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function () {
+            $("form").submit(function (event) {
+                let myForm = $('#form-room').serializeArray().reduce(function(obj, item) {
+                obj[item.name] = item.value;
+                return obj;
+            }, {});
+
+            if (myForm.room_id) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{route('site.order.create', ['product_id'=>$courseDetail->id] )}}",
+                    data: myForm,
+                    dataType: "json",
+                    encode: true,
+                }).done(function (data) {
+                    console.log(data);
+                    window.location.replace(data.path);
+                });
+            } else {
+                alert('must select a room');
+            }
+
+            event.preventDefault()
+        })
+    })
+</script>
