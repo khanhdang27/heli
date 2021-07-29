@@ -1,8 +1,8 @@
 @php
     use Illuminate\Support\Carbon;
 
-    $rooms = clone $courseDetail->rooms;    
-    $schedule = clone $courseDetail->schedule;    
+    $rooms = clone $courseDetail->rooms;
+    $schedule = clone $courseDetail->schedule;
 @endphp
 
 
@@ -10,9 +10,10 @@
     <p class="pt-5 text-primary h2">請按你的需要選擇合適班次，每班名額有限，額滿將停止收生</p>
 
     <div class="room-selection">
+        <input type="radio" name="room_id" value="" form="form-room" checked required>
         @foreach ($rooms as $idx => $room)
 
-            <input id="room_{{ $room->id }}" type="radio" name="room_id" value="{{$room->id}}" form="form-room" {{ $idx == 0 ? 'required' : '' }}>
+            <input id="room_{{ $room->id }}" type="radio" name="room_id" value="{{$room->id}}" form="form-room">
 
             <label for="room_{{ $room->id }}" class="pt-3 reviews">
                 <div class="row review-bar">
@@ -46,6 +47,4 @@
             </label>
         @endforeach
     </div>
-    
-    
 </div>

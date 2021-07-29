@@ -11,6 +11,7 @@ use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
 use App\Models\StudentSchedule;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +48,7 @@ class OrderController extends Controller
             ] = $this->getVariable($request);
 
             if (empty($student_bought)) {
-                $this->createBuyCourse($courses_with_group, $paymentMethods, $request);
+                return $this->createBuyCourse($courses_with_group, $paymentMethods, $request);
             } else {
                 $order = Order::with('course')->where('course_id', $student_bought->course_id)
                     ->where('user_id', Auth::user()->id)->first();
@@ -85,11 +86,19 @@ class OrderController extends Controller
                     $student_course = StudentCourses::create([
                         'course_id' => (int) $courses_with_group->membershipCourses->course_id,
                         'student_id' => Auth::user()->id,
-                        'room_id' => $room
+                        'room_live_course_id' => $room,
+                        'latest_study' => new DateTime(),
+                        'lecture_study' => 0
                     ]);
 
                 }
                 DB::commit();
+                if($request->ajax()){
+                    return response()->json([
+                        'path' => route('site.order.show', $result->id),
+                        'status' => 200,
+                    ]);
+                }
                 return redirect()->route('site.order.show', $result->id);
             }
         } catch (\Throwable $th) {

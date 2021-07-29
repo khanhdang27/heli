@@ -23,8 +23,9 @@ class CreateStudentCoursesTable extends Migration
                 ->foreignId('student_id')
                     ->constrained('users')
                     ->cascadeOnDelete();
-            $table->dateTime('latest_study');   
+            $table->dateTime('latest_study');
             $table->bigInteger('lecture_study');
+            $table->string('room_live_course_id')->nullable();
             $table->unique(['student_id', 'course_id']);
             $table->timestamps();
             $table->softDeletes();

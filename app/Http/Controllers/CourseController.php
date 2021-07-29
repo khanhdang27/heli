@@ -350,6 +350,7 @@ class CourseController extends Controller
             $room = RoomLiveCourse::create([
                 'course_id' => $course->id,
                 'study_session_id' => $input['study_session_id'],
+                'room_live_code' => $input['room_live_code'],
                 'start_date' => date('Y-m-d', strtotime( $input['start_date'])),
                 'number_session' => $input['number_session'],
                 'number_member' => 0,
@@ -362,6 +363,7 @@ class CourseController extends Controller
                     'study_session_id' => $input['study_session_id'],
                     'tutor_id' => $course->tutor_id,
                     'is_test' => false,
+                    'room_live_course_id' => $room->id,
                     'date' => Carbon::create($input['start_date'])->addWeek($i)->format('Y-m-d')
                 ]);
             }
