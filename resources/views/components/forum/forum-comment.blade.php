@@ -25,7 +25,7 @@
                 @endif
             </div>
             <div class="text-forum d-flex">
-                <x-like.like :likeRef=$comment :likeModule=\App\Models\UserComment::class></x-like.like>
+                <x-like.like :likeRef=$item :likeModule=\App\Models\UserComment::class></x-like.like>
             </div>
         </div>
         <div class="col-xl-3 d-flex flex-column justify-content-between text-right">

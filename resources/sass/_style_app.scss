@@ -343,7 +343,7 @@ input.check-subscribe {
 
 .praise-box {
     margin-bottom: 5rem;
-    max-width: 380px;
+    max-width: 310px;
     .praise {
         display: flex;
         flex-direction: column;
@@ -366,7 +366,7 @@ input.check-subscribe {
         box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
     }
     .content-praise p {
-        margin-bottom: 3rem;
+        font-size: 12px;
     }
 }
 
@@ -559,7 +559,10 @@ input.check-subscribe {
         font-size: 18.7pt;
     }
 }
-
+.circle-register{
+    width: 206px;
+    height: 206px;
+}
 
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
 
