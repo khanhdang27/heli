@@ -1,4 +1,3 @@
-
 @media screen and (max-width: 1200px) {
     .banner-content {
         height: 600px;
@@ -71,14 +70,11 @@
     }
 }
 
-
 @media screen and (max-width: 768px) {
-
     .menu-img {
         width: 120px;
         height: 120px;
     }
-
     .btn-register-now {
         padding: 0px 1rem;
     }
@@ -89,8 +85,9 @@
         top: 30% !important;
         height: 600px;
         .banner-info {
-            left: 60%;
+            left: 50%;
             width: 100%;
+            padding-left: 1rem;
             .banner-caption {
                 font-size: 20px;
                 .banner-title {
@@ -101,10 +98,9 @@
     }
     .free {
         min-height: 2.45vw;
-        font-size: 20px ;
+        font-size: 20px;
         border: none;
     }
-    
     .container-course {
         max-width: 100%;
     }

@@ -52,7 +52,7 @@
                                     <tr>
                                         <td>
                                             <img
-                                                src="{{ route('file.show', ['file'=> $value->image])}}"
+                                                src="{{ asset('/file/'.$value->image)}}"
                                                 width="50px;" height="60px;" alt="">
                                         </td>
                                         <td class="text-description">
