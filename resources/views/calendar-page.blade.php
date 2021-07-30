@@ -3,9 +3,9 @@
 @section('title','Calendar Page')
 
 @section('content')
-<div class="container-fluid text-center top-news-page h1">
-    @lang('keywords.starTutorTeam')
-</div>
+    <div class="container-fluid text-center top-news-page h1">
+        @lang('keywords.starTutorTeam')
+    </div>
     {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
     <div class="container-fluid calendar">
         <div class="row">
@@ -82,10 +82,12 @@
                     [
                         @php
                             foreach ($schedule as $item){
+                                $start_date = $item->studySession == null ? $item->date.'T00:00:00':str_replace(' ','T',$item->studySession->session_start);
+                                $end_date = $item->studySession == null ? $item->date.'T24:00:00':str_replace(' ','T',$item->studySession->session_end);
                                 echo('{');
-                                echo("title: '{$item->course->course_name}',");
-                                echo("start: '{$item->date}T00:00',");
-                                echo("end: '{$item->date}T24:00',");
+                                echo("title: '{$item->course->course_name} {$item->note}',");
+                                echo("start: '".$start_date."',");
+                                echo("end: '".$end_date."',");
                                 echo('},');
                             }
                         @endphp
