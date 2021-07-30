@@ -27,6 +27,14 @@ class OrderController extends Controller
     {
     }
 
+    public function addCard()
+    {
+        $_user = User::find(Auth::user()->id);
+        return view('payments.update-payment-method', [
+            'intent' => $_user->createSetupIntent()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,10 +44,13 @@ class OrderController extends Controller
     {
         $paymentMethods = $this->getPaymentMethod();
         if (empty($paymentMethods[0])) {
-            $_user = User::find(Auth::user()->id);
-            return view('payments.update-payment-method', [
-                'intent' => $_user->createSetupIntent()
-            ]);
+            if($request->ajax()){
+                return response()->json([
+                    'path' => route('site.order.addCard'),
+                    'status' => 200,
+                ]);
+            }
+            return redirect()->route('site.order.addCard');
         } else {
             [
                 $product_id,
