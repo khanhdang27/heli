@@ -102,7 +102,5 @@
 
             calendar.render();
         });
-
     </script>
-
 @endsection
