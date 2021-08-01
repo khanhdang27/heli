@@ -29,7 +29,7 @@
                                 {{ $item->title }}
                             </a><br>
                         </div>
-                        
+
                     @endforeach
                 </div>
             </div>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="circle-check position-absolute bg-primary d-flex justify-content-center align-items-center">
-                        <img width="100px" src="{{ asset('images/ic/Group8.png') }}">
+                        <img width="133px" src="{{ asset('images/ic/Group8.png') }}">
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">

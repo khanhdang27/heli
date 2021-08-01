@@ -232,14 +232,7 @@ body {
 
 .text-information {
     text-align: center;
-    max-width: 45%;
-}
-
-@media screen and (max-width: 874px) {
-    .text-content {
-        font-size: 25px;
-        padding-right: 3rem;
-    }
+    max-width: 370px;
 }
 
 .circle-check {
@@ -249,10 +242,25 @@ body {
     height: 206px;
 }
 
-@media screen and (max-width: 714px) {
+@media screen and (max-width: 768px) {
+    .text-content {
+        padding-right: 3rem;
+    }
     .circle-check {
-        width: 106px;
-        height: 106px;
+        left: 60%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .text-content {
+        padding-left: 0.5rem;
+        padding-right: 1.5rem;
+        font-size: 18px;
+    }
+    .circle-check {
+        width: 116px;
+        height: 116px;
+        left: 58%;
     }
     .circle-check img {
         width: 83px;
@@ -399,7 +407,6 @@ body {
 
 .text-login-left {
     width: fit-content;
-    font-size: 25pt;
 }
 
 .btn-close {
@@ -479,3 +486,4 @@ body {
     bottom: 25%;
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
+

@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6 d-flex justify-content-center align-items-center">
-                            <div class="text-login-left text-secondary text-center text-secondary">
+                            <div class="text-login-left h1 text-secondary text-center text-secondary">
                                 @lang('keywords.loginModal.welcomeBack')<br>
                                 @lang('keywords.loginModal.loginToContinueCourse')
                             </div>
@@ -21,14 +21,14 @@
                                     <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
                                                                    width="33px">
                                     </div>
-                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithFb')</h2>
+                                    <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
                                 </a>
                                 <a class="btn-register-now btn-login btn-secondary"
                                    href="{{route('site.socialLogin', 'google')}}">
                                     <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
                                                                    width="33px">
                                     </div>
-                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithGg')</h2>
+                                    <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
                                 </a>
                             </div>
                             <div class="line-or d-flex align-items-center text-white">
@@ -51,7 +51,7 @@
                                     ])
                                 }}
                             </div>
-                            <div class="row align-items-center bottom-form mt-2 line-or">
+                            <div class="row bottom-form mt-2 line-or pt-3">
                                 <div class="col-sm">
                                     <div class="remember text-white d-flex">
                                         <label class="rememberCheck mr-3" for="rememberCheck">
