@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6 login-left d-flex flex-column justify-content-center align-items-center">
-                            <div class="text-login-left text-secondary text-center">
+                            <div class="text-login-left h1 text-secondary text-center">
                                 @lang('keywords.registerModal.freeRegistration')<br>
                                 @lang('keywords.registerModal.experienceCourse')<br>
                                 @lang('keywords.registerModal.onlineAndRealTimeCourse')<br>
@@ -22,14 +22,14 @@
                                     <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
                                                                    width="33px">
                                     </div>
-                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithFb')</h2>
+                                    <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
                                 </a>
                                 <a class="btn-register-now btn-login btn-secondary"
                                    href="{{route('site.socialLogin', 'google')}}">
                                     <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
                                                                    width="33px">
                                     </div>
-                                    <h2 class="mx-auto mb-0">@lang('keywords.loginWithGg')</h2>
+                                    <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
                                 </a>
                             </div>
                             <div class="line-or d-flex align-items-center text-white">

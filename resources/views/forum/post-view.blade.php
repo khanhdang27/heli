@@ -71,7 +71,7 @@
                             </button>
                         </div>
                         <p class="h2 text-primary pt-2">
-                            @if($post->block==1)
+                            @if($post->close_post==1)
                                 @lang('keywords.solved')
                             @else
                                 @lang('keywords.waitingForAnswer')

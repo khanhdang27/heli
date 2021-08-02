@@ -78,6 +78,11 @@
     .btn-register-now {
         padding: 0px 1rem;
     }
+    .box-btn-login {
+        .btn-register-now {
+            font-size: 20px;
+        }
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -103,5 +108,17 @@
     }
     .container-course {
         max-width: 100%;
+    }
+    .text-login-left {
+        font-size: 20px;
+    }
+    .modal-login-content {
+        height: auto !important;
+        padding: 0 !important;
+        .btn-close {
+            .close {
+                padding: 1rem 0;
+            }
+        }
     }
 }

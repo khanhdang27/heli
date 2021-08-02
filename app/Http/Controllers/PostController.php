@@ -139,7 +139,8 @@ class PostController extends Controller
         try {
             $post = Post::where('id', $post_id)->first();
             $post->update([
-                'pin_comment' => $comment_id
+                'pin_comment' => $comment_id,
+                'close_post' => 1
             ]);
             DB::commit();
             return back()->with('success', 'Save success');
