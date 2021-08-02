@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container-fluid text-center top-news-page h1">
-        @lang('keywords.starTutorTeam')
+        @lang('keywords.footer.mySchedule')
     </div>
     {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
     <div class="container-fluid calendar">

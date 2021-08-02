@@ -83,6 +83,11 @@
             font-size: 20px;
         }
     }
+    .sort-lg{
+        label{
+            margin-right: 0.5rem !important;
+        }
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -120,5 +125,12 @@
                 padding: 1rem 0;
             }
         }
+    }
+
+    .sort-lg{
+        display: none;
+    }
+    .sort-sm{
+        display: block !important;
     }
 }

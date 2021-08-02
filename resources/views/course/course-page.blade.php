@@ -14,6 +14,7 @@
 
 @section('content')
     {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
+    <hr class="m-0">
     <div class="body-content container-fluid">
         @if ( $course->type == Course::LIVE )
             <x-product-detail.course-card-page :course=$course
