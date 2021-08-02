@@ -1,5 +1,5 @@
 @php
-use App\Utilities\SelectionByClass;
+    use App\Utilities\SelectionByClass;
 @endphp
 
 @extends('layout.app')
@@ -7,22 +7,22 @@ use App\Utilities\SelectionByClass;
 @section('title', 'Blog Page')
 
 @section('content')
-    @if (empty($blog_top))
-        <div class="d-flex justify-content-center">
-            <H3>
-                No Data Fount
-            </H3>
+    <div class="body-content">
+        <div class="container-fluid text-center top-news-page h1">
+            @lang('keywords.blog-page.learningColumn')
         </div>
-    @else
-        <div class="body-content">
-            <div class="container-fluid text-center top-news-page h1">
-                @lang('keywords.blog-page.learningColumn')
+        @if (empty($blog_top))
+            <div class="d-flex justify-content-center">
+                <H3>
+                    No Data Fount
+                </H3>
             </div>
+        @else
             <div class="container-fluid pt-5 pb-5">
                 <div class="ml-auto mr-auto d-flex flex-wrap w-75">
                     @foreach ($tags as $value)
                         <a href="{{ route('site.show-blog-tag', $value) }}" class="btn-hashtag mx-3 text-center"
-                            type="button">
+                           type="button">
                             {{ $value->tag_name }}
                         </a>
                     @endforeach
@@ -60,7 +60,8 @@ use App\Utilities\SelectionByClass;
                     </a>
                 </div>
             </div>
-        </div>
+        @endif
+    </div>
 
-    @endif
+
 @endsection

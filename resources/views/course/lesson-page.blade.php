@@ -7,6 +7,7 @@
         $course = $room->course;
         $live_code = $room->room_live_code;
     @endphp
+    <hr class="m-0">
     <div class="body-content">
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
         <div class="container-fluid pt-5 pb-5 pl-0 pr-0">

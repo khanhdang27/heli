@@ -14,7 +14,7 @@ use App\Utilities\SelectionByClass;
         </div>
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
 
-        <div class="container-fluid p-0 container-course">
+        <div class="container-fluid container-course">
             <div class="title-subject text-primary text-center">
                 {{ $subject->subject_name }}
             </div>
