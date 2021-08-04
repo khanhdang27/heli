@@ -2,14 +2,14 @@
     use App\Utilities\SelectionByClass;
 @endphp
 <div>
-    <div class="container-fluid bg-dark p-1 text-center">
+    <div class="container-fluid bg-primary p-1 text-center">
         <span class="text-white text-justify text-center">
             <img src={{asset("images/ic/ic_wireless.svg")}}>【IELTS】新型冠狀病毒影響下的最新考試安排 ⾦鐘及尖沙咀英語教學中⼼暫停向公眾開放 ，直⾄另⾏通知 。如有其他需要，必須預約才可進入⼤樓 。更新⽇期: 2021年1⽉8⽇星期五
         </span>
     </div>
-    <nav class="navbar navbar-expand-xl bg-white ">
-        <a class="navbar-brand mr-5" href="{{ URL::route('site.home') }}">
-            <img class="logo" width="150" src={{ asset("images/HeliosLogo.svg")}}>
+    <nav class="navbar navbar-expand-xl bg-white py-3">
+        <a class="navbar-brand mr-4" href="{{ URL::route('site.home') }}">
+            <img class="logo" width="200" src={{ asset("images/HeliosLogo.svg")}}>
         </a>
         <button class="navbar-toggler navbar-toggler-right collapsed pr-0 pl-0 btn-collapse" type="button"
                 data-toggle="collapse"
@@ -67,13 +67,13 @@
                     </div>
                 @else
                     <!-- Button login modal -->
-                    <button type="button" class="btn-header btn-primary" data-toggle="modal" data-target="#loginModal"
+                    <button type="button" class="btn btn-header py-0 border-primary" data-toggle="modal" data-target="#loginModal"
                             id="login">
                         @lang('keywords.navBar.login')
                     </button>
                     <x-login.login></x-login.login>
                     <!-- Button Register Modal -->
-                    <button type="button" class="btn-header btn-primary" data-toggle="modal" data-target="#registerModal"
+                    <button type="button" class="btn btn-header py-0 border-primary" data-toggle="modal" data-target="#registerModal"
                             id="register">
                         @lang('keywords.navBar.register')
                     </button>

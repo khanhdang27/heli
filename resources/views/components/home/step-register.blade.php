@@ -1,19 +1,19 @@
-<div class="container-fluid step-for-register bg-dark">
+<div class="container-fluid step-for-register pb-5 bg-dark">
     <div class="content-step">
-        <div class="row row-step justify-content-center">
-            <div class="circle-step bg-secondary text-primary">
+        <div class="row row-step py-5 justify-content-center">
+            <div class="circle-step bg-white text-dark">
                 Step 1
             </div>
             <div class="col-sm-3 col-step">
                 @include('dot-bar')
             </div>
-            <div class="circle-step bg-secondary text-primary">
+            <div class="circle-step bg-white text-dark">
                 Step 2
             </div>
             <div class="col-sm-3 col-step">
                 @include('dot-bar')
             </div>
-            <div class="circle-step bg-secondary text-primary">
+            <div class="circle-step bg-white text-dark">
                 Step 3
             </div>
         </div>
@@ -40,10 +40,10 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <button class="btn-register-now btn-secondary text-primary" id="btn-register-step"
+        <button class="btn-register-now btn-dark mt-5 font-weight-bold" id="btn-register-step"
                 data-toggle="modal"
                 data-target="#registerModal">
-            <span>@lang('keywords.registerNowToExperience')</span>
+            <span>@lang('keywords.signUpNow')</span>
         </button>
     </div>
 </div>

@@ -2,13 +2,19 @@
     .banner-content {
         height: 600px;
         .banner-info {
+            width: 75%;
             .banner-caption {
+                width: 100%;
+                margin: 0 auto;
                 font-size: 30px;
                 .banner-title {
                     width: 100%;
                 }
             }
         }
+    }
+    .free {
+        font-size: 25px !important;
     }
     .product-category-padding {
         padding-left: 1rem;
@@ -75,8 +81,17 @@
         width: 120px;
         height: 120px;
     }
+    %btn-size{
+        padding: 0px 3rem;
+        font-size: 15pt;
+    }
     .btn-register-now {
-        padding: 0px 1rem;
+        @extend %btn-size
+    }
+    .step-for-register{
+        #btn-register-step{
+            @extend %btn-size
+        }
     }
     .box-btn-login {
         .btn-register-now {
@@ -95,22 +110,15 @@
         top: 30% !important;
         height: 600px;
         .banner-info {
-            left: 50%;
-            width: 100%;
-            padding-left: 1rem;
             .banner-caption {
                 font-size: 20px;
-                .banner-title {
-                    width: 100%;
-                }
             }
         }
     }
     .free {
-        min-height: 2.45vw;
-        font-size: 20px;
-        border: none;
+        font-size: 20px !important;
     }
+
     .container-course {
         max-width: 100%;
     }

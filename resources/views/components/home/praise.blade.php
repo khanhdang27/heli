@@ -2,7 +2,7 @@
     <div class="avatar-guest position-absolute">
         <img class="avatar text-center w-100" src="{{asset('images/ava1.svg')}}">
     </div>
-    <div class="card content-praise text-primary border-0">
+    <div class="card content-praise text-primary border-0 rounded-0">
         <div class="card-body p-0">
             <p>
                {{$content}}

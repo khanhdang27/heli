@@ -39,7 +39,7 @@ h5,
 
 .free {
     min-height: 2.45vw;
-    font-size: 25px !important;
+    font-size: 29px !important;
     border: none;
 }
 
@@ -53,21 +53,20 @@ h5,
         z-index: 1000;
         position: absolute;
         top: 50%;
-        left: 35%;
+        left: 50%;
         transform: translate(-50%, -50%);
         .banner-caption {
             font-size: 50px;
             font-weight: 400;
             border-bottom: 2px solid;
-            width: 55.5vw;
+            width: 40vw;
             height: auto;
             p {
                 text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
-                margin-bottom: 2.5vw;
                 line-height: 1.45;
             }
             .banner-title {
-                width: 75%;
+
             }
         }
     }
@@ -126,12 +125,11 @@ h5,
     border-radius: 20px;
     padding: 0.2rem !important;
     width: 309px;
-    height: 37px;
+    height: 40px;
     background-color: #fff;
 }
 
 .footer {
-    color: var(--secondary);
     line-height: 1.45;
     padding: 4.48rem 10rem;
     .title-foot {
@@ -144,11 +142,11 @@ h5,
     }
     a {
         font-size: 9pt;
-        color: var(--secondary);
+        color: var(--white);
     }
     a:hover {
         text-decoration: none;
-        color: var(--white);
+        color: var(--secondary);
     }
 }
 
@@ -319,19 +317,58 @@ input.check-subscribe {
     color: var(--primary);
 }
 
+.btn-header {
+    min-width: 58px;
+    border: 2px solid;
+    border-radius: 20px;
+    height: 27px;
+    font-size: 12px;
+    margin-left: 1rem;
+    margin-right: 0.5rem;
+    background-color: var(--white);
+    color: var(--primary);
+    &:hover{
+        background-color: var(--primary);
+        color: var(--white);
+    }
+}
+
+.btn-above-video{
+    .btn-register-now{
+        background-color: var(--white);
+        border: 3px solid var(--primary);
+        color: var(--primary);
+        padding: 0 4rem;
+        &:hover{
+            background-color: var(--primary);
+            color: var(--white);
+        }
+    }
+}
+
+.btn-register-free{
+    .btn-register-now{
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
+        &:hover{
+            background-color: var(--white);
+            color: var(--primary);
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
+        }
+    }
+}
+
 .btn-register-now {
-    font-size: 21.75pt;
+    font-size: 24px;
     color: #fff;
     border-radius: 50px;
     margin-top: 5rem;
     text-align: center;
     padding: 0 3rem;
     border: none;
-    min-height: 47px;
+    min-height: 39px;
     &:hover {
-        transform: translate3d(0, -1px, 0);
-        transition: all 0.5s;
-        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.20);
+        transition: 0.5s;
+        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
     }
 }
 
@@ -351,7 +388,7 @@ input.check-subscribe {
 
 .praise-box {
     margin-bottom: 5rem;
-    max-width: 310px;
+    max-width: 270px;
     .praise {
         display: flex;
         flex-direction: column;
@@ -359,8 +396,9 @@ input.check-subscribe {
     }
     .avatar-guest {
         border-radius: 200px;
-        width: 251px;
-        top: -125px;
+        width: 200px;
+        height: 200px;
+        top: -100px;
         left: 0;
         right: 0;
         margin: 0 auto;
@@ -369,12 +407,12 @@ input.check-subscribe {
         border-radius: 200px;
     }
     .content-praise {
-        padding: 10rem 1.3rem 3rem 1.3rem;
+        padding: 9rem 1.3rem 2.3rem 1.3rem;
         position: unset;
         box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
     }
     .content-praise p {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
@@ -477,8 +515,6 @@ input.check-subscribe {
 
 .show-video {
     max-width: 85%;
-    padding-top: 3rem;
-    padding-bottom: 4rem;
     iframe {
         width: 100%;
     }
@@ -522,7 +558,6 @@ input.check-subscribe {
 /*STEP FOR REGISTER-----------------------------------------*/
 
 .step-for-register {
-    padding-bottom: 3.6rem;
     .content-step {
         max-width: 1320px;
         margin: 0 auto;
@@ -541,9 +576,10 @@ input.check-subscribe {
         }
         .title-step {
             font-weight: 600;
+            font-size: 18pt;
         }
-        .row-step {
-            padding: 5rem 0 3rem 0;
+        .text-step{
+            font-size: 14pt;
         }
         .col-step {
             text-align: center;
@@ -565,6 +601,12 @@ input.check-subscribe {
     }
     #btn-register-step {
         font-size: 18.7pt;
+        border: 3px solid var(--white);
+        padding: 0 5rem;
+        &:hover{
+            background-color: var(--white);
+            color: var(--blue);
+        }
     }
 }
 .circle-register{
@@ -636,8 +678,9 @@ input.check-subscribe {
 
 .sub-header {
     width: 100%;
-    border: 2px solid;
-    background-color: rgba(15, 34, 51, 0.8);
+    background-image: url("/helios/public/images/bg_sub.svg");
+    background-size: cover;
+    z-index: 9;
 }
 
 

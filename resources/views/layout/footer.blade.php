@@ -7,9 +7,9 @@
     $result = key($getCertificate);
 
 @endphp
-<div class="footer-builder bg-dark border-secondary">
+<div class="footer-builder bg-primary">
     <div class="container-fluid">
-        <div class="row footer m-0">
+        <div class="row footer text-white m-0">
             <div class="col-lg-1"></div>
             <div class="col-lg-2 mb-3">
                 <h2 class="title-foot">@lang('keywords.footer.policy')</h2>

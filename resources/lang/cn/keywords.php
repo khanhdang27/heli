@@ -49,6 +49,7 @@ return [
     ],
     'registerNowToExperience' => '立即註冊體驗',
     'registerNowFree' => '立即免費註冊',
+    'signUpNow' => '立即註冊',
     'tryItNow' => '立即試看',
     'latestDiscountProduct' => '最新優惠課程',
     'welcomeOffer' => '迎新優惠',

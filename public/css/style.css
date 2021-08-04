@@ -5,7 +5,6 @@ body {
     font-family: PingFangTC;
     font-weight: 400;
     margin: 0;
-    background-image: url('../images/BG.jpg');
 }
 
 
@@ -47,34 +46,12 @@ body {
     background-size: cover;
 }
 
-.bg-course {
-    background-image: url('../images/BG_certificate.jpg');
-}
-
 .dropdown-items {
     min-width: 9.2rem;
 }
 
 .dropdown-menu {
     z-index: 1002;
-}
-
-.btn-header {
-    min-width: 58px;
-    height: 27px;
-    border: none;
-    border-radius: 20px;
-    margin-left: 1rem;
-    margin-right: 0.5rem;
-}
-
-.btn-header:hover {
-    cursor: pointer;
-    background-color: #294157;
-}
-
-.btn-header:focus {
-    outline: none !important;
 }
 
 .banner {
@@ -146,7 +123,7 @@ body {
 
 .item-header {
     font-size: 14px;
-    padding: 0 0 0 1rem !important;
+    padding: 0 0 0 2.5rem !important;
 }
 
 
@@ -158,9 +135,16 @@ body {
 
 .banner-background {
     height: 600px;
-    opacity: 0.7;
 }
-
+.bg-opacity{
+    background-color: #797979;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 /*TAB PRODUCT-----------------------------------------*/
 
 .menu-category-text {
@@ -210,15 +194,16 @@ body {
 /*FREE CLASS-----------------------------------------*/
 
 .free-class-container {
-    min-height: 590px;
+    min-height: 437px;
     background-image: url("../images/freeclass-bg.jpg");
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    padding: 5rem 0 5rem 0;
+    padding: 4rem 0 4rem 0;
 }
 
 .border-right-radius {
-    border: 10px solid;
+    border: 5px solid;
     border-top-right-radius: 10rem;
     border-bottom-right-radius: 10rem;
     border-left: 0 !important;
@@ -226,7 +211,7 @@ body {
 }
 
 .text-content {
-    padding: 2.5rem 5rem 2.8rem 0;
+    padding: 2rem 5rem 2rem 0;
     font-weight: 600;
 }
 
@@ -238,8 +223,8 @@ body {
 .circle-check {
     left: 64%;
     border-radius: 50%;
-    width: 206px;
-    height: 206px;
+    width: 172px;
+    height: 172px;
 }
 
 @media screen and (max-width: 768px) {
@@ -325,12 +310,6 @@ body {
 
 .btn-register-now:focus {
     outline: none;
-}
-
-@media screen and (max-width: 714px) {
-    .btn-register-now {
-        font-size: 15pt;
-    }
 }
 
 .line-or hr {
