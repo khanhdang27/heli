@@ -14,7 +14,7 @@
    }
 
 @endphp
-<nav class="navbar navbar-expand-xl container-fluid sub-header py-3 position-absolute">
+<nav class="navbar navbar-expand-xl container-fluid py-3 px-5 position-absolute {{ $page != 'home' ? "bg-primary" : "sub-header" }}">
     <button class="navbar-toggler btn-collapse" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span><img src="{{asset("images/ic/ic-collapse.png")}}" width="40"></span>
@@ -27,7 +27,7 @@
                     {{ SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id')[$default_certificate] }}
                 </a>
 
-                <div class="dropdown-menu bg-dark border border-secondary dropdown-menu-language">
+                <div class="dropdown-menu bg-primary border border-white rounded-0 dropdown-menu-language">
                     @foreach (SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id') as $key => $value)
                         @if ($key != 1)
                             @if ($page != 'home')

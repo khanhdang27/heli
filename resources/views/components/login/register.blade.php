@@ -1,30 +1,32 @@
 <div class="modal fade modal-index" id="registerModal">
-    <div class="modal-dialog h-100 m-0 modal-login-xl">
-        <div class="modal-content modal-login-content">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content modal-login-content border-white">
             <div class="modal-header btn-close">
-                <button type="button" class="close btn-x" data-dismiss="modal">&times;</button>
+                <button type="button" class="close btn-x m-0 p-0" data-dismiss="modal">
+                    <span aria-hidden="true" class="rounded-circle px-1">×</span>
+                </button>
             </div>
             <div class="my-auto pb-5">
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-sm-6 login-left d-flex flex-column justify-content-center align-items-center">
-                            <div class="text-login-left h1 text-secondary text-center">
+                        <div class="col-lg-6 login-left d-flex flex-column justify-content-center align-items-center">
+                            <div class="text-login-left h1 text-white text-center">
                                 @lang('keywords.registerModal.freeRegistration')<br>
                                 @lang('keywords.registerModal.experienceCourse')<br>
                                 @lang('keywords.registerModal.onlineAndRealTimeCourse')<br>
                             </div>
                         </div>
-                        <div class="col-sm">
+                        <div class="col-lg-6">
                             <div class="box-btn-login">
-                                <a class="btn-register-now btn-login btn-secondary"
+                                <a class="btn btn-register-now btn-login mt-0 mb-2 mx-auto"
                                    href="{{route('site.socialLogin', 'facebook')}}">
                                     <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
                                                                    width="33px">
                                     </div>
                                     <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
                                 </a>
-                                <a class="btn-register-now btn-login btn-secondary"
+                                <a class="btn btn-register-now btn-login mt-0 mx-auto"
                                    href="{{route('site.socialLogin', 'google')}}">
                                     <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
                                                                    width="33px">
@@ -32,27 +34,27 @@
                                     <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
                                 </a>
                             </div>
-                            <div class="line-or d-flex align-items-center text-white">
+                            <div class="line-or d-flex align-items-center text-white mx-auto">
                                 <hr>
                                 <span class="p-3">or</span>
                                 <hr>
                             </div>
                             {!! Form::open(['id'=>'registerForm']) !!}
-                            <div class="input-login d-flex justify-content-center align-items-center">
+                            <div class="input-login mx-auto">
                                 {{ Form::email('email',null,[
                                                 'class'=>'input-login-item',
                                                 'placeholder'=>'Email',
                                                 'autocomplete'=>'off'
                                     ]) }}
                             </div>
-                            <div class="form-group form-check mt-5">
+                            <div class="form-group form-check mt-4 subscribe-check mx-auto">
                                 <input type="checkbox" class="form-check-input check-subscribe" id="subscribe" name="subscribe">
-                                <label class="form-check-label h4 text-white ml-3" for="subscribe">
+                                <label class="form-check-label h5 pt-1 text-white ml-3" for="subscribe">
                                     {{__('Subscribe to our Newsletter')}}
                                 </label>
                             </div>
-                            <div class="bottom-btn mt-5 pt-3">
-                                <button class='btn-login btn-secondary btn-register-now'
+                            <div class="bottom-btn mt-5 d-flex justify-content-center">
+                                <button class='btn-login btn-register-now mt-0'
                                         id='btn-register'>
                                     {{__('Register')}}
                                     <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none"
@@ -61,12 +63,12 @@
                                 </button>
                             </div>
                             {!! Form::close() !!}
-                            <div class="mt-5 line-or">
+                            <div class="mt-5">
                                 <a class="text-white" href="#" data-toggle="modal" data-target="#loginModal"
                                    data-dismiss="modal">
-                                    <h4 class="text-center">
+                                    <h5 class="text-center">
                                         @lang('keywords.alreadyMember')
-                                    </h4>
+                                    </h5>
                                 </a>
                             </div>
                         </div>

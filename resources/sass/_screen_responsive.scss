@@ -94,8 +94,8 @@
         }
     }
     .box-btn-login {
-        .btn-register-now {
-            font-size: 20px;
+        .btn-login {
+            font-size: 14px;
         }
     }
     .sort-lg{
@@ -125,15 +125,15 @@
     .text-login-left {
         font-size: 20px;
     }
-    .modal-login-content {
-        height: auto !important;
-        padding: 0 !important;
-        .btn-close {
-            .close {
-                padding: 1rem 0;
-            }
-        }
-    }
+    //.modal-login-content {
+    //    height: auto !important;
+    //    padding: 0 !important;
+    //    .btn-close {
+    //        .close {
+    //            padding: 1rem 0;
+    //        }
+    //    }
+    //}
 
     .sort-lg{
         display: none;

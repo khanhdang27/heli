@@ -108,6 +108,7 @@
             </div>
             <x-home.review></x-home.review>
         @endif
+        <x-subscribe-container></x-subscribe-container>
     </div>
 
 @endsection

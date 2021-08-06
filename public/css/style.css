@@ -199,6 +199,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
     padding: 4rem 0 4rem 0;
 }
 
@@ -254,59 +255,26 @@ body {
 
 
 /*LOGIN MODAL--------------------------------------------------------------------------------------------------*/
-
-.modal-login-xl {
-    max-width: 100%;
-}
-
 .modal-body-login {
     display: flex;
     align-items: center;
 }
 
 .modal-login-content {
-    border-radius: 0;
-    border: 3px solid #E6C06C;
-    background-color: rgba(15, 34, 51, 0.8);
-    max-width: 100%;
-    height: 100%;
-    padding: 2rem 1rem;
+    border: 3px solid;
+    border-radius: 1rem;
+    background-color: rgba(10, 10, 125, 0.8);
+    padding: 1rem;
 }
 
 .modal-index {
     z-index: 16000170;
 }
 
-.modal-register-component {
-    border-radius: 0;
-    border: 3px solid #E6C06C;
-    background-color: rgba(15, 34, 51, 0.8);
-    height: 100%;
-    padding: 1.5rem 1rem;
-}
-
-.box-btn-login {
-    max-width: 540px;
-}
-
-.btn-login {
-    padding: 0.5rem 2rem;
-    display: flex;
-    text-align: center;
-    margin: 0.8rem auto 0 auto;
-    border: none;
-    align-items: center;
-    border-radius: 4rem;
-    color: var(--white);
-}
-
 .login-title {
     font-size: 20px;
 }
 
-.btn-login:hover {
-    cursor: pointer;
-}
 
 .btn-register-now:focus {
     outline: none;
@@ -318,19 +286,16 @@ body {
 }
 
 .line-or {
-    max-width: 540px;
-    font-size: 20pt;
+    max-width: 352px;
+    font-size: 20px;
     justify-items: center;
     margin: 0.5rem;
 }
 
 .input-login {
-    max-width: 540px;
-    height: 52px;
-    border: 3px solid #E6C06C;
+    max-width: 325px;
     border-radius: 50px;
-    padding: 0.5rem;
-    margin-right: 0 !important;
+    padding: 0.8rem 1rem;
 }
 
 #item1 {
@@ -339,9 +304,9 @@ body {
 
 .rememberCheck {
     display: block;
-    width: 30px;
-    height: 30px;
-    border: 2px solid #E6C06C;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--white);
 }
 
 .rememberCheck input[type="checkbox"] {
@@ -355,7 +320,6 @@ body {
     height: 100%;
     transition: .4s;
     position: relative;
-    border: 1px solid #E6C06C;
 }
 
 .check:before {
@@ -380,25 +344,13 @@ body {
     width: 100%;
 }
 
-.bottom-btn {
-    max-width: 530px;
-}
 
 .text-login-left {
     width: fit-content;
 }
 
-.btn-close {
-    display: inline-block;
-    border: none;
-}
 
-.btn-x {
-    line-height: 0;
-    font-size: 2rem;
-    text-shadow: none;
-    opacity: 100;
-}
+
 
 
 /*@media (max-width: 1200px) {*/
