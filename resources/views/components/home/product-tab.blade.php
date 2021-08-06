@@ -1,25 +1,25 @@
 <div class="container-fluid container-course">
     <!-- Nav pills -->
-    <ul class="nav nav-pills menu-category" role="tablist">
-        <li class="nav-item px-5">
-            <a class="nav-link active category-link" data-toggle="pill" href="#menu1">
-                <img class="menu-img" src="{{asset('images/IGCSE_cover.jpg')}}">
+    <ul class="nav nav-pills menu-category align-items-end" role="tablist">
+        <li class="nav-item pr-5">
+            <a class="nav-link active category-link menu-img rounded-0" data-toggle="pill" href="#menu1">
+                IGCSE
             </a>
         </li>
-        <li class="nav-item px-5">
-            <a class="nav-link category-link" data-toggle="pill" href="#menu2">
-                <img class="menu-img" src="{{asset('images/Group173.jpg')}}">
+        <li class="nav-item pr-5">
+            <a class="nav-link category-link menu-img rounded-0" data-toggle="pill" href="#menu2">
+                UKISET
             </a>
         </li>
-        <li class="nav-item px-5">
-            <a class="nav-link category-link" data-toggle="pill" href="#menu3">
-                <img class="menu-img" src="{{asset('images/Group174.jpg')}}">
+        <li class="nav-item pr-5">
+            <a class="nav-link category-link menu-img rounded-0" data-toggle="pill" href="#menu3">
+                IELTS
             </a>
         </li>
 
-        <li class="nav-item px-5">
-            <a class="nav-link category-link" data-toggle="pill" href="#menu4">
-                <img class="menu-img" src="{{asset('images/Group175.jpg')}}">
+        <li class="nav-item pr-5">
+            <a class="nav-link category-link menu-img rounded-0" data-toggle="pill" href="#menu4">
+                IAL
             </a>
         </li>
     </ul>

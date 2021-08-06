@@ -26,7 +26,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                         @lang('keywords.navBar.subjectClassification')
                     </a>
-                    <div class="dropdown-menu bg-dark py-1 px-1 border border-secondary">
+                    <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0">
                         @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_code', 'id') as $key => $value)
                             @if ($key != 1)
                             <a class="dropdown-item" href="{{ URL::route('site.certificate.show',$key, true)}}">{{$value}}</a>
@@ -60,7 +60,7 @@
                         <a class="btn btn-link bg-white pt-3" id="navbardrop" data-toggle="dropdown">
                             <img src={{asset("images/ic/ic_user.svg")}} width="24">
                         </a>
-                        <div class="dropdown-menu bg-dark py-1 px-1 border border-secondary">
+                        <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0">
                             <a class="dropdown-item" href="{{ URL::route('site.profile.show', Auth::user()->id) }}">Profile</a>
                             <a class="dropdown-item" href="{{ URL::route('site.userLogout')}}">Log out</a>
                         </div>
@@ -98,7 +98,7 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" >
                         {{ Config::get('languages')[App::getLocale()] }}
                     </a>
-                    <div class="dropdown-menu bg-dark border border-secondary dropdown-menu-language">
+                    <div class="dropdown-menu bg-primary border border-white rounded-0 dropdown-menu-language">
                         @foreach (Config::get('languages') as $lang => $language)
                             @if ($lang != App::getLocale())
                                 <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
