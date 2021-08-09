@@ -23,19 +23,23 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {{--                {{dd($order)}}--}}
-                    @foreach($order as $value)
+                    @foreach($stripe as $value)
                         <tr>
-                            <td>{{ substr($value->created_at,0,10) }}</td>
+                            <td>{{date('m/d/Y',$value->created)}}</td>
                             <td class="w-50">
-                                {{$value->course->course_name}}
+                                @php
+                                    $course = $order->filter(function($item) use ($value){
+                                        return $item->payment_id == $value->id;
+                                    })->first();
+                                @endphp
+                                {{$course->course->course_name}}
                             </td>
                             <td>payment method</td>
                             <td>
-                                <button class="btn btn-primary">Paid</button>
+                                <button class="btn btn-primary">{{$value->status}}</button>
                             </td>
-                            <td>HK{{$value->final_price}}/@lang('keywords.course-item.section')</td>
-                            <td>{{$value->payment_id}}</td>
+                            <td>HK${{$value->amount}}/@lang('keywords.course-item.section')</td>
+                            <td>{{$value->id}}</td>
                         </tr>
                     @endforeach
                     </tbody>

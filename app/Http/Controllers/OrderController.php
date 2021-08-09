@@ -15,6 +15,7 @@ use DateTime;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Stripe\Stripe;
 
 class OrderController extends Controller
 {
@@ -208,8 +209,11 @@ class OrderController extends Controller
     public function paymentHistory()
     {
         $order = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate('15');
+        \Stripe\Stripe::setApiKey(config('app.stripe_secret'));
+        $stripe = \Stripe\PaymentIntent::all(['limit' => 15, 'customer' => Auth::user()->stripe_id]);
         return view('payments.payment-history', [
-           'order' => $order
+           'order' => $order,
+            'stripe' => $stripe
         ]);
     }
     /**
