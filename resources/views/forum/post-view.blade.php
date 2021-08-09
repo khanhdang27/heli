@@ -90,6 +90,7 @@
                 <x-forum.forum-comment :comment=$post></x-forum.forum-comment>
         </div>
     </div>
+
     @push('inputFile')
         <script>
             // Add the following code if you want the name of the file appear on select

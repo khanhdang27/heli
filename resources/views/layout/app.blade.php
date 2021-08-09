@@ -83,7 +83,5 @@
     var x = document.getElementsByTagName('script')[0];
     x.parentNode.insertBefore(s, x);
 </script>
-<script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
-
 </body>
 </html>

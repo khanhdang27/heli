@@ -68,6 +68,7 @@
         @endforeach
     </div>
     </div>
+    
     @push('inputFile')
         <script>
             // Add the following code if you want the name of the file appear on select

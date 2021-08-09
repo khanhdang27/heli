@@ -15,7 +15,7 @@
             Edit
         </a>
         <a href="javascript:void(0)"
-           onclick="itemDelete('{{ route('site.post.destroy', $post->id) }}')"
+           onclick="postDelete('{{ route('site.post.destroy', $post->id) }}')"
            class="dropdown-item delete-item text-primary">
             Delete
         </a>
@@ -51,7 +51,6 @@
                     {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
                     {{ Form::file('file',['class' => 'custom-file-input']) }}
                 </div>
-
             </div>
             <div class="modal-footer">
                 {{ Form::submit('Save', ['class'=>'btn btn-primary']) }}
@@ -60,3 +59,24 @@
         </div>
     </div>
 </div>
+
+<script>
+
+function postDelete(url) {
+    var choose = confirm('Do you want delete item?');
+
+    if (choose) {
+        axios.delete(url, {}).then(response => {
+            console.log('response :>> ', response);
+            if (response.status == 200) {
+                console.log(response.message)
+                // alert(response.message);
+                location.href = "{{ route('site.post.index') }}" 
+            } else {
+                alert(response.message);
+            }
+        })
+    }
+}
+
+</script>
