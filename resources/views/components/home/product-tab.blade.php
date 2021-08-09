@@ -25,23 +25,23 @@
     </ul>
     <ul class="nav nav-pills menu-category-text" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active category-link-text" data-toggle="pill" href="#menu1">
+            <a class="nav-link active category-link-text h5" data-toggle="pill" href="#menu1">
                 IGCSE
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link category-link-text" data-toggle="pill" href="#menu2">
+            <a class="nav-link category-link-text h5" data-toggle="pill" href="#menu2">
                 UKISET
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link category-link-text" data-toggle="pill" href="#menu3">
+            <a class="nav-link category-link-text h5" data-toggle="pill" href="#menu3">
                 IELTS
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link category-link-text" data-toggle="pill" href="#menu4">
+            <a class="nav-link category-link-text h5" data-toggle="pill" href="#menu4">
                 IAL
             </a>
         </li>

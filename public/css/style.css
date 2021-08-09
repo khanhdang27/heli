@@ -2,7 +2,7 @@ html,
 body {
     font-size: 10.5pt;
     background-color: var(--white);
-    font-family: PingFangTC;
+    font-family: "Source Han Sans CN";
     font-weight: 400;
     margin: 0;
 }

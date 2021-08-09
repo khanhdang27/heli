@@ -2,13 +2,13 @@
     use Illuminate\Support\Facades\Auth;
 @endphp
 <div>
-    <div class="row row-question border-secondary pt-5 pb-5 bg-white">
+    <div class="row row-question border-primary pt-5 pb-5 bg-white">
         <div class="col-xl-3 p-0">
             <div class="d-flex flex-wrap">
                 @if(empty($post->user->avatar))
-                    <img class="mb-3 border border-secondary" src="{{asset("images/photo_default.svg")}}" width="98" height="98">
+                    <img class="mb-3" src="{{asset("images/photo_default.svg")}}" width="98" height="98">
                 @else
-                    <img class="mb-3 border border-secondary" src="{{asset('/file/'.$post->user->avatar->id)}}" width="98" height="98">
+                    <img class="mb-3" src="{{asset('/file/'.$post->user->avatar->id)}}" width="98" height="98">
                 @endif
                 <div class="pl-3 pt-2">
                     <p class="text-comment">{{$post->user->name}}</p>
@@ -17,9 +17,10 @@
             </div>
         </div>
         <div class="col-xl-6 p-0">
-            <a class="question h1 text-primary" href="{{ route('site.post.show', $post->id)}}">
+            <a class="question h3 text-primary font-weight-bold" href="{{ route('site.post.show', $post->id)}}">
                 {{$post->title}}
             </a>
+            <h5 class="mb-0">{{$post->content}}</h5>
             <div class="py-3">
                 @if($post->image!=null)
                     <img class="img-question border" src="{{asset('/file/'.$post->image->id)}}">
@@ -46,11 +47,11 @@
             @endif
             <div>
                 <div class="pt-3 text-right">
-                    <button class="btn-hashtag h3">
-                        {{$post->postTag->tag_name}}
+                    <button class="btn-hashtag">
+                        <h5 class="mb-0">{{$post->postTag->tag_name}}</h5>
                     </button>
                 </div>
-                <p class="h2 text-primary pt-2 ">
+                <p class="h3 text-primary pt-2 ">
                     @if($post->close_post==1)
                         @lang('keywords.solved')
                     @else

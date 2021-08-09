@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="body-content">
-        <div class="container-fluid text-center top-news-page h1">
+        <div class="container-fluid text-center top-news-page">
             @lang('keywords.blog-page.learningColumn')
         </div>
         @if (empty($blog_top))
@@ -56,11 +56,12 @@
                 <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">
                     <a class="btn btn-read-more h5" href="{{ $blog -> nextPageUrl() }}" id="loadMore">
                         @lang('keywords.blog-page.readMore')
-                        <img src="{{ asset('images/ic/ic_drop.svg') }}" width="65">
+                        <img src="{{ asset('images/ic/ic_drop.svg') }}" width="33px">
                     </a>
                 </div>
             </div>
         @endif
+        <x-subscribe-container></x-subscribe-container>
     </div>
 
 

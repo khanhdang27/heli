@@ -9,7 +9,7 @@ use App\Utilities\SelectionByClass;
 @section('content')
 
 <div class="body-content">
-    <div class="container-fluid text-center top-news-page h1">
+    <div class="container-fluid text-center top-news-page">
         @lang('keywords.blog-page.learningColumn')
     </div>
     <div class="container-fluid pt-5 pb-5">
@@ -22,7 +22,7 @@ use App\Utilities\SelectionByClass;
         </div>
     </div>
     <div class="container-fluid ml-auto mr-auto pb-5 body-blog-page">
-        
+
         <h1 class="pt-5 font-weight-bold text-primary">
             @lang('keywords.blog-page.latestArticles')
         </h1>
@@ -32,7 +32,7 @@ use App\Utilities\SelectionByClass;
             <x-blog.blog-item-latest :blog=$value></x-blog.blog-item-latest>
             @endforeach
         </div>
-        
+
     </div>
 </div>
 @endsection

@@ -74,7 +74,7 @@
 
         @else
             {{-- da dang nhap --}}
-            <div class="mx-auto container-video border-secondary mt-5">
+            <div class="mx-auto container-video mt-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
                     <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
                     <a href="{{ route('site.user.course') }}"

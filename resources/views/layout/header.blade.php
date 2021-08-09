@@ -48,16 +48,20 @@
                 </li>
             </ul>
 
-            <div class="user-space d-flex ml-auto">
+            <div class="pl-5 user-space d-flex ml-auto">
                 @if(Auth::check())
-                    <div class="nav-item item-header">
+                    <div class="nav-item py-1">
+                        <a class="btn-link bg-white" href="{{route('site.payment-history')}}">
+                            <img src={{asset("images/ic/ic_cart.svg")}} width="21px">
+                        </a>
+                    </div>
+                    <div class="nav-item ml-2">
                         <a class="nav-link px-0 mr-1">
-                            @lang('keywords.navBar.welcomeBack')<br>
                             {{Auth::user()->name}}
                         </a>
                     </div>
                     <div class="nav-item dropdown p-0 border-0">
-                        <a class="btn btn-link bg-white pt-3" id="navbardrop" data-toggle="dropdown">
+                        <a class="btn btn-link bg-white" id="navbardrop" data-toggle="dropdown">
                             <img src={{asset("images/ic/ic_user.svg")}} width="24">
                         </a>
                         <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0">

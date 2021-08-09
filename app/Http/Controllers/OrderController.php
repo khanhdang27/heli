@@ -131,13 +131,13 @@ class OrderController extends Controller
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
         )->where('id', $product_id)->first();
-        
+
         $student_bought = StudentCourses::query()->where([
             'course_id' => $courses_with_group->membershipCourses->course_id,
             'student_id' => Auth::user()->id
         ])->first();
 
-        
+
         return [
             $product_id,
             $courses_with_group,
@@ -162,11 +162,11 @@ class OrderController extends Controller
         if ($roomInitial->number_member + 1 <= $roomInitial->number_member_maximum) {
             $roomInitial->number_member = $roomInitial->number_member + 1;
             $roomInitial->save();
-    
+
             $course_schedules = CourseSchedule::where(
                 'course_id', $roomInitial->course_id
             )->get();
-    
+
             foreach ($course_schedules as $course_schedule) {
                 StudentSchedule::create([
                     'course_id'=> $course_schedule->course_id,
@@ -205,6 +205,13 @@ class OrderController extends Controller
         return view('order.order-detail', ['order' => $order]);
     }
 
+    public function paymentHistory()
+    {
+        $order = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate('15');
+        return view('payments.payment-history', [
+           'order' => $order
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

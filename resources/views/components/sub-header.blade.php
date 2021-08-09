@@ -23,7 +23,7 @@
         <ul class="navbar-nav {{ $page != 'home' ? "mx-auto" : null }} mt-2 mt-lg-0">
             <li class="nav-item dropdown">
 
-                <a class="h5 mb-0 nav-link dropdown-toggle text-secondary" href="#" id="navbarCer" data-toggle="dropdown" >
+                <a class="h5 mb-0 nav-link dropdown-toggle text-white" href="#" id="navbarCer" data-toggle="dropdown" >
                     {{ SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id')[$default_certificate] }}
                 </a>
 
@@ -43,7 +43,7 @@
                 @if ($item->certificate_id != 1)
                     <li class="nav-item active d-flex align-items-center flex-wrap px-3">
                         <a href="{{ route('site.subject.show', $item->id) }}"
-                           class="text-secondary nav-link"> {{ $item->subject_name }} </a>
+                           class="text-white nav-link"> {{ $item->subject_name }} </a>
                     </li>
                 @endif
             @endforeach
