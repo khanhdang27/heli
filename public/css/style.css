@@ -2,10 +2,9 @@ html,
 body {
     font-size: 10.5pt;
     background-color: var(--white);
-    font-family: PingFangTC;
+    font-family: "Source Han Sans CN";
     font-weight: 400;
     margin: 0;
-    background-image: url('../images/BG.jpg');
 }
 
 
@@ -47,34 +46,12 @@ body {
     background-size: cover;
 }
 
-.bg-course {
-    background-image: url('../images/BG_certificate.jpg');
-}
-
 .dropdown-items {
     min-width: 9.2rem;
 }
 
 .dropdown-menu {
     z-index: 1002;
-}
-
-.btn-header {
-    min-width: 58px;
-    height: 27px;
-    border: none;
-    border-radius: 20px;
-    margin-left: 1rem;
-    margin-right: 0.5rem;
-}
-
-.btn-header:hover {
-    cursor: pointer;
-    background-color: #294157;
-}
-
-.btn-header:focus {
-    outline: none !important;
 }
 
 .banner {
@@ -146,7 +123,7 @@ body {
 
 .item-header {
     font-size: 14px;
-    padding: 0 0 0 1rem !important;
+    padding: 0 0 0 2.5rem !important;
 }
 
 
@@ -158,9 +135,16 @@ body {
 
 .banner-background {
     height: 600px;
-    opacity: 0.7;
 }
-
+.bg-opacity{
+    background-color: #797979;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 /*TAB PRODUCT-----------------------------------------*/
 
 .menu-category-text {
@@ -210,15 +194,17 @@ body {
 /*FREE CLASS-----------------------------------------*/
 
 .free-class-container {
-    min-height: 590px;
+    min-height: 437px;
     background-image: url("../images/freeclass-bg.jpg");
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    padding: 5rem 0 5rem 0;
+    background-attachment: fixed;
+    padding: 4rem 0 4rem 0;
 }
 
 .border-right-radius {
-    border: 10px solid;
+    border: 5px solid;
     border-top-right-radius: 10rem;
     border-bottom-right-radius: 10rem;
     border-left: 0 !important;
@@ -226,33 +212,41 @@ body {
 }
 
 .text-content {
-    padding: 2.5rem 5rem 2.8rem 0;
+    padding: 2rem 5rem 2rem 0;
     font-weight: 600;
 }
 
 .text-information {
     text-align: center;
-    max-width: 45%;
-}
-
-@media screen and (max-width: 874px) {
-    .text-content {
-        font-size: 25px;
-        padding-right: 3rem;
-    }
+    max-width: 370px;
 }
 
 .circle-check {
     left: 64%;
     border-radius: 50%;
-    width: 206px;
-    height: 206px;
+    width: 172px;
+    height: 172px;
 }
 
-@media screen and (max-width: 714px) {
+@media screen and (max-width: 768px) {
+    .text-content {
+        padding-right: 3rem;
+    }
     .circle-check {
-        width: 106px;
-        height: 106px;
+        left: 60%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .text-content {
+        padding-left: 0.5rem;
+        padding-right: 1.5rem;
+        font-size: 18px;
+    }
+    .circle-check {
+        width: 116px;
+        height: 116px;
+        left: 58%;
     }
     .circle-check img {
         width: 83px;
@@ -261,68 +255,29 @@ body {
 
 
 /*LOGIN MODAL--------------------------------------------------------------------------------------------------*/
-
-.modal-login-xl {
-    max-width: 100%;
-}
-
 .modal-body-login {
     display: flex;
     align-items: center;
 }
 
 .modal-login-content {
-    border-radius: 0;
-    border: 3px solid #E6C06C;
-    background-color: rgba(15, 34, 51, 0.8);
-    max-width: 100%;
-    height: 100%;
-    padding: 2rem 1rem;
+    border: 3px solid;
+    border-radius: 1rem;
+    background-color: rgba(10, 10, 125, 0.8);
+    padding: 1rem;
 }
 
 .modal-index {
     z-index: 16000170;
 }
 
-.modal-register-component {
-    border-radius: 0;
-    border: 3px solid #E6C06C;
-    background-color: rgba(15, 34, 51, 0.8);
-    height: 100%;
-    padding: 1.5rem 1rem;
-}
-
-.box-btn-login {
-    max-width: 540px;
-}
-
-.btn-login {
-    padding: 0.5rem 2rem;
-    display: flex;
-    text-align: center;
-    margin: 0.8rem auto 0 auto;
-    border: none;
-    align-items: center;
-    border-radius: 4rem;
-    color: var(--white);
-}
-
 .login-title {
     font-size: 20px;
 }
 
-.btn-login:hover {
-    cursor: pointer;
-}
 
 .btn-register-now:focus {
     outline: none;
-}
-
-@media screen and (max-width: 714px) {
-    .btn-register-now {
-        font-size: 15pt;
-    }
 }
 
 .line-or hr {
@@ -331,19 +286,16 @@ body {
 }
 
 .line-or {
-    max-width: 540px;
-    font-size: 20pt;
+    max-width: 352px;
+    font-size: 20px;
     justify-items: center;
     margin: 0.5rem;
 }
 
 .input-login {
-    max-width: 540px;
-    height: 52px;
-    border: 3px solid #E6C06C;
+    max-width: 325px;
     border-radius: 50px;
-    padding: 0.5rem;
-    margin-right: 0 !important;
+    padding: 0.8rem 1rem;
 }
 
 #item1 {
@@ -352,9 +304,9 @@ body {
 
 .rememberCheck {
     display: block;
-    width: 30px;
-    height: 30px;
-    border: 2px solid #E6C06C;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--white);
 }
 
 .rememberCheck input[type="checkbox"] {
@@ -368,7 +320,6 @@ body {
     height: 100%;
     transition: .4s;
     position: relative;
-    border: 1px solid #E6C06C;
 }
 
 .check:before {
@@ -393,26 +344,13 @@ body {
     width: 100%;
 }
 
-.bottom-btn {
-    max-width: 530px;
-}
 
 .text-login-left {
     width: fit-content;
-    font-size: 25pt;
 }
 
-.btn-close {
-    display: inline-block;
-    border: none;
-}
 
-.btn-x {
-    line-height: 0;
-    font-size: 2rem;
-    text-shadow: none;
-    opacity: 100;
-}
+
 
 
 /*@media (max-width: 1200px) {*/
@@ -479,3 +417,4 @@ body {
     bottom: 25%;
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
+

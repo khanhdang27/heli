@@ -1,5 +1,5 @@
 @php
-use App\Utilities\SelectionByClass;
+    use App\Utilities\SelectionByClass;
 @endphp
 
 @extends('layout.app')
@@ -7,22 +7,22 @@ use App\Utilities\SelectionByClass;
 @section('title', 'Blog Page')
 
 @section('content')
-    @if (empty($blog_top))
-        <div class="d-flex justify-content-center">
-            <H3>
-                No Data Fount
-            </H3>
+    <div class="body-content">
+        <div class="container-fluid text-center top-news-page">
+            @lang('keywords.blog-page.learningColumn')
         </div>
-    @else
-        <div class="body-content">
-            <div class="container-fluid text-center top-news-page h1">
-                @lang('keywords.blog-page.learningColumn')
+        @if (empty($blog_top))
+            <div class="d-flex justify-content-center">
+                <H3>
+                    No Data Fount
+                </H3>
             </div>
+        @else
             <div class="container-fluid pt-5 pb-5">
                 <div class="ml-auto mr-auto d-flex flex-wrap w-75">
                     @foreach ($tags as $value)
                         <a href="{{ route('site.show-blog-tag', $value) }}" class="btn-hashtag mx-3 text-center"
-                            type="button">
+                           type="button">
                             {{ $value->tag_name }}
                         </a>
                     @endforeach
@@ -56,11 +56,13 @@ use App\Utilities\SelectionByClass;
                 <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">
                     <a class="btn btn-read-more h5" href="{{ $blog -> nextPageUrl() }}" id="loadMore">
                         @lang('keywords.blog-page.readMore')
-                        <img src="{{ asset('images/ic/ic_drop.svg') }}" width="65">
+                        <img src="{{ asset('images/ic/ic_drop.svg') }}" width="33px">
                     </a>
                 </div>
             </div>
-        </div>
+        @endif
+        <x-subscribe-container></x-subscribe-container>
+    </div>
 
-    @endif
+
 @endsection

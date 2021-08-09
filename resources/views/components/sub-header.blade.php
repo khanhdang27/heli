@@ -14,8 +14,7 @@
    }
 
 @endphp
-
-<nav class="navbar navbar-expand-xl container-fluid sub-header border-secondary">
+<nav class="navbar navbar-expand-xl container-fluid py-3 px-5 position-absolute {{ $page != 'home' ? "bg-primary" : "sub-header" }}">
     <button class="navbar-toggler btn-collapse" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span><img src="{{asset("images/ic/ic-collapse.png")}}" width="40"></span>
@@ -24,16 +23,16 @@
         <ul class="navbar-nav {{ $page != 'home' ? "mx-auto" : null }} mt-2 mt-lg-0">
             <li class="nav-item dropdown">
 
-                <a class="h5 nav-link dropdown-toggle text-secondary" href="#" id="navbarCer" data-toggle="dropdown" >
+                <a class="h5 mb-0 nav-link dropdown-toggle text-white" href="#" id="navbarCer" data-toggle="dropdown" >
                     {{ SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id')[$default_certificate] }}
                 </a>
 
-                <div class="dropdown-menu bg-dark border border-secondary dropdown-menu-language">
+                <div class="dropdown-menu bg-primary border border-white rounded-0 dropdown-menu-language">
                     @foreach (SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id') as $key => $value)
                         @if ($key != 1)
                             @if ($page != 'home')
                             <a class="dropdown-item" href="{{ route($url, $cer_show). '?certificate='.$key }}"> {{$value}}</a>
-                            @else 
+                            @else
                             <a class="dropdown-item" href="{{ route($url, ['certificate'=>$key]) }}"> {{$value}}</a>
                             @endif
                         @endif
@@ -44,7 +43,7 @@
                 @if ($item->certificate_id != 1)
                     <li class="nav-item active d-flex align-items-center flex-wrap px-3">
                         <a href="{{ route('site.subject.show', $item->id) }}"
-                           class="text-secondary nav-link"> {{ $item->subject_name }} </a>
+                           class="text-white nav-link"> {{ $item->subject_name }} </a>
                     </li>
                 @endif
             @endforeach

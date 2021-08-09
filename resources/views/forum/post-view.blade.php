@@ -8,7 +8,7 @@
     use Illuminate\Support\Facades\Auth;
     @endphp
     <div class="body-content bg-white">
-        <div class="container-fluid text-center top-news-page h1">
+        <div class="container-fluid text-center top-news-page">
             @lang('keywords.navBar.q&aArea')
         </div>
         <div class="container-fluid pt-5 pb-5">
@@ -22,17 +22,17 @@
         </div>
         <div class="pb-5 mx-auto body-forum-page">
             <!-- INDEX -->
-            <div class="row row-question border-secondary pt-5 pb-5">
+            <div class="row row-question border-primary pt-5 pb-5">
                 <div class="col-lg-3">
                     <div class="d-flex flex-wrap text-primary">
                         @if(empty($post->user->avatar))
-                            <img class="mb-3 border border-secondary" src="{{asset("images/photo_default.svg")}}" width="98" height="98">
+                            <img class="mb-3" src="{{asset("images/photo_default.svg")}}" width="98" height="98">
                         @else
-                            <img class="mb-3 border border-secondary" src="{{asset('/file/'.$post->user->avatar->id)}}" width="98" height="98">
+                            <img class="mb-3" src="{{asset('/file/'.$post->user->avatar->id)}}" width="98" height="98">
                         @endif
                         <div class="pl-3 pt-2">
                             <p class="text-comment">{{ $post->user->name }}</p>
-                            <h3 class="m-0">{{ substr($post->created_at, 0, 10) }}</h3>
+                            <p class="m-0">{{ substr($post->created_at, 0, 10) }}</p>
                         </div>
                     </div>
                 </div>
@@ -66,12 +66,12 @@
                     @endif
                     <div>
                         <div class="pt-3 text-right">
-                            <button class="btn-hashtag h3">
-                                {{$post->postTag->tag_name}}
+                            <button class="btn-hashtag">
+                                <h5 class="mb-0">{{$post->postTag->tag_name}}</h5>
                             </button>
                         </div>
-                        <p class="h2 text-primary pt-2">
-                            @if($post->block==1)
+                        <p class="h3 text-primary pt-2">
+                            @if($post->close_post==1)
                                 @lang('keywords.solved')
                             @else
                                 @lang('keywords.waitingForAnswer')

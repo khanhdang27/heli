@@ -11,7 +11,7 @@
                 @endif
                 <div class="pl-3 pt-2">
                     <p class="text-comment">{{$item->user->name}}</p>
-                    <h3 class="m-0">{{ substr($item->created_at,0,10) }}</h3>
+                    <p class="m-0">{{ substr($item->created_at,0,10) }}</p>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
             <div class="d-flex justify-content-end text-forum pt-2 m-0">
                 @if($comment->pin_comment == $item->id)
                     <span class="mr-2"><img src="{{asset("images/ic/ic_star.svg")}}" width="40"></span>
-                    <span class="h2 text-primary pt-1">@lang('keywords.forum.bestAnswer')</span>
+                    <span class="h3 text-primary pt-1">@lang('keywords.forum.bestAnswer')</span>
                 @endif
             </div>
         </div>

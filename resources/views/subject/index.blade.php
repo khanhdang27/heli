@@ -9,12 +9,12 @@ use App\Utilities\SelectionByClass;
 @section('content')
 
     <div class="body-content bg-course">
-        <div class="container-fluid text-center top-news-page h1">
+        <div class="container-fluid text-center top-news-page">
             @lang('keywords.navBar.subjectClassification')
         </div>
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
 
-        <div class="container-fluid p-0 container-course">
+        <div class="container-fluid container-course">
             <div class="title-subject text-primary text-center">
                 {{ $subject->subject_name }}
             </div>

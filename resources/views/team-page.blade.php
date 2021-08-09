@@ -2,7 +2,7 @@
 @section('title','Team Page')
 @section('content')
     <div class="body-content">
-        <div class="container-fluid text-center top-news-page h1">
+        <div class="container-fluid text-center top-news-page">
             @lang('keywords.starTutorTeam')
         </div>
         <div class="container-fluid content-team-page">

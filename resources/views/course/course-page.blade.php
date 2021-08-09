@@ -14,6 +14,7 @@
 
 @section('content')
     {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
+    <hr class="m-0">
     <div class="body-content container-fluid">
         @if ( $course->type == Course::LIVE )
             <x-product-detail.course-card-page :course=$course
@@ -92,7 +93,8 @@
                             </div>
                             @if ( $course->type == Course::LIVE )
                                 <div id="menu1" class="container-fluid pb-5 tab-pane fade">
-                                    <x-product-detail.online-class :courseDetail=$course></x-product-detail.online-class>
+                                    <x-product-detail.online-class
+                                        :courseDetail=$course></x-product-detail.online-class>
                                 </div>
                             @endif
                             <div id="menu2" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
@@ -114,6 +116,7 @@
             </div>
         </div>
     </div>
+    <x-subscribe-container></x-subscribe-container>
     @push('inputFile')
         <script>
             // Add the following code if you want the name of the file appear on select

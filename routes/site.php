@@ -50,7 +50,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
     Route::resource('payment', 'PaymentController');
+    Route::get('order/addCard', 'OrderController@addCard')->name('order.addCard');
     Route::resource('order', 'OrderController');
+    Route::get('payment-history', 'OrderController@paymentHistory')->name('payment-history');
+
     Route::resource('post', 'PostController');
     Route::get('pin-comment/{post_id}/{comment_id}','PostController@pinComment')->name('pinComment');
     Route::resource('comment', 'CommentController');

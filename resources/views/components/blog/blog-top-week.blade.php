@@ -14,11 +14,11 @@
             </a>
             <div class="d-flex justify-content-between flex-wrap pb-3">
                 <div class="d-flex align-items-center h4 text-white">
-                    <p class="h4 mr-5">
+                    <p class="h5 mr-5">
                         {{ substr($blog_top->created_at,0,10) }}
                     </p>
                     <img class="mb-2 mr-2" src="{{asset("images/ic/ic_eye.svg")}}" width="26">
-                    <h4>{{$blog_top->view_no}}</h4>
+                    <h5>{{$blog_top->view_no}}</h5>
                 </div>
                 <div class="d-flex">
                     @if(!empty($blog_top->tags))

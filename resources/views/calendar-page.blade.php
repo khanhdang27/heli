@@ -3,8 +3,8 @@
 @section('title','Calendar Page')
 
 @section('content')
-    <div class="container-fluid text-center top-news-page h1">
-        @lang('keywords.starTutorTeam')
+    <div class="container-fluid text-center top-news-page">
+        @lang('keywords.footer.mySchedule')
     </div>
     {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
     <div class="container-fluid calendar">
@@ -70,7 +70,7 @@
                     center: 'prev title next',
                     right: null
                 },
-                googleCalendarApiKey: 'AIzaSyD7TfsO9cuJatNQyxQOcS5kAkFK8enPWF8',
+                googleCalendarApiKey: '{{env('GOOGLE_API_CALENDAR')}}',
                 initialDate: '{{date("Y-m-d")}}',
                 businessHours: true, // display business hours
                 selectable: true,

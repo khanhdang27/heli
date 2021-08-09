@@ -29,7 +29,7 @@
                                 {{ $item->title }}
                             </a><br>
                         </div>
-                        
+
                     @endforeach
                 </div>
             </div>
@@ -71,15 +71,10 @@
         @if (!Auth::check())
             {{-- chua dang nhap --}}
             <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
-            <div class="w-75 mx-auto text-right">
-                <button class="btn-register-now mt-0 mb-5 btn-primary" id="" data-toggle="modal"
-                    data-target="#registerModal">
-                    <span>@lang('keywords.tryItNow')</span>
-                </button>
-            </div>
+
         @else
             {{-- da dang nhap --}}
-            <div class="mx-auto container-video border-secondary mt-5 pb-5">
+            <div class="mx-auto container-video mt-5">
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
                     <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
                     <a href="{{ route('site.user.course') }}"
@@ -95,17 +90,17 @@
                 <div class="position-relative d-flex align-items-center">
                     <div class="border-right-radius border-primary">
                         <div class="text-content d-flex justify-content-end text-primary">
-                            <h1 class="text-information text-content">
+                            <h1 class="text-information text-content mb-0">
                                 @lang('keywords.freeTrialClass')
                             </h1>
                         </div>
                     </div>
                     <div class="circle-check position-absolute bg-primary d-flex justify-content-center align-items-center">
-                        <img width="100px" src="{{ asset('images/ic/Group8.png') }}">
+                        <img width="111px" src="{{ asset('images/ic/Group8.png') }}">
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                    <button class="btn-register-now btn-primary" data-toggle="modal" data-target="#registerModalComponent">
+                <div class="d-flex justify-content-center btn-above-video">
+                    <button class="btn-register-now py-1" data-toggle="modal" data-target="#registerModalComponent">
                         <span class="font-weight-bold">@lang('keywords.registerNowToExperience')</span>
                     </button>
                     <x-login.register-modal></x-login.register-modal>
@@ -113,6 +108,7 @@
             </div>
             <x-home.review></x-home.review>
         @endif
+        <x-subscribe-container></x-subscribe-container>
     </div>
 
 @endsection

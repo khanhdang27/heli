@@ -47,20 +47,9 @@
 
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 
-.title-subject {
-    font-size: 33.8pt;
-    padding: 3rem 0;
-    font-weight: 600;
-}
-
 .sort {
     font-size: 18.5pt;
     max-width: 1767px;
-}
-
-.btn-sort {
-    width: 30px;
-    height: 20px;
 }
 
 

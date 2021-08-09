@@ -49,6 +49,7 @@ return [
     ],
     'registerNowToExperience' => 'Register now to experience',
     'registerNowFree' => 'Register Now For Free',
+    'signUpNow' => 'Sign up now',
     'tryItNow' => 'Try it now',
     'latestDiscountProduct' => 'Latest Discount Courses',
     'welcomeOffer' => 'Welcome Offer',

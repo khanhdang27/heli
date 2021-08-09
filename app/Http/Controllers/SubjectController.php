@@ -69,11 +69,11 @@ class SubjectController extends Controller
     public function show(Subject $subject)
     {
         $courses_with_group = CourseMembershipDiscount::with(
-            'translations',
             'membershipCourses',
             'courseDiscounts',
             'membershipCourses.course',
             'membershipCourses.course.subject',
+            'membershipCourses.course.subject.translations',
             'membershipCourses.course.subject.certificate',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
