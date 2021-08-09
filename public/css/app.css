@@ -11015,8 +11015,12 @@ h5,
   line-height: 1.45;
 }
 
-.container-course {
+.container-home {
   max-width: 86%;
+}
+
+.container-course {
+  max-width: 76%;
 }
 
 .container-course h2 {
@@ -11024,13 +11028,13 @@ h5,
 }
 
 .product-category-row {
-  margin-left: -42px;
-  margin-right: -42px;
+  margin-left: -28px;
+  margin-right: -28px;
 }
 
 .product-category-padding {
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .animate-up:hover {
@@ -11063,7 +11067,7 @@ h5,
 }
 
 .search {
-  border: 2px solid #0B487D;
+  border: 2px solid #0b487d;
   border-radius: 20px;
   padding: 0.2rem !important;
   width: 309px;
@@ -11109,6 +11113,11 @@ h5,
 
 .list-news a:hover {
   text-decoration: none;
+}
+
+.rounded-top-course {
+  border-top-left-radius: 0.35rem !important;
+  border-top-right-radius: 0.35rem !important;
 }
 
 form#certificate_form select {
@@ -11413,14 +11422,15 @@ input.check-subscribe {
 
 .product-box {
   width: 100%;
-  margin-top: 2.8rem;
+  margin-top: 1rem;
 }
 
 .product-box .title-product {
+  border-top-right-radius: 0.35rem !important;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  min-width: 90px;
+  min-width: 70px;
   padding: 0.6rem 0;
   text-align: center;
 }
@@ -11431,22 +11441,15 @@ input.check-subscribe {
 }
 
 .product-box .content-product {
-  height: 323px;
+  height: 250px;
   align-items: center;
   width: 100%;
   margin-left: 0;
 }
 
-.product-box .content-product .color-bar {
-  width: 15px;
-  height: 258px;
-  background-image: linear-gradient(to right, #E6C06C, #FBB03B);
-  margin: auto;
-}
-
 .product-box .content-product .body-product-content {
-  height: 258px;
-  padding: 3.65rem;
+  height: 200px;
+  padding: 1.65rem 2.65rem;
   font-size: 15.7pt;
   position: absolute;
   left: 50%;
@@ -11460,20 +11463,26 @@ input.check-subscribe {
   text-align: center;
   width: 100%;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .product-box .bottom-product2 {
-  height: 200px;
   align-items: center;
   justify-content: flex-end;
   box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
 }
 
 .product-box .bottom-product2 .card-name-product {
-  min-height: 100px;
+  min-height: 130px;
   font-size: 16pt;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .product-box .bottom-product2 .card-name-product .text-multiline-truncate {
@@ -11992,7 +12001,7 @@ input.check-subscribe {
 
 .text-30 {
   font-size: 22.5pt;
-  color: #0B487D;
+  color: #0b487d;
   font-weight: 600;
 }
 
@@ -12017,7 +12026,7 @@ input.check-subscribe {
 }
 
 .ic-action {
-  width: 48px;
+  width: 32px;
 }
 
 .row-question {
@@ -12125,6 +12134,10 @@ input.check-subscribe {
 .product-payment {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+.border-2 {
+  border: 2px solid;
 }
 
 .rating {

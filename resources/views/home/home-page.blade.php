@@ -3,7 +3,6 @@
 @section('title', 'Home Page')
 
 @section('content')
-
     <div class="banner">
         <x-sub-header :subjects=$subjects page="home"></x-sub-header>
         @if ($message = Session::get('error'))
@@ -37,15 +36,16 @@
         @endif
     </div>
     <div class="body-content">
-        <div class="container-fluid container-course">
+        <div class="container-fluid container-home">
             <div class="row">
-                <div class="col-lg-6 col-12">
+                <div class="col-lg-5 col-12">
                     <h2 class="text-primary">
                         @lang('keywords.latestDiscountProduct')
                     </h2>
                     <x-product.course-list :courses=$course_latest typeOfUI="lasted"></x-product.course-list>
                 </div>
-                <div class="col-lg-6 col-12 welcome-offer">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-5 col-12 welcome-offer">
                     <h2 class="text-primary">
                         @lang('keywords.welcomeOffer')
                     </h2>
@@ -54,7 +54,7 @@
             </div>
         </div>
         @if (Auth::check())
-            <div class="container-fluid container-course">
+            <div class="container-fluid container-home"">
                 <h2 class="text-primary" id="tab-title">
                     @lang('keywords.recommendedForYou')...
                 </h2>

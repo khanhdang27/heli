@@ -16,18 +16,16 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="box-btn-login animate-change-color">
-                            <a class="btn btn-register-now btn-login mb-2 mt-0 mx-auto"
+                        <div class="box-btn-login">
+                            <a class="btn btn-register-now btn-login mb-2 mt-0 mx-auto animate-change-color"
                                href="{{route('site.socialLogin', 'facebook')}}">
-                                <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
-                                                               width="33px">
+                                <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}" width="33px">
                                 </div>
                                 <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
                             </a>
-                            <a class="btn btn-register-now btn-login mt-0 mx-auto"
+                            <a class="btn btn-register-now btn-login mt-0 mx-auto animate-change-color"
                                href="{{route('site.socialLogin', 'google')}}">
-                                <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
-                                                               width="33px">
+                                <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}" width="33px">
                                 </div>
                                 <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
                             </a>

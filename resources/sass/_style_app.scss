@@ -1,6 +1,7 @@
 @font-face {
     font-family: Source Han Sans CN;
-    src: url('/helios/public/fonts/Source Han Sans CN Normal.ttf') format('truetype');
+    src: url("/helios/public/fonts/Source Han Sans CN Normal.ttf")
+        format("truetype");
 }
 
 html {
@@ -63,26 +64,31 @@ h5,
                 text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
                 line-height: 1.45;
             }
-            .banner-title {}
+            .banner-title {
+            }
         }
     }
 }
 
-.container-course {
+.container-home {
     max-width: 86%;
+}
+
+.container-course {
+    max-width: 76%;
     h2 {
         margin-top: 30px;
     }
 }
 
 .product-category-row {
-    margin-left: -42px;
-    margin-right: -42px;
+    margin-left: -28px;
+    margin-right: -28px;
 }
 
 .product-category-padding {
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .animate-up {
@@ -120,7 +126,7 @@ h5,
 }
 
 .search {
-    border: 2px solid #0B487D;
+    border: 2px solid #0b487d;
     border-radius: 20px;
     padding: 0.2rem !important;
     width: 309px;
@@ -161,6 +167,11 @@ h5,
     a:hover {
         text-decoration: none;
     }
+}
+
+.rounded-top-course {
+    border-top-left-radius: 0.35rem !important;
+    border-top-right-radius: 0.35rem !important;
 }
 
 form#certificate_form {
@@ -410,7 +421,6 @@ input.check-subscribe {
     outline: none;
 }
 
-
 /*GUEST PRAISE-----------------------------------------*/
 
 .title-card {
@@ -453,10 +463,11 @@ input.check-subscribe {
 //PRODUCT BOX COMPONENT
 .product-box {
     width: 100%;
-    margin-top: 2.8rem;
+    margin-top: 1rem;
     .title-product {
+        border-top-right-radius: 0.35rem !important;
         width: fit-content;
-        min-width: 90px;
+        min-width: 70px;
         padding: 0.6rem 0;
         text-align: center;
     }
@@ -465,19 +476,13 @@ input.check-subscribe {
         font-size: 14px;
     }
     .content-product {
-        height: 323px;
+        height: 250px;
         align-items: center;
         width: 100%;
         margin-left: 0;
-        .color-bar {
-            width: 15px;
-            height: 258px;
-            background-image: linear-gradient(to right, #E6C06C, #FBB03B);
-            margin: auto;
-        }
         .body-product-content {
-            height: 258px;
-            padding: 3.65rem;
+            height: 200px;
+            padding: 1.65rem 2.65rem;
             font-size: 15.7pt;
             position: absolute;
             left: 50%;
@@ -489,19 +494,25 @@ input.check-subscribe {
                 text-align: center;
                 width: 100%;
                 overflow: hidden;
-                white-space: nowrap;
                 text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
             }
         }
     }
     .bottom-product2 {
-        height: 200px;
         align-items: center;
         justify-content: flex-end;
         box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
         .card-name-product {
-            min-height: 100px;
+            min-height: 130px;
             font-size: 16pt;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
             .text-multiline-truncate {
                 overflow: hidden;
                 display: -webkit-box;
@@ -514,7 +525,6 @@ input.check-subscribe {
         }
     }
 }
-
 
 /*TAB PRODUCT-----------------------------------------*/
 
@@ -550,7 +560,7 @@ input.check-subscribe {
 
 .category-link-text.active {
     border-radius: 0;
-    font-size: 18px!important;
+    font-size: 18px !important;
     font-weight: bold;
     color: var(--primary) !important;
     background-color: #fff !important;
@@ -560,7 +570,6 @@ input.check-subscribe {
 .menu-category-text {
     height: 50px;
 }
-
 
 /*SHOW VIDEO-----------------------------------------*/
 
@@ -604,7 +613,6 @@ input.check-subscribe {
 .footer-builder {
     border: 2px solid;
 }
-
 
 /*STEP FOR REGISTER-----------------------------------------*/
 
@@ -666,7 +674,6 @@ input.check-subscribe {
     height: 112px;
 }
 
-
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
 
 .content-team-page {
@@ -726,7 +733,6 @@ input.check-subscribe {
     }
 }
 
-
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
 .sub-header {
@@ -735,7 +741,6 @@ input.check-subscribe {
     background-size: cover;
     z-index: 9;
 }
-
 
 /*SUBSCRIBE CONTAINER */
 
@@ -759,7 +764,6 @@ input.check-subscribe {
     }
 }
 
-
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 
 .title-subject {
@@ -775,7 +779,6 @@ input.check-subscribe {
     width: 30px;
     height: 20px;
 }
-
 
 /*COURSE PAGE-------------------------------------------------------------------------------*/
 
@@ -844,7 +847,6 @@ input.check-subscribe {
     font-size: 13.5pt;
 }
 
-
 /*COURSE PAGE 2-------------------------------------------------------------------------------*/
 
 .info-course {
@@ -888,13 +890,11 @@ input.check-subscribe {
     height: auto;
 }
 
-
 /*COURSE PAGE 3-------------------------------------------------------------------------------*/
 
 .video {
     max-width: 1550px;
 }
-
 
 /*BLOG PAGE----------------------------------------------------------------*/
 
@@ -996,7 +996,7 @@ input.check-subscribe {
 
 .text-30 {
     font-size: 22.5pt;
-    color: #0B487D;
+    color: #0b487d;
     font-weight: 600;
 }
 
@@ -1010,7 +1010,6 @@ input.check-subscribe {
     overflow-y: auto;
 }
 
-
 /*FORUM PAGE-------------------------------------------------------------------*/
 
 .body-forum-page {
@@ -1022,7 +1021,7 @@ input.check-subscribe {
 }
 
 .ic-action {
-    width: 48px;
+    width: 32px;
 }
 
 .row-question {
@@ -1053,7 +1052,6 @@ input.check-subscribe {
         background-color: #f1f1f1;
     }
 }
-
 
 /*NEWS PAGE-----------------------------------------*/
 
@@ -1096,12 +1094,11 @@ input.check-subscribe {
         font-size: 16px;
         cursor: pointer;
     }
-    input[type="radio"]:checked+label {
+    input[type="radio"]:checked + label {
         border-style: solid;
         border-color: var(--primary);
     }
 }
-
 
 /*PAYMENT PAGE*/
 
@@ -1127,4 +1124,8 @@ input.check-subscribe {
 .product-payment {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+.border-2 {
+    border: 2px solid;
 }
