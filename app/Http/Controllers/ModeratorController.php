@@ -107,7 +107,7 @@ class ModeratorController extends Controller
         DB::beginTransaction();
         try {
             if ($request->validated()) {
-                $user = User::where('id',$moderator->user_id)->first();
+                $user = User::where('id', $moderator->user_id)->first();
                 $user->update([
                     'name' => $requestModerator['name'],
                     'email' => $requestModerator['email'],
@@ -119,7 +119,7 @@ class ModeratorController extends Controller
                 DB::commit();
                 return back()->with('success', 'Save success');
             }
-        } catch (Throwable $th) {
+        } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('errors', 'Save error');
         }
@@ -134,8 +134,8 @@ class ModeratorController extends Controller
     public function destroy(Moderator $moderator)
     {
         try {
-            if($moderator->delete()){
-                $user = User::where('id',$moderator->user_id)->first();
+            if ($moderator->delete()) {
+                $user = User::where('id', $moderator->user_id)->first();
                 $user->delete();
             }
             return response([

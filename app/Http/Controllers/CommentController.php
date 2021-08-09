@@ -43,7 +43,7 @@ class CommentController extends Controller
     {
         $input = $request->validate([
             'ref_id' => 'required',
-            'ref_module'=>'required',
+            'ref_module' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'detail' => 'required'
         ]);
@@ -54,12 +54,12 @@ class CommentController extends Controller
             $comment = UserComment::create([
                 'user_id' => Auth::user()->id,
                 'commentable_id' => $input['ref_id'],
-                'commentable_type' =>$input['ref_module'],
+                'commentable_type' => $input['ref_module'],
                 'detail' => $input['detail']
             ]);
 
-            if(!empty($input['file'])){
-                $file = File::storeFile($input['file'],UserComment::class, $comment->id);
+            if (!empty($input['file'])) {
+                $file = File::storeFile($input['file'], UserComment::class, $comment->id);
             }
 
             $refer = $input['ref_module']::find($input['ref_id']);
@@ -73,7 +73,6 @@ class CommentController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             return back()->with('errors', 'Save error');
         }
     }

@@ -41,9 +41,9 @@ class StudySessionController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'session_name'=>'required',
-            'session_start'=>'required',
-            'session_end'=>'required',
+            'session_name' => 'required',
+            'session_start' => 'required',
+            'session_end' => 'required',
         ]);
 
         DB::beginTransaction();
@@ -63,7 +63,6 @@ class StudySessionController extends Controller
 
             return back()->with('errors', 'Create Error!');
         }
-        
     }
 
     /**
@@ -100,9 +99,9 @@ class StudySessionController extends Controller
     public function update(Request $request, StudySession $studySession)
     {
         $input = $request->validate([
-            'session_name'=>'required',
-            'session_start'=>'required',
-            'session_end'=>'required',
+            'session_name' => 'required',
+            'session_start' => 'required',
+            'session_end' => 'required',
         ]);
 
         DB::beginTransaction();
@@ -118,8 +117,6 @@ class StudySessionController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
-
             return back()->with('errors', 'Update Error!');
         }
     }

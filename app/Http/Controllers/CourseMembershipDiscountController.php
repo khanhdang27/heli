@@ -67,7 +67,7 @@ class CourseMembershipDiscountController extends Controller
         $courseMembershipDiscount = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts')
             ->where('id', $price_tag->id)->first();
         return view('admin.course-member-discount.edit', [
-            'price_tag'=>$courseMembershipDiscount
+            'price_tag' => $courseMembershipDiscount
         ]);
     }
 
@@ -83,7 +83,7 @@ class CourseMembershipDiscountController extends Controller
         $input = $request->input();
 
         $new_price_tag = CourseMembershipDiscount::with('membershipCourses')
-                ->where('id', $price_tag->id)->first();
+            ->where('id', $price_tag->id)->first();
         DB::beginTransaction();
 
         try {
@@ -99,7 +99,6 @@ class CourseMembershipDiscountController extends Controller
 
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             return back()->with('errors', 'Update error!');
         }

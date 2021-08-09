@@ -56,8 +56,8 @@ class CourseController extends Controller
             'membershipCourses.course',
             'membershipCourses.course.tutor',
             'membershipCourses.course.student'
-        )->where('publish',1)
-        ->whereHas('membershipCourses.course.student', function (Builder $query) {
+        )->where('publish', 1)
+            ->whereHas('membershipCourses.course.student', function (Builder $query) {
                 $query->where('student_id', Auth::user()->id);
             })
             ->whereHas('membershipCourses', function (Builder $query) {
@@ -65,7 +65,7 @@ class CourseController extends Controller
             })
             ->get();
 
-        return view('course.my-course-page', ['courses'=> $courses]);
+        return view('course.my-course-page', ['courses' => $courses]);
     }
 
     /**
@@ -97,9 +97,9 @@ class CourseController extends Controller
                 $input
             );
             $memberships = Membership::all();
-            foreach ( $memberships as $membership ) {
+            foreach ($memberships as $membership) {
                 $membershipCourse = MembershipCourse::create([
-                    'membership_id'=> $membership->id,
+                    'membership_id' => $membership->id,
                     'course_id' => $course->id,
                     'price_value' => $course->course_price
                 ]);
@@ -137,25 +137,25 @@ class CourseController extends Controller
             'membershipCourses.course.schedule',
             'membershipCourses.course.courseMaterial',
             'membershipCourses.course.examinations'
-        )->where('publish',1)
-        ->whereHas('membershipCourses', function ($query) {
-            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
-         })->whereHas('membershipCourses.course', function ($query) use ($course){
-            return $query->where('id', $course->id);
-         })->first();
+        )->where('publish', 1)
+            ->whereHas('membershipCourses', function ($query) {
+                return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+            })->whereHas('membershipCourses.course', function ($query) use ($course) {
+                return $query->where('id', $course->id);
+            })->first();
 
-         if (empty($courses_with_group)){
+        if (empty($courses_with_group)) {
             return redirect(route('site.home'));
         }
 
         $student_course  = null;
-        if (Auth::check()){
+        if (Auth::check()) {
             $student_course = StudentCourses::query()
                 ->where('course_id', $course->id)
-                ->where('student_id',Auth::user()->id)->first();
+                ->where('student_id', Auth::user()->id)->first();
         }
 
-        return view('course.course-page',[
+        return view('course.course-page', [
             'courseDetail' => $courses_with_group,
             'student_course' => $student_course,
         ]);
@@ -181,15 +181,15 @@ class CourseController extends Controller
             'membershipCourses.course.subject',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
-        )->where('publish',1)
-        ->whereHas('membershipCourses', function ($query) {
-            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
-         })->whereHas('membershipCourses.course', function ($query) use ($input){
-                return $query->whereTranslationLike('course_name', '%' .$input. '%');
-         })->get();
+        )->where('publish', 1)
+            ->whereHas('membershipCourses', function ($query) {
+                return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+            })->whereHas('membershipCourses.course', function ($query) use ($input) {
+                return $query->whereTranslationLike('course_name', '%' . $input . '%');
+            })->get();
 
 
-        return view('course.search',[
+        return view('course.search', [
             'courses' => $courses_with_group,
         ]);
     }
@@ -351,13 +351,13 @@ class CourseController extends Controller
                 'course_id' => $course->id,
                 'study_session_id' => $input['study_session_id'],
                 'room_live_code' => $input['room_live_code'],
-                'start_date' => date('Y-m-d', strtotime( $input['start_date'])),
+                'start_date' => date('Y-m-d', strtotime($input['start_date'])),
                 'number_session' => $input['number_session'],
                 'number_member' => 0,
                 'number_member_maximum' => $input['number_member_maximum'],
             ]);
 
-            for ($i=0; $i < $input['number_session']; $i++) {
+            for ($i = 0; $i < $input['number_session']; $i++) {
                 CourseSchedule::create([
                     'course_id' => $course->id,
                     'study_session_id' => $input['study_session_id'],
@@ -372,8 +372,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
-            return back()->with('error', 'Create error!');
+            return back()->with('errors', 'Create error!');
         }
     }
 

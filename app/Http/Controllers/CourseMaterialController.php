@@ -42,7 +42,7 @@ class CourseMaterialController extends Controller
     public function create()
     {
         $course = Course::all();
-        return view('admin.course-material.create',[
+        return view('admin.course-material.create', [
             'course' => $course
         ]);
     }
@@ -57,7 +57,7 @@ class CourseMaterialController extends Controller
     {
 
         $input = $request->validated();
-        
+
         DB::beginTransaction();
         try {
             $course_material = CourseMaterial::create([
@@ -73,8 +73,8 @@ class CourseMaterialController extends Controller
                 'course_material_origin:sc' => $input['course_material_origin:sc'],
             ]);
 
-            if (!empty($input['file'])){
-                $file = File::storeFile($input['file'],CourseMaterial::class, $course_material->id);
+            if (!empty($input['file'])) {
+                $file = File::storeFile($input['file'], CourseMaterial::class, $course_material->id);
             }
 
             DB::commit();
@@ -82,9 +82,7 @@ class CourseMaterialController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollback();
-            dd($th);
             return back()->with('errors', 'Create Fails');
-
         }
     }
 
@@ -117,11 +115,11 @@ class CourseMaterialController extends Controller
     public function update(CreateMaterialRequest $request, CourseMaterial $course_material)
     {
         $input = $request->validated();
-        
+
         DB::beginTransaction();
         try {
             $course_material = CourseMaterial::updateOrCreate(
-                ['id'=> $course_material->id],
+                ['id' => $course_material->id],
                 [
                     'course_id' => $input['course_id'],
                     'course_material_name:en' => $input['course_material_name:en'],
@@ -136,12 +134,12 @@ class CourseMaterialController extends Controller
                 ]
             );
 
-            if (!empty($input['file'])){
+            if (!empty($input['file'])) {
                 $file_old = File::query()
-                    ->where('fileable_type',CourseMaterial::class)
-                        ->where('fileable_id',$course_material->id)->first();
+                    ->where('fileable_type', CourseMaterial::class)
+                    ->where('fileable_id', $course_material->id)->first();
                 $file_old->delete();
-                $file = File::storeFile($input['file'],CourseMaterial::class, $course_material->id);
+                $file = File::storeFile($input['file'], CourseMaterial::class, $course_material->id);
             }
 
             DB::commit();
@@ -150,7 +148,6 @@ class CourseMaterialController extends Controller
             //throw $th;
             DB::rollback();
             return back()->with('errors', 'Create Fails');
-
         }
     }
 

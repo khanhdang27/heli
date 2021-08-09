@@ -37,6 +37,12 @@
             <strong>{{ $alertFm }}</strong>
         </div>
     @endif
+    @if ($alertFm = Session::get('errors'))
+        <div class="alert text-center alert-danger alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ $alertFm }}</strong>
+        </div>
+    @endif
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
