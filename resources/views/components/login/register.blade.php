@@ -18,7 +18,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="box-btn-login">
+                            <div class="box-btn-login animate-change-color">
                                 <a class="btn btn-register-now btn-login mt-0 mb-2 mx-auto"
                                    href="{{route('site.socialLogin', 'facebook')}}">
                                     <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
@@ -53,7 +53,7 @@
                                     {{__('Subscribe to our Newsletter')}}
                                 </label>
                             </div>
-                            <div class="bottom-btn mt-5 d-flex justify-content-center">
+                            <div class="bottom-btn animate-change-color mt-5 d-flex justify-content-center">
                                 <button class='btn-login btn-register-now mt-0'
                                         id='btn-register'>
                                     {{__('Register')}}

@@ -11033,7 +11033,7 @@ h5,
   padding-right: 3rem;
 }
 
-.product-category-padding:hover {
+.animate-up:hover {
   cursor: pointer;
   transform: translate3d(0, -7px, 0);
   transition: all 0.5s;
@@ -11169,8 +11169,7 @@ input.check-subscribe {
   color: var(--white);
 }
 
-.box-btn-login .btn-login:hover,
-.bottom-btn .btn-register-now:hover {
+.animate-change-color:hover {
   border: 1px solid var(--white);
   background-color: var(--primary);
   color: var(--white);

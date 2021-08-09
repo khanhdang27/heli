@@ -20,7 +20,7 @@
 @endphp
 
 @if (!empty($course_card))
-<div class="{{ $class }} product-category-padding">
+<div class="{{ $class }} product-category-padding animate-up">
     <div class="product-box">
         <div class="top-product">
             <div class="title-product bg-secondary text-primary">

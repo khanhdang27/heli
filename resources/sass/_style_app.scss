@@ -1,5 +1,5 @@
 @font-face {
-    font-family:  Source Han Sans CN;
+    font-family: Source Han Sans CN;
     src: url('/helios/public/fonts/Source Han Sans CN Normal.ttf') format('truetype');
 }
 
@@ -36,50 +36,40 @@ h5,
     font-weight: 500;
 }
 
-
 .free {
     min-height: 2.45vw;
     font-size: 29px !important;
     border: none;
 }
 
-
 .banner-content {
     img {
         width: 100%;
     }
-
     position: relative;
-
     .banner-info {
         z-index: 1000;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-
         .banner-caption {
             font-size: 50px;
             font-weight: 400;
             border-bottom: 2px solid;
             width: 40vw;
             height: auto;
-
             p {
                 text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
                 line-height: 1.45;
             }
-
-            .banner-title {
-
-            }
+            .banner-title {}
         }
     }
 }
 
 .container-course {
     max-width: 86%;
-
     h2 {
         margin-top: 30px;
     }
@@ -93,7 +83,9 @@ h5,
 .product-category-padding {
     padding-left: 3rem;
     padding-right: 3rem;
+}
 
+.animate-up {
     &:hover {
         cursor: pointer;
         transform: translate3d(0, -7px, 0);
@@ -116,7 +108,6 @@ h5,
         color: var(--white);
         font-size: 12pt;
     }
-
     a:hover {
         background: none;
         color: var(--secondary);
@@ -140,22 +131,18 @@ h5,
 .footer {
     line-height: 1.45;
     padding: 4.48rem 10rem;
-
     .title-foot {
         font-size: 14px;
         font-weight: bold;
         margin-bottom: 0;
     }
-
     span {
         font-size: 9pt;
     }
-
     a {
         font-size: 9pt;
         color: var(--white);
     }
-
     a:hover {
         text-decoration: none;
         color: var(--secondary);
@@ -171,7 +158,6 @@ h5,
 .list-news {
     height: 20rem;
     overflow-y: auto;
-
     a:hover {
         text-decoration: none;
     }
@@ -184,7 +170,6 @@ form#certificate_form {
         background: var(--dark) 0.5;
         color: var(--secondary);
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-
         option {
             padding: 0.2rem 1rem;
             font-size: 14pt;
@@ -193,7 +178,6 @@ form#certificate_form {
             color: var(--primary);
             text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
         }
-
         option:checked {
             background: var(--primary) 0.5;
             color: var(--secondary);
@@ -235,13 +219,15 @@ input.check-subscribe {
         color: var(--white);
     }
 }
-%btn_login_hover{
+
+.animate-change-color {
     &:hover {
         border: 1px solid var(--white);
         background-color: var(--primary);
         color: var(--white);
     }
 }
+
 .box-btn-login {
     max-width: 100%;
     .btn-login {
@@ -255,22 +241,23 @@ input.check-subscribe {
         font-size: 18px;
         max-width: 325px;
         min-height: 44px;
-        @extend %btn_login_hover
     }
 }
+
 .bottom-btn {
     max-width: 100%;
-    .btn-register-now{
+    .btn-register-now {
         color: var(--primary);
         background-color: var(--white);
         font-size: 20px;
         height: 42px;
-        @extend %btn_login_hover
     }
 }
-.subscribe-check{
+
+.subscribe-check {
     max-width: 352px;
 }
+
 .btn-close {
     display: inline-block;
     border: none;
@@ -283,20 +270,16 @@ input.check-subscribe {
     font-size: 1.5rem;
     text-shadow: none;
     opacity: 100;
-
     span {
         background-color: var(--white);
-
         &:hover {
             border: 2px solid var(--white);
             background-color: var(--primary);
         }
     }
-
     &:focus {
         outline: none;
     }
-
     &:hover {
         color: var(--white);
     }
@@ -321,18 +304,15 @@ input.check-subscribe {
     border-radius: 28px;
     margin: 0 0.5rem 0.5rem 0;
     min-width: 120px;
-
     a {
         text-decoration: none;
     }
-
     &:hover {
         cursor: pointer;
         text-decoration: none;
         background-color: var(--white);
         color: var(--primary);
     }
-
     &:focus {
         outline: none;
     }
@@ -347,7 +327,7 @@ input.check-subscribe {
     padding: 0.3rem 1rem;
     margin: 0.3rem 0.3rem;
     float: right;
-    &:hover{
+    &:hover {
         background-color: var(--white);
         color: var(--primary);
     }
@@ -381,7 +361,6 @@ input.check-subscribe {
     margin-right: 0.5rem;
     background-color: var(--white);
     color: var(--primary);
-
     &:hover {
         background-color: var(--primary);
         color: var(--white);
@@ -394,7 +373,6 @@ input.check-subscribe {
         border: 3px solid var(--primary);
         color: var(--primary);
         padding: 0 4rem;
-
         &:hover {
             background-color: var(--primary);
             color: var(--white);
@@ -405,7 +383,6 @@ input.check-subscribe {
 .btn-register-free {
     .btn-register-now {
         box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.45);
-
         &:hover {
             background-color: var(--white);
             color: var(--primary);
@@ -423,7 +400,6 @@ input.check-subscribe {
     padding: 0 3rem;
     border: none;
     min-height: 39px;
-
     &:hover {
         transition: 0.5s;
         box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
@@ -447,13 +423,11 @@ input.check-subscribe {
 .praise-box {
     margin-bottom: 5rem;
     max-width: 270px;
-
     .praise {
         display: flex;
         flex-direction: column;
         align-items: left;
     }
-
     .avatar-guest {
         border-radius: 200px;
         width: 200px;
@@ -463,17 +437,14 @@ input.check-subscribe {
         right: 0;
         margin: 0 auto;
     }
-
     .avatar {
         border-radius: 200px;
     }
-
     .content-praise {
         padding: 9rem 1.3rem 2.3rem 1.3rem;
         position: unset;
         box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
     }
-
     .content-praise p {
         font-size: 14px;
     }
@@ -483,32 +454,27 @@ input.check-subscribe {
 .product-box {
     width: 100%;
     margin-top: 2.8rem;
-
     .title-product {
         width: fit-content;
         min-width: 90px;
         padding: 0.6rem 0;
         text-align: center;
     }
-
     .content-top {
         text-align: center;
         font-size: 14px;
     }
-
     .content-product {
         height: 323px;
         align-items: center;
         width: 100%;
         margin-left: 0;
-
         .color-bar {
             width: 15px;
             height: 258px;
             background-image: linear-gradient(to right, #E6C06C, #FBB03B);
             margin: auto;
         }
-
         .body-product-content {
             height: 258px;
             padding: 3.65rem;
@@ -516,7 +482,6 @@ input.check-subscribe {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-
             .content-bot {
                 font-size: 14px;
                 border: 1px solid;
@@ -529,24 +494,20 @@ input.check-subscribe {
             }
         }
     }
-
     .bottom-product2 {
         height: 200px;
         align-items: center;
         justify-content: flex-end;
         box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
-
         .card-name-product {
             min-height: 100px;
             font-size: 16pt;
-
             .text-multiline-truncate {
                 overflow: hidden;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
             }
-
             .name-product {
                 font-size: 12px;
             }
@@ -559,11 +520,9 @@ input.check-subscribe {
 
 .product-tab {
     padding-bottom: 4.6rem;
-
     .menu-category {
         height: 95.39px;
     }
-
     .menu-img {
         width: 182px;
         height: 70px;
@@ -575,11 +534,11 @@ input.check-subscribe {
         background-repeat: no-repeat;
         background-size: cover;
     }
-
     .menu-category-text {
         display: none;
     }
 }
+
 .category-link.active {
     width: 251px;
     height: 95.38px;
@@ -597,6 +556,7 @@ input.check-subscribe {
     background-color: #fff !important;
     border-bottom: 6px solid var(--secondary);
 }
+
 .menu-category-text {
     height: 50px;
 }
@@ -606,27 +566,21 @@ input.check-subscribe {
 
 .show-video {
     max-width: 85%;
-
     iframe {
         width: 100%;
     }
-
     .box-list-video {
         max-height: 420px;
         overflow-y: auto;
-
         ol {
             padding-left: 75px;
         }
-
         li.lecture-inactive::marker {
             content: "🔒︎ " counter(list-item) ". ";
         }
-
         li.lecture-active::marker {
             content: "▶ " counter(list-item) ". ";
         }
-
         li {
             display: list-item ". ";
         }
@@ -658,11 +612,9 @@ input.check-subscribe {
     .content-step {
         max-width: 1320px;
         margin: 0 auto;
-
         #step2 {
             margin: 0 7rem;
         }
-
         .circle-step {
             width: 88px;
             height: 88px;
@@ -673,16 +625,13 @@ input.check-subscribe {
             font-size: 17.3pt;
             font-weight: 600;
         }
-
         .title-step {
             font-weight: 600;
             font-size: 18pt;
         }
-
         .text-step {
             font-size: 14pt;
         }
-
         .col-step {
             text-align: center;
             display: flex;
@@ -691,24 +640,20 @@ input.check-subscribe {
             margin: 0 2rem;
         }
     }
-
     .dot-bar {
         width: 289px;
         display: flex;
         justify-content: space-between;
     }
-
     .list-dot {
         width: 15px;
         height: 15px;
         border-radius: 20px;
     }
-
     #btn-register-step {
         font-size: 18.7pt;
         border: 3px solid var(--white);
         padding: 0 5rem;
-
         &:hover {
             background-color: var(--white);
             color: var(--blue);
@@ -721,16 +666,15 @@ input.check-subscribe {
     height: 112px;
 }
 
+
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
 
 .content-team-page {
     max-width: 1614px;
     padding: 0 0 10.5rem 0;
-
     .card-team {
         margin-top: 3.4rem;
         width: 100%;
-
         .thumb {
             width: 100%;
             height: 100%;
@@ -738,7 +682,6 @@ input.check-subscribe {
             background-position: center center;
             background-size: cover;
         }
-
         .info-tutor {
             width: 100%;
             min-height: 93px;
@@ -748,43 +691,34 @@ input.check-subscribe {
             bottom: 0;
             background-color: rgba(15, 34, 51, 0.6);
         }
-
         .tutor-background {
             height: 514px;
         }
-
         .name-tutor {
             font-size: 18px;
             font-weight: 600;
         }
-
         .position-tutor {
             font-size: 16px;
             font-weight: 400;
         }
-
         .info-left {
             position: relative;
             height: 514px;
         }
-
         .info-right {
             height: 514px;
         }
-
         .content-info-right {
             max-width: 100%;
             overflow-y: auto;
             font-size: 14px;
         }
-
         .bottom-info-right {
             margin: 0 0.8rem 0.8rem 0;
         }
-
         .ic-tutor {
             margin-right: 0.78rem;
-
             img {
                 width: 59px;
             }
@@ -802,6 +736,7 @@ input.check-subscribe {
     z-index: 9;
 }
 
+
 /*SUBSCRIBE CONTAINER */
 
 .subscribe-container {
@@ -811,14 +746,11 @@ input.check-subscribe {
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-
     .subscribe-title {
         max-width: 429px;
     }
-
     .ip-subscribe {
         max-width: 768px;
-
         input {
             outline: none;
             height: 50px;
@@ -826,6 +758,7 @@ input.check-subscribe {
         }
     }
 }
+
 
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 
@@ -968,11 +901,9 @@ input.check-subscribe {
 .info-article {
     min-height: 166px;
     background-color: rgba(10, 10, 125, 0.3);
-
     a {
         color: white;
     }
-
     a:hover {
         text-decoration: none;
         color: var(--secondary);
@@ -986,7 +917,6 @@ input.check-subscribe {
 .popular-articles-item-image {
     width: 100%;
     flex: 0 40%;
-
     .img-blog {
         width: 185px;
         height: 185px;
@@ -999,7 +929,6 @@ input.check-subscribe {
 
 .popular-articles-item-content {
     flex: 0 60%;
-
     a {
         overflow: hidden;
         display: -webkit-box;
@@ -1007,7 +936,6 @@ input.check-subscribe {
         -webkit-box-orient: vertical;
         text-overflow: ellipsis;
     }
-
     a:hover {
         text-decoration: none;
     }
@@ -1021,8 +949,6 @@ input.check-subscribe {
 .body-blog-page {
     max-width: 90%;
 }
-
-
 
 .btn-hashtag:focus {
     outline: none;
@@ -1068,8 +994,6 @@ input.check-subscribe {
     color: #fff;
 }
 
-
-
 .text-30 {
     font-size: 22.5pt;
     color: #0B487D;
@@ -1113,7 +1037,6 @@ input.check-subscribe {
 .top-video {
     max-width: 1554px;
     margin-left: 5rem;
-
     a:hover {
         text-decoration: none;
     }
@@ -1143,21 +1066,17 @@ input.check-subscribe {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
     .container-news-page {
         padding-bottom: 7rem;
-
         .content-news-page {
             margin-top: 8rem;
             border-top: 2px solid;
             border-bottom: 2px solid;
-
             .show-news-item {
                 margin: 0 auto;
                 height: 320px;
                 width: 650px;
                 overflow-y: auto;
-
                 a:hover {
                     text-decoration: none;
                 }
@@ -1170,7 +1089,6 @@ input.check-subscribe {
     input[type="radio"] {
         opacity: 0;
     }
-
     label {
         display: inline-block;
         padding: 4px 11px;
@@ -1178,29 +1096,35 @@ input.check-subscribe {
         font-size: 16px;
         cursor: pointer;
     }
-
-    input[type="radio"]:checked + label {
+    input[type="radio"]:checked+label {
         border-style: solid;
         border-color: var(--primary);
     }
 }
+
+
 /*PAYMENT PAGE*/
-.bg-btn-payment{
+
+.bg-btn-payment {
     background-color: #f2f2f2;
 }
-.choose-payment-method{
+
+.choose-payment-method {
     width: 30px;
     height: 30px;
 }
-.ip-payment{
+
+.ip-payment {
     height: 50px;
 }
-.bg-user{
+
+.bg-user {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
-.product-payment{
+
+.product-payment {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
