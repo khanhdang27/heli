@@ -141,7 +141,7 @@ class ModeratorController extends Controller
             return response([
                 'message' => 'Delete success!'
             ]);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             return response([
                 'message' => 'Cannot delete',
                 'detail' => $exception->getMessage()
