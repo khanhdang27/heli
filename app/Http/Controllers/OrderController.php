@@ -28,11 +28,28 @@ class OrderController extends Controller
     {
     }
 
-    public function addCard()
+    public function updateCard(Request $request)
     {
         $_user = User::find(Auth::user()->id);
+
+        return view('payments.update-card', [
+            'intent' => $_user->createSetupIntent(),
+        ]);
+    }
+
+    public function addCard(Request $request)
+    {
+        $_user = User::find(Auth::user()->id);
+
+        [
+            $product_id,
+            $courses_with_group,
+            $student_bought
+        ] = $this->getVariable($request);
+
         return view('payments.update-payment-method', [
-            'intent' => $_user->createSetupIntent()
+            'intent' => $_user->createSetupIntent(),
+            'courses_with_group' => $courses_with_group
         ]);
     }
 
@@ -43,21 +60,22 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
+        [
+            $product_id,
+            $courses_with_group,
+            $student_bought
+        ] = $this->getVariable($request);
+
         $paymentMethods = $this->getPaymentMethod();
         if (empty($paymentMethods[0])) {
-            if($request->ajax()){
+            if ($request->ajax()) {
                 return response()->json([
                     'path' => route('site.order.addCard'),
                     'status' => 200,
                 ]);
             }
-            return redirect()->route('site.order.addCard');
+            return redirect()->route('site.order.addCard', ['product_id' => $product_id]);
         } else {
-            [
-                $product_id,
-                $courses_with_group,
-                $student_bought
-            ] = $this->getVariable($request);
 
             if (empty($student_bought)) {
                 return $this->createBuyCourse($courses_with_group, $paymentMethods, $request);
@@ -71,7 +89,6 @@ class OrderController extends Controller
 
     public function createBuyCourse($courses_with_group, $paymentMethods, $request)
     {
-
         $room = $request->query('room_id');
         DB::beginTransaction();
         try {
@@ -92,7 +109,7 @@ class OrderController extends Controller
                 return $result;
             } else {
                 if ($result instanceof Order) {
-                    if ($room){
+                    if ($room) {
                         $this->updateSchedule($room);
                     }
                     $student_course = StudentCourses::create([
@@ -102,10 +119,9 @@ class OrderController extends Controller
                         'latest_study' => new DateTime(),
                         'lecture_study' => 0
                     ]);
-
                 }
                 DB::commit();
-                if($request->ajax()){
+                if ($request->ajax()) {
                     return response()->json([
                         'path' => route('site.order.show', $result->id),
                         'status' => 200,
@@ -129,6 +145,7 @@ class OrderController extends Controller
             'courseDiscounts',
             'membershipCourses.course',
             'membershipCourses.course.subject',
+            'membershipCourses.course.subject.certificate',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
         )->where('id', $product_id)->first();
@@ -165,12 +182,13 @@ class OrderController extends Controller
             $roomInitial->save();
 
             $course_schedules = CourseSchedule::where(
-                'course_id', $roomInitial->course_id
+                'course_id',
+                $roomInitial->course_id
             )->get();
 
             foreach ($course_schedules as $course_schedule) {
                 StudentSchedule::create([
-                    'course_id'=> $course_schedule->course_id,
+                    'course_id' => $course_schedule->course_id,
                     'room_live_course_id' => $course_schedule->room_live_course_id,
                     'study_session_id' => $course_schedule->study_session_id,
                     'tutor_id' => $course_schedule->tutor_id,
@@ -212,7 +230,7 @@ class OrderController extends Controller
         \Stripe\Stripe::setApiKey(config('app.stripe_secret'));
         $stripe = \Stripe\PaymentIntent::all(['limit' => 15, 'customer' => Auth::user()->stripe_id]);
         return view('payments.payment-history', [
-           'order' => $order,
+            'order' => $order,
             'stripe' => $stripe
         ]);
     }

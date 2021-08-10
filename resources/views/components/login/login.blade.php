@@ -18,18 +18,27 @@
                     <div class="col-lg-6">
                         <div class="box-btn-login">
                             <a class="btn btn-register-now btn-login mb-2 mt-0 mx-auto"
+                                id="login-fb"
                                href="{{route('site.socialLogin', 'facebook')}}">
                                 <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
                                                                width="33px">
                                 </div>
                                 <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
+                                <span id='spinner-load-fb' class="spinner-border spinner-border-sm ml-1 d-none"
+                                        role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">Loading...</span>
                             </a>
                             <a class="btn btn-register-now btn-login mt-0 mx-auto"
-                               href="{{route('site.socialLogin', 'google')}}">
+                                id="login-gg"
+                               href="{{route('site.socialLogin', 'google')}}"
+                               >
                                 <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
                                                                width="33px">
                                 </div>
                                 <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
+                                <span id='spinner-load-gg' class="spinner-border spinner-border-sm ml-1 d-none"
+                                        role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">Loading...</span>
                             </a>
                         </div>
                         <div class="line-or d-flex align-items-center text-white mx-auto">
@@ -74,7 +83,7 @@
                             <button class='btn btn-login btn-register-now my-5'
                                 id='btn-login' type="submit">
                                 <p class="mb-0">{{__('Login')}}</p>
-                                <span class="spinner-border spinner-border-sm ml-1 d-none" role="status"
+                                <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none" role="status"
                                       aria-hidden="true"></span>
                                 <span class="sr-only">Loading...</span>
                             </button>
@@ -91,10 +100,19 @@
 @push('scriptsLogin')
     <script>
         $(function () {
+            var spinner = $("#spinner-load");
+            var spinner_fb = $("#spinner-load-fb");
+            var spinner_gg = $("#spinner-load-gg");
+            function loginSocial () {
+                spinner_fb.removeClass('d-none');
+                spinner_gg.removeClass('d-none');
+            }
+
+            $('#login-gg').click(loginSocial)
+            $('#login-fb').click(loginSocial)
+
             $('#formLogin').submit(function (e) {
                 e.preventDefault();
-
-                var spinner = $("#spinner-load");
                 let formData = $(this).serializeArray();
                 $(".invalid-feedback").children("strong").text("");
                 $("#formLogin input").removeClass("is-invalid");

@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('type', 'Type') }}
-                                    {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],$course->type,['class'=>'form-control']) }}
+                                    {{ Form::select('type', Course::COURSE_TYPE,$course->type,['class'=>'form-control']) }}
                                 </div>
                             </div>
                             <div class="form-group ">

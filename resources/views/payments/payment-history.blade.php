@@ -34,11 +34,11 @@
                                 @endphp
                                 {{$course->course->course_name}}
                             </td>
-                            <td>payment method</td>
+                            <td>Visa card</td>
                             <td>
-                                <button class="btn btn-primary">{{$value->status}}</button>
+                                <h4> <span class="badge badge-primary">{{$value->status}}</span> </h4>
                             </td>
-                            <td>HK${{$value->amount}}/@lang('keywords.course-item.section')</td>
+                            <td>HK${{$value->amount/100}}</td>
                             <td>{{$value->id}}</td>
                         </tr>
                     @endforeach

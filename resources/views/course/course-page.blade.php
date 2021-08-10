@@ -1,11 +1,13 @@
 @php
 
     use App\Models\Course;
+    use App\Models\User;
     $course = $courseDetail->membershipCourses->course;
     $latesLecture = null;
     if(!empty($student_course)){
         $latesLecture = $student_course->lecture_study;
     }
+
 @endphp
 
 @extends('layout.app')

@@ -2,13 +2,6 @@
 
 @section('content')
 
-@php
-
-use \App\Models\Course;
-
-$course = $courses_with_group->membershipCourses->course;
-@endphp
-
 <div class="body-content">
     <div class="container-fluid text-center top-news-page">
         付款
@@ -30,7 +23,6 @@ $course = $courses_with_group->membershipCourses->course;
                                 <h4 class="font-weight-bold">{{Auth::user()->name}}</h4>
                                 <h4 class="font-weight-bold">{{Auth::user()->email}}</h4>
                             </div>
-                            <h4>{{Auth::user()->student->phone_no}}</h4>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
                             <img src="{{ asset('images/HeliosLogo.svg') }}">
@@ -70,8 +62,7 @@ $course = $courses_with_group->membershipCourses->course;
                                     <div class="d-flex justify-content-end">
                                         <button class="btn btn-primary mt-2 py-2 px-4 h4 shadow" id="card-button"
                                             data-secret="{{ $intent->client_secret }}">
-                                            Pay HK${{$courses_with_group->getPriceDiscount()}}/
-                                            @lang('keywords.course-item.section')
+                                            Update
                                         </button>
                                     </div>
                                     <p class="h4 mt-2">Your card details would be securely saved for faster
@@ -112,67 +103,7 @@ $course = $courses_with_group->membershipCourses->course;
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-1"></div>
-            <div class="col-12 col-lg-4">
-                <div class="card border-primary">
-                    <div class="card-body text-primary p-5">
-                        <h4 class="card-title font-weight-bold border-bottom border-primary pb-3">
-                            Your Course
-                        </h4>
-                        <div class="card border-0 mt-4">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="product-payment card-body"
-                                        style="background-color: {{$course->subject->subject_color_background}}; text: {{$course->subject->subject_color_text}}">
-                                        <div class="text-center">
-                                            <small>{{$course->subject->certificate->certificate_code}}</small></div>
-                                        <p class="text-center"><small>{{ Course::COURSE_TYPE[$course->type] }}</small>
-                                        </p>
-                                        <div class="py-2 px-4 border border-white">
-                                            <p class="text-center m-0"><small>{{$course->course_name}}</small></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card-body">
-                                        <h5 class="text-limit-3">{{$course->subject->certificate->certificate_code}}
-                                            {{$course->course_description}}</h5>
-                                        <p class="card-text"><small>{{$course->tutor->full_name}}</small></p>
-                                        <h3 class="font-weight-bold">HK${{$courses_with_group->getPriceDiscount()}}/
-                                            @lang('keywords.course-item.section')</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <table width="100%" class="my-5">
-                            <tr>
-                                <td>
-                                    <h4 class="font-weight-bold">Sub Total</h4>
-                                </td>
-                                <td class="text-right">
-                                    <h4 class="font-weight-bold">
-                                        HK$ {{$courses_with_group->getPrice()}}/ @lang('keywords.course-item.section')
-                                    </h4>
-                                </td>
-                            </tr>
-                            <tr class="font-weight-bold">
-                                <td>
-                                    <h4 class="font-weight-bold">Discount</h4>
-                                </td>
-                                <td class="text-right">
-                                    <h4 class="font-weight-bold">
-                                        {{$courses_with_group->getDiscount()}} %</h4>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="d-flex justify-content-between align-items-center bg-btn-payment p-4 shadow-sm">
-                            <h3 class="m-0 font-weight-bold">Total</h3>
-                            <h3 class="m-0 font-weight-bold">HK${{$courses_with_group->getPrice()}}/
-                                @lang('keywords.course-item.section')</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -215,7 +146,7 @@ $course = $courses_with_group->membershipCourses->course;
                 })
                     .then(function (response) {
                         console.log(response);
-                        location.href = "{{ route('site.order.create', ['product_id' => $courses_with_group->id]) }}"
+                        location.reload();
                     })
                     .catch(function (error) {
                         console.log(error);
