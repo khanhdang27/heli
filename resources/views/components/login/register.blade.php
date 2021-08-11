@@ -20,16 +20,16 @@
                         <div class="col-lg-6">
                             <div class="box-btn-login">
                                 <a class="btn btn-register-now btn-login mt-0 mb-2 mx-auto"
-                                   href="{{route('site.socialLogin', 'facebook')}}">
+                                    href="{{route('site.socialLogin', 'facebook')}}">
                                     <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
-                                                                   width="33px">
+                                            width="33px">
                                     </div>
                                     <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
                                 </a>
                                 <a class="btn btn-register-now btn-login mt-0 mx-auto"
-                                   href="{{route('site.socialLogin', 'google')}}">
+                                    href="{{route('site.socialLogin', 'google')}}">
                                     <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
-                                                                   width="33px">
+                                            width="33px">
                                     </div>
                                     <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
                                 </a>
@@ -48,24 +48,24 @@
                                     ]) }}
                             </div>
                             <div class="form-group form-check mt-4 subscribe-check mx-auto">
-                                <input type="checkbox" class="form-check-input check-subscribe" id="subscribe" name="subscribe">
+                                <input type="checkbox" class="form-check-input check-subscribe" id="subscribe"
+                                    name="subscribe">
                                 <label class="form-check-label h5 pt-1 text-white ml-3" for="subscribe">
                                     {{__('Subscribe to our Newsletter')}}
                                 </label>
                             </div>
                             <div class="bottom-btn mt-5 d-flex justify-content-center">
-                                <button class='btn-login btn-register-now mt-0'
-                                        id='btn-register'>
+                                <button class='btn-login btn-register-now mt-0' id='btn-register'>
                                     {{__('Register')}}
                                     <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none"
-                                          role="status" aria-hidden="true"></span>
+                                        role="status" aria-hidden="true"></span>
                                     <span class="sr-only">Loading...</span>
                                 </button>
                             </div>
                             {!! Form::close() !!}
                             <div class="mt-5">
                                 <a class="text-white" href="#" data-toggle="modal" data-target="#loginModal"
-                                   data-dismiss="modal">
+                                    data-dismiss="modal">
                                     <h5 class="text-center">
                                         @lang('keywords.alreadyMember')
                                     </h5>
@@ -80,8 +80,8 @@
 </div>
 
 @push('scripts')
-    <script>
-        $(function () {
+<script>
+    $(function () {
             $('#registerForm').submit(function (e) {
                 e.preventDefault();
                 var spinner = $("#spinner-load");
@@ -136,5 +136,5 @@
                 "hideMethod": "fadeOut"
             }
         }
-    </script>
+</script>
 @endpush
