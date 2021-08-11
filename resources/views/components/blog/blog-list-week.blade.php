@@ -9,7 +9,7 @@
             </div>
 
         @else
-            <div class="img-thumbnail rounded-0 p-0 img-blog align-items-center"
+            <div class="img-thumbnail rounded-0 p-0 border-0 img-blog align-items-center"
                  style="background-image: url('{{ asset("/file/".$item->photo->id)}}')"></div>
         @endif
     </div>
@@ -34,4 +34,3 @@
     </div>
 
 </div>
-<hr class="border-secondary"/>

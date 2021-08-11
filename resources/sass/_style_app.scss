@@ -993,7 +993,7 @@ input.check-subscribe {
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
-        box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     }
 }
 
@@ -1014,7 +1014,7 @@ input.check-subscribe {
 }
 
 .popular-articles-right {
-    max-height: 633px;
+    max-height: 605px;
     overflow-y: auto;
 }
 
