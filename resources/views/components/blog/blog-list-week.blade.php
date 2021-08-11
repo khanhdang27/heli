@@ -1,16 +1,15 @@
-<div class="card flex-md-row border-0">
+<div class="card flex-md-row pb-3 border-0">
     <div class="popular-articles-item-image d-flex popular-item">
         @if(empty($item->photo))
-            <div class="img-thumbnail rounded-0 p-0 img-blog align-items-center"
-                 style="background-image: url('{{ asset("images/default-image.jpg")}}')">
-                <img class="img-thumbnail border-0 p-0 rounded-0 align-items-center"
-                    src="{{ asset('images/default-image.jpg')}}"
-                    alt="Card image cap">
-            </div>
+        <div class="img-thumbnail rounded-0 p-0 img-blog align-items-center"
+            style="background-image: url('{{ asset("images/default-image.jpg")}}')">
+            <img class="img-thumbnail border-0 p-0 rounded-0 align-items-center"
+                src="{{ asset('images/default-image.jpg')}}" alt="Card image cap">
+        </div>
 
         @else
-            <div class="img-thumbnail rounded-0 p-0 border-0 img-blog align-items-center"
-                 style="background-image: url('{{ asset("/file/".$item->photo->id)}}')"></div>
+        <div class="img-thumbnail rounded-0 p-0 border-0 img-blog align-items-center"
+            style="background-image: url('{{ asset("/file/".$item->photo->id)}}')"></div>
         @endif
     </div>
 
@@ -25,9 +24,9 @@
             </p>
             <p class="d-flex flex-wrap">
                 @foreach($item->tags as $tag)
-                    <button class="btn-hashtag-small">
-                        {{$tag->tag_name}}
-                    </button>
+                <button class="btn-hashtag-small">
+                    {{$tag->tag_name}}
+                </button>
                 @endforeach
             </p>
         </div>

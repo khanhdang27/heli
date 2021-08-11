@@ -48,8 +48,8 @@
                     </div>
                 </div>
             </div>
-            <div class="bottom-product2 d-flex flex-column justify-content-between bg-white">
-                @if ($typeOfUI != 'welcome')
+            <div class="bottom-product2 d-flex flex-column justify-content-between bg-white pt-2">
+                @if ($typeOfUI != 'welcome' && $typeOfUI != 'lasted' )
                     <div class="card-name-product d-flex justify-content-between p-4">
                         <div class="name-product w-75 text-primary">
                             <div class="text-multiline-truncate">

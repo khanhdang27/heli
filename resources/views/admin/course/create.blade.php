@@ -3,6 +3,7 @@
     use App\Utilities\SelectionByClass;
     use App\Models\Tutor;
     use App\Models\Subject;
+    use App\Models\Course;
 
 @endphp
 

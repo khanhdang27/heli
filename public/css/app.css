@@ -11039,8 +11039,9 @@ h5,
 
 .animate-up:hover {
   cursor: pointer;
-  transform: translate3d(0, -7px, 0);
+  transform: translate3d(0, -3px, 0);
   transition: all 0.5s;
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
 
 .color-primary svg {
@@ -11116,8 +11117,8 @@ h5,
 }
 
 .rounded-top-course {
-  border-top-left-radius: 0.35rem !important;
-  border-top-right-radius: 0.35rem !important;
+  border-top-left-radius: 0.72rem !important;
+  border-top-right-radius: 0.72rem !important;
 }
 
 form#certificate_form select {
@@ -11426,7 +11427,7 @@ input.check-subscribe {
 }
 
 .product-box .title-product {
-  border-top-right-radius: 0.35rem !important;
+  border-top-right-radius: 0.72rem !important;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -11437,7 +11438,7 @@ input.check-subscribe {
 
 .product-box .content-top {
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .product-box .content-product {
@@ -11445,62 +11446,67 @@ input.check-subscribe {
   align-items: center;
   width: 100%;
   margin-left: 0;
+  padding: 2.5rem 0 2rem 0;
 }
 
 .product-box .content-product .body-product-content {
-  height: 200px;
-  padding: 1.65rem 2.65rem;
+  height: 100%;
   font-size: 15.7pt;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
-.product-box .content-product .body-product-content .content-bot {
-  font-size: 14px;
+.product-box .content-product .body-product-content .box-content-bot {
   border: 1px solid;
-  padding: 2rem 1.5rem;
+}
+
+.product-box .content-product .body-product-content .box-content-bot .content-bot {
+  font-size: 14px;
   text-align: center;
   width: 100%;
   overflow: hidden;
-  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-}
-
-.product-box .bottom-product2 {
-  align-items: center;
-  justify-content: flex-end;
-  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
 }
 
 .product-box .bottom-product2 .card-name-product {
-  min-height: 130px;
+  min-height: 144px;
   font-size: 16pt;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
 }
 
 .product-box .bottom-product2 .card-name-product .text-multiline-truncate {
   overflow: hidden;
+  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
 .product-box .bottom-product2 .card-name-product .name-product {
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.btn-next:after {
+  content: none !important;
+}
+
+.border-btn-next {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-prev {
+  top: 48% !important;
+}
+
+.btn-next {
+  top: 46% !important;
+}
+
+.btn-prev.swiper-button-disabled {
+  opacity: 0 !important;
 }
 
 /*TAB PRODUCT-----------------------------------------*/
-
-.product-tab {
-  padding-bottom: 4.6rem;
-}
 
 .product-tab .menu-category {
   height: 95.39px;
@@ -11927,7 +11933,7 @@ input.check-subscribe {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
 
 .popular-articles-item-content {
@@ -11947,7 +11953,7 @@ input.check-subscribe {
 }
 
 .popular-articles-right {
-  max-height: 633px;
+  max-height: 605px;
   overflow-y: auto;
 }
 
@@ -12031,11 +12037,6 @@ input.check-subscribe {
 
 .row-question {
   border-bottom: 1px solid;
-}
-
-.btn-dark-blue {
-  padding: 0 3.6rem !important;
-  min-height: 42px;
 }
 
 .top-video {
@@ -12139,6 +12140,7 @@ input.check-subscribe {
 .border-2 {
   border: 2px solid;
 }
+
 .text-limit-3 {
   overflow: hidden;
   display: -webkit-box;
@@ -12327,6 +12329,11 @@ input.check-subscribe {
 
   .sort-lg label {
     margin-right: 0.5rem !important;
+  }
+
+  #btn_next,
+  #btn_prev {
+    display: none !important;
   }
 }
 
