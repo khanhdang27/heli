@@ -21,7 +21,9 @@
                             </div>
                             <div class="mr-4">
                                 <h4 class="font-weight-bold">{{Auth::user()->name}}</h4>
-                                <h4 class="font-weight-bold">{{Auth::user()->email}}</h4>
+                                @if (!empty(Auth::user()->card_last_four))
+                                <h4 class="font-weight-bold">**** **** **** {{Auth::user()->card_last_four}}</h4>
+                                @endif
                             </div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">

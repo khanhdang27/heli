@@ -55,13 +55,7 @@
                                                 'autocomplete'=>'off'
                                     ]) }}
                             </div>
-                            <div class="form-group form-check mt-4 subscribe-check mx-auto">
-                                <input type="checkbox" class="form-check-input check-subscribe" id="subscribe"
-                                    name="subscribe">
-                                <label class="form-check-label h5 pt-1 text-white ml-3" for="subscribe">
-                                    {{__('Subscribe to our Newsletter')}}
-                                </label>
-                            </div>
+                            
                             <div class="bottom-btn mt-5 d-flex justify-content-center">
                                 <button class='btn-login btn-register-now mt-0' id='btn-register'>
                                     {{__('Register')}}

@@ -63,7 +63,6 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-
         $input = $request->all();
         $random = Str::random(10);
         if (!empty($input['email'])) {
@@ -81,10 +80,6 @@ class RegisterController extends Controller
 
                 $stripeCustomer = $user->createAsStripeCustomer(['email' => $input['email']]);
 
-                if ($input['subscribe']== 'on' and !(NewsletterFacade::isSubscribed($input['email']))){
-                    NewsletterFacade::subscribe($input['email']);
-                }
-
                 $send_mail = new SendMail();
                 $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
                 Mail::to($input['email'])->send($send_mail);
@@ -97,11 +92,10 @@ class RegisterController extends Controller
             } catch (\Throwable $th) {
                 DB::rollBack();
 
-                // dd($th);
                 return response()->json(
                     [
                         'status' => 400,
-                        'message' => 'mail is duplicate'
+                        'message' => $th->getMessage()
                     ], 400);
             }
         }

@@ -59,8 +59,8 @@ class PaymentController extends Controller
             $payment_method = $user->addPaymentMethod($request->payment_method);
 
             $paymentMethods = $user->paymentMethods();
-            $user->card_brand = $paymentMethods->last()->card->brand;
-            $user->card_last_four = $paymentMethods->last()->card->last4;
+            $user->card_brand = $paymentMethods[0]->card->brand;
+            $user->card_last_four = $paymentMethods[0]->card->last4;
             $user->save();
 
             DB::commit();
