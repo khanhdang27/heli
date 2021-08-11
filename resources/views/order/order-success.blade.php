@@ -4,6 +4,7 @@
 @section('title','Blog Page')
 
 @section('content')
+
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
             付款

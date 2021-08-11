@@ -50,9 +50,23 @@
                     </td>
                 </tr>
             </table>
-            <div class="text-right">
-                <a href="{{ route('site.profile.edit',Auth::user()->id) }}" class="font-weight-bold">Update your
-                    profile</a>
+            <div class="d-flex justify-content-around">
+
+                <div class="">
+                    <a href="{{ route('site.profile.edit',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold">
+                        Update your profile
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{{ route('site.payment-history') }}" class="btn btn-outline-primary font-weight-bold">
+                        Payment History
+                    </a>
+                </div>
+                <div class="">
+                    <a href="{{ route('site.order.updateCard',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold">
+                        Update Payment Card
+                    </a>
+                </div>
             </div>
         </div>
     </div>

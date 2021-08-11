@@ -27,7 +27,7 @@ Route::get('teams', function () {
 Route::resource('subject', 'SubjectController');
 
 Route::resource('certificate', 'CertificateController');
-Route::get('document/{id}','CertificateController@documentDetail')->name('document');
+Route::get('document/{id}', 'CertificateController@documentDetail')->name('document');
 Route::get('course/search', 'CourseController@search')->name('course.search');
 Route::resource('course', 'CourseController')->except(['index', 'update', 'store', 'delete']);
 
@@ -51,15 +51,16 @@ Route::middleware('auth')->group(function () {
     Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
     Route::resource('payment', 'PaymentController');
     Route::get('order/addCard', 'OrderController@addCard')->name('order.addCard');
+    Route::get('order/updateCard', 'OrderController@updateCard')->name('order.updateCard');
     Route::resource('order', 'OrderController');
     Route::get('payment-history', 'OrderController@paymentHistory')->name('payment-history');
 
     Route::resource('post', 'PostController');
-    Route::get('pin-comment/{post_id}/{comment_id}','PostController@pinComment')->name('pinComment');
+    Route::get('pin-comment/{post_id}/{comment_id}', 'PostController@pinComment')->name('pinComment');
     Route::resource('comment', 'CommentController');
     Route::resource('user-like', 'UserLikeController');
     Route::resource('profile', 'ProfileController');
-    Route::put('uploadAvatar','ProfileController@uploadAvatar')->name('uploadAvatar');
+    Route::put('uploadAvatar', 'ProfileController@uploadAvatar')->name('uploadAvatar');
     Route::resource('rating', 'RatingController');
 
     Route::resource('lecture', 'LectureController');

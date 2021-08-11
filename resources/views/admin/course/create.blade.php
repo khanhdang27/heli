@@ -54,8 +54,8 @@
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('type', 'Type') }}
                                     {{ Form::select('type',
-                                            [1=>'Live course', 2=>'Course recorded video', 3=>'Only documents'],
-                                                null,['class'=>'form-control', 'v-on:change'=>"setDefaultInvisible"]) }}
+                                            Course::COURSE_TYPE,
+                                            null,['class'=>'form-control', 'v-on:change'=>"setDefaultInvisible"]) }}
                                 </div>
                                 <div class="form-group col-12 col-md-4" id="tutor">
                                     {{ Form::label('tutor_id', 'Tutor') }}

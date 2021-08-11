@@ -12139,6 +12139,12 @@ input.check-subscribe {
 .border-2 {
   border: 2px solid;
 }
+.text-limit-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
 
 .rating {
   display: inline-block;

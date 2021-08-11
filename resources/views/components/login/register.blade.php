@@ -20,18 +20,26 @@
                         <div class="col-lg-6">
                             <div class="box-btn-login animate-change-color">
                                 <a class="btn btn-register-now btn-login mt-0 mb-2 mx-auto"
-                                   href="{{route('site.socialLogin', 'facebook')}}">
+                                    id="login-fb"
+                                    href="{{route('site.socialLogin', 'facebook')}}">
                                     <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
-                                                                   width="33px">
+                                            width="33px">
                                     </div>
                                     <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
+                                    <span id='spinner-load-fb' class="spinner-border spinner-border-sm ml-1 d-none"
+                                        role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">Loading...</span>
                                 </a>
                                 <a class="btn btn-register-now btn-login mt-0 mx-auto"
-                                   href="{{route('site.socialLogin', 'google')}}">
+                                    id="login-gg"
+                                    href="{{route('site.socialLogin', 'google')}}">
                                     <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
-                                                                   width="33px">
+                                            width="33px">
                                     </div>
                                     <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
+                                    <span id='spinner-load-gg' class="spinner-border spinner-border-sm ml-1 d-none"
+                                        role="status" aria-hidden="true"></span>
+                                    <span class="sr-only">Loading...</span>
                                 </a>
                             </div>
                             <div class="line-or d-flex align-items-center text-white mx-auto">
@@ -47,25 +55,19 @@
                                                 'autocomplete'=>'off'
                                     ]) }}
                             </div>
-                            <div class="form-group form-check mt-4 subscribe-check mx-auto">
-                                <input type="checkbox" class="form-check-input check-subscribe" id="subscribe" name="subscribe">
-                                <label class="form-check-label h5 pt-1 text-white ml-3" for="subscribe">
-                                    {{__('Subscribe to our Newsletter')}}
-                                </label>
-                            </div>
-                            <div class="bottom-btn animate-change-color mt-5 d-flex justify-content-center">
-                                <button class='btn-login btn-register-now mt-0'
-                                        id='btn-register'>
+                            
+                            <div class="bottom-btn mt-5 d-flex justify-content-center">
+                                <button class='btn-login btn-register-now mt-0' id='btn-register'>
                                     {{__('Register')}}
                                     <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none"
-                                          role="status" aria-hidden="true"></span>
+                                        role="status" aria-hidden="true"></span>
                                     <span class="sr-only">Loading...</span>
                                 </button>
                             </div>
                             {!! Form::close() !!}
                             <div class="mt-5">
                                 <a class="text-white" href="#" data-toggle="modal" data-target="#loginModal"
-                                   data-dismiss="modal">
+                                    data-dismiss="modal">
                                     <h5 class="text-center">
                                         @lang('keywords.alreadyMember')
                                     </h5>
@@ -80,61 +82,72 @@
 </div>
 
 @push('scripts')
-    <script>
-        $(function () {
-            $('#registerForm').submit(function (e) {
-                e.preventDefault();
-                var spinner = $("#spinner-load");
-                var button_regis = $("btn-register");
+<script>
+    $(function () {
+        var spinner = $("#spinner-load");
+        var spinner_fb = $("#spinner-load-fb");
+        var spinner_gg = $("#spinner-load-gg");
+        function loginSocial() {
+            spinner_fb.removeClass('d-none');
+            spinner_gg.removeClass('d-none');
+        }
 
-                let formData = $(this).serializeArray();
-                $(".invalid-feedback").children("strong").text("");
-                $("#registerForm input").removeClass("is-invalid");
-                spinner.removeClass('d-none');
-                button_regis.addClass("disabled")
-                $.ajax({
-                    type: "post",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: "{{ route('site.register') }}",
-                    data: formData
-                }).done(function (data) {
-                    if (data.status == 200) {
-                        spinner.addClass('d-none')
-                        toastr["success"]("@lang('keywords.toast.pleaseCheckEmail')", "@lang('keywords.toast.registerSuccess')");
-                        button_regis.removeClass("disabled")
-                    }
-                }).fail(function (data, textStatus, errorThrown) {
-                    if (data.status == 400) {
-                        spinner.addClass('d-none')
-                        toastr["error"](data.responseJSON.message, 'Error');
-                        button_regis.removeClass("disabled")
-                    } else {
-                        spinner.addClass('d-none')
-                        toastr["error"](data.responseJSON.message, 'Error');
-                        button_regis.removeClass("disabled")
-                    }
-                });
+        $('#login-gg').click(loginSocial)
+        $('#login-fb').click(loginSocial)
+
+        $('#registerForm').submit(function (e) {
+            e.preventDefault();
+            
+            var button_regis = $("btn-register");
+
+            let formData = $(this).serializeArray();
+            $(".invalid-feedback").children("strong").text("");
+            $("#registerForm input").removeClass("is-invalid");
+            spinner.removeClass('d-none');
+            button_regis.addClass("disabled")
+            $.ajax({
+                type: "post",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ route('site.register') }}",
+                data: formData
+            }).done(function (data) {
+                if (data.status == 200) {
+                    spinner.addClass('d-none')
+                    toastr["success"]("@lang('keywords.toast.pleaseCheckEmail')", "@lang('keywords.toast.registerSuccess')");
+                    button_regis.removeClass("disabled")
+                }
+            }).fail(function (data, textStatus, errorThrown) {
+                if (data.status == 400) {
+                    spinner.addClass('d-none')
+                    toastr["error"](data.responseJSON.message, 'Error');
+                    button_regis.removeClass("disabled")
+                } else {
+                    spinner.addClass('d-none')
+                    toastr["error"](data.responseJSON.message, 'Error');
+                    button_regis.removeClass("disabled")
+                }
             });
         });
-        toastRegister();
+    });
+    toastRegister();
 
-        function toastRegister() {
-            toastr.options = {
-                "closeButton": true,
-                "newestOnTop": false,
-                "positionClass": "toast-bottom-right",
-                "preventDuplicates": true,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "3600",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
+    function toastRegister() {
+        toastr.options = {
+            "closeButton": true,
+            "newestOnTop": false,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": true,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3600",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
         }
-    </script>
+    }
+</script>
 @endpush

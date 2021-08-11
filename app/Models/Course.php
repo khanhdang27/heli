@@ -15,6 +15,13 @@ class Course extends Model implements TranslatableContract
     const DOCUMENT = 3;
     use Translatable, SoftDeletes;
 
+
+    const COURSE_TYPE = [
+        self::LIVE => 'Live Course',
+        self::RECORD => 'Record Video',
+        self::DOCUMENT => 'Document'
+    ];
+
     protected $table = 'courses';
     protected $guarded = [];
     public array $translatedAttributes = ['course_name', 'course_description'];
@@ -51,12 +58,12 @@ class Course extends Model implements TranslatableContract
 
     public function likeable()
     {
-        return $this->morphMany(UserLike::class,'likeable');
+        return $this->morphMany(UserLike::class, 'likeable');
     }
 
     public function comment()
     {
-        return $this->morphMany(UserComment::class,'commentable');
+        return $this->morphMany(UserComment::class, 'commentable');
     }
 
     public function lecture()
@@ -68,7 +75,7 @@ class Course extends Model implements TranslatableContract
     {
         return $this->hasMany(Rating::class, 'ratingable_id');
     }
-    
+
     public function rooms()
     {
         return $this->hasMany(RoomLiveCourse::class);

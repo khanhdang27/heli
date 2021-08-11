@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -19,7 +20,7 @@ class PaymentController extends Controller
         // pi_1J0rEzLVVZaj9HRisGIsSaBT
         $stripe = new \Stripe\StripeClient(
             config('app.stripe_secret')
-          );
+        );
         $payment_intent = $stripe->paymentIntents->retrieve(
             $request->query('payment_intent'),
             []
@@ -42,7 +43,6 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -53,9 +53,21 @@ class PaymentController extends Controller
      */
     public function addPayment(Request $request)
     {
-        $user = User::find(Auth::user()->id);
-        $payment_method = $user->addPaymentMethod($request->payment_method);
-        return response()->json($payment_method);
+        DB::beginTransaction();
+        try {
+            $user = User::find(Auth::user()->id);
+            $payment_method = $user->addPaymentMethod($request->payment_method);
+
+            $paymentMethods = $user->paymentMethods();
+            $user->card_brand = $paymentMethods[0]->card->brand;
+            $user->card_last_four = $paymentMethods[0]->card->last4;
+            $user->save();
+
+            DB::commit();
+            return response()->json($payment_method);
+        } catch (\Throwable $th) {
+            response()->json(['error_message'=> $th->getMessage()],400);
+        }
     }
 
     /**
@@ -77,7 +89,6 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**

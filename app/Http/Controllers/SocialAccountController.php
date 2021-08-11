@@ -57,13 +57,13 @@ class SocialAccountController extends Controller
                         ]);
                         $newUser_social->save();
                         $stripeCustomer = $newUser->createAsStripeCustomer(['email' => $user->getEmail()]);
-                        if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
-                            NewsletterFacade::subscribe($user->getEmail());
-                        }
+                        // if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
+                        //     NewsletterFacade::subscribe($user->getEmail());
+                        // }
 
-                        if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
-                            NewsletterFacade::subscribe($user->getEmail());
-                        }
+                        // if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
+                        //     NewsletterFacade::subscribe($user->getEmail());
+                        // }
 
                         $send_mail = new SendMail();
                         $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);

@@ -78,7 +78,7 @@
                 <div class="d-flex justify-content-between flex-wrap pt-5 top-video">
                     <h1 class="text-primary">@lang('keywords.continueMyCourse')</h1>
                     <a href="{{ route('site.user.course') }}"
-                        class="m-0 btn-register-now text-white btn-dark-blue btn-dark">
+                        class="m-0 btn btn-outline-primary rounded">
                         <h2 class="mb-0 mt-2">@lang('keywords.otherPurchasedCourses')</h2>
                     </a>
                 </div>

@@ -25,7 +25,7 @@
                     >
                         @csrf
                         <input name="product_id" value="{{$courseDetail->id}}" form="form-room" required hidden>
-                        <button type="submit" class="btn-primary mt-3 btn-register-now product-btn">
+                        <button type="submit" class="btn-primary mt-3 btn-register-now product-btn animate-change-color">
                             <div class="px-3">
                                 @lang('keywords.coursePage.buyNow')
                             </div>
