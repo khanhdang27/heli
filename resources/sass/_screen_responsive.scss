@@ -103,6 +103,9 @@
             margin-right: 0.5rem !important;
         }
     }
+    #btn_next, #btn_prev{
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 576px) {

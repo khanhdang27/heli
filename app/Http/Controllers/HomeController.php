@@ -46,7 +46,7 @@ class HomeController extends Controller
             $course_recommended,
             $course_hot,
             $course_welcomes,
-            $course_latest 
+            $course_latest
         ] = $this->getDuplicateCourseByGroupUser();
 
         [
@@ -59,7 +59,7 @@ class HomeController extends Controller
         [$courseVideo, $latesLecture] = $this->getCourseVideo();
 
         $news = News::query()->orderByDesc('created_at')->limit(15)->get();
-        
+
         return view('home.home-page',[
             'banners' => $banners,
             'courseVideo'=>$courseVideo,
@@ -110,22 +110,22 @@ class HomeController extends Controller
         $courseIGCSE->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
             return $query->where('id', 2);
-        })->limit(4)->get();
-        
+        })->paginate(15);
+
         $courseUKISET->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
             return $query->where('id', 3);
-        })->limit(4)->get();
-        
+        })->paginate(15);
+
         $courseIELTS->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
             return $query->where('id', 4);
-        })->limit(4)->get();
-        
+        })->paginate(15);
+
         $courseIAL->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
             return $query->where('id', 5);
-        })->limit(4)->get();
+        })->paginate(15);
 
         return [
             $courseIGCSE,
@@ -155,7 +155,7 @@ class HomeController extends Controller
         $course_hot = clone $courses_with_group;
         $course_welcomes = clone $courses_with_group;
         $course_latest = clone $courses_with_group;
-        
+
         $course_recommended = $course_recommended->where('recommended', 1)->limit(4)->get();
         $course_hot = $course_hot->where('hot', 1);
         $course_welcomes = $course_welcomes->where('welcomes', 1)->limit(2)->get();
