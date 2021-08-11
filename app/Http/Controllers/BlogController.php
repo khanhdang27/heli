@@ -174,8 +174,14 @@ class BlogController extends Controller
         $blogs = Blog::where('id',$id)->with('tags')->first();
         $blogs->view_no = $blogs->view_no + 1;
         $blogs->save();
+
+        $tag = $blogs->tags->first();
+        $blog_related = Blog::with('tags')->where('id','!=',$blogs->id)->whereHas('tags', function($query) use ($tag){
+            return $query->where('tags.id', $tag->id);
+        })->orderBy('created_at', 'desc')->limit(10)->get();
         return view('blog.blog-view',[
-            'blog'=>$blogs
+            'blog'=>$blogs,
+            'blog_related' => $blog_related
         ]);
     }
     /**

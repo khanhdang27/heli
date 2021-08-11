@@ -1,4 +1,4 @@
-<div class="subscribe-container py-5 text-center btn-above-video">
+<div class="container-fluid subscribe-container py-5 text-center btn-above-video">
     <div class="mt-4 subscribe-title mx-auto text-primary">
         <h1 class="font-weight-bold">
             訂閱我們

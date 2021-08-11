@@ -50,7 +50,9 @@
                 <div class="row">
                     <!--Component Latest Blog List-->
                     @foreach ($blog as $value)
-                        <x-blog.blog-item-latest :blog=$value></x-blog.blog-item-latest>
+                        <div class="col-lg-4 p-4 blog-item-latest-display">
+                            <x-blog.blog-item-latest :blog=$value></x-blog.blog-item-latest>
+                        </div>
                     @endforeach
                 </div>
                 <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">

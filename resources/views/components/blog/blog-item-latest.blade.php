@@ -1,5 +1,5 @@
-<div class="col-lg-4 p-4 blog-item-latest-display">
-    <div class="mt-2 popular-item shadow" id="latest">
+{{--<div class="col-lg-4 p-4 blog-item-latest-display">--}}
+    <div class="mt-2 popular-item shadow animate-up" id="latest">
         <div class="thumb-article d-flex flex-column justify-content-end position-relative">
 
             @if(empty($blog->photo))
@@ -35,4 +35,4 @@
             </div>
         </div>
     </div>
-</div>
+{{--</div>--}}
