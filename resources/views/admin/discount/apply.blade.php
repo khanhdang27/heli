@@ -30,19 +30,19 @@ $array_column = $courseDiscount->toArray();
                             <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>
+                                    <th class="c-10">#</th>
+                                    <th class="c-20 text-overflow-ellipsis">
                                         Name
                                     </th>
-                                    <th>
+                                    <th class="c-20">
                                         <a href="#" class="text-muted">
                                             Price
                                         </a>
                                     </th>
-                                    <th>
+                                    <th class="c-40 text-overflow-ellipsis">
                                         Description
                                     </th>
-                                    <th>
+                                    <th class="c-10">
                                         Discount
                                     </th>
                                 </tr>
@@ -50,19 +50,19 @@ $array_column = $courseDiscount->toArray();
                                 <tbody class="list">
                                 @foreach($courses as $value)
                                     <tr>
-                                        <td>
-                                            {{ Form::checkbox('course_id[]', $value->id, in_array($value->id, array_column($array_column, 'course_id')), ['class'=>'form-control']) }}
+                                        <td class="c-10">
+                                            {{ Form::checkbox('course_id[]', $value->id, in_array($value->id, array_column($array_column['data'], 'course_id'))) }}
                                         </td>
-                                        <td class="goal-project">
+                                        <td class="c-20 text-overflow-ellipsis">
                                             {{ $value->course_name }}
                                         </td>
-                                        <td class="goal-project">
-                                            {{ $value->course_price }}
+                                        <td class="c-20">
+                                            $HK {{ $value->course_price }}
                                         </td>
-                                        <td>
+                                        <td class="c-40 text-overflow-ellipsis">
                                             {{ $value->course_description }}
                                         </td>
-                                        <th>
+                                        <th class="c-10">
                                             {{ Form::number( 'discount_'.$value->id, $courseDiscount->firstWhere('course_id',$value->id)->discount_value ?? null, ['class'=>'form-control']) }}
                                             @error('discount_'.$value->id)
                                                 <div class="alert text-danger">{{ $message }}</div>

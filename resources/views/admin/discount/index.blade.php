@@ -43,7 +43,7 @@
                                     <th>
                                         End Date
                                     </th>
-                                    <th>
+                                    <th class="c-40">
                                         Description
                                     </th>
                                     <th></th>
@@ -61,7 +61,7 @@
                                         <td>
                                             {{$value->end_date}}
                                         </td>
-                                        <td>
+                                        <td class="c-40 text-overflow-ellipsis">
                                             {{$value->description}}
                                         </td>
 

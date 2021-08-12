@@ -70,9 +70,9 @@ use App\Utilities\SelectionByClass;
                                 {{ Form::label('file', 'Material Origin (Simplify Chinese)') }}
                                 {{ Form::text('course_material_origin:sc', old('course_material_origin:sc'),['class' => 'form-control']) }}
                             </div>
-                            <div class="form-group ">
-                                {{ Form::label('file', 'File') }}
-                                {{ Form::file('file', old('file'),['class' => 'form-control']) }}
+                            <div class="custom-file">
+                                <input name="file" type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
@@ -82,4 +82,12 @@ use App\Utilities\SelectionByClass;
             </div>
         </div> <!-- / .row -->
     </div>
+
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 @endsection

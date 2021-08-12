@@ -8,12 +8,10 @@
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-
                                 <!-- Title -->
                                 <h4 class="card-header-title">
                                     Examination
                                 </h4>
-
                             </div>
                             <div class="col-auto">
                                 <!-- Button -->
@@ -28,7 +26,6 @@
                                     </svg>
                                     Add
                                 </a>
-
                             </div>
                         </div> <!-- / .row -->
                     </div>
@@ -51,12 +48,13 @@
                                 <tbody class="list">
                                 @foreach($exams as $value)
                                     <tr>
-                                        <td class="text-description">
+                                        <td>
                                             {{ $value->title }}
                                         </td>
                                         <td class="goal-project">
                                             {{ $value->deadline }}
                                         </td>
+                                        
                                         <td class="goal-project text-right">
                                             <a href="#" class="btn btn-success" data-toggle="modal"
                                                data-target="#modalListSubmissions">
@@ -98,7 +96,7 @@
                                                                 <tbody class="list">
                                                                 @foreach($value->submitExams as $submitItem)
                                                                     <tr class="text-left">
-                                                                        <td class="text-description">
+                                                                        <td>
                                                                             {{$submitItem->student_id}}
                                                                         </td>
                                                                         <td class="goal-project">
@@ -138,7 +136,6 @@
                                                        class="dropdown-item delete-item">
                                                         Delete
                                                     </a>
-
                                                 </div>
                                             </div>
                                         </td>
@@ -154,6 +151,8 @@
             </div>
         </div> <!-- / .row -->
     </div>
+
+    
 @endsection
 
 @push('css')

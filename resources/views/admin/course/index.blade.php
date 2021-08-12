@@ -3,7 +3,7 @@
     <div class="container-fluid mt-5">
         <div class="text-center alert alert-warning alert-dismissible">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            Make sure the <a href="{{ route('admin.tutor.index') }}" class="alert-link"><strong>Tutor</strong></a> already exists before adding the Course!
+            Make sure the <a href="{{ route('admin.user-manager.tutor') }}" class="alert-link"><strong>Tutor</strong></a> already exists before adding the Course!
         </div>
         <div class="row">
             <div class="col-12">
@@ -72,11 +72,11 @@
                                         Name
                                     </th>
                                     <th>
-                                        <a href="#" class="text-muted">
+                                        <a >
                                             Price
                                         </a>
                                     </th>
-                                    <th class="text-description">
+                                    <th>
                                         Description
                                     </th>
                                     <th></th>
@@ -85,13 +85,13 @@
                                 <tbody class="list">
                                 @foreach($courses as $value)
                                     <tr>
-                                        <td class="goal-project text-description">
+                                        <td >
                                             {{ $value->course_name }}
                                         </td>
-                                        <td class="goal-project">
+                                        <td >
                                             {{ $value->course_price }}
                                         </td>
-                                        <td class="text-description">
+                                        <td>
                                             {{ $value->course_description }}
                                         </td>
                                         <td class="text-right">

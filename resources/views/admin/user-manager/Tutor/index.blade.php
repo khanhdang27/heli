@@ -88,7 +88,7 @@
                                         <td class="goal-status align-middle">
                                             @if($value->user->active == 1)
                                                 <a href="{{ route('admin.user-manager.change-status', $value->user->id) }}"
-                                                   class="btn btn-warning py-0">Inactive</a>
+                                                   class="btn btn-danger py-0">Inactive</a>
                                             @else
                                                 <a href="{{ route('admin.user-manager.change-status', $value->user->id) }}"
                                                    class="btn btn-success py-0">Active</a>

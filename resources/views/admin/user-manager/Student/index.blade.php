@@ -34,19 +34,6 @@
                                     Students
                                 </h4>
                             </div>
-{{--                            <div class="col-auto">--}}
-{{--                                <!-- Button -->--}}
-{{--                                <a href="{{ route('admin.tutor.create') }}" class="btn btn-sm btn-success">--}}
-{{--                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor"--}}
-{{--                                         stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"--}}
-{{--                                         class="css-i6dzq1">--}}
-{{--                                        <circle cx="12" cy="12" r="10"></circle>--}}
-{{--                                        <line x1="12" y1="8" x2="12" y2="16"></line>--}}
-{{--                                        <line x1="8" y1="12" x2="16" y2="12"></line>--}}
-{{--                                    </svg>--}}
-{{--                                    Add--}}
-{{--                                </a>--}}
-{{--                            </div>--}}
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
@@ -83,17 +70,23 @@
                                                 <img src="{{asset('images/photo_default.svg')}}" width="75">
                                             @endif
                                         </td>
-                                        <td class="goal-project">
+                                        <td>
                                             {{ $value->full_name }}
                                         </td>
-                                        <td class="goal-status">
+                                        <td>
                                             {{ $value->user->email }}
                                         </td>
-                                        <td class="goal-status">
+                                        <td>
                                             {{ $value->user->membership->name }}
                                         </td>
-                                        <td class="goal-status">
-                                            0
+                                        <td>
+                                            @if($value->user->active == 1)
+                                                <a href="{{ route('admin.user-manager.change-status', $value->user->id) }}"
+                                                    class="btn btn-danger py-0">Inactive</a>
+                                            @else
+                                                <a href="{{ route('admin.user-manager.change-status', $value->user->id) }}"
+                                                    class="btn btn-success py-0">Active</a>
+                                            @endif
                                         </td>
                                         <td class="text-right">
                                             <div class="dropdown">

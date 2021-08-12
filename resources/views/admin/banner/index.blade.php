@@ -55,7 +55,7 @@
                                                 src="{{ asset('/file/'.$value->image)}}"
                                                 width="50px;" height="60px;" alt="">
                                         </td>
-                                        <td class="text-description">
+                                        <td>
                                             {{$value->banner_title}}
                                         </td>
                                         <td class="text-right">

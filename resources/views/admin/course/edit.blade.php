@@ -1,5 +1,8 @@
 @php
     use \App\Utilities\SelectionByClass;
+
+    use App\Models\Subject;
+    use App\Models\Course;
 @endphp
 
 @extends('admin.layout')

@@ -1,28 +1,53 @@
 .table {
-    width: 100% !important;
-    .text-description {
-        max-width: 300px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
+    width: 100%;
+    table-layout: fixed;
+
+
+    .c-10{
+        width: 10%;
     }
-    @media (max-width: 768px) {
-        .text-description {
-            max-width: 100px;
-        }
+    .c-20{
+        width: 20%;
     }
+    .c-30{
+        width: 30%;
+    }
+    .c-40{
+        width: 40%;
+    }
+    .c-50{
+        width: 50%;
+    }
+    .c-60{
+        width: 60%;
+    }
+
     thead th {
-        border-bottom: unset !important;
+        border-bottom: unset;
     }
-    .dropdown-item {
-        color: #000000 !important;
-        font-size: .8125rem;
-    }
+    // .dropdown-item {
+    //     color: #000000;
+    //     font-size: .8125rem;
+    // }
 }
 
 .dataTables_scrollBody {
-    border-bottom: unset !important;
+    border-bottom: unset;
 }
 input.check-role{
     transform: scale(1.7);
 }
+
+.text-overflow-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card {
+    overflow: initial;
+    .table-responsive {
+        overflow: inherit;
+    }
+}
+

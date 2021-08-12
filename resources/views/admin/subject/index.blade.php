@@ -45,14 +45,10 @@
                                 <thead>
                                 <tr>
                                     <th>
-                                        <a href="#" class="text-muted ">
-                                            Subject Name
-                                        </a>
+                                        Subject Name
                                     </th>
                                     <th>
-                                        <a href="#" class="text-muted ">
-                                            Certificate
-                                        </a>
+                                        Certificate
                                     </th>
                                     <th>
                                         Background color
@@ -70,7 +66,7 @@
                                             {{ $value->subject_name }}
                                         </td>
                                         <td class="goal-project">
-                                            {{ $value->certificate['certificate_name'] }}
+                                            {{ $value->certificate['certificate_code'] }}
                                         </td>
                                         <td class="goal-progress">
                                             <div

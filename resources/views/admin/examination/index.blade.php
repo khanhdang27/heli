@@ -47,7 +47,7 @@
                                     <th>
                                         Tutor
                                     </th>
-                                    <th class="text-description">
+                                    <th>
                                         Description
                                     </th>
                                     <th></th>
@@ -56,13 +56,13 @@
                                 <tbody class="list">
                                 @foreach($courses as $value)
                                     <tr>
-                                        <td class="text-description">
+                                        <td>
                                             {{ $value->course_name }}
                                         </td>
                                         <td>
                                             {{ $value->tutor->full_name }}
                                         </td>
-                                        <td class="text-description">
+                                        <td>
                                             {{ $value->course_description }}
                                         </td>
                                         <td class="text-right">
