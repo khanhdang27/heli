@@ -36,16 +36,10 @@
                             <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                 <tr>
-                                    <th>
+                                    <th class="c-20">
                                         Name
                                     </th>
-                                    <th>
-                                        Photo
-                                    </th>
-                                    <th>
-                                        File
-                                    </th>
-                                    <th>
+                                    <th class="c-40">
                                         Description
                                     </th>
                                     <th>
@@ -57,19 +51,13 @@
                                 <tbody class="list">
                                 @foreach($courseMaterial as $value)
                                     <tr>
-                                        <td class="goal-project">
+                                        <td class="c-20 text-overflow-ellipsis">
                                             {{ $value->course_material_name }}
                                         </td>
-                                        <td class="goal-project">
-
-                                        </td>
-                                        <td class="goal-project">
-{{--                                            {{ $value->material_file }}--}}
-                                        </td>
-                                        <td class="text-description">
+                                        <td class="c-40 text-overflow-ellipsis">
                                             {{ $value->course_material_description }}
                                         </td>
-                                        <td>
+                                        <td class=" text-overflow-ellipsis">
                                             {{ $value->course_material_origin }}
                                         </td>
                                         <td class="text-right">

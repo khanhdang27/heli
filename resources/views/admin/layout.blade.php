@@ -15,8 +15,6 @@
 
     <link rel='stylesheet' id='flatpickr-style-css'  href='https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css?ver=5.2.4' type='text/css' media='all' />
 
-    <!-- Map -->
-    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet'/>
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('cpanel/assets/css/theme.min.css') }}" id="stylesheetLight">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>

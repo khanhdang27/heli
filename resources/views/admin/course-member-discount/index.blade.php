@@ -34,7 +34,7 @@
                             <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                 <tr>
-                                    <th>
+                                    <th class="c-20">
                                         Course
                                     </th>
                                     <th>
@@ -46,7 +46,7 @@
                                     <th>
                                         Recommend
                                     </th>
-                                    <th>
+                                    <th class="c-30">
                                         Description
                                     </th>
 
@@ -56,7 +56,7 @@
                                 <tbody class="list">
                                 @foreach($courses_priceTag as $value)
                                     <tr>
-                                        <td>
+                                        <td class="c-20 text-overflow-ellipsis">
                                             {{$value->membershipCourses->course->course_name}}
                                         </td>
                                         <td>
@@ -68,7 +68,7 @@
                                         <td>
                                             {{$value->recommended}}
                                         </td>
-                                        <td>
+                                        <td class="c-30 text-overflow-ellipsis">
                                             {{$value->description}}
                                         </td>
                                         <td class="text-right">

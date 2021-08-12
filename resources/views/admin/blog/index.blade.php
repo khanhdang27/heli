@@ -38,7 +38,7 @@
                             <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                 <tr>
-                                    <th>
+                                    <th class="c-30">
                                         Title
                                     </th>
                                     <th>
@@ -56,16 +56,16 @@
                                 <tbody class="list">
                                 @foreach($blogs as $value)
                                     <tr>
-                                        <td class="goal-project text-description">
+                                        <td class="c-30 text-overflow-ellipsis">
                                             {{$value->title}}
                                         </td>
-                                        <td class="goal-project">
+                                        <td >
                                             {{$value->created_at}}
                                         </td>
-                                        <td class="goal-project">
+                                        <td >
                                             {{$value->view_no}}
                                         </td>
-                                        <td class="goal-project">
+                                        <td >
                                             {{$value->created_at}}
                                         </td>
                                         <td class="text-right">

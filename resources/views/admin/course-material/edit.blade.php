@@ -69,9 +69,18 @@
                                 {{ Form::label('course_material_origin:sc', 'Material Origin (Simplify Chinese)') }}
                                 {{ Form::text('course_material_origin:sc', $material->course_material_origin,['class' => 'form-control']) }}
                             </div>
-                            <div class="form-group ">
-                                {{ Form::label('file', 'File') }}
-                                {{ Form::file('file', old('file'),['class' => 'form-control']) }}
+                            <div class="row form-group">
+                                <div class="col-md-6 col-12">
+                                    <div class="custom-file">
+                                        <input name="file" type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    </div>
+                                </div>
+                                @if (!empty($material->file))
+                                <div class="col-md-6">
+                                    <h4 class="form-control">{{$material->file->raw_name}}</h4>
+                                </div>
+                                @endif
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
@@ -82,5 +91,12 @@
             </div>
         </div> <!-- / .row -->
     </div>
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 @endsection
 
