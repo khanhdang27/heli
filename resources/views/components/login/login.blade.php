@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="box-btn-login">
-                            <a class="btn btn-register-now btn-login mb-2 mt-0 mx-auto"
+                            <a class="btn btn-register-now btn-login mb-2 mt-0 mx-auto  animate-change-color"
                                 id="login-fb"
                                href="{{route('site.socialLogin', 'facebook')}}">
                                 <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}" width="33px">
@@ -27,7 +27,7 @@
                                         role="status" aria-hidden="true"></span>
                                     <span class="sr-only">Loading...</span>
                             </a>
-                            <a class="btn btn-register-now btn-login mt-0 mx-auto"
+                            <a class="btn btn-register-now btn-login mt-0 mx-auto  animate-change-color"
                                 id="login-gg"
                                href="{{route('site.socialLogin', 'google')}}"
                                >
@@ -78,8 +78,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="bottom-btn animate-change-color d-flex justify-content-center">
-                            <button class='btn btn-login btn-register-now my-5'
+                        <div class="bottom-btn d-flex justify-content-center">
+                            <button class='btn btn-login btn-register-now my-5 animate-change-color'
                                 id='btn-login' type="submit">
                                 <p class="mb-0">{{__('Login')}}</p>
                                 <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none" role="status"

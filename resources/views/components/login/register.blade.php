@@ -18,9 +18,9 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="box-btn-login animate-change-color">
-                                <a class="btn btn-register-now btn-login mt-0 mb-2 mx-auto" <<<<<<< HEAD
-                                    id="login-fb"=======>>>>>>> blog_detail
+                            <div class="box-btn-login">
+                                <a class="btn btn-register-now btn-login mt-0 mb-2 mx-auto animate-change-color" 
+                                    id="login-fb"
                                     href="{{route('site.socialLogin', 'facebook')}}">
                                     <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
                                             width="33px">
@@ -30,8 +30,8 @@
                                         role="status" aria-hidden="true"></span>
                                     <span class="sr-only">Loading...</span>
                                 </a>
-                                <a class="btn btn-register-now btn-login mt-0 mx-auto" <<<<<<< HEAD
-                                    id="login-gg"=======>>>>>>> blog_detail
+                                <a class="btn btn-register-now btn-login mt-0 mx-auto  animate-change-color"
+                                    id="login-gg"
                                     href="{{route('site.socialLogin', 'google')}}">
                                     <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
                                             width="33px">
@@ -55,14 +55,7 @@
                                                 'autocomplete'=>'off'
                                     ]) }}
                             </div>
-                            <<<<<<< HEAD=======<div class="form-group form-check mt-4 subscribe-check mx-auto">
-                                <input type="checkbox" class="form-check-input check-subscribe" id="subscribe"
-                                    name="subscribe">
-                                <label class="form-check-label h5 pt-1 text-white ml-3" for="subscribe">
-                                    {{__('Subscribe to our Newsletter')}}
-                                </label>
-                        </div>
-                        >>>>>>> blog_detail
+                            
                         <div class="bottom-btn mt-5 d-flex justify-content-center">
                             <button class='btn-login btn-register-now mt-0' id='btn-register'>
                                 {{__('Register')}}
