@@ -75,14 +75,28 @@
                         <h6>{{ $course_card->subject->subject_name }}</h6>
                     </div>
                     <a class="product-hover my-auto ml-auto" href="{{URL::route('site.course.show',$course_card->id)}}">
-                        @if($course->getDiscount() > 0)
-                            <h4 class="font-weight-bold text-danger">
-                                HK$ {{$course->getPrice()}} / @lang('keywords.course-item.section')<strong> ﹥ </strong>
-                            </h4>
+                        @if($typeOfUI != 'welcome' && $typeOfUI != 'lasted' && $typeOfUI != 'recommended')
+                            @if($course->getDiscount() > 0)
+                                <h4 class="font-weight-bold text-danger">
+                                    HK$ {{$course->getPriceDiscount()}} / @lang('keywords.course-item.section')<strong>
+                                        ﹥ </strong>
+                                </h4>
+                            @else
+                                <h4 class="font-weight-bold">
+                                    HK${{$course->getPrice()}}/@lang('keywords.course-item.section')
+                                    <strong>﹥</strong>
+                                </h4>
+                            @endif
                         @else
-                            <h4 class="font-weight-bold">
-                                HK${{$course->getPriceDiscount()}}/@lang('keywords.course-item.section')<strong>﹥</strong>
-                            </h4>
+                            @if($course->getDiscount() > 0)
+                                <h4 class="font-weight-bold text-danger">
+                                    HK$ {{$course->getPriceDiscount()}}<strong> ﹥ </strong>
+                                </h4>
+                            @else
+                                <h4 class="font-weight-bold">
+                                    HK${{$course->getPrice()}}<strong>﹥</strong>
+                                </h4>
+                            @endif
                         @endif
                     </a>
                 </div>

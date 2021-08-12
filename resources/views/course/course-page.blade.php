@@ -17,7 +17,7 @@
 @section('content')
     {{-- <x-sub-header :subjects=$subjects></x-sub-header>  --}}
     <hr class="m-0">
-    <div class="body-content container-fluid">
+    <div class="body-content container-fluid p-0">
         @if ( $course->type == Course::LIVE )
             <x-product-detail.course-card-page :course=$course
                                                :studentCourse=$student_course></x-product-detail.course-card-page>
@@ -29,7 +29,7 @@
             </div>
         @endif
         <div class="container-fluid show-video">
-            <div class="row container-fluid p-0 flex-column-reverse flex-md-row">
+            <div class="row p-0 flex-column-reverse flex-md-row">
                 @if($course->type == Course::DOCUMENT)
                     <div class="col-xl-8 bg-white">
                         @foreach($course->courseMaterial as $value)
@@ -58,32 +58,32 @@
                         <ul class="nav nav-pills" role="tablist">
                             <li class="nav-item ">
                                 <a class="nav-link active category-link-text" data-toggle="pill" href="#home">
-                                    <h1>
+                                    <h2 class="font-weight-bold">
                                         @lang('keywords.coursePage.courseOverview')
-                                    </h1>
+                                    </h2>
                                 </a>
                             </li>
                             @if ( $course->type == Course::LIVE )
                                 <li class="nav-item">
                                     <a class="nav-link category-link-text" data-toggle="pill" href="#menu1">
-                                        <h1>
+                                        <h2 class="font-weight-bold">
                                             @lang('keywords.coursePage.courseFrequency')
-                                        </h1>
+                                        </h2>
                                     </a>
                                 </li>
                             @endif
                             <li class="nav-item">
                                 <a class="nav-link category-link-text" data-toggle="pill" href="#menu2">
-                                    <h1>
+                                    <h2 class="font-weight-bold">
                                         @lang('keywords.coursePage.mentorIntroduction')
-                                    </h1>
+                                    </h2>
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link category-link-text" data-toggle="pill" href="#menu3">
-                                    <h1>
+                                    <h2 class="font-weight-bold">
                                         @lang('keywords.coursePage.studentEvaluation')
-                                    </h1>
+                                    </h2>
                                 </a>
                             </li>
                         </ul>

@@ -514,6 +514,11 @@ input.check-subscribe {
         }
     }
 }
+.course-card-page{
+    .content-product{
+        height: 300px;
+    }
+}
 .btn-next:after{
     content: none !important;
 }
@@ -805,11 +810,11 @@ input.check-subscribe {
 }
 
 .content-info {
-    font-size: 16pt;
+    font-size: 12.5pt;
 }
 
 .text-intro {
-    font-size: 16pt;
+    font-size: 14pt;
 }
 
 .bottom-package {

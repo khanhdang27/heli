@@ -20,24 +20,20 @@
             <a class="question h3 text-primary font-weight-bold" href="{{ route('site.post.show', $post->id)}}">
                 {{$post->title}}
             </a>
-            <h5 class="mb-0">{{$post->content}}</h5>
+            <h5 class="mb-0 text-primary">{{$post->content}}</h5>
             <div class="py-3">
                 @if($post->image!=null)
                     <img class="img-question border" src="{{asset('/file/'.$post->image->id)}}">
                 @endif
             </div>
-            <div class="text-forum">
-                <span class="mr-3">
+            <div class="text-forum d-flex align-items-center">
+                <button class="border-0 bg-white mr-3">
                     <img class="ic-action" src="{{asset("images/ic/ic_bookmark.svg")}}">
-                </span>
-                <span>
-                    <x-like.like :likeRef=$post :likeModule=\App\Models\Post::class></x-like.like>
-                </span>
-                <a class="ml-3" href="{{ route('site.post.show', $post->id)}}">
+                </button>
+                <x-like.like :likeRef=$post :likeModule=\App\Models\Post::class></x-like.like>
+                <a class="ml-3 h4 mb-0" href="{{ route('site.post.show', $post->id)}}">
                     <img class="ic-action" src="{{asset("images/ic/ic_mess.svg")}}">
-                    <span class="h2 text-primary">
-                        {{$post->comment_no}}
-                    </span>
+                    {{$post->comment_no}}
                 </a>
             </div>
         </div>

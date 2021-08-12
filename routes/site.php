@@ -43,6 +43,7 @@ Route::get('view-blog/{id}', 'BlogController@viewBlog')->name('view-blog');
 Route::get('forumAnswer', function () {
     return view('forum.post-view');
 })->name('forumAnswers');
+Route::post('subscribe', 'UserSubscribeController@addSubscribe')->name('subscribe');
 
 Route::middleware('auth')->group(function () {
 

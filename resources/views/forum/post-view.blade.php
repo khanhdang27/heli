@@ -37,10 +37,10 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <p class="question h2 text-primary">
+                    <p class="question h3 text-primary font-weight-bold">
                         {{ $post->title }}
                     </p>
-                    <p class="question h5">
+                    <p class="question h5 text-primary">
                         {{ $post->content }}
                     </p>
                     <div class="py-3 ">
@@ -48,16 +48,15 @@
                             <img class="img-question border border-radius" src="{{ asset('/file/' . $post->image->id) }}">
                         @endif
                     </div>
-                    <div class="text-forum d-flex">
-                        <span><img class="ic-action " src="{{ asset('images/ic/ic_bookmark.svg') }}"></span>
-
+                    <div class="text-forum d-flex align-items-center">
+                        <button class="border-0 bg-white mr-3">
+                            <img class="ic-action" src="{{asset("images/ic/ic_bookmark.svg")}}">
+                        </button>
                         <x-like.like :likeRef=$post :likeModule=\App\Models\Post::class></x-like.like>
-                        <span>
+                        <a class="ml-3 h4 mb-0 btn">
                             <img class="ic-action ml-5" src="{{ asset('images/ic/ic_mess.svg') }}">
-                            <span class="h2 text-primary">
-                                {{ $post->comment_no }}
-                            </span>
-                        </span>
+                            {{ $post->comment_no }}
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-3 d-flex flex-column justify-content-between align-items-end">

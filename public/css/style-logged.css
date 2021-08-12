@@ -64,25 +64,8 @@
     border: 3px solid;
 }
 
-.product-btn {
-    font-size: 21pt;
-    padding: 0.5rem 0 !important;
-}
-
 .share-bar {
     margin-top: 2rem;
-}
-
-.tab-item-content {
-    max-width: 846px;
-}
-
-.content-info {
-    font-size: 16pt;
-}
-
-.text-intro {
-    font-size: 16pt;
 }
 
 .bottom-package {

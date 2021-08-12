@@ -36,7 +36,7 @@
         @endif
     </div>
     <div class="body-content">
-        <div class="container-fluid container-home">
+        <div class="container-fluid container-home mt-5">
             <div class="row">
                 <div class="col-lg-5 col-12">
                     <h2 class="text-primary">

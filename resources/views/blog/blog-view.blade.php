@@ -15,8 +15,8 @@ use App\Utilities\SelectionByClass;
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
                 <button class="btn btn-outline-primary" onclick="window.history.back()">
-                    << {{__('Back')}} 
-                </button> 
+                    << {{__('Back')}}
+                </button>
                 <div class="pt-5 text-primary">
                     <p class="h1">{{$blog->title}}</p>
                     <div class="d-flex h5 my-5 align-items-center">
@@ -34,12 +34,12 @@ use App\Utilities\SelectionByClass;
                         </div>
                     </div>
                 </div>
-                <div class="text-dark mt-3 h5 text-justify w-75 mx-auto">
+                <div class="text-dark mt-3 h5 text-justify">
                     {!! $blog->content !!}
                 </div>
                 <div class="w-100">
                     @if(!empty($blog->photo))
-                    <img class="img-thumbnail border p-0 w-80 mx-auto d-block" src="{{asset('file/'.$blog->photo->id)}}">
+                    <img class="img-thumbnail border p-0 mx-auto d-block" src="{{asset('file/'.$blog->photo->id)}}">
                     @endif
                 </div>
                 <div class="mt-5">

@@ -35,34 +35,39 @@
 @endphp
 
 <div class="container-fluid show-video py-5">
-    <div class="bg-white mt-3">
-        <div class="mb-3 text-primary">
-            <div class="h2 m-0">{{ $courseDetail->course_description }}</div>
-
-{{--            <div class="h2 m-0">{{ $courseDetail->lecture->first(function($item) use ($lecture_default) {--}}
-{{--                return $item->id == $lecture_default->id;--}}
-{{--            })->lectures_name }}</div>--}}
-        </div>
-        <p class="h2 text-primary">{{ $courseDetail->tutor->full_name }}</p>
-        <div class="d-flex flex-sm-wrap top-course-detail justify-content-between mb-5">
-            <div class="d-flex align-items-center text-primary">
-                @php
-                    $rate = (int)floor($courseDetail->rating_average);
-                @endphp
-                @for ($i = 0; $i < $rate; $i++)
-                    <img src="{{ asset('images/ic/ic_star.svg') }}" width="35">
-                @endfor
-                @for ($i = 0; $i < 5-$rate; $i++)
-                    <img src="{{ asset('images/ic/ic_star_border.svg') }}" width="35">
-                @endfor
-                <h4 class="mb-0 ml-3">{{$courseDetail->rating_average}}/5</h4>
+    <div class="row">
+        <div class="bg-white col-lg-8">
+            <div class="text-primary d-flex">
+                <div class="h2 mb-0 mr-3">{{ $courseDetail->course_description }}</div>
+                <div class="mt-auto">
+                    @if (Auth::check())
+                        <x-like.like :likeRef=$courseDetail :likeModule=\App\Models\Course::class></x-like.like>
+                    @endif
+                </div>
+                {{--            <div class="h2 m-0">{{ $courseDetail->lecture->first(function($item) use ($lecture_default) {--}}
+                {{--                return $item->id == $lecture_default->id;--}}
+                {{--            })->lectures_name }}</div>--}}
             </div>
-            @if (Auth::check())
-                <x-like.like :likeRef=$courseDetail :likeModule=\App\Models\Course::class></x-like.like>
-            @endif
+            <p class="h5 mt-5 text-primary">{{ $courseDetail->tutor->full_name }}</p>
+            <div class="d-flex flex-sm-wrap top-course-detail justify-content-between mb-5">
+                <div class="d-flex align-items-center text-primary">
+                    @php
+                        $rate = (int)floor($courseDetail->rating_average);
+                    @endphp
+                    @for ($i = 0; $i < $rate; $i++)
+                        <img src="{{ asset('images/ic/ic_star.svg') }}" width="29">
+                    @endfor
+                    @for ($i = 0; $i < 5-$rate; $i++)
+                        <img src="{{ asset('images/ic/ic_star_border.svg') }}" width="29">
+                    @endfor
+                    <h5 class="mb-0 ml-3">{{$courseDetail->rating_average}}/5</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+
         </div>
     </div>
-
     <div class="row mb-4" id="video-lecture">
         <div class="col-lg-8 bg-white">
             <div class="embed-responsive embed-responsive-16by9">

@@ -1,13 +1,13 @@
 {{--{{dd($comment->comment)}}--}}
 @foreach($comment->comment as $item)
 <div class="">
-    <div class="row row-question pt-5 pb-5 border-secondary">
+    <div class="row row-question pt-5 pb-5 border-primary">
         <div class="col-xl-3">
             <div class="d-flex flex-wrap text-primary">
                 @if(empty($item->user->avatar))
-                    <img class="mb-3 border border-secondary" src="{{asset("images/photo_default.svg")}}" width="98" height="98">
+                    <img class="mb-3" src="{{asset("images/photo_default.svg")}}" width="98" height="98">
                 @else
-                    <img class="mb-3 border border-secondary" src="{{asset('/file/'.$item->user->avatar->id)}}" width="98" height="98">
+                    <img class="mb-3" src="{{asset('/file/'.$item->user->avatar->id)}}" width="98" height="98">
                 @endif
                 <div class="pl-3 pt-2">
                     <p class="text-comment">{{$item->user->name}}</p>
@@ -21,7 +21,7 @@
             </p>
             <div class="py-3">
                 @if($item->image!=null)
-                    <img class="img-question border" src="{{asset('/file/'.$item->image->id)}}">
+                    <img class="img-question border w-100" src="{{asset('/file/'.$item->image->id)}}">
                 @endif
             </div>
             <div class="text-forum d-flex">

@@ -18,13 +18,13 @@ $liked = empty($user_liked) ? 0 : $user_liked->like_style;
 $component = explode('\\',$likeModule)[2];
 
 @endphp
-<button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-1 border-0 bg-white text-primary" v-on:click="clicklike">
+<button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-1 border-0 bg-white text-primary h4 mb-0" v-on:click="clicklike">
     <img class="ic-action"
          id="like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}"
          src="{{ $liked == 0 ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}} ">
 
         @if($likeModule == Post::class || $likeModule== UserComment::class)
-            <span class="h2 " id="{{$component}}_like_no_{{$likeRef->id}}" >{{$likeRef->like_no}}</span>
+        {{$likeRef->like_no}}
         @endif
 </button>
 
