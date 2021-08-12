@@ -176,12 +176,9 @@ class BlogController extends Controller
         $blogs->save();
 
         $tags = $blogs->tags;
+        
         $blog_related = Blog::with('tags')->where('id','!=',$blogs->id)->whereHas('tags', function($query) use ($tags){
-            $query->orWhere(function($_query) use ($tags) {
-                foreach ($tags as $tag) {
-                    $_query->where('tags.id', $tag->id);
-                }}
-            );
+            $query->whereIn('tags.id', array_column($tags->toArray(),'id'));
         })->orderBy('created_at', 'desc')->limit(10)->get();
         return view('blog.blog-view',[
             'blog'=>$blogs,

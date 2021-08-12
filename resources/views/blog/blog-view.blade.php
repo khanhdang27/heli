@@ -10,7 +10,7 @@ use App\Utilities\SelectionByClass;
     <div class="container-fluid text-center top-news-page">
         @lang('keywords.blog-page.learningColumn')
     </div>
-    <div class="pb-5 container-fluid bg-white pt-3">
+    <div class="pb-5 container bg-white pt-3">
         <div class="row">
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
@@ -42,20 +42,21 @@ use App\Utilities\SelectionByClass;
                     <img class="img-thumbnail border p-0 mx-auto d-block" src="{{asset('file/'.$blog->photo->id)}}">
                     @endif
                 </div>
-                <div class="mt-5">
-                    <h3 class="text-primary font-weight-bold">{{__('RELATED')}}</h3>
-                    <div class="swiper-container mb-5" id="swiper_blog_related">
-                        <div class="swiper-wrapper">
-                            @foreach($blog_related as $item)
-                            <div class="swiper-slide">
-                                <x-blog.blog-item-latest :blog=$item></x-blog.blog-item-latest>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         <div class="col-lg-1"></div>
+    </div>
+    <div class="mt-5">
+        <h3 class="text-primary font-weight-bold">{{__('RELATED')}}</h3>
+        <div class="swiper-container mb-5" id="swiper_blog_related">
+            <div class="swiper-wrapper">
+                @foreach($blog_related as $item)
+                <div class="swiper-slide">
+                    <x-blog.blog-item-latest :blog=$item></x-blog.blog-item-latest>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 </div>
 <x-subscribe-container></x-subscribe-container>
