@@ -47,7 +47,7 @@
         </li>
     </ul>
     <!-- Tab panes -->
-    <h2 class="text-primary text-primary mt-5 mb-3" id="tab-title">
+    <h2 class="text-primary font-weight-bold mt-5 mb-3" id="tab-title">
         @lang('keywords.hotCourseSeries')
     </h2>
     <div class="tab-content">

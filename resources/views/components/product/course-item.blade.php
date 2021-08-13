@@ -40,7 +40,7 @@
                                 Document
                             @endif
                         </div>
-                        <div class="box-content-bot py-4 px-5 w-100">
+                        <div class="box-content-bot p-4 w-100">
                             <div class="content-bot" title="{{$course_card->course_name}}">
                                 {{$course_card->course_name}}
                             </div>
@@ -53,9 +53,7 @@
                     <div class="card-name-product d-flex justify-content-between p-4">
                         <div class="name-product w-75 text-primary">
                             <div class="text-multiline-truncate">
-                                <p>
-                                    {{rtrim(mb_substr($course_card->course_description,0,100))}}
-                                </p>
+                                {{rtrim(mb_substr($course_card->course_description,0,100))}}
                             </div>
                             <div class="pt-3 align-bottom">
                                 @if($course_card->type != Course::DOCUMENT)
@@ -70,31 +68,29 @@
                         </div>
                     </div>
                 @endif
-                <div class="d-flex">
-                    <div class="title-product bg-primary text-white my-auto">
+                <div class="d-flex justify-content-between">
+                    <div class="title-product bg-primary text-white mt-auto">
                         <h6>{{ $course_card->subject->subject_name }}</h6>
                     </div>
-                    <a class="product-hover my-auto ml-auto" href="{{URL::route('site.course.show',$course_card->id)}}">
+                    <a class="product-hover my-auto" href="{{URL::route('site.course.show',$course_card->id)}}">
                         @if($typeOfUI != 'welcome' && $typeOfUI != 'lasted' && $typeOfUI != 'recommended')
                             @if($course->getDiscount() > 0)
                                 <h4 class="font-weight-bold text-danger">
-                                    HK$ {{$course->getPriceDiscount()}} / @lang('keywords.course-item.section')<strong>
-                                        ﹥ </strong>
+                                    HK${{$course->getPriceDiscount()}}/@lang('keywords.course-item.section')﹥
                                 </h4>
                             @else
                                 <h4 class="font-weight-bold">
-                                    HK${{$course->getPrice()}}/@lang('keywords.course-item.section')
-                                    <strong>﹥</strong>
+                                    HK${{$course->getPrice()}}/@lang('keywords.course-item.section')﹥
                                 </h4>
                             @endif
                         @else
                             @if($course->getDiscount() > 0)
                                 <h4 class="font-weight-bold text-danger">
-                                    HK$ {{$course->getPriceDiscount()}}<strong> ﹥ </strong>
+                                    HK${{$course->getPriceDiscount()}}﹥
                                 </h4>
                             @else
                                 <h4 class="font-weight-bold">
-                                    HK${{$course->getPrice()}}<strong>﹥</strong>
+                                    HK${{$course->getPrice()}}﹥
                                 </h4>
                             @endif
                         @endif
