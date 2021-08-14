@@ -20,9 +20,8 @@ class CourseMaterialController extends Controller
      */
     public function index()
     {
-        $course = Course::all();
         $courseMaterial = CourseMaterial::query()
-            ->with('translations')
+            ->with('translations', 'course', 'course.tutor')
             ->latest()
             ->when(request('name') != '', function (Builder $query) {
                 $query->whereTranslationLike('course_material_name', '%' . request('name') . '%');
@@ -30,7 +29,6 @@ class CourseMaterialController extends Controller
             ->paginate(15);
         return view('admin.course-material.index', [
             'courseMaterial' => $courseMaterial,
-            'course' => $course
         ]);
     }
 

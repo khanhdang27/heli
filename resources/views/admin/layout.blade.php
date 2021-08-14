@@ -38,7 +38,7 @@
     @if ($alertFm = Session::get('errors'))
         <div class="alert text-center alert-danger alert-block">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>{{ $alertFm }}</strong>
+            {!! $alertFm !!}
         </div>
     @endif
 
