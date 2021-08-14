@@ -29,11 +29,15 @@ class DatabaseSeeder extends Seeder
             'tutor-edit',
             'tutor-delete',
 
+            'moderator-list',
+            'moderator-create',
+            'moderator-edit',
+            'moderator-delete',
+
             'student-list',
             'student-create',
             'student-edit',
             'student-delete',
-            'student-bought',
 
             'news-list',
             'news-create',
@@ -49,11 +53,6 @@ class DatabaseSeeder extends Seeder
             'document-create',
             'document-edit',
             'document-delete',
-
-            'video-list',
-            'video-create',
-            'video-edit',
-            'video-delete',
 
             'course-list',
             'course-create',
@@ -74,8 +73,37 @@ class DatabaseSeeder extends Seeder
             'forum_post-create',
             'forum_post-edit',
             'forum_post-delete',
-            'forum_post-pin',
-            'forum_post-block',
+
+            'study_session-list',
+            'study_session-create',
+            'study_session-edit',
+            'study_session-delete',
+
+            'subscribe-list',
+            'subscribe-create',
+            'subscribe-edit',
+            'subscribe-delete',
+            
+            'examination-list',
+            'examination-create',
+            'examination-edit',
+            'examination-delete',
+            
+            'membership-list',
+            'membership-create',
+            'membership-edit',
+            'membership-delete',
+            
+            'price-list',
+            'price-create',
+            'price-edit',
+            'price-delete',
+            
+            'discount-list',
+            'discount-create',
+            'discount-edit',
+            'discount-delete',
+
         ];
 
         foreach ($permissions as $permission) {

@@ -93,6 +93,16 @@ class User extends Authenticatable
         return $this->hasOne(Student::class);
     }
 
+    public function tutor()
+    {
+        return $this->hasOne(Tutor::class);
+    }
+
+    public function moderator()
+    {
+        return $this->hasOne(Moderator::class);
+    }
+
     public function student_courses () {
         if ($this->hasRole('student')){
             return $this->hasMany(StudentCourses::class, 'student_id');

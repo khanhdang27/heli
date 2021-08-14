@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Moderator\CreateModeratorRequest;
 use App\Http\Requests\Moderator\UpdateModeratorRequest;
+use App\Models\File;
 use App\Models\Moderator;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -88,9 +89,9 @@ class ModeratorController extends Controller
      */
     public function edit(Moderator $moderator)
     {
-        $moderators = $moderator::with('user')->first();
+        $moderator = $moderator->load('user');
         return view('admin.moderator.edit', [
-            'moderator' => $moderators
+            'moderator' => $moderator
         ]);
     }
 
@@ -110,12 +111,18 @@ class ModeratorController extends Controller
                 $user = User::where('id', $moderator->user_id)->first();
                 $user->update([
                     'name' => $requestModerator['name'],
-                    'email' => $requestModerator['email'],
                 ]);
                 $moderator->update([
                     'full_name' => $requestModerator['full_name'],
                     'phone' => $requestModerator['phone'],
                 ]);
+                if (!empty($request['photo'])) {
+                    $file = File::storeFile(
+                        $request['photo'],
+                        User::class,
+                        $user->id,
+                    );
+                }
                 DB::commit();
                 return back()->with('success', 'Save success');
             }

@@ -29,7 +29,6 @@ class UpdateModeratorRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required',
             'full_name' => 'required',
             'phone' => 'required'
         ];

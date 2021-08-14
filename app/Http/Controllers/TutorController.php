@@ -87,7 +87,9 @@ class TutorController extends Controller
                 "email" => $_request["email"],
                 "password" => $_request["password"]
             ]);
+            $_user->assignRole('tutor');
             $_user->save();
+            
             if (!empty($request['photo'])) {
                 $file = File::storeFile(
                     $request['photo'],

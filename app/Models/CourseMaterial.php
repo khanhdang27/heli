@@ -55,4 +55,9 @@ class CourseMaterial extends Model implements TranslatableContract
         return $this->morphOne(File::class, 'fileable');
     }
 
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
 }

@@ -39,6 +39,8 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::resource('banner', 'BannerController');
 
+    Route::get('profile-tutor', 'UserController@tutorProfile')->name('tutorProfile');
+    Route::get('profile-moderator', 'UserController@tutorModerator')->name('tutorModerator');
     Route::resource('user', 'UserController');
 
     Route::resource('tag', 'TagController');
@@ -82,4 +84,5 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('examination', 'ExaminationController');
     Route::get('manage-examination/index/{id}', 'ExaminationController@manageExamination')->name('manage-examination');
     Route::get('manage-examination/create/{id}', 'ExaminationController@addExamination')->name('manage-examination.create');
+
 });

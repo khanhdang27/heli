@@ -9,35 +9,8 @@
 
         <!-- Brand -->
         <a class="navbar-brand " href="{{ route('admin.dashboard') }}">
-            <img src="{{ asset('images/HeliosLogo.svg') }}" class="navbar-brand-img mx-auto bg-white border rounded" alt="...">
+            <img src="{{ asset('images/HeliosLogo.svg') }}" class="navbar-brand-img mx-auto p-2 bg-white border rounded" alt="...">
         </a>
-
-        <!-- User (xs) -->
-        <div class="navbar-user d-md-none">
-
-            <!-- Dropdown -->
-            <div class="dropdown">
-
-                <!-- Toggle -->
-                <a href="#" id="sidebarIcon" class="dropdown-toggle" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <div class="avatar avatar-sm avatar-online">
-                        <img src="{{ asset("cpanel/assets/img/avatars/profiles/avatar-1.jpg") }}"
-                             class="avatar-img rounded-circle"
-                             alt="...">
-                    </div>
-                </a>
-                <!-- Menu -->
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="sidebarIcon">
-                    <a href="profile-posts.html" class="dropdown-item">Profile</a>
-                    <a href="settings.html" class="dropdown-item">Settings</a>
-                    <hr class="dropdown-divider">
-                    <a href="sign-in.html" class="dropdown-item">Logout</a>
-                </div>
-
-            </div>
-
-        </div>
 
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="sidebarCollapse">
@@ -62,7 +35,6 @@
                         <i class="fe fe-home"></i> Dashboards
                     </a>
                 </li> --}}
-                @role('super-admin|moderator')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.certificate.index') active @endif"
                        href="{{ route('admin.certificate.index') }}">
@@ -76,7 +48,6 @@
                     </a>
                 </li>
                 
-                @endrole
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.course.index') active @endif"
                        href="{{ route('admin.course.index') }}">
@@ -84,12 +55,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.material.index') active @endif"
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.course-material.index') active @endif"
                        href="{{ route('admin.course-material.index') }}">
                         <i class="fe fe-clipboard"></i> Materials
                     </a>
                 </li>
-                @role('super-admin|moderator')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.banner.index') active @endif"
                        href="{{ route('admin.banner.index') }}">
@@ -115,16 +85,6 @@
                         <i class="fe fe-clipboard"></i> News
                     </a>
                 </li>
-                @endrole
-                @role(['super-admin'])
-                <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.roles.index') active @endif"
-                       href="{{ route('admin.roles.index') }}">
-                        <i class="fe fe-clipboard"></i> Roles
-                    </a>
-                </li>
-                @endrole
-                @role('super-admin|moderator')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.discount.index') active @endif"
                        href="{{ route('admin.discount.index') }}">
@@ -143,8 +103,16 @@
                         <i class="fe fe-clipboard"></i> Membership
                     </a>
                 </li>
-                @endrole
-                @role(['super-admin'])
+                <li class="nav-item">
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.examination.index') active @endif"
+                       href="{{ route('admin.examination.index') }}">
+                        <i class="fe fe-clipboard"></i> Examinations
+                    </a>
+                </li>
+                
+                <!-- Divider -->
+                <hr class="navbar-divider border border-secondary w-75 my-1">
+
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#collapseUserManager" role="button"
                        aria-expanded="false" aria-controls="collapseUserManager">
@@ -152,48 +120,49 @@
                     </a>
                     <div class="collapse" id="collapseUserManager">
                         <ul class="nav nav-sm flex-column">
+                            @can('student-list')
                             <li class="nav-item">
                                 <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.student') active @endif"
                                    href="{{ route('admin.user-manager.student') }}">Student</a>
                             </li>
+                            @endcan
+                            @can('student-list')
                             <li class="nav-item">
                                 <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.tutor') active @endif"
                                    href="{{ route('admin.user-manager.tutor') }}">Tutor</a>
                             </li>
+                            @endcan
+                            @can('student-list')
                             <li class="nav-item">
                                 <a class="nav-link @if(request()->route()->getName() == 'admin.user-manager.moderator') active @endif"
                                    href="{{ route('admin.user-manager.moderator') }}">Moderator</a>
                             </li>
+                            @endcan
                         </ul>
                     </div>
                 </li>
-                @endrole
-                
-                @role(['super-admin'])
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.user-subscribe') active @endif"
                        href="{{ route('admin.user-subscribe') }}">
                         <i class="fe fe-clipboard"></i> User Subscribe
                     </a>
                 </li>
-                @endrole
-                @role(['super-admin'])
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.study-session.index') active @endif"
                        href="{{ route('admin.study-session.index') }}">
                         <i class="fe fe-clipboard"></i> Study Session
                     </a>
                 </li>
-                @endrole
+                @role(['super-admin'])
                 <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.examination.index') active @endif"
-                       href="{{ route('admin.examination.index') }}">
-                        <i class="fe fe-clipboard"></i> Examinations
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.roles.index') active @endif"
+                       href="{{ route('admin.roles.index') }}">
+                        <i class="fe fe-clipboard"></i> Roles
                     </a>
                 </li>
+                @endrole
+                
             </ul>
-            <!-- Divider -->
-            <hr class="navbar-divider my-3">
             <div class="mt-auto"></div>
         </div>
         <!-- / .navbar-collapse -->

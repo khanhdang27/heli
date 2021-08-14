@@ -38,10 +38,6 @@
                                         {{ Form::label('full_name', 'Full name') }}
                                         {{ Form::text('full_name', $tutor->full_name, ['class' => 'form-control']) }}
                                     </div>
-                                    {{--                                <div class="form-group ">--}}
-                                    {{--                                    {{ Form::label('active', 'Active') }}--}}
-                                    {{--                                    {{ Form::select('active', [false => 'Inactive', true => 'Active'], $tutor->user->active, ['class' => 'form-control']) }}--}}
-                                    {{--                                </div>--}}
                                     <div class="form-group ">
                                         {{ Form::label('subject_id', 'Subject') }}
                                         {{ Form::select('subject_id',
@@ -64,6 +60,9 @@
                                         @if(empty($tutor->user->avatar))
                                             <div id="preview" class="mb-4">
                                                 <img v-if="url" :src="url" width=100%/>
+                                            </div>
+                                            <div id="preview_file_already">
+                                                <img src="{{asset('/images/user_default.png')}}" width=100%/>
                                             </div>
                                         @else
                                             <div id="preview" class="mb-4" style="display: none">
@@ -139,6 +138,26 @@
                             </div>
                             {{ Form::submit('Save', ['class' => 'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
+
+                            @if (Auth::user()->id == $tutor->user_id)
+                                {!! Form::open(['url' => URL::route('site.userUpdatePassword', Auth::user()->id),'method'=>'post' ]) !!}
+                                @csrf
+                                <div class="border rounded p-4 mt-3">
+                                    <h3>Update Password</h3><hr>
+                                    <div class="form-group ">
+                                        {{ Form::label('old_password', 'Old Password') }}
+                                        {{ Form::password('old_password', ['class' => 'form-control']) }}
+                                    </div>
+                                    <div class="form-group ">
+                                        {{ Form::label('password', 'New Password') }}
+                                        {{ Form::password('password', ['class' => 'form-control']) }}
+                                    </div>
+                                    
+                                </div>
+                                {{ Form::submit('Save', ['class' => 'btn btn-primary mt-5']) }}
+                                {!! Form::close() !!}
+                            @endif
+                            
                         </div>
                     </div>
                 </div>

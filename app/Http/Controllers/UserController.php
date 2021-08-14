@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\CreateUserRequest;
+use App\Models\Moderator;
 use App\Models\Student;
+use App\Models\Tutor;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -101,5 +105,27 @@ class UserController extends Controller
                 'message' => 'Cannot delete course'
             ], 400);
         }
+    }
+
+    public function tutorProfile()
+    {
+        $tutor = Tutor::where('user_id', Auth::user()->id)->first();
+        $tutor->load(['translations', 'user', 'subject']);
+        
+        return view('admin.tutor.edit', 
+            [
+                'tutor' => $tutor,
+            ]
+        );
+    }
+
+    public function tutorModerator()
+    {
+        $moderator = Moderator::where('user_id', Auth::user()->id)->first();
+        $moderator->load(['user']);
+        
+        return view('admin.moderator.edit', [
+            'moderator' => $moderator
+        ]);
     }
 }
