@@ -11547,7 +11547,7 @@ input.check-subscribe {
   font-weight: bold;
   color: var(--primary) !important;
   background-color: #fff !important;
-  border-bottom: 6px solid var(--secondary);
+  border-bottom: 6px solid var(--primary);
 }
 
 .menu-category-text {
@@ -12218,6 +12218,17 @@ input.check-subscribe {
   color: #fad000;
 }
 
+@media screen and (max-width: 1440px) {
+  .product-hover h4 {
+    font-size: 16px;
+  }
+
+  .product-category-padding {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .banner-content {
     height: 600px;
@@ -12239,11 +12250,6 @@ input.check-subscribe {
 
   .free {
     font-size: 25px !important;
-  }
-
-  .product-category-padding {
-    padding-left: 1rem;
-    padding-right: 1rem;
   }
 
   .product-category-row {
@@ -12338,6 +12344,10 @@ input.check-subscribe {
   #btn_next,
   #btn_prev {
     display: none !important;
+  }
+
+  .product-hover h4 {
+    font-size: 20px;
   }
 }
 
