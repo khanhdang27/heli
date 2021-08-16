@@ -20,7 +20,7 @@ class AdminAuthenticate
      */
     public function handle($request, Closure $next, ...$guards)
     {
-        if (Auth::check() && Auth::user()->hasRole(['super-admin','moderator'])){
+        if (Auth::check() && Auth::user()->hasRole(['super-admin','moderator', 'tutor'])){
             return $next($request);
         }
 

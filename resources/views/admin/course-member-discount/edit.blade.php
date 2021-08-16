@@ -29,60 +29,45 @@
                             {{ Form::label('recommend', 'Recommend') }}
                             <br>
                             {{ Form::checkbox('recommend', true, $price_tag->recommended == 1, ['data-toggle'=>"toggle"]) }}
-                            @error('recommend')
-                                <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
+                            
                         </div>
                         <div class="form-group col-3">
                             {{ Form::label('welcomes', 'Welcomes') }}
                             <br>
                             {{ Form::checkbox('welcomes', true, $price_tag->welcomes == 1, ['data-toggle'=>"toggle"]) }}
                            
-                            @error('welcomes')
-                                <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
                         </div>
                         <div class="form-group col-3">
                             {{ Form::label('hot', 'Hot') }}
                             <br>
                             {{ Form::checkbox('hot', true, $price_tag->hot == 1, ['data-toggle'=>"toggle"]) }}
-                            @error('hot')
-                                <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
+                            
                         </div>
                         <div class="form-group col-3">
                             {{ Form::label('publish', 'Publish') }}
                             <br>
                             {{ Form::checkbox('publish', true, $price_tag->publish == 1, ['data-toggle'=>"toggle"]) }}
-                            @error('publish')
-                                <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
+                           
                         </div>
                     </div>
                     <div class="form-group">
                         {{ Form::label('description', 'Description') }}
                         {{ Form::textarea('description', $price_tag->description, ['class' => 'form-control', 'rows'=>3] ) }}
-                        @error('description')
-                            <div class="alert text-danger">{{ $message }}</div>
-                        @enderror
+                        
                     </div>
                     @if(!empty($price_tag->courseDiscounts))
                         <div class="form-group">
                             {{ Form::label('discount', 'Discount') }}
                             {{ Form::number('discount', $price_tag->courseDiscounts->discount_value,
                                 ['class' => 'form-control']) }}
-                            @error('discount')
-                                <div class="alert text-danger">{{ $message }}</div>
-                            @enderror
+                            
                         </div>
                     @endif
                     <div class="form-group">
                         {{ Form::label('price_value', 'Description') }}
                         {{ Form::number('price_value', $price_tag->membershipCourses->price_value,
                             ['class' => 'form-control',]) }}
-                        @error('price_value')
-                            <div class="alert text-danger">{{ $message }}</div>
-                        @enderror
+                        
                     </div>
 
                     {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}

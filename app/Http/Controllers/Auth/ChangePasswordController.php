@@ -17,7 +17,7 @@ class ChangePasswordController extends Controller
 
         $is_confirmed = $request->validate([
             'old_password' => 'required',
-            'password' => 'required|confirmed',
+            'password' => 'required',
         ]);
         $user = User::find(Auth::user()->id);
 

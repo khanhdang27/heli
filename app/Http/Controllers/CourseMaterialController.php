@@ -7,8 +7,10 @@ use App\Http\Requests\Material\CreateMaterialRequest;
 use App\Models\Course;
 use App\Models\CourseMaterial;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CourseMaterialController extends Controller
@@ -20,17 +22,23 @@ class CourseMaterialController extends Controller
      */
     public function index()
     {
-        $course = Course::all();
+        $_user = User::find(Auth::user()->id);
         $courseMaterial = CourseMaterial::query()
-            ->with('translations')
+            ->with('translations', 'course', 'course.tutor', 'course.tutor.user')
             ->latest()
             ->when(request('name') != '', function (Builder $query) {
                 $query->whereTranslationLike('course_material_name', '%' . request('name') . '%');
             })
+            ->when($_user->hasRole('tutor'), function (Builder $query) use ($_user)
+            {
+                $query->whereHas('course.tutor.user', function ($_query) use ($_user)
+                {
+                    $_query->where('user_id', $_user->id);
+                });
+            })
             ->paginate(15);
         return view('admin.course-material.index', [
             'courseMaterial' => $courseMaterial,
-            'course' => $course
         ]);
     }
 

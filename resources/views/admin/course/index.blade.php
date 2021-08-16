@@ -1,4 +1,10 @@
 @extends('admin.layout')
+
+@php
+    use \App\Models\Course;
+@endphp
+
+
 @section('content')
     <div class="container-fluid mt-5">
         <div class="text-center alert alert-warning alert-dismissible">
@@ -102,17 +108,28 @@
                                                     <i class="fe fe-more-vertical"></i>
                                                 </a>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    @if ($value->type == \App\Models\Course::RECORD)
-                                                        <a href="{{ route('admin.course.lecture.list', $value->id) }}"
-                                                            class="dropdown-item">
-                                                                Manage Lecture
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('admin.course.room.list', $value->id) }}"
-                                                            class="dropdown-item">
-                                                                Manage Room Live
-                                                        </a>
-                                                    @endif
+                                                    @switch($value->type)
+                                                        @case(Course::RECORD)
+                                                            <a href="{{ route('admin.course.lecture.list', $value->id) }}"
+                                                                class="dropdown-item">
+                                                                    Manage Lecture
+                                                            </a>
+                                                            @break
+                                                        @case(Course::LIVE)
+                                                            <a href="{{ route('admin.course.room.list', $value->id) }}"
+                                                                class="dropdown-item">
+                                                                    Manage Room Live
+                                                            </a>
+                                                            @break
+                                                        @case(Course::DOCUMENT)
+                                                            <a href="{{ route('admin.course-material.index') }}"
+                                                                class="dropdown-item">
+                                                                    Manage Course Document
+                                                            </a>
+                                                            @break
+                                                        @default
+                                                            @break
+                                                    @endswitch
                                                     <a href="{{ route('admin.price-tag.index') }}"
                                                         class="dropdown-item">
                                                             Publish
