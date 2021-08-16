@@ -33,7 +33,7 @@
                 @if($course->type == Course::DOCUMENT)
                     <div class="col-xl-8 bg-white">
                         @foreach($course->courseMaterial as $value)
-                            <div class="col-sm-6">
+                            <div class="">
                                 <div class="mt-5">
                                     <a href="{{ route('site.file.download', $value->file) }}">
                                         <img class="border-0 p-0 " height="430"
@@ -111,7 +111,7 @@
                 <div class="col-xl-4">
                     @if (empty($student_course))
                         <x-product-detail.buy-course :courseDetail=$courseDetail></x-product-detail.buy-course>
-                    @else
+                    @elseif($course->type != Course::DOCUMENT)
                         <x-product-detail.course-submit :courseDetail=$courseDetail></x-product-detail.course-submit>
                     @endif
                 </div>

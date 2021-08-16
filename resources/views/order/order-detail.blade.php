@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Blog Page')
+@section('title','Payment')
 
 @section('content')
 
@@ -13,7 +13,7 @@
         <div class="row pt-5">
             <div class="col-12 col-lg-7 text-primary">
                 <h3 class="font-weight-bold">Invoice Details</h3>
-                <table width="100%" class="mt-4">
+                <table width="100%" class="mt-4 table-responsive-sm">
                     <tr>
                         <td>
                             <h4 class="font-weight-bold">Recipient</h4>
@@ -70,7 +70,7 @@
                         </td>
                     </tr>
                 </table>
-                <div class="d-flex justify-content-center btn-above-video mt-5">
+                <div class="d-flex justify-content-center btn-above-video my-5">
                     <a class="text-white bg-primary border border-primary rounded btn-register-now m-0"
                         href="{{ route('site.course.show', $order->course) }}">
                         Learn now

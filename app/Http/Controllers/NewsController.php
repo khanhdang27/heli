@@ -82,7 +82,7 @@ class NewsController extends Controller
      */
     public function show()
     {
-        $news = News::query()->orderByDesc('created_at')->get();
+        $news = News::query()->orderByDesc('created_at')->paginate(8);
         return view('news.news-page',[
             'news' => $news
         ]);

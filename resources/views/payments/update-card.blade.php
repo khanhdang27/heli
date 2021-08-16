@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
-                            <img src="{{ asset('images/HeliosLogo.svg') }}">
+                            <img src="{{ asset('images/HeliosLogo.svg') }}" height="48px">
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
