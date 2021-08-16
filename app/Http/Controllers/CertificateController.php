@@ -22,7 +22,7 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::where('id','!=', 1)->orderBy('created_at', 'desc')->paginate(15);
+        $certificates = Certificate::where('id', '!=', 1)->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.certificate.index', [
             'certificates' => $certificates,
         ]);
@@ -110,7 +110,7 @@ class CertificateController extends Controller
                         });
                         break;
                     case 'document':
-                        $query->whereHas('membershipCourses.course', function ($query){
+                        $query->whereHas('membershipCourses.course', function ($query) {
                             return $query->where('type', Course::DOCUMENT);
                         });
                     default:
@@ -164,44 +164,26 @@ class CertificateController extends Controller
      */
     public function destroy(Certificate $certificate)
     {
-//        try {
-//            $_subjects = $certificate->subject->toArray();
-//            if (empty($_subjects)){
-//                $certificate->delete();
-//            }
-//            return response([
-//                'message' => 'Delete success!'
-//            ],200);
-//        } catch (\Exception $exception) {
-//            return response([
-//                'message' => 'Cannot delete',
-//                'error' => $exception->getMessage()
-//            ], 400);
-//        }
-         DB::beginTransaction();
-         try {
-//             $_courses = Course::whereHas('subject.certificate', function ($query) use ($certificate){
-//                 return $query->where('id', $certificate->id);
-//             });
-//             $_subjects = Subject::whereHas('certificate', function ($query) use ($certificate){
-//                 return $query->where('id', $certificate->id);
-//             })->get();
-//             $_courses->delete();
-//             $_subjects->delete();
-             $_subjects = $certificate->subject->toArray();
-             if (empty($_subjects)){
-                 $certificate->delete();
-                 DB::commit();
-                 return response([
-                     'message' => 'Delete success!'
-                 ]);
-             }
-         } catch (\Throwable $th) {
-             DB::rollback();
-             return response([
-                 'message' => 'Cannot delete',
-                 'detail' => $th->getMessage()
-             ], 400);
-         }
+        DB::beginTransaction();
+        try {
+            $_subjects = $certificate->subject->toArray();
+            if (empty($_subjects)) {
+                $certificate->delete();
+                DB::commit();
+                return response([
+                    'message' => 'Delete success!'
+                ]);
+            } else {
+                return response([
+                    'message' => 'Cannot delete!'
+                ], 400);
+            }
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response([
+                'message' => 'Cannot delete',
+                'detail' => $th->getMessage()
+            ], 400);
+        }
     }
 }

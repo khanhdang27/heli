@@ -81,7 +81,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.blog.index') active @endif"
+                    <a class="nav-link @if(request()->route()->getName() == 'admin.forum.index') active @endif"
                         href="{{ route('admin.forum.index') }}">
                         <i class="fe fe-clipboard"></i> Forum Post
                     </a>

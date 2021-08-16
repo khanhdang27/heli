@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Membership;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class MembershipController extends Controller
@@ -58,7 +59,7 @@ class MembershipController extends Controller
      */
     public function show(Membership $membership)
     {
-        //
+        
     }
 
     /**
@@ -69,7 +70,10 @@ class MembershipController extends Controller
      */
     public function edit(Membership $membership)
     {
-        //
+        
+        return view('admin.membership.edit', [
+            'membership' => $membership
+        ]);
     }
 
     /**
@@ -81,7 +85,18 @@ class MembershipController extends Controller
      */
     public function update(Request $request, Membership $membership)
     {
-        //
+        $input = $request->validate([
+            'name'=> 'string',
+            'base_point' => 'numeric'
+        ]);
+        try {
+            DB::beginTransaction();
+            $membership->update($input);
+            DB::commit();
+            return back()->with('success', 'Create success');
+        } catch (\Throwable $th) {
+            return back()->with('errors', $th->getMessage());
+        }
     }
 
     /**

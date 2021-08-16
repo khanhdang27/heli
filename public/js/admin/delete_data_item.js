@@ -9,9 +9,10 @@ function itemDelete(url) {
                 console.log(response.message)
                 // alert(response.message);
                 location.reload();
-            } else {
-                alert(response.message);
             }
-        })
+        }).catch(error => {
+            console.log(error)
+            alert('delete is invalid');
+        });
     }
 }

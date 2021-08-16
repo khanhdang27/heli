@@ -144,7 +144,6 @@ class SubjectController extends Controller
     {
         DB::beginTransaction();
         try {
-//            $_tutor = $subject->tutor->toArray();
             $_course = $subject->course->toArray();
             if (empty($_course) ){
                 $subject->delete();
@@ -152,19 +151,17 @@ class SubjectController extends Controller
                 return response([
                     'message' => 'Delete success!'
                 ]);
+            } else {
+                return response([
+                    'message' => 'Cannot delete!'
+                ], 400);
             }
         } catch (\Exception $exception) {
             DB::rollBack();
             return response([
-                'message' => 'Cannot delete!'
+                'message' => $exception->getMessage()
             ], 400);
         }
-
-        // $active = $subject->status;
-        // $subject->status = $active == 1 ? 0 : 0;
-        // $subject->save();
-
-        // return $subject->save();
     }
 
     /**

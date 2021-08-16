@@ -101,25 +101,51 @@ class NewsController extends Controller
         ]);
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Models\News  $news
-    //  * @return \Illuminate\Http\RedirectResponse
-    //  */
-    // public function update(Request $request, News $news)
-    // {
-    //     $news->update(
-    //         $request->validate([
-    //             'title' => 'required',
-    //             'content' => 'required',
-    //             'file' => 'file'
-    //         ])
-    //     );
-    //     return redirect()->route('admin.news.index')
-    //         ->with('success','Update success');
-    // }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\News  $news
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update (Request $request, News $news)
+    {
+       
+        $newsValidate = $request->validate([
+            'announcement_date' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+
+            $news->update([
+                'announcement_date' => $newsValidate['announcement_date'],
+                'title' => $newsValidate['title'],
+                'content' => $newsValidate['content'],
+            ]);
+            $old_file = File::where('fileable_type', News::class)->where('fileable_id', $news->id)->first();
+
+            if(!empty($request['file'])){
+                if (!empty($old_file)) {
+                    $old_file->delete();
+                }
+                $file = File::storeFile(
+                    $request['file'],
+                    News::class,
+                    $news->id,
+                );
+            }
+            
+            DB::commit();
+            return back()->with('success', 'Create success');
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->with('errors', $th->getMessage());
+            //throw $th;
+        }
+    }
 
     public function newsDetail($id)
     {
@@ -136,6 +162,26 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        
+        DB::beginTransaction();
+        try {
+            $_course = $news->course->toArray();
+            if (empty($_course) ){
+                $news->delete();
+                DB::commit();
+                return response([
+                    'message' => 'Delete success!'
+                ]);
+            } else {
+                return response([
+                    'message' => 'Cannot delete!'
+                ], 400);
+            }
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 }

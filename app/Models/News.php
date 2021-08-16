@@ -12,7 +12,7 @@ class News extends Model
 
     public $timestamps = TRUE;
 
-    public function file_ref(){
+    public function file(){
         return $this->morphOne(File::class, 'fileable');
     }
 }
