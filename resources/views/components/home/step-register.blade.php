@@ -40,9 +40,8 @@
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        <button class="btn-register-now btn-dark mt-5 font-weight-bold" id="btn-register-step"
-                data-toggle="modal"
-                data-target="#registerModal">
+        <button class="btn-register-now btn-dark mt-5 font-weight-bold" id="btn-register-step" data-toggle="modal"
+            data-target="#registerModal">
             <span>@lang('keywords.signUpNow')</span>
         </button>
     </div>
@@ -55,75 +54,46 @@
     const step3 = popmotion.styler(document.getElementById('animate-object3'));
     const animateStep1 = popmotion.tween({
         from: {
-            scale: 0.6,
-            opacity: 1,
-        },
-        to: {
             scale: 1,
             opacity: 1,
         },
+        to: {
+            scale: 1.4,
+            opacity: 1,
+        },
         flip: Infinity,
-        repeatDelay: 4500,
-        duration:500,
-
+        repeatDelay: 1200,
+        duration:400,
+        elapsed:-400
     }).start(step1.set);
 
     const animateStep2 = popmotion.tween({
         from: {
-            scale: 0.6,
-            opacity: 1,
-        },
-        to: {
             scale: 1,
             opacity: 1,
         },
+        to: {
+            scale: 1.4,
+            opacity: 1,
+        },
         flip: Infinity,
-        repeatDelay: 4500,
-        duration:500,
-        elapsed:-2000
+        repeatDelay: 1200,
+        duration:400,
+        elapsed:-800
     }).start(step2.set);
 
     const animateStep3 = popmotion.tween({
         from: {
-            scale: 0.5,
-            opacity: 1,
-        },
-        to: {
             scale: 1,
             opacity: 1,
         },
+        to: {
+            scale: 1.4,
+            opacity: 1,
+        },
         flip: Infinity,
-        repeatDelay: 4500,
-        duration:500,
-        elapsed:-4000
+        repeatDelay: 1200,
+        duration:400,
+        elapsed:-1200
     }).start(step3.set);
-</script>
-<script>
-    var content1 = document.querySelector('#content1');
-    var content2 = document.querySelector('#step2');
-    var content3 = document.querySelector('#content3');
-    var listDot = [
-        document.querySelector('#listDot1'),
-        document.querySelector('#listDot2')
-    ]
-    ScrollReveal().reveal(listDot, {
-        delay: 300,
-        duration: 500,
-        reset: true
-    });
-    ScrollReveal().reveal(content1, {
-        delay: 300,
-        duration: 500,
-        reset: true
-    });
-    ScrollReveal().reveal(content2, {
-        delay:350,
-        duration: 500,
-        reset: true
-    });
-    ScrollReveal().reveal(content3, {
-        delay: 400,
-        duration: 500,
-        reset: true
-    });
 </script>
