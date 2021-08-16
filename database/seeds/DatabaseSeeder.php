@@ -49,6 +49,11 @@ class DatabaseSeeder extends Seeder
             'blog-edit',
             'blog-delete',
 
+            'forum-list',
+            'forum-create',
+            'forum-edit',
+            'forum-delete',
+
             'document-list',
             'document-create',
             'document-edit',
@@ -192,6 +197,5 @@ class DatabaseSeeder extends Seeder
             'certificate_code'=> "IAL",
             'certificate_name' => 'International Advanced Level'
         ]);
-
     }
 }

@@ -45,6 +45,10 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::resource('tag', 'TagController');
 
+    Route::post('forum/restore/{id}', 'ManagePostController@restore')->name('forum.restore');
+    Route::get('forum/review/{id}', 'ManagePostController@review')->name('forum.review');
+    Route::resource('forum', 'ManagePostController');
+
     Route::resource('blog', 'BlogController');
 
     Route::resource('news', 'NewsController');
