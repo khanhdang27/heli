@@ -23,10 +23,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bottom-btn animate-change-color mt-5 d-flex justify-content-center">
-                        <button class='btn-login btn-register-now' data-toggle="modal" data-target="#registerModal"
-                                data-dismiss="modal"
-                                id='btn-register'>
+                    <div class="bottom-btn mt-5 d-flex justify-content-center">
+                        <button class='btn-login btn-register-now animate-change-color' data-toggle="modal"
+                            data-target="#registerModal" data-dismiss="modal" id='btn-register'>
                             <h3 class="mb-0 font-weight-bold">@lang('keywords.registerNowToExperience')</h3>
                         </button>
                     </div>

@@ -51,7 +51,7 @@ class UserManagerController extends Controller
             'name' => 'required',
             'email'=>'required',
             'full_name'=>'required',
-            'phone'=>'required|numeric',
+            'phone'=>'required',
         ]);
         DB::beginTransaction();
         try {
@@ -107,17 +107,17 @@ class UserManagerController extends Controller
         $student = Student::with('user')->where('id', $id)->first();
         $_request = $request->validate([
             'name' => 'required',
-            'email'=>'required',
             'full_name'=>'required',
             'day_of_birth'=>'required',
             'phone_no'=>'required|numeric',
+            'membership' => 'required|numeric',
         ]);
         DB::beginTransaction();
         try {
             $user = User::where('id',$student->user_id)->first();
             $user->update([
                 'name' => $_request['name'],
-                'email' => $_request['email'],
+                'membership_group' => $_request['membership']
             ]);
             $student->update([
                 'full_name' => $_request['full_name'],
