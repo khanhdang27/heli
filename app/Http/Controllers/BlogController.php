@@ -137,19 +137,23 @@ class BlogController extends Controller
         $allBlog = Blog::with('tags');
         $blog_top = clone $allBlog;
         $blogs_list = clone $allBlog;
-        $blog_latest = clone $allBlog;
         $blog_top = $blog_top->orderBy('view_no','desc')->first();
         $blogs_list = $blogs_list->orderBy('view_no','desc')->limit(5)->get();
-        $blog_latest = $blog_latest->orderBy('created_at','desc')->paginate(9);
+
 
         $tags = Tag::where('tag_type',Tag::$BLOG)->get();
 
         return view('blog.blog-page',[
             'blog_top' => $blog_top,
-            'blog' => $blog_latest,
             'blogs' => $blogs_list,
             'tags' => $tags
         ]);
+    }
+
+    public function list()
+    {
+        $allBlog = Blog::with('tags', 'photo')->orderBy('created_at','desc')->paginate(9);
+        return response()->json($allBlog);
     }
 
     public function showBlogPageByTag(Tag $tag)

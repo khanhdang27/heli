@@ -155,7 +155,6 @@ class OrderController extends Controller
             'student_id' => Auth::user()->id
         ])->first();
 
-
         return [
             $product_id,
             $courses_with_group,
@@ -177,7 +176,7 @@ class OrderController extends Controller
     public function updateSchedule($room)
     {
         $roomInitial = RoomLiveCourse::find($room);
-        if ($roomInitial->number_member + 1 <= $roomInitial->number_member_maximum) {
+        if ($roomInitial->number_member < $roomInitial->number_member_maximum) {
             $roomInitial->number_member = $roomInitial->number_member + 1;
             $roomInitial->save();
 
