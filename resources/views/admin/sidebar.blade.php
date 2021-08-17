@@ -39,81 +39,81 @@
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.banner.index') active @endif"
                         href="{{ route('admin.banner.index') }}">
-                        <i class="fe fe-clipboard"></i> Banners
+                        <i class="fe fe-image"></i> Banners
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.certificate.index') active @endif"
                         href="{{ route('admin.certificate.index') }}">
-                        <i class="fe fe-clipboard"></i> Certificates
+                        <i class="fe fe-file-text"></i> Certificates
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.subject.index') active @endif"
                         href="{{ route('admin.subject.index') }}">
-                        <i class="fe fe-clipboard"></i> Subjects
+                        <i class="fe fe-book-open"></i> Subjects
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.course.index') active @endif"
                         href="{{ route('admin.course.index') }}">
-                        <i class="fe fe-clipboard"></i> Courses
+                        <i class="fe fe-book-open"></i> Courses
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.course-material.index') active @endif"
                         href="{{ route('admin.course-material.index') }}">
-                        <i class="fe fe-clipboard"></i> Materials
+                        <i class="fe fe-file"></i> Materials
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.tag.index') active @endif"
                         href="{{ route('admin.tag.index') }}">
-                        <i class="fe fe-clipboard"></i> Tags
+                        <i class="fe fe-hash"></i> Tags
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.blog.index') active @endif"
                         href="{{ route('admin.blog.index') }}">
-                        <i class="fe fe-clipboard"></i> Blog Post
+                        <i class="fe fe-layout"></i> Blog Post
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.forum.index') active @endif"
                         href="{{ route('admin.forum.index') }}">
-                        <i class="fe fe-clipboard"></i> Forum Post
+                        <i class="fe fe-layout"></i> Forum Post
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.news.index') active @endif"
                         href="{{ route('admin.news.index') }}">
-                        <i class="fe fe-clipboard"></i> News
+                        <i class="fe fe-layout"></i> News
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.discount.index') active @endif"
                         href="{{ route('admin.discount.index') }}">
-                        <i class="fe fe-clipboard"></i> Discount
+                        <i class="fe fe-percent"></i> Discount
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.price-tag.index') active @endif"
                         href="{{ route('admin.price-tag.index') }}">
-                        <i class="fe fe-clipboard"></i> Price Publish
+                        <i class="fe fe-tag"></i> Price Publish
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.membership.index') active @endif"
                         href="{{ route('admin.membership.index') }}">
-                        <i class="fe fe-clipboard"></i> Membership
+                        <i class="fe fe-users"></i> Membership
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.examination.index') active @endif"
                         href="{{ route('admin.examination.index') }}">
-                        <i class="fe fe-clipboard"></i> Examinations
+                        <i class="fe fe-file-text"></i> Examinations
                     </a>
                 </li>
 
@@ -123,7 +123,7 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#collapseUserManager" role="button"
                         aria-expanded="false" aria-controls="collapseUserManager">
-                        <i class="fe fe-clipboard"></i> User Manager
+                        <i class="fe fe-user"></i> User Manager
                     </a>
                     <div class="collapse" id="collapseUserManager">
                         <ul class="nav nav-sm flex-column">
@@ -151,20 +151,20 @@
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.user-subscribe') active @endif"
                         href="{{ route('admin.user-subscribe') }}">
-                        <i class="fe fe-clipboard"></i> User Subscribe
+                        <i class="fe fe-mail"></i> User Subscribe
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.study-session.index') active @endif"
                         href="{{ route('admin.study-session.index') }}">
-                        <i class="fe fe-clipboard"></i> Study Session
+                        <i class="fe fe-video"></i> Study Session
                     </a>
                 </li>
                 @role(['super-admin'])
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.roles.index') active @endif"
                         href="{{ route('admin.roles.index') }}">
-                        <i class="fe fe-clipboard"></i> Roles
+                        <i class="fe fe-user-check"></i> Roles
                     </a>
                 </li>
                 @endrole
