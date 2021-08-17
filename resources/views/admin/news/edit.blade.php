@@ -25,17 +25,23 @@
                         <div class="form-group">
                             {{ Form::label('announcement_date', 'Date') }}
                             {{ Form::date('announcement_date', $news->announcement_date,['class' => 'form-control'] ) }}
-
+                            @error('announcement_date')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group ">
                             {{ Form::label('title', 'News Title') }}
                             {{ Form::text('title', $news->title,['class' => 'form-control'] ) }}
-
+                            @error('title')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             {{ Form::label('content', 'News content') }}
                             {{ Form::textarea('content', $news->content, ['id'=>'ckeditor']) }}
-
+                            @error('content')
+                            <div class="alert text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="row">
                             <div class="col-6">

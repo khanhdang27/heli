@@ -32,7 +32,7 @@ class UserSubscribeController extends Controller
                 return back()->with('success','Subscribed');
             }
         } catch (\Throwable $th) {
-            return back()->with('errors', 'Can not subscribe');
+            return back()->withErrors( 'Can not subscribe');
         }
     }
 

@@ -44,15 +44,19 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        $old_banner = Banner::all()->first();
-        if (!empty($old_banner)){
-            $old_banner->delete();
-        }
-        $input = $request->all();
+        
+        $input = $request->validate([
+            'banner_title' => 'required',
+            'file' => 'file',
+        ]);
 
         DB::beginTransaction();
 
         try {
+            $old_banner = Banner::all()->first();
+            if (!empty($old_banner)){
+                $old_banner->delete();
+            }
             $banner = Banner::create([
                 'banner_title' => $request->input('banner_title'),
             ]);
@@ -66,7 +70,7 @@ class BannerController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Save error');
+            return back()->withErrors('Save error');
         }
     }
 
@@ -101,15 +105,18 @@ class BannerController extends Controller
 
     public function update(CreateBannerRequest $request, Banner $banner)
     {
-        $old_banner = Banner::all()->first();
-        if (!empty($old_banner)){
-            $old_banner->delete();
-        }
-        $input = $request->all();
+        $input = $request->validate([
+            'banner_title' => 'required',
+            'file' => 'file',
+        ]);
 
         DB::beginTransaction();
 
         try {
+            $old_banner = Banner::all()->first();
+            if (!empty($old_banner)){
+                $old_banner->delete();
+            }
             $banner = Banner::create([
                 'banner_title' => $request->input('banner_title'),
             ]);
@@ -123,7 +130,7 @@ class BannerController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Save error');
+            return back()->withErrors('Save error');
         }
     }
 

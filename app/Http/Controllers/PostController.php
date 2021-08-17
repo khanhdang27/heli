@@ -51,7 +51,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         if (empty($request->tag_id)) {
-            return back()->with('errors', 'Tag not found');
+            return back()->withErrors( 'Tag not found');
         }
         $input = $request->all();
 
@@ -73,7 +73,7 @@ class PostController extends Controller
             return back()->with('success', 'Save success');
         } catch (Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Save error');
+            return back()->withErrors( 'Save error');
         }
     }
 
@@ -132,7 +132,7 @@ class PostController extends Controller
 
         } catch (Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Save error');
+            return back()->withErrors( 'Save error');
         }
     }
 
@@ -149,7 +149,7 @@ class PostController extends Controller
             return back()->with('success', 'Save success');
         }catch (Throwable $th){
             DB::rollBack();
-            return back()->with('errors', 'Save error');
+            return back()->withErrors( 'Save error');
         }
     }
     /**

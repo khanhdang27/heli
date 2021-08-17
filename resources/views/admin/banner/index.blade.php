@@ -37,19 +37,19 @@
                         <table id="data-table" class="table table-sm table-nowrap card-table">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="c-20">
                                         Photo
                                     </th>
                                     <th>
                                         Title
                                     </th>
-                                    <th></th>
+                                    <th class="c-10"></th>
                                 </tr>
                             </thead>
                             <tbody class="list">
                                 @foreach($banner as $value)
                                 <tr>
-                                    <td>
+                                    <td class="c-20">
                                         @if ($value->image != null)
                                         <img src="{{ asset('/file/'.$value->image->id)}}" width="50px;" height="60px;"
                                             alt="">
@@ -58,10 +58,10 @@
                                         @endif
 
                                     </td>
-                                    <td>
+                                    <td class="text-overflow-ellipsis">
                                         {{$value->banner_title}}
                                     </td>
-                                    <td class="text-right">
+                                    <td class="text-right c-10">
                                         <div class="dropdown">
                                             <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

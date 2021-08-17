@@ -46,11 +46,20 @@ class CertificateController extends Controller
      */
     public function store(CreateCertificateRequest $request)
     {
-        $certificate = new Certificate(
-            $request->validated()
-        );
-        $certificate->save();
-        return back()->with('success', 'Create success');
+        DB::beginTransaction();
+
+        try {
+            $certificate = new Certificate(
+                $request->validated()
+            );
+            $certificate->save();
+            DB::commit();
+            return back()->with('success', 'Create success');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->withErrors('Create error');
+        }
+        
     }
 
 

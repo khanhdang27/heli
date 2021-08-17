@@ -49,7 +49,7 @@
               <h3>Image</h3>
               <hr>
               @if ($post->image != null)
-              <img class="img-question border border-radius" src="{{ asset('/file/' . $post->image->id) }}">
+              <img class="img-thumbnail" src="{{ asset('/file/' . $post->image->id) }}">
               @endif
             </div>
           </div>
