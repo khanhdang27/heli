@@ -61,14 +61,10 @@
                 <h2 class="title-foot">@lang('keywords.footer.address')</h2>
                 <a>@lang('keywords.footer.headOffice')</a><br>
                 <a>@lang('keywords.footer.CausewayBay')</a><br>
-                <a>@lang('keywords.footer.street')</a><br>
-                <a>@lang('keywords.footer.room')</a><br>
                 <br>
                 <a>@lang('keywords.footer.CausewayBayStore')</a><br>
-                <a>@lang('keywords.footer.CausewayBay')</a><br>
                 <a>@lang('keywords.footer.makeAnAppointment')</a><br>
-                <a>@lang('keywords.footer.road')</a><br>
-                <a>@lang('keywords.footer.plaza')</a>
+                <a>@lang('keywords.footer.road')</a>
             </div>
             <div class="col-lg-1"></div>
         </div>

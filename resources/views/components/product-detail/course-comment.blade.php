@@ -3,7 +3,11 @@
     <div class="row row-question pt-3 pb-3 border-secondary bg-white">
         <div class="col-xl-2">
             <div class="d-flex text-primary w-100">
-                <img src="{{asset('/file/'.$comment->user->avatar->id)}}" width="120" height="120">
+                @if(empty(Auth::user()->avatar))
+                    <img src="{{asset('images/user_default.png')}}" width="120" height="120">
+                @else
+                    <img src="{{asset('/file/'.$comment->user->avatar->id)}}" width="120" height="120">
+                @endif
             </div>
         </div>
         <div class="col-xl-6 d-flex flex-column justify-content-between">

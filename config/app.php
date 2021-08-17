@@ -9,6 +9,7 @@ return [
 
     'vimeo_app_id' => env('VIMEO_APP_ID', ''),
     'vimeo_token' => env('VIMEO_TOKEN', ''),
+    'google_api_calendar' => env('GOOGLE_API_CALENDAR', ''),
 
     /*
     |--------------------------------------------------------------------------

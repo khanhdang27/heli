@@ -121,6 +121,9 @@ class PostController extends Controller
                 'tag_id' => $request['tag_id']
             ]);
             if (!empty($request['file'])) {
+                if (!empty($post->image)){
+                    $post->image->delete();
+                }
                 $file = File::storeFile($request['file'], Post::class, $post->id);
             }
 

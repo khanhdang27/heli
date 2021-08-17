@@ -9,7 +9,7 @@
         </div>
         <x-sub-header :subjects=$subjects ></x-sub-header>
         <div class="container-fluid container-course">
-            <div class="title-subject h2 font-weight-bold text-primary text-center">
+            <div class="title-subject h2 font-weight-bold text-primary text-center pb-4 mb-0">
                 {{$certificate->certificate_code}}
             </div>
             <div class="text-primary my-4 d-flex h5">

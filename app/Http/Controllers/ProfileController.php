@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Moderator;
 use App\Models\Student;
 use App\Models\Tutor;
 use App\Models\User;
@@ -53,8 +54,18 @@ class ProfileController extends Controller
     public function show($user_id)
     {
         $student = Student::where('user_id', $user_id)->first();
+        $tutor = Tutor::where('user_id', $user_id)->first();
+        $moderator = Moderator::where('user_id', $user_id)->first();
+        $_user = User::find($user_id);
+        if ($_user->hasRole('student')){
+            $user = $student;
+        }elseif ($_user->hasRole('tutor')){
+            $user = $tutor;
+        }else{
+            $user = $moderator;
+        }
         return view('profile.index', [
-            'student' => $student
+            'user_info' => $user
         ]);
     }
 
@@ -67,8 +78,18 @@ class ProfileController extends Controller
     public function edit($user_id)
     {
         $student = Student::where('user_id', $user_id)->first();
+        $tutor = Tutor::where('user_id', $user_id)->first();
+        $moderator = Moderator::where('user_id', $user_id)->first();
+        $_user = User::find($user_id);
+        if ($_user->hasRole('student')){
+            $user = $student;
+        }elseif ($_user->hasRole('tutor')){
+            $user = $tutor;
+        }else{
+            $user = $moderator;
+        }
         return view('profile.edit', [
-            'student' => $student
+            'user_info' => $user
         ]);
     }
 

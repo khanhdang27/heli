@@ -30,7 +30,7 @@
                         <p>Phone:</p>
                     </td>
                     <td>
-                        <p class="text-primary">{{$student->phone_no ?? null}}</p>
+                        <p class="text-primary">{{$user_info->phone_no ?? null}}</p>
                     </td>
                 </tr>
                 <tr>
@@ -38,7 +38,7 @@
                         <p>Full name:</p>
                     </td>
                     <td>
-                        <p class="text-primary">{{$student->full_name ?? null}}</p>
+                        <p class="text-primary">{{$user_info->full_name ?? null}}</p>
                     </td>
                 </tr>
                 <tr>
@@ -46,7 +46,7 @@
                         <p>Date of birth:</p>
                     </td>
                     <td>
-                        <p class="text-primary">{{$student->day_of_birth ?? null}}</p>
+                        <p class="text-primary">{{$user_info->day_of_birth ?? null}}</p>
                     </td>
                 </tr>
             </table>
@@ -57,16 +57,18 @@
                         Update your profile
                     </a>
                 </div>
-                <div class="">
-                    <a href="{{ route('site.payment-history') }}" class="btn btn-outline-primary font-weight-bold">
-                        Payment History
-                    </a>
-                </div>
-                <div class="">
-                    <a href="{{ route('site.order.updateCard',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold">
-                        Update Payment Card
-                    </a>
-                </div>
+                @if(Auth::User()->hasRole('student'))
+                    <div class="">
+                        <a href="{{ route('site.payment-history') }}" class="btn btn-outline-primary font-weight-bold">
+                            Payment History
+                        </a>
+                    </div>
+                    <div class="">
+                        <a href="{{ route('site.order.updateCard',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold">
+                            Update Payment Card
+                        </a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

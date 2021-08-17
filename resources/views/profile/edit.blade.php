@@ -82,17 +82,17 @@
                         </div>
                         <div class="form-group">
                             {{ Form::label('full_name', 'Full Name') }}
-                            {{ Form::text('full_name', $student->full_name ?? null, ['class' => 'form-control']) }}
+                            {{ Form::text('full_name', $user_info->full_name ?? null, ['class' => 'form-control']) }}
                         </div>
                         <div class="d-flex justify-content-between">
                             <div class="form-group w-50">
                                 {{ Form::label('day_of_birth', 'Date of birth') }}
-                                {{ Form::date('day_of_birth', $student->day_of_birth ?? null, ['class' => 'form-control']) }}
+                                {{ Form::date('day_of_birth', $user_info->day_of_birth ?? null, ['class' => 'form-control']) }}
                             </div>
                             <div class="px-3"></div>
                             <div class="form-group w-100">
                                 {{ Form::label('phone_no', 'Phone') }}
-                                {{ Form::text('phone_no', $student->phone_no ?? null, ['class' => 'form-control']) }}
+                                {{ Form::text('phone_no', $user_info->phone_no ?? null, ['class' => 'form-control']) }}
                             </div>
                         </div>
 

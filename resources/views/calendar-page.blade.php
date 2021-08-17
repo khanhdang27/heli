@@ -70,7 +70,7 @@
                     center: 'prev title next',
                     right: null
                 },
-                googleCalendarApiKey: '{{env('GOOGLE_API_CALENDAR')}}',
+                googleCalendarApiKey: '{{config('app.google_api_calendar')}}',
                 initialDate: '{{date("Y-m-d")}}',
                 businessHours: true, // display business hours
                 selectable: true,

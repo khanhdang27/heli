@@ -22,9 +22,9 @@
                         <h3 class="mb-0">Post your question</h3>
                     </a>
                 </div>
-                <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog">
+                <div class="modal fade modal-index" id="modalCreate" tabindex="-1" role="dialog">
                     <div class="modal-dialog">
-                        <div class="modal-content">
+                        <div class="modal-content text-primary">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Post your question</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -68,7 +68,7 @@
         @endforeach
     </div>
     </div>
-    
+
     @push('inputFile')
         <script>
             // Add the following code if you want the name of the file appear on select

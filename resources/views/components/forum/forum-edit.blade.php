@@ -21,9 +21,9 @@
         </a>
     </div>
 </div>
-<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog">
+<div class="modal fade modal-index" id="modalEdit" tabindex="-1" role="dialog">
     <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content text-primary">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Edit your question</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -51,6 +51,14 @@
                     {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
                     {{ Form::file('file',['class' => 'custom-file-input']) }}
                 </div>
+                <div class="mt-3">
+                    <p>Old image</p>
+                    @if(empty($post->image))
+                        <div class="border rounded p-3 text-center text-muted">None</div>
+                    @else
+                        <img class="border rounded" src="{{asset('/file/'.$post->image->id)}}" width="100%"/>
+                    @endif
+                </div>
             </div>
             <div class="modal-footer">
                 {{ Form::submit('Save', ['class'=>'btn btn-primary']) }}
@@ -71,7 +79,7 @@ function postDelete(url) {
             if (response.status == 200) {
                 console.log(response.message)
                 // alert(response.message);
-                location.href = "{{ route('site.post.index') }}" 
+                location.href = "{{ route('site.post.index') }}"
             } else {
                 alert(response.message);
             }

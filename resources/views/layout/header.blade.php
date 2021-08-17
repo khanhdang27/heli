@@ -50,11 +50,13 @@
 
             <div class="pl-5 user-space d-flex ml-auto">
                 @if(Auth::check())
-                    <div class="nav-item py-1">
-                        <a class="btn-link bg-white" href="{{route('site.payment-history')}}">
-                            <img src={{asset("images/ic/ic_cart.svg")}} width="21px">
-                        </a>
-                    </div>
+                    @if(Auth::user()->hasRole('student'))
+                        <div class="nav-item py-1">
+                            <a class="btn-link bg-white" href="{{route('site.payment-history')}}">
+                                <img src={{asset("images/ic/ic_cart.svg")}} width="21px">
+                            </a>
+                        </div>
+                    @endif
                     <div class="nav-item ml-2">
                         <a class="nav-link px-0 mr-1">
                             {{Auth::user()->name}}
