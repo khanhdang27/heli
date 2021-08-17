@@ -110,7 +110,7 @@ class ExaminationController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Save error');
+            return back()->withErrors( 'Save error');
         }
 
 
@@ -142,7 +142,7 @@ class ExaminationController extends Controller
             return redirect()->route('site.course.show', $submitExam->examination->course_id)->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Save error');
+            return back()->withErrors( 'Save error');
         }
     }
 
@@ -214,7 +214,7 @@ class ExaminationController extends Controller
             return back()->with('success', 'Update success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Save error');
+            return back()->withErrors( 'Save error');
         }
     }
 

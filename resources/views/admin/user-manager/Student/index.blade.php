@@ -72,7 +72,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{ $value->full_name }}
+                                        {{ $value->user->name }}
                                     </td>
                                     <td>
                                         {{ $value->user->email }}

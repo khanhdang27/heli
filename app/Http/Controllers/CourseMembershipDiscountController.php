@@ -109,7 +109,7 @@ class CourseMembershipDiscountController extends Controller
                 return back()->with('success', 'Update success!');
             } catch (\Throwable $th) {
                 DB::rollBack();
-                return back()->with('errors', 'Update error!');
+                return back()->withErrors( 'Update error!');
             }
         } else {
             $_course_type = Course::COURSE_TYPE[$new_price_tag->membershipCourses->course->type];
@@ -127,7 +127,7 @@ class CourseMembershipDiscountController extends Controller
                 default:
                     return false;
             }
-            return back()->with('errors', 'please check cousre <a href="'.$_url.'" ><strong> ['.$_course_type.'] </strong> </a> already before public', );
+            return back()->withErrors( 'please check cousre <a href="'.$_url.'" ><strong> ['.$_course_type.'] </strong> </a> already before public', );
         }
         
     }

@@ -111,7 +111,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Create Error!');
+            return back()->withErrors( 'Create Error!');
         }
     }
 
@@ -372,7 +372,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->with('errors', 'Create error!');
+            return back()->withErrors( 'Create error!');
         }
     }
 

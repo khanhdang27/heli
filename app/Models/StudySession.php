@@ -14,4 +14,9 @@ class StudySession extends Model
     public $timestamps = TRUE;
 
     protected $guarded = [];
+
+    public function rooms()
+    {
+        return $this->hasMany(RoomLiveCourse::class);
+    }
 }

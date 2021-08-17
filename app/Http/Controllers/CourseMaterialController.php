@@ -90,7 +90,7 @@ class CourseMaterialController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollback();
-            return back()->with('errors', 'Create Fails');
+            return back()->withErrors( 'Create Fails');
         }
     }
 
@@ -155,7 +155,7 @@ class CourseMaterialController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollback();
-            return back()->with('errors', 'Create Fails');
+            return back()->withErrors( 'Create Fails');
         }
     }
 

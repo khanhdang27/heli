@@ -47,7 +47,6 @@ use \App\Models\Course;
 
                         </div>
                         <div class="col-auto">
-
                             <!-- Button -->
                             <a href="{{ route('admin.course.create') }}" class="btn btn-sm btn-success">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
@@ -63,77 +62,80 @@ use \App\Models\Course;
                     </div> <!-- / .row -->
                 </div>
                 <div class="card-body h-100">
-                    <table id="course-table" class="table table-sm h-100">
-                        <thead>
-                            <tr>
-                                <th class="c-30">
-                                    Name
-                                </th>
-                                <th class="c-10">
-                                    Price
-                                </th>
-                                <th class="c-50">
-                                    Description
-                                </th>
-                                <th class="c-10"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($courses as $value)
-                            <tr>
-                                <td class="c-30">
-                                    {{ $value->course_name }}
-                                </td>
-                                <td class="c-10">
-                                    {{ $value->course_price }}
-                                </td>
-                                <td class="c-50">
-                                    {{ $value->course_description }}
-                                </td>
-                                <td class="c-10 text-right">
-                                    <div class="dropdown">
-                                        <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fe fe-more-vertical"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            @switch($value->type)
-                                            @case(Course::RECORD)
-                                            <a href="{{ route('admin.course.lecture.list', $value->id) }}"
-                                                class="dropdown-item">
-                                                Manage Lecture
+                    <div class="table-responsive mb-0" data-toggle="lists"
+                        data-options="{&quot;valueNames&quot;: [&quot;goal-project&quot;, &quot;goal-status&quot;, &quot;goal-progress&quot;, &quot;goal-date&quot;]}">
+                        <table id="course-table" class="table table-sm h-100">
+                            <thead>
+                                <tr>
+                                    <th class="c-30">
+                                        Name
+                                    </th>
+                                    <th class="c-10">
+                                        Price
+                                    </th>
+                                    <th class="c-50">
+                                        Description
+                                    </th>
+                                    <th class="c-10"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="list">
+                                @foreach($courses as $value)
+                                <tr>
+                                    <td class="c-30">
+                                        {{ $value->course_name }}
+                                    </td>
+                                    <td class="c-10">
+                                        {{ $value->course_price }}
+                                    </td>
+                                    <td class="c-50">
+                                        {{ $value->course_description }}
+                                    </td>
+                                    <td class="c-10 text-right">
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fe fe-more-vertical"></i>
                                             </a>
-                                            @break
-                                            @case(Course::LIVE)
-                                            <a href="{{ route('admin.course.room.list', $value->id) }}"
-                                                class="dropdown-item">
-                                                Manage Room Live
-                                            </a>
-                                            @break
-                                            @case(Course::DOCUMENT)
-                                            <a href="{{ route('admin.course-material.index') }}" class="dropdown-item">
-                                                Manage Course Document
-                                            </a>
-                                            @break
-                                            @default
-                                            @break
-                                            @endswitch
-                                            <a href="{{ route('admin.price-tag.index') }}" class="dropdown-item">
-                                                Publish
-                                            </a>
-                                            <a href="{{ route('admin.course.edit', $value->id) }}"
-                                                class="dropdown-item">
-                                                Edit
-                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                @switch($value->type)
+                                                @case(Course::RECORD)
+                                                <a href="{{ route('admin.course.lecture.list', $value->id) }}"
+                                                    class="dropdown-item">
+                                                    Manage Lecture
+                                                </a>
+                                                @break
+                                                @case(Course::LIVE)
+                                                <a href="{{ route('admin.course.room.list', $value->id) }}"
+                                                    class="dropdown-item">
+                                                    Manage Room Live
+                                                </a>
+                                                @break
+                                                @case(Course::DOCUMENT)
+                                                <a href="{{ route('admin.course-material.index') }}"
+                                                    class="dropdown-item">
+                                                    Manage Course Document
+                                                </a>
+                                                @break
+                                                @default
+                                                @break
+                                                @endswitch
+                                                <a href="{{ route('admin.price-tag.index') }}" class="dropdown-item">
+                                                    Publish
+                                                </a>
+                                                <a href="{{ route('admin.course.edit', $value->id) }}"
+                                                    class="dropdown-item">
+                                                    Edit
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    {{ $courses->links() }}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $courses->links() }}
+                    </div>
                 </div>
             </div>
 

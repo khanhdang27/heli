@@ -61,7 +61,7 @@ class StudySessionController extends Controller
             DB::rollBack();
             dd($th);
 
-            return back()->with('errors', 'Create Error!');
+            return back()->withErrors( 'Create Error!');
         }
     }
 
@@ -106,18 +106,18 @@ class StudySessionController extends Controller
 
         DB::beginTransaction();
         try {
-            $studySession->update([
+            $studySession->fill([
                 'session_name' => $input['session_name'],
                 'session_start' => Carbon::parse(strtotime($input['session_start'])),
                 'session_end' => Carbon::parse(strtotime($input['session_end']))
             ]);
-
+            $studySession->save();
             DB::commit();
 
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('errors', 'Update Error!');
+            return back()->withErrors( 'Update Error!');
         }
     }
 
@@ -129,15 +129,22 @@ class StudySessionController extends Controller
      */
     public function destroy(StudySession $studySession)
     {
-
         try {
-            $studySession->delete();
-            return response([
-                'message' => 'Delete success!'
-            ]);
+            $studySession->load('rooms');
+
+            if ($studySession->rooms->isEmpty()) {
+                $studySession->delete();
+                return response([
+                    'message' => 'Delete success!'
+                ]);
+            } else {
+                return response([
+                    'message' => 'Cannot delete course'
+                ], 400);
+            }
         } catch (\Exception $exception) {
             return response([
-                'message' => 'Cannot delete course'
+                'message' => $exception->getMessage()
             ], 400);
         }
     }

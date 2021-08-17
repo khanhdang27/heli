@@ -61,27 +61,30 @@ class TutorController extends Controller
      * @param CreateTutorRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreateTutorRequest $request)
+    public function store(Request $request)
     {
+        $_request = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'full_name' => 'required',
+            'subject_id' => 'required',
+            'password' => 'required',
+            'tutor_info:en' => 'required',
+            'tutor_info:cn' => 'required',
+            'tutor_info:sc' => 'required',
+            'tutor_level:en' => 'required',
+            'tutor_level:cn' => 'required',
+            'tutor_level:sc' => 'required',
+            'tutor_experience:en' => 'required',
+            'tutor_experience:cn' => 'required',
+            'tutor_experience:sc' => 'required',
+            'tutor_specialized:en' => 'required',
+            'tutor_specialized:cn' => 'required',
+            'tutor_specialized:sc' => 'required',
+        ]);
         DB::beginTransaction();
         try {
-            $_request = $request->validate([
-                'name' => 'required',
-                'full_name' => 'required',
-                'subject_id' => 'required',
-                'tutor_info:en' => 'required',
-                'tutor_info:cn' => 'required',
-                'tutor_info:sc' => 'required',
-                'tutor_level:en' => 'required',
-                'tutor_level:cn' => 'required',
-                'tutor_level:sc' => 'required',
-                'tutor_experience:en' => 'required',
-                'tutor_experience:cn' => 'required',
-                'tutor_experience:sc' => 'required',
-                'tutor_specialized:en' => 'required',
-                'tutor_specialized:cn' => 'required',
-                'tutor_specialized:sc' => 'required',
-            ]);
+            
             $_user = new User([
                 "name" => $_request["name"],
                 "email" => $_request["email"],
@@ -123,7 +126,7 @@ class TutorController extends Controller
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', $th->getMessage());
+            return back()->withErrors('Create error');
         }
         
     }
@@ -224,7 +227,7 @@ class TutorController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', $th->getMessage());
+            return back()->withErrors('Update error');
         }
 
     }

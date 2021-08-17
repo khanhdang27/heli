@@ -36,10 +36,16 @@
                                 <div class="form-group ">
                                     {{ Form::label('banner_title', 'Banner title') }}
                                     {{ Form::text('banner_title', $banner->banner_title,['class' => 'form-control'] ) }}
+                                    @error('banner_title')
+                                    <div class="alert text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="custom-file ">
                                     {{ Form::label('file', 'File', ['class' => 'custom-file-label']) }}
                                     {{ Form::file('file', ['class' => 'custom-file-input', 'required'])}}
+                                    @error('file')
+                                    <div class="alert text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                                 {!! Form::close() !!}

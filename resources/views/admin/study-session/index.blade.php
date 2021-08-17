@@ -44,7 +44,7 @@
                                     <th>
                                         Session End
                                     </th>
-
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody class="list">
@@ -59,7 +59,25 @@
                                     <td class="goal-project">
                                         {{ explode(' ', $value->session_end)[1] }}
                                     </td>
-
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fe fe-more-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="{{ route('admin.study-session.edit', $value) }}"
+                                                    class="dropdown-item">
+                                                    Edit
+                                                </a>
+                                                <a href="javascript:void(0)"
+                                                    onclick="itemDelete('{{ route('admin.study-session.destroy', $value->id) }}')"
+                                                    class="dropdown-item delete-item">
+                                                    Delete
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

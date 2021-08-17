@@ -95,7 +95,7 @@ class MembershipController extends Controller
             DB::commit();
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
-            return back()->with('errors', $th->getMessage());
+            return back()->withErrors('Create error');
         }
     }
 
