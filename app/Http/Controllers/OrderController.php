@@ -148,7 +148,9 @@ class OrderController extends Controller
             'membershipCourses.course.subject.certificate',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
-        )->where('id', $product_id)->first();
+        )->find($product_id);
+
+        dd($product_id, $courses_with_group);
 
         $student_bought = StudentCourses::query()->where([
             'course_id' => $courses_with_group->membershipCourses->course_id,

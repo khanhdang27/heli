@@ -31,15 +31,15 @@
                             @csrf
                             <div class="form-group ">
                                 {{ Form::label('course_name:en', 'Course Name (English)') }}
-                                {{ Form::text('course_name:en', $course->course_name, ['class' => 'form-control']) }}
+                                {{ Form::text('course_name:en', $course->translate('en')->course_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_name:cn', 'Course Name (Traditional Chinese)') }}
-                                {{ Form::text('course_name:cn', $course->course_name, ['class' => 'form-control']) }}
+                                {{ Form::text('course_name:cn', $course->translate('cn')->course_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
-                                {{ Form::text('course_name:sc', $course->course_name, ['class' => 'form-control']) }}
+                                {{ Form::text('course_name:sc', $course->translate('sc')->course_name, ['class' => 'form-control']) }}
                             </div>
                             <div class="row justify-content-between">
                                 <div class="form-group col-12 col-md-4">
@@ -68,15 +68,15 @@
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:en', 'Course Description (English)') }}
-                                {{ Form::text('course_description:en', $course->course_description, ['class' => 'form-control']) }}
+                                {{ Form::text('course_description:en', $course->translate('en')->course_description, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:cn', 'Course Description (Traditional Chinese)') }}
-                                {{ Form::text('course_description:cn', $course->course_description, ['class' => 'form-control']) }}
+                                {{ Form::text('course_description:cn', $course->translate('cn')->course_description, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_description:sc', 'Course Description (Simplify Chinese)') }}
-                                {{ Form::text('course_description:sc', $course->course_description, ['class' => 'form-control']) }}
+                                {{ Form::text('course_description:sc', $course->translate('sc')->course_description, ['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('course_overview', 'Course Overview') }}

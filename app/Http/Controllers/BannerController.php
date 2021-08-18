@@ -66,7 +66,7 @@ class BannerController extends Controller
             }
 
             DB::commit();
-            return back()->with('success', 'Save success');
+            return $this->redirect()->route('admin.banner.index')->with('success', 'Save success');
 
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -126,7 +126,7 @@ class BannerController extends Controller
             }
 
             DB::commit();
-            return back()->with('success', 'Save success');
+            return redirect()->route('admin.banner.index')->with('success', 'Save success');
 
         } catch (\Throwable $th) {
             DB::rollBack();

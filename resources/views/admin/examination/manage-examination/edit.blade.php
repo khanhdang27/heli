@@ -40,8 +40,10 @@
                                 {{ Form::textarea('description', $exam->description,['class' => 'form-control']) }}
                             </div>
                             <div class="form-group ">
-                                {{ Form::label('file', 'File') }}
-                                {{ Form::file('file', null,['class' => 'form-control']) }}
+                                <div class="custom-file">
+                                    <input name="file" type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                </div>
                             </div>
                             {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                             {!! Form::close() !!}
@@ -51,5 +53,12 @@
             </div>
         </div> <!-- / .row -->
     </div>
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 @endsection
 

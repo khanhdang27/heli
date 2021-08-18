@@ -17,13 +17,15 @@ class NewsController extends Controller
      */
     public function index()
     {
-        
-        return view('admin.news.index');
+        $news = News::orderBy('created_at', 'desc')->paginate(15);
+        return view('admin.news.index',[
+            'news' => $news
+        ]);
     }
 
     public function list()
     {
-        $news = News::orderBy('created_at', 'desc')->paginate(15);
+        $news = News::orderBy('created_at', 'desc')->paginate(8);
         return response()->json($news);
     }
 

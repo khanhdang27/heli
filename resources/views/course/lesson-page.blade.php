@@ -13,22 +13,22 @@
         <div class="container-fluid pt-5 pb-5 pl-0 pr-0">
             <div class="w-75 m-auto">
                 <div class="row">
-                    <div id="detail" class="col-lg-6">
+                    <div id="detail" class="col-lg-8">
                         <div class="product-box mt-0 row bg-white m-0">
-                            <div class="top-product col-lg-5 px-0">
-                                <div class="content-product row" style="background-color: {{$course->subject->subject_color_background}}; height: 200px">
-                                    <div class="col-3">
-                                        <div class="color-bar" style="height: 170px">
-                                        </div>
-                                    </div>
+                            <div class="top-product col-lg-5">
+                                <div class="content-product rounded-top-course"
+                                     style="background-color: {{$course->subject->subject_color_background}}">
                                     <div
-                                        class="body-product-content d-flex flex-column justify-content-between align-items-center col-9"
+                                        class="body-product-content d-flex flex-column justify-content-between align-items-center col-10 mx-auto"
                                         style="color: {{$course->subject->subject_color_text}}">
-                                        <div class="content-top text-wrap w-75">
-                                            {{$course->subject->certificate->certificate_code}}<br>
+                                        <div class="content-top text-wrap w-100">
+                                            {{ $course->subject->certificate->certificate_code }}<br>
+                                            @lang('keywords.course-item.liveCourse')
                                         </div>
-                                        <div class="content-bot" title="{{$course->course_name}}">
-                                            {{$course->course_name}}
+                                        <div class="box-content-bot p-4 w-100">
+                                            <div class="content-bot" title="{{$course->course_name}}">
+                                                {{$course->course_name}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -62,8 +62,7 @@ use \App\Models\Course;
                     </div> <!-- / .row -->
                 </div>
                 <div class="card-body h-100">
-                    <div class="table-responsive mb-0" data-toggle="lists"
-                        data-options="{&quot;valueNames&quot;: [&quot;goal-project&quot;, &quot;goal-status&quot;, &quot;goal-progress&quot;, &quot;goal-date&quot;]}">
+                    <div class="table-responsive mb-0" data-toggle="lists">
                         <table id="course-table" class="table table-sm h-100">
                             <thead>
                                 <tr>
@@ -145,23 +144,10 @@ use \App\Models\Course;
 @endsection
 
 @push('css')
-<link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" id="stylesheetDark">
 <style>
 
 </style>
 @endpush
 @push('js')
-<script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
-<script>
-    $('#course-table').DataTable({
-            searching: false,
-            ordering: false,
-            paging:false,
-            // responsive: true,
-            scrollX:true,
-            info: false,
-
-        });
-</script>
 @endpush

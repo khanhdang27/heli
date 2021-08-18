@@ -42,8 +42,10 @@
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                             <div class="form-group ">
-                                {{ Form::label('file', 'File') }}
-                                {{ Form::file('file', old('file'),['class' => 'form-control']) }}
+                                <div class="custom-file">
+                                    <input name="file" type="file" class="custom-file-input" id="validatedCustomFile" required>
+                                    <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                </div>
                             </div>
                             @error('file')
                             <div class="alert text-danger">{{ $message }}</div>
@@ -56,4 +58,11 @@
             </div>
         </div> <!-- / .row -->
     </div>
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 @endsection

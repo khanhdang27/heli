@@ -40,6 +40,18 @@
             @else
                 <div class="col-lg-2 mb-3">
                     <h2 class="title-foot">@lang('keywords.footer.member')</h2>
+
+                    @if (Auth::check())
+                    <a href="{{ route('site.profile.show',Auth::user()->id) }}">
+                        @lang('keywords.footer.myAccount')
+                    </a><br>
+                    <a href="{{ route('user.course') }}">
+                        @lang('keywords.footer.myCourses')
+                    </a><br>
+                    <a href="{{ route('user.calendar') }}">
+                        @lang('keywords.footer.mySchedule')
+                    </a>
+                    @else
                     <a data-toggle="modal" data-target="#loginModal" id="login" href="#">
                         @lang('keywords.footer.myAccount')
                     </a><br>
@@ -49,6 +61,8 @@
                     <a data-toggle="modal" data-target="#loginModal" id="login" href="#">
                         @lang('keywords.footer.mySchedule')
                     </a>
+                    @endif
+                    
                 </div>
             @endif
             <div class="col-lg-2 mb-3">

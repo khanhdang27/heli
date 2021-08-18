@@ -11210,7 +11210,7 @@ input.check-subscribe {
   color: var(--primary);
   background-color: var(--white);
   font-size: 20px;
-  height: 42px;
+  min-height: 42px;
 }
 
 .subscribe-check {
@@ -11339,7 +11339,7 @@ input.check-subscribe {
   background-color: var(--white);
   border: 3px solid var(--primary);
   color: var(--primary);
-  padding: 0 4rem;
+  padding: 0 3rem;
 }
 
 .btn-above-video .btn-register-now:hover {
@@ -11746,7 +11746,7 @@ input.check-subscribe {
   width: 100%;
   background-image: url("/helios/public/images/bg_sub.svg");
   background-size: cover;
-  z-index: 9;
+  z-index: 1001;
 }
 
 /*SUBSCRIBE CONTAINER */
