@@ -17,7 +17,6 @@ class PaymentController extends Controller
      */
     public function index(Request $request)
     {
-        // pi_1J0rEzLVVZaj9HRisGIsSaBT
         $stripe = new \Stripe\StripeClient(
             config('app.stripe_secret')
         );

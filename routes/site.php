@@ -18,6 +18,7 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('/loginby/{provider}', 'SocialAccountController@redirectToProvider')->name('socialLogin');
 Route::get('/loginby/{provide}/callback', 'SocialAccountController@handleProviderCallback');
 
+Route::get('news/list', 'NewsController@list')->name('news.list');
 Route::get('news', 'NewsController@show')->name('news');
 Route::get('news/{id}', 'NewsController@newsDetail')->name('news-detail');
 Route::get('teams', function () {
@@ -35,6 +36,7 @@ Route::get('blog-view', function () {
     return view('blog.blog-view');
 })->name('blog-view');
 
+Route::get('blog/list', 'BlogController@list')->name('blog.list');
 Route::get('show-blog', 'BlogController@showBlogPage')->name('show-blog');
 Route::get('show-blog/tag/{tag}', 'BlogController@showBlogPageByTag')->name('show-blog-tag');
 
