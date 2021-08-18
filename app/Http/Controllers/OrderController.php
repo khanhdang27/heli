@@ -49,7 +49,8 @@ class OrderController extends Controller
 
         return view('payments.update-payment-method', [
             'intent' => $_user->createSetupIntent(),
-            'courses_with_group' => $courses_with_group
+            'courses_with_group' => $courses_with_group,
+            'room_id' => $request->query('room_id') ?? null
         ]);
     }
 
@@ -70,11 +71,11 @@ class OrderController extends Controller
         if (empty($paymentMethods[0])) {
             if ($request->ajax()) {
                 return response()->json([
-                    'path' => route('site.order.addCard'),
+                    'path' => route('site.order.addCard', $request->input()),
                     'status' => 200,
                 ]);
             }
-            return redirect()->route('site.order.addCard', ['product_id' => $product_id]);
+            return redirect()->route('site.order.addCard', $request->input());
         } else {
 
             if (empty($student_bought)) {
@@ -131,7 +132,6 @@ class OrderController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return redirect()->route('site.home')->with('errors', 'Buy Fails');
         }
     }
@@ -140,6 +140,7 @@ class OrderController extends Controller
     {
         $product_id = $request->query('product_id');
 
+        // DB::enableQueryLog();
         $courses_with_group = CourseMembershipDiscount::with(
             'membershipCourses',
             'courseDiscounts',
@@ -149,8 +150,6 @@ class OrderController extends Controller
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
         )->find($product_id);
-
-        dd($product_id, $courses_with_group);
 
         $student_bought = StudentCourses::query()->where([
             'course_id' => $courses_with_group->membershipCourses->course_id,

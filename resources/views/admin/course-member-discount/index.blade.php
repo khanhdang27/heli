@@ -63,10 +63,18 @@
                                             {{$value->membershipCourses->membership->name}}
                                         </td>
                                         <td>
-                                            {{$value->publish}}
+                                            @if ($value->publish)
+                                                <span class="badge badge-success"> check </span>
+                                            @else
+                                                <span class="badge badge-warning"> none </span>
+                                            @endif
                                         </td>
                                         <td>
-                                            {{$value->recommended}}
+                                            @if ($value->recommended)
+                                                <span class="badge badge-success"> check </span>
+                                            @else
+                                                <span class="badge badge-warning"> none </span>
+                                            @endif
                                         </td>
                                         <td class="c-30 text-overflow-ellipsis">
                                             {{$value->description}}

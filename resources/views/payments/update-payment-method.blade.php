@@ -216,7 +216,7 @@ $course = $courses_with_group->membershipCourses->course;
                 })
                     .then(function (response) {
                         console.log(response);
-                        location.href = "{{ route('site.order.create', ['product_id' => $courses_with_group->id]) }}"
+                        location.href = "{{ route('site.order.create', ['product_id' => $courses_with_group->id, 'room_id'=> ] ) }}", 
                     })
                     .catch(function (error) {
                         console.log(error);

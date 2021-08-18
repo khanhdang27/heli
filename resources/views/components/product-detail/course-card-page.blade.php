@@ -30,8 +30,8 @@
                     <div class="">
                         <div class="name-product d-flex flex-column justify-content-between text-primary py-4">
                             <div class="d-flex flex-md-nowrap flex-sm-wrap">
-                                <div class="text-multiline-truncate pr-4">
-                                    <a class="h3 font-weight-bold" href="{{ empty($studentCourse) ? '#' : route('site.live_show', $studentCourse->room_live_course_id) }}" >
+                                <div class="text-limit-3 pr-4">
+                                    <a class="h3 font-weight-bold" href="{{ empty($studentCourse) ? '#' : route('site.live_show', $studentCourse->room_live_course_id ) }}" >
                                         {{rtrim(mb_substr($course->course_description,0,100))}}
                                         If you use this site regularly and would like to help keep the site on the Internet, please consider donating a small sum to help pay for the hosting and bandwidth bill.
                                     </a>

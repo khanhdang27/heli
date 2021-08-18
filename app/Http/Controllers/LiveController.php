@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class LiveController extends Controller
 {
-    public function show($id)
+    public function show($room_live_course_id)
     {
-        $room = RoomLiveCourse::with('course')->find($id);
+        $room = RoomLiveCourse::with('course')->find($room_live_course_id);
         return view('course.lesson-page', [
             'room' => $room
         ]);

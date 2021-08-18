@@ -24,7 +24,7 @@
                         v-on:submit="buyCourse"
                     >
                         @csrf
-                        <input name="product_id" value="{{$course->id}}" form="form-room" required hidden>
+                        <input name="product_id" value="{{$courseDetail->id}}" form="form-room" required hidden>
                         <div class="btn-above-video">
                             <button type="submit" class="btn-register-now w-100 border-primary h4 m-0 py-2">
                                 @lang('keywords.coursePage.buyNow')
@@ -34,7 +34,7 @@
                 </div>
             @else
                 <div class="btn-above-video">
-                    <a href="{{route('site.order.create', ['product_id'=>$course->id])}}">
+                    <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
                         <div class="btn-register-now w-100 border-primary h4 m-0 py-2">
                             @lang('keywords.coursePage.buyNow')
                         </div>
