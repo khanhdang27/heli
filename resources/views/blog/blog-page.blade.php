@@ -88,7 +88,6 @@ use App\Utilities\SelectionByClass;
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
