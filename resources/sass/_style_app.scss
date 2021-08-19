@@ -519,18 +519,24 @@ input.check-subscribe {
         height: 300px;
     }
 }
-.btn-next:after{
-    content: none !important;
-}
+
 .border-btn-next{
     border: 2px solid var(--primary);
     color: var(--primary);
 }
 .btn-prev{
-    top: 48% !important;
+    top: 46% !important;
+    left: 70px !important;
+    &:after{
+        content: none !important;
+    }
 }
 .btn-next{
     top: 46% !important;
+    right: 70px !important;
+    &:after{
+        content: none !important;
+    }
 }
 
 .btn-prev.swiper-button-disabled{

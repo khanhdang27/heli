@@ -25,7 +25,14 @@
 {{--</div>--}}
 @if(!$courses->isEmpty())
     <div class="pb-3 row flex-nowrap">
-        <div class="col-11 px-0">
+        <div class="col-1">
+            <div class="swiper-button-prev btn-prev" id="btn_prev">
+                <div class="rounded-circle border-btn-next animate-change-color py-3 px-4">
+                    <p class="h2 text-center mx-2">❮</p>
+                </div>
+            </div>
+        </div>
+        <div class="px-0 col-10">
             <div class="swiper-container" id="swiperCourse">
                 <div class="swiper-wrapper pb-3">
                     @foreach($courses as $value)
@@ -35,17 +42,11 @@
                         </div>
                     @endforeach
                 </div>
-
-                <div class="swiper-button-prev btn-prev" id="btn_prev">
-                    {{--                <div class="rounded-circle border-btn-next animate-change-color pt-1 px-3">--}}
-                    {{--                    <p class="h2 text-center">❮</p>--}}
-                    {{--                </div>--}}
-                </div>
             </div>
 
         </div>
-        <div class="col-1" id="btn_next">
-            <div class="swiper-button-next btn-next">
+        <div class="col-1">
+            <div class="swiper-button-next btn-next" id="btn_next">
                 <div class="rounded-circle border-btn-next animate-change-color py-2 px-4">
                     <p class="m-0 h2 text-center">❯</p>
                     <p class="text-nowrap text-center m-0">更多</p>
@@ -82,7 +83,7 @@
                 },
                 1200: {
                     slidesPerView: 4,
-                    spaceBetween: 10,
+                    spaceBetween: 20,
                 }
             },
         });

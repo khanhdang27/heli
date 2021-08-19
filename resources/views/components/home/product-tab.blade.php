@@ -50,6 +50,8 @@
     <h2 class="text-primary font-weight-bold mt-5 mb-3" id="tab-title">
         @lang('keywords.hotCourseSeries')
     </h2>
+</div>
+<div class="container-fluid">
     <div class="tab-content">
         <div id="menu1" class="tab-pane active">
             <x-product.course-list-hot :courses=$courseIGCSE typeOfUI="hot"></x-product.course-list-hot>
