@@ -124,7 +124,7 @@ $course = $courses_with_group->membershipCourses->course;
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="product-payment card-body"
-                                        style="background-color: {{$course->subject->subject_color_background}}; text: {{$course->subject->subject_color_text}}">
+                                        style="background-color: {{$course->subject->subject_color_background}}; text-color: {{$course->subject->subject_color_text}} ">
                                         <div class="text-center">
                                             <small>{{$course->subject->certificate->certificate_code}}</small></div>
                                         <p class="text-center"><small>{{ Course::COURSE_TYPE[$course->type] }}</small>
@@ -216,7 +216,7 @@ $course = $courses_with_group->membershipCourses->course;
                 })
                     .then(function (response) {
                         console.log(response);
-                        location.href = "{{ route('site.order.create', ['product_id' => $courses_with_group->id, 'room_id'=> ] ) }}", 
+                        location.href = "{{ route('site.order.create', ['product_id' => $courses_with_group->id, 'room_id'=> $room_id] ) }}", 
                     })
                     .catch(function (error) {
                         console.log(error);

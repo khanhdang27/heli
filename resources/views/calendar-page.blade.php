@@ -53,12 +53,12 @@
 
     </div>
     @php
-        $tkb[0] = array('start'=>'2021-07-14T13:00:00', 'end'=>'2021-07-14T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[1] = array('start'=>'2021-07-16T13:00:00', 'end'=>'2021-07-16T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[2] = array('start'=>'2021-07-18T13:00:00', 'end'=>'2021-07-18T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[3] = array('start'=>'2021-07-20T13:00:00', 'end'=>'2021-07-20T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[4] = array('start'=>'2021-07-22T13:00:00', 'end'=>'2021-07-22T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
-        $tkb[5] = array('start'=>'2021-07-24T13:00:00', 'end'=>'2021-07-24T15:00:00', 'title' => 'Toeic 900', 'description' => 'description of Toeic 900');
+        $thb = [];
+        foreach ($schedule as $item){
+            $start_date = $item->studySession == null ? $item->date.'T00:00:00': $item->date.'T'.explode(' ', $item->studySession->session_start)[1];
+            $end_date = $item->studySession == null ? $item->date.'T24:00:00': $item->date.'T'.explode(' ', $item->studySession->session_end)[1];
+            $tkb[] = array('start'=>$start_date, 'end'=>$end_date, 'title' => $item->course->course_name.' '.$item->note, 'description' => '');
+        }
     @endphp
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -76,22 +76,22 @@
                 selectable: true,
                 fixedWeekCount: false,
                 displayEventEnd: true,
-                eventSources: [{
-                    googleCalendarId: 'en.hong_kong.official#holiday@group.v.calendar.google.com',
-                },
+                eventSources: [
+                    {
+                        googleCalendarId: 'en.hong_kong.official#holiday@group.v.calendar.google.com',
+                    },
                     [
-                        @php
-                            foreach ($schedule as $item){
-                                $start_date = $item->studySession == null ? $item->date.'T00:00:00':str_replace(' ','T',$item->studySession->session_start);
-                                $end_date = $item->studySession == null ? $item->date.'T24:00:00':str_replace(' ','T',$item->studySession->session_end);
+                    @php
+                        
+                        foreach ($tkb as $e){
                                 echo('{');
-                                echo("title: '{$item->course->course_name} {$item->note}',");
-                                echo("start: '".$start_date."',");
-                                echo("end: '".$end_date."',");
+                                echo("title: '{$e['title']}',");
+                                echo("start: '{$e['start']}',");
+                                echo("end: '{$e['end']}',");
                                 echo('},');
                             }
-                        @endphp
-                    ],
+                    @endphp
+                    ]
 
                 ],
                 eventTimeFormat: { // like '14:30:00'
@@ -105,4 +105,15 @@
             calendar.render();
         });
     </script>
+
+    <style>
+        .fc-daygrid-dot-event .fc-event-title {
+            flex-grow: 1;
+            flex-shrink: 1;
+            min-width: 0;
+            overflow: hidden;
+            font-weight: bold;
+            white-space: normal;
+        }
+    </style>
 @endsection
