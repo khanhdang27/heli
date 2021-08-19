@@ -69,7 +69,7 @@ use App\Utilities\SelectionByClass;
                                         <div class="">
                                             <div class="d-flex align-items-center text-white">
                                                 <p class="h5 mr-5">
-                                                    <span v-cloak>@{{ post.created_at }}</span>
+                                                    <span v-cloak>@{{ post.created_at | formatDate }}</span>
                                                 </p>
                                                 <img class="mb-2 mr-2" src="{{asset("images/ic/ic_eye.svg")}}"
                                                     width="26">
@@ -103,7 +103,15 @@ use App\Utilities\SelectionByClass;
     @endif
 
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+
+        Vue.filter('formatDate', function(value) {
+            if (value) {
+                return moment(String(value)).format('MM/DD/YYYY hh:mm')
+            }
+        });
         var app = new Vue({
             el: '#show-blog',
             data: {
