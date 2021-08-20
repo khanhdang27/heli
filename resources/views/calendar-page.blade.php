@@ -53,7 +53,7 @@
 
     </div>
     @php
-        $thb = [];
+        $tkb = [];
         foreach ($schedule as $item){
             $start_date = $item->studySession == null ? $item->date.'T00:00:00': $item->date.'T'.explode(' ', $item->studySession->session_start)[1];
             $end_date = $item->studySession == null ? $item->date.'T24:00:00': $item->date.'T'.explode(' ', $item->studySession->session_end)[1];
