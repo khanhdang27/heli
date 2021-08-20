@@ -20,13 +20,6 @@ class SendMail extends Mailable
         return $this;
     }
 
-//    public function body($body)
-//    {
-//        $this->body = $body;
-//
-//        return $this;
-//    }
-
     /**
      * Build the message.
      *

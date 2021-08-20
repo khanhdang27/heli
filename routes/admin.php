@@ -40,7 +40,9 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('banner', 'BannerController');
 
     Route::get('profile-tutor', 'UserController@tutorProfile')->name('tutorProfile');
-    Route::get('profile-moderator', 'UserController@tutorModerator')->name('tutorModerator');
+    Route::get('profile-moderator', 'UserController@moderatorProfile')->name('moderatorProfile');
+    Route::get('profile-admin', 'UserController@adminProfile')->name('adminProfile');
+    Route::post('admin-update-owner', 'UserController@adminOwner')->name('adminOwner');
     Route::resource('user', 'UserController');
 
     Route::resource('tag', 'TagController');
