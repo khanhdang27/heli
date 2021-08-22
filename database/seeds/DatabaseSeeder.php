@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'role-list',
-            'role-create',
-            'role-edit',
-            'role-delete',
+            'banner-list',
+            'banner-create',
+            'banner-edit',
+            'banner-delete',
 
             'tutor-list',
             'tutor-create',
@@ -74,11 +74,6 @@ class DatabaseSeeder extends Seeder
             'certificate-edit',
             'certificate-delete',
 
-            'forum_post-list',
-            'forum_post-create',
-            'forum_post-edit',
-            'forum_post-delete',
-
             'study_session-list',
             'study_session-create',
             'study_session-edit',
@@ -108,7 +103,6 @@ class DatabaseSeeder extends Seeder
             'discount-create',
             'discount-edit',
             'discount-delete',
-
         ];
 
         foreach ($permissions as $permission) {
