@@ -70,10 +70,10 @@ class HomeController extends Controller
             'course_welcomes'=>$course_welcomes,
             'course_latest'=>$course_latest,
             'subjects'=>$subjects,
-            'courseIGCSE' => $courseIGCSE->get(),
-            'courseUKISET' => $courseUKISET->get(),
-            'courseIELTS' => $courseIELTS->get(),
-            'courseIAL' => $courseIAL->get(),
+            'courseIGCSE' => $courseIGCSE->latest('created_at')->get(),
+            'courseUKISET' => $courseUKISET->latest('created_at')->get(),
+            'courseIELTS' => $courseIELTS->latest('created_at')->get(),
+            'courseIAL' => $courseIAL->latest('created_at')->get(),
         ]);
     }
 
@@ -146,7 +146,7 @@ class HomeController extends Controller
             'membershipCourses.course.subject.certificate',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
-        )->where('publish',1)
+        )->where('publish', true)
         ->whereHas('membershipCourses', function ($query) {
             return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
         });
@@ -156,9 +156,9 @@ class HomeController extends Controller
         $course_welcomes = clone $courses_with_group;
         $course_latest = clone $courses_with_group;
 
-        $course_recommended = $course_recommended->where('recommended', 1)->limit(4)->get();
-        $course_hot = $course_hot->where('hot', 1);
-        $course_welcomes = $course_welcomes->where('welcomes', 1)->limit(2)->get();
+        $course_recommended = $course_recommended->where('recommended', true)->limit(4)->get();
+        $course_hot = $course_hot->where('hot', true);
+        $course_welcomes = $course_welcomes->where('welcomes', true)->limit(2)->get();
         $course_latest = $course_latest->whereHas('courseDiscounts.discount', function($query){
             return $query->where('start_date','<=', DATE(NOW()))
                 ->where('end_date','>=', DATE(NOW()));

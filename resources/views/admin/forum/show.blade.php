@@ -19,6 +19,7 @@
         <div class="card-body">
           <div class="card-body">
             <div class="d-flex">
+              @can('forum-delete')
               @if ($post->deleted_at)
               <a class="btn btn-outline-warning ml-auto" href="javascript:void(0)"
                 onclick="itemRestore('{{ route('admin.forum.restore', $post) }}')" class="dropdown-item delete-item">
@@ -30,6 +31,7 @@
                 Delete
               </a>
               @endif
+              @endcan
             </div>
             <div class="border rounded p-4 mt-3">
               <h3>Title</h3>

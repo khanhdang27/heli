@@ -1,22 +1,19 @@
 @php
-    use App\Utilities\SelectionByClass;
+use App\Utilities\SelectionByClass;
 @endphp
 <div class="dropdown">
-    <a href="#" class="btn btn-option py-0" role="button"
-       data-toggle="dropdown" aria-haspopup="true"
-       aria-expanded="false">
+    <a href="#" class="btn btn-option py-0" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
         <h2 class="mb-0">
             <i class="fe fe-more-horizontal"></i>
         </h2>
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-option py-0">
-        <a href="#" class="dropdown-item text-primary" data-toggle="modal"
-           data-target="#modalEdit">
+        <a href="#" class="dropdown-item text-primary" data-toggle="modal" data-target="#modalEdit">
             Edit
         </a>
-        <a href="javascript:void(0)"
-           onclick="postDelete('{{ route('site.post.destroy', $post->id) }}')"
-           class="dropdown-item delete-item text-primary">
+        <a href="javascript:void(0)" onclick="postDelete('{{ route('site.post.destroy', $post->id) }}')"
+            class="dropdown-item delete-item text-primary">
             Delete
         </a>
     </div>
@@ -31,7 +28,7 @@
                 </button>
             </div>
             {!! Form::open(['url' => URL::route('site.post.update',['type'=>'post', 'ref'=>0,$post->id]),
-                                'enctype' => 'multipart/form-data', 'method' => 'put' ]) !!}
+            'enctype' => 'multipart/form-data', 'method' => 'put' ]) !!}
             <div class="modal-body">
                 <div class="form-group">
                     {{ Form::label('tag_id', 'Tag') }}
@@ -54,9 +51,9 @@
                 <div class="mt-3">
                     <p>Old image</p>
                     @if(empty($post->image))
-                        <div class="border rounded p-3 text-center text-muted">None</div>
+                    <div class="border rounded p-3 text-center text-muted">None</div>
                     @else
-                        <img class="border rounded" src="{{asset('/file/'.$post->image->id)}}" width="100%"/>
+                    <img class="border rounded" src="{{asset('/file/'.$post->image->id)}}" width="100%" />
                     @endif
                 </div>
             </div>
@@ -69,8 +66,7 @@
 </div>
 
 <script>
-
-function postDelete(url) {
+    function postDelete(url) {
     var choose = confirm('Do you want delete item?');
 
     if (choose) {

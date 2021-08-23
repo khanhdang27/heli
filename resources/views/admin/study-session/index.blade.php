@@ -14,7 +14,7 @@
                             </h4>
                         </div>
                         <div class="col-auto">
-
+                            @can('study_session-create')
                             <!-- Button -->
                             <a href="{{ route('admin.study-session.create') }}" class="btn btn-sm btn-success">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
@@ -25,7 +25,7 @@
                                 </svg>
                                 Add
                             </a>
-
+                            @endcan
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -66,15 +66,19 @@
                                                 <i class="fe fe-more-vertical"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
+                                                @can('study_session-edit')
                                                 <a href="{{ route('admin.study-session.edit', $value) }}"
                                                     class="dropdown-item">
                                                     Edit
                                                 </a>
+                                                @endcan
+                                                @can('study_session-delete')
                                                 <a href="javascript:void(0)"
                                                     onclick="itemDelete('{{ route('admin.study-session.destroy', $value->id) }}')"
                                                     class="dropdown-item delete-item">
                                                     Delete
                                                 </a>
+                                                @endcan
                                             </div>
                                         </div>
                                     </td>

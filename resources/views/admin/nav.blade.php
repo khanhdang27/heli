@@ -31,9 +31,11 @@
                     @if (Auth::user()->hasRole('tutor'))
                     <a href="{{ route('admin.tutorProfile') }}" class="dropdown-item">Profile</a>
                     @elseif (Auth::user()->hasRole('moderator'))
-                    <a href="{{ route('admin.tutorModerator') }}" class="dropdown-item">Profile</a>
+                    <a href="{{ route('admin.moderatorProfile') }}" class="dropdown-item">Profile</a>
+                    @elseif (Auth::user()->hasRole('super-admin'))
+                    <a href="{{ route('admin.adminProfile') }}" class="dropdown-item">Profile</a>
                     @else
-
+                    {{--  --}}
                     @endif
                     <hr class="dropdown-divider">
                     <a href="{{ URL::route('admin.logout') }}" class="dropdown-item">Logout</a>

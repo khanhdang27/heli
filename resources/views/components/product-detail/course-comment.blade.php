@@ -18,7 +18,7 @@
                 </h5>
 
             </div>
-            <h5 class="text-primary pl-3">{{$course->course_description}}</h5>
+            <h5 class="text-primary pl-3">{{$course->course_name}}</h5>
         </div>
         <div class="col-xl-4 pr-0">
             @foreach($course->ratings as $rating)

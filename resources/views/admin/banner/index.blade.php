@@ -16,8 +16,7 @@
 
                         </div>
                         <div class="col-auto">
-
-                            <!-- Button -->
+                            @can('banner-create')
                             <a href="{{ route('admin.banner.create') }}" class="btn btn-sm btn-success">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                                     fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
@@ -27,7 +26,7 @@
                                 </svg>
                                 Add
                             </a>
-
+                            @endcan
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -68,15 +67,19 @@
                                                 <i class="fe fe-more-vertical"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
+                                                @can('banner-edit')
                                                 <a href="{{ route('admin.banner.edit', $value->id) }}"
                                                     class="dropdown-item">
                                                     Edit
                                                 </a>
+                                                @endcan
+                                                @can('banner-delete')
                                                 <a href="javascript:void(0)"
                                                     onclick="itemDelete('{{ route('admin.banner.destroy', $value->id) }}')"
                                                     class="dropdown-item delete-item">
                                                     Delete
                                                 </a>
+                                                @endcan
                                             </div>
                                         </div>
                                     </td>

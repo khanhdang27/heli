@@ -18,7 +18,12 @@ class LoginController extends Controller
 
     public function actionLogin(AdminLoginRequest $request)
     {
-        if(Auth::attempt($request->validated())) {
+        $input = $request->validated();
+        if(Auth::attempt([
+            'email' => $input['email'],
+            'password' => $input['password'],
+            'active' => 1
+        ])) {
             return redirect()->route('admin.dashboard')->with('status', 'login successful!');
         }
         throw ValidationException::withMessages([

@@ -36,38 +36,52 @@
                 <i class="fe fe-home"></i> Dashboards
                 </a>
                 </li> --}}
+                @can('banner-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.banner.index') active @endif"
                         href="{{ route('admin.banner.index') }}">
                         <i class="fe fe-image"></i> Banners
                     </a>
                 </li>
+                @endcan
+
+                @can('certificate-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.certificate.index') active @endif"
                         href="{{ route('admin.certificate.index') }}">
                         <i class="fe fe-file-text"></i> Certificates
                     </a>
                 </li>
+                @endcan
+
+                @can('subject-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.subject.index') active @endif"
                         href="{{ route('admin.subject.index') }}">
                         <i class="fe fe-book-open"></i> Subjects
                     </a>
                 </li>
+                @endcan
 
+                @can('course-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.course.index') active @endif"
                         href="{{ route('admin.course.index') }}">
                         <i class="fe fe-book-open"></i> Courses
                     </a>
                 </li>
+                @endcan
+
+                @can('document-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.course-material.index') active @endif"
                         href="{{ route('admin.course-material.index') }}">
                         <i class="fe fe-file"></i> Materials
                     </a>
                 </li>
+                @endcan
 
+                @can('blog-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.tag.index') active @endif"
                         href="{{ route('admin.tag.index') }}">
@@ -80,42 +94,62 @@
                         <i class="fe fe-layout"></i> Blog Post
                     </a>
                 </li>
+                @endcan
+
+                @can('forum-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.forum.index') active @endif"
                         href="{{ route('admin.forum.index') }}">
                         <i class="fe fe-layout"></i> Forum Post
                     </a>
                 </li>
+                @endcan
+
+                @can('news-list')
+
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.news.index') active @endif"
                         href="{{ route('admin.news.index') }}">
                         <i class="fe fe-layout"></i> News
                     </a>
                 </li>
+                @endcan
+
+                @can('discount-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.discount.index') active @endif"
                         href="{{ route('admin.discount.index') }}">
                         <i class="fe fe-percent"></i> Discount
                     </a>
                 </li>
+                @endcan
+
+                @can('price-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.price-tag.index') active @endif"
                         href="{{ route('admin.price-tag.index') }}">
                         <i class="fe fe-tag"></i> Price Publish
                     </a>
                 </li>
+                @endcan
+
+                @can('membership-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.membership.index') active @endif"
                         href="{{ route('admin.membership.index') }}">
                         <i class="fe fe-users"></i> Membership
                     </a>
                 </li>
+                @endcan
+                @can('examination-list')
+                    
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.examination.index') active @endif"
                         href="{{ route('admin.examination.index') }}">
                         <i class="fe fe-file-text"></i> Examinations
                     </a>
                 </li>
+                @endcan
 
                 <!-- Divider -->
                 <hr class="navbar-divider border border-secondary w-75 my-1">
@@ -148,18 +182,23 @@
                         </ul>
                     </div>
                 </li>
+                @can('subscribe-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.user-subscribe') active @endif"
                         href="{{ route('admin.user-subscribe') }}">
                         <i class="fe fe-mail"></i> User Subscribe
                     </a>
                 </li>
+                @endcan
+                @can('study_session-list')
+                    
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.study-session.index') active @endif"
                         href="{{ route('admin.study-session.index') }}">
                         <i class="fe fe-video"></i> Study Session
                     </a>
                 </li>
+                @endcan
                 @role(['super-admin'])
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.roles.index') active @endif"

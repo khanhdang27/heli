@@ -12,9 +12,7 @@
                     <h2>Role Management</h2>
                 </div>
                 <div class="pull-right text-right">
-                    @can('role-create')
-                        {{Form::submit('Save Permissions', ['class'=>'btn btn-primary'])}}
-                    @endcan
+                    {{Form::submit('Save Permissions', ['class'=>'btn btn-primary'])}}
                 </div>
             </div>
         </div>
@@ -22,31 +20,31 @@
     <div class="container-fluid pb-5">
         <table class="table mt-5">
             <thead>
-            <tr>
-                <th class="text-dark" scope="col">Permission</th>
-                @foreach($roles as $value)
+                <tr>
+                    <th class="text-dark" scope="col">Permission</th>
+                    @foreach($roles as $value)
                     <th class="text-dark text-center" scope="col">{{$value->name}}</th>
-                @endforeach
-            </tr>
+                    @endforeach
+                </tr>
             </thead>
             <tbody>
-            @foreach($permission as $item)
+                @foreach($permission as $item)
                 <tr>
-                    <td >
+                    <td>
                         <label class="mb-0">
                             {{$item->name}}
                         </label>
                     </td>
                     @foreach($roles as $value)
-                        <td class="text-center">
-                            {{ Form::checkbox("permission_".$value->id."_".$item->id,
+                    <td class="text-center">
+                        {{ Form::checkbox("permission_".$value->id."_".$item->id,
                                 null,
                                 $value->permissions->where('id', $item->id)->first(),
                                 array('class' => 'align-middle name check-role')) }}
-                        </td>
+                    </td>
                     @endforeach
                 </tr>
-            @endforeach
+                @endforeach
             </tbody>
         </table>
     </div>
