@@ -12158,6 +12158,14 @@ input.check-subscribe {
   -webkit-box-orient: vertical;
 }
 
+.item-schedule {
+  max-width: 123.58px;
+  height: 190px;
+  background-image: url("/helios/public/images/ic/bookmark.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
 .rating {
   display: inline-block;
   position: relative;
@@ -12385,6 +12393,11 @@ input.check-subscribe {
 
   .sort-sm {
     display: block !important;
+  }
+
+  .fc .fc-toolbar-title {
+    width: 250px !important;
+    font-size: 24px !important;
   }
 }
 
