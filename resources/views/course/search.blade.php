@@ -62,4 +62,3 @@ use App\Utilities\SelectionByClass;
     }
 </script>
 @endsection
-@endsection

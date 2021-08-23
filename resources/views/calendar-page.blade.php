@@ -37,15 +37,7 @@
                 </div>
                 <div class="event-calendar">
                     <div class="d-flex flex-wrap mb-5">
-                        <div class="mr-5 mb-3">
-                            <img src="{{asset("images/bookmark.png")}}" width="50">
-                        </div>
-                        <div class="mr-5 mb-3">
-                            <img src="{{asset("images/bookmark.png")}}" width="50">
-                        </div>
-                        <div>
-                            <img src="{{asset("images/bookmark.png")}}" width="50">
-                        </div>
+                        
                     </div>
                 </div>
             </div>

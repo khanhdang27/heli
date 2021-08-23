@@ -141,12 +141,15 @@
                     </a>
                 </li>
                 @endcan
+                @can('examination-list')
+                    
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.examination.index') active @endif"
                         href="{{ route('admin.examination.index') }}">
                         <i class="fe fe-file-text"></i> Examinations
                     </a>
                 </li>
+                @endcan
 
                 <!-- Divider -->
                 <hr class="navbar-divider border border-secondary w-75 my-1">
@@ -179,18 +182,23 @@
                         </ul>
                     </div>
                 </li>
+                @can('subscribe-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.user-subscribe') active @endif"
                         href="{{ route('admin.user-subscribe') }}">
                         <i class="fe fe-mail"></i> User Subscribe
                     </a>
                 </li>
+                @endcan
+                @can('study_session-list')
+                    
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.study-session.index') active @endif"
                         href="{{ route('admin.study-session.index') }}">
                         <i class="fe fe-video"></i> Study Session
                     </a>
                 </li>
+                @endcan
                 @role(['super-admin'])
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.roles.index') active @endif"
