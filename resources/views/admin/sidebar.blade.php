@@ -55,7 +55,6 @@
                 @endcan
 
                 @can('subject-list')
-
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.subject.index') active @endif"
                         href="{{ route('admin.subject.index') }}">

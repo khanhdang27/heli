@@ -82,6 +82,7 @@
                         <a href="{{ route('admin.forum.review', $value) }}" class="dropdown-item delete-item">
                           Review
                         </a>
+                        @can('forum-delete')
                         @if ($value->deleted_at)
                         <a href="javascript:void(0)" onclick="itemRestore('{{ route('admin.forum.restore', $value) }}')"
                           class="dropdown-item delete-item">
@@ -93,6 +94,7 @@
                           Delete
                         </a>
                         @endif
+                        @endcan
                       </div>
                     </div>
                   </td>
