@@ -125,7 +125,7 @@ class CertificateController extends Controller
                     default:
                         break;
                 }
-            })->get();
+            })->latest('created_at')->simplePaginate(15);
         // dd(DB::getQueryLog());
 
         return view('certificate.index', [

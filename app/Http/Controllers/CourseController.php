@@ -186,8 +186,8 @@ class CourseController extends Controller
                 return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
             })->whereHas('membershipCourses.course', function ($query) use ($input) {
                 return $query->whereTranslationLike('course_name', '%' . $input . '%');
-            })->get();
-
+            })->latest('created_at')->paginate(15);
+    
 
         return view('course.search', [
             'courses' => $courses_with_group,
