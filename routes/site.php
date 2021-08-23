@@ -76,5 +76,6 @@ Route::middleware('auth')->group(function () {
     Route::prefix('my/')->name('user.')->group(function () {
         Route::get('course', 'CourseController@my')->name('course');
         Route::get('calendar', 'ScheduleController@index')->name('calendar');
+        Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
     });
 });
