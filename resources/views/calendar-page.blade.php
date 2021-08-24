@@ -79,6 +79,10 @@
         }
     @endphp
     <script>
+        function getHolidays(events) {
+            return events.filter(event => event.id.length > 1);
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
 
@@ -122,7 +126,13 @@
 
             calendar.render();
 
+            var allEvents = calendar.getEvents();
+            console.log((allEvents));
+
             $('.calendar').on('click', 'button', function (e) {
+                allEvents = calendar.getEvents();
+                console.log((allEvents));
+                console.log(getHolidays(allEvents));
                 var button = $(this).attr('aria-label');
                 if (button === "next" || button === "prev") {
                     var date = calendar.getDate();
@@ -154,8 +164,8 @@
                         })
 
                         $("#item-schedule-list").html(html)
-
                     });
+                   
                 }
             });
 

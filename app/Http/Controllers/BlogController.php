@@ -158,21 +158,21 @@ class BlogController extends Controller
 
     public function showBlogPageByTag(Tag $tag)
     {
-        DB::enableQueryLog();
-
-        $blogs = Blog::with('tags')->whereHas('tags', function($query) use ($tag){
-            return $query->where('tags.id', $tag->id);
-        })->get();
-
         $tags = Tag::where('tag_type',Tag::$BLOG)->get();
 
         return view('blog.blog-page-tag',[
-            'blogs' => $blogs,
-            'tags' => $tags
+            'tags' => $tags,
+            'tag' => $tag
         ]);
     }
 
-
+    public function listByTag(Tag $tag)
+    {
+        $blogs = Blog::with('tags', 'photo')->whereHas('tags', function($query) use ($tag){
+            return $query->where('tags.id', $tag->id);
+        })->orderBy('created_at','desc')->paginate(9);
+        return response()->json($blogs);
+    }
 
     public function viewBlog($id){
         $blogs = Blog::where('id',$id)->with('tags')->first();

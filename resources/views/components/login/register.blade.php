@@ -20,24 +20,24 @@
                         <div class="col-lg-6">
                             <div class="box-btn-login">
                                 <a class="btn btn-register-now btn-login mt-0 mb-2 mx-auto animate-change-color" 
-                                    id="login-fb"
+                                    id="login-fb-register"
                                     href="{{route('site.socialLogin', 'facebook')}}">
                                     <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
                                             width="33px">
                                     </div>
                                     <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
-                                    <span id='spinner-load-fb' class="spinner-border spinner-border-sm ml-1 d-none"
+                                    <span id='spinner-load-fb-register' class="spinner-border spinner-border-sm ml-1 d-none"
                                         role="status" aria-hidden="true"></span>
                                     <span class="sr-only">Loading...</span>
                                 </a>
                                 <a class="btn btn-register-now btn-login mt-0 mx-auto  animate-change-color"
-                                    id="login-gg"
+                                    id="login-gg-register"
                                     href="{{route('site.socialLogin', 'google')}}">
                                     <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
                                             width="33px">
                                     </div>
                                     <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
-                                    <span id='spinner-load-gg' class="spinner-border spinner-border-sm ml-1 d-none"
+                                    <span id='spinner-load-gg-register' class="spinner-border spinner-border-sm ml-1 d-none"
                                         role="status" aria-hidden="true"></span>
                                     <span class="sr-only">Loading...</span>
                                 </a>
@@ -59,7 +59,7 @@
                         <div class="bottom-btn mt-5 d-flex justify-content-center">
                             <button class='btn-login btn-register-now mt-0' id='btn-register'>
                                 {{__('Register')}}
-                                <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none"
+                                <span id='spinner-load-register' class="spinner-border spinner-border-sm ml-1 d-none"
                                     role="status" aria-hidden="true"></span>
                                 <span class="sr-only">Loading...</span>
                             </button>
@@ -84,16 +84,16 @@
 @push('scripts')
 <script>
     $(function () {
-        var spinner = $("#spinner-load");
-        var spinner_fb = $("#spinner-load-fb");
-        var spinner_gg = $("#spinner-load-gg");
+        var spinner = $("#spinner-load-register");
+        var spinner_fb = $("#spinner-load-fb-register");
+        var spinner_gg = $("#spinner-load-gg-register");
         function loginSocial() {
             spinner_fb.removeClass('d-none');
             spinner_gg.removeClass('d-none');
         }
 
-        $('#login-gg').click(loginSocial)
-        $('#login-fb').click(loginSocial)
+        $('#login-gg-register').click(loginSocial)
+        $('#login-fb-register').click(loginSocial)
 
         $('#registerForm').submit(function (e) {
             e.preventDefault();

@@ -52,7 +52,7 @@ use App\Utilities\SelectionByClass;
             <div class="swiper-wrapper">
                 @foreach($blog_related as $item)
                 <div class="swiper-slide">
-                    <x-blog.blog-item-latest :blog=$item></x-blog.blog-item-latest>
+                    <x-blog.blog-related :blog=$item></x-blog.blog-related>
                 </div>
                 @endforeach
             </div>
