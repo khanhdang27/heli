@@ -1,7 +1,6 @@
 @font-face {
     font-family: Source Han Sans CN;
-    src: url("/helios/public/fonts/Source Han Sans CN Normal.ttf")
-        format("truetype");
+    src: url("/helios/public/fonts/Source Han Sans CN Normal.ttf") format("truetype");
 }
 
 html {
@@ -420,6 +419,7 @@ input.check-subscribe {
     outline: none;
 }
 
+
 /*GUEST PRAISE-----------------------------------------*/
 
 .title-card {
@@ -483,7 +483,7 @@ input.check-subscribe {
         .body-product-content {
             height: 100%;
             font-size: 15.7pt;
-            .box-content-bot{
+            .box-content-bot {
                 border: 1px solid;
                 .content-bot {
                     font-size: 14px;
@@ -514,34 +514,39 @@ input.check-subscribe {
         }
     }
 }
-.course-card-page{
-    .content-product{
+
+.course-card-page {
+    .content-product {
         height: 300px;
     }
 }
 
-.border-btn-next{
+.border-btn-next {
     border: 2px solid var(--primary);
     color: var(--primary);
 }
-.btn-prev{
+
+.btn-prev {
     top: 46% !important;
     left: 70px !important;
-    &:after{
-        content: none !important;
-    }
-}
-.btn-next{
-    top: 46% !important;
-    right: 70px !important;
-    &:after{
+    &:after {
         content: none !important;
     }
 }
 
-.btn-prev.swiper-button-disabled{
+.btn-next {
+    top: 46% !important;
+    right: 70px !important;
+    &:after {
+        content: none !important;
+    }
+}
+
+.btn-prev.swiper-button-disabled {
     opacity: 0 !important;
 }
+
+
 /*TAB PRODUCT-----------------------------------------*/
 
 .product-tab {
@@ -586,6 +591,7 @@ input.check-subscribe {
     height: 50px;
 }
 
+
 /*SHOW VIDEO-----------------------------------------*/
 
 .show-video {
@@ -628,6 +634,7 @@ input.check-subscribe {
 .footer-builder {
     border: 2px solid;
 }
+
 
 /*STEP FOR REGISTER-----------------------------------------*/
 
@@ -689,6 +696,7 @@ input.check-subscribe {
     height: 112px;
 }
 
+
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
 
 .content-team-page {
@@ -748,6 +756,7 @@ input.check-subscribe {
     }
 }
 
+
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
 .sub-header {
@@ -756,6 +765,7 @@ input.check-subscribe {
     background-size: cover;
     z-index: 1001;
 }
+
 
 /*SUBSCRIBE CONTAINER */
 
@@ -779,6 +789,7 @@ input.check-subscribe {
     }
 }
 
+
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 
 .title-subject {
@@ -794,6 +805,7 @@ input.check-subscribe {
     width: 30px;
     height: 20px;
 }
+
 
 /*COURSE PAGE-------------------------------------------------------------------------------*/
 
@@ -862,6 +874,7 @@ input.check-subscribe {
     font-size: 13.5pt;
 }
 
+
 /*COURSE PAGE 2-------------------------------------------------------------------------------*/
 
 .info-course {
@@ -905,11 +918,13 @@ input.check-subscribe {
     height: auto;
 }
 
+
 /*COURSE PAGE 3-------------------------------------------------------------------------------*/
 
 .video {
     max-width: 1550px;
 }
+
 
 /*BLOG PAGE----------------------------------------------------------------*/
 
@@ -1025,6 +1040,7 @@ input.check-subscribe {
     overflow-y: auto;
 }
 
+
 /*FORUM PAGE-------------------------------------------------------------------*/
 
 .body-forum-page {
@@ -1062,6 +1078,8 @@ input.check-subscribe {
         background-color: #f1f1f1;
     }
 }
+
+
 /*NEWS PAGE-----------------------------------------*/
 
 .box-news {
@@ -1103,11 +1121,12 @@ input.check-subscribe {
         font-size: 16px;
         cursor: pointer;
     }
-    input[type="radio"]:checked + label {
+    input[type="radio"]:checked+label {
         border-style: solid;
         border-color: var(--primary);
     }
 }
+
 
 /*PAYMENT PAGE*/
 
@@ -1145,8 +1164,9 @@ input.check-subscribe {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
 //Calendar
-.item-schedule{
+.item-schedule {
     max-width: 123.58px;
     height: 190px;
     background-image: url('/helios/public/images/ic/bookmark.svg');
