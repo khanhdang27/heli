@@ -15,25 +15,8 @@
             <div class="col-xl-1"></div>
             <div class="col-xl-4">
                 <div class="event-calendar">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <p><img class="mr-2" src="{{asset("images/ic/ic_ellipse1.svg")}}"
-                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                            <p><img class="mr-2" src="{{asset("images/ic/ic_polygon1.svg")}}"
-                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                        </div>
-                        <div class="col-sm-4">
-                            <p><img class="mr-2" src="{{asset("images/ic/ic_ellipse2.svg")}}"
-                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                            <p><img class="mr-2" src="{{asset("images/ic/ic_polygon2.svg")}}"
-                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                        </div>
-                        <div class="col-sm-4">
-                            <p><img class="mr-2" src="{{asset("images/ic/ic_ellipse3.svg")}}"
-                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                            <p><img class="mr-2" src="{{asset("images/ic/ic_polygon3.svg")}}"
-                                    width="34">@lang('keywords.HongKongPublicHolidays')</p>
-                        </div>
+                    <div class="row" id="item-event-list">
+                        <div class="col-sm-4"></div>
                     </div>
                 </div>
                 <div class="event-calendar">
@@ -79,6 +62,10 @@
         }
     @endphp
     <script>
+        function getHolidays(events) {
+            return events.filter(event => event.id.length > 1);
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
 
@@ -100,14 +87,13 @@
                     },
                     [
                         @php
-
                             foreach ($tkb as $e){
-                                    echo('{');
-                                    echo("title: '{$e['title']}',");
-                                    echo("start: '{$e['start']}',");
-                                    echo("end: '{$e['end']}',");
-                                    echo('},');
-                                }
+                                echo('{');
+                                echo("title: '{$e['title']}',");
+                                echo("start: '{$e['start']}',");
+                                echo("end: '{$e['end']}',");
+                                echo('},');
+                            }
                         @endphp
                     ]
 
@@ -122,6 +108,9 @@
 
             calendar.render();
 
+            // var calendarUrl = 'https://www.googleapis.com/calendar/v3/calendars/en.hongkong%23holiday%40group.v.calendar.google.com/events?key=AIzaSyDfKWdpeRjC-731P6PQkR8DsKuuVewHpqc';
+
+            
             $('.calendar').on('click', 'button', function (e) {
                 var button = $(this).attr('aria-label');
                 if (button === "next" || button === "prev") {
@@ -133,9 +122,10 @@
                         url: "{{route('site.user.getMonth', '')}}/" + current_month,
                         dataType: "json",
                     }).done(function (data) {
-                        var html = '';
-                        data.forEach(function (item) {
-                            html += `<div class="col-sm-4 col-lg-2 col-xl-4 col-6">
+                        var schedule = '';
+                        var holidays = '';
+                        data.schedule.forEach(function (item) {
+                            schedule += `<div class="col-sm-4 col-lg-2 col-xl-4 col-6">
                                         <div class="item-schedule mb-5">
                                             <div class="pt-3 px-2">
                                                 <p class="text-center text-limit-3">
@@ -152,10 +142,17 @@
                                         </div>
                                     </div>`;
                         })
+                        data.event.forEach(function (item) {
+                            holidays += `<div class="col-sm-4">
+                            <p><img class="mr-2" src="{{asset("images/ic/ic_ellipse1.svg")}}"
+                                        width="34">${item.googleEvent.summary}</p>
+                            </div>`;
+                        })
 
-                        $("#item-schedule-list").html(html)
-
+                        $("#item-schedule-list").html(schedule)
+                        $("#item-event-list").html(holidays)
                     });
+                   
                 }
             });
 

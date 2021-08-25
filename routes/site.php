@@ -39,6 +39,7 @@ Route::get('blog-view', function () {
 Route::get('blog/list', 'BlogController@list')->name('blog.list');
 Route::get('show-blog', 'BlogController@showBlogPage')->name('show-blog');
 Route::get('show-blog/tag/{tag}', 'BlogController@showBlogPageByTag')->name('show-blog-tag');
+Route::get('blog/tag/{tag}', 'BlogController@listByTag')->name('blog.list.tag');
 
 Route::get('view-blog/{id}', 'BlogController@viewBlog')->name('view-blog');
 

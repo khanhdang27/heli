@@ -16,7 +16,7 @@ class MembershipController extends Controller
      */
     public function index()
     {
-        $memberships = Membership::query()->paginate(15);
+        $memberships = Membership::query()->orderByDesc('created_at')->paginate(15);
         return view('admin.membership.index',[
             'memberships' => $memberships
         ]);
