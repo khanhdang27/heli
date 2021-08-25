@@ -104,14 +104,13 @@
                     },
                     [
                         @php
-
                             foreach ($tkb as $e){
-                                    echo('{');
-                                    echo("title: '{$e['title']}',");
-                                    echo("start: '{$e['start']}',");
-                                    echo("end: '{$e['end']}',");
-                                    echo('},');
-                                }
+                                echo('{');
+                                echo("title: '{$e['title']}',");
+                                echo("start: '{$e['start']}',");
+                                echo("end: '{$e['end']}',");
+                                echo('},');
+                            }
                         @endphp
                     ]
 
@@ -126,13 +125,8 @@
 
             calendar.render();
 
-            var allEvents = calendar.getEvents();
-            console.log((allEvents));
-
+            
             $('.calendar').on('click', 'button', function (e) {
-                allEvents = calendar.getEvents();
-                console.log((allEvents));
-                console.log(getHolidays(allEvents));
                 var button = $(this).attr('aria-label');
                 if (button === "next" || button === "prev") {
                     var date = calendar.getDate();

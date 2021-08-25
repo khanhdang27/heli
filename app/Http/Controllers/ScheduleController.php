@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudentSchedule;
-
-use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Spatie\GoogleCalendar\Event;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Request;
 
 class ScheduleController extends Controller
 {
@@ -25,6 +25,13 @@ class ScheduleController extends Controller
             ->whereMonth('date', $month)
             ->whereYear('date', date("Y"))
             ->get()->toArray();
+
+        // , Carbon $startDateTime = null, Carbon $endDateTime = null
+        $first_day_of_the_current_month = Carbon::create()->month($month)->startOfMonth();
+        $last_day_of_the_current_month = $first_day_of_the_current_month->copy()->endOfMonth();
+        $event = Event::get($first_day_of_the_current_month, $last_day_of_the_current_month);
+
+        dd($event);
 
         return response()->json($schedule);
     }

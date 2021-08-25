@@ -13,7 +13,7 @@ use App\Models\MembershipCourse;
 use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
-use App\Models\StudentSchedule;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -32,6 +32,8 @@ class CourseController extends Controller
      */
     public function index()
     {
+
+        $_user = User::find(Auth::user()->id);
         $tutors = Tutor::all();
         $courses = Course::query()
             ->with('tutor', 'translations')
@@ -41,6 +43,11 @@ class CourseController extends Controller
             ->when(request('tutor') != '', function (Builder $query) {
                 $query->where('tutor_id', request('tutor'));
             })
+            ->when($_user->hasRole('tutor'), function (Builder $query) use ($_user) {
+                $_user->load('tutor');
+                $query->where('tutor_id', $_user->tutor->id);
+            })
+            ->orderByDesc('created_at')
             ->paginate(15)
             ->withQueryString();
         return view('admin.course.index', [
