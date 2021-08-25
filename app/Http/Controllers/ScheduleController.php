@@ -26,13 +26,12 @@ class ScheduleController extends Controller
             ->whereYear('date', date("Y"))
             ->get()->toArray();
 
-        // , Carbon $startDateTime = null, Carbon $endDateTime = null
-        $first_day_of_the_current_month = Carbon::create()->month($month)->startOfMonth();
+        // , Carbon $startDateTime = null, Carbon $endDateTime = null,
+        $first_day_of_the_current_month = Carbon::create()->month($month)->year(date("Y"))->startOfMonth();
         $last_day_of_the_current_month = $first_day_of_the_current_month->copy()->endOfMonth();
-        $event = Event::get($first_day_of_the_current_month, $last_day_of_the_current_month);
+        $event = Event::get($first_day_of_the_current_month, $last_day_of_the_current_month, [], 'en.hong_kong.official#holiday@group.v.calendar.google.com' );
 
-        dd($event);
 
-        return response()->json($schedule);
+        return response()->json(['schedule'=> $schedule, 'event' => $event]);
     }
 }
