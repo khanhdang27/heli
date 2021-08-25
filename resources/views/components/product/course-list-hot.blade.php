@@ -57,7 +57,7 @@
     </div>
 
     <script>
-        var swiper = new Swiper("#swiperCourse", {
+        var swiperCourse = new Swiper("#swiperCourse", {
             @if(Auth::check())
             slidesPerColumn: 2,
             slidesPerColumnFill: 'row',

@@ -147,7 +147,7 @@
                     animationFreeClass.start(freeClass.set);
                     animationFreeClass.start(circleCheck.set);
                     animationFreeClass.start(btnFreeClass.set);
-            } 
+            }
         });
 
     </script>

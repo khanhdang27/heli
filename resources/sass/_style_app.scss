@@ -633,15 +633,14 @@ input.check-subscribe {
 
 .step-for-register {
     .content-step {
-        max-width: 1320px;
+        max-width: 80%;
         margin: 0 auto;
         #step2 {
-            margin: 0 7rem;
+            //margin: 0 7rem;
         }
         .circle-step {
             width: 88px;
             height: 88px;
-            border-radius: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -653,6 +652,7 @@ input.check-subscribe {
             font-size: 18pt;
         }
         .text-step {
+            max-width: 270px;
             font-size: 14pt;
         }
         .col-step {
@@ -660,7 +660,6 @@ input.check-subscribe {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 2rem;
         }
     }
     .dot-bar {
