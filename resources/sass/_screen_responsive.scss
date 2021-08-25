@@ -121,6 +121,9 @@
 }
 
 @media screen and (max-width: 576px) {
+    html{
+        font-size: 13px !important;
+    }
     .banner-content {
         top: 30% !important;
         height: 600px;
@@ -133,7 +136,9 @@
     .free {
         font-size: 20px !important;
     }
-
+    .container-home{
+        max-width: 100%;
+    }
     .container-course {
         max-width: 100%;
     }
@@ -159,5 +164,26 @@
     .fc .fc-toolbar-title{
         width: 250px !important;
         font-size: 24px !important;
+    }
+    .product-box {
+        .content-product{
+            height: 180px;
+            padding: 1rem 0;
+            .box-content-bot{
+
+            }
+        }
+        .bottom-product2{
+            .card-name-product{
+                min-height: 120px;
+                padding: 0 1rem !important;
+            }
+        }
+    }
+    .card-small{
+        display: none;
+    }
+    .swiper-card-small{
+        display: block !important;
     }
 }

@@ -70,7 +70,8 @@
                 @endif
                 <div class="d-flex justify-content-between">
                     <div class="title-product bg-primary text-white mt-auto">
-                        <h6>{{ $course_card->subject->subject_name }}</h6>
+                        <a href="{{URL::route('site.course.show',$course_card->id)}}" class="btn text-white h6 mb-0">
+                            {{ $course_card->subject->subject_name }}</a>
                     </div>
                     <a class="product-hover my-auto" href="{{URL::route('site.course.show',$course_card->id)}}">
                         @if($typeOfUI != 'welcome' && $typeOfUI != 'lasted' && $typeOfUI != 'recommended')

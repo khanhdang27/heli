@@ -57,13 +57,12 @@
     </div>
 
     <script>
-        var swiper = new Swiper("#swiperCourse", {
+        var swiperCourseHot = new Swiper("#swiperCourse", {
             @if(Auth::check())
             slidesPerColumn: 2,
             slidesPerColumnFill: 'row',
             @endif
             speed: 1000,
-            spaceBetween: 20,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
