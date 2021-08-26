@@ -31,6 +31,10 @@ h5,
     font-weight: 500;
 }
 
+.bg-gray {
+    background-color: var(--gray);
+}
+
 .course-title {
     font-size: 30px;
     font-weight: 500;
@@ -670,9 +674,9 @@ input.check-subscribe {
         }
     }
     .dot-bar {
-        width: 289px;
+        width: 290px;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
     .list-dot {
         width: 15px;

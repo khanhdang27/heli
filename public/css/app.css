@@ -10975,6 +10975,10 @@ h5,
   font-weight: 500;
 }
 
+.bg-gray {
+  background-color: var(--gray);
+}
+
 .course-title {
   font-size: 30px;
   font-weight: 500;
@@ -11432,7 +11436,7 @@ input.check-subscribe {
   width: -moz-fit-content;
   width: fit-content;
   min-width: 70px;
-  padding: 0.6rem 0;
+  padding: 0.2rem 0;
   text-align: center;
 }
 
@@ -11643,9 +11647,9 @@ input.check-subscribe {
 }
 
 .step-for-register .dot-bar {
-  width: 289px;
+  width: 290px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .step-for-register .list-dot {
@@ -12349,6 +12353,10 @@ input.check-subscribe {
 }
 
 @media screen and (max-width: 576px) {
+  html {
+    font-size: 13px !important;
+  }
+
   .banner-content {
     top: 30% !important;
     height: 600px;
@@ -12360,6 +12368,10 @@ input.check-subscribe {
 
   .free {
     font-size: 20px !important;
+  }
+
+  .container-home {
+    max-width: 100%;
   }
 
   .container-course {
@@ -12381,6 +12393,24 @@ input.check-subscribe {
   .fc .fc-toolbar-title {
     width: 250px !important;
     font-size: 24px !important;
+  }
+
+  .product-box .content-product {
+    height: 180px;
+    padding: 1rem 0;
+  }
+
+  .product-box .bottom-product2 .card-name-product {
+    min-height: 120px;
+    padding: 0 1rem !important;
+  }
+
+  .card-small {
+    display: none;
+  }
+
+  .swiper-card-small {
+    display: block !important;
   }
 }
 

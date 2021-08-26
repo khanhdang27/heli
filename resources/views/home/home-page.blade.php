@@ -95,7 +95,7 @@
     </div>
     @endif
     @if (!Auth::check())
-    <div class="free-class-container" id="free-class">
+    <div class="free-class-container">
         <div class="position-relative d-flex align-items-center">
             <div class="border-right-radius border-primary" id="border-right-radius">
                 <div class="text-content d-flex justify-content-end text-primary">
@@ -125,18 +125,7 @@
                 });
             };
         }
-        const freeClass = popmotion.styler(document.getElementById('border-right-radius'));
-        const circleCheck = popmotion.styler(document.getElementById('circle-check'));
-        const btnFreeClass = popmotion.styler(document.getElementById('btn-free-class'));
-
-        const animationFreeClass = popmotion.tween({
-            from: -1200,
-            to: {
-                x: 0
-            },
-            duration: 1500
-        });
-        let is_scoll_into = false;
+        
         $(window).scroll(function() {
             var hT = $('#free-class').offset().top,
                 hH = $('#free-class').outerHeight(),

@@ -8,8 +8,10 @@
             </div>
             <div class="col-sm-3 col-step" id="listDot1">
                 <div class="dot-bar">
+                    <div id="dot-bar-1" class='list-dot bg-white' style="transform: translateX(0)">
+                    </div>
                     @for ($i = 0; $i < 8; $i++)
-                        <div class='list-dot bg-white'>
+                        <div id="dot-bar-1-{{$i}}" class='list-dot bg-gray'>
                         </div>
                     @endfor
                 </div>
@@ -21,9 +23,11 @@
             </div>
             <div class="col-sm-3 col-step" id="listDot2">
                 <div class="dot-bar">
+                    <div id="dot-bar-2" class='list-dot bg-white'>
+                    </div>
                     @for ($i = 0; $i < 8; $i++)
-                        <div class='list-dot bg-white'>
-                        </div>
+                    <div id="dot-bar-2-{{$i}}" class='list-dot bg-gray'>
+                    </div>
                     @endfor
                 </div>
             </div>
@@ -71,28 +75,48 @@
     const text2 = document.getElementById('step2');
     const step3 = document.getElementById('animate-object3');
     const text3 = document.getElementById('content3');
-    const animeStep1 = anime({
+    const dot_1 = document.getElementById('dot-bar-1');
+    const dot_2 = document.getElementById('dot-bar-2');
+
+    var tl = anime.timeline({
+        duration: 3500,
+        loop: true
+    });
+    tl.add({
         targets: [step1, text1],
-        delay: 1000,
         scale: {
             value: 1.2,
         },
         direction: 'alternate'
-    });
-    const animeStep2 = anime({
+    }).add({
+        targets: [dot_1],
+        translateX: 290,
+        easing: 'steps(9)',
+        loop: false,
+        direction: 'alternate',
+        complete: function (){
+            dot_1.style.display = "none";
+        },
+    }).add({
         targets: [step2, text2],
-        delay: 4000,
+        scale: {
+            value: 1.2,
+        },
+        direction: 'alternate'
+    }).add({
+        targets: [dot_2],
+        translateX: 290,
+        easing: 'steps(9)',
+        loop: false,
+        direction: 'alternate',
+        complete: function (){
+            dot_2.style.display = "none";
+        },
+    }).add({
         scale: {
             value: 1.2,
         },
         direction: 'alternate'
     });
-    const animeStep3 = anime({
-        targets: [step3, text3],
-        delay: 7000,
-        scale: {
-            value: 1.2,
-        },
-        direction: 'alternate'
-    });
+
 </script>
