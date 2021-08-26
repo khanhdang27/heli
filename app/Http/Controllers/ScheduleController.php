@@ -31,7 +31,6 @@ class ScheduleController extends Controller
         $last_day_of_the_current_month = $first_day_of_the_current_month->copy()->endOfMonth();
         $event = Event::get($first_day_of_the_current_month, $last_day_of_the_current_month, [], 'en.hong_kong.official#holiday@group.v.calendar.google.com' );
 
-
         return response()->json(['schedule'=> $schedule, 'event' => $event]);
     }
 }
