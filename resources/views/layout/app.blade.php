@@ -43,7 +43,7 @@
 @stack('scripts')
 @stack('scriptsLogin')
 @stack('inputFile')
-
+@stack('showNavbar')
 @include('layout.footer')
 <script>
     var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?26718';

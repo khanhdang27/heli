@@ -31,6 +31,17 @@ h5,
     font-weight: 500;
 }
 
+.overlay{
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    background: rgba(11,10,12,.35);
+    z-index: 9998;
+    overflow: hidden;
+}
+
 .course-title {
     font-size: 30px;
     font-weight: 500;

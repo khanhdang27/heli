@@ -62,7 +62,7 @@
             slidesPerColumn: 2,
             slidesPerColumnFill: 'row',
             @endif
-            speed: 1000,
+            speed: 700,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
