@@ -14,12 +14,12 @@
    }
 
 @endphp
-<nav class="navbar navbar-expand-xl container-fluid py-3 px-5 position-absolute {{ $page != 'home' ? "bg-primary" : "sub-header" }}">
+<nav class="navbar navbar-expand-sm container-fluid py-3 px-5 position-absolute {{ $page != 'home' ? "bg-primary" : "sub-header" }}">
     <button class="navbar-toggler btn-collapse" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span><img src="{{asset("images/ic/ic-collapse.png")}}" width="40"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <div class="collapse navbar-collapse flex-wrap" id="navbarTogglerDemo01">
         <ul class="navbar-nav {{ $page != 'home' ? "mx-auto" : null }} mt-2 mt-lg-0">
             <li class="nav-item dropdown">
 

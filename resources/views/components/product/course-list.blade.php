@@ -1,11 +1,11 @@
-@if($typeOfUI == 'certificate_filter')
-    <div class="pb-5 row product-category-row">
-        @foreach($courses as $value)
-            <x-product.course-item :course=$value typeOfUI={{$typeOfUI}}>
-            </x-product.course-item>
-        @endforeach
-    </div>
-@else
+{{--@if($typeOfUI == 'certificate_filter')--}}
+{{--    <div class="pb-5 row product-category-row">--}}
+{{--        @foreach($courses as $value)--}}
+{{--            <x-product.course-item :course=$value typeOfUI={{$typeOfUI}}>--}}
+{{--            </x-product.course-item>--}}
+{{--        @endforeach--}}
+{{--    </div>--}}
+{{--@else--}}
     <div class="pb-5 row product-category-row card-small">
         @foreach($courses as $value)
             <x-product.course-item :course=$value typeOfUI={{$typeOfUI}}>
@@ -26,8 +26,8 @@
     </div>
     <script>
         var swiperCourse = new Swiper("#swiperSmall", {
-            speed: 1000,
+            speed: 500,
             width: 280,
         });
     </script>
-@endif
+{{--@endif--}}
