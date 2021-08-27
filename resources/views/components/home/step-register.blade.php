@@ -2,37 +2,33 @@
     <div class="content-step">
         <div class="row row-step py-5 justify-content-center">
             <div class="col-sm-2">
-                <div class="circle-step bg-white text-dark rounded-circle ml-auto" id="animate-object1">
+                <div class="circle-step text-dark rounded-circle ml-auto" id="animate-object1" >
                     Step 1
                 </div>
             </div>
             <div class="col-sm-3 col-step" id="listDot1">
                 <div class="dot-bar">
-                    <div id="dot-bar-1" class='list-dot bg-white' style="transform: translateX(0)">
-                    </div>
-                    @for ($i = 0; $i < 8; $i++)
+                    @for ($i = 0; $i < 9; $i++)
                         <div id="dot-bar-1-{{$i}}" class='list-dot bg-gray'>
                         </div>
                     @endfor
                 </div>
             </div>
             <div class="col-sm-1">
-                <div class="circle-step bg-white text-dark rounded-circle mx-auto" id="animate-object2">
+                <div class="circle-step text-dark rounded-circle mx-auto" id="animate-object2" style="background-color: white">
                     Step 2
                 </div>
             </div>
             <div class="col-sm-3 col-step" id="listDot2">
                 <div class="dot-bar">
-                    <div id="dot-bar-2" class='list-dot bg-white'>
-                    </div>
-                    @for ($i = 0; $i < 8; $i++)
+                    @for ($i = 0; $i < 9; $i++)
                     <div id="dot-bar-2-{{$i}}" class='list-dot bg-gray'>
                     </div>
                     @endfor
                 </div>
             </div>
             <div class="col-sm-2">
-                <div class="circle-step bg-white text-dark rounded-circle mr-auto" id="animate-object3">
+                <div class="circle-step text-dark rounded-circle mr-auto" id="animate-object3" style="background-color: white">
                     Step 3
                 </div>
             </div>
@@ -66,7 +62,6 @@
         </button>
     </div>
 </div>
-<script src="https://unpkg.com/popmotion/dist/popmotion.global.min.js"></script>
 <script src="{{ asset('js/anime.min.js') }}"></script>
 <script>
     const step1 = document.getElementById('animate-object1');
@@ -79,7 +74,7 @@
     const dot_2 = document.getElementById('dot-bar-2');
 
     var tl = anime.timeline({
-        duration: 3500,
+        duration: 900,
         loop: true
     });
     tl.add({
@@ -87,36 +82,72 @@
         scale: {
             value: 1.2,
         },
-        direction: 'alternate'
-    }).add({
-        targets: [dot_1],
-        translateX: 290,
-        easing: 'steps(9)',
-        loop: false,
         direction: 'alternate',
-        complete: function (){
-            dot_1.style.display = "none";
+        changeComplete: function (){
+            step1.style.backgroundColor = "#ffffff";
         },
-    }).add({
+        changeBegin: function () {
+            step1.style.backgroundColor = "#E6C06C";
+        }
+    })
+    
+    for (let index = 0; index < 9; index++) {
+        
+        tl.add({
+            targets: ['#dot-bar-1-'+index],
+            loop: false,
+            direction: 'alternate',
+            changeComplete: function (){
+                document.getElementById('dot-bar-1-'+index).style.backgroundColor = "#b1b1b1";
+            },
+            changeBegin: function () {
+                document.getElementById('dot-bar-1-'+index).style.backgroundColor = "#ffffff";
+            }
+        })
+    }
+    
+    
+    tl.add({
         targets: [step2, text2],
         scale: {
             value: 1.2,
         },
-        direction: 'alternate'
-    }).add({
-        targets: [dot_2],
-        translateX: 290,
-        easing: 'steps(9)',
-        loop: false,
         direction: 'alternate',
-        complete: function (){
-            dot_2.style.display = "none";
+        changeComplete: function (){
+            step2.style.backgroundColor = "#ffffff";
         },
-    }).add({
+        changeBegin: function () {
+            step2.style.backgroundColor = "#E6C06C";
+        }
+    })
+    
+    for (let index = 0; index < 9; index++) {
+        
+        tl.add({
+            targets: ['#dot-bar-2-'+index],
+            loop: false,
+            direction: 'alternate',
+            changeComplete: function (){
+                document.getElementById('dot-bar-2-'+index).style.backgroundColor = "#b1b1b1";
+            },
+            changeBegin: function () {
+                document.getElementById('dot-bar-2-'+index).style.backgroundColor = "#ffffff";
+            }
+        })
+    }
+    
+    tl.add({
+        targets: [step3, text3],
         scale: {
             value: 1.2,
         },
-        direction: 'alternate'
+        direction: 'alternate',
+        changeComplete: function (){
+            step3.style.backgroundColor = "#ffffff";
+        },
+        changeBegin: function () {
+            step3.style.backgroundColor = "#E6C06C";
+        }
     });
 
 </script>

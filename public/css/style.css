@@ -136,7 +136,8 @@ body {
 .banner-background {
     height: 600px;
 }
-.bg-opacity{
+
+.bg-opacity {
     background-color: #797979;
     opacity: 0.5;
     position: absolute;
@@ -145,6 +146,8 @@ body {
     width: 100%;
     height: 100%;
 }
+
+
 /*TAB PRODUCT-----------------------------------------*/
 
 .menu-category-text {
@@ -204,6 +207,7 @@ body {
 }
 
 .border-right-radius {
+    transform: translate(-500px);
     border: 5px solid;
     border-top-right-radius: 10rem;
     border-bottom-right-radius: 10rem;
@@ -255,6 +259,7 @@ body {
 
 
 /*LOGIN MODAL--------------------------------------------------------------------------------------------------*/
+
 .modal-body-login {
     display: flex;
     align-items: center;
@@ -274,7 +279,6 @@ body {
 .login-title {
     font-size: 20px;
 }
-
 
 .btn-register-now:focus {
     outline: none;
@@ -344,13 +348,9 @@ body {
     width: 100%;
 }
 
-
 .text-login-left {
     width: fit-content;
 }
-
-
-
 
 
 /*@media (max-width: 1200px) {*/
@@ -417,4 +417,3 @@ body {
     bottom: 25%;
     box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.16);
 }
-

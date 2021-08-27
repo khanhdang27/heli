@@ -95,11 +95,11 @@
     </div>
     @endif
     @if (!Auth::check())
-    <div class="free-class-container">
+    <div class="free-class-container" id="free-class">
         <div class="position-relative d-flex align-items-center">
-            <div class="border-right-radius border-primary" id="border-right-radius">
+            <div class="border-right-radius border-primary" id="border-right-free-class">
                 <div class="text-content d-flex justify-content-end text-primary">
-                    <h1 class="text-information text-content mb-0">
+                    <h1 class="text-information text-content mb-0" id="text-free-class">
                         @lang('keywords.freeTrialClass')
                     </h1>
                 </div>
@@ -125,17 +125,49 @@
                 });
             };
         }
+
+        const linestep1 = document.getElementById('border-right-free-class');
+        const textstep2 = document.getElementById('text-free-class');
+        const circlestep3 = document.getElementById('circle-check');
         
+        let is_scoll_into = false;
         $(window).scroll(function() {
             var hT = $('#free-class').offset().top,
                 hH = $('#free-class').outerHeight(),
                 wH = $(window).height(),
                 wS = $(this).scrollTop();
-                if (wS > (hT - hH) && wS < (hT + hH ) && !is_scoll_into){
-                    is_scoll_into = true;
-                    animationFreeClass.start(freeClass.set);
-                    animationFreeClass.start(circleCheck.set);
-                    animationFreeClass.start(btnFreeClass.set);
+            if (wS > (hT - hH) && wS < (hT + hH ) && !is_scoll_into){
+                is_scoll_into = true;
+                
+                var tl_free = anime.timeline({
+                    duration: 2500,
+                    loop: false
+                });
+
+                tl_free.add({
+                    targets: linestep1, 
+                    translateX: -10,
+                    direction: 'alternate',
+                    loop: true,
+                    easing: 'spring(1, 80, 10, 0)'
+                })
+                tl_free.add({
+                    targets: circlestep3, 
+                    translateY: 5,
+                    scale: 0.8,
+                    opacity: [0, 1],
+                    direction: 'alternate',
+                    loop: true,
+                    easing: 'spring(1, 80, 10, 0)'
+                })
+                tl_free.add({
+                    targets: textstep2,
+                    opacity: [0, 1],
+                    translateY: 5,
+                    direction: 'alternate',
+                    loop: true,
+                    easing: 'spring(1, 80, 10, 0)'
+                })
             }
         });
 
