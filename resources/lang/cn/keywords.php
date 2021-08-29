@@ -19,7 +19,12 @@ return [
         'welcomeBack' => '歡迎回來!',
         'loginToContinueCourse' => '登入繼續體驗課程',
     ],
+    'passwordReset'=> [
+        'resetPassword' =>'重设密码',
+        'sendPasswordResetLink'=> '发送密码重置链接'
+    ],
     'registerModal' => [
+        'register' => '登记',
         'freeRegistration' => '免費註冊',
         'experienceCourse' => '體驗課程',
         'onlineAndRealTimeCourse'=> '網上課程及實時課程',

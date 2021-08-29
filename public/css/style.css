@@ -7,13 +7,11 @@ body {
     margin: 0;
 }
 
-
 /* width */
 
 ::-webkit-scrollbar {
     width: 5px;
 }
-
 
 /* Track */
 
@@ -22,14 +20,12 @@ body {
     border-radius: 10px;
 }
 
-
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
-    background: #0B487D;
+    background: #0b487d;
     border-radius: 10px;
 }
-
 
 /* Handle on hover */
 
@@ -92,12 +88,12 @@ body {
     text-align: center;
 }
 
-.links>a {
+.links > a {
     color: #636b6f;
     padding: 0 25px;
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     text-decoration: none;
     text-transform: uppercase;
 }
@@ -126,7 +122,6 @@ body {
     padding: 0 0 0 2.5rem;
 }
 
-
 /*BANNER-----------------------------------------*/
 
 .img {
@@ -147,7 +142,6 @@ body {
     height: 100%;
 }
 
-
 /*TAB PRODUCT-----------------------------------------*/
 
 .menu-category-text {
@@ -163,13 +157,11 @@ body {
     }
 }
 
-
 /* width */
 
 ::-webkit-scrollbar {
     width: 5px;
 }
-
 
 /* Track */
 
@@ -178,21 +170,18 @@ body {
     border-radius: 10px;
 }
 
-
 /* Handle */
 
 ::-webkit-scrollbar-thumb {
-    background: #0B487D;
+    background: #0b487d;
     border-radius: 10px;
 }
-
 
 /* Handle on hover */
 
 ::-webkit-scrollbar-thumb:hover {
     background: #b30000;
 }
-
 
 /*FREE CLASS-----------------------------------------*/
 
@@ -212,7 +201,7 @@ body {
     border-top-right-radius: 10rem;
     border-bottom-right-radius: 10rem;
     border-left: 0 !important;
-    width: 67.50vw;
+    width: 67.5vw;
 }
 
 .text-content {
@@ -256,7 +245,6 @@ body {
         width: 83px;
     }
 }
-
 
 /*LOGIN MODAL--------------------------------------------------------------------------------------------------*/
 
@@ -306,32 +294,17 @@ body {
     margin-bottom: 1rem;
 }
 
-.rememberCheck {
-    display: block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--white);
-}
-
-.rememberCheck input[type="checkbox"] {
-    display: none;
-}
-
 .check {
     background-color: #fff;
     cursor: pointer;
     width: 100%;
     height: 100%;
-    transition: .4s;
+    transition: 0.4s;
     position: relative;
 }
 
 .check:before {
     background-color: #fff;
-}
-
-.rememberCheck input[type="checkbox"]:checked+.check {
-    background-color: dodgerblue;
 }
 
 .input-login-item {
@@ -352,21 +325,15 @@ body {
     width: fit-content;
 }
 
-
 /*@media (max-width: 1200px) {*/
-
 
 /*    .btn-close {*/
 
-
 /*        display: inline-block;*/
-
 
 /*    }*/
 
-
 /*}*/
-
 
 /*LATEST NEW PAGE--------------------------------------------------------------------------------------------------*/
 
@@ -402,7 +369,6 @@ body {
 .card-profile {
     max-width: 700px;
 }
-
 
 /*CARD PAYMENT--------------------------------------------------------------------------------------------------*/
 

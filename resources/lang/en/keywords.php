@@ -19,7 +19,12 @@ return [
         'welcomeBack' => 'Welcome back!',
         'loginToContinueCourse' => 'Login to continue the course',
     ],
+    'passwordReset'=> [
+        'resetPassword' =>'Reset Password',
+        'sendPasswordResetLink'=> 'Send Password Reset Link'
+    ],
     'registerModal' => [
+        'register' => 'Register',
         'freeRegistration' => 'Free registration',
         'experienceCourse' => 'Experience course',
         'onlineAndRealTimeCourse' => 'Online courses and real-time courses',
