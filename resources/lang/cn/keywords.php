@@ -10,7 +10,9 @@ return [
         'latestNews' => '最新資訊',
         'learningColumn' => '學習專欄',
         'q&aArea' => '問答討論區',
-        'welcomeBack' => '歡迎回來！'
+        'welcomeBack' => '歡迎回來！',
+        'profile' => '剖面',
+        'logOut' => '登出'
     ],
     'guestPraise' => '客⼾的表揚',
     'loginModal' => [

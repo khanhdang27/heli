@@ -58,6 +58,7 @@ h5,
 }
 
 .banner-content {
+    height: 569px;
     img {
         width: 100%;
     }
@@ -1187,3 +1188,24 @@ input.check-subscribe {
     background-size: 100%;
     background-repeat: no-repeat;
 }
+/*BANNER-----------------------------------------*/
+
+.banner-background {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-opacity {
+    background-color: #797979;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/*SUB HEADER-----------------------------------------*/
+
