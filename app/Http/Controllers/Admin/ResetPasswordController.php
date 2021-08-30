@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Ad;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Auth;
 
 class ResetPasswordController extends Controller
 {
@@ -38,14 +36,10 @@ class ResetPasswordController extends Controller
         $user->password = $password;
     }
 
-    public function redirectPath()
-    {
-        if (method_exists($this, 'redirectTo')) {
-            return $this->redirectTo();
-        }
-
-        return Auth::user()->hasRole('student') ? '/site' : '/admin';
-    }
-
-    protected $redirectTo = RouteServiceProvider::HOME;
+    /**
+     * Where to redirect users after resetting their password.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::ADMIN;
 }

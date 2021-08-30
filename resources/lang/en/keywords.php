@@ -134,6 +134,9 @@ return [
         'addReview' => 'Add your review'
     ],
     'more' => 'More',
-    'coursesIHavePurchased' => 'Courses I have purchased'
+    'coursesIHavePurchased' => 'Courses I have purchased',
+    'errors' => [
+        'tooManyRequests' => 'Too Many Requests, Please calm Wait for some minutes and requests again',
+    ]
 
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
@@ -32,7 +32,7 @@ class LoginController extends Controller
             'email' => $input['email'],
             'password' => $input['password'],
             'active' => 1
-        ])) {
+        ], $input['remember'] ? true : false)) {
             return redirect()->route('admin.dashboard')->with('status', 'login successful!');
         }
         throw ValidationException::withMessages([
@@ -58,4 +58,5 @@ class LoginController extends Controller
         Auth::logout();
         return redirect()->route('admin.login');;
     }
+
 }

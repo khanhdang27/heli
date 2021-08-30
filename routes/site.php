@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('', 'HomeController@index')->name('home');
 
 Route::post('register', 'Auth\RegisterController@register')->name('register');
-Route::post('login', 'Auth\LoginController@login')->name('userLogin')->middleware("throttle:5,10");;
+Route::post('login', 'Auth\LoginController@login')->name('userLogin')->middleware("throttle:5,10");
 Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
 Route::post('password/update', 'Auth\ChangePasswordController@update')->name('userUpdatePassword');
 

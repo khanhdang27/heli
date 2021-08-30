@@ -1,13 +1,18 @@
 <?php
 
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'login'])
     ->name('login');
-Route::post('login', [LoginController::class, 'actionLogin']);
+Route::post('login', [LoginController::class, 'actionLogin'])->middleware("throttle:5,10");
 Route::get('logout', [LoginController::class, 'logout'])
     ->name('logout');
+
+Route::get('password/reset', 'Admin\ForgotPasswordController@showLinkRequestForm')->name('backpack.auth.password.reset');
+Route::post('password/reset', 'Admin\ResetPasswordController@reset');
+Route::get('password/reset/{token}', 'Admin\ResetPasswordController@showResetForm')->name('backpack.auth.password.reset.token');
+Route::post('password/email', 'Admin\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email');
 
 Route::middleware('auth.admin')->group(function () {
     Route::get('/', [LoginController::class, 'dashboard'])
