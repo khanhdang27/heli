@@ -6,7 +6,6 @@
                     {{Auth::user()->name}}
                 </h4>
                 <sub class="d-block"> {{ Auth::user()->email }} </sub>
-
             </div>
         </div>
         <!-- User -->

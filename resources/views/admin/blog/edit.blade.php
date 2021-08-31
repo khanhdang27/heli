@@ -19,13 +19,10 @@ $tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Certificate
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -47,7 +44,6 @@ $tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
                         </div>
                         <div class="form-group">
                             {{ Form::label('tag_id', 'Post tag:', ['class'=>'mr-3']) }}
-
                             @foreach($tags as $id => $tag)
                             {{ Form::checkbox('tag_id[]',$id,in_array($id, array_column($blog->tags->toArray(),'id'))) }}
                             {{ Form::label($id, $tag,['class'=>'mr-3'] ) }}
