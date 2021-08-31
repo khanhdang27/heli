@@ -6,16 +6,14 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-
+                    <div class="d-flex align-items-center">
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Material
                             </h4>
-
                         </div>
-                        <div class="col-auto">
+                        <div class="ml-auto col-auto">
                             @can('forum-create')
                             <!-- Button -->
                             <a href="{{ route('admin.user.create') }}" class="btn btn-sm btn-success">

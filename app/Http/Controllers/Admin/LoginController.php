@@ -32,7 +32,7 @@ class LoginController extends Controller
             'email' => $input['email'],
             'password' => $input['password'],
             'active' => 1
-        ], $input['remember'] ? true : false)) {
+        ], empty($input['remember']) ? true : false)) {
             return redirect()->route('admin.dashboard')->with('status', 'login successful!');
         }
         throw ValidationException::withMessages([

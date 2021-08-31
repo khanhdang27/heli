@@ -15,27 +15,9 @@
 
         <!-- Collapse -->
         <div class="collapse navbar-collapse" id="sidebarCollapse">
-            <!-- Form -->
-            <form class="mt-4 mb-3 d-md-none">
-                <div class="input-group input-group-rounded input-group-merge">
-                    <input type="search" class="form-control form-control-rounded form-control-prepended"
-                        placeholder="Search" aria-label="Search">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <span class="fe fe-search"></span>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
             <!-- Navigation -->
             <ul class="navbar-nav">
-                {{-- <li class="nav-item">
-                    <a class="nav-link @if(request()->route()->getName() == 'admin.dashboard') active @endif"
-                       href="{{ route('admin.dashboard') }}">
-                <i class="fe fe-home"></i> Dashboards
-                </a>
-                </li> --}}
+
                 @can('banner-list')
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.banner.index') active @endif"
@@ -142,7 +124,7 @@
                 </li>
                 @endcan
                 @can('examination-list')
-                    
+
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.examination.index') active @endif"
                         href="{{ route('admin.examination.index') }}">
@@ -191,7 +173,7 @@
                 </li>
                 @endcan
                 @can('study_session-list')
-                    
+
                 <li class="nav-item">
                     <a class="nav-link @if(request()->route()->getName() == 'admin.study-session.index') active @endif"
                         href="{{ route('admin.study-session.index') }}">

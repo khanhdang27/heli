@@ -9,57 +9,65 @@ use App\Models\Subject;
 @extends('admin.layout')
 @section('content')
 <script src="{{asset("js/admin/vimeo-upload.js")}}"></script>
-    <!-- CARDS -->
-    <div class="container-fluid mt-5">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-10 col-xl-8">
-                <!-- Goals -->
-                <div class="card">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <!-- Title -->
-                                <h4 class="card-header-title">
-                                    Create Course
-                                </h4>
-                            </div>
-                        </div> <!-- / .row -->
-                    </div>
-                    <div class="card-body">
-                        {!! Form::open(['url' => route('admin.course.lecture.store', $course->id), 'enctype'=>'multipart/form-data']) !!}
-                        @csrf
-                        <div class="form-group ">
-                            {{ Form::label('lectures_name', 'Name') }}
-                            {{ Form::text('lectures_name',old('lectures_name'),['class' => 'form-control', 'required', 'id'=> 'lectures_name']) }}
+<!-- CARDS -->
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10 col-xl-8">
+            <!-- Goals -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <div class="pr-2">
+                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                                <i class="fe fe-arrow-left"></i>
+                            </button>
                         </div>
-                        <div class="form-group ">
-                            {{ Form::label('lectures_description', 'Description') }}
-                            {{ Form::text('lectures_description',old('lectures_description'),['class' => 'form-control', 'required', 'id'=> 'lectures_description']) }}
+                        <div>
+                            <!-- Title -->
+                            <h4 class="card-header-title">
+                                Create Course
+                            </h4>
                         </div>
-                        <div class="form-group ">
-                            Pick up video
-                            <label class="btn btn-block btn-info">
-                                Browse&hellip; <input id="browse" type="file" style="display: none;">
-                            </label>
-                            <div class="col-md-12">
-                                <div id="results"></div>
-                            </div>
-                            <div id="progress-container" class="progress">
-                                <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100" style="width: 0%">&nbsp;0%
-                                </div>
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
-                    </div>
+                    </div> <!-- / .row -->
                 </div>
-
+                <div class="card-body">
+                    {!! Form::open(['url' => route('admin.course.lecture.store', $course->id),
+                    'enctype'=>'multipart/form-data']) !!}
+                    @csrf
+                    <div class="form-group ">
+                        {{ Form::label('lectures_name', 'Name') }}
+                        {{ Form::text('lectures_name',old('lectures_name'),['class' => 'form-control', 'required', 'id'=> 'lectures_name']) }}
+                    </div>
+                    <div class="form-group ">
+                        {{ Form::label('lectures_description', 'Description') }}
+                        {{ Form::text('lectures_description',old('lectures_description'),['class' => 'form-control', 'required', 'id'=> 'lectures_description']) }}
+                    </div>
+                    <div class="form-group ">
+                        Pick up video
+                        <label class="btn btn-block btn-info">
+                            Browse&hellip; <input id="browse" type="file" style="display: none;">
+                        </label>
+                        <div class="col-md-12">
+                            <div id="results"></div>
+                        </div>
+                        <div id="progress-container" class="progress">
+                            <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
+                                role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100"
+                                style="width: 0%">&nbsp;0%
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
             </div>
-        </div> <!-- / .row -->
-    </div>
+
+        </div>
+    </div> <!-- / .row -->
+</div>
 
 
-    <script type="text/javascript">
-        /**
+<script type="text/javascript">
+    /**
          * Called when files are dropped on to the drop target or selected by the browse button.
          * For each file, uploads the content to Drive & displays the results when complete.
          */
@@ -167,6 +175,6 @@ use App\Models\Subject;
             browse.addEventListener('change', handleFileSelect, false)
         })
 
-    </script>
+</script>
 
 @endsection

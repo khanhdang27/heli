@@ -12,16 +12,14 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-
+                    <div class="d-flex align-items-center">
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Subjects
                             </h4>
-
                         </div>
-                        <div class="col-auto">
+                        <div class="ml-auto col-auto">
                             @can('subject-create')
                             <!-- Button -->
                             <a href="{{ route('admin.subject.create') }}" class="btn btn-sm btn-success">
@@ -47,6 +45,12 @@
                                         Subject Name
                                     </th>
                                     <th>
+                                        Subject Name ( 普通話 )
+                                    </th>
+                                    <th>
+                                        Subject Name ( 简体中文 )
+                                    </th>
+                                    <th>
                                         Certificate
                                     </th>
                                     <th>
@@ -63,6 +67,12 @@
                                 <tr>
                                     <td class="goal-project">
                                         {{ $value->subject_name }}
+                                    </td>
+                                    <td class="goal-project">
+                                        {{ $value->translate('cn')->subject_name }}
+                                    </td>
+                                    <td class="goal-project">
+                                        {{ $value->translate('sc')->subject_name }}
                                     </td>
                                     <td class="goal-project">
                                         {{ $value->certificate['certificate_code'] }}

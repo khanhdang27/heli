@@ -6,16 +6,14 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-
+                    <div class="d-flex align-items-center">
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Banners
                             </h4>
-
                         </div>
-                        <div class="col-auto">
+                        <div class="ml-auto col-auto">
                             @can('banner-create')
                             <a href="{{ route('admin.banner.create') }}" class="btn btn-sm btn-success">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"

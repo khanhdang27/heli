@@ -6,14 +6,14 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Examination
                             </h4>
                         </div>
-                        <div class="col-auto">
+                        <div class="ml-auto col-auto">
                             @can('examination-create')
 
                             <!-- Button -->
