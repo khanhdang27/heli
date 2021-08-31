@@ -7,6 +7,8 @@ return [
 
     'home_url' => env('APP_HOME_URL', ''),
 
+    'admin_url' => env('APP_ADMIN_URL', ''),
+
     'vimeo_app_id' => env('VIMEO_APP_ID', ''),
     'vimeo_token' => env('VIMEO_TOKEN', ''),
     'google_api_calendar' => env('GOOGLE_API_CALENDAR', ''),

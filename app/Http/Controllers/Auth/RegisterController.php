@@ -44,21 +44,7 @@ class RegisterController extends Controller
     public function __construct()
     {
     }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param array $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+    
 
     public function register(Request $request)
     {
@@ -90,18 +76,17 @@ class RegisterController extends Controller
                     ], 200);
             } catch (\Throwable $th) {
                 DB::rollBack();
-
                 return response()->json(
                     [
                         'status' => 400,
-                        'message' => $th->getMessage()
+                        'message' => "Register Error"
                     ], 400);
             }
         }
         return response()->json(
             [
                 'status' => 400,
-                'message' => 'mail is empty'
+                'message' => 'Please enter email'
             ], 400);
     }
 

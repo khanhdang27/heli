@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
@@ -8,9 +8,18 @@ use App\Http\Requests\Admin\AdminLoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 
 class LoginController extends Controller
 {
+    
+    use AuthenticatesUsers;
+
+    protected $maxAttempts = 5; // Default is 5
+    protected $decayMinutes = 1; // Default is 1
+
+
     public function login()
     {
         return view('admin.login');
@@ -23,7 +32,7 @@ class LoginController extends Controller
             'email' => $input['email'],
             'password' => $input['password'],
             'active' => 1
-        ])) {
+        ], $input['remember'] ? true : false)) {
             return redirect()->route('admin.dashboard')->with('status', 'login successful!');
         }
         throw ValidationException::withMessages([
@@ -47,11 +56,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
         return redirect()->route('admin.login');;
     }
+
 }

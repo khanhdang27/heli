@@ -10979,6 +10979,17 @@ h5,
   background-color: var(--gray);
 }
 
+.overlay {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  background: rgba(11, 10, 12, 0.35);
+  z-index: 9998;
+  overflow: hidden;
+}
+
 .course-title {
   font-size: 30px;
   font-weight: 500;
@@ -12320,6 +12331,27 @@ input.check-subscribe {
   .menu-category-text {
     display: flex;
   }
+
+  .item-header {
+    padding: 0 !important;
+  }
+
+  .dropdown-menu-language {
+    left: -35px;
+  }
+
+  .user-cart,
+  .user-name {
+    display: none;
+  }
+
+  .navbar-small {
+    margin-left: 0 !important;
+  }
+
+  .logo {
+    width: 180px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -12349,6 +12381,35 @@ input.check-subscribe {
 
   .product-hover h4 {
     font-size: 20px;
+  }
+
+  .item-header {
+    padding: 0.5rem 1.5rem !important;
+  }
+
+  .navbar-responsive .item-header {
+    border-bottom: 1px solid var(--light);
+  }
+
+  .dropdown-menu-language {
+    left: -48px;
+  }
+
+  .navbar-small {
+    position: fixed;
+    height: 100%;
+    margin-left: 0 !important;
+    background: var(--white);
+    transform: translate3d(0px, 0px, 0px) !important;
+    transition: all 0s;
+    top: 0;
+    left: 0;
+    width: 320px;
+    z-index: 9999;
+  }
+
+  .navbar-small .navbar-small-close {
+    display: block !important;
   }
 }
 
@@ -12411,6 +12472,10 @@ input.check-subscribe {
 
   .swiper-card-small {
     display: block !important;
+  }
+
+  .user-space {
+    display: none !important;
   }
 }
 

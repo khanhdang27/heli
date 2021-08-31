@@ -21,7 +21,12 @@ return [
         'welcomeBack' => 'Welcome back!',
         'loginToContinueCourse' => 'Login to continue the course',
     ],
+    'passwordReset'=> [
+        'resetPassword' =>'Reset Password',
+        'sendPasswordResetLink'=> 'Send Password Reset Link'
+    ],
     'registerModal' => [
+        'register' => 'Register',
         'freeRegistration' => 'Free registration',
         'experienceCourse' => 'Experience course',
         'onlineAndRealTimeCourse' => 'Online courses and real-time courses',
@@ -131,6 +136,9 @@ return [
         'addReview' => 'Add your review'
     ],
     'more' => 'More',
-    'coursesIHavePurchased' => 'Courses I have purchased'
+    'coursesIHavePurchased' => 'Courses I have purchased',
+    'errors' => [
+        'tooManyRequests' => 'Too Many Requests, Please calm Wait for some minutes and requests again',
+    ]
 
 ];

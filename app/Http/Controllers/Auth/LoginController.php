@@ -7,8 +7,6 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Validator;
 
 class LoginController extends Controller
 {
@@ -26,13 +24,6 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = 'logged';
-
-    /**
      * Create a new controller instance.
      *
      *
@@ -45,13 +36,13 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if (empty($request->get('email'))) {
-            return response()->json([
-                'status' => 400,
-                'message' => 'email is not register'
-            ]);
-        }
-        $userLogin = User::where('email', $request->get('email'))->first();
+        $input = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'remember_me' => 'nullable'
+        ]);
+
+        $userLogin = User::where('email', $input['email'])->first();
         if ($userLogin->active != 1) {
             return response()->json([
                 'status' => 401,
@@ -59,16 +50,11 @@ class LoginController extends Controller
             ]);
         }
 
-        $input = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
         if (Auth::attempt([
             'email' => $input['email'],
             'password' => $input['password'],
             'active' => 1
-        ])) {
+        ], empty($input['remember_me']) ? true : false )) {
             return response()->json([
                 'status' => 200,
                 'message' => 'success'
@@ -76,7 +62,7 @@ class LoginController extends Controller
         }
         return response()->json([
             'status' => 400,
-            'message' => 'fail'
+            'message' => 'login fail'
         ]);
 
     }
