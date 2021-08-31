@@ -10,7 +10,9 @@ return [
         'latestNews' => 'Latest News',
         'learningColumn' => 'Learning Column',
         'q&aArea' => 'Q&A Area',
-        'welcomeBack' => 'Welcome back!'
+        'welcomeBack' => 'Welcome back!',
+        'profile' => 'Profile',
+        'logOut' => 'Log out'
     ],
     'guestPraise' => 'Guest Praise',
     'loginModal' => [

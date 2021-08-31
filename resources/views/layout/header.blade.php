@@ -12,28 +12,42 @@
                 data-target="#navb" aria-expanded="false">
             <img src="{{asset("images/ic/ic-collapse.png")}}" width="38">
         </button>
-        <a class="navbar-brand mr-4" href="{{ URL::route('site.home') }}">
+        <a class="navbar-brand m-0" href="{{ URL::route('site.home') }}">
             <img class="logo" width="200" src={{ asset("images/HeliosLogo.svg")}}>
         </a>
         <div class="navbar-collapse collapse ml-3 navbar-small" id="navb">
-            <div class="navbar-small-close d-none">
+            <div class="navbar-small-close d-lg-none">
                 <div class="d-flex justify-content-between p-4">
-                    <img height="45" src={{ asset("images/ic/ic_helios.svg")}}>
-                    <button class="h2 mb-0 p-0 btn bg-white" id="closeNavbar" type="button" data-toggle="collapse" data-target="#navb"
+                    @if(Auth::check())
+                        <div class="d-flex align-items-center flex-wrap w-75">
+                            @if(empty(Auth::user()->avatar))
+                                <img width="45" height="45" class="rounded-circle"
+                                     src="{{asset('images/user_default.png')}}">
+                            @else
+                                <img width="45" height="45" class="rounded-circle"
+                                     src="{{asset('/file/'.Auth::user()->avatar->id)}}">
+                            @endif
+                            <p class="mb-0 ml-3 text-primary text-wrap text-truncate">{{Auth::user()->name}}</p>
+                        </div>
+                    @else
+                        <img height="45" src={{ asset("images/ic/ic_helios.svg")}}>
+                    @endif
+                    <button class="h2 mb-0 p-0 btn bg-white" id="closeNavbar" type="button" data-toggle="collapse"
+                            data-target="#navb"
                             aria-expanded="true"><span class="mb-auto">×</span>
                     </button>
                 </div>
             </div>
-            <ul class="navbar-nav mr-auto navbar-responsive">
+            <ul class="navbar-nav mr-auto navbar-responsive ml-lg-4">
                 <li class="nav-item item-header">
                     <a class="nav-link"
                        href={{ URL::route('site.teams') }}>@lang('keywords.navBar.mentorTeam')</a>
                 </li>
                 <li class="nav-item dropdown item-header">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="certificateDrop" data-toggle="dropdown">
                         @lang('keywords.navBar.subjects')
                     </a>
-                    <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0">
+                    <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0" aria-labelledby="certificateDrop">
                         @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_code', 'id') as $key => $value)
                             @if ($key != 1)
                                 <a class="dropdown-item"
@@ -54,31 +68,61 @@
                     <a class="nav-link"
                        href="{{ URL::route('site.post.index') }}">@lang('keywords.navBar.q&aArea')</a>
                 </li>
+                @if(Auth::check())
+                    <li class="nav-item item-header d-md-none">
+                        <a class="nav-link d-flex justify-content-between"
+                           href="{{ URL::route('site.profile.show', Auth::user()->id) }}">
+                            @lang('keywords.navBar.profile')
+                            <h3 class="fe fe-user text-primary mb-0"></h3>
+                        </a>
+                    </li>
+                    <li class="nav-item item-header d-md-none">
+                        <a class="nav-link d-flex justify-content-between"
+                           href="{{ URL::route('site.userLogout')}}">
+                            @lang('keywords.navBar.logOut')
+                            <h3 class="fe fe-log-out text-primary mb-0"></h3>
+                        </a>
+                    </li>
+                @endif
+                <li class="nav-item item-header dropdown d-md-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="navLang" data-toggle="dropdown">
+                        {{ Config::get('languages')[App::getLocale()] }}
+                    </a>
+                    <div
+                        class="dropdown-menu bg-primary border border-white rounded-0">
+                        @foreach (Config::get('languages') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                            @endif
+                        @endforeach
+                    </div>
+                </li>
             </ul>
         </div>
-                    <div id="overlay" class="overlay position-fixed" style="display: none"></div>
-        <div class="user-space d-flex ml-auto">
+        <div id="overlay" class="overlay position-fixed" style="display: none"></div>
+        <div class="d-flex ml-auto">
             @if(Auth::check())
                 @if(Auth::user()->hasRole('student'))
-                    <div class="nav-item py-1 user-cart">
+                    <div class="nav-item py-1 user-cart d-none d-xl-block">
                         <a class="btn-link bg-white" href="{{route('site.payment-history')}}">
                             <img src={{asset("images/ic/ic_cart.svg")}} width="21px">
                         </a>
                     </div>
                 @endif
-                <div class="nav-item ml-2 user-name">
+                <div class="nav-item ml-2 user-name d-none d-xl-block">
                     <a class="nav-link px-0 mr-1">
                         {{Auth::user()->name}}
                     </a>
                 </div>
-                <div class="nav-item dropdown p-0 border-0">
+                <div class="nav-item dropdown p-0 border-0 d-none d-md-block ml-auto">
                     <a class="btn btn-link bg-white" id="navbardrop" data-toggle="dropdown">
                         <img src={{asset("images/ic/ic_user.svg")}} width="24">
                     </a>
                     <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0">
                         <a class="dropdown-item"
-                           href="{{ URL::route('site.profile.show', Auth::user()->id) }}">Profile</a>
-                        <a class="dropdown-item" href="{{ URL::route('site.userLogout')}}">Log out</a>
+                           href="{{ URL::route('site.profile.show', Auth::user()->id) }}">@lang('keywords.navBar.profile')</a>
+                        <a class="dropdown-item"
+                           href="{{ URL::route('site.userLogout')}}">@lang('keywords.navBar.logOut')</a>
                     </div>
                 </div>
             @else
@@ -99,33 +143,35 @@
             @endif
 
         </div>
-        <ul class="user-space navbar-nav flex-row ml-1">
-            @if (Auth::check() && Auth::User()->hasRole('student'))
-                <li class="nav-item item-header p-2">
-                    <a class="nav-link"
-                       href="{{ route('site.user.course') }}">@lang('keywords.footer.myCourses')
+        <div class="d-none d-md-block">
+            <ul class="navbar-nav flex-row ml-1">
+                @if (Auth::check() && Auth::User()->hasRole('student'))
+                    <li class="nav-item item-header p-2">
+                        <a class="nav-link"
+                           href="{{ route('site.user.course') }}">@lang('keywords.footer.myCourses')
+                        </a>
+                    </li>
+                    <li class="nav-item item-header p-2">
+                        <a class="nav-link"
+                           href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')
+                        </a>
+                    </li>
+                @endif
+                <li class="nav-item item-header dropdown p-2">
+                    <a class="nav-link dropdown-toggle px-3" href="#" id="navbardrop" data-toggle="dropdown">
+                        {{ Config::get('languages')[App::getLocale()] }}
                     </a>
+                    <div
+                        class="dropdown-menu bg-primary border border-white rounded-0 dropdown-menu-language position-absolute">
+                        @foreach (Config::get('languages') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                            @endif
+                        @endforeach
+                    </div>
                 </li>
-                <li class="nav-item item-header p-2">
-                    <a class="nav-link"
-                       href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')
-                    </a>
-                </li>
-            @endif
-            <li class="nav-item item-header dropdown p-2">
-                <a class="nav-link dropdown-toggle position-relative" href="#" id="navbardrop" data-toggle="dropdown">
-                    {{ Config::get('languages')[App::getLocale()] }}
-                </a>
-                <div
-                    class="dropdown-menu bg-primary border border-white rounded-0 dropdown-menu-language position-absolute">
-                    @foreach (Config::get('languages') as $lang => $language)
-                        @if ($lang != App::getLocale())
-                            <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
-                        @endif
-                    @endforeach
-                </div>
-            </li>
-        </ul>
+            </ul>
+        </div>
     </nav>
 
 </div>
