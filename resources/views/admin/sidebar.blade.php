@@ -47,7 +47,7 @@
 
                 @can('course-list')
                 <li class="nav-item">
-                    <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.course')) active @endif"
+                    <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.course.')) active @endif"
                         href="{{ route('admin.course.index') }}">
                         <i class="fe fe-book-open"></i> Courses
                     </a>

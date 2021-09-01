@@ -122,6 +122,17 @@ class BlogController extends Controller
             'content' => $request['content']
         ]);
         $blog->save();
+
+        if (!empty($request['photo'])) {
+            if (!empty($blog->photo)) {
+                $blog->photo->delete();
+            }
+            $file = File::storeFile(
+                $request['photo'],
+                Blog::class,
+                $blog->id,
+            );
+        }
         foreach ($request['tag_id'] as $tag_id){
             $blogTag = new BlogTags([
                 'blog_id' => $blog->id,
@@ -129,7 +140,7 @@ class BlogController extends Controller
             ]);
             $blogTag->save();
         }
-        return back()->with('success', 'Create success');
+        return back()->with('success', 'Update success');
     }
 
     public function showBlogPage()

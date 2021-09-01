@@ -14,13 +14,10 @@
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Membership
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>

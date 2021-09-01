@@ -21,13 +21,10 @@ use App\Models\Membership;
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Student
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>

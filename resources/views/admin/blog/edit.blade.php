@@ -21,18 +21,31 @@ $tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
                         <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
-                                Edit Certificate
+                                Edit Post
                             </h4>
                         </div>
                     </div> <!-- / .row -->
                 </div>
                 <div class="card-body">
-                    <div class="card-body">
+                    <div id="editBlog" class="card-body">
                         {!! Form::open(['route' => ['admin.blog.update', $blog->id], 'method'=> 'put', 'enctype' =>
                         'multipart/form-data']) !!}
-                        <div class="form-group ">
-                            {{ Form::label('photo', 'Photo') }}
-                            {{ Form::file('photo', ['class' => 'form-control']) }}
+                        <div class="custom-file mb-5">
+                            {{ Form::label('photo', 'Photo',['class'=>'custom-file-label']) }}
+                            {{ Form::file('photo',['class' => 'custom-file-input', '@change'=>'onFileChange']) }}
+                        </div>
+                        <div>
+                            @if (empty($blog->photo))
+                            <div id="preview_file_already">
+                            </div>
+                            @else
+                            <div id="preview_file_already" class="mb-4">
+                                <img class="img-thumbnail" src="{{asset('/file/'.$blog->photo->id)}}" width=100% />
+                            </div>
+                            @endif
+                            <div id="preview" class="mb-4" style="display: none">
+                                <img class="img-thumbnail" v-if="url" :src="url" width=100% />
+                            </div>
                         </div>
                         <div class="form-group ">
                             {{ Form::label('title', 'Title') }}
@@ -44,10 +57,11 @@ $tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
                         </div>
                         <div class="form-group">
                             {{ Form::label('tag_id', 'Post tag:', ['class'=>'mr-3']) }}
-                            @foreach($tags as $id => $tag)
-                            {{ Form::checkbox('tag_id[]',$id,in_array($id, array_column($blog->tags->toArray(),'id'))) }}
-                            {{ Form::label($id, $tag,['class'=>'mr-3'] ) }}
-                            @endforeach
+                            <select id="tags_select" class="option-multiple-select" name="tag_id[]" multiple="multiple">
+                                @foreach($tags as $id => $tag)
+                                <option value="{{$id}}">{{$tag}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}
@@ -57,9 +71,39 @@ $tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
         </div>
     </div> <!-- / .row -->
 </div>
+
+<script>
+    const displayPhoto = new Vue({
+        el: '#editBlog',
+        data() {
+            return {
+                url: null,
+            }
+        },
+        methods: {
+            onFileChange(e) {
+                const file = e.target.files[0];
+                this.url = URL.createObjectURL(file);
+                document.getElementById('preview').style = 'block';
+                document.getElementById('preview_file_already').hidden = 'true';
+            }
+        }
+    })
+</script>
 <script>
     window.onload = function() {
-            CKEDITOR.replace( 'ckeditor');
-        };
+        CKEDITOR.replace( 'ckeditor');
+    };
+    $(document).ready(function() {
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+        $('.option-multiple-select').select2();
+
+        $('#tags_select').val(@json(array_column($blog->tags->toArray(),'id')));
+
+        $('#tags_select').trigger('change');
+    });
 </script>
 @endsection

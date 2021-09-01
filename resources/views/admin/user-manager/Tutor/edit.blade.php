@@ -17,13 +17,10 @@ use App\Utilities\SelectionByClass;
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Tutor
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>

@@ -91,13 +91,13 @@ use App\Utilities\SelectionByClass;
 
 <script>
     // Add the following code if you want the name of the file appear on select
-        $(".custom-file-input").on("change", function() {
-          var fileName = $(this).val().split("\\").pop();
-          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 
-        $(document).ready(function() {
-            $("select[name='course_id']").select2();
-        });
+    $(document).ready(function() {
+        $("select[name='course_id']").select2();
+    });
 </script>
 @endsection
