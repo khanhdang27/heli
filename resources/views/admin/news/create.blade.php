@@ -15,7 +15,6 @@
                         </div>
                         <div>
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Create News
                             </h4>
@@ -48,7 +47,8 @@
                         </div>
                         <div class="custom-file ">
                             {{ Form::label('file', 'News File',['class'=>'custom-file-label']) }}
-                            {{ Form::file('file',['class' => 'custom-file-input']) }}
+                            {{ Form::file('file',['class' => 'custom-file-input', 'accept'=>"image/*, application/pdf"]) }}
+                            <sub class="text-dark"> accept image file, PDF </sub>
                             @error('file')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
@@ -64,16 +64,16 @@
 </div>
 <script>
     window.onload = function () {
-            CKEDITOR.replace('ckeditor');
-        };
+        CKEDITOR.replace('ckeditor');
+    };
 </script>
 @push('inputFile')
 <script>
     // Add the following code if you want the name of the file appear on select
-            $(".custom-file-input").on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 </script>
 @endpush
 @endsection

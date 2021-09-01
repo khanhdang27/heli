@@ -32,7 +32,8 @@ $tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
                         'multipart/form-data']) !!}
                         <div class="custom-file mb-5">
                             {{ Form::label('photo', 'Photo',['class'=>'custom-file-label']) }}
-                            {{ Form::file('photo',['class' => 'custom-file-input', '@change'=>'onFileChange']) }}
+                            {{ Form::file('photo',['class' => 'custom-file-input', '@change'=>'onFileChange', 'accept'=>"image/*"]) }}
+                            <sub class="text-dark"> accept image file </sub>
                         </div>
                         <div>
                             @if (empty($blog->photo))

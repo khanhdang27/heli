@@ -27,11 +27,9 @@
                         <div class="row">
                             <div class="col-6">
                                 @if ($banner->image != null)
-
                                 <img class="w-100 img-thumbnail" src="{{ asset('/file/'.$banner->image->id) }}" alt="">
                                 @endif
                             </div>
-
                             <div class="col-6">
                                 {!! Form::open(['route' => ['admin.banner.update',$banner->id],'method'=>'put',
                                 'enctype'=>'multipart/form-data']) !!}
@@ -46,7 +44,8 @@
                                 </div>
                                 <div class="custom-file ">
                                     {{ Form::label('file', 'File', ['class' => 'custom-file-label']) }}
-                                    {{ Form::file('file', ['class' => 'custom-file-input', 'required'])}}
+                                    {{ Form::file('file', ['class' => 'custom-file-input', 'required', 'accept'=>"image/*"])}}
+                                    <sub class="text-dark"> accept image file </sub>
                                     @error('file')
                                     <div class="alert text-danger">{{ $message }}</div>
                                     @enderror

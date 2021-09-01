@@ -18,9 +18,7 @@ use \App\Utilities\SelectionByClass;
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Material
                             </h4>
@@ -79,8 +77,10 @@ use \App\Utilities\SelectionByClass;
                         <div class="row form-group">
                             <div class="col-md-6 col-12">
                                 <div class="custom-file">
-                                    <input name="file" type="file" class="custom-file-input" id="validatedCustomFile">
+                                    <input name="file" type="file" class="custom-file-input" id="validatedCustomFile"
+                                        accept="application/pdf">
                                     <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <sub class="text-dark"> accept file PDF </sub>
                                 </div>
                             </div>
                             @if (!empty($material->file))

@@ -7,6 +7,11 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
+                        <div class="pr-2">
+                            <a class="btn btn-outline-dark btn-sm" href="{{ route('admin.examination.index') }}">
+                                <i class="fe fe-arrow-left"></i>
+                            </a>
+                        </div>
                         <div>
                             <!-- Title -->
                             <h4 class="card-header-title">

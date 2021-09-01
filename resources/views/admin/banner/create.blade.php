@@ -35,7 +35,8 @@
                         </div>
                         <div class="custom-file ">
                             {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
-                            {{ Form::file('file',['class' => 'custom-file-input']) }}
+                            {{ Form::file('file',['class' => 'custom-file-input', 'accept'=>"image/*"]) }}
+                            <sub class="text-dark"> accept image file </sub>
                             @error('file')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror

@@ -14,13 +14,10 @@
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Examination
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -49,8 +46,9 @@
                         <div class="form-group ">
                             <div class="custom-file">
                                 <input name="file" type="file" class="custom-file-input" id="validatedCustomFile"
-                                    required>
+                                    accept="application/pdf">
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                <sub class="text-dark"> accept file PDF </sub>
                             </div>
                         </div>
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}

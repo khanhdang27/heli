@@ -77,8 +77,10 @@ use App\Utilities\SelectionByClass;
                             {{ Form::text('course_material_origin:sc', old('course_material_origin:sc'),['class' => 'form-control']) }}
                         </div>
                         <div class="custom-file">
-                            <input name="file" type="file" class="custom-file-input" id="validatedCustomFile" required>
+                            <input name="file" type="file" class="custom-file-input" id="validatedCustomFile"
+                                accept="application/pdf" required>
                             <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                            <sub class="text-dark"> accept file PDF</sub>
                         </div>
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}

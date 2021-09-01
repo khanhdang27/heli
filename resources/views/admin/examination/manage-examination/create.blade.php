@@ -50,8 +50,9 @@
                         <div class="form-group ">
                             <div class="custom-file">
                                 <input name="file" type="file" class="custom-file-input" id="validatedCustomFile"
-                                    required>
+                                    accept="application/pdf" required>
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                <sub class="text-dark"> accept file PDF </sub>
                             </div>
                         </div>
                         @error('file')

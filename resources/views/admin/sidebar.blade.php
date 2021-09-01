@@ -126,7 +126,7 @@
                 @can('examination-list')
 
                 <li class="nav-item">
-                    <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.examination')) active @endif"
+                    <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.examination') || Str::startsWith(request()->route()->getName(), 'admin.manage-examination') ) active @endif"
                         href="{{ route('admin.examination.index') }}">
                         <i class="fe fe-file-text"></i> Examinations
                     </a>
