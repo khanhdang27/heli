@@ -71,10 +71,10 @@
                 <div class="d-flex justify-content-between">
                     <div class="title-product bg-primary text-white mt-auto">
                         <a href="{{URL::route('site.course.show',$course_card->id)}}"
-                           class="btn text-white h6 mb-0 text-nowrap text-truncate px-2">
+                           class="btn text-white h6 mb-0 text-nowrap text-truncate px-2 product-hover">
                             {{ $course_card->subject->subject_name }}</a>
                     </div>
-                    <a class="product-hover my-auto" href="{{URL::route('site.course.show',$course_card->id)}}">
+                    <a class="product-hover my-auto w-75 text-right" href="{{URL::route('site.course.show',$course_card->id)}}">
                         @if($typeOfUI != 'welcome' && $typeOfUI != 'lasted' && $typeOfUI != 'recommended')
                             @if($course->getDiscount() > 0)
                                 <h4 class="font-weight-bold text-danger">

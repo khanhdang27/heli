@@ -308,9 +308,11 @@ input.check-subscribe {
     }
 }
 
-.product-hover:hover {
-    text-decoration: none;
-    color: var(--secondary);
+.product-hover{
+    &:hover{
+        text-decoration: none;
+        color: var(--secondary) !important;
+    }
 }
 
 .share-bar {
@@ -480,7 +482,7 @@ input.check-subscribe {
     .title-product {
         border-top-right-radius: 0.72rem !important;
         width: fit-content;
-        min-width: 70px;
+        min-width: 95px;
         padding: 0.2rem 0;
         text-align: center;
         a{

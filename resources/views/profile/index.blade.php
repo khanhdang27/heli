@@ -50,21 +50,21 @@
                     </td>
                 </tr>
             </table>
-            <div class="d-flex justify-content-around">
+            <div class="row">
 
-                <div class="">
-                    <a href="{{ route('site.profile.edit',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold">
+                <div class="col-sm-4">
+                    <a href="{{ route('site.profile.edit',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold w-100 mb-3">
                         Update your profile
                     </a>
                 </div>
                 @if(Auth::User()->hasRole('student'))
-                    <div class="">
-                        <a href="{{ route('site.payment-history') }}" class="btn btn-outline-primary font-weight-bold">
+                    <div class="col-sm-4">
+                        <a href="{{ route('site.payment-history') }}" class="btn btn-outline-primary font-weight-bold w-100 mb-3">
                             Payment History
                         </a>
                     </div>
-                    <div class="">
-                        <a href="{{ route('site.order.updateCard',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold">
+                    <div class="col-sm-4">
+                        <a href="{{ route('site.order.updateCard',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold w-100 mb-3">
                             Update Payment Card
                         </a>
                     </div>

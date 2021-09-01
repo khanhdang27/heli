@@ -39,6 +39,19 @@
                 </div>
             </div>
             <ul class="navbar-nav mr-auto navbar-responsive ml-lg-4">
+                <li class="nav-item item-header dropdown d-md-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="navLang" data-toggle="dropdown">
+                        {{ Config::get('languages')[App::getLocale()] }}
+                    </a>
+                    <div
+                        class="dropdown-menu bg-primary border border-white rounded-0">
+                        @foreach (Config::get('languages') as $lang => $language)
+                            @if ($lang != App::getLocale())
+                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
+                            @endif
+                        @endforeach
+                    </div>
+                </li>
                 <li class="nav-item item-header">
                     <a class="nav-link"
                        href={{ URL::route('site.teams') }}>@lang('keywords.navBar.mentorTeam')</a>
@@ -68,6 +81,7 @@
                     <a class="nav-link"
                        href="{{ URL::route('site.post.index') }}">@lang('keywords.navBar.q&aArea')</a>
                 </li>
+                <hr class="m-0">
                 @if(Auth::check())
                     <li class="nav-item item-header d-md-none">
                         <a class="nav-link"
@@ -83,30 +97,15 @@
                         <a class="nav-link d-flex justify-content-between"
                            href="{{ URL::route('site.profile.show', Auth::user()->id) }}">
                             @lang('keywords.navBar.profile')
-                            <h3 class="fe fe-user text-primary mb-0"></h3>
                         </a>
                     </li>
                     <li class="nav-item item-header d-md-none">
                         <a class="nav-link d-flex justify-content-between"
                            href="{{ URL::route('site.userLogout')}}">
                             @lang('keywords.navBar.logOut')
-                            <h3 class="fe fe-log-out text-primary mb-0"></h3>
                         </a>
                     </li>
                 @endif
-                <li class="nav-item item-header dropdown d-md-none">
-                    <a class="nav-link dropdown-toggle" href="#" id="navLang" data-toggle="dropdown">
-                        {{ Config::get('languages')[App::getLocale()] }}
-                    </a>
-                    <div
-                        class="dropdown-menu bg-primary border border-white rounded-0">
-                        @foreach (Config::get('languages') as $lang => $language)
-                            @if ($lang != App::getLocale())
-                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
-                            @endif
-                        @endforeach
-                    </div>
-                </li>
             </ul>
         </div>
         <div id="overlay" class="overlay position-fixed" style="display: none"></div>
