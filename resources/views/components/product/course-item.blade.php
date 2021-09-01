@@ -70,7 +70,8 @@
                 @endif
                 <div class="d-flex justify-content-between">
                     <div class="title-product bg-primary text-white mt-auto">
-                        <a href="{{URL::route('site.course.show',$course_card->id)}}" class="btn text-white h6 mb-0">
+                        <a href="{{URL::route('site.course.show',$course_card->id)}}"
+                           class="btn text-white h6 mb-0 text-nowrap text-truncate px-2">
                             {{ $course_card->subject->subject_name }}</a>
                     </div>
                     <a class="product-hover my-auto" href="{{URL::route('site.course.show',$course_card->id)}}">

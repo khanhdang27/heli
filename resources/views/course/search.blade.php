@@ -10,29 +10,53 @@ use App\Utilities\SelectionByClass;
 
 <div class="body-content bg-course">
     <div class="container-fluid text-center top-news-page">
-        @lang('keywords.navBar.subjectClassification')
+        @lang('keywords.searchResult')
     </div>
     {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
 
-    <div class="container-fluid p-0 container-course mt-5">
-        <div class="sort text-primary mb-4 d-flex">
-            <span class="mr-4">@lang('keywords.sort')</span>
-            <form>
-                <label class="radio-inline mr-5">
-                    <input class="btn-sort" type="radio" name="optradio" checked> @lang('keywords.upToDate')
-                </label>
-                <label class="radio-inline mr-5">
-                    <input class="btn-sort" type="radio" name="optradio"> @lang('keywords.price')
-                </label>
-                <label class="radio-inline mr-5">
-                    <input class="btn-sort" type="radio" name="optradio">@lang('keywords.liveCourses')
-                </label>
-                <label class="radio-inline mr-5">
-                    <input class="btn-sort" type="radio" name="optradio">@lang('keywords.recordALesson')
-                </label>
-                <label style="color: red" class="radio-inline mr-5">
-                    <input class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
-                </label>
+    <div class="container-fluid container-course mt-5">
+        <div class="text-primary mb-4 d-flex h5">
+            <form class="w-100">
+                <div class="sort-lg">
+                    <span class="mr-4">@lang('keywords.sort')</span>
+                    <label class="radio-inline mr-5">
+                        <input class="btn-sort" type="radio" name="optradio" checked> @lang('keywords.upToDate')
+                    </label>
+                    <label class="radio-inline mr-5">
+                        <input class="btn-sort" type="radio" name="optradio"> @lang('keywords.price')
+                    </label>
+                    <label class="radio-inline mr-5">
+                        <input class="btn-sort" type="radio" name="optradio">@lang('keywords.liveCourses')
+                    </label>
+                    <label class="radio-inline mr-5">
+                        <input class="btn-sort" type="radio" name="optradio">@lang('keywords.recordALesson')
+                    </label>
+                    <label class="radio-inline mr-5">
+                        <input class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
+                    </label>
+                </div>
+                <div class="btn-group dropleft sort-sm text-right" style="display: none">
+                    <button class="btn btn-outline-primary dropdown-toggle h5" id="navbardrop" data-toggle="dropdown">
+                        Sort
+                    </button>
+                    <div class="dropdown-menu">
+                        <label class="radio-inline mr-5 dropdown-item">
+                            <input class="btn-sort" type="radio" name="optradio" checked> @lang('keywords.upToDate')
+                        </label>
+                        <label class="radio-inline mr-5 dropdown-item">
+                            <input class="btn-sort" type="radio" name="optradio"> @lang('keywords.price')
+                        </label>
+                        <label class="radio-inline mr-5 dropdown-item">
+                            <input class="btn-sort" type="radio" name="optradio">@lang('keywords.liveCourses')
+                        </label>
+                        <label class="radio-inline mr-5 dropdown-item">
+                            <input class="btn-sort" type="radio" name="optradio">@lang('keywords.recordALesson')
+                        </label>
+                        <label class="radio-inline mr-5 dropdown-item">
+                            <input class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
+                        </label>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="d-flex">

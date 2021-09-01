@@ -15,7 +15,7 @@
         {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
 
         <div class="container-fluid container-course">
-            <div class="title-subject text-primary text-center h2 pb-5 mb-0">
+            <div class="text-primary text-center h2 pb-5 mb-0 mt-5">
                 {{ $subject->subject_name }}
             </div>
             <div class="text-primary mb-4 d-flex h5">

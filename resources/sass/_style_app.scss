@@ -142,8 +142,6 @@ h5,
 .search {
     border: 2px solid #0b487d;
     border-radius: 20px;
-    padding: 0.2rem !important;
-    width: 309px;
     height: 40px;
     background-color: #fff;
 }
@@ -328,7 +326,7 @@ input.check-subscribe {
     padding: 0.5rem 1rem;
     border-radius: 28px;
     margin: 0 0.5rem 0.5rem 0;
-    min-width: 120px;
+    min-width: 87px;
     a {
         text-decoration: none;
     }
@@ -372,7 +370,7 @@ input.check-subscribe {
 }
 
 .text-comment {
-    font-size: 18.7pt;
+    font-size: 20px;
     color: var(--primary);
 }
 
@@ -485,6 +483,9 @@ input.check-subscribe {
         min-width: 70px;
         padding: 0.2rem 0;
         text-align: center;
+        a{
+            max-width: 95px;
+        }
     }
     .content-top {
         text-align: center;
@@ -775,7 +776,6 @@ input.check-subscribe {
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
 .sub-header {
-    width: 100%;
     background-image: url("/helios/public/images/bg_sub.svg");
     background-size: cover;
     z-index: 1001;
@@ -961,7 +961,7 @@ input.check-subscribe {
 
 .popular-articles-item-image {
     width: 100%;
-    flex: 0 40%;
+    flex: 0 30%;
     .img-blog {
         width: 185px;
         height: 185px;
@@ -973,7 +973,7 @@ input.check-subscribe {
 }
 
 .popular-articles-item-content {
-    flex: 0 60%;
+    flex: 0 70%;
     a {
         overflow: hidden;
         display: -webkit-box;
@@ -1063,7 +1063,7 @@ input.check-subscribe {
 }
 
 .img-question {
-    width: 60%;
+    max-height: 470px;
 }
 
 .ic-action {
@@ -1207,5 +1207,11 @@ input.check-subscribe {
     width: 100%;
     height: 100%;
 }
-/*SUB HEADER-----------------------------------------*/
-
+/*Forum-----------------------------------------*/
+.user-avatar{
+    width: 98px;
+    height: 98px;
+}
+.item-slide{
+    width: fit-content !important;
+}

@@ -45,7 +45,7 @@
             </div>
 
         </div>
-        <div class="col-1">
+        <div class="col-1 d-none d-md-block">
             <div class="swiper-button-next btn-next" id="btn_next">
                 <div class="rounded-circle border-btn-next animate-change-color py-2 px-4">
                     <p class="m-0 h2 text-center">❯</p>

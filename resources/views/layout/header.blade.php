@@ -70,6 +70,16 @@
                 </li>
                 @if(Auth::check())
                     <li class="nav-item item-header d-md-none">
+                        <a class="nav-link"
+                           href="{{ route('site.user.course') }}">@lang('keywords.footer.myCourses')
+                        </a>
+                    </li>
+                    <li class="nav-item item-header d-md-none">
+                        <a class="nav-link"
+                           href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')
+                        </a>
+                    </li>
+                    <li class="nav-item item-header d-md-none">
                         <a class="nav-link d-flex justify-content-between"
                            href="{{ URL::route('site.profile.show', Auth::user()->id) }}">
                             @lang('keywords.navBar.profile')
@@ -134,7 +144,7 @@
                 </button>
                 <x-login.login></x-login.login>
                 <!-- Button Register Modal -->
-                <button type="button" class="btn btn-header py-0 border-primary" data-toggle="modal"
+                <button type="button" class="btn btn-header py-0 border-primary d-none d-md-block" data-toggle="modal"
                         data-target="#registerModal"
                         id="register">
                     @lang('keywords.navBar.register')

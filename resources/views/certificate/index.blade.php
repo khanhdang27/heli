@@ -8,8 +8,8 @@
         @lang('keywords.navBar.subjectClassification')
     </div>
     <x-sub-header :subjects=$subjects></x-sub-header>
-    <div class="container-fluid container-course">
-        <div class="title-subject h2 font-weight-bold text-primary text-center pb-4 mb-0">
+    <div class="container-fluid container-course pt-5 mt-5">
+        <div class="h2 font-weight-bold text-primary text-center pb-4 mb-0 mt-5 mt-md-0">
             {{$certificate->certificate_code}}
         </div>
         <div class="text-primary my-4 d-flex h5">

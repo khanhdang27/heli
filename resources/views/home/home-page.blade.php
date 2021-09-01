@@ -16,7 +16,7 @@
     @else
     <br>
     <div class="container pt-5 mt-5">
-        <h1 class="text-center text-secondary">
+        <h1 class="text-center text-secondary mt-3">
             @lang('keywords.latestNewsPage')
         </h1>
         <hr class="border-secondary">
@@ -129,7 +129,7 @@
         const linestep1 = document.getElementById('border-right-free-class');
         const textstep2 = document.getElementById('text-free-class');
         const circlestep3 = document.getElementById('circle-check');
-        
+
         let is_scoll_into = false;
         $(window).scroll(function() {
             var hT = $('#free-class').offset().top,
@@ -138,21 +138,21 @@
                 wS = $(this).scrollTop();
             if (wS > (hT - hH) && wS < (hT + hH ) && !is_scoll_into){
                 is_scoll_into = true;
-                
+
                 var tl_free = anime.timeline({
                     duration: 2500,
                     loop: false
                 });
 
                 tl_free.add({
-                    targets: linestep1, 
+                    targets: linestep1,
                     translateX: -10,
                     direction: 'alternate',
                     loop: true,
                     easing: 'spring(1, 80, 10, 0)'
                 })
                 tl_free.add({
-                    targets: circlestep3, 
+                    targets: circlestep3,
                     translateY: 5,
                     scale: 0.8,
                     opacity: [0, 1],
