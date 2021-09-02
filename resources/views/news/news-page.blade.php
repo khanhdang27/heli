@@ -23,7 +23,7 @@
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-center mt-5">
+                    <div v-if="!isFinished" class="d-flex justify-content-center mt-5">
                         <button class="btn-more h5 bg-white text-primary border-primary" @click='getPosts()' v-cloak>
                             @lang('keywords.more')
                             <img src="{{asset("images/ic/ic_drop.svg")}}" width="28">
@@ -35,26 +35,23 @@
     </div>
     <script>
         var app = new Vue({
-    el: '#showMore',
-    data: {
-        isFinished: false,
-        page: 0,
-        buttonText: 'Load More',
-        posts: ''
-    },
-    methods: {
-        getPosts: function(){
-            axios.get('{{ route("site.news.list")}}', {
-                params: {
-                    page: this.page + 1, 
-                }
-            })
-            .then(function (response) {
-                console.log(response)
-                if(response.data ){
-                    
-                    var len = app.posts.length;
-                    if (app.page != response.data.last_page ) {
+        el: '#showMore',
+        data: {
+            isFinished: false,
+            page: 0,
+            buttonText: 'Load More',
+            posts: ''
+        },
+        methods: {
+            getPosts: function(){
+                axios.get('{{ route("site.news.list")}}', {
+                    params: {
+                        page: this.page + 1, 
+                    }
+                })
+                .then(function (response) {
+                    if(response.data){
+                        var len = app.posts.length;
                         app.page+=1;
                         if(len > 0){
                             app.buttonText = "Loading ...";
@@ -68,20 +65,20 @@
                         }else{
                             app.posts = response.data.data;
                         }
+                        if (!response.data.next_page_url ) {
+                            app.isFinished = true;
+                        }
+                    }else{
+                        app.buttonText = "No more records avaiable.";
+                        app.isFinished = true;
                     }
-                    
-
-                }else{
-                app.buttonText = "No more records avaiable.";
-                app.isFinished = true;
-                }
-            });
+                });
+            }
+        },
+        created: function(){
+            this.getPosts();
         }
-    },
-    created: function(){
-        this.getPosts();
-    }
-})
+    })
     </script>
     <x-subscribe-container></x-subscribe-container>
 </div>
