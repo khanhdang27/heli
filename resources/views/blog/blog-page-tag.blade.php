@@ -49,8 +49,7 @@ use App\Utilities\SelectionByClass;
                                             <p class="h5 mr-5">
                                                 <span v-cloak>@{{ post.created_at | formatDate }}</span>
                                             </p>
-                                            <img class="mb-2 mr-2" src="{{asset("images/ic/ic_eye.svg")}}"
-                                                width="26">
+                                            <img class="mb-2 mr-2" src="{{asset("images/ic/ic_eye.svg")}}" width="26">
                                             <h5>
                                                 <span v-cloak>@{{ post.view_no }}</span>
                                             </h5>
@@ -70,7 +69,7 @@ use App\Utilities\SelectionByClass;
                 </div>
             </div>
         </div>
-        <div class="d-flex pt-5 mt-5 pb-5 justify-content-center">
+        <div v-if="!isFinished" class="d-flex pt-5 mt-5 pb-5 justify-content-center">
             <button class="btn-more h5 bg-white text-primary border-primary" @click='getPosts()' v-cloak>
                 @lang('keywords.more')
                 <img src="{{asset("images/ic/ic_drop.svg")}}" width="28">
@@ -81,9 +80,10 @@ use App\Utilities\SelectionByClass;
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-
     Vue.filter('formatDate', function(value) {
         if (value) {
             return moment(String(value)).format('MM/DD/YYYY hh:mm')
@@ -106,27 +106,27 @@ use App\Utilities\SelectionByClass;
                 })
                 .then(function (response) {
                     console.log(response)
-                    if(response.data ){
-                        console.log('response.data :>> ', response.data);
+                    if(response.data){
                         var len = app.posts.length;
-                        if (app.page != response.data.last_page ) {
-                            app.page+=1;
-                            if(len > 0){
-                                app.buttonText = "Loading ...";
-                                setTimeout(function() {
-                                    app.buttonText = "Load More";
-                                    // Loop on data and push in posts
-                                    for (let i = 0; i < response.data.data.length; i++){
-                                        app.posts.push(response.data.data[i]); 
-                                    } 
-                                },500);
-                            }else{
-                                app.posts = response.data.data;
-                            }
+                        app.page+=1;
+                        if(len > 0){
+                            app.buttonText = "Loading ...";
+                            setTimeout(function() {
+                                app.buttonText = "Load More";
+                                // Loop on data and push in posts
+                                for (let i = 0; i < response.data.data.length; i++){
+                                    app.posts.push(response.data.data[i]); 
+                                } 
+                            },500);
+                        }else{
+                            app.posts = response.data.data;
+                        }
+                        if (!response.data.next_page_url ) {
+                            app.isFinished = true;
                         }
                     }else{
-                    app.buttonText = "No more records avaiable.";
-                    app.isFinished = true;
+                        app.buttonText = "No more records avaiable.";
+                        app.isFinished = true;
                     }
                 });
             }

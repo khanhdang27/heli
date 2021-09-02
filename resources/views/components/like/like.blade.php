@@ -11,21 +11,21 @@ $id_random = Str::random(2);
 
 $liked = $likeRef->likeable;
 $user_liked = $liked->filter(function($item) {
-    return $item->user_id == Auth::user()->id;
+return $item->user_id == Auth::user()->id;
 })->first();
 
 $liked = empty($user_liked) ? 0 : $user_liked->like_style;
 $component = explode('\\',$likeModule)[2];
 
 @endphp
-<button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-1 border-0 bg-white text-primary h4 mb-0" v-on:click="clicklike">
-    <img class="ic-action"
-         id="like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}"
-         src="{{ $liked == 0 ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}} ">
+<button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-1 border-0 bg-white text-primary h4 mb-0"
+    v-on:click="clicklike">
+    <img class="ic-action" id="like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}"
+        src="{{ $liked == 0 ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}} ">
 
-        @if($likeModule == Post::class || $likeModule== UserComment::class)
-        {{$likeRef->like_no}}
-        @endif
+    @if($likeModule == Post::class || $likeModule== UserComment::class)
+    {{$likeRef->like_no}}
+    @endif
 </button>
 
 <script>
@@ -40,7 +40,7 @@ $component = explode('\\',$likeModule)[2];
             clicklike: function () {
                 @if(Auth::check())
                     console.log(this.likeable);
-                    if (this.likeable == 0) {
+                    if (like_{{ $id_random }}.likeable == 0) {
                         axios.post("{{ route('site.user-like.store')}}", {
                             like_ref_id: {{$likeRef->id}},
                             user_id: {{Auth::user()->id}},
@@ -51,6 +51,7 @@ $component = explode('\\',$likeModule)[2];
                                 if(document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}")){
                                     document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no + 1}}";
                                 }
+                                like_{{ $id_random }}.likeable = 1;
                             })
                             .catch(function (error) {
                                 console.error(error);
@@ -66,12 +67,12 @@ $component = explode('\\',$likeModule)[2];
                                 if(document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}")){
                                     document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no - 1}}";
                                 }
+                                like_{{ $id_random }}.likeable = 0;
                             })
                             .catch(function (error) {
                                 console.error(error);
                             });
                     }
-                    window.location.reload()
                 @else
                     console.log("none login")
                     alert("need to login to reaction");
