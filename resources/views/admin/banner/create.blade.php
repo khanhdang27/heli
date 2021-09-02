@@ -8,8 +8,13 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="pr-2">
+                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                                <i class="fe fe-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Create Banner
@@ -22,15 +27,16 @@
                         {!! Form::open(['url' => URL::route('admin.banner.store',['type'=>'post', 'ref'=>0]), 'enctype'
                         => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
-                            {{ Form::label('banner_title', 'Banner title') }}
-                            {{ Form::text('banner_title', old('banner_title'),['class' => 'form-control'] ) }}
+                            {{ Form::label('banner_title', 'Banner title', ['class' => 'required']) }}
+                            {{ Form::text('banner_title', old('banner_title'),['class' => 'form-control', 'required'] ) }}
                             @error('banner_title')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="custom-file ">
                             {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
-                            {{ Form::file('file',['class' => 'custom-file-input']) }}
+                            {{ Form::file('file',['class' => 'custom-file-input', 'accept'=>"image/*"]) }}
+                            <sub class="text-dark"> accept image file </sub>
                             @error('file')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
@@ -45,6 +51,8 @@
         </div>
     </div>
 </div>
+
+
 @push('inputFile')
 <script>
     // Add the following code if you want the name of the file appear on select

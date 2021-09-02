@@ -7,14 +7,17 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-
+                    <div class="d-flex align-items-center">
+                        <div class="pr-2">
+                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                                <i class="fe fe-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Edit News
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -47,20 +50,17 @@
                             <div class="col-6">
                                 <div class="custom-file">
                                     <input name="file" type="file" class="custom-file-input" id="validatedCustomFile"
-                                        required>
+                                        accept="image/*, application/pdf" required>
                                     <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                                    <sub class="text-dark"> accept image file, PDF </sub>
                                 </div>
                             </div>
                             <div class="col-6">
                                 @if (!empty($news->file))
-                                <div class="col-md-6">
-                                    <h4 class="form-control">{{$news->file->raw_name}}</h4>
-                                </div>
+                                <h4 class="form-control">{{$news->file->raw_name}}</h4>
                                 @endif
                             </div>
-
                         </div>
-
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}
                     </div>
@@ -71,8 +71,8 @@
 </div>
 <script>
     window.onload = function () {
-            CKEDITOR.replace('ckeditor');
-        };
+        CKEDITOR.replace('ckeditor');
+    };
 </script>
 @push('inputFile')
 <script>

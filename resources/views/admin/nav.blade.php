@@ -1,17 +1,13 @@
 <nav class="navbar navbar-expand-md navbar-light d-none d-md-flex" id="topbar">
     <div class="container-fluid">
-        <form class="form-inline mr-4 d-none d-md-flex">
-            <div class="input-group input-group-flush input-group-merge" data-toggle="lists"
-                data-options="{&quot;valueNames&quot;: [&quot;name&quot;]}">
-                <input type="search" class="form-control form-control-prepended dropdown-toggle search"
-                    data-toggle="dropdown" placeholder="Search" aria-label="Search" aria-expanded="false">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <i class="fe fe-search"></i>
-                    </div>
-                </div>
+        <div class="d-none d-md-flex">
+            <div>
+                <h4 class="text-dark">
+                    {{Auth::user()->name}}
+                </h4>
+                <sub class="d-block"> {{ Auth::user()->email }} </sub>
             </div>
-        </form>
+        </div>
         <!-- User -->
         <div class="navbar-user">
             <!-- Dropdown -->

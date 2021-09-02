@@ -7,12 +7,18 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="pr-2">
+                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                                <i class="fe fe-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div>
 
                             <!-- Title -->
+
                             <h4 class="card-header-title">
-                                Create Discount 
+                                Create Discount
                             </h4>
 
                         </div>
@@ -55,7 +61,7 @@
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}
                     </div>
@@ -65,7 +71,7 @@
         </div>
     </div> <!-- / .row -->
 </div>
-    {{-- <script>
+{{-- <script>
         window.onload = function () {
             CKEDITOR.replace('ckeditor');
         };
@@ -80,4 +86,3 @@
         </script>
     @endpush --}}
 @endsection
-

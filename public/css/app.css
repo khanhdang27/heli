@@ -11002,6 +11002,7 @@ h5,
 }
 
 .banner-content {
+  height: 569px;
   position: relative;
 }
 
@@ -12176,6 +12177,28 @@ input.check-subscribe {
   background-repeat: no-repeat;
 }
 
+/*BANNER-----------------------------------------*/
+
+.banner-background {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-opacity {
+  background-color: #797979;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*SUB HEADER-----------------------------------------*/
+
 .rating {
   display: inline-block;
   position: relative;
@@ -12254,18 +12277,14 @@ input.check-subscribe {
 }
 
 @media screen and (max-width: 1200px) {
-  .banner-content {
-    height: 600px;
-  }
-
   .banner-content .banner-info {
-    width: 75%;
+    width: 60%;
   }
 
   .banner-content .banner-info .banner-caption {
     width: 100%;
     margin: 0 auto;
-    font-size: 30px;
+    font-size: 40px;
   }
 
   .banner-content .banner-info .banner-caption .banner-title {
@@ -12273,7 +12292,7 @@ input.check-subscribe {
   }
 
   .free {
-    font-size: 25px !important;
+    font-size: 24px !important;
   }
 
   .product-category-row {
@@ -12336,15 +12355,6 @@ input.check-subscribe {
     padding: 0 !important;
   }
 
-  .dropdown-menu-language {
-    left: -35px;
-  }
-
-  .user-cart,
-  .user-name {
-    display: none;
-  }
-
   .navbar-small {
     margin-left: 0 !important;
   }
@@ -12362,7 +12372,7 @@ input.check-subscribe {
 
   .btn-register-now,
   .step-for-register #btn-register-step {
-    padding: 0px 3rem;
+    padding: 0 3rem;
     font-size: 15pt;
   }
 
@@ -12391,10 +12401,6 @@ input.check-subscribe {
     border-bottom: 1px solid var(--light);
   }
 
-  .dropdown-menu-language {
-    left: -48px;
-  }
-
   .navbar-small {
     position: fixed;
     height: 100%;
@@ -12406,10 +12412,15 @@ input.check-subscribe {
     left: 0;
     width: 320px;
     z-index: 9999;
+    overflow: auto;
   }
 
-  .navbar-small .navbar-small-close {
-    display: block !important;
+  .banner-content {
+    height: 400px;
+  }
+
+  .banner-content .banner-info .banner-caption {
+    font-size: 32px;
   }
 }
 
@@ -12420,7 +12431,10 @@ input.check-subscribe {
 
   .banner-content {
     top: 30% !important;
-    height: 600px;
+  }
+
+  .banner-content .banner-info {
+    top: 60%;
   }
 
   .banner-content .banner-info .banner-caption {
@@ -12428,7 +12442,8 @@ input.check-subscribe {
   }
 
   .free {
-    font-size: 20px !important;
+    padding: 0 2rem;
+    font-size: 18px !important;
   }
 
   .container-home {
@@ -12474,8 +12489,12 @@ input.check-subscribe {
     display: block !important;
   }
 
-  .user-space {
-    display: none !important;
+  .logo {
+    width: 150px;
+  }
+
+  .btn-header {
+    margin: 0 0.2rem 0 0;
   }
 }
 

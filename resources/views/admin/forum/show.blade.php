@@ -7,9 +7,17 @@
       <!-- Goals -->
       <div class="card">
         <div class="card-header">
-          <div class="row align-items-center">
-            <div class="col">
+          <div class="d-flex align-items-center">
+            <div>
+              <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                <i class="fe fe-arrow-left"></i>
+              </button>
+            </div>
+            <div>
               <!-- Title -->
+              <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                <i class="fe fe-arrow-left"></i>
+              </button>
               <h4 class="card-header-title">
                 Forum Post Review
               </h4>

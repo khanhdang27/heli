@@ -1,57 +1,61 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 .table {
-  width: 100%;
-  table-layout: fixed;
+    width: 100%;
+    table-layout: fixed;
 }
 
 .table .c-10 {
-  width: 10%;
+    width: 10%;
 }
 
 .table .c-20 {
-  width: 20%;
+    width: 20%;
 }
 
 .table .c-30 {
-  width: 30%;
+    width: 30%;
 }
 
 .table .c-40 {
-  width: 40%;
+    width: 40%;
 }
 
 .table .c-50 {
-  width: 50%;
+    width: 50%;
 }
 
 .table .c-60 {
-  width: 60%;
+    width: 60%;
 }
 
 .table thead th {
-  border-bottom: unset;
+    border-bottom: unset;
 }
 
 .dataTables_scrollBody {
-  border-bottom: unset;
+    border-bottom: unset;
 }
 
 input.check-role {
-  transform: scale(1.7);
+    transform: scale(1.7);
 }
 
 .text-overflow-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card {
-  overflow: initial;
+    overflow: initial;
 }
 
 .card .table-responsive {
-  overflow: inherit;
+    overflow: inherit;
 }
 
-
+.required:after {
+    content: "*";
+    color: red;
+    padding-left: 5px;
+}

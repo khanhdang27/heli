@@ -10,7 +10,12 @@
             <div class="modal-body modal-body-login py-5">
 
                 <div class="mx-auto">
-                    <div class="row align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="col">
+                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                                <i class="fe fe-arrow-left"></i>
+                            </button>
+                        </div>
                         <div class="col-sm-7">
                             <h1 class="text-white text-information mx-auto">
                                 @lang('keywords.freeTrialClass')

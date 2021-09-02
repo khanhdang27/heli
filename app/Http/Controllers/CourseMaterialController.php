@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Material\CreateMaterialRequest;
+use App\Http\Requests\Material\UpdateMaterialRequest;
 use App\Models\Course;
 use App\Models\CourseMaterial;
 use App\Models\File;
@@ -120,8 +121,9 @@ class CourseMaterialController extends Controller
      * @param CourseMaterial $course_material
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(CreateMaterialRequest $request, CourseMaterial $course_material)
+    public function update(UpdateMaterialRequest $request, CourseMaterial $course_material)
     {
+
         $input = $request->validated();
 
         DB::beginTransaction();

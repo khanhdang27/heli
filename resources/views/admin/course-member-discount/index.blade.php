@@ -6,17 +6,17 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Price Tags
                             </h4>
                         </div>
-                        <div class="col-auto">
+                        <div class="ml-auto col-auto">
                             @can('price-create')
                             <!-- Button -->
-                            <a href="{{ route('admin.price-tag.create') }}" class="btn btn-sm btn-success">
+                            <a href="{{ route('admin.price-tag.create') }}" class="btn btn-sm btn-success d-none">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                                     fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
                                     <circle cx="12" cy="12" r="10"></circle>

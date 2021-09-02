@@ -37,16 +37,14 @@ use \App\Models\Course;
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-
+                    <div class="d-flex align-items-center">
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
                                 Courses
                             </h4>
-
                         </div>
-                        <div class="col-auto">
+                        <div class="ml-auto col-auto">
                             <!-- Button -->
                             <a href="{{ route('admin.course.create') }}" class="btn btn-sm btn-success">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
