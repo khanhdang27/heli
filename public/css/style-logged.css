@@ -266,18 +266,3 @@
 
 
 /*}*/
-
-
-/*FORUM PAGE-------------------------------------------------------------------*/
-
-.body-forum-page {
-    max-width: 75%;
-}
-
-.img-question {
-    width: 60%;
-}
-
-.row-question {
-    border-bottom: 1px solid;
-}

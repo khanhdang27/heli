@@ -139,5 +139,6 @@ return [
     'coursesIHavePurchased' => '我已購買的課程',
     'errors' => [
         'tooManyRequests' => '请求太多，请冷静等待几分钟再请求',
-    ]
+    ],
+    'searchResult' => '搜索結果'
 ];

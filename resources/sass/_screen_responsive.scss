@@ -81,6 +81,13 @@
     .logo{
         width: 180px;
     }
+    .text-comment{
+        font-size: 18px;
+    }
+    .user-avatar{
+        width: 60px;
+        height: 60px;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -113,11 +120,6 @@
     #btn_next, #btn_prev{
         display: none !important;
     }
-    .product-hover{
-        h4{
-            font-size: 20px;
-        }
-    }
     .item-header{
         padding: 0.5rem 1.5rem !important;
     }
@@ -148,6 +150,12 @@
             }
         }
     }
+    .popular-articles-item-image {
+        .img-blog{
+            width: 145px;
+            height: 145px;
+        }
+    }
 }
 
 @media screen and (max-width: 576px) {
@@ -158,6 +166,7 @@
         top: 30% !important;
         .banner-info {
             top: 60%;
+            width: 80%;
             .banner-caption {
                 font-size: 20px;
             }
@@ -185,15 +194,8 @@
     //        }
     //    }
     //}
-
-    .sort-lg{
-        display: none;
-    }
-    .sort-sm{
-        display: block !important;
-    }
     .fc .fc-toolbar-title{
-        width: 250px !important;
+        width: 220px !important;
         font-size: 24px !important;
     }
     .product-box {

@@ -13,7 +13,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    
+
     use AuthenticatesUsers;
 
     protected $maxAttempts = 5; // Default is 5
@@ -32,7 +32,7 @@ class LoginController extends Controller
             'email' => $input['email'],
             'password' => $input['password'],
             'active' => 1
-        ], $input['remember'] ? true : false)) {
+        ], empty($input['remember']) ? true : false)) {
             return redirect()->route('admin.dashboard')->with('status', 'login successful!');
         }
         throw ValidationException::withMessages([
@@ -46,7 +46,7 @@ class LoginController extends Controller
     {
         return view('admin.dashboard');
     }
-    
+
     /**
      * Log the user out of the application.
      *

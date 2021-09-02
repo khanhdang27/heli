@@ -1,10 +1,8 @@
-<div class="card flex-md-row pb-3 border-0">
+<div class="card flex-row pb-3 border-0">
     <div class="popular-articles-item-image d-flex popular-item">
         @if(empty($item->photo))
         <div class="img-thumbnail rounded-0 p-0 img-blog align-items-center"
             style="background-image: url('{{ asset("images/default-image.jpg")}}')">
-            <img class="img-thumbnail border-0 p-0 rounded-0 align-items-center"
-                src="{{ asset('images/default-image.jpg')}}" alt="Card image cap">
         </div>
 
         @else
@@ -14,7 +12,7 @@
     </div>
 
     <div class="popular-articles-item-content">
-        <div class="card-body px-3">
+        <div class="card-body px-3 py-0">
             <a class="h4" href="{{route('site.view-blog',$item->id)}}">
                 {{$item->title}}
             </a>

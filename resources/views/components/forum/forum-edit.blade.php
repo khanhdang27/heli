@@ -1,11 +1,11 @@
 @php
 use App\Utilities\SelectionByClass;
 @endphp
-<div class="dropdown">
-    <a href="#" class="btn btn-option py-0" role="button" data-toggle="dropdown" aria-haspopup="true"
+<div class="dropdown mr-2">
+    <a href="#" class="btn btn-option ml-auto pb-0" role="button" data-toggle="dropdown" aria-haspopup="true"
         aria-expanded="false">
-        <h2 class="mb-0">
-            <i class="fe fe-more-horizontal"></i>
+        <h2 class="mb-0 text-primary">
+            <i class="fe fe-edit-3"></i>
         </h2>
     </a>
     <div class="dropdown-menu dropdown-menu-right dropdown-menu-option py-0">
