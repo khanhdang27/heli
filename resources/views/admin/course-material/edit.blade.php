@@ -31,48 +31,48 @@ use \App\Utilities\SelectionByClass;
                         'enctype'=>'multipart/form-data']) !!}
 
                         <div class="form-group ">
-                            {{ Form::label('course_id', 'Course') }}
+                            {{ Form::label('course_id', 'Course', ['class' => 'required']) }}
                             {{ Form::select('course_id', array_filter(SelectionByClass::getValues(\App\Models\Course::class,'course_name','id'), function($var, $id)
                                 {
                                     return $id != 1;
                                 }, ARRAY_FILTER_USE_BOTH) , 
-                                $material->course_id, ['class' => 'form-control']) }}
+                                $material->course_id, ['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_name:en', 'Material Name (English)') }}
-                            {{ Form::text('course_material_name:en', $material->course_material_name,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_name:en', 'Material Name (English)', ['class' => 'required']) }}
+                            {{ Form::text('course_material_name:en', $material->course_material_name,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_name:cn', 'Material Name (Traditional Chinese)') }}
-                            {{ Form::text('course_material_name:cn', $material->course_material_name,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_name:cn', 'Material Name (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('course_material_name:cn', $material->course_material_name,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)') }}
-                            {{ Form::text('course_material_name:sc',$material->course_material_name,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('course_material_name:sc',$material->course_material_name,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_description:en', 'Description (English)') }}
-                            {{ Form::textarea('course_material_description:en', $material->course_material_description,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_description:en', 'Description (English)', ['class' => 'required']) }}
+                            {{ Form::textarea('course_material_description:en', $material->course_material_description,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_description:cn', 'Description (Traditional Chinese)') }}
-                            {{ Form::textarea('course_material_description:cn', $material->course_material_description,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_description:cn', 'Description (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::textarea('course_material_description:cn', $material->course_material_description,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_description:sc', 'Description (Simplify Chinese)') }}
-                            {{ Form::textarea('course_material_description:sc', $material->course_material_description,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_description:sc', 'Description (Simplify Chinese)', ['class' => 'required']) }}
+                            {{ Form::textarea('course_material_description:sc', $material->course_material_description,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_origin:en', 'Material Origin (English)') }}
-                            {{ Form::text('course_material_origin:en', $material->course_material_origin,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_origin:en', 'Material Origin (English)', ['class' => 'required']) }}
+                            {{ Form::text('course_material_origin:en', $material->course_material_origin,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_origin:cn', 'Material Origin (Traditional Chinese)') }}
-                            {{ Form::text('course_material_origin:cn', $material->course_material_origin,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_origin:cn', 'Material Origin (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('course_material_origin:cn', $material->course_material_origin,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_origin:sc', 'Material Origin (Simplify Chinese)') }}
-                            {{ Form::text('course_material_origin:sc', $material->course_material_origin,['class' => 'form-control']) }}
+                            {{ Form::label('course_material_origin:sc', 'Material Origin (Simplify Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('course_material_origin:sc', $material->course_material_origin,['class' => 'form-control required']) }}
                         </div>
                         <div class="row form-group">
                             <div class="col-md-6 col-12">
@@ -85,7 +85,7 @@ use \App\Utilities\SelectionByClass;
                             </div>
                             @if (!empty($material->file))
                             <div class="col-md-6">
-                                <h4 class="form-control">{{$material->file->raw_name}}</h4>
+                                <h4 class="form-control required">{{$material->file->raw_name}}</h4>
                             </div>
                             @endif
                         </div>

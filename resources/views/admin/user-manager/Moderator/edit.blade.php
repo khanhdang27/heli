@@ -26,29 +26,29 @@
                         {!! Form::open(['route' => ['admin.user-manager.moderator.update', $moderator->id],
                         'method'=> 'put','enctype' => 'multipart/form-data']) !!}
                         <div class="form-group ">
-                            {{ Form::label('name', 'Name') }}
-                            {{ Form::text('name', $moderator->user->name, ['class'=>'form-control']) }}
+                            {{ Form::label('name', 'Name', ['class' => 'required']) }}
+                            {{ Form::text('name', $moderator->user->name, ['class'=>'form-control', 'required']) }}
                         </div>
                         @error('name')
                         <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group ">
-                            {{ Form::label('full_name', 'Full name') }}
-                            {{ Form::text('full_name', $moderator->full_name, ['class'=>'form-control']) }}
+                            {{ Form::label('full_name', 'Full name', ['class' => 'required']) }}
+                            {{ Form::text('full_name', $moderator->full_name, ['class'=>'form-control', 'required']) }}
                         </div>
                         @error('full_name')
                         <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group ">
-                            {{ Form::label('phone', 'Phone number') }}
-                            {{ Form::text('phone', $moderator->phone, ['class'=>'form-control']) }}
+                            {{ Form::label('phone', 'Phone number', ['class' => 'required']) }}
+                            {{ Form::text('phone', $moderator->phone, ['class'=>'form-control', 'required']) }}
                         </div>
                         @error('phone')
                         <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group ">
-                            {{ Form::label('email', 'Email') }}
-                            {{ Form::email('email', $moderator->user->email, ['class'=>'form-control']) }}
+                            {{ Form::label('email', 'Email', ['class' => 'required']) }}
+                            {{ Form::email('email', $moderator->user->email, ['class'=>'form-control', 'required']) }}
                         </div>
                         @error('email')
                         <div class="alert text-danger">{{ $message }}</div>

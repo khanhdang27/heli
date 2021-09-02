@@ -36,15 +36,15 @@
                                 @csrf
 
                                 <div class="form-group ">
-                                    {{ Form::label('banner_title', 'Banner title') }}
-                                    {{ Form::text('banner_title', $banner->banner_title,['class' => 'form-control'] ) }}
+                                    {{ Form::label('banner_title', 'Banner title', ['class' => 'required']) }}
+                                    {{ Form::text('banner_title', $banner->banner_title,['class' => 'form-control', 'required'] ) }}
                                     @error('banner_title')
                                     <div class="alert text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="custom-file ">
                                     {{ Form::label('file', 'File', ['class' => 'custom-file-label']) }}
-                                    {{ Form::file('file', ['class' => 'custom-file-input', 'required', 'accept'=>"image/*"])}}
+                                    {{ Form::file('file', ['class' => 'custom-file-input', 'accept'=>"image/*"])}}
                                     <sub class="text-dark"> accept image file </sub>
                                     @error('file')
                                     <div class="alert text-danger">{{ $message }}</div>

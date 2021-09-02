@@ -22,7 +22,6 @@ use App\Utilities\SelectionByClass;
                         </div>
                         <div>
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Study Session
                             </h4>
@@ -33,8 +32,8 @@ use App\Utilities\SelectionByClass;
                     <div class="card-body">
                         {!! Form::open(['route' => 'admin.study-session.store', 'enctype'=>'multipart/form-data']) !!}
                         <div class="form-group ">
-                            {{ Form::label('session_name', 'Session Name') }}
-                            {{ Form::text('session_name', null,['class' => 'form-control']) }}
+                            {{ Form::label('session_name', 'Session Name', ['class' => 'required']) }}
+                            {{ Form::text('session_name', null,['class' => 'form-control', 'required']) }}
                             @error('session_name')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror

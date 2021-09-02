@@ -22,7 +22,6 @@ use \App\Models\Subject;
                         </div>
                         <div>
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Subscribe
                             </h4>

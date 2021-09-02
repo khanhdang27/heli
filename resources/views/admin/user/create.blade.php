@@ -14,13 +14,10 @@
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Create Membership
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -28,22 +25,22 @@
                     <div class="card-body">
                         {!! Form::open(['route' => 'admin.user.store', 'enctype'=>'multipart/form-data', '']) !!}
                         <div class="form-group">
-                            {{ Form::label('name', 'Name') }}
-                            {{ Form::text('name', old('name'),['class' => 'form-control']) }}
+                            {{ Form::label('name', 'Name', ['class' => 'required']) }}
+                            {{ Form::text('name', old('name'),['class' => 'form-control', 'required']) }}
                         </div>
                         @error('name')
                         <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group">
-                            {{ Form::label('email', 'Email') }}
-                            {{ Form::email('email', old('email'),['class' => 'form-control']) }}
+                            {{ Form::label('email', 'Email', ['class' => 'required']) }}
+                            {{ Form::email('email', old('email'),['class' => 'form-control', 'required']) }}
                         </div>
                         @error('email')
                         <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group">
-                            {{ Form::label('password', 'Password') }}
-                            {{ Form::text('password', old('password'),['class' => 'form-control']) }}
+                            {{ Form::label('password', 'Password', ['class' => 'required']) }}
+                            {{ Form::text('password', old('password'),['class' => 'form-control', 'required']) }}
                         </div>
                         @error('password')
                         <div class="alert text-danger">{{ $message }}</div>
@@ -53,7 +50,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div> <!-- / .row -->
 </div>

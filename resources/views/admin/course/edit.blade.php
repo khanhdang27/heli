@@ -34,61 +34,61 @@ use App\Models\Course;
                         'multipart/form-data', 'id'=>'create_course']) !!}
                         @csrf
                         <div class="form-group ">
-                            {{ Form::label('course_name:en', 'Course Name (English)') }}
-                            {{ Form::text('course_name:en', $course->translate('en')->course_name, ['class' => 'form-control']) }}
+                            {{ Form::label('course_name:en', 'Course Name (English)', ['class' => 'required']) }}
+                            {{ Form::text('course_name:en', $course->translate('en')->course_name, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_name:cn', 'Course Name (Traditional Chinese)') }}
-                            {{ Form::text('course_name:cn', $course->translate('cn')->course_name, ['class' => 'form-control']) }}
+                            {{ Form::label('course_name:cn', 'Course Name (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('course_name:cn', $course->translate('cn')->course_name, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
-                            {{ Form::text('course_name:sc', $course->translate('sc')->course_name, ['class' => 'form-control']) }}
+                            {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('course_name:sc', $course->translate('sc')->course_name, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="row justify-content-between">
                             <div class="form-group col-12 col-md-4">
-                                {{ Form::label('subject_id', 'Subject') }}
+                                {{ Form::label('subject_id', 'Subject', ['class' => 'required']) }}
                                 {{ Form::select('subject_id', 
                                         array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
                                         {
                                             return $id != 1;
                                         }, ARRAY_FILTER_USE_BOTH) , 
-                                        $course->subject->id, ['class' => 'form-control']) 
+                                        $course->subject->id, ['class' => 'form-control', 'required']) 
                                     }}
                             </div>
                             <div class="form-group col-12 col-md-4">
-                                {{ Form::label('tutor_id', 'Tutor') }}
+                                {{ Form::label('tutor_id', 'Tutor', ['class' => 'required']) }}
                                 {{ Form::select('tutor_id',
                                         array_filter(SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'), function($var, $id)
                                             {
                                                 return $id != 1;
                                             }, ARRAY_FILTER_USE_BOTH),
-                                        $course->tutor->id, ['class' => 'form-control']) }}
+                                        $course->tutor->id, ['class' => 'form-control', 'required']) }}
                             </div>
                             <div class="form-group col-12 col-md-4">
-                                {{ Form::label('type', 'Type') }}
+                                {{ Form::label('type', 'Type', ['class' => 'required']) }}
                                 {{ Form::select('type', Course::COURSE_TYPE,$course->type,['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_description:en', 'Course Description (English)') }}
-                            {{ Form::text('course_description:en', $course->translate('en')->course_description, ['class' => 'form-control']) }}
+                            {{ Form::label('course_description:en', 'Course Description (English)', ['class' => 'required']) }}
+                            {{ Form::text('course_description:en', $course->translate('en')->course_description, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_description:cn', 'Course Description (Traditional Chinese)') }}
-                            {{ Form::text('course_description:cn', $course->translate('cn')->course_description, ['class' => 'form-control']) }}
+                            {{ Form::label('course_description:cn', 'Course Description (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('course_description:cn', $course->translate('cn')->course_description, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_description:sc', 'Course Description (Simplify Chinese)') }}
-                            {{ Form::text('course_description:sc', $course->translate('sc')->course_description, ['class' => 'form-control']) }}
+                            {{ Form::label('course_description:sc', 'Course Description (Simplify Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('course_description:sc', $course->translate('sc')->course_description, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_overview', 'Course Overview') }}
-                            {{ Form::textarea('course_overview',$course->course_overview,['class' => 'form-control','id'=>'ckeditor', 'required']) }}
+                            {{ Form::label('course_overview', 'Course Overview', ['class' => 'required']) }}
+                            {{ Form::textarea('course_overview',$course->course_overview,['class' => 'form-control', 'required', 'id'=>'ckeditor']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_price', 'Course Price') }}
-                            {{ Form::text('course_price', $course->course_price, ['class' => 'form-control']) }}
+                            {{ Form::label('course_price', 'Course Price', ['class' => 'required']) }}
+                            {{ Form::text('course_price', $course->course_price, ['class' => 'form-control', 'required', 'min'=> 4]) }}
                         </div>
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}

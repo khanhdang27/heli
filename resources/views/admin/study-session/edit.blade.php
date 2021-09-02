@@ -22,7 +22,6 @@ use App\Utilities\SelectionByClass;
                         </div>
                         <div>
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Study Session
                             </h4>
@@ -34,8 +33,8 @@ use App\Utilities\SelectionByClass;
                         {!! Form::open(['url' => route('admin.study-session.update', $studySession),
                         'enctype'=>'multipart/form-data', 'method'=> 'put']) !!}
                         <div class="form-group ">
-                            {{ Form::label('session_name', 'Session Name') }}
-                            {{ Form::text('session_name', $studySession->session_name, ['class' => 'form-control']) }}
+                            {{ Form::label('session_name', 'Session Name', ['class' => 'required']) }}
+                            {{ Form::text('session_name', $studySession->session_name, ['class' => 'form-control', 'required']) }}
                             @error('session_name')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror

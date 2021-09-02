@@ -27,22 +27,22 @@
                         'enctype'=>'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group ">
-                            {{ Form::label('name', 'Name') }}
-                            {{ Form::text('name', $user->name ,['class' => 'form-control']) }}
+                            {{ Form::label('name', 'Name', ['class' => 'required']) }}
+                            {{ Form::text('name', $user->name ,['class' => 'form-control', 'required']) }}
                         </div>
                         @error('name')
                         <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group ">
-                            {{ Form::label('email', 'Email') }}
-                            {{ Form::text('email', $user->email,['class' => 'form-control']) }}
+                            {{ Form::label('email', 'Email', ['class' => 'required']) }}
+                            {{ Form::text('email', $user->email,['class' => 'form-control', 'required']) }}
                         </div>
                         @error('email')
                         <div class="alert text-danger">{{ $message }}</div>
                         @enderror
                         <div class="form-group ">
-                            {{ Form::label('password', 'Password') }}
-                            {{ Form::text('password', $user->password,['class' => 'form-control']) }}
+                            {{ Form::label('password', 'Password', ['class' => 'required']) }}
+                            {{ Form::text('password', $user->password,['class' => 'form-control', 'required']) }}
                         </div>
                         @error('password')
                         <div class="alert text-danger">{{ $message }}</div>

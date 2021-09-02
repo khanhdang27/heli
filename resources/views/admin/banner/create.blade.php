@@ -27,8 +27,8 @@
                         {!! Form::open(['url' => URL::route('admin.banner.store',['type'=>'post', 'ref'=>0]), 'enctype'
                         => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
-                            {{ Form::label('banner_title', 'Banner title') }}
-                            {{ Form::text('banner_title', old('banner_title'),['class' => 'form-control'] ) }}
+                            {{ Form::label('banner_title', 'Banner title', ['class' => 'required']) }}
+                            {{ Form::text('banner_title', old('banner_title'),['class' => 'form-control', 'required'] ) }}
                             @error('banner_title')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror

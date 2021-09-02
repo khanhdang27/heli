@@ -14,13 +14,10 @@
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Tags
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -29,8 +26,8 @@
                         {!! Form::open(['route' => ['admin.tag.update', $tags->id], 'method'=> 'put', 'enctype' =>
                         'multipart/form-data']) !!}
                         <div class="form-group">
-                            {{ Form::label('tag_name', 'Tag name') }}
-                            {{ Form::text('tag_name', $tags->tag_name, ['class' => 'form-control']) }}
+                            {{ Form::label('tag_name', 'Tag name', ['class' => 'required']) }}
+                            {{ Form::text('tag_name', $tags->tag_name, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('tag_type', 'Type') }}

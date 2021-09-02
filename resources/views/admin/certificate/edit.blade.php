@@ -18,7 +18,6 @@
                             <h4 class="card-header-title">
                                 Edit Certificate
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -28,12 +27,12 @@
                         'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group">
-                            {{ Form::label('certificate_code', 'Code') }}
-                            {{ Form::text('certificate_code', $certificate->certificate_code, ['class' => 'form-control']) }}
+                            {{ Form::label('certificate_code', 'Code', ['class' => 'required']) }}
+                            {{ Form::text('certificate_code', $certificate->certificate_code, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('certificate_name', 'Name') }}
-                            {{ Form::text('certificate_name', $certificate->certificate_name, ['class' => 'form-control']) }}
+                            {{ Form::label('certificate_name', 'Name', ['class' => 'required']) }}
+                            {{ Form::text('certificate_name', $certificate->certificate_name, ['class' => 'form-control', 'required']) }}
                         </div>
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}

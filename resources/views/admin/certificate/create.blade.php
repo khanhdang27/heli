@@ -14,13 +14,10 @@
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Create Certificate
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -28,15 +25,15 @@
                     <div class="card-body">
                         {!! Form::open(['route' => 'admin.certificate.store', 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
-                            {{ Form::label('certificate_code', 'Code') }}
-                            {{ Form::text('certificate_code', old('certificate_code'),['class' => 'form-control'] ) }}
+                            {{ Form::label('certificate_code', 'Code', ['class' => 'required']) }}
+                            {{ Form::text('certificate_code', old('certificate_code'),['class' => 'form-control', 'required'] ) }}
                             @error('certificate_code')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('certificate_name', 'Name') }}
-                            {{ Form::text('certificate_name', old('certificate_name'),['class' => 'form-control'] ) }}
+                            {{ Form::label('certificate_name', 'Name', ['class' => 'required']) }}
+                            {{ Form::text('certificate_name', old('certificate_name'),['class' => 'form-control', 'required'] ) }}
                             @error('certificate_name')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror

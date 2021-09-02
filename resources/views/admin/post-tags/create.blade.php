@@ -28,8 +28,8 @@
                     <div class="card-body">
                         {!! Form::open(['route' => 'admin.tag.store', 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
-                            {{ Form::label('tag_name', 'Name') }}
-                            {{ Form::text('tag_name', old('tag_name'),['class' => 'form-control', 'placeholder'=>'ex: #ABC']) }}
+                            {{ Form::label('tag_name', 'Name', ['class' => 'required']) }}
+                            {{ Form::text('tag_name', old('tag_name'),['class' => 'form-control', 'placeholder'=>'ex: #ABC', 'required']) }}
                             @error('tag_name')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror

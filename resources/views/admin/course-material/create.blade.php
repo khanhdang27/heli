@@ -22,7 +22,6 @@ use App\Utilities\SelectionByClass;
                         </div>
                         <div>
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Create Material
                             </h4>
@@ -33,7 +32,7 @@ use App\Utilities\SelectionByClass;
                     <div class="card-body">
                         {!! Form::open(['route' => 'admin.course-material.store', 'enctype'=>'multipart/form-data']) !!}
                         <div class="form-group ">
-                            {{ Form::label('course_id', 'Course') }}
+                            {{ Form::label('course_id', 'Course', ['class' => 'required']) }}
                             {{ Form::select('course_id', array_filter(SelectionByClass::getValues(\App\Models\Course::class,'course_name','id'), function($var, $id)
                                 {
                                     return $id != 1;
@@ -41,39 +40,39 @@ use App\Utilities\SelectionByClass;
                                 null, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_name:en', 'Material Name (English)') }}
+                            {{ Form::label('course_material_name:en', 'Material Name (English)', ['class' => 'required']) }}
                             {{ Form::text('course_material_name:en', old('course_material_name:en'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_name:cn', 'Material Name (Traditional Chinese)') }}
+                            {{ Form::label('course_material_name:cn', 'Material Name (Traditional Chinese)', ['class' => 'required']) }}
                             {{ Form::text('course_material_name:cn', old('course_material_name:cn'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)') }}
+                            {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)', ['class' => 'required']) }}
                             {{ Form::text('course_material_name:sc', old('course_material_name:sc'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_description:en', 'Description (English)') }}
+                            {{ Form::label('course_material_description:en', 'Description (English)', ['class' => 'required']) }}
                             {{ Form::textarea('course_material_description:en', old('course_material_description:en'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_description:cn', 'Description (Traditional Chinese)') }}
+                            {{ Form::label('course_material_description:cn', 'Description (Traditional Chinese)', ['class' => 'required']) }}
                             {{ Form::textarea('course_material_description:cn', old('course_material_description:cn'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_description:sc', 'Description (Simplify Chinese)') }}
+                            {{ Form::label('course_material_description:sc', 'Description (Simplify Chinese)', ['class' => 'required']) }}
                             {{ Form::textarea('course_material_description:sc', old('course_material_description:sc'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_origin:en', 'Material Origin (English)') }}
+                            {{ Form::label('course_material_origin:en', 'Material Origin (English)', ['class' => 'required']) }}
                             {{ Form::text('course_material_origin:en', old('course_material_origin:en'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_origin:cn', 'Material Origin (Traditional Chinese)') }}
+                            {{ Form::label('course_material_origin:cn', 'Material Origin (Traditional Chinese)', ['class' => 'required']) }}
                             {{ Form::text('course_material_origin:cn', old('course_material_origin:cn'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('file', 'Material Origin (Simplify Chinese)') }}
+                            {{ Form::label('file', 'Material Origin (Simplify Chinese)', ['class' => 'required']) }}
                             {{ Form::text('course_material_origin:sc', old('course_material_origin:sc'),['class' => 'form-control']) }}
                         </div>
                         <div class="custom-file">

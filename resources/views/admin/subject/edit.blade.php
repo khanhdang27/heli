@@ -1,7 +1,7 @@
 @extends('admin.layout')
 @section('content')
 @php
-use App\Utilities\SelectionByClass
+use App\Utilities\SelectionByClass;
 @endphp
 <!-- CARDS -->
 <div class="container-fluid mt-5">
@@ -17,13 +17,10 @@ use App\Utilities\SelectionByClass
                             </button>
                         </div>
                         <div>
-
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Subject
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -33,7 +30,7 @@ use App\Utilities\SelectionByClass
                         => 'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group">
-                            {{ Form::label('certificate_id', 'Certificate') }}
+                            {{ Form::label('certificate_id', 'Certificate', ['class' => 'required']) }}
                             {{ Form::select('certificate_id', 
                                 array_filter(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id'), function($var, $id)
                                     {
@@ -42,16 +39,16 @@ use App\Utilities\SelectionByClass
                                 ,$subject->certificate_id, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('subject_name:en', 'Name (English)') }}
-                            {{ Form::text('subject_name:en', $subject->translate('en')->subject_name, ['class' => 'form-control']) }}
+                            {{ Form::label('subject_name:en', 'Name (English)', ['class' => 'required']) }}
+                            {{ Form::text('subject_name:en', $subject->translate('en')->subject_name, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('subject_name:cn', 'Name (Traditional Chinese)') }}
-                            {{ Form::text('subject_name:cn', $subject->translate('cn')->subject_name, ['class' => 'form-control']) }}
+                            {{ Form::label('subject_name:cn', 'Name (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('subject_name:cn', $subject->translate('cn')->subject_name, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group">
-                            {{ Form::label('subject_name:sc', 'Name (Simplify Chinese)') }}
-                            {{ Form::text('subject_name:sc', $subject->translate('sc')->subject_name, ['class' => 'form-control']) }}
+                            {{ Form::label('subject_name:sc', 'Name (Simplify Chinese)', ['class' => 'required']) }}
+                            {{ Form::text('subject_name:sc', $subject->translate('sc')->subject_name, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group">
                             {{ Form::label('subject_color_background', 'Color)') }}
