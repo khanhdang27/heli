@@ -8,6 +8,8 @@
         @lang('keywords.latestNewsPage')
     </div>
     <div class="container-fluid pb-5 body-content w-75">
+        <button class="btn btn-outline-primary" onclick="window.history.back()">
+            <i class="fe fe-arrow-left"></i> {{ __('Back') }} </button>
         <div class="pt-5 text-primary">
             <h2>{{$news->announcement_date}} {{$news->title}}</h2>
             <div class="d-flex">

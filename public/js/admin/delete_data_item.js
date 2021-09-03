@@ -4,14 +4,10 @@ function itemDelete(url) {
 
     if (choose) {
         axios.delete(url, {}).then(response => {
-            console.log('response :>> ', response);
             if (response.status == 200) {
-                console.log(response.message)
-                // alert(response.message);
                 location.reload();
             }
         }).catch(error => {
-            console.log(error)
             alert('delete is invalid');
         });
     }

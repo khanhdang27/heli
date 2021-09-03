@@ -11086,8 +11086,6 @@ h5,
 .search {
   border: 2px solid #0b487d;
   border-radius: 20px;
-  padding: 0.2rem !important;
-  width: 309px;
   height: 40px;
   background-color: #fff;
 }
@@ -11266,7 +11264,7 @@ input.check-subscribe {
 
 .product-hover:hover {
   text-decoration: none;
-  color: var(--secondary);
+  color: var(--secondary) !important;
 }
 
 .share-bar {
@@ -11282,7 +11280,7 @@ input.check-subscribe {
   padding: 0.5rem 1rem;
   border-radius: 28px;
   margin: 0 0.5rem 0.5rem 0;
-  min-width: 120px;
+  min-width: 87px;
 }
 
 .btn-hashtag a {
@@ -11330,7 +11328,7 @@ input.check-subscribe {
 }
 
 .text-comment {
-  font-size: 18.7pt;
+  font-size: 20px;
   color: var(--primary);
 }
 
@@ -11447,9 +11445,13 @@ input.check-subscribe {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  min-width: 70px;
+  min-width: 95px;
   padding: 0.2rem 0;
   text-align: center;
+}
+
+.product-box .title-product a {
+  max-width: 95px;
 }
 
 .product-box .content-top {
@@ -11627,13 +11629,13 @@ input.check-subscribe {
 /*STEP FOR REGISTER-----------------------------------------*/
 
 .step-for-register .content-step {
-  max-width: 80%;
+  max-width: 70%;
   margin: 0 auto;
 }
 
 .step-for-register .content-step .circle-step {
-  width: 88px;
-  height: 88px;
+  width: 75px;
+  height: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11643,7 +11645,7 @@ input.check-subscribe {
 
 .step-for-register .content-step .title-step {
   font-weight: 600;
-  font-size: 18pt;
+  font-size: 16pt;
 }
 
 .step-for-register .content-step .text-step {
@@ -11656,6 +11658,11 @@ input.check-subscribe {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.step-for-register .content-step .text-row {
+  margin-left: -9rem;
+  margin-right: -9rem;
 }
 
 .step-for-register .dot-bar {
@@ -11679,6 +11686,10 @@ input.check-subscribe {
 .step-for-register #btn-register-step:hover {
   background-color: var(--white);
   color: var(--blue);
+}
+
+.step-for-register-text {
+  max-width: 90%;
 }
 
 .circle-register {
@@ -11760,7 +11771,6 @@ input.check-subscribe {
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
 .sub-header {
-  width: 100%;
   background-image: url("/helios/public/images/bg_sub.svg");
   background-size: cover;
   z-index: 1001;
@@ -11945,7 +11955,7 @@ input.check-subscribe {
 
 .popular-articles-item-image {
   width: 100%;
-  flex: 0 40%;
+  flex: 0 30%;
 }
 
 .popular-articles-item-image .img-blog {
@@ -11958,7 +11968,7 @@ input.check-subscribe {
 }
 
 .popular-articles-item-content {
-  flex: 0 60%;
+  flex: 0 70%;
 }
 
 .popular-articles-item-content a {
@@ -12049,7 +12059,7 @@ input.check-subscribe {
 }
 
 .img-question {
-  width: 60%;
+  max-height: 470px;
 }
 
 .ic-action {
@@ -12197,7 +12207,18 @@ input.check-subscribe {
   height: 100%;
 }
 
-/*SUB HEADER-----------------------------------------*/
+/*Forum-----------------------------------------*/
+
+.user-avatar {
+  width: 98px;
+  height: 98px;
+}
+
+.item-slide {
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
 
 .rating {
   display: inline-block;
@@ -12362,6 +12383,15 @@ input.check-subscribe {
   .logo {
     width: 180px;
   }
+
+  .text-comment {
+    font-size: 18px;
+  }
+
+  .user-avatar {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -12387,10 +12417,6 @@ input.check-subscribe {
   #btn_next,
   #btn_prev {
     display: none !important;
-  }
-
-  .product-hover h4 {
-    font-size: 20px;
   }
 
   .item-header {
@@ -12422,6 +12448,11 @@ input.check-subscribe {
   .banner-content .banner-info .banner-caption {
     font-size: 32px;
   }
+
+  .popular-articles-item-image .img-blog {
+    width: 145px;
+    height: 145px;
+  }
 }
 
 @media screen and (max-width: 576px) {
@@ -12435,6 +12466,7 @@ input.check-subscribe {
 
   .banner-content .banner-info {
     top: 60%;
+    width: 80%;
   }
 
   .banner-content .banner-info .banner-caption {
@@ -12458,16 +12490,8 @@ input.check-subscribe {
     font-size: 20px;
   }
 
-  .sort-lg {
-    display: none;
-  }
-
-  .sort-sm {
-    display: block !important;
-  }
-
   .fc .fc-toolbar-title {
-    width: 250px !important;
+    width: 220px !important;
     font-size: 24px !important;
   }
 

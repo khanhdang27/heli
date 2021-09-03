@@ -130,7 +130,6 @@
                         this.course_discount.push(membership_discount)
                     }
                 }
-                console.log(JSON.stringify(this.$data, null, 2))
 
             }
         }

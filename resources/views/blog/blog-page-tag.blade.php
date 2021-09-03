@@ -105,7 +105,6 @@ use App\Utilities\SelectionByClass;
                     }
                 })
                 .then(function (response) {
-                    console.log(response)
                     if(response.data){
                         var len = app.posts.length;
                         app.page+=1;

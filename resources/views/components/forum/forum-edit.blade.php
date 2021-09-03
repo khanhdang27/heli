@@ -71,10 +71,7 @@ use App\Utilities\SelectionByClass;
 
     if (choose) {
         axios.delete(url, {}).then(response => {
-            console.log('response :>> ', response);
             if (response.status == 200) {
-                console.log(response.message)
-                // alert(response.message);
                 location.href = "{{ route('site.post.index') }}"
             } else {
                 alert(response.message);
