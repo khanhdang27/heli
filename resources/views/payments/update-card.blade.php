@@ -15,8 +15,7 @@
                         <div class="card border-primary py-3 px-4 text-primary">
                             <div class="row">
                                 <div class="col-sm-8 d-flex align-items-start">
-                                    <div class="rounded-circle border border-primary mr-4 bg-user user-avatar"
-                                         style="background-image: url('{{ asset(empty(Auth::user()->avatar)
+                                    <div class="rounded-circle border border-primary mr-4 bg-user user-avatar" style="background-image: url('{{ asset(empty(Auth::user()->avatar)
                                                                         ? "images/user_default.png"
                                                                         : '/file/'.Auth::user()->avatar->id
                                                                         )}}');">
@@ -24,8 +23,8 @@
                                     <div class="mr-4">
                                         <h4 class="font-weight-bold">{{Auth::user()->name}}</h4>
                                         @if (!empty(Auth::user()->card_last_four))
-                                            <h4 class="font-weight-bold">**** ****
-                                                **** {{Auth::user()->card_last_four}}</h4>
+                                        <h4 class="font-weight-bold">**** ****
+                                            **** {{Auth::user()->card_last_four}}</h4>
                                         @endif
                                     </div>
                                 </div>
@@ -37,8 +36,8 @@
                             </div>
                         </div>
                         <button class="btn bg-btn-payment border border-primary py-4 my-5 w-100" type="button"
-                                data-toggle="collapse" data-target="#collapsePaymentMethod" aria-expanded="false"
-                                aria-controls="collapsePaymentMethod">
+                            data-toggle="collapse" data-target="#collapsePaymentMethod" aria-expanded="false"
+                            aria-controls="collapsePaymentMethod">
                             <h3 class="mb-0 font-weight-bold text-primary">PAYMENT METHOD</h3>
                         </button>
                         <div class="collapse show" id="collapsePaymentMethod">
@@ -46,9 +45,8 @@
                                 {{-- VISA --}}
                                 <div class="d-flex align-items-center mb-4">
                                     <input class="btn choose-payment-method mr-4" type="radio" name="exampleRadios"
-                                           id="radioVisa" value="option1" data-toggle="collapse"
-                                           data-target="#collapseVisa"
-                                           aria-expanded="false" aria-controls="collapseVisa">
+                                        id="radioVisa" value="option1" data-toggle="collapse"
+                                        data-target="#collapseVisa" aria-expanded="false" aria-controls="collapseVisa">
                                     <label class="h3 m-0 font-weight-bold text-primary" for="radioVisa">
                                         <img class="mr-4" src="{{asset('images/ic/ic_visa.svg')}}">
                                         Visa Credit Card
@@ -60,18 +58,16 @@
                                             <div class="form-group h4">
                                                 <label for="card-holder-name">Card Holder</label>
                                                 <input class="form-control border-primary ip-payment"
-                                                       id="card-holder-name"
-                                                       type="text" style="text-transform:uppercase">
+                                                    id="card-holder-name" type="text" style="text-transform:uppercase">
                                             </div>
                                             <label class="h4" for="card-holder-name">Enter Card Number</label>
                                             <div class="form-group">
                                                 <div class="ip-payment pt-3 border border-primary rounded p-2"
-                                                     id="card-element"></div>
+                                                    id="card-element"></div>
                                             </div>
                                             <div class="d-flex justify-content-end">
                                                 <button class="btn btn-primary mt-2 py-2 px-4 h4 shadow"
-                                                        id="card-button"
-                                                        data-secret="{{ $intent->client_secret }}">
+                                                    id="card-button" data-secret="{{ $intent->client_secret }}">
                                                     Update
                                                 </button>
                                             </div>
@@ -83,8 +79,8 @@
                                 {{-- WECHAT PAY --}}
                                 <div class="d-flex align-items-center mb-4">
                                     <input class="btn choose-payment-method mr-4" type="radio" name="exampleRadios"
-                                           id="radioWechat" value="option1" data-toggle="collapse" data-target="#"
-                                           aria-expanded="false" aria-controls="">
+                                        id="radioWechat" value="option1" data-toggle="collapse" data-target="#"
+                                        aria-expanded="false" aria-controls="">
                                     <label class="h3 m-0 font-weight-bold text-primary" for="radioWechat">
                                         <img class="mr-4" src="{{asset('images/ic/ic_wechat.svg')}}">
                                         WeChat Pay
@@ -93,8 +89,8 @@
                                 {{-- ALIPAY --}}
                                 <div class="d-flex align-items-center mb-4">
                                     <input class="btn choose-payment-method mr-4" type="radio" name="exampleRadios"
-                                           id="radioAlipay" value="option1" data-toggle="collapse" data-target="#"
-                                           aria-expanded="false" aria-controls="">
+                                        id="radioAlipay" value="option1" data-toggle="collapse" data-target="#"
+                                        aria-expanded="false" aria-controls="">
                                     <label class="h3 m-0 font-weight-bold text-primary" for="radioAlipay">
                                         <img class="mr-4" src="{{asset('images/ic/ic_alipay.svg')}}">
                                         Alipay
@@ -103,8 +99,8 @@
                                 {{-- PAYPAL --}}
                                 <div class="d-flex align-items-center mb-4">
                                     <input class="btn choose-payment-method mr-4" type="radio" name="exampleRadios"
-                                           id="radioPaypal" value="option1" data-toggle="collapse" data-target="#"
-                                           aria-expanded="false" aria-controls="">
+                                        id="radioPaypal" value="option1" data-toggle="collapse" data-target="#"
+                                        aria-expanded="false" aria-controls="">
                                     <label class="h3 m-0 font-weight-bold text-primary" for="radioPaypal">
                                         <img class="mr-4" src="{{asset('images/ic/ic_paypal.svg')}}">
                                         Paypal
@@ -157,11 +153,9 @@
                     payment_method: setupIntent.payment_method,
                 })
                     .then(function (response) {
-                        console.log(response);
                         location.reload();
                     })
                     .catch(function (error) {
-                        console.log(error);
                     });
             }
         });

@@ -110,7 +110,6 @@ use App\Models\Course;
                 {
                     setDefaultInvisible() {
                         let type = document.getElementById('type');
-                        console.log(type.value);
                         if (type.value === "3") {
                             document.getElementById('tutor').hidden = true;
                         } else {

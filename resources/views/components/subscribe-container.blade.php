@@ -28,8 +28,6 @@ use Spatie\Newsletter\NewsletterFacade;
 </div>
 @endif
 
-
-
 <script>
     var subscribe = new Vue({
         el: '#subscribe_newsletter',
@@ -39,14 +37,13 @@ use Spatie\Newsletter\NewsletterFacade;
         methods: {
             onSubmit: function (){
                 const data = document.getElementById('email').value;
-                console.log(data);
                 axios.post("{{route('site.subscribe')}}", data)
                     .then(function (response) {
-                        console.info(response);
                         document.getElementById("formSubscribe").reset();
+                        toastr["success"]("@lang('keywords.subscribe.success')");
                     })
                     .catch(function (error) {
-                        console.error(error);
+                        subscriber["error"]("@lang('keywords.toast.fail')");
                     });
             }
         }

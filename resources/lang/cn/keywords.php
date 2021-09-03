@@ -140,5 +140,9 @@ return [
     'errors' => [
         'tooManyRequests' => '请求太多，请冷静等待几分钟再请求',
     ],
-    'searchResult' => '搜索結果'
+    'searchResult' => '搜索結果',
+    'subscribe' => [
+        'success' => '注册邮箱接收最新消息',
+        'fail' => '收到错误邮件，请重新输入'
+    ]
 ];

@@ -119,7 +119,6 @@
                     url: "{{ route('site.userLogin') }}",
                     data: formData
                 }).done(function (data) {
-                    console.log('data :>> ', data);
                     spinner.addClass('d-none')
                     if (data['message'] == 'success') {
                         toastr["success"]("@lang('keywords.toast.loginSuccess')");
@@ -132,7 +131,6 @@
                         toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
                     }
                 }).fail(function (data) {
-                    console.log('data :>> ', data);
                     if(data.responseJSON) {
                         toastr["error"]("@lang('auth.throttle', ['minutes'=>10])", "@lang('keywords.toast.loginFailed')");
                     } else {

@@ -37,8 +37,7 @@ use App\Utilities\SelectionByClass;
                     </div>
                 </div>
                 <div class="btn-group dropleft sort-sm text-right d-block d-md-none">
-                    <button class="btn btn-outline-primary dropdown-toggle h5" id="navbardrop"
-                            data-toggle="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle h5" id="navbardrop" data-toggle="dropdown">
                         Sort
                     </button>
                     <div class="dropdown-menu">
@@ -78,11 +77,9 @@ use App\Utilities\SelectionByClass;
     var prev = null;
     for (var i = 0; i < rad.length; i++) {
         rad[i].addEventListener('change', function() {
-            // (prev) ? console.log(prev.value): null;
             if (this !== prev) {
                 prev = this;
             }
-            console.log(this.value)
             window.location.href = "{{ route('site.course.search') }}"+"?sort="+this.value
         });
     }

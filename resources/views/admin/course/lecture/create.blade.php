@@ -82,10 +82,7 @@ use App\Models\Subject;
                 document.getElementById('lectures_name').value.length === 0 ||
                 document.getElementById('lectures_description').value.length === 0 
             ) {
-
-                console.log(document.getElementById('lectures_name').value)
                 showMessage('<strong>Error</strong>: ' + ' lectures name and description is required', 'danger')
-
             } else {
                 /* Clear the results div */
                 while (results.hasChildNodes()) results.removeChild(results.firstChild)
@@ -110,8 +107,6 @@ use App\Models\Subject;
                     },
                     onComplete: function(videoId, index) {
                         
-                        console.log(videoId)
-                        console.log(index)
                         var url = 'https://vimeo.com/' + videoId
 
                         if (index > -1) {

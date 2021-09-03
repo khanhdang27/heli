@@ -111,10 +111,7 @@
 
       if (choose) {
           axios.post(url, {}).then(response => {
-              console.log('response :>> ', response);
               if (response.status == 200) {
-                  console.log(response.message)
-                  // alert(response.message);
                   location.reload();
               } else {
                   alert(response.message);

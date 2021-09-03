@@ -140,5 +140,9 @@ return [
     'errors' => [
         'tooManyRequests' => 'Too Many Requests, Please calm Wait for some minutes and requests again',
     ],
-    'searchResult' => 'Search results'
+    'searchResult' => 'Search results',
+    'subscribe' => [
+        'success' => 'Registered email to receive the latest news',
+        'fail' => 'received an error email, please re-enter'
+    ]
 ];

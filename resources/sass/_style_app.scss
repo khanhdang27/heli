@@ -1,6 +1,7 @@
 @font-face {
     font-family: Source Han Sans CN;
-    src: url("/helios/public/fonts/Source Han Sans CN Normal.ttf") format("truetype");
+    src: url("/helios/public/fonts/Source Han Sans CN Normal.ttf")
+        format("truetype");
 }
 
 html {
@@ -41,7 +42,7 @@ h5,
     opacity: 1;
     top: 0;
     left: 0;
-    background: rgba(11, 10, 12, .35);
+    background: rgba(11, 10, 12, 0.35);
     z-index: 9998;
     overflow: hidden;
 }
@@ -308,8 +309,8 @@ input.check-subscribe {
     }
 }
 
-.product-hover{
-    &:hover{
+.product-hover {
+    &:hover {
         text-decoration: none;
         color: var(--secondary) !important;
     }
@@ -435,7 +436,6 @@ input.check-subscribe {
     outline: none;
 }
 
-
 /*GUEST PRAISE-----------------------------------------*/
 
 .title-card {
@@ -485,7 +485,7 @@ input.check-subscribe {
         min-width: 95px;
         padding: 0.2rem 0;
         text-align: center;
-        a{
+        a {
             max-width: 95px;
         }
     }
@@ -565,7 +565,6 @@ input.check-subscribe {
     opacity: 0 !important;
 }
 
-
 /*TAB PRODUCT-----------------------------------------*/
 
 .product-tab {
@@ -610,7 +609,6 @@ input.check-subscribe {
     height: 50px;
 }
 
-
 /*SHOW VIDEO-----------------------------------------*/
 
 .show-video {
@@ -654,19 +652,15 @@ input.check-subscribe {
     border: 2px solid;
 }
 
-
 /*STEP FOR REGISTER-----------------------------------------*/
 
 .step-for-register {
     .content-step {
-        max-width: 80%;
+        max-width: 70%;
         margin: 0 auto;
-        #step2 {
-            //margin: 0 7rem;
-        }
         .circle-step {
-            width: 88px;
-            height: 88px;
+            width: 75px;
+            height: 75px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -675,7 +669,7 @@ input.check-subscribe {
         }
         .title-step {
             font-weight: 600;
-            font-size: 18pt;
+            font-size: 16pt;
         }
         .text-step {
             max-width: 270px;
@@ -686,6 +680,11 @@ input.check-subscribe {
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .text-row {
+            margin-left: -9rem;
+            margin-right: -9rem;
         }
     }
     .dot-bar {
@@ -709,11 +708,14 @@ input.check-subscribe {
     }
 }
 
+.step-for-register-text {
+    max-width: 90%;
+}
+
 .circle-register {
     width: 112px;
     height: 112px;
 }
-
 
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
 
@@ -774,7 +776,6 @@ input.check-subscribe {
     }
 }
 
-
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
 .sub-header {
@@ -782,7 +783,6 @@ input.check-subscribe {
     background-size: cover;
     z-index: 1001;
 }
-
 
 /*SUBSCRIBE CONTAINER */
 
@@ -806,7 +806,6 @@ input.check-subscribe {
     }
 }
 
-
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 
 .title-subject {
@@ -822,7 +821,6 @@ input.check-subscribe {
     width: 30px;
     height: 20px;
 }
-
 
 /*COURSE PAGE-------------------------------------------------------------------------------*/
 
@@ -891,7 +889,6 @@ input.check-subscribe {
     font-size: 13.5pt;
 }
 
-
 /*COURSE PAGE 2-------------------------------------------------------------------------------*/
 
 .info-course {
@@ -935,13 +932,11 @@ input.check-subscribe {
     height: auto;
 }
 
-
 /*COURSE PAGE 3-------------------------------------------------------------------------------*/
 
 .video {
     max-width: 1550px;
 }
-
 
 /*BLOG PAGE----------------------------------------------------------------*/
 
@@ -1057,7 +1052,6 @@ input.check-subscribe {
     overflow-y: auto;
 }
 
-
 /*FORUM PAGE-------------------------------------------------------------------*/
 
 .body-forum-page {
@@ -1095,7 +1089,6 @@ input.check-subscribe {
         background-color: #f1f1f1;
     }
 }
-
 
 /*NEWS PAGE-----------------------------------------*/
 
@@ -1138,12 +1131,11 @@ input.check-subscribe {
         font-size: 16px;
         cursor: pointer;
     }
-    input[type="radio"]:checked+label {
+    input[type="radio"]:checked + label {
         border-style: solid;
         border-color: var(--primary);
     }
 }
-
 
 /*PAYMENT PAGE*/
 
@@ -1186,7 +1178,7 @@ input.check-subscribe {
 .item-schedule {
     max-width: 123.58px;
     height: 190px;
-    background-image: url('/helios/public/images/ic/bookmark.svg');
+    background-image: url("/helios/public/images/ic/bookmark.svg");
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -1210,10 +1202,10 @@ input.check-subscribe {
     height: 100%;
 }
 /*Forum-----------------------------------------*/
-.user-avatar{
+.user-avatar {
     width: 98px;
     height: 98px;
 }
-.item-slide{
+.item-slide {
     width: fit-content !important;
 }
