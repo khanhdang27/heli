@@ -9,7 +9,7 @@
     </div>
     <div class="container container-news-page">
         <div class="content-news-page border-secondary">
-            <div class="p-5">
+            <div class="py-5">
                 <div id="showMore">
                     <!-- Post -->
                     <div class="post" v-for='post in posts'>
@@ -46,7 +46,7 @@
             getPosts: function(){
                 axios.get('{{ route("site.news.list")}}', {
                     params: {
-                        page: this.page + 1, 
+                        page: this.page + 1,
                     }
                 })
                 .then(function (response) {
@@ -59,8 +59,8 @@
                                 app.buttonText = "Load More";
                                 // Loop on data and push in posts
                                 for (let i = 0; i < response.data.data.length; i++){
-                                    app.posts.push(response.data.data[i]); 
-                                } 
+                                    app.posts.push(response.data.data[i]);
+                                }
                             },500);
                         }else{
                             app.posts = response.data.data;

@@ -20,8 +20,8 @@ use App\Utilities\SelectionByClass;
                 <div class="pt-5 text-primary">
                     <p class="h1">{{$blog->title}}</p>
                     <div class="d-flex h5 my-5 align-items-center">
-                        <div class="d-flex align-items-center mr-5">
-                            <p class="mr-5 mb-0">{{ substr($blog->created_at,0,10) }}</p>
+                        <div class="d-flex align-items-center mr-5 flex-wrap">
+                            <p class="mr-4 mb-0 text-nowrap">{{ substr($blog->created_at,0,10) }}</p>
                             <img class="mr-2" src="{{asset("images/ic/ic_eyeBlue.svg")}}" width="26">
                             <p class="mb-0">{{$blog->view_no}}</p>
                         </div>
