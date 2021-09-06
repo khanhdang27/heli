@@ -42,6 +42,7 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="swiper-pagination d-block d-lg-none" id="coursePagination"></div>
             </div>
 
         </div>
@@ -66,6 +67,10 @@
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: "#coursePagination",
+                dynamicBullets: true,
             },
             breakpoints: {
                 640: {

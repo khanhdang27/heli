@@ -135,7 +135,7 @@ return [
         'rateCourse' => '課程評分',
         'addReview' => '添加您的評論'
     ],
-    'more' => '更多',
+    'more' => '閱讀更多',
     'coursesIHavePurchased' => '我已購買的課程',
     'errors' => [
         'tooManyRequests' => '请求太多，请冷静等待几分钟再请求',

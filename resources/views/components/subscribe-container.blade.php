@@ -37,13 +37,15 @@ use Spatie\Newsletter\NewsletterFacade;
         methods: {
             onSubmit: function (){
                 const data = document.getElementById('email').value;
-                axios.post("{{route('site.subscribe')}}", data)
+                axios.post("{{route('site.customerSubscribe')}}", {
+                    email:data
+                })
                     .then(function (response) {
                         document.getElementById("formSubscribe").reset();
                         toastr["success"]("@lang('keywords.subscribe.success')");
                     })
                     .catch(function (error) {
-                        subscriber["error"]("@lang('keywords.toast.fail')");
+                        toastr["error"]("@lang('keywords.subscribe.fail')");
                     });
             }
         }
