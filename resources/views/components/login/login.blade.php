@@ -78,7 +78,7 @@
                         <div class="bottom-btn d-flex justify-content-center">
                             <button class='btn btn-login btn-register-now my-5 animate-change-color' id='btn-login'
                                 type="submit">
-                                <p class="mb-0">{{__('Login')}}</p>
+                                <p class="mb-0">{{__('keywords.login')}}</p>
                                 <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none"
                                     role="status" aria-hidden="true"></span>
                                 <span class="sr-only">Loading...</span>

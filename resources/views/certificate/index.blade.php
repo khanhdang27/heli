@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </form>
-            <form name="m_sort_course" class="w-100  d-block d-md-none">
+            <form name="m_sort_course" class="w-100 text-right d-block d-md-none">
                 <div class="btn-group dropleft sort-sm text-right">
                     <button class="btn btn-outline-primary dropdown-toggle h5" id="navbardrop" data-toggle="dropdown">
                         Sort

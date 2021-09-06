@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="swiper-container w-100 mt-2" id="swpSubjects">
-                <div class="swiper-wrapper mt-1">
+                <div class="swiper-wrapper mt-1 pb-3">
                     @foreach ($subjects as $item)
                         @if ($item->certificate_id != 1)
                             <div class="swiper-slide item-slide">
@@ -45,6 +45,7 @@
                         @endif
                     @endforeach
                 </div>
+                <div class="swiper-scrollbar" id="subjectsScrollbar"></div>
             </div>
 
         </div>
@@ -65,6 +66,9 @@
     var swpSubjects = new Swiper("#swpSubjects", {
         speed: 500,
         spaceBetween: 20,
-        slidesPerView: "auto"
+        slidesPerView: "auto",
+        scrollbar: {
+            el: "#subjectsScrollbar",
+        },
     });
 </script>
