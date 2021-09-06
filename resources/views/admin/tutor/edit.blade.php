@@ -99,21 +99,21 @@ use App\Utilities\SelectionByClass;
                             <hr>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:en', 'Tutor Info (English)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_info:en', $tutor->tutor_info, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_info:en', $tutor->translate('en')->tutor_info, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_info:en')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:cn', 'Tutor Info (Traditional Chinese)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_info:cn', $tutor->tutor_info, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_info:cn', $tutor->translate('cn')->tutor_info, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_info:cn')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_info:sc', 'Tutor Info (Simplify Chinese)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_info:sc', $tutor->tutor_info, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_info:sc', $tutor->translate('sc')->tutor_info, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_info:sc')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
@@ -124,21 +124,21 @@ use App\Utilities\SelectionByClass;
                             <hr>
                             <div class="form-group ">
                                 {{ Form::label('tutor_level:en', 'Tutor Level (English)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_level:en', $tutor->tutor_level, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_level:en', $tutor->translate('en')->tutor_level, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_level:en')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_level:cn', 'Tutor Level (Traditional Chinese)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_level:cn', $tutor->tutor_level, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_level:cn', $tutor->translate('cn')->tutor_level, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_level:cn')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_level:sc', 'Tutor Level (Simplify Chinese)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_level:sc', $tutor->tutor_level, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_level:sc', $tutor->translate('sc')->tutor_level, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_level:sc')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
@@ -149,21 +149,21 @@ use App\Utilities\SelectionByClass;
                             <hr>
                             <div class="form-group ">
                                 {{ Form::label('tutor_specialized:en', 'Tutor Specialized (English)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_specialized:en', $tutor->tutor_specialized, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_specialized:en', $tutor->translate('en')->tutor_specialized, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_specialized:en')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_specialized:cn', 'Tutor Specialized (Traditional Chinese)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_specialized:cn', $tutor->tutor_specialized, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_specialized:cn', $tutor->translate('cn')->tutor_specialized, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_specialized:cn')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_specialized:sc', 'Tutor Specialized (Simplify Chinese)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_specialized:sc', $tutor->tutor_specialized, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_specialized:sc', $tutor->translate('sc')->tutor_specialized, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_specialized:sc')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
@@ -174,21 +174,21 @@ use App\Utilities\SelectionByClass;
                             <hr>
                             <div class="form-group ">
                                 {{ Form::label('tutor_experience:en', 'Tutor Experience (English)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_experience:en', $tutor->tutor_experience, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_experience:en', $tutor->translate('en')->tutor_experience, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_experience:en')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_experience:cn', 'Tutor Experience (Traditional Chinese)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_experience:cn', $tutor->tutor_experience, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_experience:cn', $tutor->translate('cn')->tutor_experience, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_experience:cn')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group ">
                                 {{ Form::label('tutor_experience:sc', 'Tutor Experience (Simplify Chinese)', ['class' => 'required']) }}
-                                {{ Form::text('tutor_experience:sc', $tutor->tutor_experience, ['class' => 'form-control', 'required']) }}
+                                {{ Form::text('tutor_experience:sc', $tutor->translate('sc')->tutor_experience, ['class' => 'form-control', 'required']) }}
                                 @error('tutor_experience:sc')
                                 <div class="alert text-danger">{{ $message }}</div>
                                 @enderror

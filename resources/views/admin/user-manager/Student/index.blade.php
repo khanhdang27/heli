@@ -41,19 +41,19 @@
                         <table id="data-table" class="table table-sm table-nowrap card-table">
                             <thead>
                                 <tr>
-                                    <th>
+                                    <th class="c-10">
                                         Photo
                                     </th>
-                                    <th>
+                                    <th class="c-30">
                                         Name
                                     </th>
-                                    <th>
+                                    <th class="c-30">
                                         Email
                                     </th>
-                                    <th>
+                                    <th class="c-20">
                                         Membership Group
                                     </th>
-                                    <th>
+                                    <th class="c-10">
                                         Active/Inactive
                                     </th>
                                     <th></th>
@@ -62,7 +62,7 @@
                             <tbody class="list">
                                 @foreach($students as $value)
                                 <tr>
-                                    <td>
+                                    <td class="c-10">
                                         @if(!empty($value->user->avatar))
                                         <img type="image/jpg" src="{{asset('/file/'.$value->user->avatar->id)}}"
                                             width="75" height="75" />
@@ -70,16 +70,16 @@
                                         <img src="{{asset('images/photo_default.svg')}}" width="75">
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="c-30">
                                         {{ $value->user->name }}
-                                    </td>
+                                    </td class="c-30">
                                     <td>
                                         {{ $value->user->email }}
-                                    </td>
+                                    </td class="c-20">
                                     <td>
                                         {{ $value->user->membership->name }}
                                     </td>
-                                    <td>
+                                    <td class="c-10">
                                         @if($value->user->active == 0)
                                         <a href="{{ route('admin.user-manager.change-status', $value->user->id) }}"
                                             class="btn btn-danger py-0">Inactive</a>
