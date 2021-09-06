@@ -87,7 +87,7 @@
     <div class="mx-auto container-home mt-5">
         <div class="d-flex justify-content-between flex-wrap pt-5 btn-above-video px-3">
             <h2 class="text-primary">@lang('keywords.continueMyCourse')</h2>
-            <a href="{{ route('site.user.course') }}" class="m-0 btn btn-register-now btn-login py-1 px-5">
+            <a href="{{ route('site.user.course') }}" class="m-0 btn btn-register-now btn-login px-5">
                 @lang('keywords.otherPurchasedCourses')
             </a>
         </div>

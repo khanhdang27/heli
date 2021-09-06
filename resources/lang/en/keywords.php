@@ -129,7 +129,8 @@ return [
     ],
     'forum' =>[
         'bestAnswer' => 'Best answer',
-        'addAnswer' => 'Add your answer'
+        'addAnswer' => 'Add your answer',
+        'postQuestion' => 'Post your question'
     ],
     'rate' => [
         'rateCourse' => 'Rate Course',

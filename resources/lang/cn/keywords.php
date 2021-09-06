@@ -129,7 +129,8 @@ return [
     ],
     'forum' =>[
         'bestAnswer' => '最佳答案',
-        'addAnswer' => '添加您的答案'
+        'addAnswer' => '添加您的答案',
+        'postQuestion' => '發表你的問題'
     ],
     'rate' => [
         'rateCourse' => '課程評分',
