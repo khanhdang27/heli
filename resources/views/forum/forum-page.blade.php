@@ -15,14 +15,14 @@
                         <div class="text-right mt-5">
                             <a href="#" class="btn btn-secondary text-primary" data-toggle="modal"
                                data-target="#modalCreate">
-                                <h3 class="mb-0">Post your question</h3>
+                                <h3 class="mb-0">@lang('keywords.forum.postQuestion')</h3>
                             </a>
                         </div>
                         <div class="modal fade modal-index" id="modalCreate" tabindex="-1" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content text-primary">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Post your question</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">@lang('keywords.forum.postQuestion')</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
