@@ -3,7 +3,7 @@
         <div class="modal-content modal-login-content border-white">
             <div class="modal-header btn-close">
                 <button type="button" class="close btn-x m-0 p-0" data-dismiss="modal">
-                    <span aria-hidden="true" class="rounded-circle p-1">×</span>
+                    <span aria-hidden="true" class="rounded-circle p-1"><i class="fe fe-x"></i></span>
                 </button>
             </div>
             <div class="my-auto pb-5">

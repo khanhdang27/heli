@@ -10951,6 +10951,10 @@ html {
   font-size: 14pt;
 }
 
+body {
+  padding-right: 0px !important;
+}
+
 h1,
 .h1 {
   font-size: 32px;
