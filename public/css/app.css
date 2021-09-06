@@ -12224,6 +12224,11 @@ input.check-subscribe {
   width: fit-content !important;
 }
 
+.tutor_image {
+  width: 270px;
+  height: 270px;
+}
+
 .rating {
   display: inline-block;
   position: relative;
@@ -12302,6 +12307,11 @@ input.check-subscribe {
 }
 
 @media screen and (max-width: 1200px) {
+  .tutor_image {
+    width: 230px;
+    height: 230px;
+  }
+
   .banner-content .banner-info {
     width: 60%;
   }
@@ -12399,6 +12409,11 @@ input.check-subscribe {
 }
 
 @media screen and (max-width: 768px) {
+  .tutor_image {
+    width: 170px;
+    height: 170px;
+  }
+
   .menu-img {
     width: 120px;
     height: 120px;
@@ -12464,6 +12479,11 @@ input.check-subscribe {
     font-size: 13px !important;
   }
 
+  .tutor_image {
+    width: 70px;
+    height: 70px;
+  }
+
   .banner-content {
     top: 30% !important;
   }
@@ -12523,6 +12543,14 @@ input.check-subscribe {
 
   .btn-header {
     margin: 0 0.2rem 0 0;
+  }
+
+  .box-news .h2 {
+    font-size: 20px;
+  }
+
+  .modal-body-login h1 {
+    font-size: 26px;
   }
 }
 
