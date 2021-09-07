@@ -28,7 +28,7 @@ class ExaminationController extends Controller
             })
             ->when(request('tutor') != '', function ($query) {
                 $query->where('tutor_id', request('tutor'));
-            })
+            })->orderBy('created_at', 'desc')
             ->paginate(15)
             ->withQueryString();
         return view('admin.examination.index', [

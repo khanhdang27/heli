@@ -17,7 +17,6 @@
         <div class="collapse navbar-collapse" id="sidebarCollapse">
             <!-- Navigation -->
             <ul class="navbar-nav">
-
                 @can('banner-list')
                 <li class="nav-item">
                     <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.banner')) active @endif"
@@ -142,6 +141,7 @@
                     Str::startsWith(request()->route()->getName(), 'admin.user-manager.student') ||
                     Str::startsWith(request()->route()->getName(), 'admin.user-manager.tutor') ||
                     Str::startsWith(request()->route()->getName(), 'admin.tutor') ||
+                    Str::startsWith(request()->route()->getName(), 'admin.moderator') ||
                     Str::startsWith(request()->route()->getName(), 'admin.user-manager.moderator')
                     ) ? 'true' : 'false' ;
 
@@ -166,7 +166,7 @@
                             @endcan
                             @can('student-list')
                             <li class="nav-item">
-                                <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.user-manager.moderator')) active @endif"
+                                <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.user-manager.moderator') || Str::startsWith(request()->route()->getName(), 'admin.moderator')) active @endif"
                                     href="{{ route('admin.user-manager.moderator') }}">Moderator</a>
                             </li>
                             @endcan
