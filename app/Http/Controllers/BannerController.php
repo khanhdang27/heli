@@ -44,7 +44,7 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $input = $request->validate([
             'banner_title' => 'required',
             'file' => 'file',
@@ -66,7 +66,7 @@ class BannerController extends Controller
             }
 
             DB::commit();
-            return $this->redirect()->route('admin.banner.index')->with('success', 'Save success');
+            return back()->with('success', 'Save success');
 
         } catch (\Throwable $th) {
             DB::rollBack();

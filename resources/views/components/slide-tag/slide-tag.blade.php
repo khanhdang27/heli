@@ -3,8 +3,8 @@
         @foreach($tags as $value)
             <div class="swiper-slide item-slide">
                 <a class="btn btn-hashtag text-nowrap"
-                   href="{{$type == 'blog' ? route('site.show-blog-tag', $value) : "#"}}">
-                    {{ $type == 'blog' ? $value->tag_name : $value }}
+                   href="{{$type == 'blog' ? route('site.show-blog-tag', $value) : route('site.show-post-tag', $value)}}">
+                    {{$value->tag_name}}
                 </a>
             </div>
         @endforeach

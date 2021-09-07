@@ -94,14 +94,6 @@
                                                     Edit
                                                 </a>
                                                 @endcan
-                                                @can('price-delete')
-
-                                                <a href="javascript:void(0)"
-                                                    onclick="itemDelete('{{ route('admin.price-tag.destroy', $value->id) }}')"
-                                                    class="dropdown-item delete-item">
-                                                    Delete
-                                                </a>
-                                                @endcan
                                             </div>
                                         </div>
                                     </td>

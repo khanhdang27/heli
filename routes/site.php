@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('post', 'PostController');
     Route::get('pin-comment/{post_id}/{comment_id}', 'PostController@pinComment')->name('pinComment');
+    Route::get('show-post/tag/{tag}', 'PostController@showPostByTag')->name('show-post-tag');
     Route::resource('comment', 'CommentController');
     Route::resource('user-like', 'UserLikeController');
     Route::resource('profile', 'ProfileController');
