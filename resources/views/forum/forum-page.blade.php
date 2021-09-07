@@ -28,22 +28,22 @@
                                         </button>
                                     </div>
                                     <div class="modal-body pt-3">
-                                        {!! Form::open(['url' => URL::route('site.post.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data' ]) !!}
+                                        {!! Form::open(['url' => URL::route('site.post.store',['type'=>'post', 'ref'=>0]), 'enctype' => 'multipart/form-data', 'id'=>'postCreate' ]) !!}
                                         <div class="form-group">
                                             {{ Form::label('tag_id', 'Tag') }}
-                                            {{ Form::select('tag_id',$tags,null, ['class' => 'form-control','required']) }}
+                                            {{ Form::select('tag_id',$tags->pluck('tag_name', 'id'),null, ['class' => 'form-control','required', 'id'=>'postCreateTag']) }}
                                         </div>
                                         <div class="form-group">
                                             {{ Form::label('title', 'Title') }}
-                                            {{ Form::text('title',old('title'),['class' => 'form-control']) }}
+                                            {{ Form::text('title',old('title'),['class' => 'form-control', 'id'=>'postCreateTitle']) }}
                                         </div>
                                         <div class="form-group ">
                                             {{ Form::label('content', 'Content') }}
-                                            {{ Form::textarea('content',old('content'),['class' => 'form-control', 'rows' => '7']) }}
+                                            {{ Form::textarea('content',old('content'),['class' => 'form-control', 'rows' => '7', 'id'=>'postCreateContent']) }}
                                         </div>
                                         <div class="custom-file ">
                                             {{ Form::label('file', 'Image',['class'=>'custom-file-label']) }}
-                                            {{ Form::file('file',['class' => 'custom-file-input']) }}
+                                            {{ Form::file('file',['class' => 'custom-file-input', 'id'=>'postCreateFile']) }}
                                         </div>
 
                                     </div>

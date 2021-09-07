@@ -116,7 +116,7 @@ class NewsController extends Controller
      */
     public function update (Request $request, News $news)
     {
-       
+
         $newsValidate = $request->validate([
             'announcement_date' => 'required',
             'title' => 'required',
@@ -142,7 +142,7 @@ class NewsController extends Controller
                     $news->id,
                 );
             }
-            
+
             DB::commit();
             return back()->with('success', 'Create success');
 
@@ -168,21 +168,13 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        
         DB::beginTransaction();
         try {
-            $_course = $news->course->toArray();
-            if (empty($_course) ){
-                $news->delete();
-                DB::commit();
-                return response([
-                    'message' => 'Delete success!'
-                ]);
-            } else {
-                return response([
-                    'message' => 'Cannot delete!'
-                ], 400);
-            }
+            $news->delete();
+            DB::commit();
+            return response([
+                'message' => 'Delete success!'
+            ]);
         } catch (\Exception $exception) {
             DB::rollBack();
             return response([
