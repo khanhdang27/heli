@@ -16,9 +16,9 @@ use App\Utilities\SelectionByClass;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.course-material.index')}}">
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->
@@ -36,7 +36,7 @@ use App\Utilities\SelectionByClass;
                             {{ Form::select('course_id', array_filter(SelectionByClass::getValues(\App\Models\Course::class,'course_name','id'), function($var, $id)
                                 {
                                     return $id != 1;
-                                }, ARRAY_FILTER_USE_BOTH) , 
+                                }, ARRAY_FILTER_USE_BOTH) ,
                                 null, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">

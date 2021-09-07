@@ -13,9 +13,9 @@ use \App\Utilities\SelectionByClass;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.course-material.index')}}">
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->
@@ -35,44 +35,44 @@ use \App\Utilities\SelectionByClass;
                             {{ Form::select('course_id', array_filter(SelectionByClass::getValues(\App\Models\Course::class,'course_name','id'), function($var, $id)
                                 {
                                     return $id != 1;
-                                }, ARRAY_FILTER_USE_BOTH) , 
+                                }, ARRAY_FILTER_USE_BOTH) ,
                                 $material->course_id, ['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_name:en', 'Material Name (English)', ['class' => 'required']) }}
-                            {{ Form::text('course_material_name:en', $material->course_material_name,['class' => 'form-control required']) }}
+                            {{ Form::text('course_material_name:en', $material->translate('en')->course_material_name,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_name:cn', 'Material Name (Traditional Chinese)', ['class' => 'required']) }}
-                            {{ Form::text('course_material_name:cn', $material->course_material_name,['class' => 'form-control required']) }}
+                            {{ Form::text('course_material_name:cn', $material->translate('cn')->course_material_name,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)', ['class' => 'required']) }}
-                            {{ Form::text('course_material_name:sc',$material->course_material_name,['class' => 'form-control required']) }}
+                            {{ Form::text('course_material_name:sc',$material->translate('sc')->course_material_name,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_description:en', 'Description (English)', ['class' => 'required']) }}
-                            {{ Form::textarea('course_material_description:en', $material->course_material_description,['class' => 'form-control required']) }}
+                            {{ Form::textarea('course_material_description:en', $material->translate('en')->course_material_description,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_description:cn', 'Description (Traditional Chinese)', ['class' => 'required']) }}
-                            {{ Form::textarea('course_material_description:cn', $material->course_material_description,['class' => 'form-control required']) }}
+                            {{ Form::textarea('course_material_description:cn', $material->translate('cn')->course_material_description,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_description:sc', 'Description (Simplify Chinese)', ['class' => 'required']) }}
-                            {{ Form::textarea('course_material_description:sc', $material->course_material_description,['class' => 'form-control required']) }}
+                            {{ Form::textarea('course_material_description:sc', $material->translate('sc')->course_material_description,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_origin:en', 'Material Origin (English)', ['class' => 'required']) }}
-                            {{ Form::text('course_material_origin:en', $material->course_material_origin,['class' => 'form-control required']) }}
+                            {{ Form::text('course_material_origin:en', $material->translate('en')->course_material_origin,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_origin:cn', 'Material Origin (Traditional Chinese)', ['class' => 'required']) }}
-                            {{ Form::text('course_material_origin:cn', $material->course_material_origin,['class' => 'form-control required']) }}
+                            {{ Form::text('course_material_origin:cn', $material->translate('cn')->course_material_origin,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('course_material_origin:sc', 'Material Origin (Simplify Chinese)', ['class' => 'required']) }}
-                            {{ Form::text('course_material_origin:sc', $material->course_material_origin,['class' => 'form-control required']) }}
+                            {{ Form::text('course_material_origin:sc', $material->translate('sc')->course_material_origin,['class' => 'form-control required']) }}
                         </div>
                         <div class="row form-group">
                             <div class="col-md-6 col-12">

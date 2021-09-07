@@ -12,9 +12,9 @@ use App\Utilities\SelectionByClass;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.subject.index')}}">
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->
@@ -31,7 +31,7 @@ use App\Utilities\SelectionByClass;
                         @csrf
                         <div class="form-group ">
                             {{ Form::label('certificate_id', 'Certificate', ['class' => 'required']) }}
-                            {{ Form::select('certificate_id', 
+                            {{ Form::select('certificate_id',
                                     array_filter(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id'), function($var, $id)
                                     {
                                         return $id != 1;

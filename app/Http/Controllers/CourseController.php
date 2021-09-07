@@ -194,7 +194,7 @@ class CourseController extends Controller
             })->whereHas('membershipCourses.course', function ($query) use ($input) {
                 return $query->whereTranslationLike('course_name', '%' . $input . '%');
             })->latest('created_at')->paginate(15);
-    
+
 
         return view('course.search', [
             'courses' => $courses_with_group,
@@ -255,7 +255,8 @@ class CourseController extends Controller
     public function lectures(Course $course)
     {
         $_course = $course->load('lecture');
-        $lectures = Lecture::query()->where('course_id', $_course->id)->paginate(15);
+        $lectures = Lecture::query()->where('course_id', $_course->id)
+            ->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.course.lecture.index', [
             'course' => $_course,
             'lectures' => $lectures
@@ -317,7 +318,8 @@ class CourseController extends Controller
     public function rooms(Course $course)
     {
         $_course = $course->load('rooms');
-        $rooms = RoomLiveCourse::with('studySession')->where('course_id', $_course->id)->paginate(15);
+        $rooms = RoomLiveCourse::with('studySession')->where('course_id', $_course->id)
+            ->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.course.room.index', [
             'course' => $_course,
             'rooms' => $rooms

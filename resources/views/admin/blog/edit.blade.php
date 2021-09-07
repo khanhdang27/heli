@@ -1,10 +1,5 @@
 @extends('admin.layout')
 @section('content')
-@php
-use App\Utilities\SelectionByClass;
-$tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
-
-@endphp
 <!-- CARDS -->
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
@@ -14,9 +9,9 @@ $tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.blog.index')}}">
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->
@@ -60,7 +55,7 @@ $tags=SelectionByClass::getValues(\App\Models\Tag::class,'tag_name', 'id');
                             {{ Form::label('tag_id', 'Post tag:', ['class'=>'mr-3']) }}
                             <select id="tags_select" class="option-multiple-select" name="tag_id[]" multiple="multiple">
                                 @foreach($tags as $id => $tag)
-                                <option value="{{$id}}">{{$tag}}</option>
+                                <option value="{{$tag->id}}">{{$tag->tag_name}}</option>
                                 @endforeach
                             </select>
                         </div>

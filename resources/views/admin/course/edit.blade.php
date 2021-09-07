@@ -16,9 +16,9 @@ use App\Models\Course;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.course.index')}}">
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->
@@ -48,12 +48,12 @@ use App\Models\Course;
                         <div class="row justify-content-between">
                             <div class="form-group col-12 col-md-4">
                                 {{ Form::label('subject_id', 'Subject', ['class' => 'required']) }}
-                                {{ Form::select('subject_id', 
+                                {{ Form::select('subject_id',
                                         array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
                                         {
                                             return $id != 1;
-                                        }, ARRAY_FILTER_USE_BOTH) , 
-                                        $course->subject->id, ['class' => 'form-control', 'required']) 
+                                        }, ARRAY_FILTER_USE_BOTH) ,
+                                        $course->subject->id, ['class' => 'form-control', 'required'])
                                     }}
                             </div>
                             <div class="form-group col-12 col-md-4">
