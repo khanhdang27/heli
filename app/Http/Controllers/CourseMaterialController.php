@@ -153,7 +153,7 @@ class CourseMaterialController extends Controller
             }
 
             DB::commit();
-            return back()->with('success', 'Create success');
+            return back()->with('success', 'Update success');
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollback();

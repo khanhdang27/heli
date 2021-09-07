@@ -18,9 +18,9 @@ use App\Models\Subject;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.course.lecture.list', $course->id)}}">
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->
@@ -74,13 +74,13 @@ use App\Models\Subject;
         function handleFileSelect(evt) {
             evt.stopPropagation()
             evt.preventDefault()
-            
+
             var files = evt.dataTransfer ? evt.dataTransfer.files : $(this).get(0).files
             var results = document.getElementById('results')
 
-            if ( 
+            if (
                 document.getElementById('lectures_name').value.length === 0 ||
-                document.getElementById('lectures_description').value.length === 0 
+                document.getElementById('lectures_description').value.length === 0
             ) {
                 showMessage('<strong>Error</strong>: ' + ' lectures name and description is required', 'danger')
             } else {
@@ -106,7 +106,7 @@ use App\Models\Subject;
                         updateProgress(data.loaded / data.total)
                     },
                     onComplete: function(videoId, index) {
-                        
+
                         var url = 'https://vimeo.com/' + videoId
 
                         if (index > -1) {
@@ -115,7 +115,7 @@ use App\Models\Subject;
 
                             /* add stringify the json object for displaying in a text area */
                             var pretty = JSON.stringify(this.metadata[index], null, 2)
-    
+
                             axios.post("{{ route('admin.course.lecture.store', $course->id)}}", {
                                     lectures_name: this.metadata[index].name,
                                     lectures_description: this.metadata[index].description,

@@ -9,9 +9,9 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.tag.index')}}">
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
 

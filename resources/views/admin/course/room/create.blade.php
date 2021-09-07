@@ -17,9 +17,9 @@ use App\Models\StudySession;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a class="btn btn-outline-dark btn-sm" href="{{ route('admin.course.room.list', $course->id) }}">
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->
@@ -35,7 +35,7 @@ use App\Models\StudySession;
                     @csrf
                     <div class="form-group ">
                         {{ Form::label('study_session_id', 'Study Session') }}
-                        {{ Form::select('study_session_id', 
+                        {{ Form::select('study_session_id',
                                 SelectionByClass::getValues(StudySession::class,'session_name','id'), null,['class' => 'form-control']) }}
                     </div>
 
