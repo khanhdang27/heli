@@ -9,9 +9,9 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <div class="pr-2">
-                                <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                                <a href="{{ route('admin.forum.index') }}" class="btn btn-outline-dark btn-sm" >
                                     <i class="fe fe-arrow-left"></i>
-                                </button>
+                                </a>
                             </div>
                             <div>
                                 <!-- Title -->
@@ -27,12 +27,12 @@
                                 @can('forum-delete')
                                     @if ($post->deleted_at)
                                         <a class="btn btn-outline-warning ml-auto" href="javascript:void(0)"
-                                           onclick="itemRestore('{{ route('admin.forum.restore', $post) }}')">
+                                            onclick="itemRestore('{{ route('admin.forum.restore', $post) }}')">
                                             Restore
                                         </a>
                                     @else
                                         <a class="btn btn-outline-danger ml-auto" href="javascript:void(0)"
-                                           onclick="itemDelete('{{ route('admin.forum.destroy', $post) }}')">
+                                            onclick="itemDelete('{{ route('admin.forum.destroy', $post) }}')">
                                             Delete
                                         </a>
                                     @endif
@@ -42,15 +42,15 @@
                                 <h3>Title</h3>
                                 <hr>
                                 <span>
-                {{ $post->title }}
-              </span>
+                                    {{ $post->title }}
+                                </span>
                             </div>
                             <div class="border rounded p-4 mt-3">
                                 <h3>Content</h3>
                                 <hr>
                                 <span>
-                {{ $post->content }}
-              </span>
+                                    {{ $post->content }}
+                                </span>
                             </div>
                             <div class="border rounded p-4 mt-3">
                                 <h3>Image</h3>
@@ -69,7 +69,7 @@
 @endsection
 @push('js')
     <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
+    <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>
 
     <script>
         function itemRestore(url) {

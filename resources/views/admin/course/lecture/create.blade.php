@@ -25,7 +25,7 @@ use App\Models\Subject;
                         <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
-                                Create Course
+                                Create Lectures
                             </h4>
                         </div>
                     </div> <!-- / .row -->

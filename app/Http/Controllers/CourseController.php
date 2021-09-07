@@ -255,8 +255,7 @@ class CourseController extends Controller
     public function lectures(Course $course)
     {
         $_course = $course->load('lecture');
-        $lectures = Lecture::query()->where('course_id', $_course->id)
-            ->orderBy('created_at', 'desc')->paginate(15);
+        $lectures = Lecture::query()->where('course_id', $_course->id)->paginate(15);
         return view('admin.course.lecture.index', [
             'course' => $_course,
             'lectures' => $lectures
@@ -318,8 +317,7 @@ class CourseController extends Controller
     public function rooms(Course $course)
     {
         $_course = $course->load('rooms');
-        $rooms = RoomLiveCourse::with('studySession')->where('course_id', $_course->id)
-            ->orderBy('created_at', 'desc')->paginate(15);
+        $rooms = RoomLiveCourse::with('studySession')->where('course_id', $_course->id)->paginate(15);
         return view('admin.course.room.index', [
             'course' => $_course,
             'rooms' => $rooms
@@ -385,10 +383,30 @@ class CourseController extends Controller
         }
     }
 
-    public function destroyRoom(Course $course, Lecture $lecture)
+    public function updateRoom(Request $request, Course $course, RoomLiveCourse $room)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $room->update([
+                'study_session_id' => $input['study_session_id'],
+                'room_live_code' => $input['room_live_code'],
+                'number_member_maximum' => $input['number_member_maximum'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return back()->withErrors( 'Create error!');
+        }
+    }
+
+    public function destroyRoom(Course $course, RoomLiveCourse $room)
     {
         try {
-            $lecture->delete();
+            $room->delete();
             return response([
                 'message' => 'Delete success!'
             ]);

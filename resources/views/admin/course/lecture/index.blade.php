@@ -36,7 +36,7 @@
                         <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
-                                Courses
+                                Lectures
                             </h4>
                         </div>
                         <div class="ml-auto col-auto">

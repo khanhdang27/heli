@@ -23,7 +23,6 @@ use App\Models\StudySession;
                         </div>
                         <div>
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Edit Room
                             </h4>
@@ -31,15 +30,15 @@ use App\Models\StudySession;
                     </div> <!-- / .row -->
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['url' => route('admin.course.room.store', $course->id),
-                    'enctype'=>'multipart/form-data']) !!}
+                    {!! Form::open(['url' => route('admin.course.room.update', ['course' => $course->id, 'room' => $room->id]),
+                        'enctype'=>'multipart/form-data', 'method'=>'put']) !!}
                     @csrf
                     <div class="form-group ">
                         {{ Form::label('study_session_id', 'Study Session') }}
                         {{ Form::select('study_session_id',
                                 SelectionByClass::getValues(StudySession::class,'session_name','id'),
-                                $room->study_session_id
-                                ) }}
+                                $room->study_session_id,
+                                ['class' => 'form-control', 'readonly'] ) }}
                     </div>
 
                     <div class="form-group ">
@@ -49,12 +48,12 @@ use App\Models\StudySession;
 
                     <div class="form-group ">
                         {{ Form::label('start_date', 'Date Start') }}
-                        {{ Form::date('start_date',$room->start_date,['class' => 'form-control', 'required', 'id'=> 'start_date']) }}
+                        {{ Form::date('start_date',$room->start_date,['class' => 'form-control', 'required', 'id'=> 'start_date', 'readonly']) }}
                     </div>
 
                     <div class="form-group ">
                         {{ Form::label('number_session', 'Number Session') }}
-                        {{ Form::number('number_session',$room->number_session,['class' => 'form-control', 'required']) }}
+                        {{ Form::number('number_session',$room->number_session,['class' => 'form-control', 'required', 'readonly']) }}
                     </div>
 
                     <div class="form-group ">

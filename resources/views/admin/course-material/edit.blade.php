@@ -47,7 +47,7 @@ use \App\Utilities\SelectionByClass;
                             {{ Form::text('course_material_name:cn', $material->translate('cn')->course_material_name,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::label('course_material_name:sc', 'Material Name (Simplify Chinese)', ['class' => 'required']) }}
                             {{ Form::text('course_material_name:sc',$material->translate('sc')->course_material_name,['class' => 'form-control required']) }}
                         </div>
                         <div class="form-group ">

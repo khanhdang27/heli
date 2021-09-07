@@ -20,9 +20,8 @@ use \App\Utilities\SelectionByClass;
                         <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
-                                Edit Course
+                                Edit Lecture
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>

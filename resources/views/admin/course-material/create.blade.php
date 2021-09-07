@@ -48,7 +48,7 @@ use App\Utilities\SelectionByClass;
                             {{ Form::text('course_material_name:cn', old('course_material_name:cn'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_material_name:sc', 'Material Name (Traditional Chinese)', ['class' => 'required']) }}
+                            {{ Form::label('course_material_name:sc', 'Material Name (Simplify Chinese)', ['class' => 'required']) }}
                             {{ Form::text('course_material_name:sc', old('course_material_name:sc'),['class' => 'form-control']) }}
                         </div>
                         <div class="form-group ">
