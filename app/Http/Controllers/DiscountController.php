@@ -114,9 +114,19 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount)
     {
-        $discount->delete();
-        return back()->with('success', 'Delete success!');
-
+        DB::beginTransaction();
+        try {
+            $discount->delete();
+            DB::commit();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 
     /**
@@ -145,7 +155,7 @@ class DiscountController extends Controller
     {
         DB::beginTransaction();
         $input = $request->input();
-        
+
         try {
             foreach ($request->input('course_id') as $key => $value) {
                 if (empty($input['discount_'.$value])) {
@@ -167,7 +177,7 @@ class DiscountController extends Controller
                     $priceTag->save();
                 }
             }
-            
+
             DB::commit();
             return back()->with(['success'=> "Update Succeed"]);
         } catch (\Throwable $th) {
