@@ -67,7 +67,7 @@
                     </div>
                     @endif
                     <div class="form-group">
-                        {{ Form::label('price_value', 'Description') }}
+                        {{ Form::label('price_value', 'Price') }}
                         {{ Form::number('price_value', $price_tag->membershipCourses->price_value,
                             ['class' => 'form-control',]) }}
 
