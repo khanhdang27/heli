@@ -18,9 +18,9 @@ use \App\Models\Subject;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a href="{{ route('admin.user-manager.tutor') }}" class="btn btn-outline-dark btn-sm" >
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->

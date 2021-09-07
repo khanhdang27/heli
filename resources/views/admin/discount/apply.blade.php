@@ -8,7 +8,6 @@ $array_column = $courseDiscount->toArray();
 @extends('admin.layout')
 @section('content')
 <div class="container-fluid mt-5">
-    {{-- @dd($array_column, $courses) --}}
     <div class="row">
         <div class="col-12">
             <!-- Goals -->
@@ -16,13 +15,12 @@ $array_column = $courseDiscount->toArray();
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <button class="btn btn-outline-dark btn-sm" onclick="window.history.go(-1)">
+                            <a href="{{ route('admin.discount.index') }}" class="btn btn-outline-dark btn-sm" >
                                 <i class="fe fe-arrow-left"></i>
-                            </button>
+                            </a>
                         </div>
                         <div>
                             <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Discounts - {{ $discount->name }} from {{ $discount->start_date }} to
                                 {{ $discount->end_date }}
@@ -58,7 +56,7 @@ $array_column = $courseDiscount->toArray();
                                 @foreach($courses as $value)
                                 <tr>
                                     <td class="c-10">
-                                        {{ Form::checkbox('course_id[]', $value->id, in_array($value->id, array_column($array_column['data'], 'course_id'))) }}
+                                        {{ Form::checkbox('course_id[]', $value->id, in_array($value->id, array_column($array_column, 'course_id'))) }}
                                     </td>
                                     <td class="c-20 text-overflow-ellipsis">
                                         {{ $value->course_name }}
@@ -75,7 +73,6 @@ $array_column = $courseDiscount->toArray();
                                         <div class="alert text-danger">{{ $message }}</div>
                                         @enderror
                                     </th>
-
                                 </tr>
                                 @endforeach
                             </tbody>

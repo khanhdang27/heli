@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'login'])
     ->name('login');
-Route::post('login', [LoginController::class, 'actionLogin'])->middleware("throttle:5,10");
+Route::post('login', [LoginController::class, 'actionLogin'])->middleware("throttle:15,10");
 Route::get('logout', [LoginController::class, 'logout'])
     ->name('logout');
 

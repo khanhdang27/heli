@@ -138,9 +138,9 @@ class DiscountController extends Controller
     public function apply($id)
     {
         $discount = Discount::find($id);
-        $courses = Course::query()->paginate(15);
+        $courses = Course::query()->orderBy('created_at', 'desc')->paginate(15);
 
-        $courseDiscount = CourseDiscount::with('course')->where('discount_id', $id)->paginate(15);
+        $courseDiscount = CourseDiscount::with('course')->where('discount_id', $id)->get();
 
         return view('admin.discount.apply',compact('discount', 'courses', 'courseDiscount'));
     }
@@ -150,7 +150,7 @@ class DiscountController extends Controller
      *
      * @param  \App\Discount  $discount
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function storeApply($id, Request $request)
     {
         DB::beginTransaction();
