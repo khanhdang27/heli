@@ -40,7 +40,7 @@ return [
         'address' => '地址',
         'terms&Conditions' => '條款和條件',
         'privacyPolicy' => '隱私政策',
-        'cookiePolicy' => '餅乾政策',
+        'cookiePolicy' => '私隱政策',
         'aboutHelios' => '關於Helios',
         'FAQ' => 'FAQ',
         'myAccount' => '我的帳號',
