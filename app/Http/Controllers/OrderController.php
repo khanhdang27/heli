@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\CourseMembershipDiscount;
 use App\Models\CourseSchedule;
-use Illuminate\Http\Request;
-use Laravel\Cashier\Cashier;
 use App\Models\Order;
 use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
@@ -13,9 +11,10 @@ use App\Models\StudentSchedule;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Stripe\Stripe;
+use Laravel\Cashier\Cashier;
 
 class OrderController extends Controller
 {
@@ -61,12 +60,13 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
+//        dd(Auth::id());
         [
             $product_id,
             $courses_with_group,
             $student_bought
         ] = $this->getVariable($request);
-
+//        dd($courses_with_group->membershipCourses->course->id);
         $paymentMethods = $this->getPaymentMethod();
         if (empty($paymentMethods[0])) {
             if ($request->ajax()) {
@@ -79,7 +79,22 @@ class OrderController extends Controller
         } else {
 
             if (empty($student_bought)) {
+                if ($courses_with_group->membershipCourses->course->type == 1) {
+                    $request_course_id = $courses_with_group->membershipCourses->course->id;
+                    $request_schedule = CourseSchedule::where('course_id', $request_course_id)
+                        ->where('room_live_course_id', $request['room_id'])->get();    //request schedule
+
+                    $student_schedule = StudentSchedule::where('student_id', Auth::user()->id)->get();
+                    foreach ($request_schedule as $item_request) {
+                        foreach ($student_schedule as $item_purchased) {
+                            if ($item_request->date == $item_purchased->date) {
+                                return false;
+                            }
+                        }
+                    }
+                }
                 return $this->createBuyCourse($courses_with_group, $paymentMethods, $request);
+
             } else {
                 $order = Order::with('course')->where('course_id', $student_bought->course_id)
                     ->where('user_id', Auth::user()->id)->first();
@@ -114,7 +129,7 @@ class OrderController extends Controller
                         $this->updateSchedule($room);
                     }
                     $student_course = StudentCourses::create([
-                        'course_id' => (int) $courses_with_group->membershipCourses->course_id,
+                        'course_id' => (int)$courses_with_group->membershipCourses->course_id,
                         'student_id' => Auth::user()->id,
                         'room_live_course_id' => $room,
                         'latest_study' => new DateTime(),
@@ -204,7 +219,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -215,7 +230,7 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(Order $order)
@@ -234,10 +249,11 @@ class OrderController extends Controller
             'stripe' => $stripe
         ]);
     }
+
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -250,8 +266,8 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -262,7 +278,7 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

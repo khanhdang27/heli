@@ -75,7 +75,9 @@ $course = $courseDetail->membershipCourses->course
                     encode: true,
                 }).done(function (data) {
                     window.location.replace(data.path);
-                });
+                }).fail(function (response){
+                    alert('Duplicate schedule! Please check your schedule.');
+                })
             } else {
                 alert('must select a room');
             }
