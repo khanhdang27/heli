@@ -13,30 +13,28 @@ $course = $courseDetail->membershipCourses->course
     <p class="my-5 h4">{{$course->tutor->full_name}}</p>
     @endif
     <h2 class="my-5 font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>
-    @if(Auth::check())
-    @if(Auth::user()->stripe_id != null)
-    @if ($course->type == Course::LIVE)
-    <div id="buy_live">
-        <form id="form-room" class="form-inline" method="get" v-on:submit="buyCourse">
-            @csrf
-            <input name="product_id" value="{{$courseDetail->id}}" form="form-room" required hidden>
-            <div class="btn-above-video w-100">
-                <button type="submit" class="btn-register-now w-100 border-primary h4 m-0 py-2">
-                    @lang('keywords.coursePage.buyNow')
-                </button>
+    @if(Auth::check() && Auth::user()->stripe_id != null)
+        @if ($course->type == Course::LIVE)
+            <div id="buy_live">
+                <form id="form-room" class="form-inline" method="get" v-on:submit="buyCourse">
+                    @csrf
+                    <input name="product_id" value="{{$courseDetail->id}}" form="form-room" required hidden>
+                    <div class="btn-above-video w-100">
+                        <button type="submit" class="btn-register-now w-100 border-primary h4 m-0 py-2">
+                            @lang('keywords.coursePage.buyNow')
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    @else
-    <div class="btn-above-video">
-        <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
-            <div class="btn-register-now w-100 border-primary h4 m-0 py-2">
-                @lang('keywords.coursePage.buyNow')
+        @else
+            <div class="btn-above-video">
+                <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
+                    <div class="btn-register-now w-100 border-primary h4 m-0 py-2">
+                        @lang('keywords.coursePage.buyNow')
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-    @endif
-    @endif
+        @endif
     @else
     <div class="btn-above-video">
         <button class="btn-register-now w-100 border-primary h4 m-0 py-2" data-toggle="modal"

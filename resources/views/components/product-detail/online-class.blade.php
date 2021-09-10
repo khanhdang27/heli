@@ -28,7 +28,7 @@
                             其余的: {{ $room->number_member_maximum - $room->number_member }}
                         </p>
                     </div>
-                    <div class="col-xl-9 text-primary">
+                    <div class="col-xl-9 {{$room->number_member_maximum - $room->number_member == 0 ? "text-muted" : "text-primary"}}">
                         <p class="h4 font-weight-bold">
                             {{ $courseDetail->course_name }} : {{ $courseDetail->course_description }}
                         </p>
