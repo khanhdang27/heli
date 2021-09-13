@@ -16,7 +16,14 @@
             <div class="col-xl-4">
                 <div class="event-calendar">
                     <div class="row" id="item-event-list">
-
+                        @foreach ($event as $item)
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-start mb-3">
+                                    <img class="mr-2" src="{{asset("images/ic/ic_ellipse1.svg")}}"width="34">
+                                    <p class="mb-0">{{$item->googleEvent->summary}}</p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="event-calendar">
