@@ -7,6 +7,8 @@ return [
 
     'home_url' => env('APP_HOME_URL', ''),
 
+    'home_url_public' => env('MIX_APP_URL_PUBLIC', ''),
+
     'admin_url' => env('APP_ADMIN_URL', ''),
 
     'vimeo_app_id' => env('VIMEO_APP_ID', ''),
