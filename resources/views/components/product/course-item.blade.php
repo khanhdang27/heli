@@ -23,7 +23,7 @@
 
 @if (!empty($course_card))
     <div class="{{ $class }} product-category-padding">
-        <div class="product-box animate-up rounded-top-course border">
+        <div class="product-box animate-up rounded-top-course border" id="{{$typeOfUI}}{{$course_card->id}}">
             <div class="top-product">
                 <div class="content-product rounded-top-course"
                      style="background-color: {{$course_card->subject->subject_color_background}}">
@@ -61,7 +61,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="ic-heart w-25 text-right">
+                        <div class="ic-heart text-right h-50" id="heart{{$typeOfUI}}{{$course_card->id}}">
                             @if (Auth::check())
                                 <x-like.like :likeRef=$course_card :likeModule=\App\Models\Course::class></x-like.like>
                             @endif
@@ -70,11 +70,10 @@
                 @endif
                 <div class="d-flex justify-content-between">
                     <div class="title-product bg-primary text-white mt-auto">
-                        <a href="{{URL::route('site.course.show',$course_card->id)}}"
-                           class="btn text-white h6 mb-0 text-nowrap text-truncate px-2 product-hover">
-                            {{ $course_card->subject->subject_name }}</a>
+                        <a class="btn text-white h6 mb-0 text-nowrap text-truncate px-2 product-hover">
+                            {{ $course_card->subject->subject_name }}</a >
                     </div>
-                    <a class="product-hover my-auto w-75 text-right" href="{{URL::route('site.course.show',$course_card->id)}}">
+                    <a class="product-hover my-auto w-75 text-right">
                         @if($typeOfUI != 'welcome' && $typeOfUI != 'lasted' && $typeOfUI != 'recommended')
                             @if($course->getDiscount() > 0)
                                 <h4 class="font-weight-bold text-danger">
@@ -103,3 +102,20 @@
     </div>
 
 @endif
+<script>
+    var clickedHeart = false;
+    var element{{$typeOfUI}}{{$course_card->id}} = document.getElementById('{{$typeOfUI}}{{$course_card->id}}');
+    if ("{{$typeOfUI}}" != 'welcome') {
+        var heart{{$typeOfUI}}{{$course_card->id}} = document.getElementById('heart{{$typeOfUI}}{{$course_card->id}}');
+        heart{{$typeOfUI}}{{$course_card->id}}.onclick = function () {
+            clickedHeart = true;
+        };
+    }
+    element{{$typeOfUI}}{{$course_card->id}}.onclick = function () {
+        if(!clickedHeart) {
+            window.location.href = "{{URL::route('site.course.show',$course_card->id)}}"
+        }else {
+            clickedHeart = false;
+        }
+    };
+</script>
