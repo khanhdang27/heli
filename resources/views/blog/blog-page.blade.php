@@ -59,7 +59,7 @@ use App\Utilities\SelectionByClass;
 
                                             <img v-if="post.photo"
                                                 class="main-photo img-thumbnail border-0 p-0 rounded-0"
-                                                :src="'/helios/public/file/'+post.photo.id">
+                                                :src="public+'/file/'+post.photo.id">
                                             <img v-else class="main-photo img-thumbnail border-0 p-0 rounded-0"
                                                 src="{{ asset('images/default-image.jpg')}}">
 
@@ -122,7 +122,8 @@ use App\Utilities\SelectionByClass;
                     isFinished: false,
                     page: 0,
                     buttonText: 'Load More',
-                    posts: ''
+                    posts: '',
+                    public: '{{ config('app.home_url_public') }}'
                 },
                 methods: {
                     getPosts: function () {

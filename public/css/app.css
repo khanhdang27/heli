@@ -10944,7 +10944,7 @@ a.text-dark:focus {
 
 @font-face {
   font-family: Source Han Sans CN;
-  src: url("/helios/public/fonts/Source Han Sans CN Normal.ttf") format("truetype");
+  src: url("/../fonts/Source Han Sans CN Normal.ttf") format("truetype");
 }
 
 html {
@@ -11167,7 +11167,7 @@ form#certificate_form select option:checked {
 }
 
 .top-news-page {
-  background-image: url("/helios/public/images/bg_topPage.svg");
+  background-image: url("/../images/bg_topPage.svg");
   background-size: cover;
   color: var(--white);
   font-size: 24px;
@@ -11551,7 +11551,7 @@ input.check-subscribe {
   font-weight: bold;
   color: var(--white);
   text-align: center;
-  background-image: url("/helios/public/images/ic/bg-tab-unActive.svg");
+  background-image: url("/../images/ic/bg-tab-unActive.svg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -11565,7 +11565,7 @@ input.check-subscribe {
   height: 95.38px;
   font-size: 41px;
   background-color: var(--white) !important;
-  background-image: url("/helios/public/images/ic/bg-tab-Active.svg") !important;
+  background-image: url("/../images/ic/bg-tab-Active.svg") !important;
   background-size: cover;
 }
 
@@ -11775,7 +11775,7 @@ input.check-subscribe {
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
 .sub-header {
-  background-image: url("/helios/public/images/bg_sub.svg");
+  background-image: url("/../images/bg_sub.svg");
   background-size: cover;
   z-index: 1001;
 }
@@ -11784,7 +11784,7 @@ input.check-subscribe {
 
 .subscribe-container {
   min-height: 437px;
-  background-image: url("/helios/public/images/bg-subscribe.jpg");
+  background-image: url("/../images/bg-subscribe.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -12186,7 +12186,7 @@ input.check-subscribe {
 .item-schedule {
   max-width: 123.58px;
   height: 190px;
-  background-image: url("/helios/public/images/ic/bookmark.svg");
+  background-image: url("/../images/ic/bookmark.svg");
   background-size: 100%;
   background-repeat: no-repeat;
 }
