@@ -131,7 +131,7 @@ body {
     border-radius: 10px;
 }
 .course-detail-tab::-webkit-scrollbar-thumb {
-    background: lightgray;
+    background: #D3D3D3FF;
     border-radius: 10px;
 }
 /* Handle on hover */

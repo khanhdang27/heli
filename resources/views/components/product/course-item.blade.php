@@ -105,7 +105,7 @@
 <script>
     var clickedHeart = false;
     var element{{$screen}}_{{$typeOfUI}}{{$course_card->id}} = document.getElementById('{{$screen}}_{{$typeOfUI}}{{$course_card->id}}');
-    if ("{{$typeOfUI}}" != 'welcome') {
+    if ("{{$typeOfUI}}" != 'welcome' && "{{$typeOfUI}}" != 'lasted') {
         var {{$screen}}_heart{{$typeOfUI}}{{$course_card->id}} = document.getElementById('{{$screen}}_heart{{$typeOfUI}}{{$course_card->id}}');
         {{$screen}}_heart{{$typeOfUI}}{{$course_card->id}}.onclick = function () {
             clickedHeart = true;
