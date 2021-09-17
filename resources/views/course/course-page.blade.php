@@ -55,9 +55,9 @@
                     </div>
                 @else
                     <div class="col-xl-8 container-fluid">
-                        <ul class="nav nav-pills" role="tablist">
+                        <ul class="nav nav-pills flex-nowrap text-nowrap overflow-auto course-detail-tab" role="tablist">
                             <li class="nav-item ">
-                                <a class="nav-link active category-link-text" data-toggle="pill" href="#home">
+                                <a class="nav-link active category-link-text" data-toggle="pill" href="#homeCourse">
                                     <h2 class="font-weight-bold">
                                         @lang('keywords.coursePage.courseOverview')
                                     </h2>
@@ -65,7 +65,7 @@
                             </li>
                             @if ( $course->type == Course::LIVE )
                                 <li class="nav-item">
-                                    <a class="nav-link category-link-text" data-toggle="pill" href="#menu1">
+                                    <a class="nav-link category-link-text" data-toggle="pill" href="#menuCourse1">
                                         <h2 class="font-weight-bold">
                                             @lang('keywords.coursePage.courseFrequency')
                                         </h2>
@@ -73,14 +73,14 @@
                                 </li>
                             @endif
                             <li class="nav-item">
-                                <a class="nav-link category-link-text" data-toggle="pill" href="#menu2">
+                                <a class="nav-link category-link-text" data-toggle="pill" href="#menuCourse2">
                                     <h2 class="font-weight-bold">
                                         @lang('keywords.coursePage.mentorIntroduction')
                                     </h2>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link category-link-text" data-toggle="pill" href="#menu3">
+                                <a class="nav-link category-link-text" data-toggle="pill" href="#menuCourse3">
                                     <h2 class="font-weight-bold">
                                         @lang('keywords.coursePage.studentEvaluation')
                                     </h2>
@@ -89,20 +89,20 @@
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div id="home" class="container-fluid pt-5 mb-5  tab-pane active">
+                            <div id="homeCourse" class="container-fluid pt-5 mb-5 tab-pane active">
                                 <x-product-detail.course-overview
                                     :courseDetail=$course></x-product-detail.course-overview>
                             </div>
                             @if ( $course->type == Course::LIVE )
-                                <div id="menu1" class="container-fluid pb-5 tab-pane fade">
+                                <div id="menuCourse1" class="container-fluid pb-5 tab-pane fade">
                                     <x-product-detail.online-class
                                         :courseDetail=$course></x-product-detail.online-class>
                                 </div>
                             @endif
-                            <div id="menu2" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
+                            <div id="menuCourse2" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
                                 <x-product-detail.course-tutor :courseDetail=$course></x-product-detail.course-tutor>
                             </div>
-                            <div id="menu3" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
+                            <div id="menuCourse3" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
                                 <x-product-detail.course-rate :courseDetail=$course></x-product-detail.course-rate>
                             </div>
                         </div>

@@ -12,7 +12,7 @@
                 <div class="swiper-wrapper pb-3">
                     @foreach($courses as $value)
                         <div class="swiper-slide mb-5">
-                            <x-product.course-item :course=$value typeOfUI={{$typeOfUI}}>
+                            <x-product.course-item :course=$value typeOfUI="{{$typeOfUI}}" screen="">
                             </x-product.course-item>
                         </div>
                     @endforeach

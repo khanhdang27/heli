@@ -23,7 +23,7 @@
 
 @if (!empty($course_card))
     <div class="{{ $class }} product-category-padding">
-        <div class="product-box animate-up rounded-top-course border" id="{{$typeOfUI}}{{$course_card->id}}">
+        <div class="product-box animate-up rounded-top-course border" id="{{$screen}}_{{$typeOfUI}}{{$course_card->id}}">
             <div class="top-product">
                 <div class="content-product rounded-top-course"
                      style="background-color: {{$course_card->subject->subject_color_background}}">
@@ -61,7 +61,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="ic-heart text-right h-50" id="heart{{$typeOfUI}}{{$course_card->id}}">
+                        <div class="ic-heart text-right h-50" id="{{$screen}}_heart{{$typeOfUI}}{{$course_card->id}}">
                             @if (Auth::check())
                                 <x-like.like :likeRef=$course_card :likeModule=\App\Models\Course::class></x-like.like>
                             @endif
@@ -104,14 +104,14 @@
 @endif
 <script>
     var clickedHeart = false;
-    var element{{$typeOfUI}}{{$course_card->id}} = document.getElementById('{{$typeOfUI}}{{$course_card->id}}');
+    var element{{$screen}}_{{$typeOfUI}}{{$course_card->id}} = document.getElementById('{{$screen}}_{{$typeOfUI}}{{$course_card->id}}');
     if ("{{$typeOfUI}}" != 'welcome') {
-        var heart{{$typeOfUI}}{{$course_card->id}} = document.getElementById('heart{{$typeOfUI}}{{$course_card->id}}');
-        heart{{$typeOfUI}}{{$course_card->id}}.onclick = function () {
+        var {{$screen}}_heart{{$typeOfUI}}{{$course_card->id}} = document.getElementById('{{$screen}}_heart{{$typeOfUI}}{{$course_card->id}}');
+        {{$screen}}_heart{{$typeOfUI}}{{$course_card->id}}.onclick = function () {
             clickedHeart = true;
         };
     }
-    element{{$typeOfUI}}{{$course_card->id}}.onclick = function () {
+    element{{$screen}}_{{$typeOfUI}}{{$course_card->id}}.onclick = function () {
         if(!clickedHeart) {
             window.location.href = "{{URL::route('site.course.show',$course_card->id)}}"
         }else {
