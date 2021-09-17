@@ -85,6 +85,7 @@ return [
         'shareCourse' => '分享課程',
         'courseFrequency' => '課程班次',
         'myCourses' => '我的課程',
+        'wishlist' => '我的收藏',
         'registerNow' => '馬上報讀',
         'addToCart' => '加入購物車'
     ],
@@ -138,6 +139,7 @@ return [
     ],
     'more' => '閱讀更多',
     'coursesIHavePurchased' => '我已購買的課程',
+    'coursesWishlist' => '愿望清单中的课程',
     'errors' => [
         'tooManyRequests' => '请求太多，请冷静等待几分钟再请求',
     ],

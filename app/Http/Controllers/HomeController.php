@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Models\StudentCourses;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -170,6 +171,24 @@ class HomeController extends Controller
             $course_welcomes,
             $course_latest
         ];
+    }
+
+
+    public function wishlist()
+    {
+        $courses = CourseMembershipDiscount::with(
+            'membershipCourses',
+            'membershipCourses.course',
+            'membershipCourses.course.likeable',
+            'membershipCourses.course.likeable.user',
+        )->where('publish', true)
+        ->whereHas('membershipCourses.course.likeable', function ($query)
+        {
+            $query->where('user_id', Auth::user()->id);
+        })
+        ->get();
+
+        return view('home.wishlist', ['courses' => $courses]);
     }
 }
 

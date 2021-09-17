@@ -30,25 +30,19 @@
                 <a href="{{ URL::route('site.show-blog') }}">@lang('keywords.navBar.learningColumn')</a><br>
                 <a href="{{ URL::route('site.post.index') }}">@lang('keywords.footer.FAQ')</a>
             </div>
-            @if(Auth::user()!=null)
-                <div class="col-lg-2 mb-3">
-                    <h2 class="title-foot">@lang('keywords.footer.member')</h2>
-                    <a href="#">@lang('keywords.footer.myAccount')</a><br>
-                    <a href="{{ URL::route('site.user.course') }}">@lang('keywords.footer.myCourses')</a><br>
-                    <a href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')</a>
-                </div>
-            @else
-                <div class="col-lg-2 mb-3">
-                    <h2 class="title-foot">@lang('keywords.footer.member')</h2>
-
-                    @if (Auth::check())
+            <div class="col-lg-2 mb-3">
+                <h2 class="title-foot">@lang('keywords.footer.member')</h2>
+                @if (Auth::check())
                     <a href="{{ route('site.profile.show',Auth::user()->id) }}">
                         @lang('keywords.footer.myAccount')
                     </a><br>
-                    <a href="{{ route('user.course') }}">
+                    <a href="{{ route('site.user.course') }}">
                         @lang('keywords.footer.myCourses')
                     </a><br>
-                    <a href="{{ route('user.calendar') }}">
+                    <a href="{{ URL::route('site.user.wishlist') }}">
+                        @lang('keywords.coursePage.wishlist')
+                    </a><br>
+                    <a href="{{ route('site.user.calendar') }}">
                         @lang('keywords.footer.mySchedule')
                     </a>
                     @else
@@ -61,10 +55,8 @@
                     <a data-toggle="modal" data-target="#loginModal" id="login" href="#">
                         @lang('keywords.footer.mySchedule')
                     </a>
-                    @endif
-
-                </div>
-            @endif
+                @endif
+            </div>
             <div class="col-lg-2 mb-3">
                 <h2 class="title-foot">@lang('keywords.footer.connection')</h2>
                 <span>@lang('keywords.footer.phone'): </span><a href="tel:852 2602 1668">+852 2602 1668</a><br>

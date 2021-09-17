@@ -96,6 +96,10 @@ use App\Utilities\SelectionByClass;
                 </li>
                 <li class="nav-item item-header d-md-none">
                     <a class="nav-link"
+                        href="{{ URL::route('site.user.wishlist') }}">@lang('keywords.coursePage.wishlist')</a>
+                </li>
+                <li class="nav-item item-header d-md-none">
+                    <a class="nav-link"
                         href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')
                     </a>
                 </li>
@@ -110,6 +114,7 @@ use App\Utilities\SelectionByClass;
                         @lang('keywords.navBar.logOut')
                     </a>
                 </li>
+                
                 @endif
             </ul>
         </div>
@@ -133,6 +138,8 @@ use App\Utilities\SelectionByClass;
                     <img src={{asset("images/ic/ic_user.svg")}} width="24">
                 </a>
                 <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0">
+                    <a class="dropdown-item"
+                        href="{{ URL::route('site.user.wishlist') }}">@lang('keywords.coursePage.wishlist')</a>
                     <a class="dropdown-item"
                         href="{{ URL::route('site.profile.show', Auth::user()->id) }}">@lang('keywords.navBar.profile')</a>
                     <a class="dropdown-item"
