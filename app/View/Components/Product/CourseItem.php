@@ -8,16 +8,17 @@ class CourseItem extends Component
 {
     public $course;
     public $typeOfUI;
-
+    public $screen;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($course, $typeOfUI)
+    public function __construct($course, $typeOfUI, $screen)
     {
         $this->course = $course;
         $this->typeOfUI=$typeOfUI;
+        $this->screen=$screen;
 
     }
 
@@ -30,7 +31,8 @@ class CourseItem extends Component
     {
         return view('components.product.course-item', [
             'course' => $this->course,
-            'typeOfUI' => $this->typeOfUI
+            'typeOfUI' => $this->typeOfUI,
+            'screen' => $this->screen
         ]);
     }
 }

@@ -967,7 +967,7 @@ input.check-subscribe {
 }
 
 .post-spotlight {
-    height: 581px !important;
+    height: 581px;
 }
 
 .popular-articles-item-image {
@@ -1113,10 +1113,6 @@ input.check-subscribe {
 }
 
 .body-news-page {
-    background-image: url("../images/BG_news.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     .container-news-page {
         padding-bottom: 7rem;
         .content-news-page {

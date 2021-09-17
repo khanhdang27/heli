@@ -37,6 +37,16 @@ use App\Utilities\SelectionByClass;
                     </button>
                 </div>
             </div>
+            <div class="px-4 pb-4 d-block d-md-none">
+                <form class="form-inline my-lg-0"
+                      action="{{ route('site.course.search') }}">
+                    <div class="search w-100 d-flex px-3 py-1">
+                        <span class=""><img src="{{asset("images/ic/ic_search.svg")}}" width="26"></span>
+                        <input name="course" class="ip-search w-100" type="text"
+                               placeholder="@lang('keywords.footer.searchForCourses')">
+                    </div>
+                </form>
+            </div>
             <ul class="navbar-nav mr-auto navbar-responsive ml-lg-4">
                 <li class="nav-item item-header dropdown d-md-none">
                     <a class="nav-link dropdown-toggle" href="#" id="navLang" data-toggle="dropdown">

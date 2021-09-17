@@ -50,7 +50,7 @@
 
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 d-none d-md-block px-0">
         <form class="{{ $page == 'home' ? "ml-auto" : null }} form-inline my-lg-0"
               action="{{ route('site.course.search') }}">
             <div class="search w-100 d-flex px-3 py-1">

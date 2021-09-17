@@ -1,6 +1,6 @@
 <div class="pb-5 row product-category-row card-small">
     @foreach($courses as $value)
-        <x-product.course-item :course=$value typeOfUI={{$typeOfUI}}>
+        <x-product.course-item :course=$value typeOfUI="{{$typeOfUI}}" screen="lg">
         </x-product.course-item>
     @endforeach
 </div>
@@ -9,7 +9,7 @@
         <div class="swiper-wrapper">
             @foreach($courses as $value)
                 <div class="swiper-slide">
-                    <x-product.course-item :course=$value typeOfUI={{$typeOfUI}}>
+                    <x-product.course-item :course=$value typeOfUI="{{$typeOfUI}}" screen="sm">
                     </x-product.course-item>
                 </div>
             @endforeach

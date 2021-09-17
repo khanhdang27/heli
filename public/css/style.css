@@ -114,6 +114,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 5px;
+    height: 4px;
 }
 
 /* Track */
@@ -129,7 +130,10 @@ body {
     background: #0b487d;
     border-radius: 10px;
 }
-
+.course-detail-tab::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 10px;
+}
 /* Handle on hover */
 
 ::-webkit-scrollbar-thumb:hover {
