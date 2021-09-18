@@ -1,10 +1,4 @@
 @php
-
-@endphp
-
-
-
-@php
 use Spatie\Newsletter\NewsletterFacade;
 @endphp
 
@@ -12,9 +6,7 @@ use Spatie\Newsletter\NewsletterFacade;
 <div class="container-fluid subscribe-container py-5 text-center btn-above-video" id="subscribe_newsletter">
     <div class="mt-4 subscribe-title mx-auto text-primary">
         <h1 class="font-weight-bold">
-            訂閱我們
-            當我們有任何最新優惠及課程
-            將會立刻通知您
+            @lang('keywords.subscribe.subscribeUs')
         </h1>
     </div>
     <form v-on:submit.prevent="onSubmit" ref="formSubscribe" id="formSubscribe" method="post">

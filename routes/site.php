@@ -5,6 +5,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', 'HomeController@index')->name('home');
 
+Route::get('faq', function () {
+    return view('home.faq');
+})->name('faq');
+Route::get('privacy-policy', function () {
+    return view('home.privacy-policy');
+})->name('privacy-policy');
+Route::get('terms-conditions', function () {
+    return view('home.terms-conditions');
+})->name('terms-conditions');
+
 Route::post('register', 'Auth\RegisterController@register')->name('register');
 Route::post('login', 'Auth\LoginController@login')->name('userLogin')->middleware("throttle:30,10");
 Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');

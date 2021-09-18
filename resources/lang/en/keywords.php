@@ -146,6 +146,7 @@ return [
     'searchResult' => 'Search results',
     'subscribe' => [
         'success' => 'Registered email to receive the latest news',
-        'fail' => 'received an error email, please re-enter'
+        'fail' => 'received an error email, please re-enter',
+        'subscribeUs' => 'Subscribe to us when we have any latest offers and courses will notify you immediately'
     ]
 ];
