@@ -1,6 +1,6 @@
 <div class="container-fluid container-home">
     <!-- Nav pills -->
-    <ul class="nav nav-pills menu-category align-items-end" role="tablist">
+    <ul id="home-tab" class="nav nav-pills menu-category align-items-end" role="tablist">
         <li class="nav-item pr-5">
             <a class="nav-link active category-link menu-img rounded-0" data-toggle="pill" href="#menu1">
                 IGCSE

@@ -19,7 +19,6 @@ class Course extends Model implements TranslatableContract
     const COURSE_TYPE = [
         self::LIVE => 'Live Course',
         self::RECORD => 'Record Video',
-        self::DOCUMENT => 'Document'
     ];
 
     protected $table = 'courses';

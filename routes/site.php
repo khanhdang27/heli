@@ -5,6 +5,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', 'HomeController@index')->name('home');
 
+Route::get('faq', function () {
+    return view('home.faq');
+})->name('faq');
+Route::get('privacy-policy', function () {
+    return view('home.privacy-policy');
+})->name('privacy-policy');
+Route::get('terms-conditions', function () {
+    return view('home.terms-conditions');
+})->name('terms-conditions');
+
 Route::post('register', 'Auth\RegisterController@register')->name('register');
 Route::post('login', 'Auth\LoginController@login')->name('userLogin')->middleware("throttle:30,10");
 Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
@@ -77,6 +87,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('my/')->name('user.')->group(function () {
         Route::get('course', 'CourseController@my')->name('course');
+        Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
         Route::get('calendar', 'ScheduleController@index')->name('calendar');
         Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
     });

@@ -439,7 +439,6 @@ input.check-subscribe {
     outline: none;
 }
 
-
 /*GUEST PRAISE-----------------------------------------*/
 
 .title-card {
@@ -569,7 +568,6 @@ input.check-subscribe {
     opacity: 0 !important;
 }
 
-
 /*TAB PRODUCT-----------------------------------------*/
 
 .product-tab {
@@ -586,6 +584,13 @@ input.check-subscribe {
         background-image: url("/../images/ic/bg-tab-unActive.svg");
         background-repeat: no-repeat;
         background-size: cover;
+        transition: 1s;
+
+        &:hover {
+            transform: scale(1.2);
+            z-index: 2;
+            box-shadow: 2px 2px 2px rgb(97, 97, 97);
+        }
     }
     .menu-category-text {
         display: none;
@@ -613,7 +618,6 @@ input.check-subscribe {
 .menu-category-text {
     height: 50px;
 }
-
 
 /*SHOW VIDEO-----------------------------------------*/
 
@@ -657,7 +661,6 @@ input.check-subscribe {
 .footer-builder {
     border: 2px solid;
 }
-
 
 /*STEP FOR REGISTER-----------------------------------------*/
 
@@ -723,7 +726,6 @@ input.check-subscribe {
     height: 112px;
 }
 
-
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
 
 .content-team-page {
@@ -783,7 +785,6 @@ input.check-subscribe {
     }
 }
 
-
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
 .sub-header {
@@ -791,7 +792,6 @@ input.check-subscribe {
     background-size: cover;
     z-index: 1001;
 }
-
 
 /*SUBSCRIBE CONTAINER */
 
@@ -803,7 +803,7 @@ input.check-subscribe {
     background-position: center;
     background-attachment: fixed;
     .subscribe-title {
-        max-width: 429px;
+        max-width: 500px;
     }
     .ip-subscribe {
         max-width: 768px;
@@ -814,7 +814,6 @@ input.check-subscribe {
         }
     }
 }
-
 
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 
@@ -831,7 +830,6 @@ input.check-subscribe {
     width: 30px;
     height: 20px;
 }
-
 
 /*COURSE PAGE-------------------------------------------------------------------------------*/
 
@@ -900,7 +898,6 @@ input.check-subscribe {
     font-size: 13.5pt;
 }
 
-
 /*COURSE PAGE 2-------------------------------------------------------------------------------*/
 
 .info-course {
@@ -944,13 +941,11 @@ input.check-subscribe {
     height: auto;
 }
 
-
 /*COURSE PAGE 3-------------------------------------------------------------------------------*/
 
 .video {
     max-width: 1550px;
 }
-
 
 /*BLOG PAGE----------------------------------------------------------------*/
 
@@ -1066,7 +1061,6 @@ input.check-subscribe {
     overflow-y: auto;
 }
 
-
 /*FORUM PAGE-------------------------------------------------------------------*/
 
 .body-forum-page {
@@ -1105,7 +1099,6 @@ input.check-subscribe {
     }
 }
 
-
 /*NEWS PAGE-----------------------------------------*/
 
 .box-news {
@@ -1143,12 +1136,11 @@ input.check-subscribe {
         font-size: 16px;
         cursor: pointer;
     }
-    input[type="radio"]:checked+label {
+    input[type="radio"]:checked + label {
         border-style: solid;
         border-color: var(--primary);
     }
 }
-
 
 /*PAYMENT PAGE*/
 
@@ -1196,7 +1188,6 @@ input.check-subscribe {
     background-repeat: no-repeat;
 }
 
-
 /*BANNER-----------------------------------------*/
 
 .banner-background {
@@ -1216,7 +1207,6 @@ input.check-subscribe {
     width: 100%;
     height: 100%;
 }
-
 
 /*Forum-----------------------------------------*/
 

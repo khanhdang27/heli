@@ -85,6 +85,7 @@ return [
         'shareCourse' => 'Share course',
         'courseFrequency' => 'Course frequency',
         'myCourses' => 'My Courses',
+        'wishlist' => 'My Wishlist',
         'registerNow' => 'Register Now',
         'buyNow' => 'Buy Now'
     ],
@@ -138,12 +139,14 @@ return [
     ],
     'more' => 'More',
     'coursesIHavePurchased' => 'Courses I have purchased',
+    'coursesWishlist' => 'Courses in Wishlist',
     'errors' => [
         'tooManyRequests' => 'Too Many Requests, Please calm Wait for some minutes and requests again',
     ],
     'searchResult' => 'Search results',
     'subscribe' => [
         'success' => 'Registered email to receive the latest news',
-        'fail' => 'received an error email, please re-enter'
+        'fail' => 'received an error email, please re-enter',
+        'subscribeUs' => 'Subscribe to us when we have any latest offers and courses will notify you immediately'
     ]
 ];
