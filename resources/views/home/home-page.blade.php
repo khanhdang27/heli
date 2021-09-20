@@ -3,7 +3,7 @@
 @section('title', 'Home Page')
 
 @section('content')
-<div class="banner">
+<div class="banner position-relative">
     <x-sub-header :subjects=$subjects page="home"></x-sub-header>
     @if ($message = Session::get('error'))
     <div class="alert alert-danger alert-block">
