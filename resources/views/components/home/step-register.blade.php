@@ -59,7 +59,6 @@
     </button>
 </div>
 </div>
-<script src="{{ asset('js/anime.min.js') }}"></script>
 <script>
     const step1 = document.getElementById('animate-object1');
     const text1 = document.getElementById('content1');
@@ -87,9 +86,9 @@
             step1.style.backgroundColor = "#E6C06C";
         }
     })
-    
+
     for (let index = 0; index < 7; index++) {
-        
+
         tl.add({
             targets: ['#dot-bar-1-'+index],
             loop: false,
@@ -102,8 +101,8 @@
             }
         })
     }
-    
-    
+
+
     tl.add({
         targets: [step2, text2],
         scale: {
@@ -117,9 +116,9 @@
             step2.style.backgroundColor = "#E6C06C";
         }
     })
-    
+
     for (let index = 0; index < 7; index++) {
-        
+
         tl.add({
             targets: ['#dot-bar-2-'+index],
             loop: false,
@@ -132,7 +131,7 @@
             }
         })
     }
-    
+
     tl.add({
         targets: [step3, text3],
         scale: {
