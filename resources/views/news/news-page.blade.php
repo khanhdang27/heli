@@ -12,10 +12,10 @@
             <div class="py-5">
                 <div id="showMore">
                     <!-- Post -->
-                    <div class="post" v-for='post in posts'>
-                        <div class="mx-auto box-news">
+                    <div class="mx-auto box-news">
+                        <div class="post" v-for='post in posts'>
                             <div class="py-2">
-                                <a id="new_href" class="h2" :href="'news/'+post.id">
+                                <a id="new_href" class="h2 text-center" :href="'news/'+post.id">
                                     <span v-cloak>@{{ post.announcement_date }} </span>
                                     <span v-cloak>@{{ post.title }}</span>
                                 </a><br>

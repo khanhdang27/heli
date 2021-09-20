@@ -25,14 +25,15 @@
         src="https://platform-api.sharethis.com/js/sharethis.js#property=60e7b308b06e7600197f484d&product=inline-share-buttons"
         async="async"></script>
     <script src="{{ asset('js/anime.min.js') }}"></script>
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+
 </head>
 
 <body>
     @include('layout.header')
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-
+    <script src="{{asset('js/vue@2.6.14')}}"></script>
     <script src="{{asset('js/swiper/swiper-bundle.min.js')}}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
@@ -43,7 +44,6 @@
     <script src="{{ asset('js/lib/main.js') }}"></script>
     <script src="{{ asset('js/home/app.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
-    </script>
     @stack('likePost')
     @stack('scripts')
     @stack('scriptsLogin')

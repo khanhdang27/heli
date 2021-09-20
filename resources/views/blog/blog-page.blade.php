@@ -25,8 +25,6 @@ use App\Utilities\SelectionByClass;
             </div>
         </div>
         <div class="row justify-content-center pt-5 pb-5">
-            {{--    </div>--}}
-            {{--    <div class="w-75 ml-auto mr-auto pb-5 body-blog-page">--}}
             <div class="col-md-9">
                 <h2 class="font-weight-bold text-primary bg-white">
                     @lang('keywords.blog-page.popularArticlesThisWeek')
@@ -56,13 +54,11 @@ use App\Utilities\SelectionByClass;
                                     <div class="mt-2 popular-item shadow animate-up" id="latest">
                                         <div
                                             class="thumb-article d-flex flex-column justify-content-end position-relative">
-
                                             <img v-if="post.photo"
                                                 class="main-photo img-thumbnail border-0 p-0 rounded-0"
-                                                :src="public+'/file/'+post.photo.id">
+                                                :src="'/file/'+post.photo.id">
                                             <img v-else class="main-photo img-thumbnail border-0 p-0 rounded-0"
                                                 src="{{ asset('images/default-image.jpg')}}">
-
                                             <div
                                                 class="container-fluid pt-2 info-article d-flex flex-column justify-content-between position-absolute">
                                                 <a :href="'view-blog/'+post.id"
@@ -107,9 +103,6 @@ use App\Utilities\SelectionByClass;
     </div>
     @endif
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         Vue.filter('formatDate', function (value) {
                 if (value) {
@@ -123,7 +116,6 @@ use App\Utilities\SelectionByClass;
                     page: 0,
                     buttonText: 'Load More',
                     posts: '',
-                    public: '{{ config('app.home_url_public') }}'
                 },
                 methods: {
                     getPosts: function () {

@@ -165,12 +165,49 @@
             height: 145px;
         }
     }
+    .text-content {
+        padding-right: 3rem;
+    }
+    .circle-check {
+        left: 60%;
+    }
 }
 
 @media screen and (max-width: 576px) {
     html {
         font-size: 13px !important;
     }
+
+    h1,
+    .h1 {
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    h2,
+    .h2 {
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    h3,
+    .h3 {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    h4,
+    .h4 {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    h5,
+    .h5 {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
     .tutor_image {
         width: 70px;
         height: 70px;
@@ -199,15 +236,6 @@
     .text-login-left {
         font-size: 20px;
     }
-    //.modal-login-content {
-    //    height: auto !important;
-    //    padding: 0 !important;
-    //    .btn-close {
-    //        .close {
-    //            padding: 1rem 0;
-    //        }
-    //    }
-    //}
     .fc .fc-toolbar-title {
         width: 220px !important;
         font-size: 24px !important;
@@ -216,8 +244,6 @@
         .content-product {
             height: 180px;
             padding: 1rem 0;
-            .box-content-bot {
-            }
         }
         .bottom-product2 {
             .card-name-product {
@@ -255,24 +281,37 @@
             }
         }
     }
-    %height-blog{
+    %height-blog {
         height: 400px;
     }
-    .post-spotlight{
-        @extend %height-blog
+    .post-spotlight {
+        @extend %height-blog;
     }
-    #latest{
-        @extend %height-blog
+    #latest {
+        @extend %height-blog;
     }
-    .main-photo-top{
-        @extend %height-blog
+    .main-photo-top {
+        @extend %height-blog;
     }
-    .main-photo{
-        @extend %height-blog
+    .main-photo {
+        @extend %height-blog;
     }
-    .category-link-text{
-        h2{
+    .category-link-text {
+        h2 {
             font-size: 21px;
         }
+    }
+    .text-content {
+        padding-left: 0.5rem;
+        padding-right: 1.5rem;
+        font-size: 18px;
+    }
+    .circle-check {
+        width: 116px;
+        height: 116px;
+        left: 58%;
+    }
+    .circle-check img {
+        width: 83px;
     }
 }

@@ -131,7 +131,7 @@ body {
     border-radius: 10px;
 }
 .course-detail-tab::-webkit-scrollbar-thumb {
-    background: #D3D3D3FF;
+    background: #d3d3d3ff;
     border-radius: 10px;
 }
 /* Handle on hover */
@@ -176,31 +176,6 @@ body {
     border-radius: 50%;
     width: 172px;
     height: 172px;
-}
-
-@media screen and (max-width: 768px) {
-    .text-content {
-        padding-right: 3rem;
-    }
-    .circle-check {
-        left: 60%;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .text-content {
-        padding-left: 0.5rem;
-        padding-right: 1.5rem;
-        font-size: 18px;
-    }
-    .circle-check {
-        width: 116px;
-        height: 116px;
-        left: 58%;
-    }
-    .circle-check img {
-        width: 83px;
-    }
 }
 
 /*LOGIN MODAL--------------------------------------------------------------------------------------------------*/
