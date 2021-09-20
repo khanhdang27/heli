@@ -140,7 +140,7 @@
                 is_scoll_into = true;
 
                 var tl_free = anime.timeline({
-                    duration: 2500,
+                    duration: 800,
                     loop: false
                 });
 

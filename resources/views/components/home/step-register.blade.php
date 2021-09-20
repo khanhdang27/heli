@@ -8,7 +8,7 @@
             </div>
             <div class="col-sm-3 col-step" id="listDot1">
                 <div class="dot-bar">
-                    @for ($i = 0; $i < 7; $i++) <div id="dot-bar-1-{{$i}}" class='list-dot bg-gray'>
+                    @for ($i = 0; $i < 5; $i++) <div id="dot-bar-1-{{$i}}" class='list-dot bg-gray'>
                 </div>
                 @endfor
             </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="col-sm-3 col-step" id="listDot2">
             <div class="dot-bar">
-                @for ($i = 0; $i < 7; $i++) <div id="dot-bar-2-{{$i}}" class='list-dot bg-gray'>
+                @for ($i = 0; $i < 5; $i++) <div id="dot-bar-2-{{$i}}" class='list-dot bg-gray'>
             </div>
             @endfor
         </div>
@@ -70,7 +70,7 @@
     const dot_2 = document.getElementById('dot-bar-2');
 
     var tl = anime.timeline({
-        duration: 900,
+        duration: 800,
         loop: true
     });
     tl.add({
@@ -87,7 +87,7 @@
         }
     })
 
-    for (let index = 0; index < 7; index++) {
+    for (let index = 0; index < 5; index++) {
 
         tl.add({
             targets: ['#dot-bar-1-'+index],
@@ -117,7 +117,7 @@
         }
     })
 
-    for (let index = 0; index < 7; index++) {
+    for (let index = 0; index < 5; index++) {
 
         tl.add({
             targets: ['#dot-bar-2-'+index],
