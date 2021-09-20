@@ -70,7 +70,7 @@
             "brandSetting": {
                 "brandName": "Helios",
                 "brandSubTitle": "",
-                "brandImg": "",
+                "brandImg": "https://heliosweb.tk/images/ic/ic_helios.png",
                 "welcomeText": "Hi there!\nHow can I help you?",
                 "messageText": "Hello, I have a question",
                 "backgroundColor": "#0b487d",

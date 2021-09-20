@@ -7,7 +7,7 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <div class="modal-body modal-body-login py-5">
+            <div class="modal-body modal-body-login py-5 d-flex align-items-center">
 
                 <div class="mx-auto">
                     <div class="row align-items-center">
