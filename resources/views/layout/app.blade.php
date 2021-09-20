@@ -24,6 +24,7 @@
     <script type="text/javascript"
         src="https://platform-api.sharethis.com/js/sharethis.js#property=60e7b308b06e7600197f484d&product=inline-share-buttons"
         async="async"></script>
+    <script src="{{ asset('js/anime.min.js') }}"></script>
 </head>
 
 <body>
