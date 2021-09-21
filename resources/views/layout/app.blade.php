@@ -10,20 +10,17 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
-    </script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+
     <link href="{{ asset('css/app.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-logged.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-calendar.css')}}" rel="stylesheet">
     <link href="{{ asset('css/toastr.css')}}" rel="stylesheet">
     <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
     <link href="{{asset('cpanel/assets/fonts/feather/feather.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('js/swiper/swiper-bundle.min.css')}}" />
-    <script type="text/javascript"
-        src="https://platform-api.sharethis.com/js/sharethis.js#property=60e7b308b06e7600197f484d&product=inline-share-buttons"
-        async="async"></script>
+
+    <script src="{{ asset('js/sharethis.js') }}"></script>
     <script src="{{ asset('js/anime.min.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
@@ -37,13 +34,19 @@
     <script src="{{asset('js/swiper/swiper-bundle.min.js')}}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
-    @yield('content')
+
+    <div id="app">
+
+        {{-- <example-component></example-component> --}}
+        @yield('content')
+    </div>
 
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lib/main.js') }}"></script>
     <script src="{{ asset('js/home/app.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
+
     @stack('likePost')
     @stack('scripts')
     @stack('scriptsLogin')
@@ -70,7 +73,7 @@
             "brandSetting": {
                 "brandName": "Helios",
                 "brandSubTitle": "",
-                "brandImg": "https://heliosweb.tk/images/ic/ic_helios.png",
+                "brandImg": "{{ asset('images/ic/ic_helios.png') }}",
                 "welcomeText": "Hi there!\nHow can I help you?",
                 "messageText": "Hello, I have a question",
                 "backgroundColor": "#0b487d",
@@ -86,6 +89,9 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     </script>
+
+
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
