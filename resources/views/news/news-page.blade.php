@@ -33,53 +33,55 @@
             </div>
         </div>
     </div>
-    <script>
+    @push('scripts')
+    <script type="application/javascript">
         var app = new Vue({
-        el: '#showMore',
-        data: {
-            isFinished: false,
-            page: 0,
-            buttonText: 'Load More',
-            posts: ''
-        },
-        methods: {
-            getPosts: function(){
-                axios.get('{{ route("site.news.list")}}', {
-                    params: {
-                        page: this.page + 1,
-                    }
-                })
-                .then(function (response) {
-                    if(response.data){
-                        var len = app.posts.length;
-                        app.page+=1;
-                        if(len > 0){
-                            app.buttonText = "Loading ...";
-                            setTimeout(function() {
-                                app.buttonText = "Load More";
-                                // Loop on data and push in posts
-                                for (let i = 0; i < response.data.data.length; i++){
-                                    app.posts.push(response.data.data[i]);
-                                }
-                            },500);
-                        }else{
-                            app.posts = response.data.data;
+            el: '#showMore',
+            data: {
+                isFinished: false,
+                page: 0,
+                buttonText: 'Load More',
+                posts: ''
+            },
+            methods: {
+                getPosts: function(){
+                    axios.get('{{ route("site.news.list")}}', {
+                        params: {
+                            page: this.page + 1,
                         }
-                        if (!response.data.next_page_url ) {
+                    })
+                    .then(function (response) {
+                        if(response.data){
+                            var len = app.posts.length;
+                            app.page+=1;
+                            if(len > 0){
+                                app.buttonText = "Loading ...";
+                                setTimeout(function() {
+                                    app.buttonText = "Load More";
+                                    // Loop on data and push in posts
+                                    for (let i = 0; i < response.data.data.length; i++){
+                                        app.posts.push(response.data.data[i]);
+                                    }
+                                },500);
+                            }else{
+                                app.posts = response.data.data;
+                            }
+                            if (!response.data.next_page_url ) {
+                                app.isFinished = true;
+                            }
+                        }else{
+                            app.buttonText = "No more records avaiable.";
                             app.isFinished = true;
                         }
-                    }else{
-                        app.buttonText = "No more records avaiable.";
-                        app.isFinished = true;
-                    }
-                });
+                    });
+                }
+            },
+            created: function(){
+                this.getPosts();
             }
-        },
-        created: function(){
-            this.getPosts();
-        }
-    })
+        })
     </script>
+    @endpush
     <x-subscribe-container></x-subscribe-container>
 </div>
 @endsection

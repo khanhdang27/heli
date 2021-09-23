@@ -103,12 +103,12 @@ use App\Models\Course;
         </div>
     </div> <!-- / .row -->
 </div>
-<script>
+<script type="application/javascript">
     window.onload = function () {
             CKEDITOR.replace('ckeditor');
         };
 </script>
-<script>
+<script type="application/javascript">
     var create_course = new Vue({
             el: '#create_course',
             methods:

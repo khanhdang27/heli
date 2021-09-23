@@ -11,7 +11,6 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <script src="{{ asset('js/popper.min.js') }}"></script>
-
     <link href="{{ asset('css/app.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-logged.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style-calendar.css')}}" rel="stylesheet">
@@ -25,35 +24,32 @@
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
 
+    <script src="{{asset('js/swiper/swiper-bundle.min.js')}}"></script>
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 </head>
 
 <body>
     @include('layout.header')
 
-    <script src="{{asset('js/vue@2.6.14')}}"></script>
-    <script src="{{asset('js/swiper/swiper-bundle.min.js')}}"></script>
-    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-
-
     <div id="app">
-
         {{-- <example-component></example-component> --}}
         @yield('content')
     </div>
+    @routes
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lib/main.js') }}"></script>
     <script src="{{ asset('js/home/app.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
-
-    @stack('likePost')
+    <script src="{{asset('js/vue@2.6.14')}}"></script>
     @stack('scripts')
     @stack('scriptsLogin')
     @stack('inputFile')
     @stack('showNavbar')
     @include('layout.footer')
-    <script>
+    <script type="application/javascript">
         var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?26718';
         var s = document.createElement('script');
         s.type = 'text/javascript';
@@ -90,8 +86,6 @@
         x.parentNode.insertBefore(s, x);
     </script>
 
-
-    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

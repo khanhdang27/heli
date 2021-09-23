@@ -1,7 +1,6 @@
 @extends('admin.layout')
 @section('content')
 <!-- CARDS -->
-<script src="{{ asset('js/admin/upload-file-project.js') }}"></script>
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-8">
@@ -54,12 +53,13 @@
 
 
 @push('inputFile')
-<script>
+<script src="{{ asset('js/admin/upload-file-project.js') }}"></script>
+<script type="application/javascript">
     // Add the following code if you want the name of the file appear on select
-    $(".custom-file-input").on("change", function () {
-        var fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
+$(".custom-file-input").on("change", function () {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
 </script>
 @endpush
 @endsection

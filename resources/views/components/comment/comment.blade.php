@@ -3,7 +3,7 @@
     <div class="d-flex flex-wrap justify-content-end align-items-center mb-3">
         <h5 class="text-primary mb-0 mr-5">@lang('keywords.rate.rateCourse'):</h5>
         {{-- <x-rating.rating :course=$refComment></x-rating.rating> --}}
-
+        <rating-component v-bind:rating="0" v-bind:read-only="false"></rating-component>
     </div>
     <h5 class="text-primary">
         @lang('keywords.rate.addReview')

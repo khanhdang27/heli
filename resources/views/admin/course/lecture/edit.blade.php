@@ -13,7 +13,8 @@ use \App\Utilities\SelectionByClass;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.course.lecture.list', $course->id)}}">
+                            <a class="btn btn-outline-dark btn-sm"
+                                href="{{route('admin.course.lecture.list', $course->id)}}">
                                 <i class="fe fe-arrow-left"></i>
                             </a>
                         </div>
@@ -88,7 +89,7 @@ use \App\Utilities\SelectionByClass;
         </div>
     </div> <!-- / .row -->
 </div>
-<script>
+<script type="application/javascript">
     window.onload = function () {
             CKEDITOR.replace('ckeditor');
         };

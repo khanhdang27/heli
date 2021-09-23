@@ -68,7 +68,7 @@
     </div> <!-- / .row -->
 </div>
 
-<script>
+<script type="application/javascript">
     const displayPhoto = new Vue({
         el: '#editBlog',
         data() {
@@ -86,7 +86,7 @@
         }
     })
 </script>
-<script>
+<script type="application/javascript">
     window.onload = function() {
         CKEDITOR.replace( 'ckeditor');
     };

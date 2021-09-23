@@ -117,7 +117,8 @@
             <x-login.register-modal></x-login.register-modal>
         </div>
     </div>
-    <script>
+    @push('scripts')
+    <script type="application/javascript">
         if (!String.prototype.format) {
             String.prototype.format = function(...args) {
                 return this.replace(/(\{\d+\})/g, function(a) {
@@ -172,10 +173,10 @@
         });
 
     </script>
+    @endpush
     <x-home.review></x-home.review>
     @endif
     <x-subscribe-container></x-subscribe-container>
 </div>
-
 
 @endsection

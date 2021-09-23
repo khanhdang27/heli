@@ -1,81 +1,82 @@
-@php
-use App\Models\Course;
-use App\Models\Post;
-use App\Models\UserComment;
-use App\Models\UserLike;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
+<template>
+  <div>
+    <button
+      class="ml-1 border-0 bg-white text-primary h4 mb-0"
+      v-on:click="clicklike"
+    >
+      <img class="ic-action" :src="imageSrc" />
 
-$id_random = Str::random(2);
-
-$liked = $likeRef->likeable;
-$user_liked = $liked->filter(function($item) {
-return $item->user_id == Auth::user()->id;
-})->first();
-
-$liked = empty($user_liked) ? 0 : $user_liked->like_style;
-$component = explode('\\',$likeModule)[2];
-
-@endphp
-{{-- <button id="like_{{$component}}_{{$likeRef->id}}_{{$id_random}}" class="ml-1 border-0 bg-white text-primary h4
-mb-0"
-v-on:click="clicklike"> --}}
-<img class="ic-action" id="like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}"
-    src="{{ $liked == 0 ? asset('images/ic/ic_heart.svg') : asset('images/ic/ic_fullHeart.svg')}} ">
-
-@if($likeModule == Post::class || $likeModule== UserComment::class)
-{{$likeRef->like_no}}
-@endif
-</button>
+      <div v-if="likeModule === 'Post' || likeModule === 'UserComment'" v-cloak>
+        {{ _likeNo }}
+      </div>
+    </button>
+  </div>
+</template>
 
 <script>
-    // var like_{{ $id_random }} = new Vue({
-    //     el: '#like_{{$component}}_{{$likeRef->id}}_{{$id_random}}',
-    //     data() {
-    //         return {
-    //             likeable: {{ $liked }}
-    //         }
-    //     },
-    //     methods: {
-    //         clicklike: function () {
-    //             @if(Auth::check())
-    //                 if (like_{{ $id_random }}.likeable == 0) {
-    //                     axios.post("{{ route('site.user-like.store')}}", {
-    //                         like_ref_id: {{$likeRef->id}},
-    //                         user_id: {{Auth::user()->id}},
-    //                         like_module: String.raw`{{$likeModule}}`
-    //                     }).then(function (response) {
-    //                             document.querySelector("#like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}").src = "{{asset('images/ic/ic_fullHeart.svg')}}";
-    //                             if(document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}")){
-    //                                 document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no + 1}}";
-    //                             }
-    //                             like_{{ $id_random }}.likeable = 1;
-    //                         })
-    //                         .catch(function (error) {
-    //                             console.error(error);
-    //                         });
-    //                 } else {
-    //                     axios.put("{{route('site.user-like.update',$likeRef->id)}}", {
-    //                         like_ref_id: {{$likeRef->id}},
-    //                         user_id: {{\Illuminate\Support\Facades\Auth::user()->id}},
-    //                         like_module: String.raw`{{$likeModule}}`
-    //                     }).then(function (response) {
-    //                             console.info(response);
-    //                             document.querySelector("#like_style_{{$component}}_{{$likeRef->id}}_{{$id_random}}").src = "{{asset('images/ic/ic_heart.svg')}}";
-    //                             if(document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}")){
-    //                                 document.querySelector("#{{$component}}_like_no_{{$likeRef->id}}").textContent = "{{$likeRef->like_no - 1}}";
-    //                             }
-    //                             like_{{ $id_random }}.likeable = 0;
-    //                         })
-    //                         .catch(function (error) {
-    //                             console.error(error);
-    //                         });
-    //                 }
-    //             @else
-    //                 alert("need to login to reaction");
-    //             @endif
-    //         },
-    //     },
-    // });
+export default {
+  props: {
+    userId: Number,
+    likeRefId: Number,
+    likeModule: String,
+    likeNo: Number,
+    isLiked: Number,
+  },
+  mounted: function () {
+    this.like = this.isLiked;
+    this.imageSrc =
+      this.like === 1
+        ? "/images/ic/ic_fullHeart.svg"
+        : "/images/ic/ic_heart.svg";
+  },
+  data() {
+    return {
+      _likeNo: this.likeNo,
+      like: 0,
+      imageSrc: "",
+    };
+  },
+
+  methods: {
+    clicklike: function () {
+      if (this.like === 0) {
+        let data = {
+          like_ref_id: this.likeRefId,
+          user_id: this.userId,
+          like_module: this.likeModule,
+        };
+        axios
+          .post(route("site.user-like.store"), data, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+          .then((response) => {
+            this.imageSrc = "/images/ic/ic_fullHeart.svg";
+            this._likeNo = this._likeNo + 1;
+            this.like = 1;
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      } else {
+        axios
+          .put(route("site.user-like.update", { user_like: this.likeRefId }), {
+            like_ref_id: this.likeRefId,
+            user_id: this.userId,
+            like_module: this.likeModule,
+          })
+          .then((response) => {
+            this.imageSrc = "/images/ic/ic_heart.svg";
+            this._likeNo = this._likeNo - 1;
+            this.like = 0;
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      }
+    },
+  },
+};
 </script>

@@ -70,7 +70,7 @@
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.js"></script>
-    <script>
+    <script type="application/javascript">
         document.body.addEventListener("onload", function() {
         this.style.display = 'block !important';
     });

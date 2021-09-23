@@ -18,7 +18,7 @@ use \App\Models\Subject;
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <a href="{{ route('admin.user-manager.tutor') }}" class="btn btn-outline-dark btn-sm" >
+                            <a href="{{ route('admin.user-manager.tutor') }}" class="btn btn-outline-dark btn-sm">
                                 <i class="fe fe-arrow-left"></i>
                             </a>
                         </div>
@@ -198,7 +198,7 @@ use \App\Models\Subject;
 
     </div> <!-- / .row -->
 </div>
-<script>
+<script type="application/javascript">
     const displayPhoto = new Vue({
             el: '#editTutor',
             data() {
@@ -217,7 +217,7 @@ use \App\Models\Subject;
         })
 </script>
 @push('inputFile')
-<script>
+<script type="application/javascript">
     // Add the following code if you want the name of the file appear on select
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();

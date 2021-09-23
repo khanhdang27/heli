@@ -61,7 +61,7 @@ use App\Utilities\SelectionByClass;
     </div>
     <x-subscribe-container></x-subscribe-container>
 </div>
-<script>
+<script type="application/javascript">
     var swiper = new Swiper("#swiper_blog_related", {
             speed: 1000,
             spaceBetween: 20,

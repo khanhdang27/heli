@@ -31,8 +31,8 @@
         <span class="icon">★</span>
     </label>
 </form>
-
-<script>
+@push('scripts')
+<script type="application/javascript">
     $('.stars-input').change(function () {
         var rate_no = this.value;
         $.ajax({
@@ -49,3 +49,4 @@
         })
     });
 </script>
+@endpush

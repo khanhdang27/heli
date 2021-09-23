@@ -82,8 +82,8 @@
     </div>
 </div>
 
-@push('scripts')
-<script>
+@push('scriptsLogin')
+<script type="application/javascript">
     $(function () {
         var spinner = $("#spinner-load-register");
         var spinner_fb = $("#spinner-load-fb-register");

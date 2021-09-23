@@ -104,7 +104,7 @@
 <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('js/admin/delete_data_item.js')}}"></script>
 
-<script>
+<script type="application/javascript">
   function itemRestore(url) {
 
   var choose = confirm('Do you want restore item?');

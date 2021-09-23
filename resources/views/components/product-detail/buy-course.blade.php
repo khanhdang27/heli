@@ -14,27 +14,27 @@ $course = $courseDetail->membershipCourses->course
     @endif
     <h2 class="my-5 font-weight-bold">HKD: {{$courseDetail->getPriceDiscount()}}$ </h2>
     @if(Auth::check() && Auth::user()->stripe_id != null)
-        @if ($course->type == Course::LIVE)
-            <div id="buy_live">
-                <form id="form-room" class="form-inline" method="get" v-on:submit="buyCourse">
-                    @csrf
-                    <input name="product_id" value="{{$courseDetail->id}}" form="form-room" required hidden>
-                    <div class="btn-above-video w-100">
-                        <button type="submit" class="btn-register-now w-100 border-primary h4 m-0 py-2">
-                            @lang('keywords.coursePage.buyNow')
-                        </button>
-                    </div>
-                </form>
+    @if ($course->type == Course::LIVE)
+    <div id="buy_live">
+        <form id="form-room" class="form-inline" method="get">
+            @csrf
+            <input name="product_id" value="{{$courseDetail->id}}" form="form-room" required hidden>
+            <div class="btn-above-video w-100">
+                <button type="submit" class="btn-register-now w-100 border-primary h4 m-0 py-2">
+                    @lang('keywords.coursePage.buyNow')
+                </button>
             </div>
-        @else
-            <div class="btn-above-video">
-                <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
-                    <div class="btn-register-now w-100 border-primary h4 m-0 py-2">
-                        @lang('keywords.coursePage.buyNow')
-                    </div>
-                </a>
+        </form>
+    </div>
+    @else
+    <div class="btn-above-video">
+        <a href="{{route('site.order.create', ['product_id'=>$courseDetail->id])}}">
+            <div class="btn-register-now w-100 border-primary h4 m-0 py-2">
+                @lang('keywords.coursePage.buyNow')
             </div>
-        @endif
+        </a>
+    </div>
+    @endif
     @else
     <div class="btn-above-video">
         <button class="btn-register-now w-100 border-primary h4 m-0 py-2" data-toggle="modal"
@@ -55,32 +55,33 @@ $course = $courseDetail->membershipCourses->course
     </div>
 </div>
 
-
-<script>
+@push('scripts')
+<script type="application/javascript">
     $(document).ready(function () {
-            $("form").submit(function (event) {
-                let myForm = $('#form-room').serializeArray().reduce(function(obj, item) {
-                obj[item.name] = item.value;
-                return obj;
-            }, {});
+        $("form").submit(function (event) {
+            let myForm = $('#form-room').serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
 
-            if (myForm.room_id) {
-                $.ajax({
-                    type: "GET",
-                    url: "{{route('site.order.create', ['product_id'=>$courseDetail->id] )}}",
-                    data: myForm,
-                    dataType: "json",
-                    encode: true,
-                }).done(function (data) {
-                    window.location.replace(data.path);
-                }).fail(function (response){
-                    alert('Duplicate schedule! Please check your schedule.');
-                })
-            } else {
-                alert('must select a room');
-            }
+        if (myForm.room_id) {
+            $.ajax({
+                type: "GET",
+                url: "{{route('site.order.create', ['product_id'=>$courseDetail->id] )}}",
+                data: myForm,
+                dataType: "json",
+                encode: true,
+            }).done(function (data) {
+                window.location.replace(data.path);
+            }).fail(function (response){
+                alert('Duplicate schedule! Please check your schedule.');
+            })
+        } else {
+            alert('must select a room');
+        }
 
-            event.preventDefault()
+        event.preventDefault()
         })
     })
 </script>
+@endpush

@@ -59,7 +59,8 @@
     </button>
 </div>
 </div>
-<script>
+@push('scripts')
+<script type="application/javascript">
     const step1 = document.getElementById('animate-object1');
     const text1 = document.getElementById('content1');
     const step2 = document.getElementById('animate-object2');
@@ -147,3 +148,4 @@
     });
 
 </script>
+@endpush

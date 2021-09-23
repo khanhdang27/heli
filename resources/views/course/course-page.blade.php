@@ -8,6 +8,7 @@ if(!empty($student_course)){
 $latesLecture = $student_course->lecture_study;
 }
 
+dd($courseDetail->membershipCourses->course->likeable);
 @endphp
 
 @extends('layout.app')
@@ -92,14 +93,14 @@ $latesLecture = $student_course->lecture_study;
         </div>
     </div>
 </div>
-<x-subscribe-container></x-subscribe-container>
+{{-- <x-subscribe-container></x-subscribe-container> --}}
 @push('inputFile')
-<script>
+<script type="application/javascript">
     // Add the following code if you want the name of the file appear on select
-            $(".custom-file-input").on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 </script>
 @endpush
 @endsection

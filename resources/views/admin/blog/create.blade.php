@@ -62,7 +62,7 @@
     </div> <!-- / .row -->
 </div>
 
-<script>
+<script type="application/javascript">
     const displayPhoto = new Vue({
             el: '#editBlog',
             data() {
@@ -80,12 +80,12 @@
             }
         })
 </script>
-<script>
+<script type="application/javascript">
     window.onload = function () {
             CKEDITOR.replace('ckeditor');
         };
 </script>
-<script>
+<script type="application/javascript">
     $(document).ready(function() {
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function () {

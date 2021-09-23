@@ -49,17 +49,14 @@ $praiseList = [
         <div class="swiper-container mb-5" id="mySwiper">
             <div class="swiper-wrapper" style="padding-top: 9rem">
                 @foreach($praiseList as $item)
-                    <div class="swiper-slide">
-                        <div class="praise-box mx-auto">
-                            <x-home.praise
-                                content="{{$item['content']}}"
-                                name="{{$item['name']}}"
-                                school="{{$item['school']}}"
-                            >
+                <div class="swiper-slide">
+                    <div class="praise-box mx-auto">
+                        <x-home.praise content="{{$item['content']}}" name="{{$item['name']}}"
+                            school="{{$item['school']}}">
 
-                            </x-home.praise>
-                        </div>
+                        </x-home.praise>
                     </div>
+                </div>
 
                 @endforeach
             </div>
@@ -67,8 +64,8 @@ $praiseList = [
         </div>
     </div>
 </div>
-
-<script>
+@push('scripts')
+<script type="application/javascript">
     var swiper = new Swiper("#mySwiper", {
         loop: true,
         speed: 1000,
@@ -99,4 +96,4 @@ $praiseList = [
         },
     });
 </script>
-
+@endpush

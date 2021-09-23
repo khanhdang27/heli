@@ -21,7 +21,8 @@
         "laravelcollective/html": "^6.2",
         "spatie/laravel-google-calendar": "^3.3",
         "spatie/laravel-newsletter": "^4.10",
-        "spatie/laravel-permission": "^4.2"
+        "spatie/laravel-permission": "^4.2",
+        "tightenco/ziggy": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

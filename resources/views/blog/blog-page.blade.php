@@ -102,61 +102,63 @@ use App\Utilities\SelectionByClass;
         </div>
     </div>
     @endif
-
-    <script>
-        Vue.filter('formatDate', function (value) {
-                if (value) {
-                    return moment(String(value)).format('MM/DD/YYYY hh:mm')
-                }
-            });
-            var app = new Vue({
-                el: '#show-blog',
-                data: {
-                    isFinished: false,
-                    page: 0,
-                    buttonText: 'Load More',
-                    posts: '',
-                },
-                methods: {
-                    getPosts: function () {
-                        axios.get('{{ route("site.blog.list")}}', {
-                            params: {
-                                page: this.page + 1,
-                            }
-                        })
-                        .then(function (response) {
-                            if (response.data) {
-                                var len = app.posts.length;
-                                app.page += 1;
-                                if (len > 0) {
-                                    app.buttonText = "Loading ...";
-                                    setTimeout(function () {
-                                        app.buttonText = "Load More";
-                                        // Loop on data and push in posts
-                                        for (let i = 0; i < response.data.data.length; i++) {
-                                            app.posts.push(response.data.data[i]);
-                                        }
-                                    }, 500);
-                                } else {
-                                    app.posts = response.data.data;
-                                }
-                                if (!response.data.next_page_url ) {
-                                    app.isFinished = true;
-                                }
-                            } else {
-                                app.buttonText = "No more records avaiable.";
-                                app.isFinished = true;
-                            }
-                        });
-                    }
-                },
-                created: function () {
-                    this.getPosts();
-                }
-            })
-    </script>
     <x-subscribe-container></x-subscribe-container>
 </div>
 
 
+@push('scripts')
+
+<script type="application/javascript">
+    Vue.filter('formatDate', function (value) {
+            if (value) {
+                return moment(String(value)).format('MM/DD/YYYY hh:mm')
+            }
+        });
+        var app = new Vue({
+            el: '#show-blog',
+            data: {
+                isFinished: false,
+                page: 0,
+                buttonText: 'Load More',
+                posts: '',
+            },
+            methods: {
+                getPosts: function () {
+                    axios.get('{{ route("site.blog.list")}}', {
+                        params: {
+                            page: this.page + 1,
+                        }
+                    })
+                    .then(function (response) {
+                        if (response.data) {
+                            var len = app.posts.length;
+                            app.page += 1;
+                            if (len > 0) {
+                                app.buttonText = "Loading ...";
+                                setTimeout(function () {
+                                    app.buttonText = "Load More";
+                                    // Loop on data and push in posts
+                                    for (let i = 0; i < response.data.data.length; i++) {
+                                        app.posts.push(response.data.data[i]);
+                                    }
+                                }, 500);
+                            } else {
+                                app.posts = response.data.data;
+                            }
+                            if (!response.data.next_page_url ) {
+                                app.isFinished = true;
+                            }
+                        } else {
+                            app.buttonText = "No more records avaiable.";
+                            app.isFinished = true;
+                        }
+                    });
+                }
+            },
+            created: function () {
+                this.getPosts();
+            }
+        })
+</script>
+@endpush
 @endsection
