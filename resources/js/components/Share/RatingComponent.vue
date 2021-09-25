@@ -24,6 +24,14 @@ export default {
   props: {
     rating: Number,
     readOnly: Boolean,
+    courseId: {
+      type: Number,
+      required: false,
+    },
+    userId: {
+      type: Number,
+      required: false,
+    },
   },
   data() {
     return {
@@ -44,7 +52,19 @@ export default {
   },
   methods: {
     setRating: function (rating) {
-      this.rating = "You have Selected: " + rating + " stars";
+      console.log("You have Selected: " + rating + " stars");
+      axios
+        .post(route("site.rating.store"), {
+          course_id: this.courseId,
+          user_id: this.userId,
+          rate: rating,
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     },
   },
 };

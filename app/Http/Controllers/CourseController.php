@@ -46,7 +46,7 @@ class CourseController extends Controller
                 $query->where('tutor_id', $_user->tutor->id);
             })
             ->orderByDesc('created_at')
-            ->paginate(15)
+            ->paginate(5)
             ->withQueryString();
         return view('admin.course.index', [
             'courses' => $courses,
@@ -144,13 +144,32 @@ class CourseController extends Controller
                     ->where('student_id', Auth::user()->id)
                     ->first();
             }
-
-            dd($courses_with_group->membershipCourses->course->likeable, $courses_with_group->likeable);
-
             return view('course.course-page', [
                 'courseDetail' => $courses_with_group,
                 'student_course' => $student_course,
             ]);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param $id
+     * @return View
+     */
+    public function lectureList(Course $course)
+    {
+        try {
+            $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture')
+                ->where('publish', 1)
+                ->whereHas('membershipCourses.course', function ($query) use ($course) {
+                    return $query->where('id', $course->id);
+                })
+                ->first();
+
+            return response()->json($courses->membershipCourses->course->lecture);
         } catch (\Throwable $th) {
             dd($th);
         }

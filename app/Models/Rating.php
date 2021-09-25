@@ -11,12 +11,13 @@ class Rating extends Model
     protected $table = 'ratings';
     protected $guarded = [];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function course()
+    public function ratingable()
     {
-        return $this->belongsTo(Course::class, 'ratingable_id');
+        return $this->morphTo();
     }
 }

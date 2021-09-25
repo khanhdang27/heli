@@ -26,7 +26,7 @@ export default {
   mounted: function () {
     this.like = this.isLiked;
     this.imageSrc =
-      this.like === 1
+      this.like !== 0
         ? "/images/ic/ic_fullHeart.svg"
         : "/images/ic/ic_heart.svg";
   },
