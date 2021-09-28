@@ -52,16 +52,28 @@
                                         </svg>
                                         Add
                                     </a>
+                                    <a href="{{ route('admin.course.lecture.create', $course->id) }}"
+                                        class="btn btn-sm btn-success">
+                                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="12" y1="8" x2="12" y2="16"></line>
+                                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                                        </svg>
+                                        Add Exam
+                                    </a>
                                 @endcan
                             </div>
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
-                        <div class=" mb-0 " data-toggle="lists"
-                            data-options="{&quot;valueNames&quot;: [&quot;goal-project&quot;, &quot;goal-status&quot;, &quot;goal-progress&quot;, &quot;goal-date&quot;]}">
+                        <div class=" mb-0 " data-toggle="lists">
                             <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                     <tr>
+                                        <th>
+                                            #
+                                        </th>
                                         <th>
                                             Name
                                         </th>
@@ -71,27 +83,24 @@
                                         <th>
                                             Resource
                                         </th>
-                                        <th>
-                                            Live
-                                        </th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @foreach ($lectures as $lecture)
+                                    @dd($data)
+                                    @foreach ($data as $lecture)
                                         <tr>
-                                            <td class="goal-project">
+                                            <td>
+                                                {{ $lecture->index }}
+                                            </td>
+                                            <td>
                                                 {{ $lecture->lectures_name }}
                                             </td>
-
-                                            <td class="goal-project">
+                                            <td>
                                                 {{ $lecture->lectures_description }}
                                             </td>
                                             <td>
                                                 {{ $lecture->video_resource }}
-                                            </td>
-                                            <td>
-                                                {{ $lecture->is_live }}
                                             </td>
                                             <td class="text-right">
                                                 <div class="dropdown">
@@ -102,7 +111,16 @@
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         @can('course-delete')
                                                             <a href="javascript:void(0)"
-                                                                onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $lecture]) }}')"
+                                                                onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $data]) }}')"
+                                                                class="dropdown-item delete-item">
+                                                                Delete
+                                                            </a>
+                                                        @endcan
+                                                    </div>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        @can('course-delete')
+                                                            <a href="javascript:void(0)"
+                                                                onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $data]) }}')"
                                                                 class="dropdown-item delete-item">
                                                                 Delete
                                                             </a>
@@ -114,7 +132,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $lectures->render() }}
+                            {{ $data->render() }}
                         </div>
                     </div>
                 </div>

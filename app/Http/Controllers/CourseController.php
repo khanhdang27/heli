@@ -46,7 +46,7 @@ class CourseController extends Controller
                 $query->where('tutor_id', $_user->tutor->id);
             })
             ->orderByDesc('created_at')
-            ->paginate(5)
+            ->paginate(15)
             ->withQueryString();
         return view('admin.course.index', [
             'courses' => $courses,
@@ -162,14 +162,16 @@ class CourseController extends Controller
     public function lectureList(Course $course)
     {
         try {
-            $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture')
+            $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture', 'membershipCourses.course.exams')
                 ->where('publish', 1)
                 ->whereHas('membershipCourses.course', function ($query) use ($course) {
                     return $query->where('id', $course->id);
                 })
                 ->first();
 
-            return response()->json($courses->membershipCourses->course->lecture);
+            $lecture_course = array_merge($courses->membershipCourses->course->lecture->toArray(), $courses->membershipCourses->course->exams->toArray());
+
+            return response()->json($lecture_course);
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -252,13 +254,21 @@ class CourseController extends Controller
 
     public function lectures(Course $course)
     {
-        $_course = $course->load('lecture');
-        $lectures = Lecture::query()
-            ->where('course_id', $_course->id)
-            ->paginate(15);
+        $temp = DB::table('lectures')
+            ->leftJoin('exams', 'exams.course_id', '=', 'lectures.course_id')
+            ->select('lectures.id as lectures_id', 'exams.id as exam_id', 'lectures.course_id', 'lectures_name', 'video_resource', 'name', 'lectures_description', 'lectures.index', 'type', 'lectures.created_at', 'lectures.updated_at', 'lectures.deleted_at')
+            ->where('lectures.course_id', $course->id);
+
+        $data = DB::table('lectures')
+            ->rightJoin('exams', 'exams.course_id', '=', 'lectures.course_id')
+            ->select('lectures.id as lectures_id', 'exams.id as exam_id', 'lectures.course_id', 'lectures_name', 'video_resource', 'name', 'lectures_description', 'lectures.index', 'type', 'lectures.created_at', 'lectures.updated_at', 'lectures.deleted_at')
+            ->unionAll($temp)
+            ->where('exams.course_id', $course->id)
+            ->paginate();
+
         return view('admin.course.lecture.index', [
-            'course' => $_course,
-            'lectures' => $lectures,
+            'course' => $course,
+            'data' => $data,
         ]);
     }
 

@@ -86,10 +86,5 @@
 
 
 @push('js')
-    <script>
-        $(document).ready(function() {
-            $('#data-table').DataTable();
-        });
-    </script>
     <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>
 @endpush

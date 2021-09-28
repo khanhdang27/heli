@@ -144,10 +144,5 @@ use App\Models\Course;
 
     @push('js')
 
-        <script>
-            $(document).ready(function() {
-                $('#course-table').DataTable();
-            });
-        </script>
         <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>
     @endpush

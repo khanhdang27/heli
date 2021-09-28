@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Student extends Model
+class PassGrade extends Model
 {
     use SoftDeletes;
-    protected $table = 'students';
+    protected $table = 'pass_grades';
 
     public $timestamps = true;
 
     protected $guarded = [];
 
-    public function user()
+    public function exam()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(Exams::class);
     }
 }

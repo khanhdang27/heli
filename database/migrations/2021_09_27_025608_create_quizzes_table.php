@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLectureTable extends Migration
+class CreateQuizzesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateLectureTable extends Migration
      */
     public function up()
     {
-        Schema::create('lectures', function (Blueprint $table) {
+        Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->integer('index')->default(0);
             $table
-                ->foreignId('course_id')
-                ->constrained('courses')
+                ->foreignId('exam_id')
+                ->constrained('exams')
                 ->cascadeOnDelete();
-            $table->string('lectures_name');
-            $table->text('lectures_description');
-            $table->string('video_resource');
+            $table->integer('version');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +32,6 @@ class CreateLectureTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lectures');
+        Schema::dropIfExists('quizzes');
     }
 }
