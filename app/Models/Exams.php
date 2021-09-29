@@ -14,6 +14,16 @@ class Exams extends Model
 
     protected $guarded = [];
 
+    const ASSESSMENT = 1;
+    const NORMAL = 2;
+    const END = 3;
+
+    const TYPES = [
+        self::ASSESSMENT => 'Assessment',
+        self::NORMAL => 'Normal',
+        self::END => 'End',
+    ];
+
     public function course()
     {
         return $this->belongsTo(Course::class);

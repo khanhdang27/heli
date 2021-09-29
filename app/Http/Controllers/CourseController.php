@@ -14,11 +14,16 @@ use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
 use App\Models\User;
+use App\Models\Exams;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use Illuminate\Support\Carbon;
 
@@ -169,9 +174,9 @@ class CourseController extends Controller
                 })
                 ->first();
 
-            $lecture_course = array_merge($courses->membershipCourses->course->lecture->toArray(), $courses->membershipCourses->course->exams->toArray());
+            $lecture_course = $courses->membershipCourses->course->lecture->concat($courses->membershipCourses->course->exams);
 
-            return response()->json($lecture_course);
+            return response()->json($lecture_course->sortBy('index'));
         } catch (\Throwable $th) {
             dd($th);
         }
@@ -252,24 +257,33 @@ class CourseController extends Controller
         // }
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, ['path' => URL::current()]);
+    }
+
     public function lectures(Course $course)
     {
-        $temp = DB::table('lectures')
-            ->leftJoin('exams', 'exams.course_id', '=', 'lectures.course_id')
-            ->select('lectures.id as lectures_id', 'exams.id as exam_id', 'lectures.course_id', 'lectures_name', 'video_resource', 'name', 'lectures_description', 'lectures.index', 'type', 'lectures.created_at', 'lectures.updated_at', 'lectures.deleted_at')
-            ->where('lectures.course_id', $course->id);
+        $course->load('lecture', 'exams');
 
-        $data = DB::table('lectures')
-            ->rightJoin('exams', 'exams.course_id', '=', 'lectures.course_id')
-            ->select('lectures.id as lectures_id', 'exams.id as exam_id', 'lectures.course_id', 'lectures_name', 'video_resource', 'name', 'lectures_description', 'lectures.index', 'type', 'lectures.created_at', 'lectures.updated_at', 'lectures.deleted_at')
-            ->unionAll($temp)
-            ->where('exams.course_id', $course->id)
-            ->paginate();
+        $data = $this->paginate($course->lecture->concat($course->exams)->sortBy('index'), 15);
 
         return view('admin.course.lecture.index', [
             'course' => $course,
             'data' => $data,
         ]);
+    }
+
+    public function lectureIndexing(Request $request, Course $course)
+    {
+        dd($request->input());
     }
 
     public function createLecture(Course $course)
@@ -424,6 +438,60 @@ class CourseController extends Controller
     {
         try {
             $room->delete();
+            return response([
+                'message' => 'Delete success!',
+            ]);
+        } catch (\Exception $exception) {
+            return response(
+                [
+                    'message' => 'Cannot delete course',
+                ],
+                400,
+            );
+        }
+    }
+
+    public function createExam(Course $course)
+    {
+        return view('admin.course.exam_quiz.create', [
+            'course' => $course,
+        ]);
+    }
+
+    public function storeExam(Request $request, Course $course)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $lecture = Exams::create([
+                'course_id' => $course->id,
+                'name' => $input['name'],
+                'index' => $input['index'],
+                'type' => $input['type'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('errors', 'Create errors!');
+        }
+    }
+
+    public function editExam(Course $course, Exam $exam)
+    {
+        # code...
+    }
+
+    public function updateExam(Course $course, Exam $exam)
+    {
+        # code...
+    }
+
+    public function destroyExam(Course $course, Exam $exam)
+    {
+        try {
+            $exam->delete();
             return response([
                 'message' => 'Delete success!',
             ]);

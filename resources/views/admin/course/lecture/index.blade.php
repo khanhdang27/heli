@@ -1,3 +1,9 @@
+@php
+
+use App\Models\Lecture;
+use App\Models\Exams;
+@endphp
+
 @extends('admin.layout')
 @section('content')
     <div class="container-fluid mt-5">
@@ -52,7 +58,7 @@
                                         </svg>
                                         Add
                                     </a>
-                                    <a href="{{ route('admin.course.lecture.create', $course->id) }}"
+                                    <a href="{{ route('admin.course.exam.create', $course->id) }}"
                                         class="btn btn-sm btn-success">
                                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                                             fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
@@ -72,13 +78,13 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            #
+                                            Index
                                         </th>
                                         <th>
                                             Name
                                         </th>
                                         <th>
-                                            Description
+                                            Detail
                                         </th>
                                         <th>
                                             Resource
@@ -87,63 +93,151 @@
                                     </tr>
                                 </thead>
                                 <tbody class="list">
-                                    @dd($data)
                                     @foreach ($data as $lecture)
-                                        <tr>
-                                            <td>
-                                                {{ $lecture->index }}
-                                            </td>
-                                            <td>
-                                                {{ $lecture->lectures_name }}
-                                            </td>
-                                            <td>
-                                                {{ $lecture->lectures_description }}
-                                            </td>
-                                            <td>
-                                                {{ $lecture->video_resource }}
-                                            </td>
-                                            <td class="text-right">
-                                                <div class="dropdown">
-                                                    <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
-                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="fe fe-more-vertical"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        @can('course-delete')
-                                                            <a href="javascript:void(0)"
-                                                                onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $data]) }}')"
-                                                                class="dropdown-item delete-item">
-                                                                Delete
+                                        @if ($lecture instanceof Lecture)
+                                            <tr>
+                                                <td>
+                                                    {{ $lecture->index }}
+                                                </td>
+                                                <td>
+                                                    {{ $lecture->lectures_name }}
+                                                </td>
+                                                <td>
+                                                    {{ $lecture->lectures_description }}
+                                                </td>
+                                                <td>
+                                                    {{ $lecture->video_resource }}
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="dropdown">
+                                                        <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <i class="fe fe-more-vertical"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            @can('course-delete')
+                                                                <a href="javascript:void(0)"
+                                                                    onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $data]) }}')"
+                                                                    class="dropdown-item delete-item">
+                                                                    Delete
+                                                                </a>
+                                                            @endcan
+                                                            <a href="javascript:void(0)" class="dropdown-item delete-item"
+                                                                data-toggle="modal" data-target="#exampleModalCenter"
+                                                                data-name="{{ $lecture->lectures_name }}"
+                                                                data-index="{{ $lecture->index }}"
+                                                                data-id="{{ $lecture->id }}" data-type="Exams">
+                                                                Index
                                                             </a>
-                                                        @endcan
+                                                        </div>
                                                     </div>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        @can('course-delete')
-                                                            <a href="javascript:void(0)"
-                                                                onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $data]) }}')"
-                                                                class="dropdown-item delete-item">
-                                                                Delete
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        @if ($lecture instanceof Exams)
+                                            <tr>
+                                                <td>
+                                                    {{ $lecture->index }}
+                                                </td>
+                                                <td>
+                                                    {{ $lecture->name }}
+                                                </td>
+                                                <td>
+                                                    {{ Exams::TYPES[$lecture->type] }}
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="dropdown">
+                                                        <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
+                                                            data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <i class="fe fe-more-vertical"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            @can('course-delete')
+                                                                <a href="javascript:void(0)"
+                                                                    onclick="itemDelete('{{ route('admin.course.exam.destroy', ['course' => $course, 'exam' => $data]) }}')"
+                                                                    class="dropdown-item delete-item">
+                                                                    Delete
+                                                                </a>
+                                                            @endcan
+                                                            <a href="javascript:void(0)" class="dropdown-item delete-item"
+                                                                data-toggle="modal" data-target="#exampleModalCenter"
+                                                                data-name="{{ $lecture->name }}"
+                                                                data-index="{{ $lecture->index }}"
+                                                                data-id="{{ $lecture->id }}" data-type="Exams">
+                                                                Index
                                                             </a>
-                                                        @endcan
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $data->render() }}
+                            {{ $data->links() }}
                         </div>
                     </div>
                 </div>
-
             </div>
         </div> <!-- / .row -->
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Index</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('admin.course.lecture.indexing', $course) }}">
+                        @csrf
+                        <input name="id" type="text" class="form-control" id="element-id" hidden>
+                        <input name="type" type="text" class="form-control" id="element-type" hidden>
+                        <div class="form-group">
+                            <label for="element-name" class="col-form-label">Element</label>
+                            <input name="name" type="text" class="form-control" id="element-name" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="element-index" class="col-form-label">Index</label>
+                            <input name="index" type="number" class="form-control" id="element-index"></input>
+                        </div>
+                        <div class="d-flex">
+                            <button type="submit" class="ml-auto btn btn-primary"> Update </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
 
 @push('js')
-
     <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            console.log("ready!");
+            $('#exampleModalCenter').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var name = button.data('name') // Extract info from data-* attributes
+                var id = button.data('id') // Extract info from data-* attributes
+                var type = button.data('type') // Extract info from data-* attributes
+                var index = button.data('index') // Extract info from data-* attributes
+                var modal = $(this)
+                console.log('name :>> ', name);
+                modal.find('#element-name').val(name)
+                modal.find('#element-id').val(id)
+                modal.find('#element-type').val(type)
+                modal.find('#element-index').val(index)
+            })
+        });
+    </script>
 @endpush

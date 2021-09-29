@@ -109,12 +109,6 @@ use App\Models\Course;
                                                                     Manage Room Live
                                                                 </a>
                                                             @break
-                                                            @case(Course::DOCUMENT)
-                                                                <a href="{{ route('admin.course-material.index') }}"
-                                                                    class="dropdown-item">
-                                                                    Manage Course Document
-                                                                </a>
-                                                            @break
                                                             @default
                                                                 {{-- do nothing --}}
                                             @break
