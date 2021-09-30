@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.4",
         "astrotomic/laravel-translatable": "^11.9",
+        "bavix/laravel-wallet": "^6.1",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",

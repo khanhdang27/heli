@@ -12220,8 +12220,8 @@ input.check-subscribe {
 /*Forum-----------------------------------------*/
 
 .user-avatar {
-  width: 98px;
-  height: 98px;
+  width: 80px;
+  height: 80px;
 }
 
 .item-slide {
@@ -12233,6 +12233,175 @@ input.check-subscribe {
 .tutor_image {
   width: 270px;
   height: 270px;
+}
+
+html,
+body {
+  font-size: 10.5pt;
+  background-color: var(--white);
+  font-family: "Source Han Sans CN";
+  font-weight: 400;
+  margin: 0;
+}
+
+.body-content {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dropdown-menu {
+  z-index: 1002;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px #fff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0b487d;
+  border-radius: 10px;
+}
+
+.course-detail-tab::-webkit-scrollbar-thumb {
+  background: #d3d3d3ff;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
+
+.ip-search {
+  border: 0;
+  height: 100%;
+  outline: none;
+}
+
+.item-header {
+  font-size: 14px;
+  padding: 0 0 0 2.5rem;
+}
+
+.free-class-container {
+  min-height: 437px;
+  background-image: url("/../images/freeclass-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding: 4rem 0 4rem 0;
+}
+
+.free-class-container .border-right-radius {
+  transform: translate(-500px);
+  border: 5px solid;
+  border-top-right-radius: 10rem;
+  border-bottom-right-radius: 10rem;
+  border-left: 0 !important;
+  width: 67.5vw;
+}
+
+.circle-check {
+  left: 64%;
+  border-radius: 50%;
+  width: 172px;
+  height: 172px;
+}
+
+.text-content {
+  padding: 2rem 5rem 2rem 0;
+  font-weight: 600;
+}
+
+.text-information {
+  text-align: center;
+  max-width: 370px;
+}
+
+.modal-login-content {
+  border: 3px solid;
+  border-radius: 1rem;
+  background-color: rgba(10, 10, 125, 0.8);
+  padding: 1rem;
+}
+
+.modal-index {
+  z-index: 16000170;
+}
+
+.line-or {
+  max-width: 352px;
+  font-size: 20px;
+  justify-items: center;
+  margin: 0.5rem;
+}
+
+.line-or hr {
+  width: 100%;
+  border: 1px solid #fff;
+}
+
+.input-login {
+  max-width: 325px;
+  border-radius: 50px;
+  padding: 0.8rem 1rem;
+}
+
+.input-login .input-login-item {
+  border: none;
+  width: 90%;
+  height: 100%;
+}
+
+.input-login .input-login-item:focus {
+  outline: none;
+}
+
+.text-login-left {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.btn-more {
+  height: 37px;
+  padding: 0 1.5rem;
+  border: 2px solid;
+  border-radius: 19px;
+}
+
+.btn-more:hover {
+  cursor: pointer;
+}
+
+.btn-more:focus {
+  outline: none;
+}
+
+.card-profile {
+  max-width: 700px;
+}
+
+.wallet-card {
+  min-height: 397px;
+}
+
+.btn-topUp-value {
+  width: 122px;
+}
+
+.select-card:hover {
+  background-color: #e2e6ea;
+}
+
+.btn-add-visa:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
 }
 
 .rating {
@@ -12626,6 +12795,10 @@ input.check-subscribe {
 
   .circle-check img {
     width: 83px;
+  }
+
+  .btn-wallet {
+    height: 40px;
   }
 }
 

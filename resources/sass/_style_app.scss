@@ -1217,8 +1217,8 @@ input.check-subscribe {
 /*Forum-----------------------------------------*/
 
 .user-avatar {
-    width: 98px;
-    height: 98px;
+    width: 80px;
+    height: 80px;
 }
 
 .item-slide {
@@ -1373,4 +1373,22 @@ body {
 
 .card-profile {
     max-width: 700px;
+}
+
+//Wallet-----------------------
+.wallet-card{
+    min-height: 397px;
+}
+.btn-topUp-value{
+    width: 122px;
+}
+.select-card{
+    &:hover{
+        background-color: #e2e6ea;
+    }
+}
+.btn-add-visa{
+    &:hover{
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    }
 }

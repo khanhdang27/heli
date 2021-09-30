@@ -90,5 +90,16 @@ Route::middleware('auth')->group(function () {
         Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
         Route::get('calendar', 'ScheduleController@index')->name('calendar');
         Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
+        Route::get('wallet', 'WalletController@index')->name('wallet');
+        Route::get('wallet/top-up', 'WalletController@topUpIndex')->name('top-up');
+        Route::post('wallet/top-up/top-up-to', 'WalletController@topUpToWallet')->name('top-up-to');
+        Route::get('wallet/top-up/success', 'WalletController@topUpSuccess')->name('topUp-success');
+        Route::get('wallet/payment-history', 'WalletController@paymentHistory')->name('payment-history');
+        Route::get('wallet/topUp-history', 'WalletController@topUpHistory')->name('topUp-history');
+
     });
+    Route::get('payment', 'WalletController@payment')->name('payment');
+    Route::get('confirm-payment', 'WalletController@confirmPayment')->name('confirm');
+    Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');
+    Route::post('store-card', 'WalletController@storeCard')->name('store-card');
 });
