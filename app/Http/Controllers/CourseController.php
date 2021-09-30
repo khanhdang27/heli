@@ -283,7 +283,23 @@ class CourseController extends Controller
 
     public function lectureIndexing(Request $request, Course $course)
     {
-        dd($request->input());
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            if ($input['type'] == 'Exams') {
+                $exam = Exams::find($input['id']);
+                $exam->update(['index' => $input['index']]);
+            } else {
+                $lecture = Lecture::find($input['id']);
+                $lecture->update(['index' => $input['index']]);
+            }
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return back()->withErrors('Update Error!');
+        }
     }
 
     public function createLecture(Course $course)
@@ -303,13 +319,13 @@ class CourseController extends Controller
                 'lectures_name' => $input['lectures_name'],
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
+                'index' => $input['index'],
             ]);
 
             DB::commit();
             return response()->json(['status' => 200, 'message' => 'succeed']);
         } catch (\Throwable $th) {
             DB::rollback();
-            // dd($th);
             return response()->json(['status' => 400, 'message' => 'fails'], 400);
         }
     }
@@ -438,60 +454,6 @@ class CourseController extends Controller
     {
         try {
             $room->delete();
-            return response([
-                'message' => 'Delete success!',
-            ]);
-        } catch (\Exception $exception) {
-            return response(
-                [
-                    'message' => 'Cannot delete course',
-                ],
-                400,
-            );
-        }
-    }
-
-    public function createExam(Course $course)
-    {
-        return view('admin.course.exam_quiz.create', [
-            'course' => $course,
-        ]);
-    }
-
-    public function storeExam(Request $request, Course $course)
-    {
-        $input = $request->input();
-        DB::beginTransaction();
-        try {
-            $lecture = Exams::create([
-                'course_id' => $course->id,
-                'name' => $input['name'],
-                'index' => $input['index'],
-                'type' => $input['type'],
-            ]);
-
-            DB::commit();
-            return back()->with('success', 'Create success!');
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return back()->withErrors('errors', 'Create errors!');
-        }
-    }
-
-    public function editExam(Course $course, Exam $exam)
-    {
-        # code...
-    }
-
-    public function updateExam(Course $course, Exam $exam)
-    {
-        # code...
-    }
-
-    public function destroyExam(Course $course, Exam $exam)
-    {
-        try {
-            $exam->delete();
             return response([
                 'message' => 'Delete success!',
             ]);

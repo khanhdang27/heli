@@ -38,11 +38,18 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('course/{course}/lecture/{lecture}', 'CourseController@updateLecture')->name('course.lecture.update');
     Route::delete('course/{course}/lecture/{lecture}', 'CourseController@destroyLecture')->name('course.lecture.destroy');
 
-    Route::get('course/{course}/exam/create', 'CourseController@createExam')->name('course.exam.create');
-    Route::post('course/{course}/exam', 'CourseController@storeExam')->name('course.exam.store');
-    Route::get('course/{course}/exam/{exam}', 'CourseController@editExam')->name('course.exam.edit');
-    Route::put('course/{course}/exam/{exam}', 'CourseController@updateExam')->name('course.exam.update');
-    Route::delete('course/{course}/exam/{exam}', 'CourseController@destroyExam')->name('course.exam.destroy');
+    Route::get('course/{course}/exam/create', 'ExamsController@create')->name('course.exam.create');
+    Route::post('course/{course}/exam', 'ExamsController@store')->name('course.exam.store');
+    Route::get('course/{course}/exam/{exam}', 'ExamsController@edit')->name('course.exam.edit');
+    Route::put('course/{course}/exam/{exam}', 'ExamsController@update')->name('course.exam.update');
+    Route::delete('course/{course}/exam/{exam}', 'ExamsController@destroy')->name('course.exam.destroy');
+
+    Route::get('course/{course}/exam/{exam}/quiz', 'QuizController@index')->name('course.quiz.list');
+    Route::get('course/{course}/exam/{exam}/quiz/create', 'QuizController@create')->name('course.quiz.create');
+    Route::post('course/{course}/exam/{exam}/quiz', 'QuizController@store')->name('course.quiz.store');
+    Route::get('course/{course}/exam/{exam}/quiz/{quiz}', 'QuizController@edit')->name('course.quiz.edit');
+    Route::put('course/{course}/exam/{exam}/quiz/{quiz}', 'QuizController@update')->name('course.quiz.update');
+    Route::delete('course/{course}/quiz/{quiz}', 'QuizController@destroy')->name('course.quiz.destroy');
 
     Route::resource('course', 'CourseController');
 

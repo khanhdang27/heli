@@ -10,13 +10,14 @@
                             <div>
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Material
+                                    Quizzes
                                 </h4>
                             </div>
                             <div class="ml-auto col-auto">
                                 @can('document-create')
                                     <!-- Button -->
-                                    <a href="{{ route('admin.course-material.create') }}" class="btn btn-sm btn-success">
+                                    <a href="{{ route('admin.course.quiz.create', ['course' => $course->id, 'exam' => $exam]) }}"
+                                        class="btn btn-sm btn-success">
                                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                                             fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
                                             <circle cx="12" cy="12" r="10"></circle>
@@ -30,8 +31,7 @@
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive mb-0" data-toggle="lists"
-                            data-options="{&quot;valueNames&quot;: [&quot;goal-project&quot;, &quot;goal-status&quot;, &quot;goal-progress&quot;, &quot;goal-date&quot;]}">
+                        <div class="table-responsive mb-0" data-toggle="lists">
                             <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                     <tr>
@@ -61,16 +61,14 @@
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         @can('document-edit')
-
-                                                            <a href="{{ route('admin.course-material.edit', $value) }}"
+                                                            <a href="{{ route('admin.course.quiz.edit', ['course' => $course->id, 'exam' => $exam, 'quiz' => $value]) }}"
                                                                 class="dropdown-item">
                                                                 Edit
                                                             </a>
                                                         @endcan
                                                         @can('document-delete')
-
                                                             <a href="javascript:void(0)"
-                                                                onclick="itemDelete('{{ route('admin.course-material.destroy', $value->id) }}')"
+                                                                onclick="itemDelete('{{ route('admin.course.quiz.destroy', ['course' => $course->id, 'quiz' => $value->id]) }}')"
                                                                 class="dropdown-item delete-item">
                                                                 Delete
                                                             </a>

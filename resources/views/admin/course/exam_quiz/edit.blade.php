@@ -1,3 +1,8 @@
+@php
+
+use App\Models\Exams;
+@endphp
+
 @extends('admin.layout')
 @section('content')
     <script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
@@ -18,26 +23,28 @@
                             <div>
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Create Exams
+                                    Edit Exams
                                 </h4>
                             </div>
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => route('admin.course.exam.store', $course->id), 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open(['url' => route('admin.course.exam.update', ['course' => $course->id, 'exam' => $exam]), 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group ">
                             {{ Form::label('name', 'Name', ['class' => 'required']) }}
-                            {{ Form::text('name', old('name'), ['class' => 'form-control', 'required', 'id' => 'name']) }}
+                            {{ Form::text('name', $exam->name, ['class' => 'form-control', 'required', 'id' => 'name']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('index', 'Index', ['class' => 'required']) }}
-                            {{ Form::number('index', old('index'), ['class' => 'form-control', 'required', 'id' => 'index']) }}
+                            {{ Form::number('index', $exam->index, ['class' => 'form-control', 'required', 'id' => 'index']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('type', 'Type', ['class' => 'required']) }}
-                            {{ Form::select('size', Exams::TYPES, old('type'), ['placeholder' => 'Pick a type...', 'class' => 'form-control', 'required', 'id' => 'type']) }}
+                            {{ Form::select('size', Exams::TYPES, $exam->type, ['placeholder' => 'Pick a type...', 'class' => 'form-control', 'required', 'id' => 'type']) }}
                         </div>
+
+                        {{ Form::submit('Save', ['class' => 'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}
                     </div>
                 </div>

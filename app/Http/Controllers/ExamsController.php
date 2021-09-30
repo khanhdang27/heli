@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exams;
 use Illuminate\Http\Request;
+use App\Models\Course;
 
 class ExamsController extends Controller
 {
@@ -24,7 +25,9 @@ class ExamsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.course.exam_quiz.create', [
+            'course' => $course,
+        ]);
     }
 
     /**
@@ -33,9 +36,24 @@ class ExamsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Course $course)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $exam = Exams::create([
+                'course_id' => $course->id,
+                'name' => $input['name'],
+                'index' => $input['index'],
+                'type' => $input['type'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('errors', 'Create errors!');
+        }
     }
 
     /**
@@ -44,7 +62,7 @@ class ExamsController extends Controller
      * @param  \App\Models\Exams  $exams
      * @return \Illuminate\Http\Response
      */
-    public function show(Exams $exams)
+    public function show(Course $course, Exams $exams)
     {
         //
     }
@@ -55,9 +73,12 @@ class ExamsController extends Controller
      * @param  \App\Models\Exams  $exams
      * @return \Illuminate\Http\Response
      */
-    public function edit(Exams $exams)
+    public function edit(Course $course, Exams $exam)
     {
-        //
+        return view('admin.course.exam_quiz.edit', [
+            'course' => $course,
+            'exam' => $exam,
+        ]);
     }
 
     /**
@@ -67,9 +88,24 @@ class ExamsController extends Controller
      * @param  \App\Models\Exams  $exams
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Exams $exams)
+    public function update(Request $request, Course $course, Exams $exam)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $exams->update([
+                'course_id' => $course->id,
+                'name' => $input['name'],
+                'index' => $input['index'],
+                'type' => $input['type'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('errors', 'Update errors!');
+        }
     }
 
     /**
@@ -78,8 +114,20 @@ class ExamsController extends Controller
      * @param  \App\Models\Exams  $exams
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exams $exams)
+    public function destroy(Course $course, Exams $exams)
     {
-        //
+        try {
+            $exam->delete();
+            return response([
+                'message' => 'Delete success!',
+            ]);
+        } catch (\Exception $exception) {
+            return response(
+                [
+                    'message' => 'Cannot delete course',
+                ],
+                400,
+            );
+        }
     }
 }

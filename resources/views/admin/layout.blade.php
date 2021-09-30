@@ -41,6 +41,8 @@
         @yield('content')
     </div>
 
+
+    <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('cpanel/assets/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('cpanel/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('cpanel/assets/libs/select2/dist/js/select2.min.js') }}"></script>

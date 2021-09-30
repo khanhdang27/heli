@@ -56,7 +56,7 @@ use App\Models\Exams;
                                             <line x1="12" y1="8" x2="12" y2="16"></line>
                                             <line x1="8" y1="12" x2="16" y2="12"></line>
                                         </svg>
-                                        Add
+                                        Add Lecture
                                     </a>
                                     <a href="{{ route('admin.course.exam.create', $course->id) }}"
                                         class="btn btn-sm btn-success">
@@ -116,6 +116,13 @@ use App\Models\Exams;
                                                             <i class="fe fe-more-vertical"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right">
+                                                            <a href="javascript:void(0)" class="dropdown-item delete-item"
+                                                                data-toggle="modal" data-target="#exampleModalCenter"
+                                                                data-name="{{ $lecture->lectures_name }}"
+                                                                data-index="{{ $lecture->index }}"
+                                                                data-id="{{ $lecture->id }}" data-type="Lecture">
+                                                                Index
+                                                            </a>
                                                             @can('course-delete')
                                                                 <a href="javascript:void(0)"
                                                                     onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $data]) }}')"
@@ -123,13 +130,7 @@ use App\Models\Exams;
                                                                     Delete
                                                                 </a>
                                                             @endcan
-                                                            <a href="javascript:void(0)" class="dropdown-item delete-item"
-                                                                data-toggle="modal" data-target="#exampleModalCenter"
-                                                                data-name="{{ $lecture->lectures_name }}"
-                                                                data-index="{{ $lecture->index }}"
-                                                                data-id="{{ $lecture->id }}" data-type="Exams">
-                                                                Index
-                                                            </a>
+
                                                         </div>
                                                     </div>
                                                 </td>
@@ -157,13 +158,6 @@ use App\Models\Exams;
                                                             <i class="fe fe-more-vertical"></i>
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right">
-                                                            @can('course-delete')
-                                                                <a href="javascript:void(0)"
-                                                                    onclick="itemDelete('{{ route('admin.course.exam.destroy', ['course' => $course, 'exam' => $data]) }}')"
-                                                                    class="dropdown-item delete-item">
-                                                                    Delete
-                                                                </a>
-                                                            @endcan
                                                             <a href="javascript:void(0)" class="dropdown-item delete-item"
                                                                 data-toggle="modal" data-target="#exampleModalCenter"
                                                                 data-name="{{ $lecture->name }}"
@@ -171,6 +165,23 @@ use App\Models\Exams;
                                                                 data-id="{{ $lecture->id }}" data-type="Exams">
                                                                 Index
                                                             </a>
+                                                            <a href="{{ route('admin.course.exam.edit', ['course' => $course, 'exam' => $lecture]) }}"
+                                                                class="dropdown-item">
+                                                                Update
+                                                            </a>
+                                                            <a href="{{ route('admin.course.quiz.list', ['course' => $course, 'exam' => $lecture]) }}"
+                                                                class="dropdown-item">
+                                                                Quizzes
+                                                            </a>
+
+                                                            @can('course-delete')
+                                                                <a href="javascript:void(0)"
+                                                                    onclick="itemDelete('{{ route('admin.course.exam.destroy', ['course' => $course, 'exam' => $data]) }}')"
+                                                                    class="dropdown-item">
+                                                                    Delete
+                                                                </a>
+                                                            @endcan
+
                                                         </div>
                                                     </div>
                                                 </td>
