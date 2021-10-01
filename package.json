@@ -25,10 +25,13 @@
         "vue-template-compiler": "^2.6.14"
     },
     "dependencies": {
+        "flatpickr": "^4.6.9",
         "googleapis": "^74.2.0",
         "node-sass": "^4.14.1",
         "toastr": "^2.1.4",
         "uuid": "^8.3.2",
-        "vimeo-upload": "^0.1.6"
+        "vimeo-upload": "^0.1.6",
+        "vue-star-rating": "^1.7.0",
+        "vue-vimeo-player": "^0.2.2"
     }
 }

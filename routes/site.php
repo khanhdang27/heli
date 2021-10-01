@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('', 'HomeController@index')->name('home');
 
 Route::get('faq', function () {
@@ -16,7 +15,9 @@ Route::get('terms-conditions', function () {
 })->name('terms-conditions');
 
 Route::post('register', 'Auth\RegisterController@register')->name('register');
-Route::post('login', 'Auth\LoginController@login')->name('userLogin')->middleware("throttle:30,10");
+Route::post('login', 'Auth\LoginController@login')
+    ->name('userLogin')
+    ->middleware('throttle:30,10');
 Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
 Route::post('password/update', 'Auth\ChangePasswordController@update')->name('userUpdatePassword');
 
@@ -40,6 +41,7 @@ Route::resource('subject', 'SubjectController');
 Route::resource('certificate', 'CertificateController');
 Route::get('document/{id}', 'CertificateController@documentDetail')->name('document');
 Route::get('course/search', 'CourseController@search')->name('course.search');
+Route::get('course/lectures/{course}', 'CourseController@lectureList')->name('course.lectureList');
 Route::resource('course', 'CourseController')->except(['index', 'update', 'store', 'delete']);
 
 Route::get('blog-view', function () {
@@ -59,7 +61,6 @@ Route::get('forumAnswer', function () {
 Route::post('subscribe', 'UserSubscribeController@customerSubscribe')->name('customerSubscribe');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('file/download/{file}', 'FileController@download')->name('file.download');
 
     Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
@@ -85,6 +86,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');
 
+<<<<<<< HEAD
     Route::prefix('my/')->name('user.')->group(function () {
         Route::get('course', 'CourseController@my')->name('course');
         Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
@@ -102,4 +104,14 @@ Route::middleware('auth')->group(function () {
     Route::get('confirm-payment', 'WalletController@confirmPayment')->name('confirm');
     Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');
     Route::post('store-card', 'WalletController@storeCard')->name('store-card');
+=======
+    Route::prefix('my/')
+        ->name('user.')
+        ->group(function () {
+            Route::get('course', 'CourseController@my')->name('course');
+            Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
+            Route::get('calendar', 'ScheduleController@index')->name('calendar');
+            Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
+        });
+>>>>>>> trung/clean_code_21_09
 });

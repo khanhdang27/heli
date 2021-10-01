@@ -1,39 +1,41 @@
 @if(!$courses->isEmpty())
-    <div class="pb-3 row flex-nowrap">
-        <div class="col-1">
-            <div class="swiper-button-prev btn-prev btn-prev{{$tab}}" id="btn_prev">
-                <div class="rounded-circle border-btn-next animate-change-color py-3 px-4">
-                    <p class="h2 text-center mx-2">❮</p>
-                </div>
+<div class="pb-3 row flex-nowrap">
+    <div class="col-1">
+        <div class="swiper-button-prev btn-prev btn-prev{{$tab}}" id="btn_prev">
+            <div class="rounded-circle border-btn-next animate-change-color py-3 px-4">
+                <p class="h2 text-center mx-2">❮</p>
             </div>
         </div>
-        <div class="px-0 col-10">
-            <div class="swiper-container" id="swiperCourse{{$tab}}">
-                <div class="swiper-wrapper pb-3">
-                    @foreach($courses as $value)
-                        <div class="swiper-slide mb-5">
-                            <x-product.course-item :course=$value typeOfUI="{{$typeOfUI}}" screen="">
-                            </x-product.course-item>
-                        </div>
-                    @endforeach
+    </div>
+    <div class="px-0 col-10">
+        <div class="swiper-container" id="swiperCourse{{$tab}}">
+            <div class="swiper-wrapper pb-3">
+                @foreach($courses as $value)
+                <div class="swiper-slide mb-5">
+                    <x-product.course-item :course=$value typeOfUI="{{$typeOfUI}}" screen="">
+                    </x-product.course-item>
                 </div>
-                <div class="swiper-pagination d-block d-lg-none" id="coursePagination"></div>
+                @endforeach
             </div>
-
-        </div>
-        <div class="col-1 d-none d-md-block">
-            <div class="swiper-button-next btn-next btn-next{{$tab}}" id="btn_next">
-                <div class="rounded-circle border-btn-next animate-change-color py-2 px-4">
-                    <p class="m-0 h2 text-center">❯</p>
-                    <p class="text-nowrap text-center m-0">更多</p>
-                </div>
-            </div>
+            <div class="swiper-pagination d-block d-lg-none" id="coursePagination"></div>
         </div>
 
     </div>
+    <div class="col-1 d-none d-md-block">
+        <div class="swiper-button-next btn-next btn-next{{$tab}}" id="btn_next">
+            <div class="rounded-circle border-btn-next animate-change-color py-2 px-4">
+                <p class="m-0 h2 text-center">❯</p>
+                <p class="text-nowrap text-center m-0">更多</p>
+            </div>
+        </div>
+    </div>
 
-    <script>
-        var swiperCourseHot{{$tab}} = new Swiper("#swiperCourse{{$tab}}", {
+</div>
+
+@push('scripts')
+
+<script type="application/javascript">
+    var swiperCourseHot{{$tab}} = new Swiper("#swiperCourse{{$tab}}", {
             @if(Auth::check())
             slidesPerColumn: 2,
             slidesPerColumnFill: 'row',
@@ -68,5 +70,6 @@
             observer: true,
             observeParents: true
         });
-    </script>
+</script>
+@endpush
 @endif

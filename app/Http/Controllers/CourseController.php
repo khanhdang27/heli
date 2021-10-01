@@ -14,14 +14,18 @@ use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
 use App\Models\User;
+use App\Models\Exams;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use Illuminate\Support\Carbon;
-
 
 class CourseController extends Controller
 {
@@ -32,7 +36,6 @@ class CourseController extends Controller
      */
     public function index()
     {
-
         $_user = User::find(Auth::user()->id);
         $tutors = Tutor::all();
         $courses = Course::query()
@@ -52,18 +55,14 @@ class CourseController extends Controller
             ->withQueryString();
         return view('admin.course.index', [
             'courses' => $courses,
-            'tutors' => $tutors
+            'tutors' => $tutors,
         ]);
     }
 
     public function my()
     {
-        $courses = CourseMembershipDiscount::with(
-            'membershipCourses',
-            'membershipCourses.course',
-            'membershipCourses.course.tutor',
-            'membershipCourses.course.student'
-        )->where('publish', 1)
+        $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.tutor', 'membershipCourses.course.student')
+            ->where('publish', 1)
             ->whereHas('membershipCourses.course.student', function (Builder $query) {
                 $query->where('student_id', Auth::user()->id);
             })
@@ -85,7 +84,7 @@ class CourseController extends Controller
         $tutors = Tutor::all();
 
         return view('admin.course.create', [
-            'tutors' => $tutors
+            'tutors' => $tutors,
         ]);
     }
 
@@ -100,15 +99,13 @@ class CourseController extends Controller
         $input = $request->validated();
         DB::beginTransaction();
         try {
-            $course = Course::create(
-                $input
-            );
+            $course = Course::create($input);
             $memberships = Membership::all();
             foreach ($memberships as $membership) {
                 $membershipCourse = MembershipCourse::create([
                     'membership_id' => $membership->id,
                     'course_id' => $course->id,
-                    'price_value' => $course->course_price
+                    'price_value' => $course->course_price,
                 ]);
                 CourseMembershipDiscount::create([
                     'membership_course_id' => $membershipCourse->id,
@@ -118,7 +115,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Create Error!');
+            return back()->withErrors('Create Error!');
         }
     }
 
@@ -130,42 +127,59 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses',
-            'courseDiscounts',
-            'membershipCourses.course',
-            'membershipCourses.course.rooms',
-            'membershipCourses.course.lecture',
-            'membershipCourses.course.comment',
-            'membershipCourses.course.subject',
-            'membershipCourses.course.tutor',
-            'membershipCourses.course.ratings',
-            'membershipCourses.course.rooms.studySession',
-            'membershipCourses.course.schedule',
-            'membershipCourses.course.courseMaterial',
-            'membershipCourses.course.examinations'
-        )->where('publish', 1)
-            ->whereHas('membershipCourses', function ($query) {
-                return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
-            })->whereHas('membershipCourses.course', function ($query) use ($course) {
-                return $query->where('id', $course->id);
-            })->first();
+        try {
+            $courses_with_group = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts', 'membershipCourses.course', 'membershipCourses.course.rooms', 'membershipCourses.course.lecture', 'membershipCourses.course.comment', 'membershipCourses.course.subject', 'membershipCourses.course.tutor', 'membershipCourses.course.ratings', 'membershipCourses.course.rooms.studySession', 'membershipCourses.course.schedule', 'membershipCourses.course.courseMaterial', 'membershipCourses.course.examinations')
+                ->where('publish', 1)
+                ->whereHas('membershipCourses', function ($query) {
+                    return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+                })
+                ->whereHas('membershipCourses.course', function ($query) use ($course) {
+                    return $query->where('id', $course->id);
+                })
+                ->first();
 
-        if (empty($courses_with_group)) {
-            return redirect(route('site.home'));
+            if (empty($courses_with_group)) {
+                return redirect(route('site.home'));
+            }
+
+            $student_course = null;
+            if (Auth::check()) {
+                $student_course = StudentCourses::query()
+                    ->where('course_id', $course->id)
+                    ->where('student_id', Auth::user()->id)
+                    ->first();
+            }
+            return view('course.course-page', [
+                'courseDetail' => $courses_with_group,
+                'student_course' => $student_course,
+            ]);
+        } catch (\Throwable $th) {
+            dd($th);
         }
+    }
 
-        $student_course  = null;
-        if (Auth::check()) {
-            $student_course = StudentCourses::query()
-                ->where('course_id', $course->id)
-                ->where('student_id', Auth::user()->id)->first();
+    /**
+     * Display the specified resource.
+     *
+     * @param $id
+     * @return View
+     */
+    public function lectureList(Course $course)
+    {
+        try {
+            $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture', 'membershipCourses.course.exams')
+                ->where('publish', 1)
+                ->whereHas('membershipCourses.course', function ($query) use ($course) {
+                    return $query->where('id', $course->id);
+                })
+                ->first();
+
+            $lecture_course = $courses->membershipCourses->course->lecture->concat($courses->membershipCourses->course->exams);
+
+            return response()->json($lecture_course->sortBy('index'));
+        } catch (\Throwable $th) {
+            dd($th);
         }
-
-        return view('course.course-page', [
-            'courseDetail' => $courses_with_group,
-            'student_course' => $student_course,
-        ]);
     }
 
     /**
@@ -178,23 +192,16 @@ class CourseController extends Controller
     {
         $input = $request->input('course');
 
-        $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses',
-            'courseDiscounts',
-            'membershipCourses.course',
-            'membershipCourses.course.translations',
-            'membershipCourses.course.lecture',
-            'membershipCourses.course.comment',
-            'membershipCourses.course.subject',
-            'membershipCourses.course.tutor',
-            'membershipCourses.course.courseMaterial'
-        )->where('publish', 1)
+        $courses_with_group = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts', 'membershipCourses.course', 'membershipCourses.course.translations', 'membershipCourses.course.lecture', 'membershipCourses.course.comment', 'membershipCourses.course.subject', 'membershipCourses.course.tutor', 'membershipCourses.course.courseMaterial')
+            ->where('publish', 1)
             ->whereHas('membershipCourses', function ($query) {
                 return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
-            })->whereHas('membershipCourses.course', function ($query) use ($input) {
+            })
+            ->whereHas('membershipCourses.course', function ($query) use ($input) {
                 return $query->whereTranslationLike('course_name', '%' . $input . '%');
-            })->latest('created_at')->paginate(15);
-
+            })
+            ->latest('created_at')
+            ->paginate(15);
 
         return view('course.search', [
             'courses' => $courses_with_group,
@@ -226,9 +233,7 @@ class CourseController extends Controller
      */
     public function update(CreateCourseRequest $request, Course $course)
     {
-        $course->update(
-            $request->validated()
-        );
+        $course->update($request->validated());
         return back()->with('success', 'Update success!');
     }
 
@@ -252,20 +257,55 @@ class CourseController extends Controller
         // }
     }
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, ['path' => URL::current()]);
+    }
+
     public function lectures(Course $course)
     {
-        $_course = $course->load('lecture');
-        $lectures = Lecture::query()->where('course_id', $_course->id)->paginate(15);
+        $course->load('lecture', 'exams');
+
+        $data = $this->paginate($course->lecture->concat($course->exams)->sortBy('index'), 15);
+
         return view('admin.course.lecture.index', [
-            'course' => $_course,
-            'lectures' => $lectures
+            'course' => $course,
+            'data' => $data,
         ]);
+    }
+
+    public function lectureIndexing(Request $request, Course $course)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            if ($input['type'] == 'Exams') {
+                $exam = Exams::find($input['id']);
+                $exam->update(['index' => $input['index']]);
+            } else {
+                $lecture = Lecture::find($input['id']);
+                $lecture->update(['index' => $input['index']]);
+            }
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return back()->withErrors('Update Error!');
+        }
     }
 
     public function createLecture(Course $course)
     {
         return view('admin.course.lecture.create', [
-            'course' => $course
+            'course' => $course,
         ]);
     }
 
@@ -279,13 +319,13 @@ class CourseController extends Controller
                 'lectures_name' => $input['lectures_name'],
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
+                'index' => $input['index'],
             ]);
 
             DB::commit();
             return response()->json(['status' => 200, 'message' => 'succeed']);
         } catch (\Throwable $th) {
             DB::rollback();
-            // dd($th);
             return response()->json(['status' => 400, 'message' => 'fails'], 400);
         }
     }
@@ -305,29 +345,34 @@ class CourseController extends Controller
         try {
             $lecture->delete();
             return response([
-                'message' => 'Delete success!'
+                'message' => 'Delete success!',
             ]);
         } catch (\Exception $exception) {
-            return response([
-                'message' => 'Cannot delete course'
-            ], 400);
+            return response(
+                [
+                    'message' => 'Cannot delete course',
+                ],
+                400,
+            );
         }
     }
 
     public function rooms(Course $course)
     {
         $_course = $course->load('rooms');
-        $rooms = RoomLiveCourse::with('studySession')->where('course_id', $_course->id)->paginate(15);
+        $rooms = RoomLiveCourse::with('studySession')
+            ->where('course_id', $_course->id)
+            ->paginate(15);
         return view('admin.course.room.index', [
             'course' => $_course,
-            'rooms' => $rooms
+            'rooms' => $rooms,
         ]);
     }
 
     public function createRoom(Course $course)
     {
         return view('admin.course.room.create', [
-            'course' => $course
+            'course' => $course,
         ]);
     }
 
@@ -335,7 +380,7 @@ class CourseController extends Controller
     {
         return view('admin.course.room.edit', [
             'course' => $course,
-            'room' => $room
+            'room' => $room,
         ]);
     }
 
@@ -345,7 +390,7 @@ class CourseController extends Controller
         return view('admin.course.room.shedulers', [
             'course' => $course,
             'room' => $room,
-            'schedules' => $study_schedules
+            'schedules' => $study_schedules,
         ]);
     }
 
@@ -371,7 +416,9 @@ class CourseController extends Controller
                     'tutor_id' => $course->tutor_id,
                     'is_test' => false,
                     'room_live_course_id' => $room->id,
-                    'date' => Carbon::create($input['start_date'])->addWeek($i)->format('Y-m-d')
+                    'date' => Carbon::create($input['start_date'])
+                        ->addWeek($i)
+                        ->format('Y-m-d'),
                 ]);
             }
 
@@ -379,7 +426,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors( 'Create error!');
+            return back()->withErrors('Create error!');
         }
     }
 
@@ -399,7 +446,7 @@ class CourseController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             dd($th);
-            return back()->withErrors( 'Create error!');
+            return back()->withErrors('Create error!');
         }
     }
 
@@ -408,12 +455,15 @@ class CourseController extends Controller
         try {
             $room->delete();
             return response([
-                'message' => 'Delete success!'
+                'message' => 'Delete success!',
             ]);
         } catch (\Exception $exception) {
-            return response([
-                'message' => 'Cannot delete course'
-            ], 400);
+            return response(
+                [
+                    'message' => 'Cannot delete course',
+                ],
+                400,
+            );
         }
     }
 }

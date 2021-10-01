@@ -38,12 +38,11 @@ use App\Utilities\SelectionByClass;
                 </div>
             </div>
             <div class="px-4 pb-4 d-block d-md-none">
-                <form class="form-inline my-lg-0"
-                      action="{{ route('site.course.search') }}">
+                <form class="form-inline my-lg-0" action="{{ route('site.course.search') }}">
                     <div class="search w-100 d-flex px-3 py-1">
                         <span class=""><img src="{{asset("images/ic/ic_search.svg")}}" width="26"></span>
                         <input name="course" class="ip-search w-100" type="text"
-                               placeholder="@lang('keywords.footer.searchForCourses')">
+                            placeholder="@lang('keywords.footer.searchForCourses')">
                     </div>
                 </form>
             </div>
@@ -200,7 +199,7 @@ use App\Utilities\SelectionByClass;
 
 </div>
 @push('showNavbar')
-<script>
+<script type="application/javascript">
     $(document).ready(function () {
             $('#openNavbar').click(function () {
                 document.getElementById('overlay').style.display = 'inline-block';

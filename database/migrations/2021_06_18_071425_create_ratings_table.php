@@ -15,12 +15,13 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
+            $table
+                ->foreignId('user_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
             $table->integer('rating')->default(0);
             $table->integer('ratingable_id'); // morphic Models
-            $table->integer('ratingable_type'); // comment, post, course
+            $table->string('ratingable_type'); // comment, post, course
             $table->timestamps();
             $table->softDeletes();
         });

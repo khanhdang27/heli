@@ -71,8 +71,8 @@ use App\Utilities\SelectionByClass;
     </div>
 </div>
 
-
-<script>
+@push('scripts')
+<script type="application/javascript">
     var rad = document.sort_course.sortable;
     var prev = null;
     for (var i = 0; i < rad.length; i++) {
@@ -84,4 +84,5 @@ use App\Utilities\SelectionByClass;
         });
     }
 </script>
+@endpush
 @endsection

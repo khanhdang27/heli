@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <script>
+                    <script type="application/javascript">
                         // Add the following code if you want the name of the file appear on select
                             $(document).ready(function () {
                                 $(".custom-file-input").on("change", function () {

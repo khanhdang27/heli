@@ -78,8 +78,8 @@ use App\Utilities\SelectionByClass;
         </div>
     </div>
 </div>
-
-<script>
+@push('scripts')
+<script type="application/javascript">
     Vue.filter('formatDate', function (value) {
             if (value) {
                 return moment(String(value)).format('MM/DD/YYYY hh:mm')
@@ -131,4 +131,5 @@ use App\Utilities\SelectionByClass;
             }
         })
 </script>
+@endpush
 @endsection

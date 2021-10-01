@@ -24,13 +24,17 @@
             '>
                 @lang('keywords.blog-page.readMore')
             </button>
-            <script>
-                $(document).ready(function(){
-                    $('[data-toggle="popover"]').popover({
-                        trigger: 'focus'
-                    });
-                });
-            </script>
+
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script type="application/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({
+            trigger: 'focus'
+        });
+    });
+</script>
+@endpush

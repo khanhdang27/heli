@@ -193,9 +193,11 @@ $course = $courses_with_group->membershipCourses->course;
         </div>
     </div>
 </div>
+
+@push('scripts')
 <script src="https://js.stripe.com/v3/"></script>
 
-<script>
+<script type="application/javascript">
     const stripe = Stripe("{{ config('app.stripe_key') }}");
 
         const elements = stripe.elements();
@@ -206,7 +208,7 @@ $course = $courses_with_group->membershipCourses->course;
         cardElement.mount('#card-element');
 </script>
 
-<script>
+<script type="application/javascript">
     const cardHolderName = document.getElementById('card-holder-name');
         const cardButton = document.getElementById('card-button');
         const clientSecret = cardButton.dataset.secret;
@@ -240,6 +242,5 @@ $course = $courses_with_group->membershipCourses->course;
         });
 
 </script>
-
-
+@endpush
 @endsection

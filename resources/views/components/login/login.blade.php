@@ -93,7 +93,7 @@
     </div>
 </div>
 @push('scriptsLogin')
-<script>
+<script type="application/javascript">
     $(function () {
             var spinner = $("#spinner-load");
             var spinner_fb = $("#spinner-load-fb");

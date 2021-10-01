@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <div class="pr-2">
-                            <a href="{{ route('admin.price-tag.index') }}" class="btn btn-outline-dark btn-sm" >
+                            <a href="{{ route('admin.price-tag.index') }}" class="btn btn-outline-dark btn-sm">
                                 <i class="fe fe-arrow-left"></i>
                             </a>
                         </div>
@@ -98,7 +98,7 @@
         </div>
     </div> <!-- / .row -->
 </div>
-<script>
+<script type="application/javascript">
     var newPriceTag = new Vue({
         el: "#priceTag",
         data: {

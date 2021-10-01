@@ -8,66 +8,70 @@ use App\Models\Subject;
 
 @extends('admin.layout')
 @section('content')
-<script src="{{asset("js/admin/vimeo-upload.js")}}"></script>
-<!-- CARDS -->
-<div class="container-fluid mt-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 col-xl-8">
-            <!-- Goals -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex align-items-center">
-                        <div class="pr-2">
-                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.course.lecture.list', $course->id)}}">
-                                <i class="fe fe-arrow-left"></i>
-                            </a>
-                        </div>
-                        <div>
-                            <!-- Title -->
-                            <h4 class="card-header-title">
-                                Create Lectures
-                            </h4>
-                        </div>
-                    </div> <!-- / .row -->
-                </div>
-                <div class="card-body">
-                    {!! Form::open(['url' => route('admin.course.lecture.store', $course->id),
-                    'enctype'=>'multipart/form-data']) !!}
-                    @csrf
-                    <div class="form-group ">
-                        {{ Form::label('lectures_name', 'Name') }}
-                        {{ Form::text('lectures_name',old('lectures_name'),['class' => 'form-control', 'required', 'id'=> 'lectures_name']) }}
+    <script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
+    <!-- CARDS -->
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <!-- Goals -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <div class="pr-2">
+                                <a class="btn btn-outline-dark btn-sm"
+                                    href="{{ route('admin.course.lecture.list', $course->id) }}">
+                                    <i class="fe fe-arrow-left"></i>
+                                </a>
+                            </div>
+                            <div>
+                                <!-- Title -->
+                                <h4 class="card-header-title">
+                                    Create Lectures
+                                </h4>
+                            </div>
+                        </div> <!-- / .row -->
                     </div>
-                    <div class="form-group ">
-                        {{ Form::label('lectures_description', 'Description') }}
-                        {{ Form::text('lectures_description',old('lectures_description'),['class' => 'form-control', 'required', 'id'=> 'lectures_description']) }}
-                    </div>
-                    <div class="form-group ">
-                        Pick up video
-                        <label class="btn btn-block btn-info">
-                            Browse&hellip; <input id="browse" type="file" style="display: none;">
-                        </label>
-                        <div class="col-md-12">
-                            <div id="results"></div>
+                    <div class="card-body">
+                        {!! Form::open(['url' => route('admin.course.lecture.store', $course->id), 'enctype' => 'multipart/form-data']) !!}
+                        @csrf
+                        <div class="form-group ">
+                            {{ Form::label('lectures_name', 'Name') }}
+                            {{ Form::text('lectures_name', old('lectures_name'), ['class' => 'form-control', 'required', 'id' => 'lectures_name']) }}
                         </div>
-                        <div id="progress-container" class="progress">
-                            <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
-                                role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100"
-                                style="width: 0%">&nbsp;0%
+                        <div class="form-group ">
+                            {{ Form::label('lectures_description', 'Description') }}
+                            {{ Form::text('lectures_description', old('lectures_description'), ['class' => 'form-control', 'required', 'id' => 'lectures_description']) }}
+                        </div>
+                        <div class="form-group ">
+                            {{ Form::label('index', 'Index') }}
+                            {{ Form::number('index', old('index'), ['class' => 'form-control', 'required', 'id' => 'index']) }}
+                        </div>
+                        <div class="form-group ">
+                            Pick up video
+                            <label class="btn btn-block btn-info">
+                                Browse&hellip; <input id="browse" type="file" style="display: none;">
+                            </label>
+                            <div class="col-md-12">
+                                <div id="results"></div>
+                            </div>
+                            <div id="progress-container" class="progress">
+                                <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
+                                    role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 0%">&nbsp;0%
+                                </div>
                             </div>
                         </div>
+                        {!! Form::close() !!}
                     </div>
-                    {!! Form::close() !!}
                 </div>
+
             </div>
-
-        </div>
-    </div> <!-- / .row -->
-</div>
+        </div> <!-- / .row -->
+    </div>
 
 
-<script type="text/javascript">
-    /**
+    <script type="text/javascript">
+        /**
          * Called when files are dropped on to the drop target or selected by the browse button.
          * For each file, uploads the content to Drive & displays the results when complete.
          */
@@ -92,7 +96,8 @@ use App\Models\Subject;
                 document.getElementById('progress-container').style.display = 'block'
 
                 /* Instantiate Vimeo Uploader */
-                ;(new VimeoUpload({
+                ;
+                (new VimeoUpload({
                     name: document.getElementById('lectures_name').value,
                     description: document.getElementById('lectures_description').value,
                     private: true,
@@ -115,19 +120,22 @@ use App\Models\Subject;
 
                             /* add stringify the json object for displaying in a text area */
                             var pretty = JSON.stringify(this.metadata[index], null, 2)
-
-                            axios.post("{{ route('admin.course.lecture.store', $course->id)}}", {
+                            console.log('document.getElementById(index).value :>> ', document.getElementById(
+                                'index').value);
+                            axios.post("{{ route('admin.course.lecture.store', $course->id) }}", {
                                     lectures_name: this.metadata[index].name,
                                     lectures_description: this.metadata[index].description,
+                                    index: document.getElementById('index').value,
                                     video_resource: videoId,
-                                }).then(function (response) {
+                                }).then(function(response) {
                                     console.info(response);
                                 })
-                                .catch(function (error) {
+                                .catch(function(error) {
                                     console.error(error);
                                 });
                         }
-                        showMessage('<strong>Upload Successful</strong>: check uploaded video @ <a href="' + url + '">' + url + '</a>. Open the Console for the response details.')
+                        showMessage('<strong>Upload Successful</strong>: check uploaded video @ <a href="' +
+                            url + '">' + url + '</a>. Open the Console for the response details.')
                     }
                 })).upload()
             }
@@ -169,7 +177,6 @@ use App\Models\Subject;
             var browse = document.getElementById('browse')
             browse.addEventListener('change', handleFileSelect, false)
         })
-
-</script>
+    </script>
 
 @endsection

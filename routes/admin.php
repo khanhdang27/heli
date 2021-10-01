@@ -3,11 +3,9 @@
 use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('login', [LoginController::class, 'login'])
-    ->name('login');
-Route::post('login', [LoginController::class, 'actionLogin'])->middleware("throttle:15,10");
-Route::get('logout', [LoginController::class, 'logout'])
-    ->name('logout');
+Route::get('login', [LoginController::class, 'login'])->name('login');
+Route::post('login', [LoginController::class, 'actionLogin'])->middleware('throttle:15,10');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('password/reset', 'Admin\ForgotPasswordController@showLinkRequestForm')->name('backpack.auth.password.reset');
 Route::post('password/reset', 'Admin\ResetPasswordController@reset');
@@ -15,8 +13,7 @@ Route::get('password/reset/{token}', 'Admin\ResetPasswordController@showResetFor
 Route::post('password/email', 'Admin\ForgotPasswordController@sendResetLinkEmail')->name('backpack.auth.password.email');
 
 Route::middleware('auth.admin')->group(function () {
-    Route::get('/', [LoginController::class, 'dashboard'])
-        ->name('dashboard');
+    Route::get('/', [LoginController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('certificate', 'CertificateController');
 
@@ -32,12 +29,28 @@ Route::middleware('auth.admin')->group(function () {
     Route::delete('course/{course}/rooms/{room}', 'CourseController@destroyRoom')->name('course.room.destroy');
 
     Route::get('course/{course}/rooms/{room}/schedule', 'CourseController@listScheduleByRoom')->name('course.room.scheduler');
+
     Route::get('course/{course}/lecture', 'CourseController@lectures')->name('course.lecture.list');
+    Route::post('course/{course}/lecture/indexing', 'CourseController@lectureIndexing')->name('course.lecture.indexing');
     Route::get('course/{course}/lecture/create', 'CourseController@createLecture')->name('course.lecture.create');
     Route::post('course/{course}/lecture', 'CourseController@storeLecture')->name('course.lecture.store');
     Route::get('course/{course}/lecture/{lecture}', 'CourseController@editLecture')->name('course.lecture.edit');
     Route::put('course/{course}/lecture/{lecture}', 'CourseController@updateLecture')->name('course.lecture.update');
     Route::delete('course/{course}/lecture/{lecture}', 'CourseController@destroyLecture')->name('course.lecture.destroy');
+
+    Route::get('course/{course}/exam/create', 'ExamsController@create')->name('course.exam.create');
+    Route::post('course/{course}/exam', 'ExamsController@store')->name('course.exam.store');
+    Route::get('course/{course}/exam/{exam}', 'ExamsController@edit')->name('course.exam.edit');
+    Route::put('course/{course}/exam/{exam}', 'ExamsController@update')->name('course.exam.update');
+    Route::delete('course/{course}/exam/{exam}', 'ExamsController@destroy')->name('course.exam.destroy');
+
+    Route::get('course/{course}/exam/{exam}/quiz', 'QuizController@index')->name('course.quiz.list');
+    Route::get('course/{course}/exam/{exam}/quiz/create', 'QuizController@create')->name('course.quiz.create');
+    Route::post('course/{course}/exam/{exam}/quiz', 'QuizController@store')->name('course.quiz.store');
+    Route::get('course/{course}/exam/{exam}/quiz/{quiz}', 'QuizController@edit')->name('course.quiz.edit');
+    Route::put('course/{course}/exam/{exam}/quiz/{quiz}', 'QuizController@update')->name('course.quiz.update');
+    Route::delete('course/{course}/quiz/{quiz}', 'QuizController@destroy')->name('course.quiz.destroy');
+
     Route::resource('course', 'CourseController');
 
     Route::resource('course-material', 'CourseMaterialController');
@@ -95,5 +108,4 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('examination', 'ExaminationController');
     Route::get('manage-examination/index/{id}', 'ExaminationController@manageExamination')->name('manage-examination');
     Route::get('manage-examination/create/{id}', 'ExaminationController@addExamination')->name('manage-examination.create');
-
 });

@@ -20,7 +20,8 @@ use Spatie\Newsletter\NewsletterFacade;
 </div>
 @endif
 
-<script>
+@push('scripts')
+<script type="application/javascript">
     var subscribe = new Vue({
         el: '#subscribe_newsletter',
         data: {
@@ -43,3 +44,4 @@ use Spatie\Newsletter\NewsletterFacade;
         }
     })
 </script>
+@endpush

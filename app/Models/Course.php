@@ -6,7 +6,7 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model implements TranslatableContract
 {
@@ -14,7 +14,6 @@ class Course extends Model implements TranslatableContract
     const RECORD = 2;
     const DOCUMENT = 3;
     use Translatable, SoftDeletes;
-
 
     const COURSE_TYPE = [
         self::LIVE => 'Live Course',
@@ -55,6 +54,16 @@ class Course extends Model implements TranslatableContract
         return $this->morphMany(UserLike::class, 'likeable');
     }
 
+    public function likebyUser()
+    {
+        $isLike = $this->likeable
+            ->filter(function ($item) {
+                return $item->user_id == Auth::user()->id;
+            })
+            ->first();
+        return empty($isLike) ? 0 : $isLike->like_style;
+    }
+
     public function comment()
     {
         return $this->morphMany(UserComment::class, 'commentable');
@@ -67,7 +76,17 @@ class Course extends Model implements TranslatableContract
 
     public function ratings()
     {
-        return $this->hasMany(Rating::class, 'ratingable_id');
+        return $this->morphMany(Rating::class, 'ratingable');
+    }
+
+    public function ratingsByUser()
+    {
+        $rate = $this->ratings
+            ->filter(function ($item) {
+                return $item->user_id == Auth::user()->id;
+            })
+            ->first();
+        return empty($rate) ? 0 : $rate->rating;
     }
 
     public function rooms()
@@ -83,5 +102,10 @@ class Course extends Model implements TranslatableContract
     public function examinations()
     {
         return $this->hasMany(Examination::class, 'course_id');
+    }
+
+    public function exams()
+    {
+        return $this->hasMany(Exams::class);
     }
 }

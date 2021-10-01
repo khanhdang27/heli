@@ -64,8 +64,8 @@ use App\Utilities\SelectionByClass;
         </div>
     </div>
 </div>
-
-<script>
+@push('scripts')
+<script type="application/javascript">
     function postDelete(url) {
     var choose = confirm('Do you want delete item?');
 
@@ -81,3 +81,4 @@ use App\Utilities\SelectionByClass;
 }
 
 </script>
+@endpush

@@ -10,7 +10,7 @@ class Student extends Model
     use SoftDeletes;
     protected $table = 'students';
 
-    public $timestamps = TRUE;
+    public $timestamps = true;
 
     protected $guarded = [];
 
@@ -18,5 +18,4 @@ class Student extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 }

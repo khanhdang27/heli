@@ -9,7 +9,7 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <div class="pr-2">
-                                <a href="{{ route('admin.forum.index') }}" class="btn btn-outline-dark btn-sm" >
+                                <a href="{{ route('admin.forum.index') }}" class="btn btn-outline-dark btn-sm">
                                     <i class="fe fe-arrow-left"></i>
                                 </a>
                             </div>
@@ -68,10 +68,10 @@
     </div>
 @endsection
 @push('js')
-    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+
     <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>
 
-    <script>
+    <script type="application/javascript">
         function itemRestore(url) {
 
             var choose = confirm('Do you want restore item?');

@@ -1,6 +1,6 @@
 <div class="banner-content">
     <div class="banner-background"
-         style="background-image: url('{{ empty($banner->image) ? asset('images/banner.jpg') : asset('/file/'.$banner->image->id)}}')">
+        style="background-image: url('{{ empty($banner->image) ? asset('images/banner.jpg') : asset('/file/'.$banner->image->id)}}')">
     </div>
     <div class="bg-opacity"></div>
     <div class="banner-info" id="bannerInfo">
@@ -10,14 +10,15 @@
             </div>
         </div>
         <div class="btn-register-free text-center">
-            <button class="btn-register-now mt-5 free btn-primary " data-toggle="modal"
-                    data-target="#registerModal">
+            <button class="btn-register-now mt-5 free btn-primary " data-toggle="modal" data-target="#registerModal">
                 @lang('keywords.registerNowFree')
             </button>
         </div>
     </div>
 </div>
-<script>
+
+@push('scripts')
+<script type="application/javascript">
     const elementBanner = document.getElementById('bannerInfo');
     var animateBanner = anime({
         targets: elementBanner,
@@ -28,3 +29,4 @@
         delay: 1500
     })
 </script>
+@endpush
