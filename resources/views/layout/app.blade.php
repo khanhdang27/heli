@@ -11,13 +11,13 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     <script src="{{ asset('js/popper.min.js') }}"></script>
-    <link href="{{ asset('css/app.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/style-logged.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/style-calendar.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/toastr.css')}}" rel="stylesheet">
-    <link href="{{ asset('js/lib/main.css')}}" rel="stylesheet">
-    <link href="{{asset('cpanel/assets/fonts/feather/feather.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('js/swiper/swiper-bundle.min.css')}}" />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style-logged.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style-calendar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
+    <link href="{{ asset('js/lib/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('cpanel/assets/fonts/feather/feather.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('js/swiper/swiper-bundle.min.css') }}" />
 
     <script src="{{ asset('js/sharethis.js') }}"></script>
     <script src="{{ asset('js/anime.min.js') }}"></script>
@@ -25,7 +25,7 @@
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <script src="{{asset('js/swiper/swiper-bundle.min.js')}}"></script>
+    <script src="{{ asset('js/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 </head>
 
@@ -33,7 +33,6 @@
     @include('layout.header')
 
     <div id="app">
-        {{-- <example-component></example-component> --}}
         @yield('content')
     </div>
     @routes
@@ -44,7 +43,7 @@
     <script src="{{ asset('js/lib/main.js') }}"></script>
     <script src="{{ asset('js/home/app.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
-    <script src="{{asset('js/vue@2.6.14')}}"></script>
+    <script src="{{ asset('js/vue@2.6.14') }}"></script>
     @stack('scripts')
     @stack('scriptsLogin')
     @stack('inputFile')
@@ -80,7 +79,7 @@
                 "phoneNumber": "85292296725"
             }
         };
-        s.onload = function () {
+        s.onload = function() {
             CreateWhatsappChatWidget(options);
         };
         var x = document.getElementsByTagName('script')[0];

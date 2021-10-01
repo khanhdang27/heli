@@ -10,10 +10,7 @@ import vueVimeoPlayer from 'vue-vimeo-player'
 require('./bootstrap');
 require('./vimeo-upload');
 
-
 window.Vue = require('vue');
-import Vue from "vue";
-
 Vue.use(vueVimeoPlayer)
 
 /**
