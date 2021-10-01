@@ -86,7 +86,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');
 
-<<<<<<< HEAD
     Route::prefix('my/')->name('user.')->group(function () {
         Route::get('course', 'CourseController@my')->name('course');
         Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
@@ -104,14 +103,4 @@ Route::middleware('auth')->group(function () {
     Route::get('confirm-payment', 'WalletController@confirmPayment')->name('confirm');
     Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');
     Route::post('store-card', 'WalletController@storeCard')->name('store-card');
-=======
-    Route::prefix('my/')
-        ->name('user.')
-        ->group(function () {
-            Route::get('course', 'CourseController@my')->name('course');
-            Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
-            Route::get('calendar', 'ScheduleController@index')->name('calendar');
-            Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
-        });
->>>>>>> trung/clean_code_21_09
 });
