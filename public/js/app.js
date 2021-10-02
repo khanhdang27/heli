@@ -4394,6 +4394,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -4403,26 +4407,34 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     vueVimeoPlayer: vue_vimeo_player__WEBPACK_IMPORTED_MODULE_0__.vueVimeoPlayer
   },
-  mounted: function mounted() {
-    this.syncDataLecture();
-  },
-  methods: {
-    syncDataLecture: function syncDataLecture() {
-      axios.get(route("site.course.lectureList", 2)).then(function (response) {
-        // handle success
-        console.log(response);
-      })["catch"](function (error) {
-        // handle error
-        console.log(error);
-      });
-    }
-  },
   data: function data() {
     return {
       lectureList: [],
       videoId: "588754544",
       videoUrl: "https://player.vimeo.com/video/" + 588754544 + "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" + "58479"
     };
+  },
+  mounted: function mounted() {
+    this.syncDataLecture();
+  },
+  methods: {
+    syncDataLecture: function syncDataLecture() {
+      var _this = this;
+
+      axios.get(route("site.course.lectureList", 2)).then(function (response) {
+        for (var item in response.data) {
+          _this.lectureList.push(response.data[item]);
+        }
+
+        _this.lectureList.sort(function (a, b) {
+          return a.index - b.index;
+        });
+
+        console.log("this.lectureList :>> ", _this.lectureList);
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    }
   }
 });
 
@@ -41185,7 +41197,22 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "box-list-video text-primary pt-3" })
+        _c(
+          "div",
+          { staticClass: "box-list-video text-primary pt-3" },
+          _vm._l(_vm.lectureList, function(item) {
+            return _c("div", { key: item.index }, [
+              _vm._v(
+                "\n        " +
+                  _vm._s(item.index) +
+                  " - " +
+                  _vm._s(item.lectures_name) +
+                  "\n      "
+              )
+            ])
+          }),
+          0
+        )
       ])
     ]
   )

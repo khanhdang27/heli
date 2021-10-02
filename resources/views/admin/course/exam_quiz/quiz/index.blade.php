@@ -7,12 +7,16 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <div>
-                                <!-- Title -->
-                                <h4 class="card-header-title">
-                                    Quizzes
-                                </h4>
+                            <div class="pr-2">
+                                <a class="btn btn-outline-dark btn-sm"
+                                    href="{{ route('admin.course.lecture.list', ['course' => $course]) }}">
+                                    <i class="fe fe-arrow-left"></i>
+                                </a>
                             </div>
+                            <!-- Title -->
+                            <h4 class="card-header-title">
+                                Quizzes
+                            </h4>
                             <div class="ml-auto col-auto">
                                 @can('document-create')
                                     <!-- Button -->
@@ -60,13 +64,17 @@
                                                         <i class="fe fe-more-vertical"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        @can('document-edit')
+                                                        @can('course-edit')
                                                             <a href="{{ route('admin.course.quiz.edit', ['course' => $course->id, 'exam' => $exam, 'quiz' => $value]) }}"
                                                                 class="dropdown-item">
                                                                 Edit
                                                             </a>
+                                                            <a href="{{ route('admin.course.question.list', ['course' => $course->id, 'exam' => $exam, 'quiz' => $value]) }}"
+                                                                class="dropdown-item">
+                                                                Questions
+                                                            </a>
                                                         @endcan
-                                                        @can('document-delete')
+                                                        @can('course-delete')
                                                             <a href="javascript:void(0)"
                                                                 onclick="itemDelete('{{ route('admin.course.quiz.destroy', ['course' => $course->id, 'quiz' => $value->id]) }}')"
                                                                 class="dropdown-item delete-item">

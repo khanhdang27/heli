@@ -23,7 +23,6 @@
     <script src="{{ asset('js/anime.min.js') }}"></script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script src="{{ asset('js/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
@@ -35,8 +34,6 @@
     <div id="app">
         @yield('content')
     </div>
-    @routes
-    <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -85,6 +82,8 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     </script>
+    @routes
+    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 

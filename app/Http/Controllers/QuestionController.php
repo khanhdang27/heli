@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
+use App\Models\Exams;
 use App\Models\Question;
+use App\Models\Answer;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -12,9 +17,16 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Course $course, Exams $exam, Quiz $quiz)
     {
-        //
+        $questions = Question::where(['quiz_id' => $quiz->id])->paginate(15);
+        // resources\views\admin\course\exam_quiz\question_answer
+        return view('admin.course.exam_quiz.question_answer.index', [
+            'course' => $course,
+            'exam' => $exam,
+            'quiz' => $quiz,
+            'questions' => $questions,
+        ]);
     }
 
     /**
@@ -22,9 +34,13 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Course $course, Exams $exam, Quiz $quiz)
     {
-        //
+        return view('admin.course.exam_quiz.question_answer.create', [
+            'course' => $course,
+            'exam' => $exam,
+            'quiz' => $quiz,
+        ]);
     }
 
     /**
@@ -33,9 +49,24 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Course $course, Exams $exam, Quiz $quiz)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $question = Question::create([
+                'quiz_id' => $quiz->id,
+                'question' => $input['question'],
+                'message_wrong' => $input['message_wrong'],
+                'lecture_index' => $input['lecture_index'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('Create error!');
+        }
     }
 
     /**
@@ -44,9 +75,16 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
+    public function show(Course $course, Exams $exam, Quiz $quiz, Question $question)
     {
-        //
+        $answers = Answer::where(['question_id' => $question->id])->get();
+        return view('admin.course.exam_quiz.question_answer.answer', [
+            'course' => $course,
+            'exam' => $exam,
+            'quiz' => $quiz,
+            'question' => $question,
+            'answers' => $answers,
+        ]);
     }
 
     /**
