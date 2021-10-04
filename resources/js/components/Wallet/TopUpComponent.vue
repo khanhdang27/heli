@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!--                multilang -->
         <h2 class="font-weight-bold mb-4">{{ lang.topUpValue }}</h2>
         <div class="d-flex flex-wrap mb-5 room-selection">
             <div v-for="value in values">
@@ -10,19 +9,15 @@
             </div>
         </div>
         <div class="border-2 border-primary rounded py-2 px-5 mb-5">
-            <p>{{ lang.amount }} (Balance 10$)</p>
+            <p>{{ lang.amount }}</p>
             <input type="number" name="value"
                    class="w-100 h1 border-0 text-primary input-login-item"
-                   v-model="choose">
+                   v-model.number="choose" autocomplete="off" min="10">
         </div>
-
-        <!--                multilang -->
-        <!--    lang.blabla       -->
         <h2 class="font-weight-bold mb-4">{{ lang.exchangeValue }}</h2>
         <div class="border-2 border-primary rounded py-2 px-5 mb-3 d-flex justify-content-between
                                 align-items-center">
             <div>
-                <!--                                multilang -->
                 <p>{{ lang.amountToExchange }}</p>
                 <h2 class="font-weight-bold">{{ choose }}HK$</h2>
             </div>
@@ -36,12 +31,10 @@
         <div class="border-2 border-primary rounded py-2 px-5 mb-5 d-flex justify-content-between
                                 align-items-center">
             <div>
-                <!--                multilang -->
                 <p>{{ lang.tokensReceived }}</p>
                 <h2 class="font-weight-bold">{{ choose * transfer }}</h2>
             </div>
             <div>
-                <!--                multilang -->
                 <button class="border border-primary btn btn-light btn-topUp-value font-weight-bold
                                             py-3 h5 mb-0 text-primary">
                     TOKEN
@@ -62,7 +55,7 @@ export default {
             values: [
                 10, 50, 100, 200, 500, 1000
             ],
-            'choose': 0, // number nhe
+            'choose': 0,
         }
     },
     watch: {

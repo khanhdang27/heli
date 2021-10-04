@@ -30,13 +30,13 @@
                                     </h4>
                                     <h4>Date Due:<span class="font-weight-bold ml-3">17-09-21</span></h4>
                                 </div>
-                                <h4>Top-up ID:<span class="font-weight-bold ml-3">#0000124</span></h4>
+                                <h4>Top-up ID:<span class="font-weight-bold ml-3">{{$transaction->uuid}}</span></h4>
                             </div>
                             <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap">
                                 <div class="d-flex my-5">
                                     <h3 class="font-weight-bold mr-5">From:</h3>
                                     <div>
-                                        <h3>Kenny Or</h3>
+                                        <h3>{{Auth::user()->name}}</h3>
                                         <h3>Visa Card: **** **** **** 8097</h3>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                     <h3 class="font-weight-bold mr-5">To:</h3>
                                     <div>
                                         <h3>Wallet</h3>
-                                        <h3>Wallet ID: 5csdpare38576xvfbhyl</h3>
+                                        <h3>Wallet ID: {{$wallet->wallet_str_id}}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -61,10 +61,12 @@
                                     </thead>
                                     <tbody class="text-center">
                                     <tr>
-                                        <td class="h3 py-5">1000HK$</td>
-                                        <td class="h3 py-5">100 tokens</td>
-                                        <td class="h3 py-5">**** **** **** 8097</td>
-                                        <td class="h3 py-5">16-09-21, 15:00</td>
+                                        <td class="h3 py-5">{{$transaction->amount*10}}HK$</td>
+                                        <td class="h3 py-5">{{$transaction->amount}} tokens</td>
+                                        <td class="h3 py-5">
+                                            **** **** **** {{!empty($transaction->meta['card']) ? $transaction->meta['card'] : ''}}
+                                        </td>
+                                        <td class="h3 py-5">{{$transaction->created_at}}</td>
                                         <td class="h3 py-5">Successful</td>
                                     </tr>
                                     </tbody>
