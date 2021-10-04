@@ -1,6 +1,5 @@
 @extends('admin.layout')
 @section('content')
-    <script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
     <!-- CARDS -->
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">

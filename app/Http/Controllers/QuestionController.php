@@ -93,9 +93,14 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
+    public function edit(Course $course, Exams $exam, Quiz $quiz, Question $question)
     {
-        //
+        return view('admin.course.exam_quiz.question_answer.edit', [
+            'course' => $course,
+            'exam' => $exam,
+            'quiz' => $quiz,
+            'question' => $question,
+        ]);
     }
 
     /**
@@ -105,9 +110,23 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Course $course, Exams $exam, Quiz $quiz, Question $question)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $question->update([
+                'question' => $input['question'],
+                'message_wrong' => $input['message_wrong'],
+                'lecture_index' => $input['lecture_index'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('Update error!');
+        }
     }
 
     /**
@@ -116,8 +135,20 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy(Course $course, Exams $exam, Quiz $quiz, Question $question)
     {
-        //
+        try {
+            $question->delete();
+            return response([
+                'message' => 'Delete success!',
+            ]);
+        } catch (\Exception $exception) {
+            return response(
+                [
+                    'message' => 'Cannot delete course',
+                ],
+                400,
+            );
+        }
     }
 }

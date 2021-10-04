@@ -29,7 +29,7 @@ use App\Models\Exams;
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => route('admin.course.exam.update', ['course' => $course->id, 'exam' => $exam]), 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open(['url' => route('admin.course.exam.update', ['course' => $course->id, 'exam' => $exam]), 'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group ">
                             {{ Form::label('name', 'Name', ['class' => 'required']) }}
@@ -41,7 +41,7 @@ use App\Models\Exams;
                         </div>
                         <div class="form-group ">
                             {{ Form::label('type', 'Type', ['class' => 'required']) }}
-                            {{ Form::select('size', Exams::TYPES, $exam->type, ['placeholder' => 'Pick a type...', 'class' => 'form-control', 'required', 'id' => 'type']) }}
+                            {{ Form::select('type', Exams::TYPES, $exam->type, ['placeholder' => 'Pick a type...', 'class' => 'form-control', 'required', 'id' => 'type']) }}
                         </div>
 
                         {{ Form::submit('Save', ['class' => 'btn btn-primary mt-5']) }}

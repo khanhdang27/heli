@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
+use App\Models\Exams;
 use App\Models\PassGrade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PassGradeController extends Controller
 {
@@ -12,9 +15,14 @@ class PassGradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Course $course, Exams $exam)
     {
-        //
+        $grades = PassGrade::where(['exam_id' => $exam->id])->paginate(15);
+        return view('admin.course.grade.index', [
+            'course' => $course,
+            'exam' => $exam,
+            'grades' => $grades,
+        ]);
     }
 
     /**
@@ -22,9 +30,12 @@ class PassGradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Course $course, Exams $exam)
     {
-        //
+        return view('admin.course.grade.create', [
+            'course' => $course,
+            'exam' => $exam,
+        ]);
     }
 
     /**
@@ -33,9 +44,23 @@ class PassGradeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Course $course, Exams $exam)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $grade = PassGrade::create([
+                'exam_id' => $exam->id,
+                'score' => $input['score'],
+                'lecture_index' => $input['index'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('Create error!');
+        }
     }
 
     /**
@@ -55,9 +80,13 @@ class PassGradeController extends Controller
      * @param  \App\Models\PassGrade  $passGrade
      * @return \Illuminate\Http\Response
      */
-    public function edit(PassGrade $passGrade)
+    public function edit(Course $course, Exams $exam, PassGrade $grade)
     {
-        //
+        return view('admin.course.grade.edit', [
+            'course' => $course,
+            'exam' => $exam,
+            'grade' => $grade,
+        ]);
     }
 
     /**
@@ -67,9 +96,22 @@ class PassGradeController extends Controller
      * @param  \App\Models\PassGrade  $passGrade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PassGrade $passGrade)
+    public function update(Request $request, Course $course, Exams $exam, PassGrade $grade)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $grade->update([
+                'score' => $input['score'],
+                'lecture_index' => $input['index'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('Update error!');
+        }
     }
 
     /**
@@ -78,8 +120,20 @@ class PassGradeController extends Controller
      * @param  \App\Models\PassGrade  $passGrade
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PassGrade $passGrade)
+    public function destroy(PassGrade $grade)
     {
-        //
+        try {
+            $grade->delete();
+            return response([
+                'message' => 'Delete success!',
+            ]);
+        } catch (\Exception $exception) {
+            return response(
+                [
+                    'message' => 'Cannot delete course',
+                ],
+                400,
+            );
+        }
     }
 }

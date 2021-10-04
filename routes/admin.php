@@ -44,6 +44,13 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('course/{course}/exam/{exam}', 'ExamsController@update')->name('course.exam.update');
     Route::delete('course/{course}/exam/{exam}', 'ExamsController@destroy')->name('course.exam.destroy');
 
+    Route::get('course/{course}/exam/{exam}/grade', 'PassGradeController@index')->name('course.grade.list');
+    Route::get('course/{course}/exam/{exam}/grade/create', 'PassGradeController@create')->name('course.grade.create');
+    Route::post('course/{course}/exam/{exam}/grade', 'PassGradeController@store')->name('course.grade.store');
+    Route::get('course/{course}/exam/{exam}/grade/{grade}', 'PassGradeController@edit')->name('course.grade.edit');
+    Route::put('course/{course}/exam/{exam}/grade/{grade}', 'PassGradeController@update')->name('course.grade.update');
+    Route::delete('course/{course}/exam/{exam}/grade/{grade}', 'PassGradeController@destroy')->name('course.grade.destroy');
+
     Route::get('course/{course}/exam/{exam}/quiz', 'QuizController@index')->name('course.quiz.list');
     Route::get('course/{course}/exam/{exam}/quiz/create', 'QuizController@create')->name('course.quiz.create');
     Route::post('course/{course}/exam/{exam}/quiz', 'QuizController@store')->name('course.quiz.store');
@@ -51,6 +58,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('course/{course}/exam/{exam}/quiz/{quiz}', 'QuizController@update')->name('course.quiz.update');
     Route::delete('course/{course}/quiz/{quiz}', 'QuizController@destroy')->name('course.quiz.destroy');
 
+    Route::get('course/query', 'CourseController@courseListQuery')->name('course.query');
     Route::resource('course', 'CourseController');
 
     Route::get('course/{course}/exam/{exam}/quiz/{quiz}/question', 'QuestionController@index')->name('course.question.list');

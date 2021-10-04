@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Exams;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\DB;
 
 class ExamsController extends Controller
 {
@@ -93,7 +94,7 @@ class ExamsController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            $exams->update([
+            $exam->update([
                 'course_id' => $course->id,
                 'name' => $input['name'],
                 'index' => $input['index'],
@@ -104,6 +105,7 @@ class ExamsController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
+            dd($th);
             return back()->withErrors('errors', 'Update errors!');
         }
     }
