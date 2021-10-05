@@ -9,7 +9,7 @@
                   'tokensReceived' => __('keywords.wallet.tokensReceived'),
                 ];
     @endphp
-    <div class="body-content" >
+    <div class="body-content">
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.wallet.topUp')
         </div>
@@ -20,7 +20,8 @@
                     <div class="row justify-content-between">
                         <div class="col-lg-5">
                             {{--               php quan ra cuc tranfer             --}}
-                            <top-up-component v-bind:lang="{{json_encode($lang)}}" v-bind:transfer=0.1 ></top-up-component>
+                            <top-up-component v-bind:lang="{{json_encode($lang)}}"
+                                              v-bind:transfer=0.1></top-up-component>
                             <div class="d-flex justify-content-between mb-5">
                                 <div>
                                     <p>@lang('keywords.wallet.exchangeRate')</p>
@@ -28,7 +29,7 @@
                                 </div>
                                 <div class="mr-5">
                                     <p>@lang('keywords.wallet.totalFee')</p>
-                                    <h2 class="font-weight-bold">0$</h2>
+                                    <h2 class="font-weight-bold">@{{chooseValue}}$</h2>
                                 </div>
                             </div>
                             <div class="border-bottom border-primary d-block d-lg-none mb-5"></div>
@@ -56,33 +57,50 @@
                                 aria-controls="collapseSelectCard">
                                 @lang('keywords.wallet.visaCardLinked')
                             </button>
-                            <div class="collapse py-4 px-3 rounded bg-light room-selection" id="collapseSelectCard">
-                                <div class="select-card mb-3 d-flex">
-                                    <input id="selectCard" type="radio" name="card" value="card" form="form-room">
-                                    <label class="p-0 mb-0 w-100" for="selectCard">
-                                        <a class="btn btn-white text-primary d-flex align-items-center w-100">
-                                            <img class="mr-4" src="{{asset('images/ic/ic_visa.svg')}}" width="64">
-                                            <div>
-                                                <h3 class="font-weight-bold">**** ****
-                                                    **** {{Auth::user()->card_last_four}}</h3>
-                                                <p class="m-0 text-left h5">{{Auth::user()->name}}</p>
-                                            </div>
-                                        </a>
-                                    </label>
-                                </div>
-                                <a class="select-card btn btn-white text-primary d-flex align-items-center pl-4"
-                                   href="{{route('site.add-visa')}}">
-                                    <img class="mr-4 ml-1" src="{{asset('images/ic/ic_plus.svg')}}" width="64"
-                                         height="64">
-                                    <div>
-                                        <h3 class="m-0 font-weight-bold">@lang('keywords.wallet.addNewVisaCard')</h3>
-                                    </div>
-                                </a>
-                            </div>
+                            @error('amount')
+                            <div class="alert text-danger">{{$message}}</div>
+                            @enderror
+                            @error('card')
+                            <div class="alert text-danger">Please select visa card!</div>
+                            @enderror
                             @if(Auth::user()->stripe_id != null)
                                 <form action="{{route('site.user.top-up-to')}}" method="post">
                                     @csrf
-                                    <input name="amount" v-model="chooseValue" required hidden>
+
+                                    <div class="collapse py-4 px-3 rounded bg-light" id="collapseSelectCard">
+                                        @php
+                                            $card_item = 0;
+                                        @endphp
+                                        @if(!empty($cards))
+                                            @foreach($cards as $card)
+                                                <div class="select-card mb-3 d-flex room-selection">
+                                                    <input id="card{{$card->id}}" type="radio" name="card"
+                                                           value="{{$card_item++}}">
+                                                    <label class="p-0 mb-0 w-100" for="card{{$card->id}}">
+                                                        <a class="btn btn-white text-primary d-flex align-items-center w-100">
+                                                            <img class="mr-4" src="{{asset('images/ic/ic_visa.svg')}}"
+                                                                 width="64">
+                                                            <div>
+                                                                <h3 class="font-weight-bold">**** ****
+                                                                    **** {{$card->card->last4}}</h3>
+                                                                <p class="m-0 text-left h5">{{Auth::user()->name}}</p>
+                                                            </div>
+                                                        </a>
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                        <a class="select-card btn btn-white text-primary d-flex align-items-center pl-4"
+                                           href="{{route('site.add-visa')}}">
+                                            <img class="mr-4 ml-1" src="{{asset('images/ic/ic_plus.svg')}}" width="64"
+                                                 height="64">
+                                            <div>
+                                                <h3 class="m-0 font-weight-bold">@lang('keywords.wallet.addNewVisaCard')</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <input type="number" name="amount" v-model.number="chooseValue" required hidden>
                                     <button class="btn btn-primary w-100 font-weight-bold h4 py-3 mt-3" type="submit">
                                         @lang('keywords.wallet.topUp')
                                     </button>

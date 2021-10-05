@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\StudentCourses;
 use App\Models\User;
 use Bavix\Wallet\Models\Transaction;
 use Bavix\Wallet\Models\Wallet;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,44 +22,61 @@ class WalletController extends Controller
     {
         $all_wallets = Wallet::query()->get();
         $wallet = $all_wallets->where('holder_id', Auth::user()->id)->first();
-        $topUp_history = Transaction::query()->where('payable_id', Auth::user()->id)->get();
-        return view('wallet.manage-wallet',[
+        return view('wallet.manage-wallet', [
             'wallet' => $wallet,
-            'topUp_history' => $topUp_history
         ]);
     }
-
+    public function listTopUp()
+    {
+        $topUp_history = Transaction::query()->where('payable_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')->paginate(9);
+        return response()->json($topUp_history);
+    }
     public function topUpIndex()
     {
         $balance = Auth::user()->balance;
+        $stripe = new \Stripe\StripeClient(
+            config('app.stripe_secret')
+        );
+        $auth_stripe = $stripe->paymentMethods->all([
+                'customer' => Auth::user()->stripe_id,
+                'type' => 'card'
+            ]);
         return view('wallet.top-up', [
-            'balance' => $balance
+            'balance' => $balance,
+            'cards' => $auth_stripe
         ]);
     }
+
     public function topUpToWallet(Request $request)
     {
+        $_request = $request->validate([
+           'card' => 'required',
+            'amount' => 'required|numeric|min:10'
+        ]);
         $paymentMethods = $this->getPaymentMethod();
         $stripe = new \Stripe\StripeClient(
             config('app.stripe_secret')
         );
         $payment_intent = $stripe->paymentIntents->create([
-            'amount' => $request->amount *100,
+            'amount' => $_request['amount'] * 100,
             'currency' => 'hkd',
-            'payment_method' => $paymentMethods[0]->id,
+            'payment_method' => $paymentMethods[$_request['card']]->id,
             'confirm' => true,
-            'customer'=> $paymentMethods[0]->customer,
+            'customer' => $paymentMethods[$_request['card']]->customer,
             'metadata' => [
                 'user_id' => Auth::user()->id,
-                'price' => $request->amount,
+                'price' => $_request['amount'],
             ],
-            'return_url' => config('app.home_url'). '/payment'
+            'return_url' => config('app.home_url') . '/payment'
         ]);
         $user = User::where('id', Auth::user()->id)->first();
-        $topUp_value = $request->amount / 10;
-        $user->deposit($topUp_value);
+        $topUp_value = $_request['amount'] / 10;
+        $user->deposit($topUp_value, ['card' => $paymentMethods[$_request['card']]->card->last4]);
 
         return redirect()->route('site.user.topUp-success');
     }
+
     public function getPaymentMethod()
     {
         $stripe = Auth::user()->stripe_id;
@@ -87,13 +101,18 @@ class WalletController extends Controller
 
     public function paymentHistory()
     {
-        return view('wallet.detail-history.payment-history');
+        return view('wallet.detail-history.payment-invoice');
     }
 
-    public function topUpHistory()
+    public function topUpHistory(Transaction $transaction)
     {
-        return view('wallet.detail-history.topUp-history');
+        $wallet = Wallet::where('holder_id', Auth::user()->id)->first();
+        return view('wallet.detail-history.top-up-invoice', [
+            'transaction' => $transaction,
+            'wallet' => $wallet
+        ]);
     }
+
 
     public function payment()
     {
@@ -112,10 +131,11 @@ class WalletController extends Controller
             'intent' => $_user->createSetupIntent(),
         ]);
     }
+
     /**
      * add payment a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function storeCard(Request $request)
@@ -133,9 +153,10 @@ class WalletController extends Controller
             DB::commit();
             return response()->json($payment_method);
         } catch (\Throwable $th) {
-            response()->json(['error_message'=> $th->getMessage()],400);
+            response()->json(['error_message' => $th->getMessage()], 400);
         }
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -149,7 +170,7 @@ class WalletController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -160,7 +181,7 @@ class WalletController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -171,7 +192,7 @@ class WalletController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -182,8 +203,8 @@ class WalletController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -194,7 +215,7 @@ class WalletController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

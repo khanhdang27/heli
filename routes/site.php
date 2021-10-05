@@ -95,8 +95,9 @@ Route::middleware('auth')->group(function () {
         Route::get('wallet/top-up', 'WalletController@topUpIndex')->name('top-up');
         Route::post('wallet/top-up/top-up-to', 'WalletController@topUpToWallet')->name('top-up-to');
         Route::get('wallet/top-up/success', 'WalletController@topUpSuccess')->name('topUp-success');
+        Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.list');
         Route::get('wallet/payment-history', 'WalletController@paymentHistory')->name('payment-history');
-        Route::get('wallet/topUp-history', 'WalletController@topUpHistory')->name('topUp-history');
+        Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
 
     });
     Route::get('payment', 'WalletController@payment')->name('payment');
