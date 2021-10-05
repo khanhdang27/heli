@@ -1,5 +1,6 @@
 function itemDelete(url) {
 
+    console.log(url);
     var choose = confirm('Do you want delete item?');
 
     if (choose) {

@@ -16,7 +16,11 @@
           <h4 class="mb-0 font-weight-bold">Try It Now</h4>
         </button>
       </div>
-      <div class="box-list-video text-primary pt-3"></div>
+      <div class="box-list-video text-primary pt-3">
+        <div v-for="item in lectureList" :key="item.index">
+          {{ item.index }} - {{ item.lectures_name }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -32,23 +36,6 @@ export default {
   components: {
     vueVimeoPlayer,
   },
-  mounted() {
-    this.syncDataLecture();
-  },
-  methods: {
-    syncDataLecture() {
-      axios
-        .get(route("site.course.lectureList", 2))
-        .then(function (response) {
-          // handle success
-          console.log(response);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        });
-    },
-  },
   data() {
     return {
       lectureList: [],
@@ -59,6 +46,28 @@ export default {
         "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" +
         process.env.MIX_VIMEO_APP_ID,
     };
+  },
+  mounted() {
+    this.syncDataLecture();
+  },
+  methods: {
+    syncDataLecture() {
+      axios
+        .get(route("site.course.lectureList", 2))
+        .then((response) => {
+          for (let item in response.data) {
+            this.lectureList.push(response.data[item]);
+          }
+          this.lectureList.sort(function (a, b) {
+            return a.index - b.index;
+          });
+
+          console.log("this.lectureList :>> ", this.lectureList);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
   },
 };
 </script>

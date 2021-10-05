@@ -466,4 +466,16 @@ class CourseController extends Controller
             );
         }
     }
+
+    public function courseListQuery(Request $request)
+    {
+        $input = $request->input();
+        $courses = Course::query()
+            ->with('translations')
+            ->whereTranslationLike('course_name', '%' . $input['q'] . '%')
+            ->orderByDesc('created_at')
+            ->get();
+
+        return response()->json($courses);
+    }
 }

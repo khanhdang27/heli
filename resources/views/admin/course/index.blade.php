@@ -1,10 +1,7 @@
-@extends('admin.layout')
-
 @php
 use App\Models\Course;
 @endphp
-
-
+@extends('admin.layout')
 @section('content')
     <div class="container-fluid mt-5">
         <div class="text-center alert alert-warning alert-dismissible">
@@ -96,47 +93,105 @@ use App\Models\Course;
                                                         <i class="fe fe-more-vertical"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        @switch($value->type)
-                                                            @case(Course::RECORD)
-                                                                <a href="{{ route('admin.course.lecture.list', $value->id) }}"
-                                                                    class="dropdown-item">
-                                                                    Manage Lecture
-                                                                </a>
-                                                            @break
-                                                            @case(Course::LIVE)
-                                                                <a href="{{ route('admin.course.room.list', $value->id) }}"
-                                                                    class="dropdown-item">
-                                                                    Manage Room Live
-                                                                </a>
-                                                            @break
-                                                            @default
-                                                                {{-- do nothing --}}
-                                            @break
-                                        @endswitch
-                                        <a href="{{ route('admin.price-tag.index') }}" class="dropdown-item">
-                                            Publish
-                                        </a>
-                                        <a href="{{ route('admin.course.edit', $value->id) }}" class="dropdown-item">
-                                            Edit
-                                        </a>
-                            </div>
+                                                        @if ($value->type == Course::RECORD)
+                                                            <a href="{{ route('admin.course.lecture.list', $value->id) }}"
+                                                                class="dropdown-item">
+                                                                Manage Lecture
+                                                            </a>
+                                                            <a href="javascript:void(0)" class="dropdown-item delete-item"
+                                                                data-toggle="modal" data-target="#exampleModalCenter"
+                                                                data-id="{{ $value->id }}">
+                                                                Related Lecture
+                                                            </a>
+                                                        @endif
+                                                        @if ($value->type == Course::LIVE)
+                                                            <a href="{{ route('admin.course.room.list', $value->id) }}"
+                                                                class="dropdown-item">
+                                                                Manage Room Live
+                                                            </a>
+                                                        @endif
+                                                        <a href="{{ route('admin.price-tag.index') }}"
+                                                            class="dropdown-item">
+                                                            Publish
+                                                        </a>
+                                                        <a href="{{ route('admin.course.edit', $value->id) }}"
+                                                            class="dropdown-item">
+                                                            Edit
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{ $courses->links() }}
                         </div>
-                        </td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                        </table>
-                        {{ $courses->links() }}
                     </div>
                 </div>
             </div>
-
-        </div>
         </div> <!-- / .row -->
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Related Lecture</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{-- {{ route('admin.course.related') }} --}}
+                    <form method="POST" action="">
+                        @csrf
+                        <input name="course-id" type="text" class="form-control" id="course-id" hidden>
+                        <div class="form-group">
+                            <label for="course-related" class="col-form-label">Related</label>
+                            <select id="course-related" class="option-multiple-select" name="course_related[]"
+                                multiple="multiple">
+                            </select>
+                        </div>
+                        <div class="d-flex">
+                            <button type="submit" class="ml-auto btn btn-primary"> Update </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    @endsection
+    </div>
+@endsection
 
-    @push('js')
+@push('js')
+    <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#exampleModalCenter').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var id = button.data('id') // Extract info from data-* attributes
+                var modal = $(this)
+                modal.find('#element-id').val(id)
+            })
 
-        <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>
-    @endpush
+            $("#course-related").select2({
+                minimumInputLength: 3,
+                ajax: {
+                    url: "{{ route('admin.course.query') }}",
+                    dataType: 'json',
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(obj) {
+                                return {
+                                    id: obj.id,
+                                    text: obj.course_name
+                                };
+                            })
+                        };
+                    }
+                    // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+                }
+            });
+        });
+    </script>
+@endpush

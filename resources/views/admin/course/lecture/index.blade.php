@@ -173,7 +173,12 @@ use App\Models\Exams;
                                                                 class="dropdown-item">
                                                                 Quizzes
                                                             </a>
-
+                                                            @if ($lecture->type == Exams::ASSESSMENT)
+                                                                <a href="{{ route('admin.course.grade.list', ['course' => $course, 'exam' => $lecture]) }}"
+                                                                    class="dropdown-item">
+                                                                    Grade
+                                                                </a>
+                                                            @endif
                                                             @can('course-delete')
                                                                 <a href="javascript:void(0)"
                                                                     onclick="itemDelete('{{ route('admin.course.exam.destroy', ['course' => $course, 'exam' => $data]) }}')"
@@ -181,7 +186,6 @@ use App\Models\Exams;
                                                                     Delete
                                                                 </a>
                                                             @endcan
-
                                                         </div>
                                                     </div>
                                                 </td>
@@ -235,7 +239,6 @@ use App\Models\Exams;
     <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>
     <script>
         $(document).ready(function() {
-            console.log("ready!");
             $('#exampleModalCenter').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var name = button.data('name') // Extract info from data-* attributes
@@ -243,7 +246,6 @@ use App\Models\Exams;
                 var type = button.data('type') // Extract info from data-* attributes
                 var index = button.data('index') // Extract info from data-* attributes
                 var modal = $(this)
-                console.log('name :>> ', name);
                 modal.find('#element-name').val(name)
                 modal.find('#element-id').val(id)
                 modal.find('#element-type').val(type)

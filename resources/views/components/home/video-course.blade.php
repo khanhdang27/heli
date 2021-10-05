@@ -68,7 +68,8 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
 
         </div>
     </div>
-    <lecture-component v-bind:is-login="true" v-bind:course-id="2"></lecture-component>
+    <lecture-component v-bind:is-login="{{ Auth::check() ? 'true' : 'false' }}" v-bind:course-id="2">
+    </lecture-component>
 </div>
 
 {{-- @endif --}}

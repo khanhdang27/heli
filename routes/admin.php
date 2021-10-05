@@ -44,6 +44,13 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('course/{course}/exam/{exam}', 'ExamsController@update')->name('course.exam.update');
     Route::delete('course/{course}/exam/{exam}', 'ExamsController@destroy')->name('course.exam.destroy');
 
+    Route::get('course/{course}/exam/{exam}/grade', 'PassGradeController@index')->name('course.grade.list');
+    Route::get('course/{course}/exam/{exam}/grade/create', 'PassGradeController@create')->name('course.grade.create');
+    Route::post('course/{course}/exam/{exam}/grade', 'PassGradeController@store')->name('course.grade.store');
+    Route::get('course/{course}/exam/{exam}/grade/{grade}', 'PassGradeController@edit')->name('course.grade.edit');
+    Route::put('course/{course}/exam/{exam}/grade/{grade}', 'PassGradeController@update')->name('course.grade.update');
+    Route::delete('course/{course}/exam/{exam}/grade/{grade}', 'PassGradeController@destroy')->name('course.grade.destroy');
+
     Route::get('course/{course}/exam/{exam}/quiz', 'QuizController@index')->name('course.quiz.list');
     Route::get('course/{course}/exam/{exam}/quiz/create', 'QuizController@create')->name('course.quiz.create');
     Route::post('course/{course}/exam/{exam}/quiz', 'QuizController@store')->name('course.quiz.store');
@@ -51,9 +58,22 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('course/{course}/exam/{exam}/quiz/{quiz}', 'QuizController@update')->name('course.quiz.update');
     Route::delete('course/{course}/quiz/{quiz}', 'QuizController@destroy')->name('course.quiz.destroy');
 
+    Route::get('course/query', 'CourseController@courseListQuery')->name('course.query');
     Route::resource('course', 'CourseController');
 
+    Route::get('course/{course}/exam/{exam}/quiz/{quiz}/question', 'QuestionController@index')->name('course.question.list');
+    Route::get('course/{course}/exam/{exam}/quiz/{quiz}/question/create', 'QuestionController@create')->name('course.question.create');
+    Route::post('course/{course}/exam/{exam}/quiz/{quiz}/question', 'QuestionController@store')->name('course.question.store');
+    Route::get('course/{course}/exam/{exam}/quiz/{quiz}/question/{question}/show', 'QuestionController@show')->name('course.question.show');
+    Route::get('course/{course}/exam/{exam}/quiz/{quiz}/question/{question}', 'QuestionController@edit')->name('course.question.edit');
+    Route::put('course/{course}/exam/{exam}/quiz/{quiz}/question/{question}', 'QuestionController@update')->name('course.question.update');
+    Route::delete('course/{course}/exam/{exam}/quiz/{quiz}/question/{question}', 'QuestionController@destroy')->name('course.question.destroy');
+
     Route::resource('course-material', 'CourseMaterialController');
+
+    Route::post('question/{question}/answer', 'AnswerController@store')->name('answer.store');
+    Route::post('question/{question}/answer/update', 'AnswerController@update')->name('answer.update');
+    Route::delete('question/{question}/answer/{answer}', 'AnswerController@destroy')->name('answer.destroy');
 
     Route::resource('banner', 'BannerController');
 
