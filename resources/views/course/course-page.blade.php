@@ -28,7 +28,7 @@ if (!empty($student_course)) {
 
             </div>
         @endif
-        <div class="container-fluid show-video">
+        <div class="container-fluid">
             <div class="row p-0 flex-column-reverse flex-md-row">
 
                 <div class="col-xl-8 container-fluid">

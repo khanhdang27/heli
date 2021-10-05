@@ -1,12 +1,12 @@
 <template>
   <div class="row mb-4" id="video-lecture">
-    <div class="col-lg-8 bg-white">
+    <div class="col-lg-9 bg-white">
       <div class="embed-responsive embed-responsive-16by9">
         <vimeo-player ref="player" :video-id="videoId" :video-url="videoUrl" />
       </div>
     </div>
-    <div class="col-lg-4 bg-white">
-      <div v-if="isLogin" class="text-center btn-above-video mt-5">
+    <div class="col-lg-3 bg-white">
+      <div v-if="!isLogin" class="text-center btn-above-video mt-5">
         <button
           class="btn-register-now mt-0"
           id=""
@@ -16,10 +16,43 @@
           <h4 class="mb-0 font-weight-bold">Try It Now</h4>
         </button>
       </div>
-      <div class="box-list-video text-primary pt-3">
-        <div v-for="item in lectureList" :key="item.index">
-          {{ item.index }} - {{ item.lectures_name }}
-        </div>
+      <div class="box-list-video text-primary">
+        <h2 class="font-weight-bolder pb-2">Course Content</h2>
+        <ul
+          class="list-group list-group-flush"
+          v-for="item in lectureList"
+          :key="item.index"
+        >
+          <button
+            class="list-group-item list-group-item-action"
+            v-on:click="onClickLecture(item.index)"
+          >
+            <div class="d-flex w-100 justify-content-left">
+              <div class="my-auto mr-3">
+                <input type="checkbox" name="" id="" />
+              </div>
+              <div>
+                <h4 class="mb-1">
+                  {{ item.index }}
+                  -
+                  {{ item.lectures_name || item.name }}
+                </h4>
+                <div v-if="item.lectures_name">
+                  <strong class="text-dark text-wrap">
+                    <i class="fe fe-youtube mr-2"></i>
+                    <span>Video</span>
+                  </strong>
+                </div>
+                <div v-if="item.name">
+                  <strong class="text-dark text-wrap">
+                    <i class="fe fe-message-square mr-2"></i>
+                    <span>Quiz</span>
+                  </strong>
+                </div>
+              </div>
+            </div>
+          </button>
+        </ul>
       </div>
     </div>
   </div>
@@ -67,6 +100,10 @@ export default {
         .catch(function (error) {
           console.error(error);
         });
+    },
+    onClickLecture(index) {
+      this.lectureList[index];
+      console.log("this.lectureList[index] :>> ", this.lectureList[index]);
     },
   },
 };

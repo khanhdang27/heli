@@ -29,11 +29,13 @@
 </head>
 
 <body>
-    @include('layout.header')
-
     <div id="app">
+        @include('layout.header')
         @yield('content')
+        @include('layout.footer')
     </div>
+    @routes
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -45,7 +47,6 @@
     @stack('scriptsLogin')
     @stack('inputFile')
     @stack('showNavbar')
-    @include('layout.footer')
     <script type="application/javascript">
         var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?26718';
         var s = document.createElement('script');
@@ -82,8 +83,6 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     </script>
-    @routes
-    <script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 

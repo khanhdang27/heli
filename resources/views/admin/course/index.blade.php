@@ -100,7 +100,8 @@ use App\Models\Course;
                                                             </a>
                                                             <a href="javascript:void(0)" class="dropdown-item delete-item"
                                                                 data-toggle="modal" data-target="#exampleModalCenter"
-                                                                data-id="{{ $value->id }}">
+                                                                data-id_element="{{ $value->id }}"
+                                                                data-url="{{ route('admin.course.related.list', ['course' => $value->id]) }}">
                                                                 Related Lecture
                                                             </a>
                                                         @endif
@@ -143,10 +144,18 @@ use App\Models\Course;
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{-- {{ route('admin.course.related') }} --}}
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('admin.course.related') }}">
                         @csrf
-                        <input name="course-id" type="text" class="form-control" id="course-id" hidden>
+                        <sub>
+                            <span class='text-danger'> ( 1 ) </span> Related of this course is:
+                            <strong id="default-related">
+                            </strong>
+                        </sub>
+                        <br>
+                        <sub>
+                            if your want add more related please retype <span class='text-danger'> ( 1 ) </span> course.
+                        </sub>
+                        <input name="course_id" type="text" class="form-control" id="course-id" hidden>
                         <div class="form-group">
                             <label for="course-related" class="col-form-label">Related</label>
                             <select id="course-related" class="option-multiple-select" name="course_related[]"
@@ -169,9 +178,17 @@ use App\Models\Course;
         $(document).ready(function() {
             $('#exampleModalCenter').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
-                var id = button.data('id') // Extract info from data-* attributes
+                var id = button.data('id_element') // Extract info from data-* attributes
+                var url = button.data('url') // Extract info from data-* attributes
                 var modal = $(this)
-                modal.find('#element-id').val(id)
+                modal.find('#course-id').val(id)
+                axios.get(url).then(
+                    function(response) {
+                        console.log('response :>> ', response);
+                        modal.find('#default-related').text(response.data.courseNames)
+                    }
+                )
+
             })
 
             $("#course-related").select2({
@@ -179,6 +196,7 @@ use App\Models\Course;
                 ajax: {
                     url: "{{ route('admin.course.query') }}",
                     dataType: 'json',
+                    delay: 250,
                     processResults: function(data) {
                         return {
                             results: $.map(data, function(obj) {
@@ -189,7 +207,6 @@ use App\Models\Course;
                             })
                         };
                     }
-                    // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
                 }
             });
         });

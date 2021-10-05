@@ -59,6 +59,8 @@ Route::middleware('auth.admin')->group(function () {
     Route::delete('course/{course}/quiz/{quiz}', 'QuizController@destroy')->name('course.quiz.destroy');
 
     Route::get('course/query', 'CourseController@courseListQuery')->name('course.query');
+    Route::get('course/related/{course}', 'CourseController@courseListRelated')->name('course.related.list');
+    Route::post('course/related', 'CourseController@updateRelated')->name('course.related');
     Route::resource('course', 'CourseController');
 
     Route::get('course/{course}/exam/{exam}/quiz/{quiz}/question', 'QuestionController@index')->name('course.question.list');

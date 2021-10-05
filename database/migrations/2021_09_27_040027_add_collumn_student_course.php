@@ -23,6 +23,10 @@ class AddCollumnStudentCourse extends Migration
         Schema::table('lectures', function (Blueprint $table) {
             $table->integer('index')->default(0);
         });
+
+        Schema::table('courses', function (Blueprint $table) {
+            $table->text('related')->default(0);
+        });
     }
 
     /**

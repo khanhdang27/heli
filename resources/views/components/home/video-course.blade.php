@@ -36,7 +36,7 @@ if (Auth::check() && !empty(Auth::user()->student_courses())) {
 }
 @endphp
 
-<div class="container-fluid show-video py-5">
+<div class="container-fluid py-5">
     <div class="row">
         <div class="bg-white col-lg-8">
             <div class="text-primary d-flex">

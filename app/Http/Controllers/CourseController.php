@@ -478,4 +478,39 @@ class CourseController extends Controller
 
         return response()->json($courses);
     }
+
+    public function courseListRelated(Course $course)
+    {
+        $courseNames = '';
+        foreach (explode(',', $course->related) as $value) {
+            $courseNames .= Course::find($value)->course_name . ', ';
+        }
+        $courseNames = rtrim($courseNames, ', ');
+        return response()->json(['courseNames' => $courseNames]);
+    }
+
+    public function updateRelated(Request $request)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $listRelate = '';
+            foreach ($input['course_related'] as $key => $value) {
+                $listRelate .= $value . ',';
+            }
+            $listRelate = rtrim($listRelate, ',');
+            $course = Course::find($input['course_id']);
+
+            $course->update([
+                'related' => $listRelate,
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return back()->withErrors('Create error!');
+        }
+    }
 }
