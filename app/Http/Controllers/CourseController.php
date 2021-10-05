@@ -476,6 +476,6 @@ class CourseController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
-        return response()->json(['status' => 200, $courses]);
+        return response()->json($courses);
     }
 }
