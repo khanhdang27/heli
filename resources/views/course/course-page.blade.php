@@ -15,22 +15,23 @@ if (!empty($student_course)) {
 @section('title', 'Course Page')
 
 @section('content')
-    {{-- <x-sub-header :subjects=$subjects></x-sub-header> --}}
     <hr class="m-0">
     <div class="body-content container-fluid p-0">
-        @if ($course->type == Course::LIVE)
-            <x-product-detail.course-card-page :course=$course :studentCourse=$student_course>
-            </x-product-detail.course-card-page>
-        @elseif($course->type == Course::RECORD )
-            <x-home.video-course :courseDetail=$course :latesLecture=$latesLecture></x-home.video-course>
+        @if (!Auth::check() || empty($student_course))
+            <x-home.buy-course :course=$course></x-home.buy-course>
         @else
-            <div class="mt-5">
-
-            </div>
+            @if ($course->type == Course::LIVE)
+                <x-product-detail.course-card-page :course=$course :studentCourse=$student_course>
+                </x-product-detail.course-card-page>
+            @elseif($course->type == Course::RECORD )
+                <x-home.video-course :courseDetail=$course :latesLecture=$latesLecture></x-home.video-course>
+            @else
+                <div class="mt-5">
+                </div>
+            @endif
         @endif
-        <div class="container-fluid">
+        <div class="container-fluid {{ !Auth::check() || empty($student_course) ? 'show-video' : '' }}">
             <div class="row p-0 flex-column-reverse flex-md-row">
-
                 <div class="col-xl-8 container-fluid">
                     <ul class="nav nav-pills flex-nowrap text-nowrap overflow-auto course-detail-tab" role="tablist">
                         <li class="nav-item ">
@@ -95,7 +96,8 @@ if (!empty($student_course)) {
     {{-- <x-subscribe-container></x-subscribe-container> --}}
     @push('inputFile')
         <script type="application/javascript">
-            // Add the following code if you want the name of the file appear on select
+            // Add the following code
+            // if you want the name of the file appear on select
             $(".custom-file-input").on("change", function() {
                 var fileName = $(this).val().split("\\").pop();
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

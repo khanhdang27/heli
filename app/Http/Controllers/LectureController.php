@@ -78,28 +78,76 @@ class LectureController extends Controller
             try {
                 StudentCourses::where([
                     'course_id' => $input['course_id'],
-                    'student_id' => $input['user_id']
+                    'student_id' => $input['user_id'],
                 ])->update([
                     'latest_study' => new DateTime(),
-                    'lecture_study' => $lecture->id
+                    'lecture_study' => $lecture->id,
                 ]);
 
                 DB::commit();
-                return response([
-                    'message' => 'update success!'
-                ],200);
+                return response(
+                    [
+                        'message' => 'update success!',
+                    ],
+                    200,
+                );
             } catch (\Throwable $th) {
                 DB::rollBack();
-
-                dd($th);
-                return response([
-                    'message' => 'update fails!'
-                ],400);
+                return response(
+                    [
+                        'message' => 'update fails!',
+                    ],
+                    400,
+                );
             }
         }
-        return response([
-            'message' => 'update fails!'
-        ],400);
+        return response(
+            [
+                'message' => 'update fails!',
+            ],
+            400,
+        );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Lecture  $lecture
+     * @return \Illuminate\Http\Response
+     */
+    public function showLecture(Request $request)
+    {
+        $input = $request->input();
+
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where('course_id', $input['courseId'])
+                ->where('student_id', $input['userId'])
+                ->first();
+
+            $newWatchList = '';
+            if (strlen($student_course->watched_list) == 0) {
+                $newWatchList = $input['index'];
+            } else {
+                $newWatchList .= $student_course->watched_list;
+            }
+
+            $student_course->update(['watched_list' => $newWatchList]);
+            if ($input['modelName'] == 'Lecture') {
+                $lecture = Lecture::find($input['id']);
+
+                DB::commit();
+                return response()->json($lecture);
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
 
     /**

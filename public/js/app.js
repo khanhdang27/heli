@@ -4429,13 +4429,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    isLogin: Boolean,
-    courseId: Number
+    courseId: Number,
+    userId: Number
   },
   components: {
     vueVimeoPlayer: vue_vimeo_player__WEBPACK_IMPORTED_MODULE_0__.vueVimeoPlayer
@@ -4444,13 +4442,16 @@ __webpack_require__.r(__webpack_exports__);
     return {
       lectureList: [],
       videoId: "588754544",
-      videoUrl: "https://player.vimeo.com/video/" + 588754544 + "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" + "58479"
+      userStudies: []
     };
   },
   mounted: function mounted() {
     this.syncDataLecture();
   },
   methods: {
+    getVideoUrl: function getVideoUrl() {
+      return "https://player.vimeo.com/video/" + this.videoId + "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" + "58479";
+    },
     syncDataLecture: function syncDataLecture() {
       var _this = this;
 
@@ -4469,8 +4470,22 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onClickLecture: function onClickLecture(index) {
-      this.lectureList[index];
+      var _this2 = this;
+
       console.log("this.lectureList[index] :>> ", this.lectureList[index]);
+      axios.get(route("site.lecture.showLecture", {
+        userId: this.userId,
+        courseId: this.lectureList[index].course_id,
+        modelName: this.lectureList[index].model_name,
+        index: this.lectureList[index].index,
+        id: this.lectureList[index].id
+      })).then(function (response) {
+        console.info("response >> ", response);
+        _this2.videoId = response.data.video_resource;
+        console.info("this.videoId >> ", _this2.videoId);
+      })["catch"](function (error) {
+        console.error(error);
+      });
     }
   }
 });
@@ -41405,7 +41420,7 @@ var render = function() {
           [
             _c("vimeo-player", {
               ref: "player",
-              attrs: { "video-id": _vm.videoId, "video-url": _vm.videoUrl }
+              attrs: { "video-id": _vm.videoId, "video-url": _vm.getVideoUrl() }
             })
           ],
           1
@@ -41413,12 +41428,6 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-3 bg-white" }, [
-        !_vm.isLogin
-          ? _c("div", { staticClass: "text-center btn-above-video mt-5" }, [
-              _vm._m(0)
-            ])
-          : _vm._e(),
-        _vm._v(" "),
         _c(
           "div",
           { staticClass: "box-list-video text-primary" },
@@ -41447,25 +41456,39 @@ var render = function() {
                         "div",
                         { staticClass: "d-flex w-100 justify-content-left" },
                         [
-                          _vm._m(1, true),
+                          _vm._m(0, true),
                           _vm._v(" "),
-                          _c("div", [
-                            _c("h4", { staticClass: "mb-1" }, [
-                              _vm._v(
-                                "\n                " +
-                                  _vm._s(item.index) +
-                                  "\n                -\n                " +
-                                  _vm._s(item.lectures_name || item.name) +
-                                  "\n              "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            item.lectures_name
-                              ? _c("div", [_vm._m(2, true)])
-                              : _vm._e(),
-                            _vm._v(" "),
-                            item.name ? _c("div", [_vm._m(3, true)]) : _vm._e()
-                          ])
+                          item.model_name == "Exams"
+                            ? _c("div", [
+                                _c("h4", { staticClass: "mb-1" }, [
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(item.index) +
+                                      "\n                -\n                " +
+                                      _vm._s(item.name) +
+                                      "\n              "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _vm._m(1, true)
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          item.model_name == "Lecture"
+                            ? _c("div", [
+                                _c("h4", { staticClass: "mb-1" }, [
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(item.index) +
+                                      "\n                -\n                " +
+                                      _vm._s(item.lectures_name) +
+                                      "\n              "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _vm._m(2, true)
+                              ])
+                            : _vm._e()
                         ]
                       )
                     ]
@@ -41485,39 +41508,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn-register-now mt-0",
-        attrs: {
-          id: "",
-          "data-toggle": "modal",
-          "data-target": "#registerModal"
-        }
-      },
-      [
-        _c("h4", { staticClass: "mb-0 font-weight-bold" }, [
-          _vm._v("Try It Now")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "my-auto mr-3" }, [
       _c("input", { attrs: { type: "checkbox", name: "", id: "" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("strong", { staticClass: "text-dark text-wrap" }, [
-      _c("i", { staticClass: "fe fe-youtube mr-2" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Video")])
     ])
   },
   function() {
@@ -41528,6 +41520,16 @@ var staticRenderFns = [
       _c("i", { staticClass: "fe fe-message-square mr-2" }),
       _vm._v(" "),
       _c("span", [_vm._v("Quiz")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("strong", { staticClass: "text-dark text-wrap" }, [
+      _c("i", { staticClass: "fe fe-youtube mr-2" }),
+      _vm._v(" "),
+      _c("span", [_vm._v("Video")])
     ])
   }
 ]

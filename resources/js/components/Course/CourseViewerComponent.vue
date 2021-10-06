@@ -2,20 +2,14 @@
   <div class="row mb-4" id="video-lecture">
     <div class="col-lg-9 bg-white">
       <div class="embed-responsive embed-responsive-16by9">
-        <vimeo-player ref="player" :video-id="videoId" :video-url="videoUrl" />
+        <vimeo-player
+          ref="player"
+          :video-id="videoId"
+          :video-url="getVideoUrl()"
+        />
       </div>
     </div>
     <div class="col-lg-3 bg-white">
-      <div v-if="!isLogin" class="text-center btn-above-video mt-5">
-        <button
-          class="btn-register-now mt-0"
-          id=""
-          data-toggle="modal"
-          data-target="#registerModal"
-        >
-          <h4 class="mb-0 font-weight-bold">Try It Now</h4>
-        </button>
-      </div>
       <div class="box-list-video text-primary">
         <h2 class="font-weight-bolder pb-2">Course Content</h2>
         <ul
@@ -31,24 +25,28 @@
               <div class="my-auto mr-3">
                 <input type="checkbox" name="" id="" />
               </div>
-              <div>
+              <div v-if="item.model_name == 'Exams'">
                 <h4 class="mb-1">
                   {{ item.index }}
                   -
-                  {{ item.lectures_name || item.name }}
+                  {{ item.name }}
                 </h4>
-                <div v-if="item.lectures_name">
-                  <strong class="text-dark text-wrap">
-                    <i class="fe fe-youtube mr-2"></i>
-                    <span>Video</span>
-                  </strong>
-                </div>
-                <div v-if="item.name">
-                  <strong class="text-dark text-wrap">
-                    <i class="fe fe-message-square mr-2"></i>
-                    <span>Quiz</span>
-                  </strong>
-                </div>
+                <strong class="text-dark text-wrap">
+                  <i class="fe fe-message-square mr-2"></i>
+                  <span>Quiz</span>
+                </strong>
+              </div>
+
+              <div v-if="item.model_name == 'Lecture'">
+                <h4 class="mb-1">
+                  {{ item.index }}
+                  -
+                  {{ item.lectures_name }}
+                </h4>
+                <strong class="text-dark text-wrap">
+                  <i class="fe fe-youtube mr-2"></i>
+                  <span>Video</span>
+                </strong>
               </div>
             </div>
           </button>
@@ -63,8 +61,8 @@ import { vueVimeoPlayer } from "vue-vimeo-player";
 
 export default {
   props: {
-    isLogin: Boolean,
     courseId: Number,
+    userId: Number,
   },
   components: {
     vueVimeoPlayer,
@@ -73,17 +71,21 @@ export default {
     return {
       lectureList: [],
       videoId: "588754544",
-      videoUrl:
-        "https://player.vimeo.com/video/" +
-        588754544 +
-        "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" +
-        process.env.MIX_VIMEO_APP_ID,
+      userStudies: [],
     };
   },
   mounted() {
     this.syncDataLecture();
   },
   methods: {
+    getVideoUrl() {
+      return (
+        "https://player.vimeo.com/video/" +
+        this.videoId +
+        "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" +
+        process.env.MIX_VIMEO_APP_ID
+      );
+    },
     syncDataLecture() {
       axios
         .get(route("site.course.lectureList", 2))
@@ -102,8 +104,25 @@ export default {
         });
     },
     onClickLecture(index) {
-      this.lectureList[index];
       console.log("this.lectureList[index] :>> ", this.lectureList[index]);
+      axios
+        .get(
+          route("site.lecture.showLecture", {
+            userId: this.userId,
+            courseId: this.lectureList[index].course_id,
+            modelName: this.lectureList[index].model_name,
+            index: this.lectureList[index].index,
+            id: this.lectureList[index].id,
+          })
+        )
+        .then((response) => {
+          console.info("response >> ", response);
+          this.videoId = response.data.video_resource;
+          console.info("this.videoId >> ", this.videoId);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     },
   },
 };

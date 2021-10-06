@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
     Route::put('uploadAvatar', 'ProfileController@uploadAvatar')->name('uploadAvatar');
     Route::resource('rating', 'RatingController');
 
+    Route::get('lecture/showLecture', 'LectureController@showLecture')->name('lecture.showLecture');
     Route::resource('lecture', 'LectureController');
 
     Route::post('submit-exam', 'ExaminationController@submitExamination')->name('submit-examination');
@@ -86,20 +87,21 @@ Route::middleware('auth')->group(function () {
 
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');
 
-    Route::prefix('my/')->name('user.')->group(function () {
-        Route::get('course', 'CourseController@my')->name('course');
-        Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
-        Route::get('calendar', 'ScheduleController@index')->name('calendar');
-        Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
-        Route::get('wallet', 'WalletController@index')->name('wallet');
-        Route::get('wallet/top-up', 'WalletController@topUpIndex')->name('top-up');
-        Route::post('wallet/top-up/top-up-to', 'WalletController@topUpToWallet')->name('top-up-to');
-        Route::get('wallet/top-up/success', 'WalletController@topUpSuccess')->name('topUp-success');
-        Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.list');
-        Route::get('wallet/payment-history', 'WalletController@paymentHistory')->name('payment-history');
-        Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
-
-    });
+    Route::prefix('my/')
+        ->name('user.')
+        ->group(function () {
+            Route::get('course', 'CourseController@my')->name('course');
+            Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
+            Route::get('calendar', 'ScheduleController@index')->name('calendar');
+            Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
+            Route::get('wallet', 'WalletController@index')->name('wallet');
+            Route::get('wallet/top-up', 'WalletController@topUpIndex')->name('top-up');
+            Route::post('wallet/top-up/top-up-to', 'WalletController@topUpToWallet')->name('top-up-to');
+            Route::get('wallet/top-up/success', 'WalletController@topUpSuccess')->name('topUp-success');
+            Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.list');
+            Route::get('wallet/payment-history', 'WalletController@paymentHistory')->name('payment-history');
+            Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
+        });
     Route::get('payment', 'WalletController@payment')->name('payment');
     Route::get('confirm-payment', 'WalletController@confirmPayment')->name('confirm');
     Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');

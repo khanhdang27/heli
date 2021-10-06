@@ -14,6 +14,18 @@ class Exams extends Model
 
     protected $guarded = [];
 
+    //Add extra attribute
+    protected $attributes = ['model_name'];
+
+    //Make it available in the json response
+    protected $appends = ['model_name'];
+
+    //implement the attribute
+    public function getModelNameAttribute()
+    {
+        return 'Exams';
+    }
+
     const ASSESSMENT = 1;
     const NORMAL = 2;
     const END = 3;
