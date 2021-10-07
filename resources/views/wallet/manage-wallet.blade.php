@@ -45,17 +45,17 @@
                         <div class="col-lg-6">
                             <div class="border-2 border-primary rounded p-5 wallet-card">
                                 <h2 class="font-weight-bold">@lang('keywords.wallet.yourVisaCard') </h2>
-                                @if(!empty(Auth::user()->card_last_four))
+                                @foreach($cards as $card)
                                     <div class="d-flex my-5 align-items-center">
                                         <img class="mr-4 btn-wallet" src="{{asset('images/ic/ic_btn_visa.svg')}}"
                                              height="85">
 
                                         <div>
-                                            <p class="h3 font-weight-bold">**** **** **** {{Auth::user()->card_last_four}}</p>
+                                            <p class="h3 font-weight-bold">**** **** **** {{$card->card->last4}}</p>
                                             <p class="h4 font-weight-bold">{{Auth::user()->name}}</p>
                                         </div>
                                     </div>
-                                @endif
+                                @endforeach
                                 <div class="mb-3">
                                     <a href="{{route('site.add-visa')}}" class="d-flex btn p-0 text-primary align-items-center">
                                     <img class="mr-4 btn-wallet btn-add-visa rounded" src="{{asset('images/ic/ic_btn_plus.svg')}}"

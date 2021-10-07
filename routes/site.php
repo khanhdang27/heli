@@ -101,9 +101,13 @@ Route::middleware('auth')->group(function () {
             Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.list');
             Route::get('wallet/payment-history', 'WalletController@paymentHistory')->name('payment-history');
             Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
+
+            Route::get('payment/{product_id}', 'WalletController@payment')->name('payment');
+            Route::get('confirm-payment/{product_id}/{room}', 'WalletController@confirmPayment')->name('confirm');
+            Route::get('confirm-payment/payment-success/{product_id}/{room}', 'WalletController@paymentSuccess')->name('success');
+            Route::get('success/{course_id}', 'WalletController@success')->name('pay-success');
         });
-    Route::get('payment', 'WalletController@payment')->name('payment');
-    Route::get('confirm-payment', 'WalletController@confirmPayment')->name('confirm');
+
     Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');
     Route::post('store-card', 'WalletController@storeCard')->name('store-card');
 });

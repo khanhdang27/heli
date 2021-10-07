@@ -130,4 +130,10 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('examination', 'ExaminationController');
     Route::get('manage-examination/index/{id}', 'ExaminationController@manageExamination')->name('manage-examination');
     Route::get('manage-examination/create/{id}', 'ExaminationController@addExamination')->name('manage-examination.create');
+
+    Route::resource('wallet-manager', 'WalletManagerController');
+
+    Route::resource('setting', 'SettingController');
+    Route::get('setting/edit/{key}', 'SettingController@edit');
+    Route::get('setting/update/{key}', 'SettingController@update');
 });
