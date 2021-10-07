@@ -4436,6 +4436,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -4447,60 +4453,95 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      lectureIndex: -1,
       lectureList: [],
       videoId: "588754544",
-      studentLecture: [] //
-
+      studentLecture: [],
+      questions: []
     };
   },
   mounted: function mounted() {
     this.syncDataLecture();
   },
   methods: {
-    isWatch: function isWatch(index) {
-      return this.studentLecture.includes(index);
+    getExams: function getExams() {
+      var _this = this;
+
+      axios.get(route("site.exam.showLecture", {
+        exams: this.lectureList[this.lectureIndex].id
+      }), {
+        params: {
+          version: 1,
+          userId: this.userId,
+          courseId: this.lectureList[this.lectureIndex].course_id,
+          modelName: this.lectureList[this.lectureIndex].model_name,
+          index: this.lectureList[this.lectureIndex].index,
+          id: this.lectureList[this.lectureIndex].id
+        }
+      }).then(function (response) {
+        console.log("response :>> ", response);
+
+        _this.studentLecture.push(_this.lectureIndex);
+      })["catch"](function (error) {
+        console.error(error);
+      });
     },
     getVideoUrl: function getVideoUrl() {
       return "https://player.vimeo.com/video/" + this.videoId + "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" + "58479";
     },
     syncDataLecture: function syncDataLecture() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get(route("site.course.lectureList", 2)).then(function (response) {
         console.log("this.data :>> ", response.data);
-        _this.studentLecture = response.data.student_lecture.watched_list.split(",");
+        _this2.studentLecture = response.data.student_lecture.watched_list.split(",");
+        _this2.lectureIndex = _this2.studentLecture[_this2.studentLecture.length - 1];
 
         for (var item in response.data.lectures) {
-          _this.lectureList.push(response.data.lectures[item]);
+          _this2.lectureList.push(response.data.lectures[item]);
         }
 
-        _this.lectureList.sort(function (a, b) {
+        _this2.lectureList.sort(function (a, b) {
           return a.index - b.index;
         });
+
+        if (_this2.lectureList[index].model_name === "Exams") {
+          _this2.getExams();
+        } else {
+          _this2.getLecture();
+        }
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getLecture: function getLecture() {
+      var _this3 = this;
+
+      axios.get(route("site.lecture.showLecture", {
+        userId: this.userId,
+        courseId: this.lectureList[this.lectureIndex].course_id,
+        modelName: this.lectureList[this.lectureIndex].model_name,
+        index: this.lectureList[this.lectureIndex].index,
+        id: this.lectureList[this.lectureIndex].id
+      })).then(function (response) {
+        console.info("response >> ", response);
+        _this3.videoId = response.data.video_resource;
+
+        _this3.studentLecture.push(_this3.lectureIndex);
+
+        console.info("this.videoId >> ", _this3.videoId);
       })["catch"](function (error) {
         console.error(error);
       });
     },
     onClickLecture: function onClickLecture(index) {
-      var _this2 = this;
+      this.lectureIndex = index; // console.log("this.lectureList[index] :>> ", this.lectureList[index]);
 
-      console.log("this.lectureList[index] :>> ", this.lectureList[index]);
-      axios.get(route("site.lecture.showLecture", {
-        userId: this.userId,
-        courseId: this.lectureList[index].course_id,
-        modelName: this.lectureList[index].model_name,
-        index: this.lectureList[index].index,
-        id: this.lectureList[index].id
-      })).then(function (response) {
-        console.info("response >> ", response);
-        _this2.videoId = response.data.video_resource;
-
-        _this2.studentLecture.push(index);
-
-        console.info("this.videoId >> ", _this2.videoId);
-      })["catch"](function (error) {
-        console.error(error);
-      });
+      if (this.lectureList[index].model_name === "Exams") {
+        this.getExams();
+      } else {
+        this.getLecture();
+      }
     }
   }
 });
@@ -41429,17 +41470,25 @@ var render = function() {
     { staticClass: "row mb-4", attrs: { id: "video-lecture" } },
     [
       _c("div", { staticClass: "col-lg-9 bg-white" }, [
-        _c(
-          "div",
-          { staticClass: "embed-responsive embed-responsive-16by9" },
-          [
-            _c("vimeo-player", {
-              ref: "player",
-              attrs: { "video-id": _vm.videoId, "video-url": _vm.getVideoUrl() }
-            })
-          ],
-          1
-        )
+        _c("div", { staticClass: "embed-responsive embed-responsive-16by9" }, [
+          _vm.lectureList[_vm.lectureIndex].model_name == "Exams"
+            ? _c("div", [
+                _vm._v("\n        " + _vm._s(_vm.lectureIndex) + "\n      ")
+              ])
+            : _c(
+                "div",
+                [
+                  _c("vimeo-player", {
+                    ref: "player",
+                    attrs: {
+                      "video-id": _vm.videoId,
+                      "video-url": _vm.getVideoUrl()
+                    }
+                  })
+                ],
+                1
+              )
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-3 bg-white" }, [
@@ -41460,6 +41509,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "list-group-item list-group-item-action",
+                      class: { active: item.index == _vm.lectureIndex },
                       on: {
                         click: function($event) {
                           return _vm.onClickLecture(item.index)

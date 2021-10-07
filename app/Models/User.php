@@ -56,18 +56,14 @@ class User extends Authenticatable implements Wallet, Customer
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['name', 'email', 'password'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
 
     /**
      * The attributes that should be cast to native types.
@@ -106,8 +102,9 @@ class User extends Authenticatable implements Wallet, Customer
         return $this->hasOne(Moderator::class);
     }
 
-    public function student_courses () {
-        if ($this->hasRole('student')){
+    public function student_courses()
+    {
+        if ($this->hasRole('student')) {
             return $this->hasMany(StudentCourses::class, 'student_id');
         }
         return null;
@@ -127,7 +124,8 @@ class User extends Authenticatable implements Wallet, Customer
         ];
     }
 
-    public function membership(){
+    public function membership()
+    {
         return $this->belongsTo(Membership::class, 'membership_group');
     }
 }

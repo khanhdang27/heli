@@ -2,11 +2,16 @@
   <div class="row mb-4" id="video-lecture">
     <div class="col-lg-9 bg-white">
       <div class="embed-responsive embed-responsive-16by9">
-        <vimeo-player
-          ref="player"
-          :video-id="videoId"
-          :video-url="getVideoUrl()"
-        />
+        <div v-if="lectureList[lectureIndex].model_name == 'Exams'">
+          {{ lectureIndex }}
+        </div>
+        <div v-else>
+          <vimeo-player
+            ref="player"
+            :video-id="videoId"
+            :video-url="getVideoUrl()"
+          />
+        </div>
       </div>
     </div>
     <div class="col-lg-3 bg-white">
@@ -19,6 +24,7 @@
         >
           <button
             class="list-group-item list-group-item-action"
+            v-bind:class="{ active: item.index == lectureIndex }"
             v-on:click="onClickLecture(item.index)"
           >
             <div class="d-flex w-100 justify-content-left">
@@ -76,18 +82,41 @@ export default {
   },
   data() {
     return {
+      lectureIndex: -1,
       lectureList: [],
       videoId: "588754544",
       studentLecture: [],
-      //
+      questions: [],
     };
   },
   mounted() {
     this.syncDataLecture();
   },
   methods: {
-    isWatch(index) {
-      return this.studentLecture.includes(index);
+    getExams() {
+      axios
+        .get(
+          route("site.exam.showLecture", {
+            exams: this.lectureList[this.lectureIndex].id,
+          }),
+          {
+            params: {
+              version: 1,
+              userId: this.userId,
+              courseId: this.lectureList[this.lectureIndex].course_id,
+              modelName: this.lectureList[this.lectureIndex].model_name,
+              index: this.lectureList[this.lectureIndex].index,
+              id: this.lectureList[this.lectureIndex].id,
+            },
+          }
+        )
+        .then((response) => {
+          console.log("response :>> ", response);
+          this.studentLecture.push(this.lectureIndex);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     },
     getVideoUrl() {
       return (
@@ -106,38 +135,55 @@ export default {
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
 
+          this.lectureIndex =
+            this.studentLecture[this.studentLecture.length - 1];
+
           for (let item in response.data.lectures) {
             this.lectureList.push(response.data.lectures[item]);
           }
           this.lectureList.sort(function (a, b) {
             return a.index - b.index;
           });
+
+          if (this.lectureList[index].model_name === "Exams") {
+            this.getExams();
+          } else {
+            this.getLecture();
+          }
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
+    getLecture() {
+      axios
+        .get(
+          route("site.lecture.showLecture", {
+            userId: this.userId,
+            courseId: this.lectureList[this.lectureIndex].course_id,
+            modelName: this.lectureList[this.lectureIndex].model_name,
+            index: this.lectureList[this.lectureIndex].index,
+            id: this.lectureList[this.lectureIndex].id,
+          })
+        )
+        .then((response) => {
+          console.info("response >> ", response);
+          this.videoId = response.data.video_resource;
+          this.studentLecture.push(this.lectureIndex);
+          console.info("this.videoId >> ", this.videoId);
         })
         .catch(function (error) {
           console.error(error);
         });
     },
     onClickLecture(index) {
-      console.log("this.lectureList[index] :>> ", this.lectureList[index]);
-      axios
-        .get(
-          route("site.lecture.showLecture", {
-            userId: this.userId,
-            courseId: this.lectureList[index].course_id,
-            modelName: this.lectureList[index].model_name,
-            index: this.lectureList[index].index,
-            id: this.lectureList[index].id,
-          })
-        )
-        .then((response) => {
-          console.info("response >> ", response);
-          this.videoId = response.data.video_resource;
-          this.studentLecture.push(index);
-          console.info("this.videoId >> ", this.videoId);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+      this.lectureIndex = index;
+      // console.log("this.lectureList[index] :>> ", this.lectureList[index]);
+      if (this.lectureList[index].model_name === "Exams") {
+        this.getExams();
+      } else {
+        this.getLecture();
+      }
     },
   },
 };
