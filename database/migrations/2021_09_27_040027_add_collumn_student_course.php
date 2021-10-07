@@ -14,7 +14,7 @@ class AddCollumnStudentCourse extends Migration
     public function up()
     {
         Schema::table('student_courses', function (Blueprint $table) {
-            $table->json('watched_list');
+            $table->text('watched_list');
             $table->bigInteger('lecture_open')->nullable();
             $table->bigInteger('quiz_lecture')->nullable();
             $table->bigInteger('level_quiz')->nullable();
@@ -22,6 +22,10 @@ class AddCollumnStudentCourse extends Migration
 
         Schema::table('lectures', function (Blueprint $table) {
             $table->integer('index')->default(0);
+        });
+
+        Schema::table('courses', function (Blueprint $table) {
+            $table->text('related')->default(0);
         });
     }
 

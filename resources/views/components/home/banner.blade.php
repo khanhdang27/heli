@@ -1,6 +1,6 @@
 <div class="banner-content">
     <div class="banner-background"
-        style="background-image: url('{{ empty($banner->image) ? asset('images/banner.jpg') : asset('/file/'.$banner->image->id)}}')">
+        style="background-image: url('{{ empty($banner->image) ? asset('images/banner.jpg') : asset('/file/' . $banner->image->id) }}')">
     </div>
     <div class="bg-opacity"></div>
     <div class="banner-info" id="bannerInfo">
@@ -18,15 +18,15 @@
 </div>
 
 @push('scripts')
-<script type="application/javascript">
-    const elementBanner = document.getElementById('bannerInfo');
-    var animateBanner = anime({
-        targets: elementBanner,
-        translateY: ["110%", "-50%"],
-        translateX: ["-50%", "-50%"],
-        easing: 'easeOutExpo',
-        opacity: [0.05, 1],
-        delay: 1500
-    })
-</script>
+    <script type="application/javascript">
+        const elementBanner = document.getElementById('bannerInfo');
+        var animateBanner = anime({
+            targets: elementBanner,
+            translateY: ["110%", "-50%"],
+            translateX: ["-50%", "-50%"],
+            easing: 'easeOutExpo',
+            opacity: [0.05, 1],
+            delay: 1500
+        })
+    </script>
 @endpush
