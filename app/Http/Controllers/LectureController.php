@@ -126,21 +126,24 @@ class LectureController extends Controller
                 ->first();
 
             $newWatchList = '';
+            // dd(strlen($student_course->watched_list) == 0);
             if (strlen($student_course->watched_list) == 0) {
                 $newWatchList = $input['index'];
             } else {
-                $newWatchList .= $student_course->watched_list;
+                $watched_list = explode(',', $student_course->watched_list);
+                if (!in_array($input['index'], $watched_list)) {
+                    $newWatchList = $student_course->watched_list . ',' . $input['index'];
+                }
             }
-
             $student_course->update(['watched_list' => $newWatchList]);
             if ($input['modelName'] == 'Lecture') {
                 $lecture = Lecture::find($input['id']);
-
                 DB::commit();
                 return response()->json($lecture);
             }
         } catch (\Throwable $th) {
             DB::rollBack();
+            dd($th);
             return response()->json(
                 [
                     'message' => $th->getMessage(),

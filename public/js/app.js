@@ -4429,6 +4429,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -4442,13 +4449,17 @@ __webpack_require__.r(__webpack_exports__);
     return {
       lectureList: [],
       videoId: "588754544",
-      userStudies: []
+      studentLecture: [] //
+
     };
   },
   mounted: function mounted() {
     this.syncDataLecture();
   },
   methods: {
+    isWatch: function isWatch(index) {
+      return this.studentLecture.includes(index);
+    },
     getVideoUrl: function getVideoUrl() {
       return "https://player.vimeo.com/video/" + this.videoId + "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" + "58479";
     },
@@ -4456,15 +4467,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get(route("site.course.lectureList", 2)).then(function (response) {
-        for (var item in response.data) {
-          _this.lectureList.push(response.data[item]);
+        console.log("this.data :>> ", response.data);
+        _this.studentLecture = response.data.student_lecture.watched_list.split(",");
+
+        for (var item in response.data.lectures) {
+          _this.lectureList.push(response.data.lectures[item]);
         }
 
         _this.lectureList.sort(function (a, b) {
           return a.index - b.index;
         });
-
-        console.log("this.lectureList :>> ", _this.lectureList);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -4482,6 +4494,9 @@ __webpack_require__.r(__webpack_exports__);
       })).then(function (response) {
         console.info("response >> ", response);
         _this2.videoId = response.data.video_resource;
+
+        _this2.studentLecture.push(index);
+
         console.info("this.videoId >> ", _this2.videoId);
       })["catch"](function (error) {
         console.error(error);
@@ -41456,7 +41471,52 @@ var render = function() {
                         "div",
                         { staticClass: "d-flex w-100 justify-content-left" },
                         [
-                          _vm._m(0, true),
+                          _c("div", { staticClass: "my-auto mr-3" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.studentLecture,
+                                  expression: "studentLecture"
+                                }
+                              ],
+                              attrs: {
+                                readonly: "",
+                                type: "checkbox",
+                                name: "index",
+                                id: "index"
+                              },
+                              domProps: {
+                                value: item.index,
+                                checked: Array.isArray(_vm.studentLecture)
+                                  ? _vm._i(_vm.studentLecture, item.index) > -1
+                                  : _vm.studentLecture
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$a = _vm.studentLecture,
+                                    $$el = $event.target,
+                                    $$c = $$el.checked ? true : false
+                                  if (Array.isArray($$a)) {
+                                    var $$v = item.index,
+                                      $$i = _vm._i($$a, $$v)
+                                    if ($$el.checked) {
+                                      $$i < 0 &&
+                                        (_vm.studentLecture = $$a.concat([$$v]))
+                                    } else {
+                                      $$i > -1 &&
+                                        (_vm.studentLecture = $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1)))
+                                    }
+                                  } else {
+                                    _vm.studentLecture = $$c
+                                  }
+                                }
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
                           item.model_name == "Exams"
                             ? _c("div", [
@@ -41470,7 +41530,7 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _vm._m(1, true)
+                                _vm._m(0, true)
                               ])
                             : _vm._e(),
                           _vm._v(" "),
@@ -41486,7 +41546,7 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _vm._m(2, true)
+                                _vm._m(1, true)
                               ])
                             : _vm._e()
                         ]
@@ -41504,14 +41564,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "my-auto mr-3" }, [
-      _c("input", { attrs: { type: "checkbox", name: "", id: "" } })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

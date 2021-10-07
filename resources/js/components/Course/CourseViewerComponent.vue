@@ -23,7 +23,14 @@
           >
             <div class="d-flex w-100 justify-content-left">
               <div class="my-auto mr-3">
-                <input type="checkbox" name="" id="" />
+                <input
+                  readonly
+                  type="checkbox"
+                  :value="item.index"
+                  name="index"
+                  id="index"
+                  v-model="studentLecture"
+                />
               </div>
               <div v-if="item.model_name == 'Exams'">
                 <h4 class="mb-1">
@@ -71,13 +78,17 @@ export default {
     return {
       lectureList: [],
       videoId: "588754544",
-      userStudies: [],
+      studentLecture: [],
+      //
     };
   },
   mounted() {
     this.syncDataLecture();
   },
   methods: {
+    isWatch(index) {
+      return this.studentLecture.includes(index);
+    },
     getVideoUrl() {
       return (
         "https://player.vimeo.com/video/" +
@@ -90,14 +101,17 @@ export default {
       axios
         .get(route("site.course.lectureList", 2))
         .then((response) => {
-          for (let item in response.data) {
-            this.lectureList.push(response.data[item]);
+          console.log("this.data :>> ", response.data);
+
+          this.studentLecture =
+            response.data.student_lecture.watched_list.split(",");
+
+          for (let item in response.data.lectures) {
+            this.lectureList.push(response.data.lectures[item]);
           }
           this.lectureList.sort(function (a, b) {
             return a.index - b.index;
           });
-
-          console.log("this.lectureList :>> ", this.lectureList);
         })
         .catch(function (error) {
           console.error(error);
@@ -118,6 +132,7 @@ export default {
         .then((response) => {
           console.info("response >> ", response);
           this.videoId = response.data.video_resource;
+          this.studentLecture.push(index);
           console.info("this.videoId >> ", this.videoId);
         })
         .catch(function (error) {

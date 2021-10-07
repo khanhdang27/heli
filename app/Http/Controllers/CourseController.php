@@ -174,9 +174,13 @@ class CourseController extends Controller
                 })
                 ->first();
 
+            $student_course = StudentCourses::where('course_id', $courses->membershipCourses->course->id)
+                ->where('student_id', Auth::user()->id)
+                ->first();
+
             $lecture_course = $courses->membershipCourses->course->lecture->concat($courses->membershipCourses->course->exams);
 
-            return response()->json($lecture_course->sortBy('index'));
+            return response()->json(['lectures' => $lecture_course->sortBy('index')->toArray(), 'student_lecture' => $student_course->toArray()]);
         } catch (\Throwable $th) {
             dd($th);
         }
