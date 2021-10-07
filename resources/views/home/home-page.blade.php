@@ -80,19 +80,19 @@
     @endif
     @if (!Auth::check())
     {{-- chua dang nhap --}}
-    <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>
+{{--    <x-home.video-course :courseDetail=$courseVideo></x-home.video-course>--}}
 
     @else
     {{-- da dang nhap --}}
-    <div class="mx-auto container-home mt-5">
-        <div class="d-flex justify-content-between flex-wrap pt-5 btn-above-video px-3">
-            <h2 class="text-primary">@lang('keywords.continueMyCourse')</h2>
-            <a href="{{ route('site.user.course') }}" class="m-0 btn btn-register-now btn-login px-5">
-                @lang('keywords.otherPurchasedCourses')
-            </a>
-        </div>
-        <x-home.video-course :courseDetail=$courseVideo :latesLecture=$latesLecture></x-home.video-course>
-    </div>
+{{--    <div class="mx-auto container-home mt-5">--}}
+{{--        <div class="d-flex justify-content-between flex-wrap pt-5 btn-above-video px-3">--}}
+{{--            <h2 class="text-primary">@lang('keywords.continueMyCourse')</h2>--}}
+{{--            <a href="{{ route('site.user.course') }}" class="m-0 btn btn-register-now btn-login px-5">--}}
+{{--                @lang('keywords.otherPurchasedCourses')--}}
+{{--            </a>--}}
+{{--        </div>--}}
+{{--        <x-home.video-course :courseDetail=$courseVideo :latesLecture=$latesLecture></x-home.video-course>--}}
+{{--    </div>--}}
     @endif
     @if (!Auth::check())
     <div class="free-class-container" id="free-class">

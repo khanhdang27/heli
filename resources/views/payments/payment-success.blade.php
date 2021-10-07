@@ -1,7 +1,7 @@
 
 @extends('layout.app')
 
-@section('title','Blog Page')
+@section('title','Payment')
 
 @section('content')
 
@@ -18,7 +18,7 @@
             <h2 class="text-center font-weight-bold">Helios Education, Inc.</h2>
             <h3 class="text-center font-weight-bold">Thank you for purchasing the course by Helios. You can join the course now</h3>
             <div class="d-flex justify-content-center mt-5">
-                <a href="{{ URL::route('site.user.course') }}" class="btn text-white bg-primary border border-primary rounded btn-register-now m-0 py-2">
+                <a href="{{route('site.course.show', $course_id)}}" class="btn text-white bg-primary border border-primary rounded btn-register-now m-0 py-2">
                     Learn now
                 </a>
             </div>
