@@ -34,6 +34,8 @@
     <div id="app">
         @yield('content')
     </div>
+    @routes
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -82,8 +84,7 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     </script>
-    @routes
-    <script src="{{ asset('js/app.js') }}"></script>
+
 
 </body>
 
