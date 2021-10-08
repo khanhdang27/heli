@@ -3,7 +3,8 @@
         <div class="col-lg-9 bg-white">
             <div class="h-100">
                 <div v-if="lectureList[lectureIndex].model_name == 'Exams'" class="h-100">
-                    <quiz-component v-bind:questions=questions[0]></quiz-component>
+                    <quiz-component v-bind:questions=questions[0]
+                    @userMakeQuiz = "userMakeQuiz"></quiz-component>
                 </div>
                 <div v-else>
                     <vimeo-player
@@ -89,12 +90,19 @@ export default {
             videoId: "588754544",
             studentLecture: [],
             questions: [],
+            quiz: []
         };
     },
     mounted() {
         this.syncDataLecture();
     },
     methods: {
+        userMakeQuiz: function (value) {
+            this.quiz = value
+            console.log(this.quiz)
+            localStorage.setItem('quiz', JSON.stringify(this.quiz))
+            console.log(localStorage.getItem('quiz'))
+        },
         getExams() {
             axios
                 .get(
