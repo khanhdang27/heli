@@ -15,7 +15,7 @@ class Exams extends Model
     protected $guarded = [];
 
     //Add extra attribute
-    protected $attributes = ['model_name'];
+//    protected $attributes = ['model_name'];
 
     //Make it available in the json response
     protected $appends = ['model_name'];
