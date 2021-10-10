@@ -24,7 +24,7 @@ class ExamsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Course $course)
     {
         return view('admin.course.exam_quiz.create', [
             'course' => $course,

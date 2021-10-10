@@ -25,7 +25,7 @@ class AddCollumnStudentCourse extends Migration
         });
 
         Schema::table('courses', function (Blueprint $table) {
-            $table->text('related')->default(0);
+            $table->text('related')->nullable();
         });
     }
 

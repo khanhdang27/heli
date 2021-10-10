@@ -16,9 +16,11 @@ class SettingController extends Controller
      */
     public function index()
     {
-        $settings = Setting::query()->orderBy('created_at')->paginate(9);
+        $settings = Setting::query()
+            ->orderBy('created_at')
+            ->paginate(9);
         return view('admin.setting.index', [
-            'settings' => $settings
+            'settings' => $settings,
         ]);
     }
 
@@ -42,17 +44,17 @@ class SettingController extends Controller
     {
         $input = $request->validate([
             'key' => 'required|unique:settings,key',
-            'value' => 'required'
+            'value' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $setting = Setting::create([
                 'key' => $input['key'],
-                'value' => $input['value']
+                'value' => $input['value'],
             ]);
             DB::commit();
             return back()->with('success', 'Create success');
-        } catch (\Throwable $th){
+        } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors('Create error');
         }
@@ -78,8 +80,9 @@ class SettingController extends Controller
     public function edit($key)
     {
         $setting = Setting::where('key', $key)->first();
+
         return view('admin.setting.edit', [
-            'setting' => $setting
+            'setting' => $setting,
         ]);
     }
 
@@ -93,17 +96,19 @@ class SettingController extends Controller
     public function update(Request $request, $key)
     {
         $input = $request->validate([
-            'value' => 'required'
+            'value' => 'required',
         ]);
         DB::beginTransaction();
         try {
-            $setting = Setting::query()->where('key', $key)->first();
+            $setting = Setting::query()
+                ->where('key', $key)
+                ->first();
             $setting->update([
-                'value' => $input['value']
+                'value' => $input['value'],
             ]);
             DB::commit();
             return back()->with('success', 'Update success');
-        } catch (\Throwable $th){
+        } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors('Update error');
         }
