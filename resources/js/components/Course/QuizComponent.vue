@@ -13,7 +13,7 @@
     <div class="container-fluid py-5 h-100">
       <div class="row justify-content-center h-100">
         <div class="col-sm-8 h-100">
-          <div class="h-100">
+          <div v-if="result.length === 0" class="h-100">
             <div class="h-25">
               <h1 v-cloak>{{ questions[questionIndex].question }}</h1>
               <p>Choose the most correct answer</p>
@@ -34,7 +34,7 @@
                   type="radio"
                   :id="answer.id"
                   :value="answer.id"
-                  v-model="userChoose"
+                  v-model="userChoose[questionIndex]"
                   hidden
                 />
                 <label :for="answer.id" class="w-100">
@@ -45,14 +45,12 @@
               </div>
             </div>
           </div>
+          <div v-else>results</div>
         </div>
       </div>
     </div>
 
     <div class="bg-light text-right border py-2 px-5">
-      <button class="btn btn-primary mr-5" v-on:click="userAnswer()">
-        Check answer
-      </button>
       <button
         class="btn btn-primary"
         v-on:click="prev()"
@@ -60,13 +58,16 @@
       >
         Previous
       </button>
-      <button
-        class="btn btn-primary"
-        v-on:click="next()"
-        v-if="userChoose !== ''"
-      >
-        Next
-      </button>
+      <span v-if="userChoose[questionIndex] !== ''">
+        <button
+          class="btn btn-primary"
+          v-on:click="submitAnswer()"
+          v-if="questionIndex == questions.length - 1"
+        >
+          Submit
+        </button>
+        <button v-else class="btn btn-primary" v-on:click="next()">Next</button>
+      </span>
     </div>
   </div>
 </template>
@@ -74,36 +75,85 @@
 export default {
   props: {
     questions: Array,
-    userMakeQuiz: Array,
   },
   data() {
     return {
       questionIndex: 0,
       questionNo: "",
-      userChoose: "",
-      makeQuiz: [],
+      userChoose: [],
+      quiz: [],
+      result: [],
     };
   },
-  mounted: function () {},
+  mounted: function () {
+    this.getAnswerUser();
+  },
   methods: {
+    submitAnswer() {
+      // this.$emit("submit", true);'
+      console.log("this.quiz :>> ", this.quiz);
+      axios
+        .post(
+          route("site.exam.checkExam", {
+            exams: 1,
+          }),
+          {
+            version: 1,
+            userId: 12,
+            courseId: 2,
+            quiz: this.quiz,
+          }
+        )
+        .then((response) => {
+          console.log("this.response :>> ", response);
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
     userAnswer: function () {
       this.questionNo = document.getElementById(
         "ques" + this.questions[this.questionIndex].id
       ).value;
-      this.makeQuiz.push({
+      this.userAnswerQuiz({
         questionID: parseInt(this.questionNo),
-        answerID: this.userChoose,
+        answerID: this.userChoose[this.questionIndex],
       });
-      this.userMakeQuiz = this.makeQuiz;
-      this.$emit("userMakeQuiz", this.userMakeQuiz);
     },
     next: function () {
-      if (this.questionIndex < this.questions.length) {
+      if (this.questionIndex < this.questions.length - 1) {
+        this.userAnswer();
         this.questionIndex++;
       }
     },
     prev: function () {
       if (this.questionIndex > 0) this.questionIndex--;
+    },
+    userAnswerQuiz: function (value) {
+      if (this.quiz.length === 0) {
+        this.quiz.push(value);
+      } else {
+        if (
+          this.quiz.some((item) => {
+            return value.questionID === item.questionID;
+          })
+        ) {
+          this.quiz.map((item) => {
+            if (value.questionID === item.questionID) {
+              return (item.answerID = value.answerID);
+            }
+          });
+        } else {
+          this.quiz.push(value);
+        }
+      }
+      localStorage.setItem("quiz", JSON.stringify(this.quiz));
+    },
+    getAnswerUser() {
+      this.quiz = JSON.parse(localStorage.getItem("quiz")) || new Array();
+      this.quiz.forEach((item) => {
+        this.userChoose.push(item.answerID);
+      });
     },
   },
 };

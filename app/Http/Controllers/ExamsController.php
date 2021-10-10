@@ -133,4 +133,38 @@ class ExamsController extends Controller
             );
         }
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Exams  $exams
+     * @return \Illuminate\Http\Response
+     */
+    public function checkExam(Request $request, Exams $exams)
+    {
+        $input = $request->input();
+        dd($input);
+        DB::beginTransaction();
+        try {
+            $version = $input['version'];
+
+            $quiz = Quiz::with('question')
+                ->with('question.answers')
+                ->whereHas('question', function ($query) use ($version) {
+                    return $query->where('version', $version);
+                })
+                ->first();
+
+            DB::commit();
+            return response()->json($quiz->question);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
 }

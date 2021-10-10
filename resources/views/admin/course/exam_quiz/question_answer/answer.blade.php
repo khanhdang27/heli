@@ -9,7 +9,8 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <div class="pr-2">
-                                <a href="{{ route('admin.forum.index') }}" class="btn btn-outline-dark btn-sm">
+                                <a href="{{ route('admin.course.question.list', ['course' => $course->id, 'exam' => $exam, 'quiz' => $quiz]) }}"
+                                    class="btn btn-outline-dark btn-sm">
                                     <i class="fe fe-arrow-left"></i>
                                 </a>
                             </div>

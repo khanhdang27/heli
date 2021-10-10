@@ -11,9 +11,8 @@
         >
           <quiz-component
             v-cloak
-            v-if="questions"
             v-bind:questions="questions"
-            @userMakeQuiz="userMakeQuiz"
+            v-if="questions"
           ></quiz-component>
         </div>
         <div v-else>
@@ -28,7 +27,7 @@
     </div>
     <div class="col-lg-3 bg-white">
       <div class="box-list-video text-primary">
-        <h2 class="font-weight-bolder pb-2">Course Content</h2>
+        <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
         <ul
           class="list-group list-group-flush"
           v-for="item in lectureList"
@@ -108,10 +107,6 @@ export default {
     this.syncDataLecture();
   },
   methods: {
-    userMakeQuiz: function (value) {
-      this.quiz = IDBCursorWithValue;
-      localStorage.setItem("quiz", JSON.stringify(this.quiz));
-    },
     getExams() {
       axios
         .get(
@@ -132,6 +127,7 @@ export default {
         .then((response) => {
           this.studentLecture.push(this.lectureIndex);
           this.questions = response.data;
+          console.log("this.questions :>> ", this.questions);
         })
         .catch(function (error) {
           console.error(error);
@@ -145,6 +141,7 @@ export default {
         process.env.MIX_VIMEO_APP_ID
       );
     },
+
     syncDataLecture() {
       axios
         .get(route("site.course.lectureList", 2))

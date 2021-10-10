@@ -4454,7 +4454,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4480,10 +4479,6 @@ __webpack_require__.r(__webpack_exports__);
     this.syncDataLecture();
   },
   methods: {
-    userMakeQuiz: function userMakeQuiz(value) {
-      this.quiz = IDBCursorWithValue;
-      localStorage.setItem("quiz", JSON.stringify(this.quiz));
-    },
     getExams: function getExams() {
       var _this = this;
 
@@ -4502,6 +4497,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.studentLecture.push(_this.lectureIndex);
 
         _this.questions = response.data;
+        console.log("this.questions :>> ", _this.questions);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -4647,37 +4643,82 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    questions: Array,
-    userMakeQuiz: Array
+    questions: Array
   },
   data: function data() {
     return {
       questionIndex: 0,
       questionNo: "",
-      userChoose: "",
-      makeQuiz: []
+      userChoose: [],
+      quiz: [],
+      result: []
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.getAnswerUser();
+  },
   methods: {
+    submitAnswer: function submitAnswer() {
+      // this.$emit("submit", true);'
+      console.log("this.quiz :>> ", this.quiz);
+      axios.post(route("site.exam.checkExam", {
+        exams: 1
+      }), {
+        version: 1,
+        userId: 12,
+        courseId: 2,
+        quiz: this.quiz
+      }).then(function (response) {
+        console.log("this.response :>> ", response);
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
     userAnswer: function userAnswer() {
       this.questionNo = document.getElementById("ques" + this.questions[this.questionIndex].id).value;
-      this.makeQuiz.push({
+      this.userAnswerQuiz({
         questionID: parseInt(this.questionNo),
-        answerID: this.userChoose
+        answerID: this.userChoose[this.questionIndex]
       });
-      this.userMakeQuiz = this.makeQuiz;
-      this.$emit("userMakeQuiz", this.userMakeQuiz);
     },
     next: function next() {
-      if (this.questionIndex < this.questions.length) {
+      if (this.questionIndex < this.questions.length - 1) {
+        this.userAnswer();
         this.questionIndex++;
       }
     },
     prev: function prev() {
       if (this.questionIndex > 0) this.questionIndex--;
+    },
+    userAnswerQuiz: function userAnswerQuiz(value) {
+      if (this.quiz.length === 0) {
+        this.quiz.push(value);
+      } else {
+        if (this.quiz.some(function (item) {
+          return value.questionID === item.questionID;
+        })) {
+          this.quiz.map(function (item) {
+            if (value.questionID === item.questionID) {
+              return item.answerID = value.answerID;
+            }
+          });
+        } else {
+          this.quiz.push(value);
+        }
+      }
+
+      localStorage.setItem("quiz", JSON.stringify(this.quiz));
+    },
+    getAnswerUser: function getAnswerUser() {
+      var _this = this;
+
+      this.quiz = JSON.parse(localStorage.getItem("quiz")) || new Array();
+      this.quiz.forEach(function (item) {
+        _this.userChoose.push(item.answerID);
+      });
     }
   }
 });
@@ -41688,8 +41729,7 @@ var render = function() {
                 [
                   _vm.questions
                     ? _c("quiz-component", {
-                        attrs: { questions: _vm.questions },
-                        on: { userMakeQuiz: _vm.userMakeQuiz }
+                        attrs: { questions: _vm.questions }
                       })
                     : _vm._e()
                 ],
@@ -41717,7 +41757,7 @@ var render = function() {
           "div",
           { staticClass: "box-list-video text-primary" },
           [
-            _c("h2", { staticClass: "font-weight-bolder pb-2" }, [
+            _c("h2", { staticClass: "font-weight-bolder pb-2 background-" }, [
               _vm._v("Course Content")
             ]),
             _vm._v(" "),
@@ -41889,107 +41929,109 @@ var render = function() {
           _c("div", { staticClass: "container-fluid py-5 h-100" }, [
             _c("div", { staticClass: "row justify-content-center h-100" }, [
               _c("div", { staticClass: "col-sm-8 h-100" }, [
-                _c("div", { staticClass: "h-100" }, [
-                  _c("div", { staticClass: "h-25" }, [
-                    _c("h1", {}, [
-                      _vm._v(_vm._s(_vm.questions[_vm.questionIndex].question))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Choose the most correct answer")])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "h-75" },
-                    [
-                      _c("input", {
-                        attrs: {
-                          type: "number",
-                          id: "ques" + _vm.questions[_vm.questionIndex].id,
-                          hidden: ""
-                        },
-                        domProps: { value: _vm.questions[_vm.questionIndex].id }
-                      }),
+                _vm.result.length === 0
+                  ? _c("div", { staticClass: "h-100" }, [
+                      _c("div", { staticClass: "h-25" }, [
+                        _c("h1", {}, [
+                          _vm._v(
+                            _vm._s(_vm.questions[_vm.questionIndex].question)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v("Choose the most correct answer")])
+                      ]),
                       _vm._v(" "),
-                      _vm._l(_vm.questions[_vm.questionIndex].answers, function(
-                        answer
-                      ) {
-                        return _c(
-                          "div",
-                          {
-                            key: answer.id,
-                            staticClass:
-                              "py-0 my-2 border border-primary rounded answer-selection"
-                          },
-                          [
-                            _c("input", {
-                              directives: [
+                      _c(
+                        "div",
+                        { staticClass: "h-75" },
+                        [
+                          _c("input", {
+                            attrs: {
+                              type: "number",
+                              id: "ques" + _vm.questions[_vm.questionIndex].id,
+                              hidden: ""
+                            },
+                            domProps: {
+                              value: _vm.questions[_vm.questionIndex].id
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._l(
+                            _vm.questions[_vm.questionIndex].answers,
+                            function(answer) {
+                              return _c(
+                                "div",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.userChoose,
-                                  expression: "userChoose"
-                                }
-                              ],
-                              attrs: {
-                                type: "radio",
-                                id: answer.id,
-                                hidden: ""
-                              },
-                              domProps: {
-                                value: answer.id,
-                                checked: _vm._q(_vm.userChoose, answer.id)
-                              },
-                              on: {
-                                change: function($event) {
-                                  _vm.userChoose = answer.id
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "w-100",
-                                attrs: { for: answer.id }
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  { staticClass: "btn text-left w-100" },
-                                  [
-                                    _c("h5", { staticClass: "mb-0" }, [
-                                      _vm._v(_vm._s(answer.answer))
-                                    ])
-                                  ]
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ])
+                                  key: answer.id,
+                                  staticClass:
+                                    "py-0 my-2 border border-primary rounded answer-selection"
+                                },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.userChoose[_vm.questionIndex],
+                                        expression: "userChoose[questionIndex]"
+                                      }
+                                    ],
+                                    attrs: {
+                                      type: "radio",
+                                      id: answer.id,
+                                      hidden: ""
+                                    },
+                                    domProps: {
+                                      value: answer.id,
+                                      checked: _vm._q(
+                                        _vm.userChoose[_vm.questionIndex],
+                                        answer.id
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.userChoose,
+                                          _vm.questionIndex,
+                                          answer.id
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "w-100",
+                                      attrs: { for: answer.id }
+                                    },
+                                    [
+                                      _c(
+                                        "a",
+                                        { staticClass: "btn text-left w-100" },
+                                        [
+                                          _c("h5", { staticClass: "mb-0" }, [
+                                            _vm._v(_vm._s(answer.answer))
+                                          ])
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            }
+                          )
+                        ],
+                        2
+                      )
+                    ])
+                  : _c("div", [_vm._v("results")])
               ])
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "bg-light text-right border py-2 px-5" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary mr-5",
-                on: {
-                  click: function($event) {
-                    return _vm.userAnswer()
-                  }
-                }
-              },
-              [_vm._v("\n      Check answer\n    ")]
-            ),
-            _vm._v(" "),
             _vm.questionIndex > 0
               ? _c(
                   "button",
@@ -42005,19 +42047,34 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _vm.userChoose !== ""
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.next()
-                      }
-                    }
-                  },
-                  [_vm._v("\n      Next\n    ")]
-                )
+            _vm.userChoose[_vm.questionIndex] !== ""
+              ? _c("span", [
+                  _vm.questionIndex == _vm.questions.length - 1
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: {
+                            click: function($event) {
+                              return _vm.submitAnswer()
+                            }
+                          }
+                        },
+                        [_vm._v("\n        Submit\n      ")]
+                      )
+                    : _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          on: {
+                            click: function($event) {
+                              return _vm.next()
+                            }
+                          }
+                        },
+                        [_vm._v("Next")]
+                      )
+                ])
               : _vm._e()
           ])
         ]
