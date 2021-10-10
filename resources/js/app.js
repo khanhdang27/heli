@@ -31,6 +31,7 @@ Vue.component('top-up-history', require('./components/Wallet/TopUpHistory.vue').
 Vue.component('like-component', require('./components/Share/LikeComponent.vue').default);
 Vue.component('rating-component', require('./components/Share/RatingComponent.vue').default);
 Vue.component('lecture-component', require('./components/Course/CourseViewerComponent.vue').default);
+Vue.component('quiz-component', require('./components/Course/QuizComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

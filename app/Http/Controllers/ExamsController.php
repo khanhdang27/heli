@@ -24,7 +24,7 @@ class ExamsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Course $course)
     {
         return view('admin.course.exam_quiz.create', [
             'course' => $course,
@@ -52,6 +52,7 @@ class ExamsController extends Controller
             DB::commit();
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollback();
             return back()->withErrors('errors', 'Create errors!');
         }
