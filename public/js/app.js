@@ -4371,6 +4371,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue_vimeo_player__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-vimeo-player */ "./node_modules/vue-vimeo-player/dist/bundle.es.js");
+/* harmony import */ var _QuizComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QuizComponent */ "./resources/js/components/Course/QuizComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4443,27 +4456,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     courseId: Number,
     userId: Number
   },
   components: {
+    QuizComponent: _QuizComponent__WEBPACK_IMPORTED_MODULE_1__.default,
     vueVimeoPlayer: vue_vimeo_player__WEBPACK_IMPORTED_MODULE_0__.vueVimeoPlayer
   },
   data: function data() {
     return {
-      lectureIndex: -1,
+      lectureIndex: 0,
       lectureList: [],
       videoId: "588754544",
       studentLecture: [],
-      questions: []
+      questions: [],
+      quiz: []
     };
   },
   mounted: function mounted() {
     this.syncDataLecture();
   },
   methods: {
+    userMakeQuiz: function userMakeQuiz(value) {
+      this.quiz = IDBCursorWithValue;
+      localStorage.setItem("quiz", JSON.stringify(this.quiz));
+    },
     getExams: function getExams() {
       var _this = this;
 
@@ -4479,9 +4499,9 @@ __webpack_require__.r(__webpack_exports__);
           id: this.lectureList[this.lectureIndex].id
         }
       }).then(function (response) {
-        console.log("response :>> ", response);
-
         _this.studentLecture.push(_this.lectureIndex);
+
+        _this.questions = response.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -4493,9 +4513,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get(route("site.course.lectureList", 2)).then(function (response) {
-        console.log("this.data :>> ", response.data);
         _this2.studentLecture = response.data.student_lecture.watched_list.split(",");
-        _this2.lectureIndex = _this2.studentLecture[_this2.studentLecture.length - 1];
+        _this2.lectureIndex = _this2.studentLecture.length != 0 ? _this2.studentLecture[_this2.studentLecture.length - 2] : 0;
 
         for (var item in response.data.lectures) {
           _this2.lectureList.push(response.data.lectures[item]);
@@ -4505,7 +4524,7 @@ __webpack_require__.r(__webpack_exports__);
           return a.index - b.index;
         });
 
-        if (_this2.lectureList[index].model_name === "Exams") {
+        if (_this2.lectureList[_this2.lectureIndex].model_name === "Exams") {
           _this2.getExams();
         } else {
           _this2.getLecture();
@@ -4524,24 +4543,141 @@ __webpack_require__.r(__webpack_exports__);
         index: this.lectureList[this.lectureIndex].index,
         id: this.lectureList[this.lectureIndex].id
       })).then(function (response) {
-        console.info("response >> ", response);
         _this3.videoId = response.data.video_resource;
 
         _this3.studentLecture.push(_this3.lectureIndex);
-
-        console.info("this.videoId >> ", _this3.videoId);
       })["catch"](function (error) {
         console.error(error);
       });
     },
     onClickLecture: function onClickLecture(index) {
-      this.lectureIndex = index; // console.log("this.lectureList[index] :>> ", this.lectureList[index]);
+      this.lectureIndex = index;
 
       if (this.lectureList[index].model_name === "Exams") {
         this.getExams();
       } else {
         this.getLecture();
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/QuizComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/QuizComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    questions: Array,
+    userMakeQuiz: Array
+  },
+  data: function data() {
+    return {
+      questionIndex: 0,
+      questionNo: "",
+      userChoose: "",
+      makeQuiz: []
+    };
+  },
+  mounted: function mounted() {},
+  methods: {
+    userAnswer: function userAnswer() {
+      this.questionNo = document.getElementById("ques" + this.questions[this.questionIndex].id).value;
+      this.makeQuiz.push({
+        questionID: parseInt(this.questionNo),
+        answerID: this.userChoose
+      });
+      this.userMakeQuiz = this.makeQuiz;
+      this.$emit("userMakeQuiz", this.userMakeQuiz);
+    },
+    next: function next() {
+      if (this.questionIndex < this.questions.length) {
+        this.questionIndex++;
+      }
+    },
+    prev: function prev() {
+      if (this.questionIndex > 0) this.questionIndex--;
     }
   }
 });
@@ -4983,6 +5119,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__.default.component('top-up-history', __webpack_r
 vue__WEBPACK_IMPORTED_MODULE_1__.default.component('like-component', __webpack_require__(/*! ./components/Share/LikeComponent.vue */ "./resources/js/components/Share/LikeComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_1__.default.component('rating-component', __webpack_require__(/*! ./components/Share/RatingComponent.vue */ "./resources/js/components/Share/RatingComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_1__.default.component('lecture-component', __webpack_require__(/*! ./components/Course/CourseViewerComponent.vue */ "./resources/js/components/Course/CourseViewerComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_1__.default.component('quiz-component', __webpack_require__(/*! ./components/Course/QuizComponent.vue */ "./resources/js/components/Course/QuizComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -41056,6 +41193,45 @@ component.options.__file = "resources/js/components/Course/CourseViewerComponent
 
 /***/ }),
 
+/***/ "./resources/js/components/Course/QuizComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Course/QuizComponent.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _QuizComponent_vue_vue_type_template_id_2a25f9ff___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./QuizComponent.vue?vue&type=template&id=2a25f9ff& */ "./resources/js/components/Course/QuizComponent.vue?vue&type=template&id=2a25f9ff&");
+/* harmony import */ var _QuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QuizComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/Course/QuizComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _QuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _QuizComponent_vue_vue_type_template_id_2a25f9ff___WEBPACK_IMPORTED_MODULE_0__.render,
+  _QuizComponent_vue_vue_type_template_id_2a25f9ff___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Course/QuizComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -41267,6 +41443,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Course/QuizComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Course/QuizComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuizComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/QuizComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -41360,6 +41552,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseViewerComponent_vue_vue_type_template_id_907a0b72___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CourseViewerComponent_vue_vue_type_template_id_907a0b72___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CourseViewerComponent.vue?vue&type=template&id=907a0b72& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/CourseViewerComponent.vue?vue&type=template&id=907a0b72&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Course/QuizComponent.vue?vue&type=template&id=2a25f9ff&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Course/QuizComponent.vue?vue&type=template&id=2a25f9ff& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_template_id_2a25f9ff___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_template_id_2a25f9ff___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_QuizComponent_vue_vue_type_template_id_2a25f9ff___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./QuizComponent.vue?vue&type=template&id=2a25f9ff& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/QuizComponent.vue?vue&type=template&id=2a25f9ff&");
 
 
 /***/ }),
@@ -41470,16 +41679,28 @@ var render = function() {
     { staticClass: "row mb-4", attrs: { id: "video-lecture" } },
     [
       _c("div", { staticClass: "col-lg-9 bg-white" }, [
-        _c("div", { staticClass: "embed-responsive embed-responsive-16by9" }, [
+        _c("div", { staticClass: "h-100" }, [
+          _vm.lectureList[_vm.lectureIndex] &&
           _vm.lectureList[_vm.lectureIndex].model_name == "Exams"
-            ? _c("div", [
-                _vm._v("\n        " + _vm._s(_vm.lectureIndex) + "\n      ")
-              ])
+            ? _c(
+                "div",
+                { staticClass: "h-100" },
+                [
+                  _vm.questions
+                    ? _c("quiz-component", {
+                        attrs: { questions: _vm.questions },
+                        on: { userMakeQuiz: _vm.userMakeQuiz }
+                      })
+                    : _vm._e()
+                ],
+                1
+              )
             : _c(
                 "div",
                 [
                   _c("vimeo-player", {
                     ref: "player",
+                    staticClass: "embed-responsive embed-responsive-16by9",
                     attrs: {
                       "video-id": _vm.videoId,
                       "video-url": _vm.getVideoUrl()
@@ -41635,6 +41856,175 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/QuizComponent.vue?vue&type=template&id=2a25f9ff&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/QuizComponent.vue?vue&type=template&id=2a25f9ff& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.questions.length > 0
+    ? _c(
+        "div",
+        {
+          staticClass:
+            "\n    border border-primary\n    h-100\n    d-flex\n    flex-column\n    justify-content-between\n    text-primary\n  "
+        },
+        [
+          _c("div", { staticClass: "container-fluid py-5 h-100" }, [
+            _c("div", { staticClass: "row justify-content-center h-100" }, [
+              _c("div", { staticClass: "col-sm-8 h-100" }, [
+                _c("div", { staticClass: "h-100" }, [
+                  _c("div", { staticClass: "h-25" }, [
+                    _c("h1", {}, [
+                      _vm._v(_vm._s(_vm.questions[_vm.questionIndex].question))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v("Choose the most correct answer")])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "h-75" },
+                    [
+                      _c("input", {
+                        attrs: {
+                          type: "number",
+                          id: "ques" + _vm.questions[_vm.questionIndex].id,
+                          hidden: ""
+                        },
+                        domProps: { value: _vm.questions[_vm.questionIndex].id }
+                      }),
+                      _vm._v(" "),
+                      _vm._l(_vm.questions[_vm.questionIndex].answers, function(
+                        answer
+                      ) {
+                        return _c(
+                          "div",
+                          {
+                            key: answer.id,
+                            staticClass:
+                              "py-0 my-2 border border-primary rounded answer-selection"
+                          },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.userChoose,
+                                  expression: "userChoose"
+                                }
+                              ],
+                              attrs: {
+                                type: "radio",
+                                id: answer.id,
+                                hidden: ""
+                              },
+                              domProps: {
+                                value: answer.id,
+                                checked: _vm._q(_vm.userChoose, answer.id)
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.userChoose = answer.id
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "label",
+                              {
+                                staticClass: "w-100",
+                                attrs: { for: answer.id }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  { staticClass: "btn text-left w-100" },
+                                  [
+                                    _c("h5", { staticClass: "mb-0" }, [
+                                      _vm._v(_vm._s(answer.answer))
+                                    ])
+                                  ]
+                                )
+                              ]
+                            )
+                          ]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "bg-light text-right border py-2 px-5" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary mr-5",
+                on: {
+                  click: function($event) {
+                    return _vm.userAnswer()
+                  }
+                }
+              },
+              [_vm._v("\n      Check answer\n    ")]
+            ),
+            _vm._v(" "),
+            _vm.questionIndex > 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        return _vm.prev()
+                      }
+                    }
+                  },
+                  [_vm._v("\n      Previous\n    ")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.userChoose !== ""
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function($event) {
+                        return _vm.next()
+                      }
+                    }
+                  },
+                  [_vm._v("\n      Next\n    ")]
+                )
+              : _vm._e()
+          ])
+        ]
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

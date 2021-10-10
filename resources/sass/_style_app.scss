@@ -1148,6 +1148,25 @@ input.check-subscribe {
     }
 }
 
+.answer-selection {
+    input[type="radio"] {
+        opacity: 0;
+    }
+    label {
+        display: inline-block;
+        font-family: Arial;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 0;
+    }
+    input[type="radio"]:checked + label {
+        h5 {
+            color: whitesmoke;
+        }
+        background-color: var(--primary);
+    }
+}
+
 /*PAYMENT PAGE*/
 
 .bg-btn-payment {
@@ -1376,19 +1395,19 @@ body {
 }
 
 //Wallet-----------------------
-.wallet-card{
+.wallet-card {
     min-height: 397px;
 }
-.btn-topUp-value{
+.btn-topUp-value {
     width: 122px;
 }
-.select-card{
-    &:hover{
+.select-card {
+    &:hover {
         background-color: #e2e6ea;
     }
 }
-.btn-add-visa{
-    &:hover{
+.btn-add-visa {
+    &:hover {
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     }
 }

@@ -123,8 +123,8 @@ class LectureController extends Controller
 
         DB::beginTransaction();
         try {
-            $this->updateWatched($input);
             $lecture = Lecture::find($input['id']);
+            $this->updateWatched($input);
             DB::commit();
             return response()->json($lecture);
         } catch (\Throwable $th) {
@@ -168,6 +168,7 @@ class LectureController extends Controller
             }
 
             $this->updateWatched($input);
+            DB::commit();
             return response()->json($quiz->question);
         } catch (\Throwable $th) {
             DB::rollback();
@@ -198,12 +199,15 @@ class LectureController extends Controller
             ->first();
 
         $newWatchList = '';
+
         if (strlen($student_course->watched_list) == 0) {
-            $newWatchList = $input['index'];
+            $newWatchList = $input['index'] . ',';
         } else {
             $watched_list = explode(',', $student_course->watched_list);
             if (!in_array($input['index'], $watched_list)) {
-                $newWatchList = $student_course->watched_list . ',' . $input['index'];
+                $newWatchList = $student_course->watched_list . $input['index'] . ',';
+            } else {
+                $newWatchList = $student_course->watched_list;
             }
         }
         $student_course->update(['watched_list' => $newWatchList]);
