@@ -46,7 +46,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Bavix\\Wallet\\": "./packages/bavix/laravel-wallet/src"
+            "Bavix\\Wallet\\": "packages\\bavix\\laravel-wallet\\src"
         },
         "classmap": [
             "database/seeds",

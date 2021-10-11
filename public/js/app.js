@@ -4486,8 +4486,6 @@ __webpack_require__.r(__webpack_exports__);
         exams: this.lectureList[this.lectureIndex].id
       }), {
         params: {
-          version: 1,
-          userId: this.userId,
           courseId: this.lectureList[this.lectureIndex].course_id,
           modelName: this.lectureList[this.lectureIndex].model_name,
           index: this.lectureList[this.lectureIndex].index,
@@ -4510,7 +4508,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(route("site.course.lectureList", 2)).then(function (response) {
         _this2.studentLecture = response.data.student_lecture.watched_list.split(",");
-        _this2.lectureIndex = _this2.studentLecture.length != 0 ? _this2.studentLecture[_this2.studentLecture.length - 2] : 0;
+        _this2.lectureIndex = _this2.studentLecture.length != 1 ? _this2.studentLecture[_this2.studentLecture.length - 2] : 0;
 
         for (var item in response.data.lectures) {
           _this2.lectureList.push(response.data.lectures[item]);
@@ -4663,7 +4661,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submitAnswer: function submitAnswer() {
       // this.$emit("submit", true);'
-      console.log("this.quiz :>> ", this.quiz);
+      this.userAnswer();
       axios.post(route("site.exam.checkExam", {
         exams: 1
       }), {

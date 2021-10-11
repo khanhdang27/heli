@@ -91,7 +91,7 @@ export default {
   methods: {
     submitAnswer() {
       // this.$emit("submit", true);'
-      console.log("this.quiz :>> ", this.quiz);
+      this.userAnswer();
       axios
         .post(
           route("site.exam.checkExam", {
@@ -100,7 +100,7 @@ export default {
           {
             version: 1,
             userId: 12,
-            courseId: 2,
+            courseId: 2 ,
             quiz: this.quiz,
           }
         )

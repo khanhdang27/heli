@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\News;
+use App\Models\Setting;
 use App\Models\StudentCourses;
 use App\Models\Subject;
 use Illuminate\Database\Eloquent\Builder;

@@ -19,7 +19,6 @@
                     <h1 class="font-weight-bold my-5">@lang('keywords.wallet.topUpViaVisa')</h1>
                     <div class="row justify-content-between">
                         <div class="col-lg-5">
-                            {{--               php quan ra cuc tranfer             --}}
                             <top-up-component v-bind:lang="{{json_encode($lang)}}"
                                               v-bind:transfer={{1/$exchange_rate->value}}></top-up-component>
                             <div class="d-flex justify-content-between mb-5">

@@ -15,9 +15,10 @@ class AddCollumnStudentCourse extends Migration
     {
         Schema::table('student_courses', function (Blueprint $table) {
             $table->text('watched_list');
-            $table->bigInteger('lecture_open')->nullable();
-            $table->bigInteger('quiz_lecture')->nullable();
+            $table->bigInteger('lecture_open')->default(0);
+            $table->bigInteger('quiz_lecture')->default(0);
             $table->bigInteger('level_quiz')->nullable();
+            $table->boolean('passed')->default(false);
         });
 
         Schema::table('lectures', function (Blueprint $table) {

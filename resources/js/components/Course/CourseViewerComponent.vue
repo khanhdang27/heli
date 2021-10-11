@@ -115,8 +115,6 @@ export default {
           }),
           {
             params: {
-              version: 1,
-              userId: this.userId,
               courseId: this.lectureList[this.lectureIndex].course_id,
               modelName: this.lectureList[this.lectureIndex].model_name,
               index: this.lectureList[this.lectureIndex].index,
@@ -150,7 +148,7 @@ export default {
             response.data.student_lecture.watched_list.split(",");
 
           this.lectureIndex =
-            this.studentLecture.length != 0
+            this.studentLecture.length != 1
               ? this.studentLecture[this.studentLecture.length - 2]
               : 0;
 
