@@ -101,8 +101,9 @@ Route::middleware('auth')->group(function () {
             Route::get('wallet/top-up', 'WalletController@topUpIndex')->name('top-up');
             Route::post('wallet/top-up/top-up-to', 'WalletController@topUpToWallet')->name('top-up-to');
             Route::get('wallet/top-up/success', 'WalletController@topUpSuccess')->name('topUp-success');
-            Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.list');
-            Route::get('wallet/payment-history', 'WalletController@paymentHistory')->name('payment-history');
+            Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.listHistory');
+            Route::get('wallet/list-payment', 'WalletController@listPayment')->name('wallet.listPayment');
+            Route::get('wallet/payment-history/{order}', 'WalletController@paymentHistory')->name('wallet.payment-history');
             Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
 
             Route::get('payment/{product_id}', 'WalletController@payment')->name('payment');
