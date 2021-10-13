@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Exams;
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\PassGrade;
 use App\Models\Quiz;
 use App\Models\StudentCourses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Money\Number;
 
 class ExamsController extends Controller
 {
@@ -169,33 +171,35 @@ class ExamsController extends Controller
             [$result, $score] = $this->doGrade($quiz->question, $input['quiz']);
 
             if ($exams->type == Exams::NORMAL) {
-                if ( count($result) == $score ) {
-                    $student_course->update(['lecture_open'=> $student_course->lecture_open + 2]);
+                if (count($result) == $score) {
+                    if ($exams->index == $student_course->lecture_open) {
+                        $student_course->update(['lecture_open' => $student_course->lecture_open + 2]);
+                    }
                     DB::commit();
-                    return response()->json([$result, $score, 'status'=> true]);
+                    return response()->json(['quiz_result' => $result, 'score' => $score, 'status' => true]);
                 } else {
-                    $student_course->update(['level_quiz'=> $student_course->level_quiz + 1]);
+                    $student_course->update(['level_quiz' => $student_course->level_quiz + 1]);
                     DB::commit();
-                    return response()->json([$result, $score, 'status'=> false]);
+                    return response()->json(['quiz_result' => $result, 'score' => $score, 'status' => false]);
                 }
             } else if ($exams->type == Exams::ASSESSMENT) {
-                
+                $grade = $this->assessment($exams, $score);
+                $student_course->update(['lecture_open' => $grade->lecture_index]);
+                DB::commit();
+                return response()->json(['grade' => $grade, 'quiz_result' => $result, 'score' => $score, 'status' => true]);
             } else {
                 // Final Quiz
                 $final_score = $score / count($result);
-                if ( $final_score > 0.7 ) {
-                    $student_course->update(['passed'=> true]);
+                if ($final_score > 0.7) {
+                    $student_course->update(['passed' => true]);
                     DB::commit();
-                    return response()->json([$result, $score, 'status'=> true]);
+                    return response()->json(['quiz_result' => $result, 'score' => $score, 'status' => true]);
                 } else {
-                    $student_course->update(['level_quiz'=> $student_course->level_quiz + 1]);
+                    $student_course->update(['level_quiz' => $student_course->level_quiz + 1]);
                     DB::commit();
-                    return response()->json([$result, $score, 'status'=> false]);
+                    return response()->json(['quiz_result' => $result, 'score' => $score, 'status' => false]);
                 }
             }
-            
-
-            
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json(
@@ -207,14 +211,14 @@ class ExamsController extends Controller
         }
     }
 
-    public function doGrade($question, Array $answer )
+    public function doGrade($question, array $answer)
     {
         $result = [];
         $score = 0;
-        foreach ( $answer as $item ) {
-            $_question = $question->where( 'id', $item['questionID'] )->first();
+        foreach ($answer as $item) {
+            $_question = $question->where('id', $item['questionID'])->first();
             $_answer = $_question->answers->where('id', $item['answerID'])->first();
-            
+
             array_push($result, [
                 'is_correct' => $_answer->is_correct,
                 'question' => $_question->id,
@@ -226,5 +230,14 @@ class ExamsController extends Controller
         }
 
         return [$result, $score];
+    }
+
+    public function assessment(Exams $exams, $score)
+    {
+        $passGrade = PassGrade::where(['exam_id' => $exams->id])->get();
+
+        $grade = $passGrade->where('score', '<=', $score)->sortByDesc('score')->first();
+
+        return $grade;
     }
 }

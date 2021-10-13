@@ -4454,6 +4454,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -4471,12 +4499,15 @@ __webpack_require__.r(__webpack_exports__);
       lectureList: [],
       videoId: "588754544",
       studentLecture: [],
+      lectureOpenTo: 0,
       questions: [],
-      quiz: []
+      quiz: [],
+      isPassed: false
     };
   },
   mounted: function mounted() {
     this.syncDataLecture();
+    setTimeout(this.showLecture(), 600);
   },
   methods: {
     getExams: function getExams() {
@@ -4507,21 +4538,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.get(route("site.course.lectureList", 2)).then(function (response) {
+        console.log("this.response :>> ", response);
+        _this2.isPassed = response.data.student_lecture.passed;
         _this2.studentLecture = response.data.student_lecture.watched_list.split(",");
-        _this2.lectureIndex = _this2.studentLecture.length != 1 ? _this2.studentLecture[_this2.studentLecture.length - 2] : 0;
+        _this2.lectureOpenTo = response.data.student_lecture.lecture_open;
 
-        for (var item in response.data.lectures) {
-          _this2.lectureList.push(response.data.lectures[item]);
-        }
+        if (_this2.lectureList.length == 0) {
+          _this2.lectureIndex = _this2.studentLecture.length != 1 ? _this2.studentLecture[_this2.studentLecture.length - 2] : 0;
 
-        _this2.lectureList.sort(function (a, b) {
-          return a.index - b.index;
-        });
+          for (var item in response.data.lectures) {
+            _this2.lectureList.push(response.data.lectures[item]);
+          }
 
-        if (_this2.lectureList[_this2.lectureIndex].model_name === "Exams") {
-          _this2.getExams();
-        } else {
-          _this2.getLecture();
+          _this2.lectureList.sort(function (a, b) {
+            return a.index - b.index;
+          });
         }
       })["catch"](function (error) {
         console.error(error);
@@ -4545,9 +4576,24 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onClickLecture: function onClickLecture(index) {
-      this.lectureIndex = index;
+      if (index <= this.lectureOpenTo) {
+        this.lectureIndex = index;
+        this.showLecture();
+      } else {
+        confirm("This lecture not open now !");
+      }
+    },
+    reTryLecture: function reTryLecture() {
+      this.syncDataLecture(); // wait for re-fecth
 
-      if (this.lectureList[index].model_name === "Exams") {
+      setTimeout(this.onClickLecture(parseInt(this.lectureIndex)), 800);
+    },
+    nextToLecture: function nextToLecture() {
+      this.syncDataLecture();
+      setTimeout(this.onClickLecture(parseInt(this.lectureIndex) + 1), 2000);
+    },
+    showLecture: function showLecture() {
+      if (this.lectureList[this.lectureIndex].model_name === "Exams") {
         this.getExams();
       } else {
         this.getLecture();
@@ -4642,6 +4688,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     questions: Array
@@ -4652,7 +4773,11 @@ __webpack_require__.r(__webpack_exports__);
       questionNo: "",
       userChoose: [],
       quiz: [],
-      result: []
+      result: [],
+      showScore: {
+        correct: [],
+        wrong: []
+      }
     };
   },
   mounted: function mounted() {
@@ -4660,7 +4785,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submitAnswer: function submitAnswer() {
-      // this.$emit("submit", true);'
+      var _this = this;
+
       this.userAnswer();
       axios.post(route("site.exam.checkExam", {
         exams: 1
@@ -4670,7 +4796,36 @@ __webpack_require__.r(__webpack_exports__);
         courseId: 2,
         quiz: this.quiz
       }).then(function (response) {
-        console.log("this.response :>> ", response);
+        _this.result = response.data;
+        var index = 0;
+
+        _this.result.quiz_result.forEach(function (item) {
+          var __question = _this.questions.find(function (_question) {
+            return _question.id === item.question;
+          });
+
+          var __answer = __question.answers.find(function (_answer) {
+            return _answer.is_correct;
+          });
+
+          if (item.is_correct == true) {
+            _this.showScore.correct.push({
+              key: index,
+              question: __question.question,
+              answer: __answer.answer
+            });
+          } else {
+            _this.showScore.wrong.push({
+              key: index,
+              question: __question.question,
+              answer: __answer.answer,
+              lecture: __question.lecture_index,
+              message: __question.message_wrong
+            });
+          }
+
+          index += 1;
+        });
       })["catch"](function (error) {
         console.error(error);
       });
@@ -4711,12 +4866,21 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.setItem("quiz", JSON.stringify(this.quiz));
     },
     getAnswerUser: function getAnswerUser() {
-      var _this = this;
+      var _this2 = this;
 
       this.quiz = JSON.parse(localStorage.getItem("quiz")) || new Array();
       this.quiz.forEach(function (item) {
-        _this.userChoose.push(item.answerID);
+        _this2.userChoose.push(item.answerID);
       });
+    },
+    goToLecture: function goToLecture(index) {
+      this.$emit("goToLecture", index);
+    },
+    reTryLecture: function reTryLecture() {
+      this.$emit("reTryLecture");
+    },
+    nextToLecture: function nextToLecture() {
+      this.$emit("nextToLecture");
     }
   }
 });
@@ -41713,10 +41877,8 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row mb-4", attrs: { id: "video-lecture" } },
-    [
+  return _c("div", [
+    _c("div", { staticClass: "row mb-4", attrs: { id: "video-lecture" } }, [
       _c("div", { staticClass: "col-lg-9 bg-white" }, [
         _c("div", { staticClass: "h-100" }, [
           _vm.lectureList[_vm.lectureIndex] &&
@@ -41727,7 +41889,18 @@ var render = function() {
                 [
                   _vm.questions
                     ? _c("quiz-component", {
-                        attrs: { questions: _vm.questions }
+                        attrs: { questions: _vm.questions },
+                        on: {
+                          goToLecture: function($event) {
+                            return _vm.onClickLecture(_vm.index)
+                          },
+                          reTryLecture: function($event) {
+                            return _vm.reTryLecture()
+                          },
+                          nextToLecture: function($event) {
+                            return _vm.nextToLecture()
+                          }
+                        }
                       })
                     : _vm._e()
                 ],
@@ -41742,6 +41915,11 @@ var render = function() {
                     attrs: {
                       "video-id": _vm.videoId,
                       "video-url": _vm.getVideoUrl()
+                    },
+                    on: {
+                      ended: function($event) {
+                        return _vm.nextToLecture()
+                      }
                     }
                   })
                 ],
@@ -41831,15 +42009,38 @@ var render = function() {
                             ? _c("div", [
                                 _c("h4", { staticClass: "mb-1" }, [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                  " +
                                       _vm._s(item.index) +
-                                      "\n                -\n                " +
+                                      "\n                  -\n                  " +
                                       _vm._s(item.name) +
-                                      "\n              "
+                                      "\n                "
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _vm._m(0, true)
+                                item.index <= _vm.lectureOpenTo
+                                  ? _c(
+                                      "strong",
+                                      { staticClass: "text-dark text-wrap" },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "fe fe-message-square mr-2"
+                                        }),
+                                        _vm._v(" "),
+                                        _c("span", [_vm._v("Quiz")])
+                                      ]
+                                    )
+                                  : _c(
+                                      "strong",
+                                      { staticClass: "text-dark text-wrap" },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fe fe-lock mr-2"
+                                        }),
+                                        _vm._v(" "),
+                                        _c("span", [_vm._v("Quiz")])
+                                      ]
+                                    )
                               ])
                             : _vm._e(),
                           _vm._v(" "),
@@ -41847,15 +42048,37 @@ var render = function() {
                             ? _c("div", [
                                 _c("h4", { staticClass: "mb-1" }, [
                                   _vm._v(
-                                    "\n                " +
+                                    "\n                  " +
                                       _vm._s(item.index) +
-                                      "\n                -\n                " +
+                                      "\n                  -\n                  " +
                                       _vm._s(item.lectures_name) +
-                                      "\n              "
+                                      "\n                "
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _vm._m(1, true)
+                                item.index <= _vm.lectureOpenTo
+                                  ? _c(
+                                      "strong",
+                                      { staticClass: "text-dark text-wrap" },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fe fe-youtube mr-2"
+                                        }),
+                                        _vm._v(" "),
+                                        _c("span", [_vm._v("Video")])
+                                      ]
+                                    )
+                                  : _c(
+                                      "strong",
+                                      { staticClass: "text-dark text-wrap" },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fe fe-lock mr-2"
+                                        }),
+                                        _vm._v(" "),
+                                        _c("span", [_vm._v("Video")])
+                                      ]
+                                    )
                               ])
                             : _vm._e()
                         ]
@@ -41869,28 +42092,22 @@ var render = function() {
           2
         )
       ])
-    ]
-  )
+    ]),
+    _vm._v(" "),
+    _vm.isPassed
+      ? _c("div", { staticClass: "row mb-4" }, [_vm._m(0)])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("strong", { staticClass: "text-dark text-wrap" }, [
-      _c("i", { staticClass: "fe fe-message-square mr-2" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Quiz")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("strong", { staticClass: "text-dark text-wrap" }, [
-      _c("i", { staticClass: "fe fe-youtube mr-2" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Video")])
+    return _c("div", { staticClass: "col-12 bg-info w-100  py-1" }, [
+      _c("h1", { staticClass: "text-warning text-center" }, [
+        _vm._v("\n        Related list comming up here\n      ")
+      ])
     ])
   }
 ]
@@ -42024,57 +42241,251 @@ var render = function() {
                         2
                       )
                     ])
-                  : _c("div", [_vm._v("results")])
+                  : _c("div", [
+                      _vm.result.status == true
+                        ? _c("div", [
+                            _vm.result.score === _vm.result.score
+                              ? _c(
+                                  "div",
+                                  [
+                                    _c("h2", { staticClass: "text-success" }, [
+                                      _vm._v(
+                                        "\n                Excellent, you got all the answers correct\n              "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("strong", [_vm._v("What you know")]),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.showScore.correct, function(
+                                      item
+                                    ) {
+                                      return _c(
+                                        "div",
+                                        { key: item.key, staticClass: "pl-2" },
+                                        [
+                                          _vm._v(
+                                            "\n                - " +
+                                              _vm._s(item.question) +
+                                              " :\n                "
+                                          ),
+                                          _c(
+                                            "span",
+                                            { staticClass: "text-success" },
+                                            [
+                                              _vm._v(
+                                                "\n                  " +
+                                                  _vm._s(item.answer) +
+                                                  " "
+                                              ),
+                                              _c("i", {
+                                                staticClass: "fe fe-check"
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                )
+                              : _vm._e()
+                          ])
+                        : _c(
+                            "div",
+                            [
+                              _c("h2", [
+                                _vm._v(
+                                  "Review the course materials to expand your learning."
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("h3", [
+                                _vm._v(
+                                  "\n              you got " +
+                                    _vm._s(_vm.result.score) +
+                                    " of\n              " +
+                                    _vm._s(_vm.result.quiz_result.lenght) +
+                                    " correct\n            "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("strong", [_vm._v(" What you know ")]),
+                              _vm._v(" "),
+                              _vm._l(_vm.showScore.correct, function(item) {
+                                return _c(
+                                  "div",
+                                  { key: item.key, staticClass: "pl-2" },
+                                  [
+                                    _vm._v(
+                                      "\n              - " +
+                                        _vm._s(item.question) +
+                                        " :\n              "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: "text-success" },
+                                      [
+                                        _vm._v(
+                                          "\n                " +
+                                            _vm._s(item.answer) +
+                                            " "
+                                        ),
+                                        _c("i", { staticClass: "fe fe-check" })
+                                      ]
+                                    )
+                                  ]
+                                )
+                              }),
+                              _vm._v(" "),
+                              _c("strong", [
+                                _vm._v(" What you should review ")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.showScore.wrong, function(item) {
+                                return _c(
+                                  "div",
+                                  { key: item.key, staticClass: "pl-2" },
+                                  [
+                                    _vm._v(
+                                      "\n              - " +
+                                        _vm._s(item.question) +
+                                        " :\n              "
+                                    ),
+                                    _c("span", { staticClass: "text-danger" }, [
+                                      _vm._v(
+                                        "\n                " +
+                                          _vm._s(item.answer) +
+                                          " "
+                                      ),
+                                      _c("i", { staticClass: "fe fe-x" })
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _c("sub", { staticClass: "text-danger" }, [
+                                      _vm._v(_vm._s(item.message) + " ")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("br"),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        staticClass: "font-weight-bold",
+                                        on: {
+                                          click: function($event) {
+                                            $event.stopPropagation()
+                                            return _vm.goToLecture(item.lecture)
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                Lecture Index ." +
+                                            _vm._s(item.lecture) +
+                                            "\n              "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                    ])
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "bg-light text-right border py-2 px-5" }, [
-            _vm.questionIndex > 0
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function($event) {
-                        return _vm.prev()
-                      }
-                    }
-                  },
-                  [_vm._v("\n      Previous\n    ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.userChoose[_vm.questionIndex] !== ""
-              ? _c("span", [
-                  _vm.questionIndex == _vm.questions.length - 1
+          _vm.result.length === 0
+            ? _c(
+                "div",
+                { staticClass: "bg-light text-right border py-2 px-5" },
+                [
+                  _vm.questionIndex > 0
                     ? _c(
                         "button",
                         {
                           staticClass: "btn btn-primary",
                           on: {
                             click: function($event) {
-                              return _vm.submitAnswer()
+                              return _vm.prev()
                             }
                           }
                         },
-                        [_vm._v("\n        Submit\n      ")]
+                        [_vm._v("\n      Previous\n    ")]
                       )
-                    : _c(
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.userChoose[_vm.questionIndex] !== ""
+                    ? _c("span", [
+                        _vm.questionIndex == _vm.questions.length - 1
+                          ? _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.submitAnswer()
+                                  }
+                                }
+                              },
+                              [_vm._v("\n        Submit\n      ")]
+                            )
+                          : _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.next()
+                                  }
+                                }
+                              },
+                              [_vm._v("Next")]
+                            )
+                      ])
+                    : _vm._e()
+                ]
+              )
+            : _c(
+                "div",
+                { staticClass: "bg-light text-right border py-2 px-5" },
+                [
+                  _vm.questionIndex > 0
+                    ? _c(
                         "button",
                         {
                           staticClass: "btn btn-primary",
                           on: {
                             click: function($event) {
-                              return _vm.next()
+                              return _vm.prev()
                             }
                           }
                         },
-                        [_vm._v("Next")]
+                        [_vm._v("\n      Retry\n    ")]
                       )
-                ])
-              : _vm._e()
-          ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.result.status == true
+                    ? _c("span", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary",
+                            on: {
+                              click: function($event) {
+                                return _vm.nextToLecture()
+                              }
+                            }
+                          },
+                          [_vm._v("\n        Next Lecture\n      ")]
+                        )
+                      ])
+                    : _vm._e()
+                ]
+              )
         ]
       )
     : _vm._e()
