@@ -11,6 +11,7 @@ use App\Models\Setting;
 use App\Models\StudentCourses;
 use App\Models\StudentSchedule;
 use App\Models\User;
+use Bavix\Wallet\Exceptions\InsufficientFunds;
 use Bavix\Wallet\Models\Transaction;
 use Bavix\Wallet\Models\Wallet;
 use DateTime;
@@ -52,6 +53,14 @@ class WalletController extends Controller
             ->where('meta', '<>', null)
             ->orderBy('created_at', 'desc')->paginate(9);
         return response()->json($topUp_history);
+    }
+
+    public function listPayment()
+    {
+        $payment_history = Order::with('course')->where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')->paginate(9);
+
+        return response()->json($payment_history);
     }
 
     public function topUpIndex()
@@ -96,7 +105,7 @@ class WalletController extends Controller
         ]);
         $user = User::where('id', Auth::user()->id)->first();
         $exchange_rate = Setting::where('key', 'token_exchange_rate')->first();
-        $topUp_value = $_request['amount'] / $exchange_rate->value;
+        $topUp_value = $_request['amount'] * $exchange_rate->value;
         $user->deposit($topUp_value, ['card' => $paymentMethods[$_request['card']]->card->last4]);
 
         return redirect()->route('site.user.topUp-success');
@@ -124,9 +133,11 @@ class WalletController extends Controller
         ]);
     }
 
-    public function paymentHistory()
+    public function paymentHistory(Order $order)
     {
-        return view('wallet.detail-history.payment-invoice');
+        return view('wallet.detail-history.payment-invoice', [
+            'order' => $order
+        ]);
     }
 
     public function topUpHistory(Transaction $transaction)
@@ -202,11 +213,16 @@ class WalletController extends Controller
             $courses_with_group,
             $student_bought
         ] = $this->getVariable($product_id);
-        $user = User::query()->where('id', Auth::user()->id)->first();
-        $item = $courses_with_group;
-        $item->getAmountProduct($user);
-        $user->pay($item);
-        return $this->createBuyCourse($courses_with_group, $room);
+        try {
+            $user = User::query()->where('id', Auth::user()->id)->first();
+            $item = $courses_with_group;
+            $item->getAmountProduct($user);
+            $user->pay($item);
+            return $this->createBuyCourse($courses_with_group, $room);
+        } catch (InsufficientFunds $insufficientFunds){
+            return back()->with('errors', $insufficientFunds->getMessage());
+        }
+
     }
 
     public function success($course_id)
@@ -222,7 +238,7 @@ class WalletController extends Controller
         try {
             $order = Order::create([
                 'user_id' => Auth::user()->id,
-                'payment_id' => '0',
+                'payment_id' => uniqid(),
                 'course_id' => $courses_with_group->membershipCourses->course_id,
                 'course_price' => $courses_with_group->getPrice(),
                 'course_discount' => $courses_with_group->getDiscount(), //$course_detail->discount,

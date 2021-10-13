@@ -12,6 +12,12 @@
         <div class="container-fluid text-primary pb-5">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-sm-10 col-lg-12">
+                    @if ($alertFm = Session::get('errors'))
+                        <div class="alert text-center alert-danger alert-block my-5">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{$errors}}
+                        </div>
+                    @endif
                     <h1 class="my-5 font-weight-bold">@lang('keywords.coursePayment')</h1>
                     <div class="row justify-content-center">
                         <div class="col-sm-10 col-lg-7 col-xl-6">
@@ -42,8 +48,8 @@
                             </table>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <button class="btn btn-white text-primary border-primary py-3 h4 font-weight-bold w-100"
-                                    onclick="window.history.go(-1)">Back</button>
+                                    <a class="btn btn-white text-primary border-primary py-3 h4 font-weight-bold w-100"
+                                    href="{{route('site.course.show', $course->id)}}">Back</a>
                                 </div>
                                 <div class="col-sm-8">
                                     <a class="btn btn-primary py-3 h4 font-weight-bold w-100"

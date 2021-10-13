@@ -29,13 +29,13 @@
                                     <h4 class="mr-5">Date Issued:<span class="font-weight-bold ml-3">16-09-21</span></h4>
                                     <h4>Date Due:<span class="font-weight-bold ml-3">17-09-21</span></h4>
                                 </div>
-                                <h4>Invoice No:<span class="font-weight-bold ml-3">#19098776235</span></h4>
+                                <h4>Invoice No:<span class="font-weight-bold ml-3">#{{$order->payment_id}}</span></h4>
                             </div>
                             <div class="d-flex my-5">
                                 <h3 class="font-weight-bold mr-5">Billed To:</h3>
                                 <div>
-                                    <h3>Kenny Or</h3>
-                                    <h3>Phone: +852 9098 0989</h3>
+                                    <h3>{{Auth::user()->name}}</h3>
+                                    <h3>Email: {{Auth::user()->email}}</h3>
                                 </div>
                             </div>
                             <div class="table-responsive">
@@ -50,9 +50,9 @@
                                     </thead>
                                     <tbody class="text-center">
                                     <tr>
-                                        <td class="h3 p-5 w-50">IGCSE基礎數學2課程基礎數學第二部分</td>
-                                        <td class="h3 py-5">49 tokens</td>
-                                        <td class="h3 py-5">16-09-21, 15:00</td>
+                                        <td class="h3 p-5 w-50">{{$order->course->course_name}}</td>
+                                        <td class="h3 py-5">{{$order->course_price}} tokens</td>
+                                        <td class="h3 py-5">{{$order->created_at}}</td>
                                         <td class="h3 py-5">Paid</td>
                                     </tr>
                                     </tbody>
@@ -63,15 +63,15 @@
                                 <table width="25%">
                                     <tr>
                                         <td> <h4>Sub Total:</h4></td>
-                                        <td><h4 class="font-weight-bold text-right">49 tokens</h4></td>
+                                        <td><h4 class="font-weight-bold text-right">{{$order->course_price}} tokens</h4></td>
                                     </tr>
                                     <tr>
                                         <td><h4>Discount:</h4></td>
-                                        <td><h4 class="font-weight-bold text-right">0 token</h4></td>
+                                        <td><h4 class="font-weight-bold text-right">{{$order->course_discount}} token</h4></td>
                                     </tr>
                                     <tr>
                                         <td><h4>Total:</h4></td>
-                                        <td><h4 class="font-weight-bold text-right">49 tokens</h4></td>
+                                        <td><h4 class="font-weight-bold text-right">{{$order->final_price}} tokens</h4></td>
                                     </tr>
                                 </table>
                             </div>

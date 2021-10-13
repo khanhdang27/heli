@@ -93,7 +93,7 @@ class WalletManagerController extends Controller
     public function update(Request $request, Wallet $wallet_manager)
     {
         $validate_request = $request->validate([
-           'balance' => 'required|numeric|min:1'
+           'balance' => 'required|numeric|min:0'
         ]);
         DB::beginTransaction();
         try {

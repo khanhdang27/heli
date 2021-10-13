@@ -79,7 +79,7 @@ if (!empty($student_course)) {
                             <x-product-detail.course-tutor :courseDetail=$course></x-product-detail.course-tutor>
                         </div>
                         <div id="menuCourse3" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
-                            <x-product-detail.course-rate :courseDetail=$course></x-product-detail.course-rate>
+                            <x-product-detail.course-rate :courseDetail=$course :studentCourse=$student_course></x-product-detail.course-rate>
                         </div>
                     </div>
                 </div>

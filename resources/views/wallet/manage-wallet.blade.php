@@ -14,6 +14,8 @@
         $lang = [ 'topUpHistory' => __('keywords.wallet.topUpHistory'),
                   'hereYouCanReviewAllTopUp' => __('keywords.wallet.hereYouCanReviewAllTopUp'),
                   'viewAllHistory' => __('keywords.wallet.viewAllHistory'),
+                  'hereYouCanReviewAllPayment' => __('keywords.wallet.hereYouCanReviewAllPayment'),
+                  'paymentHistory' => __('keywords.wallet.paymentHistory'),
                 ];
     @endphp
     <div class="body-content">
@@ -31,7 +33,7 @@
                                 <div class="d-flex justify-content-between mt-5 mb-3">
                                     <h4 class="font-weight-bold">@lang('keywords.wallet.balance'):</h4>
                                     <p class="font-weight-bold h3">
-{{--                                        {{dd($wallet)}}--}}
+                                        {{--                                        {{dd($wallet)}}--}}
                                         {{$wallet->wallet->balance}} {{$wallet->wallet->balance > 1 ? 'tokens' : 'token'}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between mb-5 flex-wrap">
@@ -39,7 +41,8 @@
                                     <p class="font-weight-bold h3">{{$wallet->wallet->wallet_str_id}}</p>
                                 </div>
                                 <h4 class="font-weight-bold mb-4">@lang('keywords.wallet.fastAndSecureTopUp')</h4>
-                                <a class="btn btn-primary w-100 font-weight-bold h4 py-3" href="{{route('site.user.top-up')}}">Top-up</a>
+                                <a class="btn btn-primary w-100 font-weight-bold h4 py-3"
+                                   href="{{route('site.user.top-up')}}">Top-up</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -57,59 +60,29 @@
                                     </div>
                                 @endforeach
                                 <div class="mb-3">
-                                    <a href="{{route('site.add-visa')}}" class="d-flex btn p-0 text-primary align-items-center">
-                                    <img class="mr-4 btn-wallet btn-add-visa rounded" src="{{asset('images/ic/ic_btn_plus.svg')}}"
-                                         height="85">
-                                    <p class="h4 font-weight-bold">@lang('keywords.wallet.addNewVisaCard')</p></a>
+                                    <a href="{{route('site.add-visa')}}"
+                                       class="d-flex btn p-0 text-primary align-items-center">
+                                        <img class="mr-4 btn-wallet btn-add-visa rounded"
+                                             src="{{asset('images/ic/ic_btn_plus.svg')}}"
+                                             height="85">
+                                        <p class="h4 font-weight-bold">@lang('keywords.wallet.addNewVisaCard')</p></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="mb-5 pt-4">
-                        <a class="btn border-primary border-2 h2 text-primary w-100 d-flex justify-content-between
-                        align-items-center px-4 font-weight-bold rounded-0" data-toggle="collapse"
-                           href="#paymentHistory" role="button" aria-expanded="false" aria-controls="paymentHistory">
-                            <span>@lang('keywords.wallet.paymentHistory')</span>
-                            <span class="fe fe-chevron-right"></span>
-                        </a>
-                        <div class="collapse" id="paymentHistory">
-                            <h2 class="mt-5 mb-4">@lang('keywords.wallet.hereYouCanReviewAllPayment')</h2>
-                            <div class="table-responsive">
-                                <table class="table text-primary border-bottom mb-0">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Time</th>
-                                        <th scope="col">Course</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Invoice</th>
-                                        <th scope="col">Details</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>{{$payment['time']}}</td>
-                                        <td>{{$payment['course_name']}}</td>
-                                        <td>{{$payment['total']}}</td>
-                                        <td>{{$payment['invoice']}}</td>
-                                        <td><a class="btn btn-primary">
-                                                View
-                                            </a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="mt-5">
-                                <a class="h3 font-weight-bold btn w-100 text-primary p-0 mb-0">
-                                    @lang('keywords.wallet.viewAllHistory')
-                                    <span class="fe fe-chevron-down"></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <top-up-history route="{{route("site.user.wallet.list")}}"
+                    <payment-history-component route="{{route("site.user.wallet.listPayment")}}"
+                                               v-bind:lang="{{json_encode($lang)}}"></payment-history-component>
+                    <top-up-history route="{{route("site.user.wallet.listHistory")}}"
                                     v-bind:lang="{{json_encode($lang)}}"></top-up-history>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+<script>
+    import PaymentHistoryComponent from "../../js/components/Wallet/PaymentHistoryComponent";
+
+    export default {
+        components: {PaymentHistoryComponent}
+    }
+</script>

@@ -3,7 +3,7 @@
 @endphp
 
 <div>
-    @if(Auth::check() && Auth::User()->hasRole('student'))
+    @if(Auth::check() && Auth::User()->hasRole('student') && !empty($studentCourse))
         <x-comment.comment :refComment=$courseDetail :commentModule=\App\Models\Course::class></x-comment.comment>
     @endif
     <br>
