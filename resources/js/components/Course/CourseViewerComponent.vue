@@ -1,80 +1,108 @@
 <template>
-  <div class="row mb-4" id="video-lecture">
-    <div class="col-lg-9 bg-white">
-      <div class="h-100">
-        <div
-          v-if="
-            lectureList[lectureIndex] &&
-            lectureList[lectureIndex].model_name == 'Exams'
-          "
-          class="h-100"
-        >
-          <quiz-component
-            v-cloak
-            v-bind:questions="questions"
-            v-if="questions"
-          ></quiz-component>
+  <div>
+    <div class="row mb-4" id="video-lecture">
+      <div class="col-lg-9 bg-white">
+        <div class="h-100">
+          <div
+            v-if="
+              lectureList[lectureIndex] &&
+              lectureList[lectureIndex].model_name == 'Exams'
+            "
+            class="h-100"
+          >
+            <quiz-component
+              v-cloak
+              v-bind:questions="questions"
+              v-if="questions"
+              @goToLecture="onClickLecture(index)"
+              @reTryLecture="reTryLecture()"
+              @nextToLecture="nextToLecture()"
+            ></quiz-component>
+          </div>
+          <div v-else>
+            <vimeo-player
+              ref="player"
+              :video-id="videoId"
+              :video-url="getVideoUrl()"
+              @ended="nextToLecture()"
+              class="embed-responsive embed-responsive-16by9"
+            />
+          </div>
         </div>
-        <div v-else>
-          <vimeo-player
-            ref="player"
-            :video-id="videoId"
-            :video-url="getVideoUrl()"
-            class="embed-responsive embed-responsive-16by9"
-          />
+      </div>
+      <div class="col-lg-3 bg-white">
+        <div class="box-list-video text-primary">
+          <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
+          <ul
+            class="list-group list-group-flush"
+            v-for="item in lectureList"
+            :key="item.index"
+          >
+            <button
+              class="list-group-item list-group-item-action"
+              v-bind:class="{ active: item.index == lectureIndex }"
+              v-on:click="onClickLecture(item.index)"
+            >
+              <div class="d-flex w-100 justify-content-left">
+                <div class="my-auto mr-3">
+                  <input
+                    readonly
+                    type="checkbox"
+                    :value="item.index"
+                    name="index"
+                    id="index"
+                    v-model="studentLecture"
+                  />
+                </div>
+                <div v-if="item.model_name == 'Exams'">
+                  <h4 class="mb-1">
+                    {{ item.index }}
+                    -
+                    {{ item.name }}
+                  </h4>
+                  <strong
+                    v-if="item.index <= lectureOpenTo"
+                    class="text-dark text-wrap"
+                  >
+                    <i class="fe fe-message-square mr-2"></i>
+                    <span>Quiz</span>
+                  </strong>
+                  <strong v-else class="text-dark text-wrap">
+                    <i class="fe fe-lock mr-2"></i>
+                    <span>Quiz</span>
+                  </strong>
+                </div>
+
+                <div v-if="item.model_name == 'Lecture'">
+                  <h4 class="mb-1">
+                    {{ item.index }}
+                    -
+                    {{ item.lectures_name }}
+                  </h4>
+                  <strong
+                    v-if="item.index <= lectureOpenTo"
+                    class="text-dark text-wrap"
+                  >
+                    <i class="fe fe-youtube mr-2"></i>
+                    <span>Video</span>
+                  </strong>
+                  <strong v-else class="text-dark text-wrap">
+                    <i class="fe fe-lock mr-2"></i>
+                    <span>Video</span>
+                  </strong>
+                </div>
+              </div>
+            </button>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="col-lg-3 bg-white">
-      <div class="box-list-video text-primary">
-        <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
-        <ul
-          class="list-group list-group-flush"
-          v-for="item in lectureList"
-          :key="item.index"
-        >
-          <button
-            class="list-group-item list-group-item-action"
-            v-bind:class="{ active: item.index == lectureIndex }"
-            v-on:click="onClickLecture(item.index)"
-          >
-            <div class="d-flex w-100 justify-content-left">
-              <div class="my-auto mr-3">
-                <input
-                  readonly
-                  type="checkbox"
-                  :value="item.index"
-                  name="index"
-                  id="index"
-                  v-model="studentLecture"
-                />
-              </div>
-              <div v-if="item.model_name == 'Exams'">
-                <h4 class="mb-1">
-                  {{ item.index }}
-                  -
-                  {{ item.name }}
-                </h4>
-                <strong class="text-dark text-wrap">
-                  <i class="fe fe-message-square mr-2"></i>
-                  <span>Quiz</span>
-                </strong>
-              </div>
+    <div v-if="isPassed" class="row mb-4">
+      <div class="col-12 bg-info w-100  py-1">
 
-              <div v-if="item.model_name == 'Lecture'">
-                <h4 class="mb-1">
-                  {{ item.index }}
-                  -
-                  {{ item.lectures_name }}
-                </h4>
-                <strong class="text-dark text-wrap">
-                  <i class="fe fe-youtube mr-2"></i>
-                  <span>Video</span>
-                </strong>
-              </div>
-            </div>
-          </button>
-        </ul>
+        <h1 class="text-warning text-center">
+          Related list comming up here
+        </h1>
       </div>
     </div>
   </div>
@@ -99,12 +127,15 @@ export default {
       lectureList: [],
       videoId: "588754544",
       studentLecture: [],
+      lectureOpenTo: 0,
       questions: [],
       quiz: [],
+      isPassed: false
     };
   },
   mounted() {
     this.syncDataLecture();
+    setTimeout(this.showLecture(), 600);
   },
   methods: {
     getExams() {
@@ -115,8 +146,6 @@ export default {
           }),
           {
             params: {
-              version: 1,
-              userId: this.userId,
               courseId: this.lectureList[this.lectureIndex].course_id,
               modelName: this.lectureList[this.lectureIndex].model_name,
               index: this.lectureList[this.lectureIndex].index,
@@ -141,30 +170,29 @@ export default {
         process.env.MIX_VIMEO_APP_ID
       );
     },
-
     syncDataLecture() {
       axios
         .get(route("site.course.lectureList", 2))
         .then((response) => {
+          console.log("this.response :>> ", response);
+
+          this.isPassed = response.data.student_lecture.passed
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
 
-          this.lectureIndex =
-            this.studentLecture.length != 0
-              ? this.studentLecture[this.studentLecture.length - 2]
-              : 0;
+          this.lectureOpenTo = response.data.student_lecture.lecture_open;
 
-          for (let item in response.data.lectures) {
-            this.lectureList.push(response.data.lectures[item]);
-          }
-          this.lectureList.sort(function (a, b) {
-            return a.index - b.index;
-          });
-
-          if (this.lectureList[this.lectureIndex].model_name === "Exams") {
-            this.getExams();
-          } else {
-            this.getLecture();
+          if (this.lectureList.length == 0) {
+            this.lectureIndex =
+              this.studentLecture.length != 1
+                ? this.studentLecture[this.studentLecture.length - 2]
+                : 0;
+            for (let item in response.data.lectures) {
+              this.lectureList.push(response.data.lectures[item]);
+            }
+            this.lectureList.sort(function (a, b) {
+              return a.index - b.index;
+            });
           }
         })
         .catch(function (error) {
@@ -191,8 +219,24 @@ export default {
         });
     },
     onClickLecture(index) {
-      this.lectureIndex = index;
-      if (this.lectureList[index].model_name === "Exams") {
+      if (index <= this.lectureOpenTo) {
+        this.lectureIndex = index;
+        this.showLecture();
+      } else {
+        confirm("This lecture not open now !");
+      }
+    },
+    reTryLecture() {
+      this.syncDataLecture();
+      // wait for re-fecth
+      setTimeout(this.onClickLecture(parseInt(this.lectureIndex)), 800);
+    },
+    nextToLecture() {
+      this.syncDataLecture();
+      setTimeout(this.onClickLecture(parseInt(this.lectureIndex) + 1), 2000);
+    },
+    showLecture() {
+      if (this.lectureList[this.lectureIndex].model_name === "Exams") {
         this.getExams();
       } else {
         this.getLecture();

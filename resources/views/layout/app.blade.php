@@ -26,6 +26,7 @@
 
     <script src="{{ asset('js/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    
 </head>
 
 <body>
@@ -34,6 +35,8 @@
         @yield('content')
         @include('layout.footer')
     </div>
+    @routes
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('js/popper.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
@@ -81,8 +84,6 @@
         var x = document.getElementsByTagName('script')[0];
         x.parentNode.insertBefore(s, x);
     </script>
-    @routes
-    <script defer src="{{ asset('js/app.js') }}"></script>
 
 </body>
 

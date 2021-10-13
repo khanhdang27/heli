@@ -9,6 +9,7 @@ use App\Models\Quiz;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class LectureController extends Controller
 {
@@ -149,15 +150,38 @@ class LectureController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            $version = $input['version'];
+            $courseId = $input['courseId'];
+            $index = $input['index'];
+
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $courseId
+            ])->first();
+
+            if (empty($student_course->quiz_lecture) || 
+                ($student_course->quiz_lecture != $exams->id && $index == $student_course->lecture_open)) {
+
+                    $student_course->quiz_lecture = $exams->id;
+                    $student_course->level_quiz = 1;
+            } else {
+                return response()->json(
+                    [
+                        'message' => 'You Passed this Exam',
+                    ],
+                    205,
+                );
+            }
+
+            $version = $student_course->level_quiz;
 
             $quiz = Quiz::with('question')
                 ->with('question.answers')
+                ->where('exam_id', $exams->id)
                 ->whereHas('question', function ($query) use ($version) {
                     return $query->where('version', $version);
                 })
                 ->first();
-
+            
             if (empty($quiz)) {
                 return response()->json(
                     [
@@ -166,7 +190,6 @@ class LectureController extends Controller
                     400,
                 );
             }
-
             $this->updateWatched($input);
             DB::commit();
             return response()->json($quiz->question);
@@ -195,7 +218,7 @@ class LectureController extends Controller
     public function updateWatched(array $input)
     {
         $student_course = StudentCourses::where('course_id', $input['courseId'])
-            ->where('student_id', $input['userId'])
+            ->where('student_id', Auth::user()->id)
             ->first();
 
         $newWatchList = '';

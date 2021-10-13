@@ -104,7 +104,6 @@ class ExaminationController extends Controller
                     'note' => $input['title']
                 ]);
             }
-
             
             DB::commit();
             return back()->with('success', 'Save success');
@@ -112,8 +111,6 @@ class ExaminationController extends Controller
             DB::rollBack();
             return back()->withErrors( 'Save error');
         }
-
-
     }
 
     public function submitExamination(Request $request)

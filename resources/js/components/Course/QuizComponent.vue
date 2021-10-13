@@ -45,12 +45,73 @@
               </div>
             </div>
           </div>
-          <div v-else>results</div>
+          <div v-else>
+            <div v-if="result.status == true">
+              <div v-if="result.score === result.score">
+                <h2 class="text-success">
+                  Excellent, you got all the answers correct
+                </h2>
+
+                <strong>What you know</strong>
+                <div
+                  class="pl-2"
+                  v-for="item in showScore.correct"
+                  v-bind:key="item.key"
+                >
+                  - {{ item.question }} :
+                  <span class="text-success">
+                    {{ item.answer }} <i class="fe fe-check"> </i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <h2>Review the course materials to expand your learning.</h2>
+              <h3>
+                you got {{ result.score }} of
+                {{ result.quiz_result.lenght }} correct
+              </h3>
+              <strong> What you know </strong>
+              <div
+                class="pl-2"
+                v-for="item in showScore.correct"
+                v-bind:key="item.key"
+              >
+                - {{ item.question }} :
+                <span class="text-success">
+                  {{ item.answer }} <i class="fe fe-check"> </i>
+                </span>
+              </div>
+              <strong> What you should review </strong>
+              <div
+                class="pl-2"
+                v-for="item in showScore.wrong"
+                v-bind:key="item.key"
+              >
+                - {{ item.question }} :
+                <span class="text-danger">
+                  {{ item.answer }} <i class="fe fe-x"> </i>
+                </span>
+                <br />
+                <sub class="text-danger">{{ item.message }} </sub>
+                <br />
+                <a
+                  class="font-weight-bold"
+                  v-on:click.stop="goToLecture(item.lecture)"
+                >
+                  Lecture Index .{{ item.lecture }}
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="bg-light text-right border py-2 px-5">
+    <div
+      v-if="result.length === 0"
+      class="bg-light text-right border py-2 px-5"
+    >
       <button
         class="btn btn-primary"
         v-on:click="prev()"
@@ -69,6 +130,20 @@
         <button v-else class="btn btn-primary" v-on:click="next()">Next</button>
       </span>
     </div>
+    <div v-else class="bg-light text-right border py-2 px-5">
+      <button
+        class="btn btn-primary"
+        v-on:click="prev()"
+        v-if="questionIndex > 0"
+      >
+        Retry
+      </button>
+      <span v-if="result.status == true">
+        <button class="btn btn-primary" v-on:click="nextToLecture()">
+          Next Lecture
+        </button>
+      </span>
+    </div>
   </div>
 </template>
 <script>
@@ -83,6 +158,10 @@ export default {
       userChoose: [],
       quiz: [],
       result: [],
+      showScore: {
+        correct: [],
+        wrong: [],
+      },
     };
   },
   mounted: function () {
@@ -90,8 +169,7 @@ export default {
   },
   methods: {
     submitAnswer() {
-      // this.$emit("submit", true);'
-      console.log("this.quiz :>> ", this.quiz);
+      this.userAnswer();
       axios
         .post(
           route("site.exam.checkExam", {
@@ -105,7 +183,33 @@ export default {
           }
         )
         .then((response) => {
-          console.log("this.response :>> ", response);
+          this.result = response.data;
+
+          let index = 0;
+          this.result.quiz_result.forEach((item) => {
+            let __question = this.questions.find((_question) => {
+              return _question.id === item.question;
+            });
+            let __answer = __question.answers.find((_answer) => {
+              return _answer.is_correct;
+            });
+            if (item.is_correct == true) {
+              this.showScore.correct.push({
+                key: index,
+                question: __question.question,
+                answer: __answer.answer,
+              });
+            } else {
+              this.showScore.wrong.push({
+                key: index,
+                question: __question.question,
+                answer: __answer.answer,
+                lecture: __question.lecture_index,
+                message: __question.message_wrong,
+              });
+            }
+            index += 1;
+          });
         })
         .catch(function (error) {
           console.error(error);
@@ -154,6 +258,15 @@ export default {
       this.quiz.forEach((item) => {
         this.userChoose.push(item.answerID);
       });
+    },
+    goToLecture(index) {
+      this.$emit("goToLecture", index);
+    },
+    reTryLecture() {
+      this.$emit("reTryLecture");
+    },
+    nextToLecture() {
+      this.$emit("nextToLecture");
     },
   },
 };
