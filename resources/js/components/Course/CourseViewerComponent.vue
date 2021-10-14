@@ -98,11 +98,42 @@
       </div>
     </div>
     <div v-if="isPassed" class="row mb-4">
-      <div class="col-12 bg-info w-100  py-1">
+      <div v-for="course in related" :key="course.id">
+        <div class="swiper-slide mb-5">
+          <div class="top-product col-12" v-on:click="goToCourse(course.id)">
+            <div
+              class="content-product py-5 rounded-top-course"
+              v-bind:style="{
+                backgroundColor: course.subject.subject_color_background,
+              }"
+            >
+              <div
+                class="
+                  body-product-content
+                  d-flex
+                  flex-column
+                  justify-content-between
+                  align-items-center
+                  col-10
+                  mx-auto
+                "
+                v-bind:style="{ color: course.subject.subject_color_text }"
+              >
+                <div class="content-top text-wrap w-100" style="text-align: center;">
+                  {{ course.subject.certificate.certificate_code }}<br />
+                  <div v-if="course.type == 1">Live Course</div>
 
-        <h1 class="text-warning text-center">
-          Related list comming up here
-        </h1>
+                  <div v-else>Course Record</div>
+                </div>
+                <div class="box-content-bot py-4 px-5 w-100" style="border: 1px solid;">
+                  <div class="content-bot" v-bind:title="course.course_name">
+                    {{ course.course_name }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -130,11 +161,13 @@ export default {
       lectureOpenTo: 0,
       questions: [],
       quiz: [],
-      isPassed: false
+      related: [],
+      isPassed: false,
     };
   },
   mounted() {
     this.syncDataLecture();
+    this.syncCourseRelate();
     setTimeout(this.showLecture(), 600);
   },
   methods: {
@@ -162,6 +195,9 @@ export default {
           console.error(error);
         });
     },
+    goToCourse(id) {
+      window.location.href = route('site.course.show', id)
+    },
     getVideoUrl() {
       return (
         "https://player.vimeo.com/video/" +
@@ -170,13 +206,25 @@ export default {
         process.env.MIX_VIMEO_APP_ID
       );
     },
+    syncCourseRelate() {
+      axios
+        .get(route("site.course.related.list", 2))
+        .then((response) => {
+          console.log("related");
+          console.log(response.data);
+          this.related = response.data.courses
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
     syncDataLecture() {
       axios
         .get(route("site.course.lectureList", 2))
         .then((response) => {
           console.log("this.response :>> ", response);
 
-          this.isPassed = response.data.student_lecture.passed
+          this.isPassed = response.data.student_lecture.passed;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
 

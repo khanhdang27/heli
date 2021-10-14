@@ -351,7 +351,7 @@ class CourseController extends Controller
             return response([
                 'message' => 'Delete success!',
             ]);
-        } catch (\Exception $exception) {
+        } catch (\Throwable $th) {
             return response(
                 [
                     'message' => 'Cannot delete course',
@@ -481,6 +481,15 @@ class CourseController extends Controller
             ->get();
 
         return response()->json($courses);
+    }
+
+    public function courseListRelatedClient(Course $course)
+    {
+        $courseNames = [];
+        foreach (explode(',', $course->related) as $value) {
+            array_push($courseNames, Course::find($value)->load('subject', 'subject.certificate'));
+        }
+        return response()->json(['courses' => $courseNames]);
     }
 
     public function courseListRelated(Course $course)

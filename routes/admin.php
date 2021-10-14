@@ -36,7 +36,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::post('course/{course}/lecture', 'CourseController@storeLecture')->name('course.lecture.store');
     Route::get('course/{course}/lecture/{lecture}', 'CourseController@editLecture')->name('course.lecture.edit');
     Route::put('course/{course}/lecture/{lecture}', 'CourseController@updateLecture')->name('course.lecture.update');
-    Route::delete('course/{course}/lecture/{lecture}', 'CourseController@destroyLecture')->name('course.lecture.destroy');
+    Route::delete('course/{course}/lecture/{lecture}/destroy', 'CourseController@destroyLecture')->name('course.lecture.destroy');
 
     Route::get('course/{course}/exam/create', 'ExamsController@create')->name('course.exam.create');
     Route::post('course/{course}/exam', 'ExamsController@store')->name('course.exam.store');

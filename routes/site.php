@@ -90,6 +90,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');
 
+    Route::get('course/related/{course}', 'CourseController@courseListRelatedClient')->name('course.related.list');
+
     Route::prefix('my/')
         ->name('user.')
         ->group(function () {

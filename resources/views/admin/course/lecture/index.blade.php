@@ -125,7 +125,7 @@ use App\Models\Exams;
                                                             </a>
                                                             @can('course-delete')
                                                                 <a href="javascript:void(0)"
-                                                                    onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $data]) }}')"
+                                                                    onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $lecture->id]) }}')"
                                                                     class="dropdown-item delete-item">
                                                                     Delete
                                                                 </a>
