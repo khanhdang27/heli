@@ -11,7 +11,7 @@ require('./bootstrap');
 require('./vimeo-upload');
 
 window.Vue = require('vue');
-Vue.use(vueVimeoPlayer)
+Vue.use(vueVimeoPlayer);
 
 /**
  * The following block of code may be used to automatically register your
@@ -36,6 +36,8 @@ Vue.component('quiz-component', require('./components/Course/QuizComponent.vue')
 
 Vue.component('blog-latest-component', require('./components/Blog/BlogLatestComponent.vue').default);
 Vue.component('news-component', require('./components/Blog/NewsComponent.vue').default);
+
+Vue.component('slide-tutor-component', require('./components/Home/SlideTutorComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
