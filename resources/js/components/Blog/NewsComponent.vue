@@ -2,7 +2,7 @@
     <div id="showMore">
         <!-- Post -->
         <div class="mx-auto box-news">
-            <div class="post" v-for='post in posts'>
+            <div class="post" v-for='post in posts' v-bind:key="post.id">
                 <div class="py-2">
                     <a id="new_href" class="h2 text-center" :href="'news/'+post.id">
                         <span v-cloak>{{ post.announcement_date }} </span>

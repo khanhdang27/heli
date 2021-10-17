@@ -20,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="post in posts">
+                    <tr v-for="post in posts" v-bind:key="post.id">
                         <td v-cloak>{{ post.created_at | formatDate}}</td>
                         <td v-cloak>{{ post.course.course_name}}</td>
                         <td v-cloak>{{ post.final_price}}</td>

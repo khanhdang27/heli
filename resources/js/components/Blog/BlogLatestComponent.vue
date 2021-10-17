@@ -27,7 +27,7 @@
                                     </h5>
                                 </div>
                                 <div class="d-flex flex-wrap pb-3">
-                                    <div v-for='tag in post.tags'>
+                                    <div v-for='tag in post.tags' v-bind:key="tag.id">
                                         <button class="btn-hashtag-small">
                                             <span v-cloak>{{ tag.tag_name }}</span>
                                         </button>

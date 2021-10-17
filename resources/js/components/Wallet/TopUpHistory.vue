@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="post in posts">
+                    <tr v-for="post in posts" v-bind:key="post.uuid">
                         <td v-cloak>{{ post.created_at | formatDate}}</td>
                         <td v-cloak>{{ post.amount * 10 }}</td>
                         <td v-cloak>{{ post.amount }}</td>

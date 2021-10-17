@@ -2,7 +2,7 @@
     <div>
         <h2 class="font-weight-bold mb-4">{{ lang.topUpValue }}</h2>
         <div class="d-flex flex-wrap mb-5 room-selection">
-            <div v-for="value in values">
+            <div v-for="value in values" v-bind:key="value">
                 <input v-bind:id="value" type="radio" v-bind:value="value" v-model="choose">
                 <label class="btn btn-light p-0 border border-primary text-primary font-weight-bold h5
                                     py-3 btn-topUp-value" v-bind:for="value">{{ value }}HK$</label>
