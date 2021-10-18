@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <!--Component Latest Blog List-->
-            <div class="col-xl-4 col-lg-6 pt-4 blog-item-latest-display" v-for='post in posts' :key="post.id">
+            <div class="col-xl-4 col-lg-6 pt-4 blog-item-latest-display" v-for='post in posts' v-bind:key="post.id">
                 <div class="mt-2 popular-item shadow animate-up" id="latest">
                     <div class="thumb-article d-flex flex-column justify-content-end position-relative">
                         <img v-if="post.photo"
@@ -58,7 +58,6 @@ export default {
     },
     props: {
         lang: Object,
-        route: String,
     },
     data() {
         return {
@@ -70,7 +69,7 @@ export default {
     },
     methods: {
         getPosts: function () {
-            axios.get(this.route, {
+            axios.get(route("site.blog.list"), {
                 params: {
                     page: this.page + 1,
                 }

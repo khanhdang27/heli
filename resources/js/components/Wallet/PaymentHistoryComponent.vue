@@ -33,7 +33,7 @@
                 </table>
             </div>
             <div v-if="!isFinished" class="d-flex justify-content-center mt-5">
-                <button class="btn-more h5 bg-white text-primary border-primary" @click='getPosts()' v-cloak>
+                <button class="btn-more h5 bg-white text-primary border-primary" @click='getPaymentHistory()' v-cloak>
                     {{ lang.viewAllHistory }}
                     <span class="fe fe-chevron-down"></span>
                 </button>
@@ -53,7 +53,6 @@ export default {
     },
     props: {
         lang: Object,
-        route: String
     },
     data() {
         return {
@@ -64,8 +63,8 @@ export default {
         }
     },
     methods: {
-        getPosts: function () {
-            axios.get(this.route, {
+        getPaymentHistory: function () {
+            axios.get(route("site.user.wallet.listPayment"), {
                 params: {
                     page: this.page + 1,
                 }
@@ -97,7 +96,7 @@ export default {
         }
     },
     created: function () {
-        this.getPosts();
+        this.getPaymentHistory();
     }
 }
 </script>

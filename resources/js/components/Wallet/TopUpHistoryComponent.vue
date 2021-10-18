@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="post in posts" v-bind:key="post.uuid">
+                    <tr v-for="post in posts" v-bind:key="post.id">
                         <td v-cloak>{{ post.created_at | formatDate}}</td>
                         <td v-cloak>{{ post.amount * 10 }}</td>
                         <td v-cloak>{{ post.amount }}</td>
@@ -35,7 +35,7 @@
                 </table>
             </div>
             <div v-if="!isFinished" class="d-flex justify-content-center mt-5">
-                <button class="btn-more h5 bg-white text-primary border-primary" @click='getPosts()' v-cloak>
+                <button class="btn-more h5 bg-white text-primary border-primary" @click='getTopUpHistory()' v-cloak>
                     {{ lang.viewAllHistory }}
                     <span class="fe fe-chevron-down"></span>
                 </button>
@@ -55,7 +55,6 @@ export default {
     },
     props: {
         lang: Object,
-        route: String
     },
     data() {
         return {
@@ -66,8 +65,8 @@ export default {
         }
     },
     methods: {
-        getPosts: function () {
-            axios.get(this.route, {
+        getTopUpHistory: function () {
+            axios.get(route("site.user.wallet.listHistory"), {
                 params: {
                     page: this.page + 1,
                 }
@@ -99,7 +98,7 @@ export default {
         }
     },
     created: function () {
-        this.getPosts();
+        this.getTopUpHistory();
     }
 }
 </script>

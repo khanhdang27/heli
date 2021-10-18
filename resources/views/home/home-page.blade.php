@@ -82,6 +82,8 @@
             {{-- chua dang nhap --}}
             {{-- <x-home.video-course :courseDetail=$courseVideo></x-home.video-course> --}}
 
+            <slide-tutor-component v-bind:tutors="{{$tutors}}"></slide-tutor-component>
+
         @else
             {{-- da dang nhap --}}
             <div class="mx-auto container-home mt-5">

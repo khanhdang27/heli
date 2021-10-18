@@ -70,10 +70,8 @@
                             </div>
                         </div>
                     </div>
-                    <payment-history-component route="{{route("site.user.wallet.listPayment")}}"
-                                               v-bind:lang="{{json_encode($lang)}}"></payment-history-component>
-                    <top-up-history route="{{route("site.user.wallet.listHistory")}}"
-                                    v-bind:lang="{{json_encode($lang)}}"></top-up-history>
+                    <payment-history-component v-bind:lang="{{json_encode($lang)}}"></payment-history-component>
+                    <top-up-history-component v-bind:lang="{{json_encode($lang)}}"></top-up-history-component>
                 </div>
             </div>
         </div>

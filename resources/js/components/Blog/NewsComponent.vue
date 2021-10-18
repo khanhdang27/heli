@@ -13,7 +13,7 @@
         </div>
 
         <div v-if="!isFinished" class="d-flex justify-content-center mt-5">
-            <button class="btn-more btn h4 bg-white text-primary border-primary" @click='getPosts()' v-cloak>
+            <button class="btn-more btn h4 bg-white text-primary border-primary" @click='getNews()' v-cloak>
                 {{lang.more}} <span class="fe fe-chevron-down"></span>
             </button>
         </div>
@@ -31,7 +31,6 @@ export default {
     },
     props: {
         lang: Object,
-        route: String
     },
     data() {
         return {
@@ -42,8 +41,8 @@ export default {
         }
     },
     methods: {
-        getPosts: function () {
-            axios.get(this.route, {
+        getNews: function () {
+            axios.get(route("site.news.list"), {
                 params: {
                     page: this.page + 1,
                 }
@@ -75,7 +74,7 @@ export default {
         }
     },
     created: function () {
-        this.getPosts();
+        this.getNews();
     }
 }
 </script>
