@@ -13,7 +13,7 @@
     <div class="container container-news-page">
         <div class="content-news-page border-secondary">
             <div class="py-5">
-                <news-component route="{{ route("site.news.list")}}" v-bind:lang="{{json_encode($lang)}}"></news-component>
+                <news-component v-bind:lang="{{json_encode($lang)}}"></news-component>
             </div>
         </div>
     </div>

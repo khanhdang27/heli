@@ -26,7 +26,7 @@ Vue.use(vueVimeoPlayer);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('top-up-component', require('./components/Wallet/TopUpComponent.vue').default);
-Vue.component('top-up-history', require('./components/Wallet/TopUpHistory.vue').default);
+Vue.component('top-up-history-component', require('./components/Wallet/TopUpHistoryComponent.vue').default);
 Vue.component('payment-history-component', require('./components/Wallet/PaymentHistoryComponent.vue').default);
 
 Vue.component('like-component', require('./components/Share/LikeComponent.vue').default);
