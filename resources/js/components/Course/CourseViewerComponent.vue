@@ -13,6 +13,8 @@
             <quiz-component
               v-cloak
               v-bind:questions="questions"
+              v-bind:courseId="lectureList[lectureIndex].course_id"
+              v-bind:examId="lectureList[lectureIndex].id"
               v-if="questions"
               @goToLecture="onClickLecture(index)"
               @reTryLecture="reTryLecture()"
@@ -98,11 +100,87 @@
       </div>
     </div>
     <div v-if="isPassed" class="row mb-4">
-      <div class="col-12 bg-info w-100  py-1">
+      <div class="col-xl-1 col-lg-2 col-1 d-none d-md-block">
+        <div class="swiper-button-prev btn-prev btn-prev-tutor" id="btn_prev">
+          <div
+            class="
+              rounded-circle
+              border-btn-next
+              animate-change-color
+              py-3
+              px-4
+            "
+          >
+            <p class="h2 text-center mx-2">❮</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 col-10">
+        <swiper :options="swiperOptions">
+          <swiper-slide v-for="course in related" :key="course.id">
+              <div
+                class="top-product col-12"
+                v-on:click="goToCourse(course.id)"
+              >
+                <div
+                  class="content-product py-5 rounded-top-course"
+                  v-bind:style="{
+                    backgroundColor: course.subject.subject_color_background,
+                  }"
+                >
+                  <div
+                    class="
+                      body-product-content
+                      d-flex
+                      flex-column
+                      justify-content-between
+                      align-items-center
+                      col-10
+                      mx-auto
+                    "
+                    v-bind:style="{ color: course.subject.subject_color_text }"
+                  >
+                    <div
+                      class="content-top text-wrap w-100"
+                      style="text-align: center"
+                    >
+                      {{ course.subject.certificate.certificate_code }}<br />
+                      <div v-if="course.type == 1">Live Course</div>
 
-        <h1 class="text-warning text-center">
-          Related list comming up here
-        </h1>
+                      <div v-else>Course Record</div>
+                    </div>
+                    <div
+                      class="box-content-bot py-4 px-5 w-100"
+                      style="border: 1px solid"
+                    >
+                      <div
+                        class="content-bot"
+                        v-bind:title="course.course_name"
+                      >
+                        {{ course.course_name }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </swiper-slide>
+        </swiper>
+      </div>
+      <div class="col-xl-1 col-lg-2 col-1 d-none d-md-block">
+        <div class="swiper-button-next btn-next btn-next-tutor" id="btn_next">
+          <div
+            class="
+              rounded-circle
+              border-btn-next
+              animate-change-color
+              py-2
+              px-4
+            "
+          >
+            <p class="m-0 h2 text-center">❯</p>
+            <p class="text-nowrap text-center m-0">更多</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -111,6 +189,8 @@
 <script>
 import { vueVimeoPlayer } from "vue-vimeo-player";
 import QuizComponent from "./QuizComponent";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import "swiper/swiper-bundle.css";
 
 export default {
   props: {
@@ -120,6 +200,8 @@ export default {
   components: {
     QuizComponent,
     vueVimeoPlayer,
+    swiper,
+    swiperSlide,
   },
   data() {
     return {
@@ -130,11 +212,45 @@ export default {
       lectureOpenTo: 0,
       questions: [],
       quiz: [],
-      isPassed: false
+      related: [],
+      isPassed: false,
+      swiperOptions: {
+        speed: 700,
+        pagination: {
+          dynamicBullets: true,
+        },
+        navigation: {
+          nextEl: ".btn-next-tutor",
+          prevEl: ".btn-prev-tutor",
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          1024: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1200: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1440: {
+            slidesPerView: 3,
+            spaceBetween: 60,
+          },
+        },
+      },
     };
   },
   mounted() {
     this.syncDataLecture();
+    this.syncCourseRelate();
     setTimeout(this.showLecture(), 600);
   },
   methods: {
@@ -162,6 +278,9 @@ export default {
           console.error(error);
         });
     },
+    goToCourse(id) {
+      window.location.href = route("site.course.show", id);
+    },
     getVideoUrl() {
       return (
         "https://player.vimeo.com/video/" +
@@ -170,13 +289,24 @@ export default {
         process.env.MIX_VIMEO_APP_ID
       );
     },
+    syncCourseRelate() {
+      axios
+        .get(route("site.course.related.list", this.courseId))
+        .then((response) => {
+          console.log("related >>>", response.data);
+          this.related = response.data.courses;
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
     syncDataLecture() {
       axios
-        .get(route("site.course.lectureList", 2))
+        .get(route("site.course.lectureList", this.courseId))
         .then((response) => {
-          console.log("this.response :>> ", response);
+          console.log("lectureList :>> ", response);
 
-          this.isPassed = response.data.student_lecture.passed
+          this.isPassed = response.data.student_lecture.passed;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
 

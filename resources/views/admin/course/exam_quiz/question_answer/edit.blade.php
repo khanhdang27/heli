@@ -17,13 +17,13 @@
                             <div>
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Create Question
+                                    Edit Question
                                 </h4>
                             </div>
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => route('admin.course.question.update', ['course' => $course->id, 'exam' => $exam, 'quiz' => $quiz, 'question' => $question]), 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open(['url' => route('admin.course.question.update', ['course' => $course->id, 'exam' => $exam, 'quiz' => $quiz, 'question' => $question]), 'enctype' => 'multipart/form-data', 'method' => 'put']) !!}
                         @csrf
                         <div class="form-group ">
                             {{ Form::label('question', 'Question', ['class' => 'required']) }}

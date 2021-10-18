@@ -150,6 +150,8 @@
 export default {
   props: {
     questions: Array,
+    courseId: Number,
+    examId: Number
   },
   data() {
     return {
@@ -173,18 +175,16 @@ export default {
       axios
         .post(
           route("site.exam.checkExam", {
-            exams: 1,
+            exams: this.examId
           }),
           {
-            version: 1,
-            userId: 12,
-            courseId: 2,
+            courseId: this.courseId,
             quiz: this.quiz,
           }
         )
         .then((response) => {
           this.result = response.data;
-
+          localStorage.removeItem('quiz');
           let index = 0;
           this.result.quiz_result.forEach((item) => {
             let __question = this.questions.find((_question) => {
