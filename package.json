@@ -32,11 +32,7 @@
         "toastr": "^2.1.4",
         "uuid": "^8.3.2",
         "vimeo-upload": "^0.1.6",
-<<<<<<< HEAD
-        "vue-awesome-swiper": "^3.1.1",
-=======
         "vue-awesome-swiper": "^3.1.3",
->>>>>>> main
         "vue-star-rating": "^1.7.0",
         "vue-vimeo-player": "^0.2.2"
     }
