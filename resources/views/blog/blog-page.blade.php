@@ -47,7 +47,7 @@ use App\Utilities\SelectionByClass;
                 <h1 class="pt-5 font-weight-bold text-primary">
                     @lang('keywords.blog-page.latestArticles')
                 </h1>
-                <blog-latest-component route="{{ route("site.blog.list")}}" v-bind:lang="{{json_encode($lang)}}">
+                <blog-latest-component v-bind:lang="{{json_encode($lang)}}">
                 </blog-latest-component>
             </div>
         </div>

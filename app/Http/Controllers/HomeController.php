@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Models\Setting;
 use App\Models\StudentCourses;
 use App\Models\Subject;
+use App\Models\Tutor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
@@ -61,7 +62,8 @@ class HomeController extends Controller
         [$courseVideo, $latesLecture] = $this->getCourseVideo();
 
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
-
+        $tutors = Tutor::with('user', 'user.avatar')
+            ->where('id','!=', 1)->limit(9)->get();
         return view('home.home-page',[
             'banners' => $banners,
             'courseVideo'=>$courseVideo,
@@ -76,6 +78,7 @@ class HomeController extends Controller
             'courseUKISET' => $courseUKISET->latest('created_at')->get(),
             'courseIELTS' => $courseIELTS->latest('created_at')->get(),
             'courseIAL' => $courseIAL->latest('created_at')->get(),
+            'tutors' => $tutors
         ]);
     }
 
