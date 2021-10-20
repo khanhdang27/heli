@@ -32,9 +32,9 @@
             </div>
         </div>
     </div>
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/" type="application/javascript"></script>
 
-    <script>
+    <script type="application/javascript">
         const stripe = Stripe("{{ config('app.stripe_key') }}");
 
         const elements = stripe.elements();
@@ -45,7 +45,7 @@
 
         cardElement.mount('#card-element');
     </script>
-    <script>
+    <script type="application/javascript">
         const cardHolderName = document.getElementById('card-holder-name');
         const cardButton = document.getElementById('card-button');
         const clientSecret = cardButton.dataset.secret;

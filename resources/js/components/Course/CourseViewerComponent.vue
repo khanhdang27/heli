@@ -2,13 +2,13 @@
   <div>
     <div class="row mb-4" id="video-lecture">
       <div class="col-lg-9 bg-white">
-        <div class="h-100">
+        <div class="h-100 border border-primary">
           <div
             v-if="
               lectureList[lectureIndex] &&
               lectureList[lectureIndex].model_name == 'Exams'
             "
-            class="h-100"
+            class="h-100 container-fluid"
           >
             <quiz-component
               v-cloak
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="col-lg-3 bg-white">
-        <div class="box-list-video text-primary">
+        <div class="box-list-video text-primary lecture overflow-auto">
           <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
           <ul
             class="list-group list-group-flush"
