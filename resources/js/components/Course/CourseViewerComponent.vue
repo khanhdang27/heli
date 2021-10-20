@@ -251,7 +251,7 @@ export default {
   mounted() {
     this.syncDataLecture();
     this.syncCourseRelate();
-    setTimeout(this.showLecture(), 600);
+    setTimeout(() => this.showLecture(), 2000);
   },
   methods: {
     getExams() {
@@ -306,7 +306,7 @@ export default {
         .then((response) => {
           console.log("lectureList :>> ", response);
 
-          this.isPassed = response.data.student_lecture.passed;
+          this.isPassed = response.data.student_lecture.passed == 1;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
 
@@ -359,11 +359,11 @@ export default {
     reTryLecture() {
       this.syncDataLecture();
       // wait for re-fecth
-      setTimeout(this.onClickLecture(parseInt(this.lectureIndex)), 800);
+      setTimeout(() => this.onClickLecture(parseInt(this.lectureIndex)), 800);
     },
     nextToLecture() {
       this.syncDataLecture();
-      setTimeout(this.onClickLecture(parseInt(this.lectureIndex) + 1), 2000);
+      setTimeout( ()=> this.onClickLecture(parseInt(this.lectureIndex) + 1), 2000);
     },
     showLecture() {
       if (this.lectureList[this.lectureIndex].model_name === "Exams") {

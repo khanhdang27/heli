@@ -5061,13 +5061,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.syncDataLecture();
     this.syncCourseRelate();
-    setTimeout(this.showLecture(), 600);
+    setTimeout(function () {
+      return _this.showLecture();
+    }, 2000);
   },
   methods: {
     getExams: function getExams() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get(route("site.exam.showLecture", {
         exams: this.lectureList[this.lectureIndex].id
@@ -5079,10 +5083,10 @@ __webpack_require__.r(__webpack_exports__);
           id: this.lectureList[this.lectureIndex].id
         }
       }).then(function (response) {
-        _this.studentLecture.push(_this.lectureIndex);
+        _this2.studentLecture.push(_this2.lectureIndex);
 
-        _this.questions = response.data;
-        console.log("this.questions :>> ", _this.questions);
+        _this2.questions = response.data;
+        console.log("this.questions :>> ", _this2.questions);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -5094,32 +5098,32 @@ __webpack_require__.r(__webpack_exports__);
       return "https://player.vimeo.com/video/" + this.videoId + "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" + "58479";
     },
     syncCourseRelate: function syncCourseRelate() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get(route("site.course.related.list", this.courseId)).then(function (response) {
         console.log("related >>>", response.data);
-        _this2.related = response.data.courses;
+        _this3.related = response.data.courses;
       })["catch"](function (error) {
         console.error(error);
       });
     },
     syncDataLecture: function syncDataLecture() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get(route("site.course.lectureList", this.courseId)).then(function (response) {
         console.log("lectureList :>> ", response);
-        _this3.isPassed = response.data.student_lecture.passed;
-        _this3.studentLecture = response.data.student_lecture.watched_list.split(",");
-        _this3.lectureOpenTo = response.data.student_lecture.lecture_open;
+        _this4.isPassed = response.data.student_lecture.passed == 1;
+        _this4.studentLecture = response.data.student_lecture.watched_list.split(",");
+        _this4.lectureOpenTo = response.data.student_lecture.lecture_open;
 
-        if (_this3.lectureList.length == 0) {
-          _this3.lectureIndex = _this3.studentLecture.length != 1 ? _this3.studentLecture[_this3.studentLecture.length - 2] : 0;
+        if (_this4.lectureList.length == 0) {
+          _this4.lectureIndex = _this4.studentLecture.length != 1 ? _this4.studentLecture[_this4.studentLecture.length - 2] : 0;
 
           for (var item in response.data.lectures) {
-            _this3.lectureList.push(response.data.lectures[item]);
+            _this4.lectureList.push(response.data.lectures[item]);
           }
 
-          _this3.lectureList.sort(function (a, b) {
+          _this4.lectureList.sort(function (a, b) {
             return a.index - b.index;
           });
         }
@@ -5128,7 +5132,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     getLecture: function getLecture() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get(route("site.lecture.showLecture", {
         userId: this.userId,
@@ -5137,9 +5141,9 @@ __webpack_require__.r(__webpack_exports__);
         index: this.lectureList[this.lectureIndex].index,
         id: this.lectureList[this.lectureIndex].id
       })).then(function (response) {
-        _this4.videoId = response.data.video_resource;
+        _this5.videoId = response.data.video_resource;
 
-        _this4.studentLecture.push(_this4.lectureIndex);
+        _this5.studentLecture.push(_this5.lectureIndex);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -5153,13 +5157,21 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     reTryLecture: function reTryLecture() {
+      var _this6 = this;
+
       this.syncDataLecture(); // wait for re-fecth
 
-      setTimeout(this.onClickLecture(parseInt(this.lectureIndex)), 800);
+      setTimeout(function () {
+        return _this6.onClickLecture(parseInt(_this6.lectureIndex));
+      }, 800);
     },
     nextToLecture: function nextToLecture() {
+      var _this7 = this;
+
       this.syncDataLecture();
-      setTimeout(this.onClickLecture(parseInt(this.lectureIndex) + 1), 2000);
+      setTimeout(function () {
+        return _this7.onClickLecture(parseInt(_this7.lectureIndex) + 1);
+      }, 2000);
     },
     showLecture: function showLecture() {
       if (this.lectureList[this.lectureIndex].model_name === "Exams") {
