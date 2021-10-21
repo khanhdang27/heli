@@ -1,9 +1,9 @@
 @php
 
-use App\Utilities\SelectionByClass;
-use App\Models\Tutor;
-use App\Models\Subject;
-use App\Models\Course;
+    use App\Utilities\SelectionByClass;
+    use App\Models\Tutor;
+    use App\Models\Subject;
+    use App\Models\Course;
 
 @endphp
 
@@ -112,7 +112,7 @@ use App\Models\Course;
         </div> <!-- / .row -->
     </div>
     <script type="application/javascript">
-        window.onload = function() {
+        window.onload = function () {
             CKEDITOR.replace('ckeditor');
         };
     </script>

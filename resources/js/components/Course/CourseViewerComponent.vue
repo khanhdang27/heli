@@ -8,7 +8,7 @@
               lectureList[lectureIndex] &&
               lectureList[lectureIndex].model_name == 'Exams'
             "
-            class="h-100 container-fluid"
+            class="h-100"
           >
             <quiz-component
               v-cloak
@@ -251,7 +251,7 @@ export default {
   mounted() {
     this.syncDataLecture();
     this.syncCourseRelate();
-    setTimeout(this.showLecture(), 600);
+    setTimeout(() => this.showLecture(), 600);
   },
   methods: {
     getExams() {
@@ -359,11 +359,11 @@ export default {
     reTryLecture() {
       this.syncDataLecture();
       // wait for re-fecth
-      setTimeout(this.onClickLecture(parseInt(this.lectureIndex)), 800);
+      setTimeout(() => this.onClickLecture(parseInt(this.lectureIndex)), 800);
     },
     nextToLecture() {
       this.syncDataLecture();
-      setTimeout(this.onClickLecture(parseInt(this.lectureIndex) + 1), 2000);
+      setTimeout( () => this.onClickLecture(parseInt(this.lectureIndex) + 1), 2000);
     },
     showLecture() {
       if (this.lectureList[this.lectureIndex].model_name === "Exams") {
