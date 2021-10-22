@@ -1,7 +1,7 @@
 @php
 
 use App\Models\Lecture;
-use App\Models\Exams;
+use App\Models\Examination;
 @endphp
 
 @extends('admin.layout')
@@ -136,7 +136,7 @@ use App\Models\Exams;
                                                 </td>
                                             </tr>
                                         @endif
-                                        @if ($lecture instanceof Exams)
+                                        @if ($lecture instanceof Examination)
                                             <tr>
                                                 <td>
                                                     {{ $lecture->index }}
@@ -145,7 +145,7 @@ use App\Models\Exams;
                                                     {{ $lecture->name }}
                                                 </td>
                                                 <td>
-                                                    {{ Exams::TYPES[$lecture->type] }}
+                                                    {{ Examination::TYPES[$lecture->type] }}
                                                 </td>
                                                 <td>
 
@@ -162,7 +162,7 @@ use App\Models\Exams;
                                                                 data-toggle="modal" data-target="#exampleModalCenter"
                                                                 data-name="{{ $lecture->name }}"
                                                                 data-index="{{ $lecture->index }}"
-                                                                data-id="{{ $lecture->id }}" data-type="Exams">
+                                                                data-id="{{ $lecture->id }}" data-type="Examination">
                                                                 Index
                                                             </a>
                                                             <a href="{{ route('admin.course.exam.edit', ['course' => $course, 'exam' => $lecture]) }}"
@@ -173,7 +173,7 @@ use App\Models\Exams;
                                                                 class="dropdown-item">
                                                                 Quizzes
                                                             </a>
-                                                            @if ($lecture->type == Exams::ASSESSMENT)
+                                                            @if ($lecture->type == Examination::ASSESSMENT)
                                                                 <a href="{{ route('admin.course.grade.list', ['course' => $course, 'exam' => $lecture]) }}"
                                                                     class="dropdown-item">
                                                                     Grade

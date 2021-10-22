@@ -1,5 +1,5 @@
 @php
-use App\Models\Exams;
+use App\Models\Examination;
 @endphp
 
 @extends('admin.layout')
@@ -22,7 +22,7 @@ use App\Models\Exams;
                             <div>
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Create Exams
+                                    Create Examination
                                 </h4>
                             </div>
                         </div> <!-- / .row -->
@@ -40,7 +40,7 @@ use App\Models\Exams;
                         </div>
                         <div class="form-group ">
                             {{ Form::label('type', 'Type', ['class' => 'required']) }}
-                            {{ Form::select('type', Exams::TYPES, old('type'), ['placeholder' => 'Pick a size...', 'class' => 'form-control', 'required', 'id' => 'type']) }}
+                            {{ Form::select('type', Examination::TYPES, old('type'), ['placeholder' => 'Pick a size...', 'class' => 'form-control', 'required', 'id' => 'type']) }}
                         </div>
                         {{ Form::submit('Save', ['class' => 'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}

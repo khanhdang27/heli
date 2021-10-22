@@ -38,11 +38,11 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('course/{course}/lecture/{lecture}', 'CourseController@updateLecture')->name('course.lecture.update');
     Route::delete('course/{course}/lecture/{lecture}/destroy', 'CourseController@destroyLecture')->name('course.lecture.destroy');
 
-    Route::get('course/{course}/exam/create', 'ExamsController@create')->name('course.exam.create');
-    Route::post('course/{course}/exam', 'ExamsController@store')->name('course.exam.store');
-    Route::get('course/{course}/exam/{exam}', 'ExamsController@edit')->name('course.exam.edit');
-    Route::put('course/{course}/exam/{exam}', 'ExamsController@update')->name('course.exam.update');
-    Route::delete('course/{course}/exam/{exam}', 'ExamsController@destroy')->name('course.exam.destroy');
+    Route::get('course/{course}/exam/create', 'ExaminationController@create')->name('course.exam.create');
+    Route::post('course/{course}/exam', 'ExaminationController@store')->name('course.exam.store');
+    Route::get('course/{course}/exam/{exam}', 'ExaminationController@edit')->name('course.exam.edit');
+    Route::put('course/{course}/exam/{exam}', 'ExaminationController@update')->name('course.exam.update');
+    Route::delete('course/{course}/exam/{exam}', 'ExaminationController@destroy')->name('course.exam.destroy');
 
     Route::get('course/{course}/exam/{exam}/grade', 'PassGradeController@index')->name('course.grade.list');
     Route::get('course/{course}/exam/{exam}/grade/create', 'PassGradeController@create')->name('course.grade.create');
@@ -127,10 +127,6 @@ Route::middleware('auth.admin')->group(function () {
     Route::post('user-subscribe/unsubscribe', 'UserSubscribeController@unsubscribe')->name('user-subscribe.unsubscribe');
 
     Route::resource('study-session', 'StudySessionController');
-    Route::resource('examination', 'ExaminationController');
-    Route::get('manage-examination/index/{id}', 'ExaminationController@manageExamination')->name('manage-examination');
-    Route::get('manage-examination/create/{id}', 'ExaminationController@addExamination')->name('manage-examination.create');
-
     Route::resource('wallet-manager', 'WalletManagerController');
 
     Route::resource('setting', 'SettingController');

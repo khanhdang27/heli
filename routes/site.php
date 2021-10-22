@@ -82,11 +82,8 @@ Route::middleware('auth')->group(function () {
     Route::get('lecture/showLecture', 'LectureController@showLecture')->name('lecture.showLecture');
     Route::resource('lecture', 'LectureController');
 
-    Route::post('exam/{exams}', 'ExamsController@checkExam')->name('exam.checkExam');
+    Route::post('exam/{exams}', 'ExaminationController@checkExam')->name('exam.checkExam');
     Route::get('exam/{exams}', 'LectureController@showExam')->name('exam.showLecture');
-
-    // Route::post('submit-exam', 'ExaminationController@submitExamination')->name('submit-examination');
-    // Route::get('unsubmit-exam/{id}', 'ExaminationController@unSubmitExamination')->name('unsubmit-examination');
 
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');
 

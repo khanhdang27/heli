@@ -25,11 +25,12 @@ class CreateStudentCoursesTable extends Migration
                 ->cascadeOnDelete();
             $table->dateTime('latest_study');
             $table->bigInteger('lecture_study');
-            $table->json('watched_list');
-            $table->bigInteger('lecture_open')->nullable();
-            $table->bigInteger('quiz_lecture')->nullable();
-            $table->bigInteger('level_quiz')->nullable();
-            $table->string('room_live_course_id')->nullable();
+            $table->text('watched_list');
+            $table->bigInteger('lecture_open')->default(0);
+            $table->bigInteger('quiz_lecture')->default(0);
+            $table->bigInteger('quiz_set')->nullable();
+            $table->bigInteger('level')->nullable();
+            $table->boolean('passed')->default(false);
             $table->unique(['student_id', 'course_id']);
             $table->timestamps();
             $table->softDeletes();

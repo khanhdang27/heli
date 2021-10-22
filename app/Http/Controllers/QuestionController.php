@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\Exams;
+use App\Models\Examination;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Quiz;
@@ -17,7 +17,7 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Course $course, Exams $exam, Quiz $quiz)
+    public function index(Course $course, Examination $exam, Quiz $quiz)
     {
         $questions = Question::where(['quiz_id' => $quiz->id])->paginate(15);
         // resources\views\admin\course\exam_quiz\question_answer
@@ -34,7 +34,7 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Course $course, Exams $exam, Quiz $quiz)
+    public function create(Course $course, Examination $exam, Quiz $quiz)
     {
         return view('admin.course.exam_quiz.question_answer.create', [
             'course' => $course,
@@ -49,7 +49,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Course $course, Exams $exam, Quiz $quiz)
+    public function store(Request $request, Course $course, Examination $exam, Quiz $quiz)
     {
         $input = $request->input();
         DB::beginTransaction();
@@ -75,7 +75,7 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course, Exams $exam, Quiz $quiz, Question $question)
+    public function show(Course $course, Examination $exam, Quiz $quiz, Question $question)
     {
         $answers = Answer::where(['question_id' => $question->id])->get();
         return view('admin.course.exam_quiz.question_answer.answer', [
@@ -93,7 +93,7 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course, Exams $exam, Quiz $quiz, Question $question)
+    public function edit(Course $course, Examination $exam, Quiz $quiz, Question $question)
     {
         return view('admin.course.exam_quiz.question_answer.edit', [
             'course' => $course,
@@ -110,7 +110,7 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course, Exams $exam, Quiz $quiz, Question $question)
+    public function update(Request $request, Course $course, Examination $exam, Quiz $quiz, Question $question)
     {
         $input = $request->input();
         DB::beginTransaction();
@@ -135,7 +135,7 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course, Exams $exam, Quiz $quiz, Question $question)
+    public function destroy(Course $course, Examination $exam, Quiz $quiz, Question $question)
     {
         try {
             $question->delete();

@@ -99,13 +99,8 @@ class Course extends Model implements TranslatableContract
         return $this->hasMany(CourseSchedule::class);
     }
 
-    public function examinations()
-    {
-        return $this->hasMany(Examination::class, 'course_id');
-    }
-
     public function exams()
     {
-        return $this->hasMany(Exams::class);
+        return $this->hasMany(Examination::class);
     }
 }

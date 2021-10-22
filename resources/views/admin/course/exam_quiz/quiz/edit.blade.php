@@ -1,6 +1,6 @@
 @php
 
-use App\Models\Exams;
+use App\Models\Examination;
 @endphp
 
 @extends('admin.layout')

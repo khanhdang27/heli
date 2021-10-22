@@ -21,7 +21,7 @@
                             <div>
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Edit Exams
+                                    Edit Examination
                                 </h4>
                             </div>
                         </div> <!-- / .row -->

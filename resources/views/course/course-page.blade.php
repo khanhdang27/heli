@@ -86,8 +86,6 @@ if (!empty($student_course)) {
                 <div class="col-xl-4 col-md-6">
                     @if (empty($student_course))
                         <x-product-detail.buy-course :courseDetail=$courseDetail></x-product-detail.buy-course>
-                    @elseif($course->type != Course::DOCUMENT)
-                        <x-product-detail.course-submit :courseDetail=$courseDetail></x-product-detail.course-submit>
                     @endif
                 </div>
             </div>

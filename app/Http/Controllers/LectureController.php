@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Lecture;
 use App\Models\StudentCourses;
-use App\Models\Exams;
+use App\Models\Examination;
 use App\Models\Quiz;
 use DateTime;
 use Illuminate\Http\Request;
@@ -142,10 +142,10 @@ class LectureController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Exams  $exams
+     * @param  \App\Models\Examination  $exams
      * @return \Illuminate\Http\Response
      */
-    public function showExam(Request $request, Exams $exams)
+    public function showExam(Request $request, Examination $exams)
     {
         $input = $request->input();
         DB::beginTransaction();

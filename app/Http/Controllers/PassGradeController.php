@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\Exams;
+use App\Models\Examination;
 use App\Models\PassGrade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +15,7 @@ class PassGradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Course $course, Exams $exam)
+    public function index(Course $course, Examination $exam)
     {
         $grades = PassGrade::where(['exam_id' => $exam->id])->paginate(15);
         return view('admin.course.grade.index', [
@@ -30,7 +30,7 @@ class PassGradeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Course $course, Exams $exam)
+    public function create(Course $course, Examination $exam)
     {
         return view('admin.course.grade.create', [
             'course' => $course,
@@ -44,7 +44,7 @@ class PassGradeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Course $course, Exams $exam)
+    public function store(Request $request, Course $course, Examination $exam)
     {
         $input = $request->input();
         DB::beginTransaction();
@@ -80,7 +80,7 @@ class PassGradeController extends Controller
      * @param  \App\Models\PassGrade  $passGrade
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course, Exams $exam, PassGrade $grade)
+    public function edit(Course $course, Examination $exam, PassGrade $grade)
     {
         return view('admin.course.grade.edit', [
             'course' => $course,
@@ -96,7 +96,7 @@ class PassGradeController extends Controller
      * @param  \App\Models\PassGrade  $passGrade
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course, Exams $exam, PassGrade $grade)
+    public function update(Request $request, Course $course, Examination $exam, PassGrade $grade)
     {
         $input = $request->input();
         DB::beginTransaction();

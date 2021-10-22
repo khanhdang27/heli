@@ -14,7 +14,7 @@ use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
 use App\Models\Tutor;
 use App\Models\User;
-use App\Models\Exams;
+use App\Models\Examination;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -128,7 +128,7 @@ class CourseController extends Controller
     public function show(Course $course)
     {
         try {
-            $courses_with_group = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts', 'membershipCourses.course', 'membershipCourses.course.rooms', 'membershipCourses.course.lecture', 'membershipCourses.course.comment', 'membershipCourses.course.subject', 'membershipCourses.course.tutor', 'membershipCourses.course.ratings', 'membershipCourses.course.rooms.studySession', 'membershipCourses.course.schedule', 'membershipCourses.course.courseMaterial', 'membershipCourses.course.examinations')
+            $courses_with_group = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts', 'membershipCourses.course', 'membershipCourses.course.rooms', 'membershipCourses.course.lecture', 'membershipCourses.course.comment', 'membershipCourses.course.subject', 'membershipCourses.course.tutor', 'membershipCourses.course.ratings', 'membershipCourses.course.rooms.studySession', 'membershipCourses.course.schedule', 'membershipCourses.course.courseMaterial')
                 ->where('publish', 1)
                 ->whereHas('membershipCourses', function ($query) {
                     return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
@@ -290,8 +290,8 @@ class CourseController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            if ($input['type'] == 'Exams') {
-                $exam = Exams::find($input['id']);
+            if ($input['type'] == 'Examination') {
+                $exam = Examination::find($input['id']);
                 $exam->update(['index' => $input['index']]);
             } else {
                 $lecture = Lecture::find($input['id']);

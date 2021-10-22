@@ -5070,7 +5070,7 @@ __webpack_require__.r(__webpack_exports__);
     }, 2000);
   },
   methods: {
-    getExams: function getExams() {
+    getExamination: function getExamination() {
       var _this2 = this;
 
       axios.get(route("site.exam.showLecture", {
@@ -5174,8 +5174,8 @@ __webpack_require__.r(__webpack_exports__);
       }, 2000);
     },
     showLecture: function showLecture() {
-      if (this.lectureList[this.lectureIndex].model_name === "Exams") {
-        this.getExams();
+      if (this.lectureList[this.lectureIndex].model_name === "Examination") {
+        this.getExamination();
       } else {
         this.getLecture();
       }
@@ -51773,7 +51773,7 @@ var render = function() {
       _c("div", { staticClass: "col-lg-9 bg-white" }, [
         _c("div", { staticClass: "h-100" }, [
           _vm.lectureList[_vm.lectureIndex] &&
-          _vm.lectureList[_vm.lectureIndex].model_name == "Exams"
+          _vm.lectureList[_vm.lectureIndex].model_name == "Examination"
             ? _c(
                 "div",
                 { staticClass: "h-100" },
@@ -51900,7 +51900,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          item.model_name == "Exams"
+                          item.model_name == "Examination"
                             ? _c("div", [
                                 _c("h4", { staticClass: "mb-1" }, [
                                   _vm._v(

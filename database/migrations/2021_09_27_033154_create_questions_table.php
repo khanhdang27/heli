@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
                 ->foreignId('quiz_id')
                 ->constrained('quizzes')
                 ->cascadeOnDelete();
-            $table->text('question');
+            $table->integer('type');
             $table->text('message_wrong');
             $table->bigInteger('lecture_index');
             $table->timestamps();

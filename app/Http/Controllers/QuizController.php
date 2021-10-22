@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\Course;
-use App\Models\Exams;
+use App\Models\Examination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +15,7 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Course $course, Exams $exam)
+    public function index(Course $course, Examination $exam)
     {
         $quizzes = Quiz::where(['exam_id' => $exam->id])->paginate(15);
         return view('admin.course.exam_quiz.quiz.index', [
@@ -30,7 +30,7 @@ class QuizController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Course $course, Exams $exam)
+    public function create(Course $course, Examination $exam)
     {
         return view('admin.course.exam_quiz.quiz.create', [
             'course' => $course,
@@ -44,7 +44,7 @@ class QuizController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Course $course, Exams $exam)
+    public function store(Request $request, Course $course, Examination $exam)
     {
         $input = $request->input();
         DB::beginTransaction();
@@ -69,7 +69,7 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course, Exams $exam, Quiz $quiz)
+    public function show(Course $course, Examination $exam, Quiz $quiz)
     {
         //
     }
@@ -80,7 +80,7 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course, Exams $exam, Quiz $quiz)
+    public function edit(Course $course, Examination $exam, Quiz $quiz)
     {
         return view('admin.course.exam_quiz.quiz.edit', [
             'course' => $course,
@@ -96,7 +96,7 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course, Exams $exam, Quiz $quiz)
+    public function update(Request $request, Course $course, Examination $exam, Quiz $quiz)
     {
         $input = $request->input();
         DB::beginTransaction();

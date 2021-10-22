@@ -28,4 +28,9 @@ class Lecture extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function file()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
 }

@@ -16,6 +16,6 @@ class PassGrade extends Model
 
     public function exam()
     {
-        return $this->belongsTo(Exams::class);
+        return $this->belongsTo(Examination::class);
     }
 }

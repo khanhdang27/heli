@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubmitExaminationsTable extends Migration
+class CreateSpeakExercisesAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateSubmitExaminationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('submit_examinations', function (Blueprint $table) {
+        Schema::create('speak_exercises_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')
-                ->constrained('users')
+            $table
+                ->foreignId('s_e_question_id')
+                ->constrained('speak_exercises_questions')
                 ->cascadeOnDelete();
-            $table->bigInteger('examination_id');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->timestamps();
+            $table->string('audio_ref');
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -33,6 +32,6 @@ class CreateSubmitExaminationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('submit_examinations');
+        Schema::dropIfExists('speak_exercises_answers');
     }
 }

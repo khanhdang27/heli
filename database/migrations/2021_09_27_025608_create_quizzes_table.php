@@ -19,7 +19,7 @@ class CreateQuizzesTable extends Migration
                 ->foreignId('exam_id')
                 ->constrained('exams')
                 ->cascadeOnDelete();
-            $table->integer('version');
+            $table->integer('set');
             $table->timestamps();
             $table->softDeletes();
         });

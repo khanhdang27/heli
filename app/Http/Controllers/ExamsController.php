@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Exams;
+use App\Models\Examination;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\PassGrade;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Money\Number;
 
-class ExamsController extends Controller
+class ExaminationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -48,7 +48,7 @@ class ExamsController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            $exam = Exams::create([
+            $exam = Examination::create([
                 'course_id' => $course->id,
                 'name' => $input['name'],
                 'index' => $input['index'],
@@ -67,10 +67,10 @@ class ExamsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Exams  $exams
+     * @param  \App\Models\Examination  $exams
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course, Exams $exams)
+    public function show(Course $course, Examination $exams)
     {
         //
     }
@@ -78,10 +78,10 @@ class ExamsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Exams  $exams
+     * @param  \App\Models\Examination  $exams
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course, Exams $exam)
+    public function edit(Course $course, Examination $exam)
     {
         return view('admin.course.exam_quiz.edit', [
             'course' => $course,
@@ -93,10 +93,10 @@ class ExamsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Exams  $exams
+     * @param  \App\Models\Examination  $exams
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course, Exams $exam)
+    public function update(Request $request, Course $course, Examination $exam)
     {
         $input = $request->input();
         DB::beginTransaction();
@@ -120,10 +120,10 @@ class ExamsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Exams  $exams
+     * @param  \App\Models\Examination  $exams
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course, Exams $exams)
+    public function destroy(Course $course, Examination $exams)
     {
         try {
             $exams->delete();
@@ -143,10 +143,10 @@ class ExamsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Exams  $exams
+     * @param  \App\Models\Examination  $exams
      * @return \Illuminate\Http\Response
      */
-    public function checkExam(Request $request, Exams $exams)
+    public function checkExam(Request $request, Examination $exams)
     {
         $input = $request->input();
         // dd($input);
@@ -170,7 +170,7 @@ class ExamsController extends Controller
                 ->first();
             [$result, $score] = $this->doGrade($quiz->question, $input['quiz']);
 
-            if ($exams->type == Exams::NORMAL) {
+            if ($exams->type == Examination::EXERCISES) {
                 if (count($result) == $score) {
                     if ($exams->index == $student_course->lecture_open) {
                         $student_course->update(['lecture_open' => $student_course->lecture_open + 2]);
@@ -182,7 +182,7 @@ class ExamsController extends Controller
                     DB::commit();
                     return response()->json(['quiz_result' => $result, 'score' => $score, 'status' => false]);
                 }
-            } else if ($exams->type == Exams::ASSESSMENT) {
+            } else if ($exams->type == Examination::ASSESSMENT) {
                 $grade = $this->assessment($exams, $score);
                 $student_course->update(['lecture_open' => $grade->lecture_index]);
                 DB::commit();
@@ -232,7 +232,7 @@ class ExamsController extends Controller
         return [$result, $score];
     }
 
-    public function assessment(Exams $exams, $score)
+    public function assessment(Examination $exams, $score)
     {
         $passGrade = PassGrade::where(['exam_id' => $exams->id])->get();
 

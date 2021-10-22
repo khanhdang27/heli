@@ -1,7 +1,7 @@
 @php
 
 use App\Models\Lecture;
-use App\Models\Exams;
+use App\Models\Examination;
 @endphp
 
 @extends('admin.layout')

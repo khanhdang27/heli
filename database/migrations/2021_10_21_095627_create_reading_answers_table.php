@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExaminationsTable extends Migration
+class CreateReadingAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateExaminationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('examinations', function (Blueprint $table) {
+        Schema::create('reading_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')
-                ->constrained('courses')
+            $table
+                ->foreignId('reading_question_id')
+                ->constrained('reading_questions')
                 ->cascadeOnDelete();
-            $table->date('deadline');
-            $table->string('title');
-            $table->text('description')->nullable();
+            $table->text('answer');
+            $table->boolean('is_correct');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -33,6 +33,6 @@ class CreateExaminationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('examinations');
+        Schema::dropIfExists('reading_answers');
     }
 }
