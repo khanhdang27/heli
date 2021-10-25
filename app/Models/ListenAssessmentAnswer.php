@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ListenAssessmentAnswer extends Model
 {
     use SoftDeletes;
+
+    public function question()
+    {
+        return $this->belongsTo(ListenAssessmentQuestion::class);
+    }
 }

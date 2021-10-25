@@ -122,16 +122,6 @@
                         </a>
                     </li>
                 @endcan
-                @can('examination-list')
-
-                    <li class="nav-item">
-                        <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.examination') || Str::startsWith(request()->route()->getName(), 'admin.manage-examination') ) active @endif"
-                           href="{{ route('admin.examination.index') }}">
-                            <i class="fe fe-file-text"></i> Examinations
-                        </a>
-                    </li>
-                @endcan
-
             <!-- Divider -->
                 <hr class="navbar-divider border border-secondary w-75 my-1">
 

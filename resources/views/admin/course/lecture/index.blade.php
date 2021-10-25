@@ -58,7 +58,7 @@ use App\Models\Examination;
                                         </svg>
                                         Add Lecture
                                     </a>
-                                    <a href="{{ route('admin.course.exam.create', $course->id) }}"
+                                    <a href="{{ route('admin.course.examination.create', $course->id) }}"
                                         class="btn btn-sm btn-success">
                                         <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
                                             fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
@@ -165,26 +165,16 @@ use App\Models\Examination;
                                                                 data-id="{{ $lecture->id }}" data-type="Examination">
                                                                 Index
                                                             </a>
-                                                            <a href="{{ route('admin.course.exam.edit', ['course' => $course, 'exam' => $lecture]) }}"
+                                                            <a href="{{ route('admin.course.examination.edit', ['course' => $course, 'exam' => $lecture]) }}"
                                                                 class="dropdown-item">
                                                                 Update
                                                             </a>
-                                                            <a href="{{ route('admin.course.quiz.list', ['course' => $course, 'exam' => $lecture]) }}"
-                                                                class="dropdown-item">
-                                                                Quizzes
-                                                            </a>
-                                                            @if ($lecture->type == Examination::ASSESSMENT)
-                                                                <a href="{{ route('admin.course.grade.list', ['course' => $course, 'exam' => $lecture]) }}"
-                                                                    class="dropdown-item">
-                                                                    Grade
-                                                                </a>
-                                                            @endif
                                                             @can('course-delete')
-                                                                <a href="javascript:void(0)"
-                                                                    onclick="itemDelete('{{ route('admin.course.exam.destroy', ['course' => $course, 'exam' => $data]) }}')"
+                                                                {{-- <a href="javascript:void(0)"
+                                                                    onclick="itemDelete('{{ route('admin.course.examination.destroy', ['course' => $course, 'exam' => $lecture]) }}')"
                                                                     class="dropdown-item">
                                                                     Delete
-                                                                </a>
+                                                                </a> --}}
                                                             @endcan
                                                         </div>
                                                     </div>

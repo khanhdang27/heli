@@ -20,6 +20,7 @@ class CreateQuizzesTable extends Migration
                 ->constrained('exams')
                 ->cascadeOnDelete();
             $table->integer('set');
+            $table->unique(['exam_id', 'set']);
             $table->timestamps();
             $table->softDeletes();
         });

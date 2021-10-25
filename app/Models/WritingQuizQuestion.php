@@ -8,6 +8,13 @@ class WritingQuizQuestion extends Model
 {
     use SoftDeletes;
 
+    const PART_1 = 1;
+    const PART_2 = 2;
+    const PART = [
+        self::PART_1 => 'Part 1',
+        self::PART_2 => 'Part 2'
+    ];
+
     public function question()
     {
         return $this->belongsTo(Question::class);
@@ -16,5 +23,10 @@ class WritingQuizQuestion extends Model
     public function answer()
     {
         return $this->hasMany(WritingQuizAnswer::class);
+    }
+
+    public function file()
+    {
+        return $this->morphOne(File::class, 'fileable');
     }
 }
