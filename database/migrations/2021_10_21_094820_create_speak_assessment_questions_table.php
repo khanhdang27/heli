@@ -21,6 +21,8 @@ class CreateSpeakAssessmentQuestionsTable extends Migration
                 ->cascadeOnDelete();
             $table->string('audio_ref');
             $table->text('question');
+            $table->text('message_wrong');
+            $table->bigInteger('lecture_index');
             $table->timestamps();
         });
     }

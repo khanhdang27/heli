@@ -24,6 +24,8 @@ class CreateReadingQuestionsTable extends Migration
                 ->constrained('passages')
                 ->cascadeOnDelete();
             $table->text('question');
+            $table->text('message_wrong');
+            $table->bigInteger('lecture_index');
             $table->timestamps();
             $table->softDeletes();
         });

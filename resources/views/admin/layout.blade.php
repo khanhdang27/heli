@@ -23,36 +23,22 @@
     @include('admin.sidebar')
     <div class="main-content">
         @include('admin.nav')
-
         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-        @if (Route::is('admin.course.examination.create') || Route::is('admin.course.examination.edit'))
-
-            @livewireStyles
-            @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            {{ $slot }}
-
-            @livewireScripts
-        @else
-            @if ($alertFm = Session::get('success'))
-                <div class="alert text-center alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $alertFm }}</strong>
-                </div>
-            @endif
-            @if ($alertFm = Session::get('errors'))
-                <div class="alert text-center alert-danger alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    @if ($errors->any())
-                        {!! $errors->first() !!}
-                    @endif
-                </div>
-            @endif
-            @yield('content')
+        @if ($alertFm = Session::get('success'))
+            <div class="alert text-center alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $alertFm }}</strong>
+            </div>
         @endif
+        @if ($alertFm = Session::get('errors'))
+            <div class="alert text-center alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @if ($errors->any())
+                    {!! $errors->first() !!}
+                @endif
+            </div>
+        @endif
+        @yield('content')
     </div>
 
 

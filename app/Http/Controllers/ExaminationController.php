@@ -6,12 +6,11 @@ use App\Models\Examination;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\PassGrade;
+use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\StudentCourses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
-use Money\Number;
 
 class ExaminationController extends Controller
 {
@@ -32,7 +31,7 @@ class ExaminationController extends Controller
      */
     public function create(Course $course)
     {
-        return view('admin.course.exam_quiz.create', [
+        return view('admin.course.examination.create', [
             'course' => $course,
         ]);
     }
@@ -55,10 +54,17 @@ class ExaminationController extends Controller
                 'type' => $input['type'],
             ]);
 
+            for ($i=1; $i <= 4; $i++) { 
+                Quiz::create([
+                    'exam_id' => $exam->id,
+                    'set' => $i,
+                ]);
+            }
             DB::commit();
-            return back()->with('success', 'Create success!');
+            return redirect()
+                ->route('admin.course.examination.edit', ['course' => $this->course->id, 'exam' => $exam->id])
+                ->with('success', 'Create success!');
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollback();
             return back()->withErrors('errors', 'Create errors!');
         }
@@ -83,9 +89,16 @@ class ExaminationController extends Controller
      */
     public function edit(Course $course, Examination $exam)
     {
-        return view('admin.course.exam_quiz.edit', [
+        $quizzes = Quiz::where('exam_id', $exam->id)->get();
+        $questions_set = [];
+        foreach ($quizzes as $quiz) {
+            array_push($questions_set, Question::where('quiz_id', $quiz->id)->get());
+        }
+        return view('admin.course.examination.edit', [
             'course' => $course,
             'exam' => $exam,
+            'quizzes' => $quizzes,
+            'questions_set' => $questions_set,
         ]);
     }
 
@@ -112,7 +125,6 @@ class ExaminationController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return back()->withErrors('errors', 'Update errors!');
         }
     }
@@ -123,10 +135,10 @@ class ExaminationController extends Controller
      * @param  \App\Models\Examination  $exams
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course, Examination $exams)
+    public function destroy(Course $course, Examination $exam)
     {
         try {
-            $exams->delete();
+            $exam->delete();
             return response([
                 'message' => 'Delete success!',
             ]);

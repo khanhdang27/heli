@@ -8,6 +8,11 @@ class ReadingQuestion extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'reading_questions';
+
+    public $timestamps = true;
+    protected $guarded = [];
+
     public function question()
     {
         return $this->belongsTo(Question::class);

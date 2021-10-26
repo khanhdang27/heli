@@ -21,6 +21,8 @@ class CreateWritingAssessmentQuestionsTable extends Migration
                 ->constrained('questions')
                 ->cascadeOnDelete();
             $table->text('question');
+            $table->text('message_wrong');
+            $table->bigInteger('lecture_index');
             $table->softDeletes();
             $table->timestamps();
         });

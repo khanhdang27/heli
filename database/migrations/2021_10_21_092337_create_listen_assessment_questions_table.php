@@ -23,6 +23,8 @@ class CreateListenAssessmentQuestionsTable extends Migration
             $table->string('audio_ref');
             $table->integer('part');
             $table->text('question');
+            $table->text('message_wrong');
+            $table->bigInteger('lecture_index');
             $table->softDeletes();
             $table->timestamps();
         });

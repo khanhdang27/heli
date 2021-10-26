@@ -38,6 +38,12 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('course/{course}/lecture/{lecture}', 'CourseController@updateLecture')->name('course.lecture.update');
     Route::delete('course/{course}/lecture/{lecture}/destroy', 'CourseController@destroyLecture')->name('course.lecture.destroy');
 
+    Route::get('/course/{course}/examination/create', 'ExaminationController@create')->name('course.examination.create');
+    Route::post('/course/{course}/examination', 'ExaminationController@store')->name('course.examination.store');
+    Route::get('/course/{course}/examination/{exam}/edit', 'ExaminationController@edit')->name('course.examination.edit');
+    Route::put('/course/{course}/examination/{exam}', 'ExaminationController@update')->name('course.examination.update');
+    Route::delete('/course/{course}/examination/{exam}', 'ExaminationController@destroy')->name('course.examination.destroy');
+    
     Route::get('course/{course}/exam/{exam}/grade', 'PassGradeController@index')->name('course.grade.list');
     Route::get('course/{course}/exam/{exam}/grade/create', 'PassGradeController@create')->name('course.grade.create');
     Route::post('course/{course}/exam/{exam}/grade', 'PassGradeController@store')->name('course.grade.store');
@@ -49,6 +55,12 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('course/related/{course}', 'CourseController@courseListRelated')->name('course.related.list');
     Route::post('course/related', 'CourseController@updateRelated')->name('course.related');
     Route::resource('course', 'CourseController');
+
+    Route::post('quiz/{quiz}/question/reading', 'ReadingQuestionController@store')->name('quiz.question.reading.store');
+    Route::post('quiz/{quiz}/question/{question}/reading', 'ReadingQuestionController@update')->name('quiz.question.reading.update');
+
+    Route::post('passage', 'PassageController@store')->name('passage.store');
+    Route::post('passage/{passage}', 'PassageController@update')->name('passage.update');
 
     Route::resource('course-material', 'CourseMaterialController');
 
@@ -111,8 +123,4 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('setting', 'SettingController');
     Route::get('setting/edit/{key}', 'SettingController@edit');
     Route::get('setting/update/{key}', 'SettingController@update');
-
-    // use App\Http\Livewire\Examination;
-    Route::get('/course/{course}/examination/create', [\App\Http\Livewire\Examination\Create::class, '__invoke'])->name('course.examination.create');
-    Route::get('/course/{course}/examination/{exam}/edit', [\App\Http\Livewire\Examination\Edit::class, '__invoke'])->name('course.examination.edit');
 });

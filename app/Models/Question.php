@@ -69,13 +69,14 @@ class Question extends Model
 
     public function questionContent()
     {
+        $this->quiz->load('exams');
         switch ($this->quiz->exams->type) {
             case Examination::ASSESSMENT:
-                return $this->questionTypeAssessment();
+                return $this->questionTypeAssessment()->first();
             case Examination::EXERCISES:
-                return $this->questionTypeExercises();
+                return $this->questionTypeExercise()->first();
             case Examination::QUIZ:
-                return $this->questionTypeQuiz();
+                return $this->questionTypeQuiz()->first();
             default:
                 return null;
         }

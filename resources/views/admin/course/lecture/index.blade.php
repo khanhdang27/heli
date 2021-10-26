@@ -170,11 +170,11 @@ use App\Models\Examination;
                                                                 Update
                                                             </a>
                                                             @can('course-delete')
-                                                                {{-- <a href="javascript:void(0)"
+                                                                <a href="javascript:void(0)"
                                                                     onclick="itemDelete('{{ route('admin.course.examination.destroy', ['course' => $course, 'exam' => $lecture]) }}')"
                                                                     class="dropdown-item">
                                                                     Delete
-                                                                </a> --}}
+                                                                </a>
                                                             @endcan
                                                         </div>
                                                     </div>

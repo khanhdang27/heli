@@ -18,6 +18,7 @@ class CreatePassagesTable extends Migration
             $table->foreignId('quiz_id')->constrained('quizzes')
             ->cascadeOnDelete();
             $table->longText('content');
+            $table->text('title');
             $table->softDeletes();
             $table->timestamps();
         });

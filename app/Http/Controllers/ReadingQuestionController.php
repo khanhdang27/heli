@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\ReadingQuestion;
+use App\Models\Question;
+use App\Models\Quiz;
+use App\Models\ReadingQuestion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReadingQuestionController extends Controller
 {
@@ -33,9 +36,38 @@ class ReadingQuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Quiz $quiz)
     {
-        //
+        $input = $request->validate([
+            'passage_id'=> 'required',
+            'index'=> 'required',
+            'question'=> 'required',
+            'message_wrong'=> 'required',
+            'lecture_index'=> 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+            $question = Question::create([
+                'quiz_id' => $quiz->id,
+                'type' => Question::READING,
+                'index' => $input['index']
+            ]);
+
+            $readQuestion = ReadingQuestion::create([
+                'question_id' => $question->id,
+                'question' => $input['question'],
+                'passage_id' => $input['passage_id'],
+                'message_wrong' => $input['message_wrong'],
+                'lecture_index' => $input['lecture_index'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return back()->withErrors('Create error!');
+        }
     }
 
     /**
@@ -67,9 +99,34 @@ class ReadingQuestionController extends Controller
      * @param  \App\ReadingQuestion  $readingQuestion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReadingQuestion $readingQuestion)
+    public function update(Request $request, Quiz $quiz, Question $question)
     {
-        //
+        $input = $request->validate([
+            'index'=> 'required',
+            'question'=> 'required',
+            'message_wrong'=> 'required',
+            'lecture_index'=> 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+            $question->update([
+                'index' => $input['index']
+            ]);
+
+            $readQuestion = ReadingQuestion::where(['question_id' => $question->id])->first();
+
+            $readQuestion->update([
+                'question' => $input['question'],
+                'message_wrong' => $input['message_wrong'],
+                'lecture_index' => $input['lecture_index'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('Update error!');
+        }
     }
 
     /**

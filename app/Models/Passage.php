@@ -8,7 +8,7 @@ class Passage extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'passage';
+    protected $table = 'passages';
 
     public $timestamps = true;
 

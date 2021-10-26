@@ -20,8 +20,7 @@ class CreateQuestionsTable extends Migration
                 ->constrained('quizzes')
                 ->cascadeOnDelete();
             $table->integer('type');
-            $table->text('message_wrong');
-            $table->bigInteger('lecture_index');
+            $table->integer('index')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

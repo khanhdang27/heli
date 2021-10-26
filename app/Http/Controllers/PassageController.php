@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Passage;
+use App\Models\Passage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PassageController extends Controller
 {
@@ -35,7 +36,23 @@ class PassageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'quiz_id' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            Passage::create($input);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Create Success !!!');
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Create Fails !!!');
+        }
     }
 
     /**
@@ -69,7 +86,22 @@ class PassageController extends Controller
      */
     public function update(Request $request, Passage $passage)
     {
-        //
+        $input = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $passage->update($input);
+
+            DB::commit();
+            return redirect()->back()->with('success', 'Create Success !!!');
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Create Fails !!!');
+        }
     }
 
     /**

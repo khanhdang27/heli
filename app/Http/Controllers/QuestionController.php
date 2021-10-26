@@ -7,6 +7,7 @@ use App\Models\Examination;
 use App\Models\Question;
 use App\Models\Answer;
 use App\Models\Quiz;
+use App\Models\ReadingQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -69,22 +70,16 @@ class QuestionController extends Controller
         }
     }
 
+    
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course, Examination $exam, Quiz $quiz, Question $question)
+    public function show(Question $question)
     {
-        $answers = Answer::where(['question_id' => $question->id])->get();
-        return view('admin.course.exam_quiz.question_answer.answer', [
-            'course' => $course,
-            'exam' => $exam,
-            'quiz' => $quiz,
-            'question' => $question,
-            'answers' => $answers,
-        ]);
+       
     }
 
     /**
@@ -93,14 +88,9 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course, Examination $exam, Quiz $quiz, Question $question)
+    public function edit( Question $question)
     {
-        return view('admin.course.exam_quiz.question_answer.edit', [
-            'course' => $course,
-            'exam' => $exam,
-            'quiz' => $quiz,
-            'question' => $question,
-        ]);
+        
     }
 
     /**
@@ -110,23 +100,9 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course, Examination $exam, Quiz $quiz, Question $question)
+    public function update(Request $request, Quiz $quiz, Question $question)
     {
-        $input = $request->input();
-        DB::beginTransaction();
-        try {
-            $question->update([
-                'question' => $input['question'],
-                'message_wrong' => $input['message_wrong'],
-                'lecture_index' => $input['lecture_index'],
-            ]);
-
-            DB::commit();
-            return back()->with('success', 'Update success!');
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return back()->withErrors('Update error!');
-        }
+        
     }
 
     /**

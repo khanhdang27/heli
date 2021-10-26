@@ -2,6 +2,8 @@
 use App\Models\Examination;
 @endphp
 
+@extends('admin.layout')
+@section('content')
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10 col-xl-8">
@@ -24,29 +26,31 @@ use App\Models\Examination;
                     </div> <!-- / .row -->
                 </div>
                 <div class="card-body">
-                    <form wire:submit.prevent="save">
+                    {!! Form::open(['method' => 'post', 'url' => route('admin.course.examination.store', $course->id)]) !!}
                         <div class="form-group">
                             <label for="name"> Name </label>
-                            {!! Form::text('name', 0, ['class' => 'form-control', 'required', "wire:model"=>"examination.name"]) !!}
+                            {!! Form::text('name', old('name'), ['class' => 'form-control', 'required', "wire:model"=>"examination.name"]) !!}
                             @error('examination.name') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label for="index">Index</label>
-                            {!! Form::number('index', 0, ['class' => 'form-control', 'required', "wire:model"=>"examination.index"]) !!}
+                            {!! Form::number('index', old('index'), ['class' => 'form-control', 'required', "wire:model"=>"examination.index"]) !!}
                             @error('examination.index') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label for="type">Type</label>
-                            {!! Form::select('type', Examination::TYPES, null,['class' => 'form-control', 'required', "wire:model"=>"examination.type"]) !!}
+                            {!! Form::select('type', Examination::TYPES, old('type'),['class' => 'form-control', 'required', "wire:model"=>"examination.type"]) !!}
                             @error('examination.type') <span class="error">{{ $message }}</span> @enderror
                         </div>
                      
                         <div class="d-flex">
                             <button type="submit" class="btn btn-success ml-auto"> Save </button>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div> <!-- / .row -->
 </div>
+
+@endsection
