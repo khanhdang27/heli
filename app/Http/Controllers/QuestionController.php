@@ -21,7 +21,6 @@ class QuestionController extends Controller
     public function index(Course $course, Examination $exam, Quiz $quiz)
     {
         $questions = Question::where(['quiz_id' => $quiz->id])->paginate(15);
-        // resources\views\admin\course\exam_quiz\question_answer
         return view('admin.course.exam_quiz.question_answer.index', [
             'course' => $course,
             'exam' => $exam,

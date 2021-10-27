@@ -59,6 +59,10 @@ Route::middleware('auth.admin')->group(function () {
     Route::post('quiz/{quiz}/question/reading', 'ReadingQuestionController@store')->name('quiz.question.reading.store');
     Route::post('quiz/{quiz}/question/{question}/reading', 'ReadingQuestionController@update')->name('quiz.question.reading.update');
 
+
+    Route::post('question/reading/answer', 'ReadingAnswerController@store')->name('reading.answer.store');
+    Route::post('question/reading/answer/{answer}', 'ReadingAnswerController@update')->name('reading.answer.update');
+
     Route::post('passage', 'PassageController@store')->name('passage.store');
     Route::post('passage/{passage}', 'PassageController@update')->name('passage.update');
 

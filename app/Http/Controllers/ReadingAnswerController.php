@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\ReadingAnswer;
+use App\Models\ReadingAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReadingAnswerController extends Controller
 {
@@ -35,7 +36,21 @@ class ReadingAnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $readingAnswer = ReadingAnswer::create([
+                'reading_question_id' => $input['question_id'],
+                'answer' => $input['answer'],
+                'is_correct' => false
+            ]);
+            DB::commit();
+            return response()->json(['message' => 'Success', 'answer' => $readingAnswer]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return response()->json(['message' => 'error', $th]);
+        }
     }
 
     /**
