@@ -18,7 +18,7 @@ class ReadingQuestion extends Model
         return $this->belongsTo(Question::class);
     }
 
-    public function answer()
+    public function answers()
     {
         return $this->hasMany(ReadingAnswer::class);
     }

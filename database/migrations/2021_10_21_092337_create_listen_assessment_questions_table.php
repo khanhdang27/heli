@@ -20,7 +20,6 @@ class CreateListenAssessmentQuestionsTable extends Migration
                 ->foreignId('question_id')
                 ->constrained('questions')
                 ->cascadeOnDelete();
-            $table->string('audio_ref');
             $table->integer('part');
             $table->text('question');
             $table->text('message_wrong');

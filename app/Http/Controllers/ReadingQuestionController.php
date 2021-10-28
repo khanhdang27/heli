@@ -135,8 +135,21 @@ class ReadingQuestionController extends Controller
      * @param  \App\ReadingQuestion  $readingQuestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReadingQuestion $readingQuestion)
+    public function destroy( Quiz $quiz, Question $question)
     {
-        //
+        try {
+            $question->delete();
+            return response([
+                'message' => 'Delete success!',
+            ]);
+        } catch (\Exception $exception) {
+            return response(
+                [
+                    'message' => 'Cannot delete course',
+                    'exception' => $exception
+                ],
+                400,
+            );
+        }
     }
 }

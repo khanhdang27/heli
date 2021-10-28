@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\WritingAssessmentAnswer;
+use App\Models\WritingAssessmentAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WritingAssessmentAnswerController extends Controller
 {
@@ -35,7 +36,21 @@ class WritingAssessmentAnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $readingAnswer = WritingAssessmentAnswer::create([
+                'w_a_question_id' => $input['question_id'],
+                'answer' => $input['answer'],
+                'is_correct' => false
+            ]);
+            DB::commit();
+            return response()->json(['message' => 'Success', 'answer' => $readingAnswer]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return response()->json(['message' => 'error']);
+        }
     }
 
     /**
@@ -78,8 +93,21 @@ class WritingAssessmentAnswerController extends Controller
      * @param  \App\WritingAssessmentAnswer  $writingAssessmentAnswer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WritingAssessmentAnswer $writingAssessmentAnswer)
+    public function destroy(WritingAssessmentAnswer $answer)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $answer->delete();
+            // dd(DB::getQueryLog());
+            DB::commit();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 }

@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class WritingAssessmentQuestion extends Model
 {
     use SoftDeletes;
+    public $timestamps = true;
+    protected $guarded = [];
 
     public function question()
     {
         return $this->belongsTo(Question::class);
     }
 
-    public function answer()
+    public function answers()
     {
-        return $this->hasMany(WritingAssessmentAnswer::class);
+        return $this->hasMany(WritingAssessmentAnswer::class, 'w_a_question_id');
     }
 }

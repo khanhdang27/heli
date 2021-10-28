@@ -56,12 +56,33 @@ Route::middleware('auth.admin')->group(function () {
     Route::post('course/related', 'CourseController@updateRelated')->name('course.related');
     Route::resource('course', 'CourseController');
 
+    // =============== Question Reading =======================
     Route::post('quiz/{quiz}/question/reading', 'ReadingQuestionController@store')->name('quiz.question.reading.store');
     Route::post('quiz/{quiz}/question/{question}/reading', 'ReadingQuestionController@update')->name('quiz.question.reading.update');
-
+    Route::delete('quiz/{quiz}/question/{question}/reading', 'ReadingQuestionController@destroy')->name('quiz.question.reading.destroy');
 
     Route::post('question/reading/answer', 'ReadingAnswerController@store')->name('reading.answer.store');
     Route::post('question/reading/answer/{answer}', 'ReadingAnswerController@update')->name('reading.answer.update');
+    Route::delete('question/reading/answer/{answer}', 'ReadingAnswerController@destroy')->name('reading.answer.destroy');
+
+    // =============== Question Writing =======================
+    Route::post('quiz/{quiz}/question/assessment/writing', 'WritingAssessmentQuestionController@store')->name('quiz.question.writing.assessment.store');
+    Route::post('quiz/{quiz}/question/{question}/assessment/writing', 'WritingAssessmentQuestionController@update')->name('quiz.question.writing.assessment.update');
+    Route::delete('quiz/{quiz}/question/{question}/assessment/writing', 'WritingAssessmentQuestionController@destroy')->name('quiz.question.writing.assessment.destroy');
+
+    Route::post('question/assessment/writing/answer', 'WritingAssessmentAnswerController@store')->name('writing.assessment.answer.store');
+    Route::post('question/assessment/writing/answer/{answer}', 'WritingAssessmentAnswerController@update')->name('writing.assessment.answer.update');
+    Route::delete('question/assessment/writing/answer/{answer}', 'WritingAssessmentAnswerController@destroy')->name('writing.assessment.answer.destroy');
+
+    // =============== Question Listening =======================
+    Route::post('quiz/{quiz}/question/assessment/listening', 'ListenAssessmentQuestionController@store')->name('quiz.question.listening.assessment.store');
+    Route::post('quiz/{quiz}/question/{question}/assessment/listening', 'ListenAssessmentQuestionController@update')->name('quiz.question.listening.assessment.update');
+    Route::delete('quiz/{quiz}/question/{question}/assessment/listening', 'ListenAssessmentQuestionController@destroy')->name('quiz.question.listening.assessment.destroy');
+
+    Route::post('question/assessment/listening/answer', 'ListenAssessmentAnswerController@store')->name('listening.assessment.answer.store');
+    Route::post('question/assessment/listening/answer/{answer}', 'ListenAssessmentAnswerController@update')->name('listening.assessment.answer.update');
+    Route::delete('question/assessment/listening/answer/{answer}', 'ListenAssessmentAnswerController@destroy')->name('listening.assessment.answer.destroy');
+
 
     Route::post('passage', 'PassageController@store')->name('passage.store');
     Route::post('passage/{passage}', 'PassageController@update')->name('passage.update');

@@ -48,7 +48,6 @@ class ReadingAnswerController extends Controller
             return response()->json(['message' => 'Success', 'answer' => $readingAnswer]);
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return response()->json(['message' => 'error', $th]);
         }
     }
@@ -93,8 +92,20 @@ class ReadingAnswerController extends Controller
      * @param  \App\ReadingAnswer  $readingAnswer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReadingAnswer $readingAnswer)
+    public function destroy(ReadingAnswer $answer)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $answer->delete();
+            DB::commit();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 }

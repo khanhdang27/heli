@@ -52,7 +52,7 @@ use App\Models\Examination;
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 @foreach ($quizzes as $quiz)
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link {{ $quiz->set == 1 ? ' active' : '' }}"
+                                        <a class="nav-link"
                                             id="set_{{ $quiz->set }}" data-toggle="tab" href="#set-{{ $quiz->set }}"
                                             role="tab" aria-controls="set-{{ $quiz->set }}" aria-selected="true">Set
                                             {{ $quiz->set }}</a>
@@ -60,11 +60,33 @@ use App\Models\Examination;
                                     @if ($exam->type == Examination::ASSESSMENT)
                                     @break
                                 @endif
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        if (localStorage.quizQuestionSet) {
+                                            if ( {{ $exam->type }} != 1 ) {
+                                                let quizSet = localStorage.getItem("quizQuestionSet")
+                                                $(`a[id="${quizSet}"]`).tab('show');
+                                            } else {
+                                                $(`a[id="set_1"]`).tab('show');
+                                            }
+                                        }
+                                        $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
+                                            localStorage.setItem("quizQuestionSet", event.target.id);
+                                        })
+
+                                        if (localStorage.collapseQuestion) {
+                                            let quizSet = localStorage.getItem("collapseQuestion")
+                                            $(`div[id="${quizSet}"]`).collapse('show');
+                                        }
+                                        $('.accordion').on('shown.bs.collapse', function (event) {
+                                            localStorage.setItem("collapseQuestion", event.target.id);
+                                        })
+                                     })
+                                </script>
                                 @endforeach
                             </ul>
                             <br>
                             <div class="tab-content">
-
                                 @foreach ($quizzes as $quiz)
                                     <div class="tab-pane fade {{ $quiz->set == 1 ? 'show active' : '' }} "
                                         id="set-{{ $quiz->set }}" role="tabpanel"
@@ -105,9 +127,14 @@ use App\Models\Examination;
                                                 <div id="collapseWritingSet1" class="collapse"
                                                     aria-labelledby="headingTwo" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        Some placeholder content for the second accordion panel. This panel
-                                                        is
-                                                        hidden by default.
+                                                        @if($exam->type == Examination::QUIZ)
+                                                        @else
+                                                            <x-admin.create-writing-question :quiz="$quiz">
+                                                            </x-admin.create-writing-question>
+                                                            <br>
+                                                            <x-admin.list-writing-question :quiz="$quiz">
+                                                            </x-admin.list-writing-question>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,9 +152,10 @@ use App\Models\Examination;
                                                 <div id="collapseListeningSet1" class="collapse"
                                                     aria-labelledby="headingThree" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        And lastly, the placeholder content for the third and final
-                                                        accordion
-                                                        panel. This panel is hidden by default.
+                                                       <x-admin.create-listening-question :quiz="$quiz">
+                                                            </x-admin.create-listening-question>
+                                                        <x-admin.list-listening-question :quiz="$quiz">
+                                                            </x-admin.list-listening-question>
                                                     </div>
                                                 </div>
                                             </div>

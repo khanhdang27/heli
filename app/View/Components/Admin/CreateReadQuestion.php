@@ -18,7 +18,6 @@ class CreateReadQuestion extends Component
     {
         $this->quiz = $quiz;
         $this->passage = Passage::where('quiz_id', $this->quiz->id)->first();
-        
     }
 
     /**

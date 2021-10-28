@@ -8,6 +8,10 @@ class WritingAssessmentAnswer extends Model
 {
     use SoftDeletes;
 
+    public $timestamps = true;
+    protected $guarded = [];
+
+
     public function question()
     {
         return $this->belongsTo(WritingAssessmentQuestion::class);

@@ -110,7 +110,7 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course, Examination $exam, Quiz $quiz, Question $question)
+    public function destroy(Quiz $quiz, Question $question)
     {
         try {
             $question->delete();

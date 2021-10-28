@@ -1,23 +1,23 @@
-<ul class="list-group" id="listQuestionReading_{{ $quiz->set }}">
+<ul class="list-group" id="listQuestionAssessmentWriting_{{ $quiz->set }}">
     
     @foreach ($questions as $question)
         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info"
             id="headingQuestion_{{ $question->id }}" data-toggle="collapse"
-            data-target="#collapseAnswerReading_{{ $question->id }}" aria-expanded="true"
-            aria-controls="collapseAnswerReading_{{ $question->id }}">
+            data-target="#collapseAnswerAssessmentWriting_{{ $question->id }}" aria-expanded="true"
+            aria-controls="collapseAnswerAssessmentWriting_{{ $question->id }}">
             <div class="w-75">
                 {{ $question->index }} - {{ $question->questionContent()->question }}
             </div>
             <div class="ml-auto w-25">
                 <button class="btn btn-warning btn-sm m-1 w-100" data-toggle="modal"
-                    data-target="#modalReadingQuestion_{{ $question->id }}"> Update </button>
+                    data-target="#modalAssessmentWritingQuestion_{{ $question->id }}"> Update </button>
                 <button class="btn btn-danger btn-sm  m-1 w-100"
                 onclick="itemDelete('{{ route('admin.quiz.question.reading.destroy', [ 'quiz'=> $quiz->id, 'question' => $question->id]) }}')"
                 > Delete </button>
             </div>
 
-            <div class="modal fade" id="modalReadingQuestion_{{ $question->id }}" tabindex="0" role="dialog"
-                aria-labelledby="modalReadingQuestion_{{ $question->id }}_Title" aria-hidden="true">
+            <div class="modal fade" id="modalAssessmentWritingQuestion_{{ $question->id }}" tabindex="0" role="dialog"
+                aria-labelledby="modalAssessmentWritingQuestion_{{ $question->id }}_Title" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -29,7 +29,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.reading.update', ['quiz' => $quiz->id, 'question' => $question->id]), 'id' => 'formReadingQuestion_{{ $question->id }}']) !!}
+                            {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.writing.assessment.update', ['quiz' => $quiz->id, 'question' => $question->id])]) !!}
                             <div class="form-group">
                                 <label for="index" class="required text-dark">Index</label>
                                 {{ Form::number('index', $question->index, ['class' => 'form-control', 'required']) }}
@@ -63,31 +63,30 @@
                         let pos = localStorage.getItem("scrollPosition")
                         window.scrollTo(0, pos);
                     }
-                    $('#modalReadingQuestion_{{ $question->id }}').on('shown.bs.modal', function() {
+                    $('#modalAssessmentWritingQuestion_{{ $question->id }}').on('shown.bs.modal', function() {
                         var scrollPosition = window.pageYOffset;
                         localStorage.setItem("scrollPosition", scrollPosition);
                     });
                 });
             </script>
-
         </li>
-        <div id="collapseAnswerReading_{{ $question->id }}" class="collapse"
+        <div id="collapseAnswerAssessmentWriting_{{ $question->id }}" class="collapse"
             aria-labelledby="headingQuestion_{{ $question->id }}"
-            data-parent="#listQuestionReading_{{ $quiz->set }}">
+            data-parent="#listQuestionAssessmentWriting_{{ $quiz->set }}">
             <div class="card-body">
                 <div class="d-flex">
                     <button class="btn btn-success ml-auto btn-sm" data-toggle="modal"
-                        data-target="#modalReadingAnswer{{ $question->id }}">
+                        data-target="#modalAssessmentAnswer{{ $question->id }}">
                         Add Answer
                     </button>
                 </div>
                 <script type="application/javascript"> 
                     function addAnswer_{{$question->id}}() {
-                        var data = $('#formAnswerReading_{{$question->id}}').serializeArray()
+                        var data = $('#formAnswerAssessmentWritting_{{$question->id}}').serializeArray()
                         console.log(data);
                         $.ajax({
                             type: "POST",
-                            url: "{{ route('admin.reading.answer.store') }}",
+                            url: "{{ route('admin.writing.assessment.answer.store') }}",
                             data: data
                         }).done(function (data) {
                             if (data.message == 'Success') {
@@ -102,10 +101,8 @@
                                     </li>`;
 
                                 document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;
-                                $('#modalReadingAnswer{{ $question->id }}').modal('hide')
+                                $('#modalAssessmentAnswer{{ $question->id }}').modal('hide')
                             }
-                            console.log(data);
-
                         })
                         .fail(function (err) {
 
@@ -113,7 +110,7 @@
                     }
                 </script>
                 <!-- Modal -->
-                <div class="modal fade" id="modalReadingAnswer{{ $question->id }}" tabindex="-1" aria-labelledby="modalReadingAnswer{{ $question->id }}Label"
+                <div class="modal fade" id="modalAssessmentAnswer{{ $question->id }}" tabindex="-1" aria-labelledby="modalAssessmentAnswer{{ $question->id }}Label"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -124,7 +121,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form id="formAnswerReading_{{$question->id}}">
+                                <form id="formAnswerAssessmentWritting_{{$question->id}}">
                                     @csrf
                                     <input name="question_id" type="text" hidden value="{{ $question->questionContent()->id }}"/>
                                     <label for="answer"> Answer </label>
@@ -149,7 +146,7 @@
                                 </div>
                                 
                                 <a href="javascript:void(0)"
-                                    onclick="itemDelete('{{ route('admin.reading.answer.destroy', ['answer' => $item->id]) }}')">
+                                    onclick="itemDelete('{{ route('admin.writing.assessment.answer.destroy', ['answer' => $item->id]) }}')">
                                     <i class="fe fe-trash mr-2 text-danger"></i>
                                 </a>
                             </li>
