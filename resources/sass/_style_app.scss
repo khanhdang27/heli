@@ -1165,6 +1165,9 @@ input.check-subscribe {
         }
         background-color: var(--primary);
     }
+    input[type="radio"]:disabled + label{
+        opacity: 0.3;
+    }
 }
 
 /*PAYMENT PAGE*/
