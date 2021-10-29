@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid h-100 d-flex flex-column justify-content-between text-primary">
         <h1 class="mt-3 text-center font-weight-bold">Writing</h1>
-        <div class="h5 text-center" v-if="type !== 'exercise'">
+        <div class="h5 text-center" v-if="type !== $getConst('exercise')">
             <vue-countdown-timer v-if="startQuiz === true"
                                  @start_callback="startCallBack('event started')"
                                  @end_callback="endCallBack('event ended')"
@@ -37,37 +37,66 @@
                 <button class="btn btn-success mt-3" v-on:click="startExam()">Start</button>
             </div>
         </div>
-        <div class="py-4 h-100 row justify-content-center lecture overflow-auto" v-if="startQuiz === true">
+        <div class="py-4 h-100 row justify-content-center lecture overflow-auto">
             <div class="col-lg-8">
                 <div class="h-100">
-                    <div v-if="type === 'quiz'">
-                        <h3 v-cloak>{{ questionWriting[questionIndex].id }}. {{
-                                questionWriting[questionIndex].question
-                            }}</h3>
-                        <div class="mt-5" v-if="type === 'quiz'">
-                            <div class="form-group" :id="questionWriting[questionIndex].id">
-                                <ckeditor v-model="editorData" :config="editorConfig"></ckeditor>
+                    <div v-if="type !== $getConst('exercise') && startQuiz===true">
+                        <div v-if="type === $getConst('quiz')">
+                            <h3 v-cloak>{{ questionWriting[questionIndex].id }}. {{
+                                    questionWriting[questionIndex].question
+                                }}</h3>
+                            <div class="mt-5" v-if="type === $getConst('quiz')">
+                                <div class="form-group" :id="questionWriting[questionIndex].id">
+                                    <ckeditor v-model="editorData" :config="editorConfig"></ckeditor>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <h3 v-cloak>{{ questionWriting[questionIndex].id }}. {{
+                                    questionWriting[questionIndex].question
+                                }}</h3>
+                            <p>Choose the most correct answer</p>
+                            <div class="mt-5">
+                                <input type="number"
+                                       :id="'ques' + questionWriting[questionIndex].id"
+                                       :value="questionWriting[questionIndex].id"
+                                       hidden/>
+                                <div v-for="answer in questionWriting[questionIndex].answers"
+                                     v-bind:key="answer.id"
+                                     class="py-0 my-2 border border-primary rounded answer-selection">
+                                    <input type="radio"
+                                           :id="answer.id"
+                                           :value="answer.id"
+                                           v-model="userChoose[questionIndex]"
+                                           v-bind:disabled="resultCheck[questionIndex]"
+                                           hidden/>
+                                    <label :for="answer.id" class="w-100">
+                                        <a class="btn text-left w-100">
+                                            <h5 class="mb-0">{{ answer.answer }}</h5>
+                                        </a>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div v-else>
-                        <div v-if="type === 'exercise'">
-                            <div v-if="resultCheck[questionIndex] === -1">
-                                <div class="p-3 bg-danger rounded h5 text-white font-weight-bold">
-                                    Incorrect answer !
-                                </div>
-                                <h5 v-for="answer_item in questionWriting[questionIndex].answers"
-                                    class="text-success">
-                                    <span v-if="answer_item.is_correct === 1 ">
+
+                    <div v-if="type === $getConst('exercise')">
+                        <div v-if="resultCheck[questionIndex] === $getConst('incorrect')">
+                            <div class="p-3 bg-danger rounded h5 text-white font-weight-bold">
+                                Incorrect answer !
+                            </div>
+                            <h5 v-for="answer_item in questionReading[questionIndex].answers"
+                                class="text-success">
+                                    <span v-if="answer_item.is_correct === $getConst('correct') ">
                                         Correct answer is: {{ answer_item.answer }}
                                     </span></h5>
-                            </div>
-
-                            <div class="p-3 bg-success rounded h5 text-white font-weight-bold"
-                                 v-if="resultCheck[questionIndex] === 1">
-                                Good job !
-                            </div>
                         </div>
+
+                        <div class="p-3 bg-success rounded h5 text-white font-weight-bold"
+                             v-if="resultCheck[questionIndex] === $getConst('correct')">
+                            Good job !
+                        </div>
+
                         <h3 v-cloak>{{ questionWriting[questionIndex].id }}. {{
                                 questionWriting[questionIndex].question
                             }}</h3>
@@ -102,7 +131,7 @@
             <button class="btn btn-primary" v-on:click="prev()" v-if="questionIndex > 0">
                 Previous
             </button>
-            <span v-if="type === 'exercise'">
+            <span v-if="type === $getConst('exercise')">
                 <button class="btn btn-primary mx-2" v-on:click="check()"
                         :id="'check' + questionWriting[questionIndex]"
                         v-bind:disabled="resultCheck[questionIndex]">
@@ -113,7 +142,7 @@
                     Next
                 </button>
             </span>
-            <span v-if="type !== 'exercise'">
+            <span v-if="type !== $getConst('exercise')">
                 <button class="btn btn-primary mx-2" v-on:click="submit()"
                         v-if="questionIndex === questionWriting.length - 1">
                     Submit
@@ -130,9 +159,9 @@
 <script>
 import CKEditor from 'ckeditor4-vue'
 
-const ASSESSMENT = 'assessment'
-const EXERCISE = 'exercise'
-const QUIZ = 'quiz'
+const ASSESSMENT = 5001
+const EXERCISE = 5002
+const QUIZ = 5003
 export default {
     props: {
         questionWriting: Array
@@ -143,7 +172,7 @@ export default {
     data() {
         return {
             questionIndex: 0,
-            type: ASSESSMENT,
+            type: EXERCISE,
             editorData: '',
             editorConfig: {},
             timeNow: '',
@@ -175,15 +204,15 @@ export default {
             this.startQuiz = true;
             this.timeNow = new Date();
             this.timeEnd = new Date();
-            if (this.type === 'quiz') {
+            if (this.type === $getConst('quiz')) {
                 this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitQuiz)
             }
-            if (this.type === 'assessment') {
+            if (this.type === $getConst('assessment')) {
                 this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitAssessment)
             }
         },
         check: function () {
-            if (typeof this.userChoose[this.questionIndex] === 'undefined') {
+            if (undefined) {
                 this.resultCheck.push(-1)
             } else {
                 for (let i = 0; i < this.questionWriting[this.questionIndex].answers.length; i++) {

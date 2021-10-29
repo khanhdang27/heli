@@ -19,20 +19,20 @@
 <!--                                />-->
                                 <h5>Audio can played once only</h5>
                             </div>
-                            <div v-if="type === 'exercise'">
-                                <div v-if="resultCheck[questionIndex] === -1">
+                            <div v-if="type === $getConst('exercise')">
+                                <div v-if="resultCheck[questionIndex] === $getConst('incorrect')">
                                     <div class="p-3 bg-danger rounded h5 text-white font-weight-bold">
                                         Incorrect answer !
                                     </div>
                                     <h5 v-for="answer_item in questionListening[questionIndex].answers"
                                         class="text-success">
-                                    <span v-if="answer_item.is_correct === 1 ">
+                                    <span v-if="answer_item.is_correct === $getConst('correct')">
                                         Correct answer is: {{ answer_item.answer }}
                                     </span></h5>
                                 </div>
 
                                 <div class="p-3 bg-success rounded h5 text-white font-weight-bold"
-                                     v-if="resultCheck[questionIndex] === 1">
+                                     v-if="resultCheck[questionIndex] === $getConst('correct')">
                                     Good job !
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                             v-if="questionIndex > 0 && resultCheck[questionIndex] ">
                         Previous
                     </button>
-                    <span v-if="type === 'exercise'">
+                    <span v-if="type === $getConst('exercise')">
                         <button class="btn btn-primary mx-2" v-on:click="check()"
                                 :id="'check' + questionListening[questionIndex]"
                                 v-bind:disabled="resultCheck[questionIndex]">
@@ -80,7 +80,7 @@
                             Next
                         </button>
                     </span>
-                    <span v-if="type !== 'exercise'">
+                    <span v-if="type !== $getConst('exercise')">
                         <button class="btn btn-primary mx-2" v-on:click="submit()"
                                 v-if="questionIndex === questionListening.length - 1">
                             Submit
@@ -98,19 +98,19 @@
                 <h2 class="text-success">You score {{ allResults[0].score }}</h2>
                 <div>
                     <i class="fe fe-check-circle h4 text-success"></i>
-                    <span class="h4" v-if="type==='quiz'">Number of correct question {{
+                    <span class="h4" v-if="type===$getConst('quiz')">Number of correct question {{
                             allResults[0].correct_question
                         }}</span>
-                    <span class="h4" v-if="type==='assessment'">Number of wrong question {{
+                    <span class="h4" v-if="type===$getConst('assessment')">Number of wrong question {{
                             allResults[1].correct_question
                         }}</span>
                 </div>
                 <div>
                     <i class="fe fe-x-circle h4 text-danger"></i>
-                    <span class="h4" v-if="type==='quiz'">Number of wrong question {{
+                    <span class="h4" v-if="type===$getConst('quiz')">Number of wrong question {{
                             allResults[0].wrong_question
                         }}</span>
-                    <span class="h4" v-if="type==='assessment'">Number of wrong question {{
+                    <span class="h4" v-if="type===$getConst('assessment')">Number of wrong question {{
                             allResults[1].wrong_question
                         }}</span>
                 </div>
@@ -124,9 +124,9 @@ const results = [
     {type: 'quiz', score: 5.5, correct_question: 8, wrong_question: 5},
     {type: 'exercise', score: 6, correct_question: 10, wrong_question: 3},
 ]
-const ASSESSMENT = 'assessment'
-const EXERCISE = 'exercise'
-const QUIZ = 'quiz'
+const ASSESSMENT = 5001
+const EXERCISE = 5002
+const QUIZ = 5003
 
 import SoundCloud from 'vue-soundcloud-player'
 export default {
@@ -134,14 +134,14 @@ export default {
         questionListening: Array
     },
     components: {
-        // SoundCloud
+        // SoundCloud,
     },
     data() {
         return {
             questionIndex: 0,
             questionNo: '',
             userChoose: [],
-            type: ASSESSMENT,
+            type: EXERCISE,
             allResults: [],
             resultCheck: [],
         };
@@ -157,7 +157,7 @@ export default {
         },
 
         check: function () {
-            if (typeof this.userChoose[this.questionIndex] === 'undefined') {
+            if (undefined) {
                 this.resultCheck.push(-1)
             } else {
                 for (let i = 0; i < this.questionListening[this.questionIndex].answers.length; i++) {

@@ -108,16 +108,16 @@
     <!--                </div>-->
     <!--            </div>-->
     <div class="h-100">
-        <div v-if="typeExercise === 'writing'" class="h-100">
+        <div v-if="typeExercise === $getConst('writing')" class="h-100">
             <writing-component v-bind:questionWriting="questions"></writing-component>
         </div>
-        <div v-if="typeExercise === 'reading'" class="h-100">
+        <div v-if="typeExercise === $getConst('reading')" class="h-100">
             <reading-component v-bind:questionReading="questions"></reading-component>
         </div>
-        <div v-if="typeExercise === 'listening'" class="h-100">
+        <div v-if="typeExercise === $getConst('listening')" class="h-100">
             <listening-component v-bind:questionListening="questions"></listening-component>
         </div>
-        <div v-if="typeExercise === 'speaking'" class="h-100">
+        <div v-if="typeExercise === $getConst('speaking')" class="h-100">
             <speaking-component v-bind:questionSpeaking="questions"></speaking-component>
         </div>
     </div>
@@ -125,10 +125,10 @@
 <script>
 import ReadingComponent from "./ReadingComponent";
 
-const WRITING = 'writing';
-const READING = 'reading';
-const LISTENING = 'listening';
-const SPEAKING = 'speaking';
+const WRITING = 10;
+const READING = 20;
+const LISTENING = 30;
+const SPEAKING = 40;
 export default {
     components: {ReadingComponent},
     props: {
@@ -147,7 +147,7 @@ export default {
                 correct: [],
                 wrong: [],
             },
-            typeExercise: SPEAKING
+            typeExercise: LISTENING
         };
     },
     mounted: function () {

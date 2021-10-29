@@ -4,7 +4,7 @@
         <div class="py-4 row h-100 justify-content-center lecture overflow-auto">
             <div class="col-lg-8">
                 <div class="h-100">
-                    <div v-if="type==='assessment'">
+                    <div v-if="type === $getConst('assessment')">
                         <div class="border shadow-sm bg-white rounded p-3 mb-3 h4 text-center">
                             Audio {{questionSpeaking[questionIndex].id}}:
                             <vimeo-player
@@ -36,7 +36,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-if="type==='exercise'">
+                    <div v-if="type === $getConst('exercise')">
                         <vimeo-player
                             ref="player"
                             :video-id="videoId"
@@ -44,7 +44,7 @@
                             class="embed-responsive embed-responsive-16by9"
                         />
                     </div>
-                    <div v-if="type==='quiz'">
+                    <div v-if="type === $getConst('quiz')">
                         <h3 v-cloak v-for="question in questionSpeaking" :key="question.id">
                             {{ question.id }}. {{ question.question }}</h3>
                         <p>Please record one video with voice that answers all question.</p>
@@ -56,11 +56,11 @@
                 </div>
             </div>
         </div>
-        <div class="text-right py-4 pr-3" v-if="type==='assessment'">
+        <div class="text-right py-4 pr-3" v-if="type === $getConst('assessment')">
             <button class="btn btn-primary" v-on:click="prev()" v-if="questionIndex > 0">
                 Previous
             </button>
-            <span v-if="type !== 'exercise'">
+            <span v-if="type !== $getConst('exercise')">
                 <button class="btn btn-primary mx-2" v-on:click="submit()"
                         v-if="questionIndex === questionSpeaking.length - 1">
                     Submit
@@ -83,9 +83,9 @@
 import { vueVimeoPlayer } from "vue-vimeo-player";
 import {PhotoCapture, VideoCapture} from 'vue-media-recorder'
 
-const ASSESSMENT = 'assessment'
-const EXERCISE = 'exercise'
-const QUIZ = 'quiz'
+const ASSESSMENT = 5001
+const EXERCISE = 5002
+const QUIZ = 5003
 export default {
     props: {
         questionSpeaking: Array
@@ -123,7 +123,7 @@ export default {
             );
         },
         check: function () {
-            if (typeof this.userChoose[this.questionIndex] === 'undefined') {
+            if (undefined) {
                 this.resultCheck.push(-1)
             } else {
                 for (let i = 0; i < this.questionSpeaking[this.questionIndex].answers.length; i++) {

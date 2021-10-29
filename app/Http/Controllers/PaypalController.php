@@ -23,7 +23,8 @@ use PayPal\Auth\OAuthTokenCredential;
 class PaypalController extends Controller
 {
     private $_api_context;
-
+    const APPROVAL_URL = 'approval_url';
+    const APPROVED = 'approved';
     public function __construct()
     {
         $paypal_configuration = Config::get('paypal');
@@ -83,7 +84,7 @@ class PaypalController extends Controller
         }
 
         foreach($payment->getLinks() as $link) {
-            if($link->getRel() == 'approval_url') {
+            if($link->getRel() == self::APPROVAL_URL) {
                 $redirect_url = $link->getHref();
                 break;
             }
@@ -111,7 +112,7 @@ class PaypalController extends Controller
         $result = $payment->execute($execution, $this->_api_context);
         $total = (int)$result->getTransactions()[0]->getAmount()->getTotal();
 
-        if ($result->getState() == 'approved') {
+        if ($result->getState() == self::APPROVED) {
             $user = User::where('id', Auth::user()->id)->first();
             $exchange_rate = Setting::where('key', 'token_exchange_rate')->first();
             $topUp_value = $total * $exchange_rate->value;
