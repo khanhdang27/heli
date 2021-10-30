@@ -195,7 +195,7 @@ $course = $courses_with_group->membershipCourses->course;
 </div>
 
 @push('scripts')
-<script src="https://js.stripe.com/v3/"></script>
+<script type="application/javascript" src="https://js.stripe.com/v3/"></script>
 
 <script type="application/javascript">
     const stripe = Stripe("{{ config('app.stripe_key') }}");

@@ -32,7 +32,9 @@
             </div>
         </div>
     </div>
-    <script src="https://js.stripe.com/v3/" type="application/javascript"></script>
+    
+    @push('scripts')
+    <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
 
     <script type="application/javascript">
         const stripe = Stripe("{{ config('app.stripe_key') }}");
@@ -70,7 +72,7 @@
                     payment_method: setupIntent.payment_method,
                 })
                     .then(function (response) {
-                        // location.reload();
+                        location.reload();
                         console.log('ok');
                     })
                     .catch(function (error) {
@@ -79,4 +81,6 @@
         });
 
     </script>
+    
+@endpush
 @endsection
