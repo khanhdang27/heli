@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SpeakAssessmentAnswer extends Model
 {
     use SoftDeletes;
+    public $timestamps = true;
+
+    protected $guarded = [];
 
     use SoftDeletes;
 

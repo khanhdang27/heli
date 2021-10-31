@@ -3,9 +3,10 @@
 namespace App\View\Components\Admin;
 
 use App\Models\Question;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
-class ListListeningQuestion extends Component
+class ListWritingQuizQuestion extends Component
 {
     private $quiz;
     private $question;
@@ -26,8 +27,11 @@ class ListListeningQuestion extends Component
      */
     public function render()
     {
+        // DB::enableQueryLog();
         $this->question = Question::where('quiz_id', $this->quiz->id)
-            ->where('type', Question::LISTENING)->get();
-        return view('components.admin.list-listening-question', ['quiz' => $this->quiz, 'questions' => $this->question]);
+            ->where('type', Question::WRITING)->get();
+        //     $this->question[0]->questionContent();
+        // dd(DB::getQueryLog());
+        return view('components.admin.list-writing-quiz-question',['quiz' => $this->quiz, 'questions' => $this->question]);
     }
 }

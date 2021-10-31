@@ -20,6 +20,7 @@ class CreateListenAssessmentAnswersTable extends Migration
                 ->constrained('listen_assessment_questions')
                 ->cascadeOnDelete();
             $table->text('answer');
+            $table->boolean('is_correct');
             $table->softDeletes();
             $table->timestamps();
         });

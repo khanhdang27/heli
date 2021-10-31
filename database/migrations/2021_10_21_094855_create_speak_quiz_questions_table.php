@@ -19,10 +19,10 @@ class CreateSpeakQuizQuestionsTable extends Migration
                 ->foreignId('question_id')
                 ->constrained('questions')
                 ->cascadeOnDelete();
-            $table->string('audio_ref');
             $table->text('question');
             $table->text('message_wrong');
             $table->bigInteger('lecture_index');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

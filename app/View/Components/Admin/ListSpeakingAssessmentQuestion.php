@@ -5,7 +5,7 @@ namespace App\View\Components\Admin;
 use App\Models\Question;
 use Illuminate\View\Component;
 
-class ListListeningQuestion extends Component
+class ListSpeakingAssessmentQuestion extends Component
 {
     private $quiz;
     private $question;
@@ -27,7 +27,10 @@ class ListListeningQuestion extends Component
     public function render()
     {
         $this->question = Question::where('quiz_id', $this->quiz->id)
-            ->where('type', Question::LISTENING)->get();
-        return view('components.admin.list-listening-question', ['quiz' => $this->quiz, 'questions' => $this->question]);
+        ->where('type', Question::SPEAKING)->get();
+        return view('components.admin.list-speaking-assessment-question',[
+            'quiz' => $this->quiz,
+            'questions' => $this->question,
+        ]);
     }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\ListenAssessmentAnswer;
+use App\Models\ListenAssessmentAnswer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ListenAssessmentAnswerController extends Controller
 {
@@ -35,7 +36,20 @@ class ListenAssessmentAnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $listenAnswer = ListenAssessmentAnswer::create([
+                'l_a_question_id' => $input['question_id'],
+                'answer' => $input['answer'],
+                'is_correct' => false
+            ]);
+            DB::commit();
+            return response()->json(['message' => 'Success', 'answer' => $listenAnswer]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(['message' => 'error', $th]);
+        }
     }
 
     /**
@@ -78,8 +92,20 @@ class ListenAssessmentAnswerController extends Controller
      * @param  \App\ListenAssessmentAnswer  $listenAssessmentAnswer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ListenAssessmentAnswer $listenAssessmentAnswer)
+    public function destroy(ListenAssessmentAnswer $answer)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $answer->delete();
+            DB::commit();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 }

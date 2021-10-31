@@ -2,13 +2,11 @@
 
 namespace App\View\Components\Admin;
 
-use App\Models\Question;
 use Illuminate\View\Component;
 
-class ListListeningQuestion extends Component
+class CreateWritingQuizQuestion extends Component
 {
     private $quiz;
-    private $question;
     /**
      * Create a new component instance.
      *
@@ -26,8 +24,6 @@ class ListListeningQuestion extends Component
      */
     public function render()
     {
-        $this->question = Question::where('quiz_id', $this->quiz->id)
-            ->where('type', Question::LISTENING)->get();
-        return view('components.admin.list-listening-question', ['quiz' => $this->quiz, 'questions' => $this->question]);
+        return view('components.admin.create-writing-quiz-question',['quiz' => $this->quiz]);
     }
 }

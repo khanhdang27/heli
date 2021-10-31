@@ -19,11 +19,12 @@ class CreateSpeakExercisesQuestionsTable extends Migration
                 ->foreignId('question_id')
                 ->constrained('questions')
                 ->cascadeOnDelete();
-            $table->string('audio_ref');
+            $table->string('video_code');
             $table->text('question');
             $table->text('message_wrong');
             $table->bigInteger('lecture_index');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

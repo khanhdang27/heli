@@ -1,24 +1,24 @@
-<ul class="list-group" id="listQuestionListening_{{ $quiz->set }}">   
+<ul class="list-group" id="listQuestionSpeakingAssessment_{{ $quiz->set }}">   
     
     @foreach ($questions as $question)
     @if ($question->questionContent())
     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info"
         id="headingQuestion_{{ $question->id }}">
         <div class="w-75" data-toggle="collapse"
-            data-target="#collapseAnswerListening_{{ $question->id }}" aria-expanded="true"
-            aria-controls="collapseAnswerListening_{{ $question->id }}">
+            data-target="#collapseAnswerSpeakingAssessment__{{ $question->id }}" aria-expanded="true"
+            aria-controls="collapseAnswerSpeakingAssessment__{{ $question->id }}">
             {{ $question->index }} - {{ $question->questionContent()->question }}
         </div>
         <div class="ml-auto w-25">
             <button class="btn btn-warning btn-sm m-1 w-100" data-toggle="modal"
-                data-target="#modalListeningQuestion_{{ $question->id }}"> Update </button>
+                data-target="#modalSpeakingAssessmentQuestion{{ $question->id }}"> Update </button>
             <button class="btn btn-danger btn-sm  m-1 w-100"
-            onclick="itemDelete('{{ route('admin.quiz.question.listening.assessment.destroy', [ 'quiz'=> $quiz->id, 'question' => $question->id]) }}')"
+            onclick="itemDelete('{{ route('admin.quiz.question.speaking.assessment.destroy', [ 'quiz'=> $quiz->id, 'question' => $question->id]) }}')"
             > Delete </button>
         </div>
 
-        <div class="modal fade" id="modalListeningQuestion_{{ $question->id }}" tabindex="0" role="dialog"
-            aria-labelledby="modalListeningQuestion_{{ $question->id }}_Title" aria-hidden="true">
+        <div class="modal fade" id="modalSpeakingAssessmentQuestion{{ $question->id }}" tabindex="0" role="dialog"
+            aria-labelledby="modalSpeakingAssessmentQuestion{{ $question->id }}_Title" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -30,7 +30,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.listening.assessment.update', ['quiz' => $quiz->id, 'question' => $question->id]), 'id' => 'formReadingQuestion_{{ $question->id }}']) !!}
+                        {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.speaking.assessment.update', ['quiz' => $quiz->id, 'question' => $question->id]), 'id' => 'formReadingQuestion_{{ $question->id }}']) !!}
                         <div class="form-group">
                             <label for="index" class="required text-dark">Index</label>
                             {{ Form::number('index', $question->index, ['class' => 'form-control', 'required']) }}
@@ -38,6 +38,10 @@
                         <div class="form-group">
                             <label for="question" class="required text-dark">Question</label>
                             {{ Form::text('question', $question->questionContent()->question, ['class' => 'form-control', 'required']) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="audio_ref" class="required text-dark">Audio</label>
+                            {{ Form::text('audio_ref', $question->questionContent()->audio_ref, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group">
                             <label for="message_wrong" class="required text-dark">Message Wrong</label>
@@ -64,7 +68,7 @@
                     let pos = localStorage.getItem("scrollPosition")
                     window.scrollTo(0, pos);
                 }
-                $('#modalListeningQuestion_{{ $question->id }}').on('shown.bs.modal', function() {
+                $('#modalSpeakingAssessmentAnswer{{ $question->id }}').on('shown.bs.modal', function() {
                     var scrollPosition = window.pageYOffset;
                     localStorage.setItem("scrollPosition", scrollPosition);
                 });
@@ -72,13 +76,13 @@
         </script>
 
     </li>
-    <div id="collapseAnswerListening_{{ $question->id }}" class="collapse"
+    <div id="collapseAnswerSpeakingAssessment__{{ $question->id }}" class="collapse"
         aria-labelledby="headingQuestion_{{ $question->id }}"
-        data-parent="#listQuestionListening_{{ $quiz->set }}">
+        data-parent="#listQuestionSpeakingAssessment_{{ $quiz->set }}">
         <div class="card-body">
             <div class="d-flex">
                 <button class="btn btn-success ml-auto btn-sm" data-toggle="modal"
-                    data-target="#modalListeningAnswer{{ $question->id }}">
+                    data-target="#modalSpeakingAssessmentAnswer{{ $question->id }}">
                     Add Answer
                 </button>
             </div>
@@ -88,7 +92,7 @@
                     console.log(data);
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('admin.listening.assessment.answer.store') }}",
+                        url: "{{ route('admin.speaking.assessment.answer.store') }}",
                         data: data
                     }).done(function (data) {
                         if (data.message == 'Success') {
@@ -103,7 +107,7 @@
                                 </li>`;
 
                             document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;
-                            $('#modalListeningAnswer{{ $question->id }}').modal('hide')
+                            $('#modalSpeakingAssessmentAnswer{{ $question->id }}').modal('hide')
                         }
                         console.log(data);
 
@@ -114,7 +118,7 @@
                 }
             </script>
             <!-- Modal -->
-            <div class="modal fade" id="modalListeningAnswer{{ $question->id }}" tabindex="-1" aria-labelledby="modalListeningAnswer{{ $question->id }}Label"
+            <div class="modal fade" id="modalSpeakingAssessmentAnswer{{ $question->id }}" tabindex="-1" aria-labelledby="modalSpeakingAssessmentAnswer{{ $question->id }}Label"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -149,7 +153,7 @@
                             </div>
                             
                             <a href="javascript:void(0)"
-                                onclick="itemDelete('{{ route('admin.listening.assessment.answer.destroy', ['answer' => $item->id]) }}')">
+                                onclick="itemDelete('{{ route('admin.speaking.assessment.answer.destroy', ['answer' => $item->id]) }}')">
                                 <i class="fe fe-trash mr-2 text-danger"></i>
                             </a>
                         </li>

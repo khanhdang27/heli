@@ -41,6 +41,7 @@ class ListenAssessmentQuestionController extends Controller
         $input = $request->validate([
             'index'=> 'required',
             'question'=> 'required',
+            'part'=> 'required',
             'message_wrong'=> 'required',
             'lecture_index'=> 'required',
         ]);

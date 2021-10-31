@@ -1,11 +1,11 @@
 <ul class="list-group" id="listQuestionAssessmentWriting_{{ $quiz->set }}">
-    
     @foreach ($questions as $question)
+        @if ($question->questionContent())
         <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info"
-            id="headingQuestion_{{ $question->id }}" data-toggle="collapse"
+            id="headingQuestion_{{ $question->id }}">
+            <div class="w-75" data-toggle="collapse"
             data-target="#collapseAnswerAssessmentWriting_{{ $question->id }}" aria-expanded="true"
             aria-controls="collapseAnswerAssessmentWriting_{{ $question->id }}">
-            <div class="w-75">
                 {{ $question->index }} - {{ $question->questionContent()->question }}
             </div>
             <div class="ml-auto w-25">
@@ -138,7 +138,7 @@
                 <form>
                     <ul class="list-group list-group-flush mt-3" id="listAnswerOf_{{ $question->id }}">
                         
-                        @foreach ($question->questionContent()->answers as $a=> $item)    
+                        @foreach ($question->questionContent()->answers as  $item)    
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="form-check">
                                     <input type="radio" class="form-check-input" id="answer_{{$item->id}}" name="answer">
@@ -159,6 +159,7 @@
                 </form>
             </div>
         </div>
+        @endif
     @endforeach
 </ul>
 

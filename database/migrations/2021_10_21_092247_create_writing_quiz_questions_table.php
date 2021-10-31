@@ -19,6 +19,7 @@ class CreateWritingQuizQuestionsTable extends Migration
                 ->foreignId('question_id')
                 ->constrained('questions')
                 ->cascadeOnDelete();
+            $table->integer('part');
             $table->text('question');
             $table->text('message_wrong');
             $table->bigInteger('lecture_index');

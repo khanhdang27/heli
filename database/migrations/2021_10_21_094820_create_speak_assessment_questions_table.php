@@ -23,6 +23,7 @@ class CreateSpeakAssessmentQuestionsTable extends Migration
             $table->text('question');
             $table->text('message_wrong');
             $table->bigInteger('lecture_index');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

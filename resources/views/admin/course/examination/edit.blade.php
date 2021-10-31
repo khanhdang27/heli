@@ -128,6 +128,11 @@ use App\Models\Examination;
                                                     aria-labelledby="headingTwo" data-parent="#accordionExample">
                                                     <div class="card-body">
                                                         @if($exam->type == Examination::QUIZ)
+                                                            <x-admin.create-writing-quiz-question :quiz="$quiz">
+                                                            </x-admin.create-writing-quiz-question>
+                                                            <br>
+                                                            <x-admin.list-writing-quiz-question :quiz="$quiz">
+                                                            </x-admin.list-writing-quiz-question>
                                                         @else
                                                             <x-admin.create-writing-question :quiz="$quiz">
                                                             </x-admin.create-writing-question>
@@ -173,9 +178,25 @@ use App\Models\Examination;
                                                 <div id="collapseSpeakingSet1" class="collapse"
                                                     aria-labelledby="headingThree" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        And lastly, the placeholder content for the third and final
-                                                        accordion
-                                                        panel. This panel is hidden by default.
+                                                        @if ($exam->type == Examination::ASSESSMENT)
+                                                            <x-admin.create-speaking-assessment-question :quiz="$quiz">
+                                                                </x-admin.create-speaking-assessment-question>
+                                                            <x-admin.list-speaking-assessment-question :quiz="$quiz">
+                                                                </x-admin.list-speaking-assessment-question>
+
+                                                        @elseif ($exam->type == Examination::EXERCISES)
+                                                            <x-admin.create-speaking-question :quiz="$quiz">
+                                                                </x-admin.create-speaking-question>
+                                                            <x-admin.list-speaking-question :quiz="$quiz">
+                                                                </x-admin.list-speaking-question>
+
+                                                        @else
+                                                            <x-admin.create-speaking-quiz-question :quiz="$quiz">
+                                                                </x-admin.create-speaking-quiz-question>
+                                                            <x-admin.list-speaking-quiz-question :quiz="$quiz">
+                                                                </x-admin.list-speaking-quiz-question>
+
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\SpeakExercisesQuestion;
+use App\Models\Question;
+use App\Models\Quiz;
+use App\Models\SpeakExercisesQuestion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SpeakExercisesQuestionController extends Controller
 {
@@ -33,9 +36,38 @@ class SpeakExercisesQuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Quiz $quiz)
     {
-        //
+        $input = $request->validate([
+            'video_code'=> 'required',
+            'index'=> 'required',
+            'question'=> 'required',
+            'message_wrong'=> 'required',
+            'lecture_index'=> 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+            $question = Question::create([
+                'quiz_id' => $quiz->id,
+                'type' => Question::SPEAKING,
+                'index' => $input['index']
+            ]);
+
+            $readQuestion = SpeakExercisesQuestion::create([
+                'question_id' => $question->id,
+                'question' => $input['question'],
+                'video_code' => $input['video_code'],
+                'message_wrong' => $input['message_wrong'],
+                'lecture_index' => $input['lecture_index'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Create success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return back()->withErrors('Create error!');
+        }
     }
 
     /**
@@ -67,9 +99,36 @@ class SpeakExercisesQuestionController extends Controller
      * @param  \App\SpeakExercisesQuestion  $speakExercisesQuestion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SpeakExercisesQuestion $speakExercisesQuestion)
+    public function update(Request $request, Quiz $quiz, Question $question)
     {
-        //
+        $input = $request->validate([
+            'video_code' => 'required',
+            'index'=> 'required',
+            'question'=> 'required',
+            'message_wrong'=> 'required',
+            'lecture_index'=> 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+            $question->update([
+                'index' => $input['index']
+            ]);
+
+            $readQuestion = SpeakExercisesQuestion::where(['question_id' => $question->id])->first();
+
+            $readQuestion->update([
+                'video_code' => $input['video_code'],
+                'question' => $input['question'],
+                'message_wrong' => $input['message_wrong'],
+                'lecture_index' => $input['lecture_index'],
+            ]);
+
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('Update error!');
+        }
     }
 
     /**
@@ -78,8 +137,21 @@ class SpeakExercisesQuestionController extends Controller
      * @param  \App\SpeakExercisesQuestion  $speakExercisesQuestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SpeakExercisesQuestion $speakExercisesQuestion)
+    public function destroy(Quiz $quiz, Question $question)
     {
-        //
+        try {
+            $question->delete();
+            return response([
+                'message' => 'Delete success!',
+            ]);
+        } catch (\Exception $exception) {
+            return response(
+                [
+                    'message' => 'Cannot delete course',
+                    'exception' => $exception
+                ],
+                400,
+            );
+        }
     }
 }

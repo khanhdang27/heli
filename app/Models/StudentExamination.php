@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class StudentExamination extends Model
 {
     use SoftDeletes;
+    public $timestamps = true;
+
+    protected $guarded = [];
 
     public function student()
     {

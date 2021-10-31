@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\SpeakAssessmentQuestion;
 use Illuminate\Http\Request;
 
-class SpeakAssessmentQuestionController extends Controller
+class SpeakExercisesAnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +40,10 @@ class SpeakAssessmentQuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SpeakAssessmentQuestion  $speackAssessmentQuestion
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(SpeakAssessmentQuestion $speackAssessmentQuestion)
+    public function show($id)
     {
         //
     }
@@ -52,10 +51,10 @@ class SpeakAssessmentQuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SpeakAssessmentQuestion  $speackAssessmentQuestion
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(SpeakAssessmentQuestion $speackAssessmentQuestion)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +63,10 @@ class SpeakAssessmentQuestionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SpeakAssessmentQuestion  $speackAssessmentQuestion
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SpeakAssessmentQuestion $speackAssessmentQuestion)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +74,10 @@ class SpeakAssessmentQuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SpeakAssessmentQuestion  $speackAssessmentQuestion
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SpeakAssessmentQuestion $speackAssessmentQuestion)
+    public function destroy($id)
     {
         //
     }

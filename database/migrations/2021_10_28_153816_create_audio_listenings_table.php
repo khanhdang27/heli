@@ -27,6 +27,8 @@ class CreateAudioListeningsTable extends Migration
                 ->foreignId('quiz_id')
                 ->constrained('quizzes')
                 ->cascadeOnDelete();
+            $table->text('audio_ref');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

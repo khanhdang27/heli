@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class WritingQuizQuestion extends Model
 {
     use SoftDeletes;
+    public $timestamps = true;
+
+    protected $guarded = [];
 
     const PART_1 = 1;
     const PART_2 = 2;
@@ -20,7 +23,7 @@ class WritingQuizQuestion extends Model
         return $this->belongsTo(Question::class);
     }
 
-    public function answer()
+    public function answers()
     {
         return $this->hasMany(WritingQuizAnswer::class);
     }
