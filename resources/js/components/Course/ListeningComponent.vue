@@ -1,0 +1,212 @@
+<template>
+    <div class="h-100">
+        <div v-if="allResults.length===0" class="h-100">
+            <div class="container-fluid h-100 d-flex flex-column justify-content-between text-primary">
+                <h1 class="mt-4 text-center font-weight-bold">Listening</h1>
+                <div class="py-4 h-100 row justify-content-center lecture overflow-auto">
+                    <div class="col-lg-8">
+                        <div class="h-100">
+                            <div class="border shadow-sm bg-white rounded p-3 mb-3 h4 text-center">
+                                <vimeo-player
+                                    :player-height="55"
+                                    ref="audio"
+                                    :video-id="'601557402'"
+                                />
+<!--                                <SoundCloud-->
+<!--                                    track="194881641"-->
+<!--                                    :mini="true"-->
+<!--                                    @ready="ready"-->
+<!--                                />-->
+                                <h5>Audio can played once only</h5>
+                            </div>
+                            <div v-if="type === $getConst('exercise')">
+                                <div v-if="resultCheck[questionIndex] === $getConst('incorrect')">
+                                    <div class="p-3 bg-danger rounded h5 text-white font-weight-bold">
+                                        Incorrect answer !
+                                    </div>
+                                    <h5 v-for="answer_item in questionListening[questionIndex].answers"
+                                        class="text-success">
+                                    <span v-if="answer_item.is_correct === $getConst('correct')">
+                                        Correct answer is: {{ answer_item.answer }}
+                                    </span></h5>
+                                </div>
+
+                                <div class="p-3 bg-success rounded h5 text-white font-weight-bold"
+                                     v-if="resultCheck[questionIndex] === $getConst('correct')">
+                                    Good job !
+                                </div>
+                            </div>
+                            <h3 v-cloak>{{ questionListening[questionIndex].id }}. {{
+                                    questionListening[questionIndex].question
+                                }}</h3>
+                            <p>Choose the most correct answer</p>
+                            <div class="mt-5">
+                                <input type="number"
+                                       :id="'ques' + questionListening[questionIndex].id"
+                                       :value="questionListening[questionIndex]"
+                                       hidden/>
+                                <div v-for="answer in questionListening[questionIndex].answers"
+                                     v-bind:key="answer.id"
+                                     class="py-0 my-2 border border-primary rounded answer-selection">
+                                    <input type="radio"
+                                           :id="answer.id"
+                                           :value="answer.id"
+                                           v-model="userChoose[questionIndex]"
+                                           v-bind:disabled="resultCheck[questionIndex]"
+                                           hidden/>
+                                    <label :for="answer.id" class="w-100">
+                                        <a class="btn text-left w-100">
+                                            <h5 class="mb-0">{{ answer.answer }}</h5>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right pb-4 pr-3">
+                    <button class="btn btn-primary" v-on:click="prev()"
+                            v-if="questionIndex > 0 && resultCheck[questionIndex] ">
+                        Previous
+                    </button>
+                    <span v-if="type === $getConst('exercise')">
+                        <button class="btn btn-primary mx-2" v-on:click="check()"
+                                :id="'check' + questionListening[questionIndex]"
+                                v-bind:disabled="resultCheck[questionIndex]">
+                            Check
+                        </button>
+                        <button class="btn btn-primary mx-2" v-on:click="next()"
+                                v-if="questionIndex < questionListening.length - 1 && resultCheck[questionIndex] ">
+                            Next
+                        </button>
+                    </span>
+                    <span v-if="type !== $getConst('exercise')">
+                        <button class="btn btn-primary mx-2" v-on:click="submit()"
+                                v-if="questionIndex === questionListening.length - 1">
+                            Submit
+                        </button>
+                        <button class="btn btn-primary mx-2" v-on:click="next()"
+                                v-if="questionIndex < questionListening.length - 1">
+                            Next
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div v-else class="mt-5 h-100">
+            <div class="text-center">
+                <h2 class="text-success">You score {{ allResults[0].score }}</h2>
+                <div>
+                    <i class="fe fe-check-circle h4 text-success"></i>
+                    <span class="h4" v-if="type===$getConst('quiz')">Number of correct question {{
+                            allResults[0].correct_question
+                        }}</span>
+                    <span class="h4" v-if="type===$getConst('assessment')">Number of wrong question {{
+                            allResults[1].correct_question
+                        }}</span>
+                </div>
+                <div>
+                    <i class="fe fe-x-circle h4 text-danger"></i>
+                    <span class="h4" v-if="type===$getConst('quiz')">Number of wrong question {{
+                            allResults[0].wrong_question
+                        }}</span>
+                    <span class="h4" v-if="type===$getConst('assessment')">Number of wrong question {{
+                            allResults[1].wrong_question
+                        }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+const results = [
+    {type: 'quiz', score: 5.5, correct_question: 8, wrong_question: 5},
+    {type: 'exercise', score: 6, correct_question: 10, wrong_question: 3},
+]
+const ASSESSMENT = 5001
+const EXERCISE = 5002
+const QUIZ = 5003
+
+import SoundCloud from 'vue-soundcloud-player'
+export default {
+    props: {
+        questionListening: Array
+    },
+    components: {
+        // SoundCloud,
+    },
+    data() {
+        return {
+            questionIndex: 0,
+            questionNo: '',
+            userChoose: [],
+            type: EXERCISE,
+            allResults: [],
+            resultCheck: [],
+        };
+    },
+    methods: {
+        next: function () {
+            if (this.questionIndex < this.questionListening.length - 1) {
+                this.questionIndex++;
+            }
+        },
+        prev: function () {
+            if (this.questionIndex > 0) this.questionIndex--;
+        },
+
+        check: function () {
+            if (undefined) {
+                this.resultCheck.push(-1)
+            } else {
+                for (let i = 0; i < this.questionListening[this.questionIndex].answers.length; i++) {
+                    if (this.questionListening[this.questionIndex].answers[i].id === this.userChoose[this.questionIndex]) {
+                        if (this.questionListening[this.questionIndex].answers[i].is_correct === 1) {
+                            return this.resultCheck.push(1)
+                        }
+                        return this.resultCheck.push(-1)
+                    }
+                }
+            }
+            console.log(this.resultCheck)
+        },
+        submit: function () {
+            console.log('cau tra loi ne', this.userChoose)
+        },
+        userAnswer: function () {
+            this.questionNo = document.getElementById(
+                "ques" + this.questions[this.questionIndex].id
+            ).value;
+            this.userAnswerQuiz({
+                questionID: parseInt(this.questionNo),
+                answerID: this.userChoose[this.questionIndex],
+            });
+        },
+        userAnswerQuiz: function (value) {
+            if (this.resultCheck.length === 0) {
+                this.resultCheck.push(value);
+            } else {
+                if (
+                    this.resultCheck.some((item) => {
+                        return value.questionID === item.questionID;
+                    })
+                ) {
+                    this.resultCheck.map((item) => {
+                        if (value.questionID === item.questionID) {
+                            return (item.answerID = value.answerID);
+                        }
+                    });
+                } else {
+                    this.resultCheck.push(value);
+                }
+            }
+            // localStorage.setItem("listening", JSON.stringify(this.resultCheck));
+        },
+    }
+}
+</script>
+
+<style scoped>
+
+</style>

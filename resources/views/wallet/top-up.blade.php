@@ -16,8 +16,8 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-12 col-sm-9 text-primary pb-5 mb-5">
-                    <h1 class="font-weight-bold my-5">@lang('keywords.wallet.topUpViaVisa')</h1>
-                    <div class="row justify-content-between">
+{{--                    <h1 class="font-weight-bold my-5">@lang('keywords.wallet.topUpViaVisa')</h1>--}}
+                    <div class="row justify-content-between mt-5">
                         <div class="col-lg-5">
                             <top-up-component v-bind:lang="{{json_encode($lang)}}"
                                               v-bind:transfer={{$exchange_rate->value}}></top-up-component>
@@ -48,6 +48,7 @@
                                 <h5>@lang('keywords.wallet.topUpTo')</h5>
                                 <h4 class="font-weight-bold">@lang('keywords.wallet.wallet')</h4>
                             </div>
+
                             <h5 class="font-weight-bold">@lang('keywords.wallet.chooseVisa')</h5>
                             <button
                                 class="btn btn-light mb-2 w-100 text-left h5 font-weight-bold px-3 py-2 text-primary"
@@ -105,7 +106,23 @@
                                     </button>
                                 </form>
                             @endif
+                            <div class="d-flex align-items-center text-primary mx-auto">
+                                <hr class="border border-primary w-100">
+                                <h4 class="p-3">or</h4>
+                                <hr class="border border-primary w-100">
+                            </div>
+                            @error('amount_paypal')
+                            <div class="alert text-danger">{{$message}}</div>
+                            @enderror
+                            <form action="{{URL::route('site.user.paypal')}}" method="post" id="form_paypal">
+                                @csrf
+                                <input type="number" name="amount_paypal" v-model.number="chooseValue" required hidden>
+                                <button type="submit" class="btn btn-primary w-100 font-weight-bold h4 py-3 mt-3">
+                                    Top-up with Paypal
+                                </button>
+                            </form>
                         </div>
+
                     </div>
                 </div>
             </div>

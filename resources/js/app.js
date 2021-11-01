@@ -6,13 +6,18 @@
 
 import Vue from 'vue';
 import vueVimeoPlayer from 'vue-vimeo-player'
+import CKEditor from 'ckeditor4-vue';
+import VueCountdownTimer from 'vuejs-countdown-timer';
+import constPlugin from "./components/constPlugin";
 
 require('./bootstrap');
 require('./vimeo-upload');
 
 window.Vue = require('vue');
 Vue.use(vueVimeoPlayer);
-
+Vue.use( CKEditor );
+Vue.use(VueCountdownTimer);
+Vue.use(constPlugin);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -33,6 +38,10 @@ Vue.component('like-component', require('./components/Share/LikeComponent.vue').
 Vue.component('rating-component', require('./components/Share/RatingComponent.vue').default);
 Vue.component('lecture-component', require('./components/Course/CourseViewerComponent.vue').default);
 Vue.component('quiz-component', require('./components/Course/QuizComponent.vue').default);
+Vue.component('reading-component', require('./components/Course/ReadingComponent.vue').default);
+Vue.component('writing-component', require('./components/Course/WritingComponent.vue').default);
+Vue.component('listening-component', require('./components/Course/ListeningComponent.vue').default);
+Vue.component('speaking-component', require('./components/Course/SpeakingComponent.vue').default);
 
 Vue.component('blog-latest-component', require('./components/Blog/BlogLatestComponent.vue').default);
 Vue.component('news-component', require('./components/Blog/NewsComponent.vue').default);

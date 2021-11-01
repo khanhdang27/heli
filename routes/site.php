@@ -109,6 +109,10 @@ Route::middleware('auth')->group(function () {
             Route::get('confirm-payment/{product_id}/{room}', 'WalletController@confirmPayment')->name('confirm');
             Route::get('confirm-payment/payment-success/{product_id}/{room}', 'WalletController@paymentSuccess')->name('success');
             Route::get('success/{course_id}', 'WalletController@success')->name('pay-success');
+
+            Route::get('paywithpaypal', 'PaypalController@payWithPaypal')->name('paywithpaypal');
+            Route::post('paypal', 'PaypalController@postPaymentWithpaypal')->name('paypal');
+            Route::get('paypal', 'PaypalController@getPaymentStatus')->name('status');
         });
 
     Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');

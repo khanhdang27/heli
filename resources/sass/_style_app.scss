@@ -1165,6 +1165,9 @@ input.check-subscribe {
         }
         background-color: var(--primary);
     }
+    input[type="radio"]:disabled + label{
+        opacity: 0.3;
+    }
 }
 
 /*PAYMENT PAGE*/
@@ -1431,4 +1434,7 @@ body {
         bottom: 0;
         background-color: rgba(10, 10, 125, 0.3);
     }
+}
+.lecture{
+    max-height: 610px;
 }

@@ -6,7 +6,7 @@
           <div
             v-if="
               lectureList[lectureIndex] &&
-              lectureList[lectureIndex].model_name == 'Examination'
+              lectureList[lectureIndex].model_name == 'Exams'
             "
             class="h-100"
           >
@@ -56,7 +56,7 @@
                     v-model="studentLecture"
                   />
                 </div>
-                <div v-if="item.model_name == 'Examination'">
+                <div v-if="item.model_name == 'Exams'">
                   <h4 class="mb-1">
                     {{ item.index }}
                     -
@@ -254,7 +254,7 @@ export default {
     setTimeout(() => this.showLecture(), 2000);
   },
   methods: {
-    getExamination() {
+    getExams() {
       axios
         .get(
           route("site.exam.showLecture", {
@@ -366,8 +366,8 @@ export default {
       setTimeout( ()=> this.onClickLecture(parseInt(this.lectureIndex) + 1), 2000);
     },
     showLecture() {
-      if (this.lectureList[this.lectureIndex].model_name === "Examination") {
-        this.getExamination();
+      if (this.lectureList[this.lectureIndex].model_name === "Exams") {
+        this.getExams();
       } else {
         this.getLecture();
       }
