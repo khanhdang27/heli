@@ -92,7 +92,7 @@ export default {
     data() {
         return {
             questionIndex: 0,
-            type: ASSESSMENT,
+            type: this.$root.$getConst('assessment'),
             videoId: "588754544",
             imageBase64: null,
             videoUrl: null,

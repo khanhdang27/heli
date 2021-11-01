@@ -19,7 +19,7 @@
                                     <div class="p-3 bg-danger rounded h5 text-white font-weight-bold">
                                         Incorrect answer !
                                     </div>
-                                    <h5 v-for="answer_item in questionListening[questionIndex].answers"
+                                    <h5 v-for="answer_item in questionListening[questionIndex].answers" v-bind:key="answer_item.id"
                                         class="text-success">
                                     <span v-if="answer_item.is_correct === $getConst('correct')">
                                         Correct answer is: {{ answer_item.answer }}
@@ -129,7 +129,7 @@ export default {
             questionIndex: 0,
             questionNo: '',
             userChoose: [],
-            type: EXERCISE,
+            type: this.$root.$getConst('exercise'),
             allResults: [],
             resultCheck: [],
         };

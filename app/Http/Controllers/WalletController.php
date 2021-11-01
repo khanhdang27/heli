@@ -93,7 +93,7 @@ class WalletController extends Controller
         );
         $payment_intent = $stripe->paymentIntents->create([
             'amount' => $_request['amount'] * 100,
-            'currency' => 'hkd',
+            'currency' => 'USD',
             'payment_method' => $paymentMethods[$_request['card']]->id,
             'confirm' => true,
             'customer' => $paymentMethods[$_request['card']]->customer,

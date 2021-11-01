@@ -35,7 +35,7 @@ export default {
                 correct: [],
                 wrong: [],
             },
-            typeExercise: LISTENING
+            typeExercise: this.$root.$getConst('listening')
         };
     },
     mounted: function () {
