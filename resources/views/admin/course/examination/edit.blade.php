@@ -60,29 +60,7 @@ use App\Models\Examination;
                                     @if ($exam->type == Examination::ASSESSMENT)
                                     @break
                                 @endif
-                                <script type="text/javascript">
-                                    $(document).ready(function() {
-                                        if (localStorage.quizQuestionSet) {
-                                            if ( {{ $exam->type }} != 1 ) {
-                                                let quizSet = localStorage.getItem("quizQuestionSet")
-                                                $(`a[id="${quizSet}"]`).tab('show');
-                                            } else {
-                                                $(`a[id="set_1"]`).tab('show');
-                                            }
-                                        }
-                                        $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
-                                            localStorage.setItem("quizQuestionSet", event.target.id);
-                                        })
-
-                                        if (localStorage.collapseQuestion) {
-                                            let quizSet = localStorage.getItem("collapseQuestion")
-                                            $(`div[id="${quizSet}"]`).collapse('show');
-                                        }
-                                        $('.accordion').on('shown.bs.collapse', function (event) {
-                                            localStorage.setItem("collapseQuestion", event.target.id);
-                                        })
-                                     })
-                                </script>
+                                
                                 @endforeach
                             </ul>
                             <br>
@@ -205,6 +183,7 @@ use App\Models\Examination;
                                     @if ($exam->type == Examination::ASSESSMENT)
                                     @break
                                 @endif
+
                                 @endforeach
                             </div>
                         </div>
@@ -218,4 +197,31 @@ use App\Models\Examination;
             CKEDITOR.replaceAll('rich-text' );
         };
     </script>
+
+    
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log('it run')
+        if (localStorage.quizQuestionSet) {
+            if ( {{ $exam->type }} != 1 ) {
+                let quizSet = localStorage.getItem("quizQuestionSet")
+                $(`a[id="${quizSet}"]`).tab('show');
+            } else {
+                $(`a[id="set_1"]`).tab('show');
+            }
+        }
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
+            localStorage.setItem("quizQuestionSet", event.target.id);
+        })
+
+        if (localStorage.collapseQuestion) {
+            let quizSet = localStorage.getItem("collapseQuestion")
+            $(`div[id="${quizSet}"]`).collapse('show');
+        }
+        $('#accordionExample').on('shown.bs.collapse', function (event) {
+            console.log("show ", event.target)
+            localStorage.setItem("collapseQuestion", event.target.id);
+        })
+     })
+</script>
 @endsection

@@ -139,14 +139,15 @@
                     </div>
                 </div>
             </div>
-            <form>
+            {!! Form::open([ 'url' => route("admin.quiz.question.reading.setAnswerTrue", ['quiz' => $quiz->id, 'question' => $question->questionContent()->id]), 'method'=>"PUT"]) !!}
+                @csrf
                 <ul class="list-group list-group-flush mt-3" id="listAnswerOf_{{ $question->id }}">
-                    
                     @foreach ($question->questionContent()->answers as  $item)    
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" id="answer_{{$item->id}}" name="answer">
+                                <input type="radio" class="form-check-input" id="answer_{{$item->id}}" name="answer" value="{{$item->id}}" {{ $item->is_correct == 1 ? 'checked=true' : ''}}>
                                 <label class="form-check-label " for="answer_{{$item->id}}">{{$item->answer}}</label>
+                                {{ $item->is_correct}}
                             </div>
                             
                             <a href="javascript:void(0)"
@@ -157,10 +158,11 @@
                         
                     @endforeach
                 </ul>
-                <button class="btn btn-success mt-2 mb-3 btn-sm">
+                <button type="submit" class="btn btn-success mt-2 mb-3 btn-sm">
                     Set Answer
                 </button>
-            </form>
+                {!! Form::close() !!}
+
         </div>
     </div>
     @endif
