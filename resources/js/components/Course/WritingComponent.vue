@@ -159,9 +159,6 @@
 <script>
 import CKEditor from 'ckeditor4-vue'
 
-const ASSESSMENT = 5001
-const EXERCISE = 5002
-const QUIZ = 5003
 export default {
     props: {
         questionWriting: Array

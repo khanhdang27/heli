@@ -81,19 +81,13 @@
 
 <script>
 import { vueVimeoPlayer } from "vue-vimeo-player";
-import {PhotoCapture, VideoCapture} from 'vue-media-recorder'
 
-const ASSESSMENT = 5001
-const EXERCISE = 5002
-const QUIZ = 5003
 export default {
     props: {
         questionSpeaking: Array
     },
     components:{
         vueVimeoPlayer,
-        // PhotoCapture,
-        // VideoCapture
     },
     data() {
         return {

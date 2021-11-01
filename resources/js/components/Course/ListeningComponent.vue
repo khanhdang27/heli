@@ -12,11 +12,6 @@
                                     ref="audio"
                                     :video-id="'601557402'"
                                 />
-<!--                                <SoundCloud-->
-<!--                                    track="194881641"-->
-<!--                                    :mini="true"-->
-<!--                                    @ready="ready"-->
-<!--                                />-->
                                 <h5>Audio can played once only</h5>
                             </div>
                             <div v-if="type === $getConst('exercise')">
@@ -124,17 +119,10 @@ const results = [
     {type: 'quiz', score: 5.5, correct_question: 8, wrong_question: 5},
     {type: 'exercise', score: 6, correct_question: 10, wrong_question: 3},
 ]
-const ASSESSMENT = 5001
-const EXERCISE = 5002
-const QUIZ = 5003
 
-import SoundCloud from 'vue-soundcloud-player'
 export default {
     props: {
         questionListening: Array
-    },
-    components: {
-        // SoundCloud,
     },
     data() {
         return {
@@ -201,7 +189,6 @@ export default {
                     this.resultCheck.push(value);
                 }
             }
-            // localStorage.setItem("listening", JSON.stringify(this.resultCheck));
         },
     }
 }
