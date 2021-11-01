@@ -176,7 +176,7 @@ class UserManagerController extends Controller
             'email'=>'required',
             'full_name'=>'required',
             'day_of_birth'=>'required',
-            'phone_no'=>'required|numeric',
+            'phone_no'=>'required',
         ]);
         DB::beginTransaction();
         try {

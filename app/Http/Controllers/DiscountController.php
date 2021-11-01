@@ -114,9 +114,19 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount)
     {
-        $discount->delete();
-        return back()->with('success', 'Delete success!');
-
+        DB::beginTransaction();
+        try {
+            $discount->delete();
+            DB::commit();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 
     /**
@@ -128,9 +138,9 @@ class DiscountController extends Controller
     public function apply($id)
     {
         $discount = Discount::find($id);
-        $courses = Course::query()->paginate(15);
+        $courses = Course::query()->orderBy('created_at', 'desc')->paginate(15);
 
-        $courseDiscount = CourseDiscount::with('course')->where('discount_id', $id)->paginate(15);
+        $courseDiscount = CourseDiscount::with('course')->where('discount_id', $id)->get();
 
         return view('admin.discount.apply',compact('discount', 'courses', 'courseDiscount'));
     }
@@ -140,12 +150,12 @@ class DiscountController extends Controller
      *
      * @param  \App\Discount  $discount
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function storeApply($id, Request $request)
     {
         DB::beginTransaction();
         $input = $request->input();
-        
+
         try {
             foreach ($request->input('course_id') as $key => $value) {
                 if (empty($input['discount_'.$value])) {
@@ -167,7 +177,7 @@ class DiscountController extends Controller
                     $priceTag->save();
                 }
             }
-            
+
             DB::commit();
             return back()->with(['success'=> "Update Succeed"]);
         } catch (\Throwable $th) {

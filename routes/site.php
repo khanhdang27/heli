@@ -2,11 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('', 'HomeController@index')->name('home');
 
+Route::get('faq', function () {
+    return view('home.faq');
+})->name('faq');
+Route::get('privacy-policy', function () {
+    return view('home.privacy-policy');
+})->name('privacy-policy');
+Route::get('terms-conditions', function () {
+    return view('home.terms-conditions');
+})->name('terms-conditions');
+
 Route::post('register', 'Auth\RegisterController@register')->name('register');
-Route::post('login', 'Auth\LoginController@login')->name('userLogin');
+Route::post('login', 'Auth\LoginController@login')
+    ->name('userLogin')
+    ->middleware('throttle:30,10');
 Route::get('logout', 'Auth\LoginController@logout')->name('userLogout');
 Route::post('password/update', 'Auth\ChangePasswordController@update')->name('userUpdatePassword');
 
@@ -30,6 +41,7 @@ Route::resource('subject', 'SubjectController');
 Route::resource('certificate', 'CertificateController');
 Route::get('document/{id}', 'CertificateController@documentDetail')->name('document');
 Route::get('course/search', 'CourseController@search')->name('course.search');
+Route::get('course/lectures/{course}', 'CourseController@lectureList')->name('course.lectureList');
 Route::resource('course', 'CourseController')->except(['index', 'update', 'store', 'delete']);
 
 Route::get('blog-view', function () {
@@ -46,10 +58,9 @@ Route::get('view-blog/{id}', 'BlogController@viewBlog')->name('view-blog');
 Route::get('forumAnswer', function () {
     return view('forum.post-view');
 })->name('forumAnswers');
-Route::post('subscribe', 'UserSubscribeController@addSubscribe')->name('subscribe');
+Route::post('subscribe', 'UserSubscribeController@customerSubscribe')->name('customerSubscribe');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('file/download/{file}', 'FileController@download')->name('file.download');
 
     Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
@@ -61,22 +72,45 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('post', 'PostController');
     Route::get('pin-comment/{post_id}/{comment_id}', 'PostController@pinComment')->name('pinComment');
+    Route::get('show-post/tag/{tag}', 'PostController@showPostByTag')->name('show-post-tag');
     Route::resource('comment', 'CommentController');
     Route::resource('user-like', 'UserLikeController');
     Route::resource('profile', 'ProfileController');
     Route::put('uploadAvatar', 'ProfileController@uploadAvatar')->name('uploadAvatar');
     Route::resource('rating', 'RatingController');
 
+    Route::get('lecture/showLecture', 'LectureController@showLecture')->name('lecture.showLecture');
     Route::resource('lecture', 'LectureController');
 
-    Route::post('submit-exam', 'ExaminationController@submitExamination')->name('submit-examination');
-    Route::get('unsubmit-exam/{id}', 'ExaminationController@unSubmitExamination')->name('unsubmit-examination');
+    Route::post('exam/{exams}', 'ExaminationController@checkExam')->name('exam.checkExam');
+    Route::get('exam/{exams}', 'LectureController@showExam')->name('exam.showLecture');
 
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');
 
-    Route::prefix('my/')->name('user.')->group(function () {
-        Route::get('course', 'CourseController@my')->name('course');
-        Route::get('calendar', 'ScheduleController@index')->name('calendar');
-        Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
-    });
+    Route::get('course/related/{course}', 'CourseController@courseListRelatedClient')->name('course.related.list');
+
+    Route::prefix('my/')
+        ->name('user.')
+        ->group(function () {
+            Route::get('course', 'CourseController@my')->name('course');
+            Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
+            Route::get('calendar', 'ScheduleController@index')->name('calendar');
+            Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
+            Route::get('wallet', 'WalletController@index')->name('wallet');
+            Route::get('wallet/top-up', 'WalletController@topUpIndex')->name('top-up');
+            Route::post('wallet/top-up/top-up-to', 'WalletController@topUpToWallet')->name('top-up-to');
+            Route::get('wallet/top-up/success', 'WalletController@topUpSuccess')->name('topUp-success');
+            Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.listHistory');
+            Route::get('wallet/list-payment', 'WalletController@listPayment')->name('wallet.listPayment');
+            Route::get('wallet/payment-history/{order}', 'WalletController@paymentHistory')->name('wallet.payment-history');
+            Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
+
+            Route::get('payment/{product_id}', 'WalletController@payment')->name('payment');
+            Route::get('confirm-payment/{product_id}/{room}', 'WalletController@confirmPayment')->name('confirm');
+            Route::get('confirm-payment/payment-success/{product_id}/{room}', 'WalletController@paymentSuccess')->name('success');
+            Route::get('success/{course_id}', 'WalletController@success')->name('pay-success');
+        });
+
+    Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');
+    Route::post('store-card', 'WalletController@storeCard')->name('store-card');
 });

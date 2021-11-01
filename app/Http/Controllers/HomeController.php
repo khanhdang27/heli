@@ -6,9 +6,12 @@ use App\Models\Banner;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\News;
+use App\Models\Setting;
 use App\Models\StudentCourses;
 use App\Models\Subject;
+use App\Models\Tutor;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -59,7 +62,8 @@ class HomeController extends Controller
         [$courseVideo, $latesLecture] = $this->getCourseVideo();
 
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
-
+        $tutors = Tutor::with('user', 'user.avatar')
+            ->where('id','!=', 1)->limit(9)->get();
         return view('home.home-page',[
             'banners' => $banners,
             'courseVideo'=>$courseVideo,
@@ -74,6 +78,7 @@ class HomeController extends Controller
             'courseUKISET' => $courseUKISET->latest('created_at')->get(),
             'courseIELTS' => $courseIELTS->latest('created_at')->get(),
             'courseIAL' => $courseIAL->latest('created_at')->get(),
+            'tutors' => $tutors
         ]);
     }
 
@@ -170,6 +175,24 @@ class HomeController extends Controller
             $course_welcomes,
             $course_latest
         ];
+    }
+
+
+    public function wishlist()
+    {
+        $courses = CourseMembershipDiscount::with(
+            'membershipCourses',
+            'membershipCourses.course',
+            'membershipCourses.course.likeable',
+            'membershipCourses.course.likeable.user',
+        )->where('publish', true)
+        ->whereHas('membershipCourses.course.likeable', function ($query)
+        {
+            $query->where('user_id', Auth::user()->id);
+        })
+        ->get();
+
+        return view('home.wishlist', ['courses' => $courses]);
     }
 }
 

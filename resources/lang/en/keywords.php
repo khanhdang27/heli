@@ -5,18 +5,28 @@ return [
         'register' => 'Signup',
         'english' => 'ENG',
         'mentorTeam' => 'Mentor Team',
-        'subjectClassification' => 'Subject Classification',
+        'subjectClassification' => 'Subjects Classification',
+        'subjects' => 'Subjects',
         'latestNews' => 'Latest News',
         'learningColumn' => 'Learning Column',
-        'q&aArea' => 'Q&A Discussion Area',
-        'welcomeBack' => 'Welcome back!'
+        'q&aArea' => 'Q&A Area',
+        'welcomeBack' => 'Welcome back!',
+        'profile' => 'Profile',
+        'logOut' => 'Log out'
     ],
     'guestPraise' => 'Guest Praise',
     'loginModal' => [
+        'email' => 'Email',
+        'password' => 'Password',
         'welcomeBack' => 'Welcome back!',
         'loginToContinueCourse' => 'Login to continue the course',
     ],
+    'passwordReset'=> [
+        'resetPassword' =>'Reset Password',
+        'sendPasswordResetLink'=> 'Send Password Reset Link'
+    ],
     'registerModal' => [
+        'register' => 'Register',
         'freeRegistration' => 'Free registration',
         'experienceCourse' => 'Experience course',
         'onlineAndRealTimeCourse' => 'Online courses and real-time courses',
@@ -75,6 +85,7 @@ return [
         'shareCourse' => 'Share course',
         'courseFrequency' => 'Course frequency',
         'myCourses' => 'My Courses',
+        'wishlist' => 'My Wishlist',
         'registerNow' => 'Register Now',
         'buyNow' => 'Buy Now'
     ],
@@ -119,13 +130,59 @@ return [
     ],
     'forum' =>[
         'bestAnswer' => 'Best answer',
-        'addAnswer' => 'Add your answer'
+        'addAnswer' => 'Add your answer',
+        'postQuestion' => 'Post your question'
     ],
     'rate' => [
         'rateCourse' => 'Rate Course',
         'addReview' => 'Add your review'
     ],
     'more' => 'More',
-    'coursesIHavePurchased' => 'Courses I have purchased'
-
+    'coursesIHavePurchased' => 'Courses I have purchased',
+    'coursesWishlist' => 'Courses in Wishlist',
+    'errors' => [
+        'tooManyRequests' => 'Too Many Requests, Please calm Wait for some minutes and requests again',
+    ],
+    'searchResult' => 'Search results',
+    'subscribe' => [
+        'success' => 'Registered email to receive the latest news',
+        'fail' => 'received an error email, please re-enter',
+        'subscribeUs' => 'Subscribe to us when we have any latest offers and courses will notify you immediately'
+    ],
+    'wallet' => [
+        'myWallet' => 'My Wallet',
+        'yourWallet' => 'Your Wallet',
+        'walletManagement' => 'Wallet Management',
+        'balance' => 'Balance',
+        'fastAndSecureTopUp' => 'Fast and secure token top-up',
+        'yourVisaCard' => 'Your Visa Card',
+        'hereYouCanReviewAllPayment' => 'Here you can review all of your payment to Helios',
+        'hereYouCanReviewAllTopUp' => 'Here you can review all of your Top-up to Wallet',
+        'paymentHistory' => 'Payment history',
+        'topUpHistory' => 'Top-up history',
+        'viewAllHistory' => 'View All History',
+        'topUp' => 'Top-up',
+        'topUpViaVisa' => 'Top-up via linked visa card',
+        'exchangeRate' => 'Exchange rate',
+        'totalFee' => 'Total Fee',
+        'walletBalance' => 'Wallet Balance',
+        'transactionDetails' => 'Transaction Detail',
+        'topUpTo' => 'Top-up to',
+        'wallet' => 'Wallet',
+        'chooseVisa' => 'Choose Visa Card',
+        'visaCardLinked' => 'Visa card linked',
+        'addNewVisaCard' => 'Add new Visa card',
+        'topUpValue' => 'Top-up value',
+        'amount' => 'Amount',
+        'exchangeValue' => 'Exchange Value',
+        'amountToExchange' => 'Amount to exchange',
+        'tokensReceived' => 'Tokens received',
+        'topUpSuccessfully' => 'Top-up successfully',
+        'topUpDetails' => 'Top-up Details',
+        'topUpAmount' => 'Top-up Amount',
+        'time' => 'Time',
+        'completed' => 'Completed'
+    ],
+    'coursePayment' => 'Course payment',
+    'addVisaCard' => 'Add visa card',
 ];

@@ -15,9 +15,12 @@ class CreateLectureTable extends Migration
     {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')
-                    ->constrained('courses')
-                    ->cascadeOnDelete();
+            $table->integer('level')->nullable(true);
+            $table->integer('index')->default(0);
+            $table
+                ->foreignId('course_id')
+                ->constrained('courses')
+                ->cascadeOnDelete();
             $table->string('lectures_name');
             $table->text('lectures_description');
             $table->string('video_resource');

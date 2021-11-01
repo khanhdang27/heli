@@ -100,8 +100,10 @@ class BlogController extends Controller
     {
         $_blog = Blog::with('tags')
             ->where('id', $blog->id)->first();
+        $tags = Tag::where('tag_type', Tag::$BLOG)->get();
         return view('admin.blog.edit', [
             'blog' => $_blog,
+            'tags' => $tags
         ]);
     }
 
@@ -122,6 +124,17 @@ class BlogController extends Controller
             'content' => $request['content']
         ]);
         $blog->save();
+
+        if (!empty($request['photo'])) {
+            if (!empty($blog->photo)) {
+                $blog->photo->delete();
+            }
+            $file = File::storeFile(
+                $request['photo'],
+                Blog::class,
+                $blog->id,
+            );
+        }
         foreach ($request['tag_id'] as $tag_id){
             $blogTag = new BlogTags([
                 'blog_id' => $blog->id,
@@ -129,7 +142,7 @@ class BlogController extends Controller
             ]);
             $blogTag->save();
         }
-        return back()->with('success', 'Create success');
+        return back()->with('success', 'Update success');
     }
 
     public function showBlogPage()
@@ -180,7 +193,7 @@ class BlogController extends Controller
         $blogs->save();
 
         $tags = $blogs->tags;
-        
+
         $blog_related = Blog::with('tags')->where('id','!=',$blogs->id)->whereHas('tags', function($query) use ($tags){
             $query->whereIn('tags.id', array_column($tags->toArray(),'id'));
         })->orderBy('created_at', 'desc')->limit(10)->get();
@@ -192,11 +205,23 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param Blog $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Blog $blog)
     {
-
+        DB::beginTransaction();
+        try {
+            $blog->delete();
+            DB::commit();
+            return response([
+                'message' => 'Delete success!'
+            ]);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            return response([
+                'message' => $exception->getMessage()
+            ], 400);
+        }
     }
 }

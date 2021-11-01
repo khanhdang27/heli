@@ -54,4 +54,10 @@ input.check-role {
   overflow: inherit;
 }
 
+.required:after {
+  content: "*";
+  color: red;
+  padding-left: 5px;
+}
+
 

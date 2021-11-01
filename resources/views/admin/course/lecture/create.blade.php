@@ -8,7 +8,7 @@ use App\Models\Subject;
 
 @extends('admin.layout')
 @section('content')
-<script src="{{asset("js/admin/vimeo-upload.js")}}"></script>
+    <script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
     <!-- CARDS -->
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
@@ -16,25 +16,35 @@ use App\Models\Subject;
                 <!-- Goals -->
                 <div class="card">
                     <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
+                        <div class="d-flex align-items-center">
+                            <div class="pr-2">
+                                <a class="btn btn-outline-dark btn-sm"
+                                    href="{{ route('admin.course.lecture.list', $course->id) }}">
+                                    <i class="fe fe-arrow-left"></i>
+                                </a>
+                            </div>
+                            <div>
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Create Course
+                                    Create Lectures
                                 </h4>
                             </div>
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => route('admin.course.lecture.store', $course->id), 'enctype'=>'multipart/form-data']) !!}
+                        {!! Form::open(['url' => route('admin.course.lecture.store', $course->id), 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group ">
                             {{ Form::label('lectures_name', 'Name') }}
-                            {{ Form::text('lectures_name',old('lectures_name'),['class' => 'form-control', 'required', 'id'=> 'lectures_name']) }}
+                            {{ Form::text('lectures_name', old('lectures_name'), ['class' => 'form-control', 'required', 'id' => 'lectures_name']) }}
                         </div>
                         <div class="form-group ">
                             {{ Form::label('lectures_description', 'Description') }}
-                            {{ Form::text('lectures_description',old('lectures_description'),['class' => 'form-control', 'required', 'id'=> 'lectures_description']) }}
+                            {{ Form::text('lectures_description', old('lectures_description'), ['class' => 'form-control', 'required', 'id' => 'lectures_description']) }}
+                        </div>
+                        <div class="form-group ">
+                            {{ Form::label('index', 'Index') }}
+                            {{ Form::number('index', old('index'), ['class' => 'form-control', 'required', 'id' => 'index']) }}
                         </div>
                         <div class="form-group ">
                             Pick up video
@@ -45,7 +55,9 @@ use App\Models\Subject;
                                 <div id="results"></div>
                             </div>
                             <div id="progress-container" class="progress">
-                                <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100" style="width: 0%">&nbsp;0%
+                                <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
+                                    role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 0%">&nbsp;0%
                                 </div>
                             </div>
                         </div>
@@ -66,18 +78,15 @@ use App\Models\Subject;
         function handleFileSelect(evt) {
             evt.stopPropagation()
             evt.preventDefault()
-            
+
             var files = evt.dataTransfer ? evt.dataTransfer.files : $(this).get(0).files
             var results = document.getElementById('results')
 
-            if ( 
+            if (
                 document.getElementById('lectures_name').value.length === 0 ||
-                document.getElementById('lectures_description').value.length === 0 
+                document.getElementById('lectures_description').value.length === 0
             ) {
-
-                console.log(document.getElementById('lectures_name').value)
                 showMessage('<strong>Error</strong>: ' + ' lectures name and description is required', 'danger')
-
             } else {
                 /* Clear the results div */
                 while (results.hasChildNodes()) results.removeChild(results.firstChild)
@@ -87,7 +96,8 @@ use App\Models\Subject;
                 document.getElementById('progress-container').style.display = 'block'
 
                 /* Instantiate Vimeo Uploader */
-                ;(new VimeoUpload({
+                ;
+                (new VimeoUpload({
                     name: document.getElementById('lectures_name').value,
                     description: document.getElementById('lectures_description').value,
                     private: true,
@@ -101,9 +111,7 @@ use App\Models\Subject;
                         updateProgress(data.loaded / data.total)
                     },
                     onComplete: function(videoId, index) {
-                        
-                        console.log(videoId)
-                        console.log(index)
+
                         var url = 'https://vimeo.com/' + videoId
 
                         if (index > -1) {
@@ -112,19 +120,22 @@ use App\Models\Subject;
 
                             /* add stringify the json object for displaying in a text area */
                             var pretty = JSON.stringify(this.metadata[index], null, 2)
-    
-                            axios.post("{{ route('admin.course.lecture.store', $course->id)}}", {
+                            console.log('document.getElementById(index).value :>> ', document.getElementById(
+                                'index').value);
+                            axios.post("{{ route('admin.course.lecture.store', $course->id) }}", {
                                     lectures_name: this.metadata[index].name,
                                     lectures_description: this.metadata[index].description,
+                                    index: document.getElementById('index').value,
                                     video_resource: videoId,
-                                }).then(function (response) {
+                                }).then(function(response) {
                                     console.info(response);
                                 })
-                                .catch(function (error) {
+                                .catch(function(error) {
                                     console.error(error);
                                 });
                         }
-                        showMessage('<strong>Upload Successful</strong>: check uploaded video @ <a href="' + url + '">' + url + '</a>. Open the Console for the response details.')
+                        showMessage('<strong>Upload Successful</strong>: check uploaded video @ <a href="' +
+                            url + '">' + url + '</a>. Open the Console for the response details.')
                     }
                 })).upload()
             }
@@ -166,7 +177,6 @@ use App\Models\Subject;
             var browse = document.getElementById('browse')
             browse.addEventListener('change', handleFileSelect, false)
         })
-
     </script>
 
 @endsection

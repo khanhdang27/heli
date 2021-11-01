@@ -7,14 +7,18 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-
+                    <div class="d-flex align-items-center">
+                        <div class="pr-2">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.banner.index')}}">
+                                <i class="fe fe-arrow-left"></i>
+                            </a>
+                        </div>
+                        <div>
                             <!-- Title -->
+
                             <h4 class="card-header-title">
                                 Edit Banner
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -23,26 +27,25 @@
                         <div class="row">
                             <div class="col-6">
                                 @if ($banner->image != null)
-
                                 <img class="w-100 img-thumbnail" src="{{ asset('/file/'.$banner->image->id) }}" alt="">
                                 @endif
                             </div>
-
                             <div class="col-6">
                                 {!! Form::open(['route' => ['admin.banner.update',$banner->id],'method'=>'put',
                                 'enctype'=>'multipart/form-data']) !!}
                                 @csrf
 
                                 <div class="form-group ">
-                                    {{ Form::label('banner_title', 'Banner title') }}
-                                    {{ Form::text('banner_title', $banner->banner_title,['class' => 'form-control'] ) }}
+                                    {{ Form::label('banner_title', 'Banner title', ['class' => 'required']) }}
+                                    {{ Form::text('banner_title', $banner->banner_title,['class' => 'form-control', 'required'] ) }}
                                     @error('banner_title')
                                     <div class="alert text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="custom-file ">
                                     {{ Form::label('file', 'File', ['class' => 'custom-file-label']) }}
-                                    {{ Form::file('file', ['class' => 'custom-file-input', 'required'])}}
+                                    {{ Form::file('file', ['class' => 'custom-file-input', 'accept'=>"image/*"])}}
+                                    <sub class="text-dark"> accept image file </sub>
                                     @error('file')
                                     <div class="alert text-danger">{{ $message }}</div>
                                     @enderror
@@ -52,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <script>
+                    <script type="application/javascript">
                         // Add the following code if you want the name of the file appear on select
                             $(document).ready(function () {
                                 $(".custom-file-input").on("change", function () {

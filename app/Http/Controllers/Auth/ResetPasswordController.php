@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
+use Illuminate\Support\Str;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Auth;
+
 class ResetPasswordController extends Controller
 {
     /*
@@ -21,10 +25,27 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
+
     /**
-     * Where to redirect users after resetting their password.
+     * Set the user's password.
      *
-     * @var string
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
+     * @return void
      */
+    protected function setUserPassword($user, $password)
+    {
+        $user->password = $password;
+    }
+
+    public function redirectPath()
+    {
+        if (method_exists($this, 'redirectTo')) {
+            return $this->redirectTo();
+        }
+
+        return Auth::user()->hasRole('student') ? '/site' : '/admin';
+    }
+
     protected $redirectTo = RouteServiceProvider::HOME;
 }

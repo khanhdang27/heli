@@ -8,21 +8,43 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Examination extends Model
 {
     use SoftDeletes;
-    protected $table = 'examinations';
+    protected $table = 'exams';
+
+    public $timestamps = true;
+
     protected $guarded = [];
+
+    //Make it available in the json response
+    protected $appends = ['model_name'];
+
+    //implement the attribute
+    public function getModelNameAttribute()
+    {
+        return 'Examination';
+    }
+
+    const ASSESSMENT = 1;
+    const EXERCISES = 2;
+    const QUIZ = 3;
+
+    const TYPES = [
+        self::ASSESSMENT => 'Assessment',
+        self::EXERCISES => 'Exercises',
+        self::QUIZ => 'Quiz',
+    ];
 
     public function course()
     {
-        return $this->belongsTo(Course::class, 'course_id');
+        return $this->belongsTo(Course::class);
     }
 
-    public function file()
+    public function quiz()
     {
-        return $this->morphOne(File::class, 'fileable');
+        return $this->hasMany(Quiz::class);
     }
 
-    public function submitExams()
+    public function passGrade()
     {
-        return $this->hasMany(SubmitExamination::class);
+        return $this->hasMany(PassGrade::class);
     }
 }

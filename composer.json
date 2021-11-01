@@ -12,7 +12,6 @@
         "astrotomic/laravel-translatable": "^11.9",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
-        "google/apiclient": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/cashier": "^12.13",
         "laravel/framework": "^7.0",
@@ -20,9 +19,11 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.4",
         "laravelcollective/html": "^6.2",
+        "livewire/livewire": "^2.7",
         "spatie/laravel-google-calendar": "^3.3",
         "spatie/laravel-newsletter": "^4.10",
-        "spatie/laravel-permission": "^4.2"
+        "spatie/laravel-permission": "^4.2",
+        "tightenco/ziggy": "^1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
@@ -45,7 +46,8 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Bavix\\Wallet\\": "packages\\bavix\\laravel-wallet\\src"
         },
         "classmap": [
             "database/seeds",
@@ -62,7 +64,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

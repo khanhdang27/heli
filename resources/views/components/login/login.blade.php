@@ -3,7 +3,7 @@
         <div class="modal-content modal-login-content border-white">
             <div class="modal-header btn-close">
                 <button type="button" class="close btn-x m-0 p-0" data-dismiss="modal">
-                    <span aria-hidden="true" class="rounded-circle p-1">×</span>
+                    <span aria-hidden="true" class="rounded-circle p-1"><i class="fe fe-x"></i></span>
                 </button>
             </div>
             <!-- Modal body -->
@@ -18,26 +18,24 @@
                     <div class="col-lg-6">
                         <div class="box-btn-login">
                             <a class="btn btn-register-now btn-login mb-2 mt-0 mx-auto  animate-change-color"
-                                id="login-fb"
-                               href="{{route('site.socialLogin', 'facebook')}}">
-                                <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}" width="33px">
+                                id="login-fb" href="{{route('site.socialLogin', 'facebook')}}">
+                                <div class="box-ic ic-fb"><img class="ic" src="{{asset("images/ic/ic_fb.svg")}}"
+                                        width="33px">
                                 </div>
                                 <p class="mx-auto mb-0">@lang('keywords.loginWithFb')</p>
                                 <span id='spinner-load-fb' class="spinner-border spinner-border-sm ml-1 d-none"
-                                        role="status" aria-hidden="true"></span>
-                                    <span class="sr-only">Loading...</span>
+                                    role="status" aria-hidden="true"></span>
+                                <span class="sr-only">Loading...</span>
                             </a>
-                            <a class="btn btn-register-now btn-login mt-0 mx-auto  animate-change-color"
-                                id="login-gg"
-                               href="{{route('site.socialLogin', 'google')}}"
-                               >
+                            <a class="btn btn-register-now btn-login mt-0 mx-auto  animate-change-color" id="login-gg"
+                                href="{{route('site.socialLogin', 'google')}}">
                                 <div class="box-ic ic-gg"><img class="ic" src="{{asset("images/ic/ic_gg.svg")}}"
-                                                               width="33px">
+                                        width="33px">
                                 </div>
                                 <p class="mx-auto mb-0">@lang('keywords.loginWithGg')</p>
                                 <span id='spinner-load-gg' class="spinner-border spinner-border-sm ml-1 d-none"
-                                        role="status" aria-hidden="true"></span>
-                                    <span class="sr-only">Loading...</span>
+                                    role="status" aria-hidden="true"></span>
+                                <span class="sr-only">Loading...</span>
                             </a>
                         </div>
                         <div class="line-or d-flex align-items-center text-white mx-auto">
@@ -50,24 +48,23 @@
                         <div class="input-login mb-2 mx-auto">
                             {{ Form::email('email',null,[
                                             'class'=>'input-login-item',
-                                            'placeholder'=>'Email'
+                                            'placeholder'=> __('keywords.loginModal.email')
                                             ]) }}
                         </div>
                         <div class="input-login mx-auto">
                             {{ Form::password('password', [
                                 'class'=> 'input-login-item',
-                                'placeholder'=>'Password'
+                                'placeholder'=>__('keywords.loginModal.password')
                                 ])
                             }}
                         </div>
                         <div class="row bottom-form mt-4 mx-auto">
                             <div class="col-sm">
-                                <div class="remember text-white d-flex">
-                                    <label class="rememberCheck mr-3" for="rememberCheck">
-                                        <input type="checkbox" id="rememberCheck">
-                                        <div class="check"></div>
+                                <div class="from-group text-white ">
+                                    <input type="checkbox" id="rememberCheck" name="remember_me">
+                                    <label class="mr-3" for="rememberCheck">
+                                        <p class="mb-0">@lang('keywords.rememberMe')</p>
                                     </label>
-                                    <p class="mb-0">@lang('keywords.rememberMe')</p>
                                 </div>
                             </div>
                             <div class="col-sm text-right p-0">
@@ -79,14 +76,13 @@
                             </div>
                         </div>
                         <div class="bottom-btn d-flex justify-content-center">
-                            <button class='btn btn-login btn-register-now my-5 animate-change-color'
-                                id='btn-login' type="submit">
-                                <p class="mb-0">{{__('Login')}}</p>
-                                <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none" role="status"
-                                      aria-hidden="true"></span>
+                            <button class='btn btn-login btn-register-now my-5 animate-change-color' id='btn-login'
+                                type="submit">
+                                <p class="mb-0">{{__('keywords.login')}}</p>
+                                <span id='spinner-load' class="spinner-border spinner-border-sm ml-1 d-none"
+                                    role="status" aria-hidden="true"></span>
                                 <span class="sr-only">Loading...</span>
                             </button>
-
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -97,8 +93,8 @@
     </div>
 </div>
 @push('scriptsLogin')
-    <script>
-        $(function () {
+<script type="application/javascript">
+    $(function () {
             var spinner = $("#spinner-load");
             var spinner_fb = $("#spinner-load-fb");
             var spinner_gg = $("#spinner-load-gg");
@@ -134,6 +130,12 @@
                     } else {
                         toastr["error"]("@lang('keywords.toast.incorrect')", "@lang('keywords.toast.loginFailed')");
                     }
+                }).fail(function (data) {
+                    if(data.responseJSON) {
+                        toastr["error"]("@lang('auth.throttle', ['minutes'=>10])", "@lang('keywords.toast.loginFailed')");
+                    } else {
+                        toastr["error"](data.message, "@lang('keywords.toast.loginFailed')");
+                    }
                 })
             });
         })
@@ -148,5 +150,5 @@
                 "extendedTimeOut": false,
             }
         }
-    </script>
+</script>
 @endpush

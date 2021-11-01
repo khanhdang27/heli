@@ -1,10 +1,14 @@
 @font-face {
     font-family: Source Han Sans CN;
-    src: url("/helios/public/fonts/Source Han Sans CN Normal.ttf") format("truetype");
+    src: url("/fonts/Source Han Sans CN Normal.ttf") format("truetype");
 }
 
 html {
     font-size: 14pt;
+}
+
+body {
+    padding-right: 0px !important;
 }
 
 h1,
@@ -16,6 +20,12 @@ h1,
 h2,
 .h2 {
     font-size: 26px;
+    font-weight: 500;
+}
+
+h3,
+.h3 {
+    font-size: 22px;
     font-weight: 500;
 }
 
@@ -31,6 +41,21 @@ h5,
     font-weight: 500;
 }
 
+.bg-gray {
+    background-color: var(--gray);
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    top: 0;
+    left: 0;
+    background: rgba(11, 10, 12, 0.35);
+    z-index: 9998;
+    overflow: hidden;
+}
+
 .course-title {
     font-size: 30px;
     font-weight: 500;
@@ -43,6 +68,7 @@ h5,
 }
 
 .banner-content {
+    height: 569px;
     img {
         width: 100%;
     }
@@ -126,8 +152,6 @@ h5,
 .search {
     border: 2px solid #0b487d;
     border-radius: 20px;
-    padding: 0.2rem !important;
-    width: 309px;
     height: 40px;
     background-color: #fff;
 }
@@ -200,7 +224,7 @@ form#certificate_form {
 }
 
 .top-news-page {
-    background-image: url("/helios/public/images/bg_topPage.svg");
+    background-image: url("/../images/bg_topPage.svg");
     background-size: cover;
     color: var(--white);
     font-size: 24px;
@@ -294,9 +318,11 @@ input.check-subscribe {
     }
 }
 
-.product-hover:hover {
-    text-decoration: none;
-    color: var(--secondary);
+.product-hover {
+    &:hover {
+        text-decoration: none;
+        color: var(--secondary) !important;
+    }
 }
 
 .share-bar {
@@ -312,7 +338,7 @@ input.check-subscribe {
     padding: 0.5rem 1rem;
     border-radius: 28px;
     margin: 0 0.5rem 0.5rem 0;
-    min-width: 120px;
+    min-width: 87px;
     a {
         text-decoration: none;
     }
@@ -356,7 +382,7 @@ input.check-subscribe {
 }
 
 .text-comment {
-    font-size: 18.7pt;
+    font-size: 20px;
     color: var(--primary);
 }
 
@@ -419,7 +445,6 @@ input.check-subscribe {
     outline: none;
 }
 
-
 /*GUEST PRAISE-----------------------------------------*/
 
 .title-card {
@@ -466,9 +491,12 @@ input.check-subscribe {
     .title-product {
         border-top-right-radius: 0.72rem !important;
         width: fit-content;
-        min-width: 70px;
+        min-width: 95px;
         padding: 0.2rem 0;
         text-align: center;
+        a {
+            max-width: 95px;
+        }
     }
     .content-top {
         text-align: center;
@@ -546,7 +574,6 @@ input.check-subscribe {
     opacity: 0 !important;
 }
 
-
 /*TAB PRODUCT-----------------------------------------*/
 
 .product-tab {
@@ -560,9 +587,16 @@ input.check-subscribe {
         font-weight: bold;
         color: var(--white);
         text-align: center;
-        background-image: url("/helios/public/images/ic/bg-tab-unActive.svg");
+        background-image: url("/../images/ic/bg-tab-unActive.svg");
         background-repeat: no-repeat;
         background-size: cover;
+        transition: 1s;
+
+        &:hover {
+            transform: scale(1.2);
+            z-index: 2;
+            box-shadow: 2px 2px 2px rgb(97, 97, 97);
+        }
     }
     .menu-category-text {
         display: none;
@@ -574,7 +608,7 @@ input.check-subscribe {
     height: 95.38px;
     font-size: 41px;
     background-color: var(--white) !important;
-    background-image: url("/helios/public/images/ic/bg-tab-Active.svg") !important;
+    background-image: url("/../images/ic/bg-tab-Active.svg") !important;
     background-size: cover;
 }
 
@@ -590,7 +624,6 @@ input.check-subscribe {
 .menu-category-text {
     height: 50px;
 }
-
 
 /*SHOW VIDEO-----------------------------------------*/
 
@@ -635,19 +668,15 @@ input.check-subscribe {
     border: 2px solid;
 }
 
-
 /*STEP FOR REGISTER-----------------------------------------*/
 
 .step-for-register {
     .content-step {
-        max-width: 80%;
+        max-width: 70%;
         margin: 0 auto;
-        #step2 {
-            //margin: 0 7rem;
-        }
         .circle-step {
-            width: 88px;
-            height: 88px;
+            width: 75px;
+            height: 75px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -656,7 +685,7 @@ input.check-subscribe {
         }
         .title-step {
             font-weight: 600;
-            font-size: 18pt;
+            font-size: 16pt;
         }
         .text-step {
             max-width: 270px;
@@ -668,11 +697,15 @@ input.check-subscribe {
             justify-content: center;
             align-items: center;
         }
+        .text-row {
+            margin-left: -9rem;
+            margin-right: -9rem;
+        }
     }
     .dot-bar {
-        width: 289px;
+        width: 290px;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
     }
     .list-dot {
         width: 15px;
@@ -690,11 +723,14 @@ input.check-subscribe {
     }
 }
 
+.step-for-register-text {
+    max-width: 90%;
+}
+
 .circle-register {
     width: 112px;
     height: 112px;
 }
-
 
 /*TEAM PAGE----------------------------------------------------------------------------------------------------------*/
 
@@ -755,28 +791,25 @@ input.check-subscribe {
     }
 }
 
-
 /*SUB HEADER------------------------------------------------------------------------------------------*/
 
 .sub-header {
-    width: 100%;
-    background-image: url("/helios/public/images/bg_sub.svg");
+    background-image: url("/../images/bg_sub.svg");
     background-size: cover;
     z-index: 1001;
 }
-
 
 /*SUBSCRIBE CONTAINER */
 
 .subscribe-container {
     min-height: 437px;
-    background-image: url("/helios/public/images/bg-subscribe.jpg");
+    background-image: url("/../images/bg-subscribe.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
     .subscribe-title {
-        max-width: 429px;
+        max-width: 500px;
     }
     .ip-subscribe {
         max-width: 768px;
@@ -787,7 +820,6 @@ input.check-subscribe {
         }
     }
 }
-
 
 /*SUBJECT PAGE ----------------------------------------------------------------------------------------*/
 
@@ -804,7 +836,6 @@ input.check-subscribe {
     width: 30px;
     height: 20px;
 }
-
 
 /*COURSE PAGE-------------------------------------------------------------------------------*/
 
@@ -873,7 +904,6 @@ input.check-subscribe {
     font-size: 13.5pt;
 }
 
-
 /*COURSE PAGE 2-------------------------------------------------------------------------------*/
 
 .info-course {
@@ -917,13 +947,11 @@ input.check-subscribe {
     height: auto;
 }
 
-
 /*COURSE PAGE 3-------------------------------------------------------------------------------*/
 
 .video {
     max-width: 1550px;
 }
-
 
 /*BLOG PAGE----------------------------------------------------------------*/
 
@@ -940,12 +968,12 @@ input.check-subscribe {
 }
 
 .post-spotlight {
-    height: 581px !important;
+    height: 581px;
 }
 
 .popular-articles-item-image {
     width: 100%;
-    flex: 0 40%;
+    flex: 0 30%;
     .img-blog {
         width: 185px;
         height: 185px;
@@ -957,7 +985,7 @@ input.check-subscribe {
 }
 
 .popular-articles-item-content {
-    flex: 0 60%;
+    flex: 0 70%;
     a {
         overflow: hidden;
         display: -webkit-box;
@@ -1039,7 +1067,6 @@ input.check-subscribe {
     overflow-y: auto;
 }
 
-
 /*FORUM PAGE-------------------------------------------------------------------*/
 
 .body-forum-page {
@@ -1047,7 +1074,7 @@ input.check-subscribe {
 }
 
 .img-question {
-    width: 60%;
+    max-height: 470px;
 }
 
 .ic-action {
@@ -1078,7 +1105,6 @@ input.check-subscribe {
     }
 }
 
-
 /*NEWS PAGE-----------------------------------------*/
 
 .box-news {
@@ -1086,10 +1112,6 @@ input.check-subscribe {
 }
 
 .body-news-page {
-    background-image: url("../images/BG_news.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     .container-news-page {
         padding-bottom: 7rem;
         .content-news-page {
@@ -1120,12 +1142,30 @@ input.check-subscribe {
         font-size: 16px;
         cursor: pointer;
     }
-    input[type="radio"]:checked+label {
+    input[type="radio"]:checked + label {
         border-style: solid;
         border-color: var(--primary);
     }
 }
 
+.answer-selection {
+    input[type="radio"] {
+        opacity: 0;
+    }
+    label {
+        display: inline-block;
+        font-family: Arial;
+        font-size: 16px;
+        cursor: pointer;
+        margin-bottom: 0;
+    }
+    input[type="radio"]:checked + label {
+        h5 {
+            color: whitesmoke;
+        }
+        background-color: var(--primary);
+    }
+}
 
 /*PAYMENT PAGE*/
 
@@ -1168,7 +1208,227 @@ input.check-subscribe {
 .item-schedule {
     max-width: 123.58px;
     height: 190px;
-    background-image: url('/helios/public/images/ic/bookmark.svg');
+    background-image: url("/../images/ic/bookmark.svg");
     background-size: 100%;
     background-repeat: no-repeat;
+}
+
+/*BANNER-----------------------------------------*/
+
+.banner-background {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-opacity {
+    background-color: #797979;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/*Forum-----------------------------------------*/
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+}
+
+.item-slide {
+    width: fit-content !important;
+}
+
+.tutor_image {
+    width: 270px;
+    height: 270px;
+}
+//Move from style.css--------------------------------
+html,
+body {
+    font-size: 10.5pt;
+    background-color: var(--white);
+    font-family: "Source Han Sans CN";
+    font-weight: 400;
+    margin: 0;
+}
+
+.body-content {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.dropdown-menu {
+    z-index: 1002;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #fff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0b487d;
+    border-radius: 10px;
+}
+.course-detail-tab::-webkit-scrollbar-thumb {
+    background: #d3d3d3ff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
+
+.ip-search {
+    border: 0;
+    height: 100%;
+    outline: none;
+}
+
+.item-header {
+    font-size: 14px;
+    padding: 0 0 0 2.5rem;
+}
+
+.free-class-container {
+    min-height: 437px;
+    background-image: url("/../images/freeclass-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 4rem 0 4rem 0;
+
+    .border-right-radius {
+        transform: translate(-500px);
+        border: 5px solid;
+        border-top-right-radius: 10rem;
+        border-bottom-right-radius: 10rem;
+        border-left: 0 !important;
+        width: 67.5vw;
+    }
+}
+
+.circle-check {
+    left: 64%;
+    border-radius: 50%;
+    width: 172px;
+    height: 172px;
+}
+
+.text-content {
+    padding: 2rem 5rem 2rem 0;
+    font-weight: 600;
+}
+
+.text-information {
+    text-align: center;
+    max-width: 370px;
+}
+
+.modal-login-content {
+    border: 3px solid;
+    border-radius: 1rem;
+    background-color: rgba(10, 10, 125, 0.8);
+    padding: 1rem;
+}
+
+.modal-index {
+    z-index: 16000170;
+}
+
+.line-or {
+    max-width: 352px;
+    font-size: 20px;
+    justify-items: center;
+    margin: 0.5rem;
+    hr {
+        width: 100%;
+        border: 1px solid #fff;
+    }
+}
+
+.input-login {
+    max-width: 325px;
+    border-radius: 50px;
+    padding: 0.8rem 1rem;
+    .input-login-item {
+        border: none;
+        width: 90%;
+        height: 100%;
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.text-login-left {
+    width: fit-content;
+}
+
+.btn-more {
+    height: 37px;
+    padding: 0 1.5rem;
+    border: 2px solid;
+    border-radius: 19px;
+    &:hover {
+        cursor: pointer;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
+.card-profile {
+    max-width: 700px;
+}
+
+//Wallet-----------------------
+.wallet-card {
+    min-height: 397px;
+}
+.btn-topUp-value {
+    width: 122px;
+}
+.select-card {
+    &:hover {
+        background-color: #e2e6ea;
+    }
+}
+.btn-add-visa {
+    &:hover {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    }
+}
+
+//Slide tutor
+
+.card-tutor{
+    height: 407px;
+    .thumb-img-tutor {
+        width: 100%;
+        height: 100%;
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .info-tutor {
+        width: 100%;
+        max-height: 250px;
+        overflow-y: auto;
+        bottom: 0;
+        background-color: rgba(10, 10, 125, 0.3);
+    }
 }

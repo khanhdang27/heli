@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Lecture;
 use App\Models\StudentCourses;
+use App\Models\Examination;
+use App\Models\Quiz;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class LectureController extends Controller
 {
@@ -78,28 +81,127 @@ class LectureController extends Controller
             try {
                 StudentCourses::where([
                     'course_id' => $input['course_id'],
-                    'student_id' => $input['user_id']
+                    'student_id' => $input['user_id'],
                 ])->update([
                     'latest_study' => new DateTime(),
-                    'lecture_study' => $lecture->id
+                    'lecture_study' => $lecture->id,
                 ]);
 
                 DB::commit();
-                return response([
-                    'message' => 'update success!'
-                ],200);
+                return response(
+                    [
+                        'message' => 'update success!',
+                    ],
+                    200,
+                );
             } catch (\Throwable $th) {
                 DB::rollBack();
-
-                dd($th);
-                return response([
-                    'message' => 'update fails!'
-                ],400);
+                return response(
+                    [
+                        'message' => 'update fails!',
+                    ],
+                    400,
+                );
             }
         }
-        return response([
-            'message' => 'update fails!'
-        ],400);
+        return response(
+            [
+                'message' => 'update fails!',
+            ],
+            400,
+        );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Lecture  $lecture
+     * @return \Illuminate\Http\Response
+     */
+    public function showLecture(Request $request)
+    {
+        $input = $request->input();
+
+        DB::beginTransaction();
+        try {
+            $lecture = Lecture::find($input['id']);
+            $this->updateWatched($input);
+            DB::commit();
+            return response()->json($lecture);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Examination  $exams
+     * @return \Illuminate\Http\Response
+     */
+    public function showExam(Request $request, Examination $exams)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $courseId = $input['courseId'];
+            $index = $input['index'];
+
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $courseId
+            ])->first();
+
+            if (empty($student_course->quiz_lecture) || 
+                ($student_course->quiz_lecture != $exams->id && $index == $student_course->lecture_open)) {
+
+                    $student_course->quiz_lecture = $exams->id;
+                    $student_course->level_quiz = 1;
+            } else {
+                return response()->json(
+                    [
+                        'message' => 'You Passed this Exam',
+                    ],
+                    205,
+                );
+            }
+
+            $version = $student_course->level_quiz;
+
+            $quiz = Quiz::with('question')
+                ->with('question.answers')
+                ->where('exam_id', $exams->id)
+                ->whereHas('question', function ($query) use ($version) {
+                    return $query->where('version', $version);
+                })
+                ->first();
+            
+            if (empty($quiz)) {
+                return response()->json(
+                    [
+                        'message' => 'Quiz not found',
+                    ],
+                    400,
+                );
+            }
+            $this->updateWatched($input);
+            DB::commit();
+            return response()->json($quiz->question);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
 
     /**
@@ -111,5 +213,26 @@ class LectureController extends Controller
     public function destroy(Lecture $lecture)
     {
         //
+    }
+
+    public function updateWatched(array $input)
+    {
+        $student_course = StudentCourses::where('course_id', $input['courseId'])
+            ->where('student_id', Auth::user()->id)
+            ->first();
+
+        $newWatchList = '';
+
+        if (strlen($student_course->watched_list) == 0) {
+            $newWatchList = $input['index'] . ',';
+        } else {
+            $watched_list = explode(',', $student_course->watched_list);
+            if (!in_array($input['index'], $watched_list)) {
+                $newWatchList = $student_course->watched_list . $input['index'] . ',';
+            } else {
+                $newWatchList = $student_course->watched_list;
+            }
+        }
+        $student_course->update(['watched_list' => $newWatchList]);
     }
 }

@@ -15,13 +15,13 @@ use App\Utilities\SelectionByClass;
             <div class="col-lg-1"></div>
             <div class="col-lg-10">
                 <button class="btn btn-outline-primary" onclick="window.history.back()">
-                    << {{__('Back')}}
+                    <i class="fe fe-arrow-left"></i> {{__('Back')}}
                 </button>
                 <div class="pt-5 text-primary">
                     <p class="h1">{{$blog->title}}</p>
                     <div class="d-flex h5 my-5 align-items-center">
-                        <div class="d-flex align-items-center mr-5">
-                            <p class="mr-5 mb-0">{{ substr($blog->created_at,0,10) }}</p>
+                        <div class="d-flex align-items-center mr-5 flex-wrap">
+                            <p class="mr-4 mb-0 text-nowrap">{{ substr($blog->created_at,0,10) }}</p>
                             <img class="mr-2" src="{{asset("images/ic/ic_eyeBlue.svg")}}" width="26">
                             <p class="mb-0">{{$blog->view_no}}</p>
                         </div>
@@ -42,26 +42,26 @@ use App\Utilities\SelectionByClass;
                     <img class="img-thumbnail border p-0 mx-auto d-block" src="{{asset('file/'.$blog->photo->id)}}">
                     @endif
                 </div>
-                
+
             </div>
-        <div class="col-lg-1"></div>
-    </div>
-    <div class="mt-5">
-        <h3 class="text-primary font-weight-bold">{{__('RELATED')}}</h3>
-        <div class="swiper-container mb-5" id="swiper_blog_related">
-            <div class="swiper-wrapper">
-                @foreach($blog_related as $item)
-                <div class="swiper-slide">
-                    <x-blog.blog-related :blog=$item></x-blog.blog-related>
+            <div class="col-lg-1"></div>
+        </div>
+        <div class="mt-5">
+            <h3 class="text-primary font-weight-bold">{{__('RELATED')}}</h3>
+            <div class="swiper-container mb-5" id="swiper_blog_related">
+                <div class="swiper-wrapper">
+                    @foreach($blog_related as $item)
+                    <div class="swiper-slide">
+                        <x-blog.blog-related :blog=$item></x-blog.blog-related>
+                    </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
         </div>
     </div>
+    <x-subscribe-container></x-subscribe-container>
 </div>
-<x-subscribe-container></x-subscribe-container>
-</div>
-<script>
+<script type="application/javascript">
     var swiper = new Swiper("#swiper_blog_related", {
             speed: 1000,
             spaceBetween: 20,

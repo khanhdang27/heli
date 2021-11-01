@@ -1168,7 +1168,7 @@ A HORIZONTAL event
     width: 25px;
     height: 36px;
     margin-right: 3px;
-    background-image: url("/helios/public/images/ic/ic-flag.svg");
+    background-image: url("../../images/ic/ic-flag.svg");
     background-repeat: no-repeat;
     background-size: contain;
 }

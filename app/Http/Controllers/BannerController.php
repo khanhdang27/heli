@@ -44,10 +44,10 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $input = $request->validate([
             'banner_title' => 'required',
-            'file' => 'file',
+            'file' => 'file|required',
         ]);
 
         DB::beginTransaction();
@@ -66,7 +66,7 @@ class BannerController extends Controller
             }
 
             DB::commit();
-            return $this->redirect()->route('admin.banner.index')->with('success', 'Save success');
+            return back()->with('success', 'Save success');
 
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -113,15 +113,13 @@ class BannerController extends Controller
         DB::beginTransaction();
 
         try {
-            $old_banner = Banner::all()->first();
-            if (!empty($old_banner)){
-                $old_banner->delete();
-            }
-            $banner = Banner::create([
+
+            $banner->update([
                 'banner_title' => $request->input('banner_title'),
             ]);
 
             if(!empty($input['file'])){
+                $banner->image->delete();
                 $file = File::storeFile($input['file'],Banner::class, $banner->id);
             }
 

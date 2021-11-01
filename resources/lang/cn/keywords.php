@@ -6,17 +6,27 @@ return [
         'english' => 'ENG',
         'mentorTeam' => '導師團隊',
         'subjectClassification' => '科⽬分類',
+        'subjects' => '科⽬分類',
         'latestNews' => '最新資訊',
         'learningColumn' => '學習專欄',
         'q&aArea' => '問答討論區',
-        'welcomeBack' => '歡迎回來！'
+        'welcomeBack' => '歡迎回來！',
+        'profile' => '剖面',
+        'logOut' => '登出'
     ],
     'guestPraise' => '客⼾的表揚',
     'loginModal' => [
+        'email' => '電郵',
+        'password' => '密碼',
         'welcomeBack' => '歡迎回來!',
         'loginToContinueCourse' => '登入繼續體驗課程',
     ],
+    'passwordReset'=> [
+        'resetPassword' =>'重设密码',
+        'sendPasswordResetLink'=> '发送密码重置链接'
+    ],
     'registerModal' => [
+        'register' => '登记',
         'freeRegistration' => '免費註冊',
         'experienceCourse' => '體驗課程',
         'onlineAndRealTimeCourse'=> '網上課程及實時課程',
@@ -28,9 +38,9 @@ return [
         'member' => '會員',
         'connection' => '聯絡',
         'address' => '地址',
-        'terms&Conditions' => 'Terms & Conditions',
-        'privacyPolicy' => 'Privacy Policy',
-        'cookiePolicy' => 'Cookie Policy',
+        'terms&Conditions' => '條款和條件',
+        'privacyPolicy' => '隱私政策',
+        'cookiePolicy' => '私隱政策',
         'aboutHelios' => '關於Helios',
         'FAQ' => 'FAQ',
         'myAccount' => '我的帳號',
@@ -75,6 +85,7 @@ return [
         'shareCourse' => '分享課程',
         'courseFrequency' => '課程班次',
         'myCourses' => '我的課程',
+        'wishlist' => '我的收藏',
         'registerNow' => '馬上報讀',
         'addToCart' => '加入購物車'
     ],
@@ -119,14 +130,60 @@ return [
     ],
     'forum' =>[
         'bestAnswer' => '最佳答案',
-        'addAnswer' => '添加您的答案'
+        'addAnswer' => '添加您的答案',
+        'postQuestion' => '發表你的問題'
     ],
     'rate' => [
         'rateCourse' => '課程評分',
         'addReview' => '添加您的評論'
     ],
-    'more' => '更多',
-    'coursesIHavePurchased' => '我已購買的課程'
-
+    'more' => '閱讀更多',
+    'coursesIHavePurchased' => '我已購買的課程',
+    'coursesWishlist' => '愿望清单中的课程',
+    'errors' => [
+        'tooManyRequests' => '请求太多，请冷静等待几分钟再请求',
+    ],
+    'searchResult' => '搜索結果',
+    'subscribe' => [
+        'success' => '注册邮箱接收最新消息',
+        'fail' => '收到错误邮件，请重新输入',
+        'subscribeUs' => '訂閱我們當我們有任何最新優惠及課程將會立刻通知您'
+    ],
+    'wallet' => [
+        'myWallet' => '我的錢包',
+        'yourWallet' => '你的錢包',
+        'walletManagement' => '钱包管理',
+        'balance' => '剩餘',
+        'fastAndSecureTopUp' => '快速安全的代幣充值',
+        'yourVisaCard' => '您的 Visa 卡',
+        'hereYouCanReviewAllPayment' => '您可以在此處查看您向 Helios 支付的所有款項',
+        'hereYouCanReviewAllTopUp' => '在這裡您可以查看您的所有充值到錢包',
+        'paymentHistory' => '支付歷史',
+        'topUpHistory' => '充值記錄',
+        'viewAllHistory' => '查看所有歷史記錄',
+        'topUp' => '充值',
+        'topUpViaVisa' => '通過關聯的簽證卡充值',
+        'exchangeRate' => '匯率',
+        'totalFee' => '總費用',
+        'walletBalance' => '錢包餘額',
+        'transactionDetails' => '交易明細',
+        'topUpTo' => '充值到',
+        'wallet' => '錢包',
+        'chooseVisa' => '選擇維薩卡',
+        'visaCardLinked' => 'Visa卡已鏈接',
+        'addNewVisaCard' => '添加新的 Visa 卡',
+        'topUpValue' => '充值值',
+        'amount' => '量',
+        'exchangeValue' => '匯率',
+        'amountToExchange' => '兌換金額',
+        'tokensReceived' => '收到的代幣',
+        'topUpSuccessfully' => '充值成功',
+        'topUpDetails' => '充值詳情',
+        'topUpAmount' => '充值金額',
+        'time' => '時間',
+        'completed' => '完全的',
+    ],
+    'coursePayment' => '課程付款',
+    'addVisaCard' => '添加簽證卡',
 
 ];

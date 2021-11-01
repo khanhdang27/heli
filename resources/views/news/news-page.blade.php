@@ -3,86 +3,20 @@
 @section('title','News Page')
 
 @section('content')
+    @php
+        $lang = [ 'more' => __('keywords.more')];
+    @endphp
 <div class="body-news-page">
     <div class="container-fluid text-center top-news-page">
         @lang('keywords.latestNewsPage')
     </div>
     <div class="container container-news-page">
         <div class="content-news-page border-secondary">
-            <div class="p-5">
-                <div id="showMore">
-                    <!-- Post -->
-                    <div class="post" v-for='post in posts'>
-                        <div class="mx-auto box-news">
-                            <div class="py-2">
-                                <a id="new_href" class="h2" :href="'news/'+post.id">
-                                    <span v-cloak>@{{ post.announcement_date }} </span>
-                                    <span v-cloak>@{{ post.title }}</span>
-                                </a><br>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-center mt-5">
-                        <button class="btn-more h5 bg-white text-primary border-primary" @click='getPosts()' v-cloak>
-                            @lang('keywords.more')
-                            <img src="{{asset("images/ic/ic_drop.svg")}}" width="28">
-                        </button>
-                    </div>
-                </div>
+            <div class="py-5">
+                <news-component v-bind:lang="{{json_encode($lang)}}"></news-component>
             </div>
         </div>
     </div>
-    <script>
-        var app = new Vue({
-    el: '#showMore',
-    data: {
-        isFinished: false,
-        page: 0,
-        buttonText: 'Load More',
-        posts: ''
-    },
-    methods: {
-        getPosts: function(){
-            axios.get('{{ route("site.news.list")}}', {
-                params: {
-                    page: this.page + 1, 
-                }
-            })
-            .then(function (response) {
-                console.log(response)
-                if(response.data ){
-                    
-                    var len = app.posts.length;
-                    if (app.page != response.data.last_page ) {
-                        app.page+=1;
-                        if(len > 0){
-                            app.buttonText = "Loading ...";
-                            setTimeout(function() {
-                                app.buttonText = "Load More";
-                                // Loop on data and push in posts
-                                for (let i = 0; i < response.data.data.length; i++){
-                                    app.posts.push(response.data.data[i]); 
-                                } 
-                            },500);
-                        }else{
-                            app.posts = response.data.data;
-                        }
-                    }
-                    
-
-                }else{
-                app.buttonText = "No more records avaiable.";
-                app.isFinished = true;
-                }
-            });
-        }
-    },
-    created: function(){
-        this.getPosts();
-    }
-})
-    </script>
     <x-subscribe-container></x-subscribe-container>
 </div>
 @endsection

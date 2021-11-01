@@ -37,49 +37,51 @@ class RatingController extends Controller
     public function store(Request $request)
     {
         $request_rate = $request->all();
-        $course = Course::query()->where('id', $request_rate['course_id'])->first();
+        $course = Course::query()
+            ->where('id', $request_rate['course_id'])
+            ->first();
         if (!empty($request_rate)) {
-            $already_rating = Rating::query()->where('user_id', $request_rate['user_id'])
-                ->where('ratingable_id', $request_rate['course_id'])->first();
+            $already_rating = Rating::query()
+                ->where('user_id', $request_rate['user_id'])
+                ->where('ratingable_id', $request_rate['course_id'])
+                ->first();
             if (empty($already_rating)) {
                 $rating = new Rating([
                     'user_id' => $request_rate['user_id'],
                     'rating' => $request_rate['rate'],
                     'ratingable_id' => $request_rate['course_id'],
-                    'ratingable_type' => 1
+                    'ratingable_type' => Cousre::class,
                 ]);
 
                 if ($rating->save()) {
-
-                    if ($course->rating_average == 0){
+                    if ($course->rating_average == 0) {
                         $course->update([
                             'rating_no' => $course->rating_no + 1,
                             'rating_average' => $request_rate['rate'],
                         ]);
-                    }else {
+                    } else {
                         $course->update([
                             'rating_no' => $course->rating_no + 1,
-                            'rating_average' => ($course->rating_average + $request_rate['rate'])/2,
+                            'rating_average' => ($course->rating_average + $request_rate['rate']) / 2,
                         ]);
                     }
                 }
             } else {
-                
-                $already_rating ->delete();
+                $already_rating->delete();
                 $rating = new Rating([
                     'user_id' => $request_rate['user_id'],
                     'rating' => $request_rate['rate'],
                     'ratingable_id' => $request_rate['course_id'],
-                    'ratingable_type' => 1
+                    'ratingable_type' => Cousre::class,
                 ]);
                 $rating->save();
-                if ($course->rating_average == 0){
+                if ($course->rating_average == 0) {
                     $course->update([
                         'rating_average' => $request_rate['rate'],
                     ]);
-                }else {
+                } else {
                     $course->update([
-                        'rating_average' => ($course->rating_average + $request_rate['rate'])/2,
+                        'rating_average' => ($course->rating_average + $request_rate['rate']) / 2,
                     ]);
                 }
             }

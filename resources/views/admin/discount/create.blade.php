@@ -7,14 +7,17 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-
+                    <div class="d-flex align-items-center">
+                        <div class="pr-2">
+                            <a href="{{ route('admin.discount.index') }}" class="btn btn-outline-dark btn-sm">
+                                <i class="fe fe-arrow-left"></i>
+                            </a>
+                        </div>
+                        <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
-                                Create Discount 
+                                Create Discount
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -52,7 +55,7 @@
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        
+
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}
                     </div>
@@ -62,13 +65,13 @@
         </div>
     </div> <!-- / .row -->
 </div>
-    {{-- <script>
+{{-- <script type="application/javascript">
         window.onload = function () {
             CKEDITOR.replace('ckeditor');
         };
     </script>
     @push('inputFile')
-        <script>
+        <script type="application/javascript">
             // Add the following code if you want the name of the file appear on select
             $(".custom-file-input").on("change", function () {
                 var fileName = $(this).val().split("\\").pop();
@@ -77,4 +80,3 @@
         </script>
     @endpush --}}
 @endsection
-

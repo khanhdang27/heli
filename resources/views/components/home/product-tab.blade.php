@@ -1,6 +1,6 @@
 <div class="container-fluid container-home">
     <!-- Nav pills -->
-    <ul class="nav nav-pills menu-category align-items-end" role="tablist">
+    <ul id="home-tab" class="nav nav-pills menu-category align-items-end" role="tablist">
         <li class="nav-item pr-5">
             <a class="nav-link active category-link menu-img rounded-0" data-toggle="pill" href="#menu1">
                 IGCSE
@@ -54,16 +54,16 @@
 <div class="container-fluid">
     <div class="tab-content">
         <div id="menu1" class="tab-pane active">
-            <x-product.course-list-hot :courses=$courseIGCSE typeOfUI="hot"></x-product.course-list-hot>
+            <x-product.course-list-hot :courses=$courseIGCSE typeOfUI="hot" tab="IGCSE"></x-product.course-list-hot>
         </div>
-        <div id="menu2" class="tab-pane fade">
-            <x-product.course-list-hot :courses=$courseUKISET typeOfUI="hot"></x-product.course-list-hot>
+        <div id="menu2" class="tab-pane">
+            <x-product.course-list-hot :courses=$courseUKISET typeOfUI="hot" tab="UKISET"></x-product.course-list-hot>
         </div>
-        <div id="menu3" class="tab-pane fade">
-            <x-product.course-list-hot :courses=$courseIELTS typeOfUI="hot"></x-product.course-list-hot>
+        <div id="menu3" class="tab-pane">
+            <x-product.course-list-hot :courses=$courseIELTS typeOfUI="hot" tab="IELTS"></x-product.course-list-hot>
         </div>
-        <div id="menu4" class="tab-pane fade">
-            <x-product.course-list-hot :courses=$courseIAL typeOfUI="hot"></x-product.course-list-hot>
+        <div id="menu4" class="tab-pane">
+            <x-product.course-list-hot :courses=$courseIAL typeOfUI="hot" tab="IAL"></x-product.course-list-hot>
         </div>
     </div>
 </div>

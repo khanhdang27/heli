@@ -7,10 +7,16 @@
             <!-- Goals -->
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
+                    <div class="d-flex align-items-center">
+                        <div class="pr-2">
+                            <a class="btn btn-outline-dark btn-sm" href="{{route('admin.tag.index')}}">
+                                <i class="fe fe-arrow-left"></i>
+                            </a>
+                        </div>
+                        <div>
 
                             <!-- Title -->
+
                             <h4 class="card-header-title">
                                 Create Tags
                             </h4>
@@ -22,8 +28,8 @@
                     <div class="card-body">
                         {!! Form::open(['route' => 'admin.tag.store', 'enctype' => 'multipart/form-data' ]) !!}
                         <div class="form-group ">
-                            {{ Form::label('tag_name', 'Name') }}
-                            {{ Form::text('tag_name', old('tag_name'),['class' => 'form-control', 'placeholder'=>'ex: #ABC']) }}
+                            {{ Form::label('tag_name', 'Name', ['class' => 'required']) }}
+                            {{ Form::text('tag_name', old('tag_name'),['class' => 'form-control', 'placeholder'=>'ex: #ABC', 'required']) }}
                             @error('tag_name')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror

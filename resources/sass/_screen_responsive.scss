@@ -1,6 +1,6 @@
 @media screen and (max-width: 1440px) {
-    .product-hover{
-        h4{
+    .product-hover {
+        h4 {
             font-size: 16px;
         }
     }
@@ -10,14 +10,17 @@
     }
 }
 @media screen and (max-width: 1200px) {
+    .tutor_image {
+        width: 230px;
+        height: 230px;
+    }
     .banner-content {
-        height: 600px;
         .banner-info {
-            width: 75%;
+            width: 60%;
             .banner-caption {
                 width: 100%;
                 margin: 0 auto;
-                font-size: 30px;
+                font-size: 40px;
                 .banner-title {
                     width: 100%;
                 }
@@ -25,7 +28,7 @@
         }
     }
     .free {
-        font-size: 25px !important;
+        font-size: 24px !important;
     }
     .product-category-row {
         margin-left: -14px;
@@ -72,23 +75,44 @@
     .menu-category-text {
         display: flex;
     }
+    .item-header {
+        padding: 0 !important;
+    }
+
+    .navbar-small {
+        margin-left: 0 !important;
+    }
+    .logo {
+        width: 180px;
+    }
+    .text-comment {
+        font-size: 18px;
+    }
+    .user-avatar {
+        width: 60px;
+        height: 60px;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    .tutor_image {
+        width: 170px;
+        height: 170px;
+    }
     .menu-img {
         width: 120px;
         height: 120px;
     }
-    %btn-size{
-        padding: 0px 3rem;
+    %btn-size {
+        padding: 0 3rem;
         font-size: 15pt;
     }
     .btn-register-now {
-        @extend %btn-size
+        @extend %btn-size;
     }
-    .step-for-register{
-        #btn-register-step{
-            @extend %btn-size
+    .step-for-register {
+        #btn-register-step {
+            @extend %btn-size;
         }
     }
     .box-btn-login {
@@ -96,38 +120,114 @@
             font-size: 14px;
         }
     }
-    .sort-lg{
-        label{
+    .sort-lg {
+        label {
             margin-right: 0.5rem !important;
         }
     }
-    #btn_next, #btn_prev{
+    #btn_next,
+    #btn_prev {
         display: none !important;
     }
-    .product-hover{
-        h4{
-            font-size: 20px;
+    .item-header {
+        padding: 0.5rem 1.5rem !important;
+    }
+    .navbar-responsive {
+        .item-header {
+            border-bottom: 1px solid var(--light);
         }
+    }
+
+    .navbar-small {
+        position: fixed;
+        height: 100%;
+        margin-left: 0 !important;
+        background: var(--white);
+        transform: translate3d(0px, 0px, 0px) !important;
+        transition: all 0s;
+        top: 0;
+        left: 0;
+        width: 320px;
+        z-index: 9999;
+        overflow: auto;
+    }
+    .banner-content {
+        height: 400px;
+        .banner-info {
+            .banner-caption {
+                font-size: 32px;
+            }
+        }
+    }
+    .popular-articles-item-image {
+        .img-blog {
+            width: 145px;
+            height: 145px;
+        }
+    }
+    .text-content {
+        padding-right: 3rem;
+    }
+    .circle-check {
+        left: 60%;
     }
 }
 
 @media screen and (max-width: 576px) {
-    html{
+    html {
         font-size: 13px !important;
     }
+
+    h1,
+    .h1 {
+        font-size: 30px;
+        font-weight: 500;
+    }
+
+    h2,
+    .h2 {
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    h3,
+    .h3 {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    h4,
+    .h4 {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    h5,
+    .h5 {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .tutor_image {
+        width: 70px;
+        height: 70px;
+    }
+
     .banner-content {
         top: 30% !important;
-        height: 600px;
         .banner-info {
+            top: 60%;
+            width: 80%;
             .banner-caption {
                 font-size: 20px;
             }
         }
     }
     .free {
-        font-size: 20px !important;
+        padding: 0 2rem;
+        font-size: 18px !important;
     }
-    .container-home{
+    .container-home {
         max-width: 100%;
     }
     .container-course {
@@ -136,45 +236,90 @@
     .text-login-left {
         font-size: 20px;
     }
-    //.modal-login-content {
-    //    height: auto !important;
-    //    padding: 0 !important;
-    //    .btn-close {
-    //        .close {
-    //            padding: 1rem 0;
-    //        }
-    //    }
-    //}
-
-    .sort-lg{
-        display: none;
-    }
-    .sort-sm{
-        display: block !important;
-    }
-    .fc .fc-toolbar-title{
-        width: 250px !important;
+    .fc .fc-toolbar-title {
+        width: 220px !important;
         font-size: 24px !important;
     }
     .product-box {
-        .content-product{
+        .content-product {
             height: 180px;
             padding: 1rem 0;
-            .box-content-bot{
-
-            }
         }
-        .bottom-product2{
-            .card-name-product{
+        .bottom-product2 {
+            .card-name-product {
                 min-height: 120px;
                 padding: 0 1rem !important;
             }
         }
     }
-    .card-small{
+    .card-small {
         display: none;
     }
-    .swiper-card-small{
+    .swiper-card-small {
         display: block !important;
+    }
+    .logo {
+        width: 150px;
+    }
+    .btn-header {
+        margin: 0 0.2rem 0 0;
+    }
+    .box-news {
+        .h2 {
+            font-size: 20px;
+        }
+    }
+    .modal-body-login {
+        h1 {
+            font-size: 26px;
+        }
+    }
+    .body-news-page {
+        .container-news-page {
+            .content-news-page {
+                margin-top: 3.5rem;
+            }
+        }
+    }
+    %height-blog {
+        height: 400px;
+    }
+    .post-spotlight {
+        @extend %height-blog;
+    }
+    #latest {
+        @extend %height-blog;
+    }
+    .main-photo-top {
+        @extend %height-blog;
+    }
+    .main-photo {
+        @extend %height-blog;
+    }
+    .category-link-text {
+        h2 {
+            font-size: 21px;
+        }
+    }
+    .text-content {
+        padding-left: 0.5rem;
+        padding-right: 1.5rem;
+        font-size: 18px;
+    }
+    .circle-check {
+        width: 116px;
+        height: 116px;
+        left: 58%;
+    }
+    .circle-check img {
+        width: 83px;
+    }
+    .btn-wallet{
+        height: 40px;
+    }
+    .select-card{
+        img{
+            width: 44px;
+        }
     }
 }
