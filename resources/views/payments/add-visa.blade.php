@@ -47,7 +47,7 @@
 
         cardElement.mount('#card-element');
     </script>
-    <script>
+    <script type="application/javascript">
         const cardHolderName = document.getElementById('card-holder-name');
         const cardButton = document.getElementById('card-button');
         const clientSecret = cardButton.dataset.secret;

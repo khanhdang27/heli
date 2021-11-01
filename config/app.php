@@ -13,6 +13,9 @@ return [
     'vimeo_token' => env('VIMEO_TOKEN', ''),
     'google_api_calendar' => env('GOOGLE_API_CALENDAR', ''),
 
+    'paypal_client_id' => env('PAYPAL_CLIENT_ID', ''),
+    'paypal_secret' => env('PAYPAL_SECRET', ''),
+    'paypal_mode' => env('PAYPAL_MODE', ''),
     /*
     |--------------------------------------------------------------------------
     | Application Name
