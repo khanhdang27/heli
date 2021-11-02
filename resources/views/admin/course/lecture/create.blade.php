@@ -3,6 +3,7 @@
 use App\Utilities\SelectionByClass;
 use App\Models\Tutor;
 use App\Models\Subject;
+use App\Models\Lecture;
 
 @endphp
 
@@ -48,19 +49,28 @@ use App\Models\Subject;
                         </div>
                         <div class="form-group ">
                             Pick up video
-                            <label class="btn btn-block btn-info">
-                                Browse&hellip; <input id="browse" type="file" style="display: none;">
-                            </label>
-                            <div class="col-md-12">
-                                <div id="results"></div>
-                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="browse" accept="video/mp4,video/x-m4v,video/*">
+                                <label class="custom-file-label" for="customFile">Browse&hellip; </label>
+                              </div>
+                            <div id="results"></div>
                             <div id="progress-container" class="progress">
                                 <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
                                     role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100"
                                     style="width: 0%">&nbsp;0%
                                 </div>
                             </div>
+
+                            <input type="text" id="clipbroad" class="hidden" name="clipbroad">
+
+                            {{ Form::label('video_resource', 'Video Resource') }}
+                            {{ Form::text('video_resource', old('video_resource'), ['class' => 'form-control', 'required', 'id' => 'index']) }}
                         </div>
+                        <div class="form-group">
+                            <label for="" ></label>
+                            {{ Form::select('level', Lecture::LEVELS, old('leve'), ['class' => 'form-control']) }}
+                        </div>
+                        <button type="submit" class="btn btn-primary" > Save </button>
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -68,115 +78,6 @@ use App\Models\Subject;
             </div>
         </div> <!-- / .row -->
     </div>
-
-
-    <script type="text/javascript">
-        /**
-         * Called when files are dropped on to the drop target or selected by the browse button.
-         * For each file, uploads the content to Drive & displays the results when complete.
-         */
-        function handleFileSelect(evt) {
-            evt.stopPropagation()
-            evt.preventDefault()
-
-            var files = evt.dataTransfer ? evt.dataTransfer.files : $(this).get(0).files
-            var results = document.getElementById('results')
-
-            if (
-                document.getElementById('lectures_name').value.length === 0 ||
-                document.getElementById('lectures_description').value.length === 0
-            ) {
-                showMessage('<strong>Error</strong>: ' + ' lectures name and description is required', 'danger')
-            } else {
-                /* Clear the results div */
-                while (results.hasChildNodes()) results.removeChild(results.firstChild)
-
-                /* Rest the progress bar and show it */
-                updateProgress(0)
-                document.getElementById('progress-container').style.display = 'block'
-
-                /* Instantiate Vimeo Uploader */
-                ;
-                (new VimeoUpload({
-                    name: document.getElementById('lectures_name').value,
-                    description: document.getElementById('lectures_description').value,
-                    private: true,
-                    file: files[0],
-                    token: 'a4e21d56502edc34f8e27e0244fc46b9',
-                    upgrade_to_1080: true,
-                    onError: function(data) {
-                        showMessage('<strong>Error</strong>: ' + JSON.parse(data).error, 'danger')
-                    },
-                    onProgress: function(data) {
-                        updateProgress(data.loaded / data.total)
-                    },
-                    onComplete: function(videoId, index) {
-
-                        var url = 'https://vimeo.com/' + videoId
-
-                        if (index > -1) {
-                            /* The metadata contains all of the uploaded video(s) details see: https://developer.vimeo.com/api/endpoints/videos#/{video_id} */
-                            url = this.metadata[index].link //
-
-                            /* add stringify the json object for displaying in a text area */
-                            var pretty = JSON.stringify(this.metadata[index], null, 2)
-                            console.log('document.getElementById(index).value :>> ', document.getElementById(
-                                'index').value);
-                            axios.post("{{ route('admin.course.lecture.store', $course->id) }}", {
-                                    lectures_name: this.metadata[index].name,
-                                    lectures_description: this.metadata[index].description,
-                                    index: document.getElementById('index').value,
-                                    video_resource: videoId,
-                                }).then(function(response) {
-                                    console.info(response);
-                                })
-                                .catch(function(error) {
-                                    console.error(error);
-                                });
-                        }
-                        showMessage('<strong>Upload Successful</strong>: check uploaded video @ <a href="' +
-                            url + '">' + url + '</a>. Open the Console for the response details.')
-                    }
-                })).upload()
-            }
-
-            // /* local function: show a user message */
-            function showMessage(html, type) {
-                /* hide progress bar */
-                document.getElementById('progress-container').style.display = 'none'
-                /* display alert message */
-                var element = document.createElement('div')
-                element.setAttribute('class', 'alert alert-' + (type || 'success'))
-                element.innerHTML = html
-                results.appendChild(element)
-            }
-        }
-
-        /**
-         * Dragover handler to set the drop effect.
-         */
-        function handleDragOver(evt) {
-            evt.stopPropagation()
-            evt.preventDefault()
-            evt.dataTransfer.dropEffect = 'copy'
-        }
-
-        /**
-         * Updat progress bar.
-         */
-        function updateProgress(progress) {
-            progress = Math.floor(progress * 100)
-            var element = document.getElementById('progress')
-            element.setAttribute('style', 'width:' + progress + '%')
-            element.innerHTML = '&nbsp;' + progress + '%'
-        }
-        /**
-         * Wire up drag & drop listeners once page loads
-         */
-        document.addEventListener('DOMContentLoaded', function() {
-            var browse = document.getElementById('browse')
-            browse.addEventListener('change', handleFileSelect, false)
-        })
-    </script>
+    <script src="{{ asset('js/vimeo_upload_process.js') }}"></script>
 
 @endsection

@@ -324,13 +324,15 @@ class CourseController extends Controller
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
                 'index' => $input['index'],
+                'level' => $input['level'],
             ]);
 
             DB::commit();
-            return response()->json(['status' => 200, 'message' => 'succeed']);
+            return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
-            DB::rollback();
-            return response()->json(['status' => 400, 'message' => 'fails'], 400);
+            DB::rollBack();
+            dd($th);
+            return back()->withErrors('Create Error!');
         }
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ListenAssessmentAnswer;
 use App\Models\ListenAssessmentQuestion;
 use App\Models\Question;
 use App\Models\Quiz;
@@ -91,6 +92,23 @@ class ListenAssessmentQuestionController extends Controller
     public function edit(ListenAssessmentQuestion $listenAssessmentQuestion)
     {
         //
+    }
+
+    public function setAnswerTrue(Request $request, Quiz $quiz, ListenAssessmentQuestion $question)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            ListenAssessmentAnswer::where('l_a_question_id', $question->id)->update(['is_correct' => false]);
+            $answer = ListenAssessmentAnswer::find($input['answer']);
+            $answer->update(['is_correct' => true]);
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd( $th);
+            return back()->withErrors('Update error!');
+        }
     }
 
     /**

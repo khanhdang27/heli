@@ -67,12 +67,12 @@ class BlogController extends Controller
             }
 
             DB::commit();
+            return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors( 'Create error');
         }
 
-        return back()->with('success', 'Create success');
     }
 
     /**

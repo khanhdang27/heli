@@ -60,36 +60,3 @@ $course = $courseDetail->membershipCourses->course;
         <div class="sharethis-inline-share-buttons"></div>
     </div>
 </div>
-
-@push('scripts')
-    {{-- <script type="application/javascript"> --}}
-    {{-- $(document).ready(function () { --}}
-    {{-- $("form").submit(function (event) { --}}
-    {{-- let myForm = $('#form-room').serializeArray().reduce(function(obj, item) { --}}
-    {{-- obj[item.name] = item.value; --}}
-    {{-- return obj; --}}
-    {{-- }, {}); --}}
-
-    {{-- if (myForm.room_id) { --}}
-    {{-- // console.log(myForm.room_id) --}}
-    {{-- $.ajax({ --}}
-    {{-- type: "GET", --}}
-    {{-- url: "{{route('site.user.payment', ['product_id'=>$courseDetail->id] )}}", --}}
-    {{-- data: myForm, --}}
-    {{-- dataType: "json", --}}
-    {{-- encode: true, --}}
-    {{-- }).done(function (data) { --}}
-    {{-- // window.location.replace(data.path); --}}
-    {{-- window.location.href = "{{route('site.user.payment', $courseDetail->id)}}"; --}}
-    {{-- }).fail(function (response){ --}}
-    {{-- alert('Duplicate schedule! Please check your schedule.'); --}}
-    {{-- }) --}}
-    {{-- } else { --}}
-    {{-- alert('Must select a room'); --}}
-    {{-- } --}}
-
-    {{-- event.preventDefault() --}}
-    {{-- }) --}}
-    {{-- }) --}}
-    {{-- </script> --}}
-@endpush

@@ -69,6 +69,7 @@ class ExaminationController extends Controller
         } catch (\Throwable $th) {
             dd($th);
             DB::rollback();
+            dd($th);
             return back()->withErrors('errors', 'Create errors!');
         }
     }

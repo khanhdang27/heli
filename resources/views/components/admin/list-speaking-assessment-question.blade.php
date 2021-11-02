@@ -2,7 +2,7 @@
     
     @foreach ($questions as $question)
     @if ($question->questionContent())
-    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info"
+    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info selectable"
         id="headingQuestion_{{ $question->id }}">
         <div class="w-75" data-toggle="collapse"
             data-target="#collapseAnswerSpeakingAssessment__{{ $question->id }}" aria-expanded="true"
@@ -61,21 +61,7 @@
                 </div>
             </div>
         </div>
-
-        <script type="application/javascript">
-            $(document).ready(function() {
-                if (localStorage.scrollPosition) {
-                    let pos = localStorage.getItem("scrollPosition")
-                    window.scrollTo(0, pos);
-                }
-                $('#modalSpeakingAssessmentAnswer{{ $question->id }}').on('shown.bs.modal', function() {
-                    var scrollPosition = window.pageYOffset;
-                    localStorage.setItem("scrollPosition", scrollPosition);
-                });
-            });
-        </script>
-
-    </li>
+            </li>
     <div id="collapseAnswerSpeakingAssessment__{{ $question->id }}" class="collapse"
         aria-labelledby="headingQuestion_{{ $question->id }}"
         data-parent="#listQuestionSpeakingAssessment_{{ $quiz->set }}">
@@ -143,12 +129,12 @@
                     </div>
                 </div>
             </div>
-            <form>
+            {!! Form::open([ 'url' => route("admin.quiz.question.speaking.assessment.setAnswerTrue", ['quiz' => $quiz->id, 'question' => $question->questionContent()->id]), 'method'=>"PUT"]) !!}
                 <ul class="list-group list-group-flush mt-3" id="listAnswerOf_{{ $question->id }}">
                     @foreach ($question->questionContent()->answers as  $item)    
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <div class="form-check">
-                                <input type="radio" class="form-check-input" id="answer_{{$item->id}}" name="answer">
+                                <input type="radio" class="form-check-input" id="answer_{{$item->id}}" name="answer" value="{{$item->id}}" {{ $item->is_correct == 1 ? 'checked=true' : ''}}>
                                 <label class="form-check-label " for="answer_{{$item->id}}">{{$item->answer}}</label>
                             </div>
                             
@@ -157,13 +143,12 @@
                                 <i class="fe fe-trash mr-2 text-danger"></i>
                             </a>
                         </li>
-                        
                     @endforeach
                 </ul>
                 <button class="btn btn-success mt-2 mb-3 btn-sm">
                     Set Answer
                 </button>
-            </form>
+            {!! Form::close() !!}
         </div>
     </div>
     @endif

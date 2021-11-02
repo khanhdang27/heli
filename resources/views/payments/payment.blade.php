@@ -38,7 +38,6 @@
                                     <h4 class="card-title font-weight-bold border-bottom border-primary pb-3">
                                         Your Course
                                     </h4>
-                                    {{--                                    {{dd($course)}}--}}
                                     <div class="card border-0 mt-4">
                                         <div class="row">
                                             <div class="col-md-5">

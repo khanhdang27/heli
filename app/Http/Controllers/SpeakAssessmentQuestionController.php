@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\SpeakAssessmentAnswer;
 use App\Models\SpeakAssessmentQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -91,6 +92,22 @@ class SpeakAssessmentQuestionController extends Controller
     public function edit(SpeakAssessmentQuestion $speakAssessmentQuestion)
     {
         //
+    }
+
+    public function setAnswerTrue(Request $request, Quiz $quiz, SpeakAssessmentQuestion $question)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            SpeakAssessmentAnswer::where('s_a_question_id', $question->id)->update(['is_correct' => false]);
+            $answer = SpeakAssessmentAnswer::find($input['answer']);
+            $answer->update(['is_correct' => true]);
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->withErrors('Update error!');
+        }
     }
 
     /**

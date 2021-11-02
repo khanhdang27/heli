@@ -22,16 +22,30 @@ use App\Models\Examination;
             <div class="modal-body">
                 {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.exercises.store', ['quiz' => $quiz->id])]) !!}
                 <div class="form-group">
-                    <label for="video_code"> Video </label>
-                    {{ Form::text('video_code', old('video_code'), ['class' => 'form-control', 'required']) }}
-                </div>
-                <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}
                 </div>
                 <div class="form-group">
                     <label for="question" class="required">Question</label>
                     {{ Form::text('question', old('question'), ['class' => 'form-control', 'required']) }}
+                </div>
+                <div class="form-group">
+                    <label for="video_code"> Video </label>
+                    {{ Form::text('video_code', old('video_code'), ['class' => 'form-control', 'required']) }}
+                </div>
+                <div class="form-group ">
+                    Pick up video
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="browse" accept="video/mp4,video/x-m4v,video/*">
+                        <label class="custom-file-label" for="customFile">Browse&hellip; </label>
+                      </div>
+                    <div id="results"></div>
+                    <div id="progress-container" class="progress">
+                        <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
+                            role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100"
+                            style="width: 0%">&nbsp;0%
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="message_wrong" class="required">Message Wrong</label>
@@ -49,4 +63,7 @@ use App\Models\Examination;
             </div>
         </div>
     </div>
+    
+    <script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
+    <script src="{{ asset('js/vimeo_upload_process.js') }}"></script>
 </div>

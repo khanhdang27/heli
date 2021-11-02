@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\WritingAssessmentQuestion;
+use App\Models\WritingAssessmentAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -89,6 +90,23 @@ class WritingAssessmentQuestionController extends Controller
     public function edit(WritingAssessmentQuestion $writingAssessmentQuestion)
     {
         //
+    }
+
+    public function setAnswerTrue(Request $request, Quiz $quiz, WritingAssessmentQuestion $question)
+    {
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            WritingAssessmentAnswer::where('w_a_question_id', $question->id)->update(['is_correct' => false]);
+            $answer = WritingAssessmentAnswer::find($input['answer']);
+            $answer->update(['is_correct' => true]);
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd( $th);
+            return back()->withErrors('Update error!');
+        }
     }
 
     /**

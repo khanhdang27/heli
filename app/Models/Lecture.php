@@ -15,6 +15,19 @@ class Lecture extends Model
 
     protected $guarded = [];
 
+    const LEVEL_5_0 = 1;
+    const LEVEL_5_5 = 2;
+    const LEVEL_6_0 = 3;
+    const LEVEL_6_5 = 4;
+
+
+    const LEVELS = [
+        self::LEVEL_5_0 => 'Level 5.0',
+        self::LEVEL_5_5 => 'Level 5.5',
+        self::LEVEL_6_0 => 'Level 6.0',
+        self::LEVEL_6_5 => 'Level 6.5'
+    ];
+
     //Make it available in the json response
     protected $appends = ['model_name'];
 

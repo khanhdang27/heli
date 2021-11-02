@@ -4,6 +4,8 @@ use App\Models\Examination;
 
 @extends('admin.layout')
 @section('content')
+
+<script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
@@ -60,29 +62,7 @@ use App\Models\Examination;
                                     @if ($exam->type == Examination::ASSESSMENT)
                                     @break
                                 @endif
-                                <script type="text/javascript">
-                                    $(document).ready(function() {
-                                        if (localStorage.quizQuestionSet) {
-                                            if ( {{ $exam->type }} != 1 ) {
-                                                let quizSet = localStorage.getItem("quizQuestionSet")
-                                                $(`a[id="${quizSet}"]`).tab('show');
-                                            } else {
-                                                $(`a[id="set_1"]`).tab('show');
-                                            }
-                                        }
-                                        $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
-                                            localStorage.setItem("quizQuestionSet", event.target.id);
-                                        })
-
-                                        if (localStorage.collapseQuestion) {
-                                            let quizSet = localStorage.getItem("collapseQuestion")
-                                            $(`div[id="${quizSet}"]`).collapse('show');
-                                        }
-                                        $('.accordion').on('shown.bs.collapse', function (event) {
-                                            localStorage.setItem("collapseQuestion", event.target.id);
-                                        })
-                                     })
-                                </script>
+                                
                                 @endforeach
                             </ul>
                             <br>
@@ -205,6 +185,7 @@ use App\Models\Examination;
                                     @if ($exam->type == Examination::ASSESSMENT)
                                     @break
                                 @endif
+
                                 @endforeach
                             </div>
                         </div>
@@ -218,4 +199,39 @@ use App\Models\Examination;
             CKEDITOR.replaceAll('rich-text' );
         };
     </script>
+
+    
+<script type="text/javascript">
+    $(document).ready(function() {
+        console.log('it run')
+        if (localStorage.quizQuestionSet) {
+            if ( {{ $exam->type }} != 1 ) {
+                let quizSet = localStorage.getItem("quizQuestionSet")
+                $(`a[id="${quizSet}"]`).tab('show');
+            } else {
+                $(`a[id="set_1"]`).tab('show');
+            }
+        }
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
+            localStorage.setItem("quizQuestionSet", event.target.id);
+        })
+
+        if (localStorage.collapseQuestion) {
+            let quizSet = localStorage.getItem("collapseQuestion")
+            $(`div[id="${quizSet}"]`).collapse('show');
+        }
+        $('#accordionExample').on('shown.bs.collapse', function (event) {
+            var scrollPosition = event.target.offsetTop;
+            console.log(scrollPosition)
+            localStorage.setItem("scrollPosition", scrollPosition);
+            if (event.target.dataset.parent == '#accordionExample') {
+                localStorage.setItem("collapseQuestion", event.target.id);
+            }
+        })
+        if (localStorage.scrollPosition) {
+            let pos = localStorage.getItem("scrollPosition")
+            window.scrollTo(0, pos+20);
+        }
+    });
+</script>
 @endsection

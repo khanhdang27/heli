@@ -51,6 +51,12 @@
                             <i class="fe fe-book-open"></i> Courses
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.student-examination.')) active @endif"
+                           href="{{ route('admin.student-examination.index') }}">
+                            <i class="fe fe-edit"></i> Student Examination
+                        </a>
+                    </li>
                 @endcan
 
                 @can('document-list')

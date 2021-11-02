@@ -35,10 +35,12 @@ class CreateStudentExaminationsTable extends Migration
                 ->foreignId('question_id')
                 ->constrained('questions')
                 ->cascadeOnDelete();
-            $table->bigInteger('answer_id');
-            $table->bigInteger('time');
-            $table->longText('answercomment');
-            $table->double('score');
+            $table->longText('answer');
+            $table->integer('answer_type');
+            $table->double('time');
+            $table->longText('comment')->nullable();
+            $table->double('score')->nullable();
+            $table->boolean('reviewed')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });
