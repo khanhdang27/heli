@@ -23,13 +23,21 @@ class CreateStudentCoursesTable extends Migration
                 ->foreignId('student_id')
                 ->constrained('users')
                 ->cascadeOnDelete();
+            $table->bigInteger('room_live_course_id');
             $table->dateTime('latest_study');
             $table->bigInteger('lecture_study');
             $table->text('watched_list');
-            $table->bigInteger('lecture_open')->default(0);
-            $table->bigInteger('quiz_lecture')->default(0);
-            $table->bigInteger('quiz_set')->nullable();
-            $table->bigInteger('level')->nullable();
+            
+            $table->bigInteger('level_read');
+            $table->bigInteger('level_write');
+            $table->bigInteger('level_speak');
+            $table->bigInteger('level_listen');
+
+            $table->text('open_lecture_part_read');
+            $table->text('open_lecture_part_write');
+            $table->text('open_lecture_part_speak');
+            $table->text('open_lecture_part_listen');
+
             $table->boolean('passed')->default(false);
             $table->unique(['student_id', 'course_id']);
             $table->timestamps();

@@ -173,6 +173,9 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('study-session', 'StudySessionController');
     Route::resource('wallet-manager', 'WalletManagerController');
 
+    Route::get('student-examination/student/{student}/course/{course}/exam/{exam}/quiz/{quiz}', 'StudentExaminationController@mark')->name('student-examination.mark');
+    Route::resource('student-examination', 'StudentExaminationController');
+
     Route::resource('setting', 'SettingController');
     Route::get('setting/edit/{key}', 'SettingController@edit');
     Route::get('setting/update/{key}', 'SettingController@update');
