@@ -85,6 +85,22 @@ Route::middleware('auth')->group(function () {
     Route::post('exam/{exams}', 'ExaminationController@checkExam')->name('exam.checkExam');
     Route::get('exam/{exams}', 'LectureController@showExam')->name('exam.showLecture');
 
+    Route::get('exam/readingAssessment/{exams}', 'ExaminationController@getReadingAssessmentQuestionsClient')
+        ->name('exam.getReadingAssessmentQuestionsClient');
+
+    Route::get('exam/writingAssessment/{exams}', 'ExaminationController@getWritingAssessmentQuestionsClient')
+        ->name('exam.getWritingAssessmentQuestionsClient');
+    Route::get('exam/writingQuiz/{exams}', 'ExaminationController@getWritingQuizQuestionsClient')
+        ->name('exam.getWritingQuizQuestionsClient');
+
+    Route::get('exam/listenAssessment/{exams}', 'ExaminationController@getListeningAssessmentQuestionsClient')
+        ->name('exam.getListeningAssessmentQuestionsClient');
+
+    Route::get('exam/speakingAssessment/{exams}', 'ExaminationController@getSpeakingAssessmentQuestionsClient')
+        ->name('exam.getSpeakingAssessmentQuestionsClient');
+
+
+
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');
 
     Route::get('course/related/{course}', 'CourseController@courseListRelatedClient')->name('course.related.list');

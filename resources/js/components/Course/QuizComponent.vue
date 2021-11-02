@@ -1,16 +1,25 @@
 <template>
     <div class="h-100">
-        <div v-if="typeExercise === $getConst('writing')" class="h-100">
-            <writing-component v-bind:questionWriting="questions"></writing-component>
+        <div class="text-center mt-5">
+            <button class="btn btn-success" v-on:click="startQuiz()">Start Exam</button>
         </div>
         <div v-if="typeExercise === $getConst('reading')" class="h-100">
-            <reading-component v-bind:questionReading="questions"></reading-component>
+            <reading-component
+                v-bind:examId="examId"
+                v-bind:typeExam="typeExam">
+            </reading-component>
+        </div>
+        <div v-if="typeExercise === $getConst('writing')" class="h-100">
+            <writing-component
+                v-bind:examId="examId"
+                v-bind:typeExam="typeExam">
+            </writing-component>
         </div>
         <div v-if="typeExercise === $getConst('listening')" class="h-100">
-            <listening-component v-bind:questionListening="questions"></listening-component>
+            <listening-component v-bind:examId="examId"></listening-component>
         </div>
         <div v-if="typeExercise === $getConst('speaking')" class="h-100">
-            <speaking-component v-bind:questionSpeaking="questions"></speaking-component>
+            <speaking-component v-bind:examId="examId"></speaking-component>
         </div>
     </div>
 </template>
@@ -20,7 +29,7 @@ import ReadingComponent from "./ReadingComponent";
 export default {
     components: {ReadingComponent},
     props: {
-        questions: Array,
+        typeExam: Number,
         courseId: Number,
         examId: Number
     },
@@ -35,13 +44,16 @@ export default {
                 correct: [],
                 wrong: [],
             },
-            typeExercise: this.$root.$getConst('listening')
+            typeExercise: ''
         };
     },
     mounted: function () {
         this.getAnswerUser();
     },
     methods: {
+        startQuiz: function () {
+            this.typeExercise = this.$root.$getConst('reading')
+        },
         submitAnswer() {
             this.userAnswer();
             axios
