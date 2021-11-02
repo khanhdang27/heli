@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Admin;
 
+use App\Models\Passage;
 use App\Models\Question;
 use Illuminate\View\Component;
 
@@ -29,9 +30,12 @@ class ListReadingQuestion extends Component
         $this->questions = Question::where('quiz_id', $this->quiz->id)
         ->where('type', Question::READING)
         ->get();
+
+        $passage = Passage::where('quiz_id', $this->quiz->id)->first();
         return view('components.admin.list-reading-question', [
             'questions' => $this->questions,
             'quiz' => $this->quiz,
+            'passage' => $passage,
         ]);
     }
 }

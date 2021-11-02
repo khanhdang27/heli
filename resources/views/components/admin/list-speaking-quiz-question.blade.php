@@ -1,7 +1,7 @@
 <ul class="list-group" id="listQuestionSpeakingQuiz_{{ $quiz->set }}">
     @foreach ($questions as $question)
     @if ($question->questionContent())
-    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info"
+    <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info selectable"
         id="headingQuestion_{{ $question->id }}">
         <div class="w-75" data-toggle="collapse"
         data-target="#collapseAnswerSpeakingQuiz_{{ $question->id }}" aria-expanded="true"
@@ -57,18 +57,6 @@
                 </div>
             </div>
         </div>
-        <script type="application/javascript">
-            $(document).ready(function() {
-                if (localStorage.scrollPosition) {
-                    let pos = localStorage.getItem("scrollPosition")
-                    window.scrollTo(0, pos);
-                }
-                $('#modalSpeakingQuizQuestion_{{ $question->id }}').on('shown.bs.modal', function() {
-                    var scrollPosition = window.pageYOffset;
-                    localStorage.setItem("scrollPosition", scrollPosition);
-                });
-            });
-        </script>
     </li>
         @endif
     @endforeach

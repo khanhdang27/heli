@@ -62,10 +62,11 @@ class ExaminationController extends Controller
             }
             DB::commit();
             return redirect()
-                ->route('admin.course.examination.edit', ['course' => $this->course->id, 'exam' => $exam->id])
+                ->route('admin.course.examination.edit', ['course' => $course->id, 'exam' => $exam->id])
                 ->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
+            dd($th);
             return back()->withErrors('errors', 'Create errors!');
         }
     }

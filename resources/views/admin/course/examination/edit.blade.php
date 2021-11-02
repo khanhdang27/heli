@@ -4,6 +4,8 @@ use App\Models\Examination;
 
 @extends('admin.layout')
 @section('content')
+
+<script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
@@ -219,9 +221,17 @@ use App\Models\Examination;
             $(`div[id="${quizSet}"]`).collapse('show');
         }
         $('#accordionExample').on('shown.bs.collapse', function (event) {
-            console.log("show ", event.target)
-            localStorage.setItem("collapseQuestion", event.target.id);
+            var scrollPosition = event.target.offsetTop;
+            console.log(scrollPosition)
+            localStorage.setItem("scrollPosition", scrollPosition);
+            if (event.target.dataset.parent == '#accordionExample') {
+                localStorage.setItem("collapseQuestion", event.target.id);
+            }
         })
-     })
+        if (localStorage.scrollPosition) {
+            let pos = localStorage.getItem("scrollPosition")
+            window.scrollTo(0, pos+20);
+        }
+    });
 </script>
 @endsection

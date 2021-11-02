@@ -60,4 +60,17 @@ input.check-role {
   padding-left: 5px;
 }
 
+.selectable {
+  cursor: pointer;
+}
+
+.hidden {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0);
+}
+
 

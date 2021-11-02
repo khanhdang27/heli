@@ -6,7 +6,7 @@
     {{-- @dd($questions) --}}
     @foreach ($questions as $question)
         @if ($question->questionContent())
-        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info"
+        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info selectable"
             id="headingQuestion_{{ $question->id }}">
             <div class="w-75" data-toggle="collapse"
             data-target="#collapseAnswerWritingQuiz_{{ $question->id }}" aria-expanded="true"
@@ -79,13 +79,7 @@
 
             <script type="application/javascript">
                 $(document).ready(function() {
-                    if (localStorage.scrollPosition) {
-                        let pos = localStorage.getItem("scrollPosition")
-                        window.scrollTo(0, pos);
-                    }
                     $('#modalWritingQuizQuestion_{{ $question->id }}').on('shown.bs.modal', function() {
-                        var scrollPosition = window.pageYOffset;
-                        localStorage.setItem("scrollPosition", scrollPosition);
 
                         let partElement = document.getElementById("part_update");
                         let fileElement = document.getElementById("pickFile_update");
