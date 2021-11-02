@@ -52,14 +52,14 @@
                             </div>
                         </div>
                         <div v-else>
-                            <h3 v-cloak>{{ questionWriting[questionIndex].id }}. {{
-                                    questionWriting[questionIndex].question
+                            <h3 v-cloak>{{ questionWriting[questionIndex].writing_assessment_question.id }}. {{
+                                    questionWriting[questionIndex].writing_assessment_question.question
                                 }}</h3>
                             <p>Choose the most correct answer</p>
                             <div class="mt-5">
                                 <input type="number"
-                                       :id="'ques' + questionWriting[questionIndex].id"
-                                       :value="questionWriting[questionIndex].id"
+                                       :id="'ques' + questionWriting[questionIndex].writing_assessment_question.id"
+                                       :value="questionWriting[questionIndex].writing_assessment_question.id"
                                        hidden/>
                                 <div v-for="answer in questionWriting[questionIndex].answers"
                                      v-bind:key="answer.id"
@@ -85,7 +85,7 @@
                             <div class="p-3 bg-danger rounded h5 text-white font-weight-bold">
                                 Incorrect answer !
                             </div>
-                            <h5 v-for="answer_item in questionReading[questionIndex].answers" v-bind:key="answer_item.id"
+                            <h5 v-for="answer_item in questionWriting[questionIndex].answers" v-bind:key="answer_item.id"
                                 class="text-success">
                                     <span v-if="answer_item.is_correct === $getConst('correct') ">
                                         Correct answer is: {{ answer_item.answer }}
@@ -97,8 +97,8 @@
                             Good job !
                         </div>
 
-                        <h3 v-cloak>{{ questionWriting[questionIndex].id }}. {{
-                                questionWriting[questionIndex].question
+                        <h3 v-cloak>{{ questionWriting[questionIndex].writing_assessment_question.id }}. {{
+                                questionWriting[questionIndex].writing_assessment_question.question
                             }}</h3>
                         <p>Choose the most correct answer</p>
                         <div class="mt-5">
@@ -161,15 +161,17 @@ import CKEditor from 'ckeditor4-vue'
 
 export default {
     props: {
-        questionWriting: Array
+        typeExam: Number,
+        examId: Number
     },
     components: {
         ckeditor: CKEditor.component
     },
     data() {
         return {
+            questionWriting: [],
             questionIndex: 0,
-            type: this.$root.$getConst('exercise'),
+            type: Number,
             editorData: '',
             editorConfig: {},
             timeNow: '',
@@ -197,14 +199,32 @@ export default {
         endCallBack: function (x) {
             console.log(x);
         },
+        getWritingAssessmentQuestions(){
+            axios.get(route("site.exam.getWritingAssessmentQuestionsClient", this.examId))
+                .then((response) => {
+                    console.log(response.data)
+                    this.questionWriting= response.data.questions
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
         startExam: function () {
+            if (this.typeExam === 1){
+                this.type = this.$root.$getConst('assessment')
+            }else if (this.typeExam === 2){
+                this.type = this.$root.$getConst('exercise')
+            }else {
+                this.type = this.$root.$getConst('quiz')
+            }
+            this.getWritingAssessmentQuestions();
             this.startQuiz = true;
             this.timeNow = new Date();
             this.timeEnd = new Date();
-            if (this.type === $getConst('quiz')) {
+            if (this.type === this.$root.$getConst('quiz')) {
                 this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitQuiz)
             }
-            if (this.type === $getConst('assessment')) {
+            if (this.type === this.$root.$getConst('assessment')) {
                 this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitAssessment)
             }
         },
