@@ -6,20 +6,49 @@
                 <div class="py-4 h-100 row justify-content-center lecture overflow-auto">
                     <div class="col-lg-8">
                         <div class="h-100">
-                            <div class="border shadow-sm bg-white rounded p-3 mb-3 h4 text-center">
-                                <vimeo-player
-                                    :player-height="55"
-                                    ref="audio"
-                                    :video-id="'601557402'"
-                                />
-                                <h5>Audio can played once only</h5>
+                            <div v-if="typeExam === $getConst('assessment')">
+                                <h3 v-cloak>{{ questionListening[questionIndex].listen_assessment_question.id }}. {{
+                                        questionListening[questionIndex].listen_assessment_question.question
+                                    }}</h3>
+                                <p>Choose the most correct answer</p>
+                                <div class="mt-5">
+                                    <input type="number"
+                                           :id="'ques' + questionListening[questionIndex].id"
+                                           :value="questionListening[questionIndex].listen_assessment_question"
+                                           hidden/>
+                                    <div
+                                        v-for="answer in questionListening[questionIndex].listen_assessment_question.answers"
+                                        v-bind:key="answer.id"
+                                        class="py-0 my-2 border border-primary rounded answer-selection">
+                                        <input type="radio"
+                                               :id="answer.id"
+                                               :value="answer.id"
+                                               v-model="userChoose[questionIndex]"
+                                               v-bind:disabled="resultCheck[questionIndex]"
+                                               hidden/>
+                                        <label :for="answer.id" class="w-100">
+                                            <a class="btn text-left w-100">
+                                                <h5 class="mb-0">{{ answer.answer }}</h5>
+                                            </a>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                            <div v-if="type === $getConst('exercise')">
+                            <div v-if="typeExam === $getConst('exercise')">
+                                <div class="border shadow-sm bg-white rounded p-3 mb-3 h4 text-center">
+                                    <vimeo-player
+                                        :player-height="55"
+                                        ref="audio"
+                                        :video-id="'601557402'"
+                                    />
+                                    <h5>Audio can played once only</h5>
+                                </div>
                                 <div v-if="resultCheck[questionIndex] === $getConst('incorrect')">
                                     <div class="p-3 bg-danger rounded h5 text-white font-weight-bold">
                                         Incorrect answer !
                                     </div>
-                                    <h5 v-for="answer_item in questionListening[questionIndex].answers" v-bind:key="answer_item.id"
+                                    <h5 v-for="answer_item in questionListening[questionIndex].listen_assessment_question.answers"
+                                        v-bind:key="answer_item.id"
                                         class="text-success">
                                     <span v-if="answer_item.is_correct === $getConst('correct')">
                                         Correct answer is: {{ answer_item.answer }}
@@ -30,30 +59,59 @@
                                      v-if="resultCheck[questionIndex] === $getConst('correct')">
                                     Good job !
                                 </div>
-                            </div>
-                            <h3 v-cloak>{{ questionListening[questionIndex].id }}. {{
-                                    questionListening[questionIndex].question
-                                }}</h3>
-                            <p>Choose the most correct answer</p>
-                            <div class="mt-5">
-                                <input type="number"
-                                       :id="'ques' + questionListening[questionIndex].id"
-                                       :value="questionListening[questionIndex]"
-                                       hidden/>
-                                <div v-for="answer in questionListening[questionIndex].answers"
-                                     v-bind:key="answer.id"
-                                     class="py-0 my-2 border border-primary rounded answer-selection">
-                                    <input type="radio"
-                                           :id="answer.id"
-                                           :value="answer.id"
-                                           v-model="userChoose[questionIndex]"
-                                           v-bind:disabled="resultCheck[questionIndex]"
+                                <h3 v-cloak>{{ questionListening[questionIndex].listen_assessment_question.id }}. {{
+                                        questionListening[questionIndex].listen_assessment_question.question
+                                    }}</h3>
+                                <p>Choose the most correct answer</p>
+                                <div class="mt-5">
+                                    <input type="number"
+                                           :id="'ques' + questionListening[questionIndex].id"
+                                           :value="questionListening[questionIndex]"
                                            hidden/>
-                                    <label :for="answer.id" class="w-100">
-                                        <a class="btn text-left w-100">
-                                            <h5 class="mb-0">{{ answer.answer }}</h5>
-                                        </a>
-                                    </label>
+                                    <div
+                                        v-for="answer in questionListening[questionIndex].listen_assessment_question.answers"
+                                        v-bind:key="answer.id"
+                                        class="py-0 my-2 border border-primary rounded answer-selection">
+                                        <input type="radio"
+                                               :id="answer.id"
+                                               :value="answer.id"
+                                               v-model="userChoose[questionIndex]"
+                                               v-bind:disabled="resultCheck[questionIndex]"
+                                               hidden/>
+                                        <label :for="answer.id" class="w-100">
+                                            <a class="btn text-left w-100">
+                                                <h5 class="mb-0">{{ answer.answer }}</h5>
+                                            </a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="typeExam === $getConst('quiz')">
+                                <h3 v-cloak>{{ questionListening[questionIndex].listen_assessment_question.id }}. {{
+                                        questionListening[questionIndex].listen_assessment_question.question
+                                    }}</h3>
+                                <p>Choose the most correct answer</p>
+                                <div class="mt-5">
+                                    <input type="number"
+                                           :id="'ques' + questionListening[questionIndex].id"
+                                           :value="questionListening[questionIndex]"
+                                           hidden/>
+                                    <div
+                                        v-for="answer in questionListening[questionIndex].listen_assessment_question.answers"
+                                        v-bind:key="answer.id"
+                                        class="py-0 my-2 border border-primary rounded answer-selection">
+                                        <input type="radio"
+                                               :id="answer.id"
+                                               :value="answer.id"
+                                               v-model="userChoose[questionIndex]"
+                                               v-bind:disabled="resultCheck[questionIndex]"
+                                               hidden/>
+                                        <label :for="answer.id" class="w-100">
+                                            <a class="btn text-left w-100">
+                                                <h5 class="mb-0">{{ answer.answer }}</h5>
+                                            </a>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +122,7 @@
                             v-if="questionIndex > 0 && resultCheck[questionIndex] ">
                         Previous
                     </button>
-                    <span v-if="type === $getConst('exercise')">
+                    <span v-if="typeExam=== $getConst('exercise')">
                         <button class="btn btn-primary mx-2" v-on:click="check()"
                                 :id="'check' + questionListening[questionIndex]"
                                 v-bind:disabled="resultCheck[questionIndex]">
@@ -75,7 +133,7 @@
                             Next
                         </button>
                     </span>
-                    <span v-if="type !== $getConst('exercise')">
+                    <span v-if="typeExam !== $getConst('exercise')">
                         <button class="btn btn-primary mx-2" v-on:click="submit()"
                                 v-if="questionIndex === questionListening.length - 1">
                             Submit
@@ -122,19 +180,62 @@ const results = [
 
 export default {
     props: {
-        questionListening: Array
+        typeExam: Number,
+        examId: Number
     },
     data() {
         return {
+            questionListening: [],
             questionIndex: 0,
             questionNo: '',
             userChoose: [],
-            type: this.$root.$getConst('exercise'),
             allResults: [],
             resultCheck: [],
         };
     },
+    mounted() {
+        this.getQuestion()
+    },
     methods: {
+        getQuestion: function (){
+            if (this.typeExam === this.$root.$getConst('assessment')) {
+                this.getListeningAssessmentQuestionsClient();
+            } else if (this.typeExam === this.$root.$getConst('exercise')) {
+                this.getListeningExerciseQuestionsClient();
+            } else {
+                this.getListeningQuizQuestionsClient();
+            }
+        },
+        getListeningAssessmentQuestionsClient() {
+            axios.get(route("site.exam.getListeningAssessmentQuestionsClient", this.examId))
+                .then((response) => {
+                    console.log(response.data.questions)
+                    this.questionListening = response.data.questions.question;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        getListeningExerciseQuestionsClient() {
+            axios.get(route("site.exam.getListeningExerciseQuestionsClient", this.examId))
+                .then((response) => {
+                    console.log(response.data.questions)
+                    this.questionListening = response.data.questions[0].question;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
+        getListeningQuizQuestionsClient() {
+            axios.get(route("site.exam.getListeningQuizQuestionsClient", this.examId))
+                .then((response) => {
+                    console.log(response.data.questions)
+                    this.questionListening = response.data.questions[0].question;
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
+        },
         next: function () {
             if (this.questionIndex < this.questionListening.length - 1) {
                 this.questionIndex++;
@@ -148,9 +249,9 @@ export default {
             if (undefined) {
                 this.resultCheck.push(-1)
             } else {
-                for (let i = 0; i < this.questionListening[this.questionIndex].answers.length; i++) {
-                    if (this.questionListening[this.questionIndex].answers[i].id === this.userChoose[this.questionIndex]) {
-                        if (this.questionListening[this.questionIndex].answers[i].is_correct === 1) {
+                for (let i = 0; i < this.questionListening[this.questionIndex].listen_assessment_question.answers.length; i++) {
+                    if (this.questionListening[this.questionIndex].listen_assessment_question.answers[i].id === this.userChoose[this.questionIndex]) {
+                        if (this.questionListening[this.questionIndex].listen_assessment_question.answers[i].is_correct === 1) {
                             return this.resultCheck.push(1)
                         }
                         return this.resultCheck.push(-1)

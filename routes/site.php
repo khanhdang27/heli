@@ -87,17 +87,31 @@ Route::middleware('auth')->group(function () {
 
     Route::get('exam/readingAssessment/{exams}', 'ExaminationController@getReadingAssessmentQuestionsClient')
         ->name('exam.getReadingAssessmentQuestionsClient');
+    Route::get('exam/readingExercise/{exams}', 'ExaminationController@getReadingExerciseQuestionsClient')
+        ->name('exam.getReadingExerciseQuestionsClient');
+    Route::get('exam/readingQuiz/{exams}', 'ExaminationController@getReadingQuizQuestionsClient')
+        ->name('exam.getReadingQuizQuestionsClient');
 
     Route::get('exam/writingAssessment/{exams}', 'ExaminationController@getWritingAssessmentQuestionsClient')
         ->name('exam.getWritingAssessmentQuestionsClient');
+    Route::get('exam/writingExercise/{exams}', 'ExaminationController@getWritingExerciseQuestionsClient')
+        ->name('exam.getWritingExerciseQuestionsClient');
     Route::get('exam/writingQuiz/{exams}', 'ExaminationController@getWritingQuizQuestionsClient')
         ->name('exam.getWritingQuizQuestionsClient');
 
     Route::get('exam/listenAssessment/{exams}', 'ExaminationController@getListeningAssessmentQuestionsClient')
         ->name('exam.getListeningAssessmentQuestionsClient');
+    Route::get('exam/listenExercise/{exams}', 'ExaminationController@getListeningExerciseQuestionsClient')
+        ->name('exam.getListeningExerciseQuestionsClient');
+    Route::get('exam/listenQuiz/{exams}', 'ExaminationController@getListeningQuizQuestionsClient')
+        ->name('exam.getListeningQuizQuestionsClient');
 
     Route::get('exam/speakingAssessment/{exams}', 'ExaminationController@getSpeakingAssessmentQuestionsClient')
         ->name('exam.getSpeakingAssessmentQuestionsClient');
+    Route::get('exam/speakingExercise/{exams}', 'ExaminationController@getSpeakingExerciseQuestionsClient')
+        ->name('exam.getSpeakingExerciseQuestionsClient');
+    Route::get('exam/speakingQuiz/{exams}', 'ExaminationController@getSpeakingQuizQuestionsClient')
+        ->name('exam.getSpeakingQuizQuestionsClient');
 
 
 

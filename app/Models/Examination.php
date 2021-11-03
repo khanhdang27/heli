@@ -40,11 +40,12 @@ class Examination extends Model
 
     public function quiz()
     {
-        return $this->hasMany(Quiz::class);
+        return $this->hasMany(Quiz::class, 'exam_id');
     }
 
     public function passGrade()
     {
         return $this->hasMany(PassGrade::class);
     }
+
 }
