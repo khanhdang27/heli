@@ -22,4 +22,9 @@ class ReadingQuestion extends Model
     {
         return $this->hasMany(ReadingAnswer::class);
     }
+
+    public function findAnswerById($id)
+    {
+        return $this->answers->where('id', $id)->first();
+    }
 }
