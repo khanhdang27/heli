@@ -4995,11 +4995,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -5134,6 +5129,7 @@ __webpack_require__.r(__webpack_exports__);
     getLecture: function getLecture() {
       var _this5 = this;
 
+      console.log("showLecture", this.lectureList[this.lectureIndex]);
       axios.get(route("site.lecture.showLecture", {
         userId: this.userId,
         courseId: this.lectureList[this.lectureIndex].course_id,
@@ -5141,6 +5137,7 @@ __webpack_require__.r(__webpack_exports__);
         index: this.lectureList[this.lectureIndex].index,
         id: this.lectureList[this.lectureIndex].id
       })).then(function (response) {
+        console.log("showLecture", response);
         _this5.videoId = response.data.video_resource;
 
         _this5.studentLecture.push(_this5.lectureIndex);
@@ -5174,6 +5171,9 @@ __webpack_require__.r(__webpack_exports__);
       }, 2000);
     },
     showLecture: function showLecture() {
+      console.log(this.lectureList[this.lectureIndex].model_name);
+      console.log(this.lectureList[this.lectureIndex]);
+
       if (this.lectureList[this.lectureIndex].model_name === "Examination") {
         this.getExamination();
       } else {
@@ -5423,13 +5423,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     ReadingComponent: _ReadingComponent__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
-    questions: Array,
+    typeExam: Number,
     courseId: Number,
     examId: Number
   },
@@ -5444,13 +5453,16 @@ __webpack_require__.r(__webpack_exports__);
         correct: [],
         wrong: []
       },
-      typeExercise: this.$root.$getConst('listening')
+      typeExercise: ''
     };
   },
   mounted: function mounted() {
     this.getAnswerUser();
   },
   methods: {
+    startQuiz: function startQuiz() {
+      this.typeExercise = this.$root.$getConst('reading');
+    },
     submitAnswer: function submitAnswer() {
       var _this = this;
 
@@ -5746,6 +5758,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var results = [{
   type: 'quiz',
   score: 5.5,
@@ -5759,22 +5772,24 @@ var results = [{
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    questionReading: Array
+    typeExam: Number,
+    examId: Number
   },
   data: function data() {
     return {
+      questionReading: [],
       questionIndex: 0,
       questionNo: '',
       userChoose: [],
-      type: this.$root.$getConst('quiz'),
-      passage: "\n            \u82F1\u6587\u5DEE\uFF0C\u4F46 Reading \u90FD\u53EF\u4EE5\u651E\u5230 Lv 5+\uFF1F \u8981\u9054\u5230\u4EE5\u4E0A\u76EE\u6A19\uFF0C\u5176\u5BE6\u771F\u4FC2\u4E00\u5572\u90FD\u5514\u96E3\uFF01 \u6211\u53EF\u4EE5\u7528\u5BE6\u6230\u7D93\u9A57\u540C\u5927\u5BB6\u8B1B\uFF0C\u300C\u82F1\u6587\u7A0B\u5EA6\u300D\u2260 \u300C\u8003\u8A66\u6280\u5DE7\u638C\u63E1\u7A0B\u5EA6\u300D\u3002\u4F46\u504F\u504F\uFF0C\u4E3B\u5BB0\u4F60 DSE \u6210\u7E3E\u5605\uFF0C\u4FC2\u300C\u5F8C\u8005\u300D\u3002\u6240\u4EE5\u5927\u5BB6\u5343\u7948\u5514\u597D\u518D\u4FFE\u300C\u82F1\u6587\u80FD\u529B\u300D\u9650\u5236\u81EA\u5DF1\u55BA DSE \u5605\u767C\u63EE\uFF01\u60F3\u77E5\u9EDE\u6A23\u638C\u63E1\u4E3B\u5BB0\u4F60\u524D\u9014\u5605\u300C\u82F1\u6587\u8003\u8A66\u6280\u5DE7\u300D\uFF1F\u5481\u5C31\u8981\u53C3\u52A0\u6211\u5462\u500B 75 \u5206\u9418\u514D\u5B78\u8CBB Paper 1 \u7CBE\u8B80\u73ED\u5566\uFF01\u6211\u6703\u5E36\u4F60\u4E86\u89E3\u8003\u8A55\u5C40\u64EC\u984C\u65B9\u6CD5\uFF0C \u6559\u4F60\u4E00\u5957\u6709\u7CFB\u7D71\u5605 mindset\uFF0C\u4EE4\u4F60\u5C31\u7B97\u7747\u5514\u660E\u7BC7\u6587\uFF0C\u90FD\u4E00\u6A23\u53EF\u4EE5\u8F15\u9B06\u651E\u5230 Lv5+\uFF01\u8AB2\u5802\u7CBE\u9078\u5167\u5BB9 \xB7 \u7528\u300C\u6280\u5DE7\u300D\u5B8C\u7F8E\u547D\u4E2D marking \u6975\u901F\u5347 grade \u4E09\u5927\u79D8\u8A23 \u6578\u64DA\u4E3B\u5C0E\u8003\u8A66\u6A21\u5F0F\u8003\u8A55\u8DA8\u52E2\u4E00\u89BD\u7121\u907A \u5F9E\u79D1\u5B78\u89D2\u5EA6\u4E86\u89E3 \u82F1\u6587 Paper 1 \u5605\u8003\u6838\u6A21\u5F0F\uFF0C\u77E5\u5DF1\u77E5\u5F7C\uFF0C\u5BA2\u89C0\u5730\u5206\u6790\u5404\u7A2E\u6578\u64DA\uFF0C\u638C\u63E1\u8003\u8A55\u5C40\u8FD110\u5E74\u5605\u51FA\u984C\u8DA8\u52E2\u3002 \u53EA\u6709\u8003\u8A55\u6578\u64DA\u5148\u6709\u771F\u6B63\u8A71\u8A9E\u6B0A\uFF01DSE \u6700\u5F37 Reading \u6280\u5DE7\u7121\u9700\u7406\u89E3\u6587\u7AE0\u4EA6\u53EF\u6709 Lv 5 + \u64D4\u5FC3\u7747\u5514\u660E\uFF0C\u6216\u8981\u82B1\u8CBB\u5927\u91CF\u6642\u9593\u95B1\u8B80 reading passage\uFF1F\u4F46\u4E0A\u5B8C\u5802\u5605\u4F60\u5C31\u6703\u660E\u767D\uFF0C\u53EA\u8981\u638C\u63E1 5** Reading \u6280\u5DE7\uFF0CPaper 1 \u6210\u7E3E\u5C31\u5DF2\u7D93\u53EF\u4EE5\u7A81\u98DB\u731B\u9032\uFF01 \u4E00\u822C\u82F1\u6587 VS DSE \u82F1\u6587 \u53EA\u50B3\u6388\u4F60 DSE \u9700\u8003\u7684\u82F1\u6587 \u96D6\u7136 75 \u5206\u9418\u5167\u672A\u5FC5\u63D0\u5347\u5230\u4F60\u5605\u82F1\u6587\u6C34\u5E73\uFF0C\u4F46\u7D55\u5C0D\u53EF\u4EE5\u4EE4\u4F60 DSE \u82F1\u6587\u5927\u5E45\u9032\u6B65\u3002 \u82B1\u5927\u91CF\u6642\u9593\u6EAB\u540C\u8003\u8A66\u7121\u95DC\u5605\u82F1\u6587 ? \u4E0D\u5982\u96C6\u4E2D\u63D0\u5347\u81EA\u5DF1\u5605\u300CDSE \u82F1\u6587\u80FD\u529B\u300D!\u82F1\u6587\u5DEE\uFF0C\u4F46 Reading \u90FD\u53EF\u4EE5\u651E\u5230 Lv 5+\uFF1F \u8981\u9054\u5230\u4EE5\u4E0A\u76EE\u6A19\uFF0C\u5176\u5BE6\u771F\u4FC2\u4E00\u5572\u90FD\u5514\u96E3\uFF01 \u6211\u53EF\u4EE5\u7528\u5BE6\u6230\u7D93\u9A57\u540C\u5927\u5BB6\u8B1B\uFF0C\u300C\u82F1\u6587\u7A0B\u5EA6\u300D\u2260 \u300C\u8003\u8A66\u6280\u5DE7\u638C\u63E1\u7A0B\u5EA6\u300D\u3002\u4F46\u504F\u504F\uFF0C\u4E3B\u5BB0\u4F60 DSE \u6210\u7E3E\u5605\uFF0C\u4FC2\u300C\u5F8C\u8005\u300D\u3002\u6240\u4EE5\u5927\u5BB6\u5343\u7948\u5514\u597D\u518D\u4FFE\u300C\u82F1\u6587\u80FD\u529B\u300D\u9650\u5236\u81EA\u5DF1\u55BA DSE \u5605\u767C\u63EE\uFF01\u60F3\u77E5\u9EDE\u6A23\u638C\u63E1\u4E3B\u5BB0\u4F60\u524D\u9014\u5605\u300C\u82F1\u6587\u8003\u8A66\u6280\u5DE7\u300D\uFF1F\u5481\u5C31\u8981\u53C3\u52A0\u6211\u5462\u500B 75 \u5206\u9418\u514D\u5B78\u8CBB Paper 1 \u7CBE\u8B80\u73ED\u5566\uFF01\u6211\u6703\u5E36\u4F60\u4E86\u89E3\u8003\u8A55\u5C40\u64EC\u984C\u65B9\u6CD5\uFF0C \u6559\u4F60\u4E00\u5957\u6709\u7CFB\u7D71\u5605 mindset\uFF0C\u4EE4\u4F60\u5C31\u7B97\u7747\u5514\u660E\u7BC7\u6587\uFF0C\u90FD\u4E00\u6A23\u53EF\u4EE5\u8F15\u9B06\u651E\u5230 Lv5+\uFF01\u8AB2\u5802\u7CBE\u9078\u5167\u5BB9 \xB7 \u7528\u300C\u6280\u5DE7\u300D\u5B8C\u7F8E\u547D\u4E2D marking \u6975\u901F\u5347 grade \u4E09\u5927\u79D8\u8A23 \u6578\u64DA\u4E3B\u5C0E\u8003\u8A66\u6A21\u5F0F\u8003\u8A55\u8DA8\u52E2\u4E00\u89BD\u7121\u907A \u5F9E\u79D1\u5B78\u89D2\u5EA6\u4E86\u89E3 \u82F1\u6587 Paper 1 \u5605\u8003\u6838\u6A21\u5F0F\uFF0C\u77E5\u5DF1\u77E5\u5F7C\uFF0C\u5BA2\u89C0\u5730\u5206\u6790\u5404\u7A2E\u6578\u64DA\uFF0C\u638C\u63E1\u8003\u8A55\u5C40\u8FD110\u5E74\u5605\u51FA\u984C\u8DA8\u52E2\u3002 \u53EA\u6709\u8003\u8A55\u6578\u64DA\u5148\u6709\u771F\u6B63\u8A71\u8A9E\u6B0A\uFF01DSE \u6700\u5F37 Reading \u6280\u5DE7\u7121\u9700\u7406\u89E3\u6587\u7AE0\u4EA6\u53EF\u6709 Lv 5 + \u64D4\u5FC3\u7747\u5514\u660E\uFF0C\u6216\u8981\u82B1\u8CBB\u5927\u91CF\u6642\u9593\u95B1\u8B80 reading passage\uFF1F\u4F46\u4E0A\u5B8C\u5802\u5605\u4F60\u5C31\u6703\u660E\u767D\uFF0C\u53EA\u8981\u638C\u63E1 5** Reading \u6280\u5DE7\uFF0CPaper 1 \u6210\u7E3E\u5C31\u5DF2\u7D93\u53EF\u4EE5\u7A81\u98DB\u731B\u9032\uFF01 \u4E00\u822C\u82F1\u6587 VS DSE \u82F1\u6587 \u53EA\u50B3\u6388\u4F60 DSE \u9700\u8003\u7684\u82F1\u6587 \u96D6\u7136 75 \u5206\u9418\u5167\u672A\u5FC5\u63D0\u5347\u5230\u4F60\u5605\u82F1\u6587\u6C34\u5E73\uFF0C\u4F46\u7D55\u5C0D\u53EF\u4EE5\u4EE4\u4F60 DSE \u82F1\u6587\u5927\u5E45\u9032\u6B65\u3002 \u82B1\u5927\u91CF\u6642\u9593\u6EAB\u540C\u8003\u8A66\u7121\u95DC\u5605\u82F1\u6587 ? \u4E0D\u5982\u96C6\u4E2D\u63D0\u5347\u81EA\u5DF1\u5605\u300CDSE \u82F1\u6587\u80FD\u529B\u300D!\u6211\u53EF\u4EE5\u7528\u5BE6\u6230\u7D93\u9A57\u540C\u5927\u5BB6\u8B1B\uFF0C\u300C\u82F1\u6587\u7A0B\u5EA6\u300D\u2260 \u300C\u8003\u8A66\u6280\u5DE7\u638C\u63E1\u7A0B\u5EA6\u300D\u3002\u4F46\u504F\u504F\uFF0C\u4E3B\u5BB0\u4F60 DSE \u6210\u7E3E\u5605\uFF0C\u4FC2\u300C\u5F8C\u8005\u300D\u3002\u6240\u4EE5\u5927\u5BB6\u5343\u7948\u5514\u597D\u518D\u4FFE\u300C\u82F1\u6587\u80FD\u529B\u300D\u9650\u5236\u81EA\u5DF1\u55BA DSE \u5605\u767C\u63EE\uFF01\u60F3\u77E5\u9EDE\u6A23\u638C\u63E1\u4E3B\u5BB0\u4F60\u524D\u9014\u5605\u300C\u82F1\u6587\u8003\u8A66\u6280\u5DE7\u300D\uFF1F\u5481\u5C31\u8981\u53C3\u52A0\u6211\u5462\u500B 75 \u5206\u9418\u514D\u5B78\u8CBB Paper 1 \u7CBE\u8B80\u73ED\u5566\uFF01\u6211\u6703\u5E36\u4F60\u4E86\u89E3\u8003\u8A55\u5C40\u64EC\u984C\u65B9\u6CD5\uFF0C \u6559\u4F60\u4E00\u5957\u6709\u7CFB\u7D71\u5605 mindset\uFF0C\u4EE4\u4F60\u5C31\u7B97\u7747\u5514\u660E\u7BC7\u6587\uFF0C\u90FD\u4E00\u6A23\u53EF\u4EE5\u8F15\u9B06\u651E\u5230 Lv5+\uFF01\u8AB2\u5802\u7CBE\u9078\u5167\u5BB9 \xB7 \u7528\u300C\u6280\u5DE7\u300D\u5B8C\u7F8E\u547D\u4E2D marking \u6975\u901F\u5347 grade \u4E09\u5927\u79D8\u8A23 \u6578\u64DA\u4E3B\u5C0E\u8003\u8A66\u6A21\u5F0F\u8003\u8A55\u8DA8\u52E2\u4E00\u89BD\u7121\u907A \u5F9E\u79D1\u5B78\u89D2\u5EA6\u4E86\u89E3 \u82F1\u6587 Paper 1 \u5605\u8003\u6838\u6A21\u5F0F\uFF0C\u77E5\u5DF1\u77E5\u5F7C\uFF0C\u5BA2\u89C0\u5730\u5206\u6790\u5404\u7A2E\u6578\u64DA\uFF0C\u638C\u63E1\u8003\u8A55\u5C40\u8FD110\u5E74\u5605\u51FA\u984C\u8DA8\u52E2\u3002 \u53EA\u6709\u8003\u8A55\u6578\u64DA\u5148\u6709\u771F\u6B63\u8A71\u8A9E\u6B0A\uFF01DSE \u6700\u5F37 Reading \u6280\u5DE7\u7121\u9700\u7406\u89E3\u6587\u7AE0\u4EA6\u53EF\u6709 Lv 5 + \u64D4\u5FC3\u7747\u5514\u660E\uFF0C\u6216\u8981\u82B1\u8CBB\u5927\u91CF\u6642\u9593\u95B1\u8B80 reading passage\uFF1F\u4F46\u4E0A\u5B8C\u5802\u5605\u4F60\u5C31\u6703\u660E\u767D\uFF0C\u53EA\u8981\u638C\u63E1 5** Reading \u6280\u5DE7\uFF0CPaper 1 \u6210\u7E3E\u5C31\u5DF2\u7D93\u53EF\u4EE5\u7A81\u98DB\u731B\u9032\uFF01 \u4E00\u822C\u82F1\u6587 VS DSE \u82F1\u6587 \u53EA\u50B3\u6388\u4F60 DSE \u9700\u8003\u7684\u82F1\u6587 \u96D6\u7136 75 \u5206\u9418\u5167\u672A\u5FC5\u63D0\u5347\u5230\u4F60\u5605\u82F1\u6587\u6C34\u5E73\uFF0C\u4F46\u7D55\u5C0D\u53EF\u4EE5\u4EE4\u4F60 DSE \u82F1\u6587\u5927\u5E45\u9032\u6B65\u3002 \u82B1\u5927\u91CF\u6642\u9593\u6EAB\u540C\u8003\u8A66\u7121\u95DC\u5605\u82F1\u6587 ? \u4E0D\u5982\u96C6\u4E2D\u63D0\u5347\u81EA\u5DF1\u5605\u300CDSE \u82F1\u6587\u80FD\u529B\u300D!\n            ",
+      type: Number,
+      passage: '',
       allResults: [],
       resultCheck: [],
       startQuiz: false,
       timeNow: '',
       timeEnd: '',
       timeLimitQuiz: 60,
-      timeLimitAssessment: 1
+      timeLimitAssessment: 2
     };
   },
   methods: {
@@ -5834,19 +5849,38 @@ var results = [{
     startCallBack: function startCallBack(x) {
       console.log(x);
     },
-    endCallBack: function endCallBack(x) {
-      this.allResults = results;
+    endCallBack: function endCallBack(x) {// this.allResults = results;
+    },
+    getReadingAssessmentQuestions: function getReadingAssessmentQuestions() {
+      var _this = this;
+
+      axios.get(route("site.exam.getReadingAssessmentQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data);
+        _this.passage = response.data.passage.content;
+        _this.questionReading = response.data.questions;
+      })["catch"](function (error) {
+        console.error(error);
+      });
     },
     startExam: function startExam() {
+      if (this.typeExam === 1) {
+        this.type = this.$root.$getConst('assessment');
+      } else if (this.typeExam === 2) {
+        this.type = this.$root.$getConst('exercise');
+      } else {
+        this.type = this.$root.$getConst('quiz');
+      }
+
+      this.getReadingAssessmentQuestions();
       this.startQuiz = true;
       this.timeNow = new Date();
       this.timeEnd = new Date();
 
-      if (this.type === 'quiz') {
+      if (this.type === this.$root.$getConst('quiz')) {
         this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitQuiz);
       }
 
-      if (this.type === 'assessment') {
+      if (this.type === this.$root.$getConst('assessment')) {
         this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitAssessment);
       }
     }
@@ -6178,15 +6212,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    questionWriting: Array
+    typeExam: Number,
+    examId: Number
   },
   components: {
     ckeditor: (ckeditor4_vue__WEBPACK_IMPORTED_MODULE_0___default().component)
   },
   data: function data() {
     return {
+      questionWriting: [],
       questionIndex: 0,
-      type: this.$root.$getConst('exercise'),
+      type: Number,
       editorData: '',
       editorConfig: {},
       timeNow: '',
@@ -6214,16 +6250,35 @@ __webpack_require__.r(__webpack_exports__);
     endCallBack: function endCallBack(x) {
       console.log(x);
     },
+    getWritingAssessmentQuestions: function getWritingAssessmentQuestions() {
+      var _this = this;
+
+      axios.get(route("site.exam.getWritingAssessmentQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data);
+        _this.questionWriting = response.data.questions;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
     startExam: function startExam() {
+      if (this.typeExam === 1) {
+        this.type = this.$root.$getConst('assessment');
+      } else if (this.typeExam === 2) {
+        this.type = this.$root.$getConst('exercise');
+      } else {
+        this.type = this.$root.$getConst('quiz');
+      }
+
+      this.getWritingAssessmentQuestions();
       this.startQuiz = true;
       this.timeNow = new Date();
       this.timeEnd = new Date();
 
-      if (this.type === $getConst('quiz')) {
+      if (this.type === this.$root.$getConst('quiz')) {
         this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitQuiz);
       }
 
-      if (this.type === $getConst('assessment')) {
+      if (this.type === this.$root.$getConst('assessment')) {
         this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitAssessment);
       }
     },
@@ -52899,7 +52954,7 @@ var render = function () {
                   _vm.questions
                     ? _c("quiz-component", {
                         attrs: {
-                          questions: _vm.questions,
+                          typeExam: _vm.lectureList[_vm.lectureIndex].type,
                           courseId: _vm.lectureList[_vm.lectureIndex].course_id,
                           examId: _vm.lectureList[_vm.lectureIndex].id,
                         },
@@ -53022,11 +53077,11 @@ var render = function () {
                             ? _c("div", [
                                 _c("h4", { staticClass: "mb-1" }, [
                                   _vm._v(
-                                    "\n                  " +
+                                    "\n                                    " +
                                       _vm._s(item.index) +
-                                      "\n                  -\n                  " +
+                                      "\n                                    -\n                                    " +
                                       _vm._s(item.name) +
-                                      "\n                "
+                                      "\n                                "
                                   ),
                                 ]),
                                 _vm._v(" "),
@@ -53061,11 +53116,11 @@ var render = function () {
                             ? _c("div", [
                                 _c("h4", { staticClass: "mb-1" }, [
                                   _vm._v(
-                                    "\n                  " +
+                                    "\n                                    " +
                                       _vm._s(item.index) +
-                                      "\n                  -\n                  " +
+                                      "\n                                    -\n                                    " +
                                       _vm._s(item.lectures_name) +
-                                      "\n                "
+                                      "\n                                "
                                   ),
                                 ]),
                                 _vm._v(" "),
@@ -53146,7 +53201,7 @@ var render = function () {
                               "div",
                               {
                                 staticClass:
-                                  "\n                    body-product-content\n                    d-flex\n                    flex-column\n                    justify-content-between\n                    align-items-center\n                    col-10\n                    mx-auto\n                  ",
+                                  "\n                  body-product-content\n                  d-flex\n                  flex-column\n                  justify-content-between\n                  align-items-center\n                  col-10\n                  mx-auto\n                ",
                                 style: {
                                   color: course.subject.subject_color_text,
                                 },
@@ -53160,7 +53215,7 @@ var render = function () {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                    " +
+                                      "\n                                    " +
                                         _vm._s(
                                           course.subject.certificate
                                             .certificate_code
@@ -53190,9 +53245,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                      " +
+                                          "\n                                        " +
                                             _vm._s(course.course_name) +
-                                            "\n                    "
+                                            "\n                                    "
                                         ),
                                       ]
                                     ),
@@ -53237,7 +53292,7 @@ var staticRenderFns = [
               "div",
               {
                 staticClass:
-                  "\n            rounded-circle\n            border-btn-next\n            animate-change-color\n            py-3\n            px-4\n          ",
+                  "\n          rounded-circle\n          border-btn-next\n          animate-change-color\n          py-3\n          px-4\n        ",
               },
               [_c("p", { staticClass: "h2 text-center mx-2" }, [_vm._v("❮")])]
             ),
@@ -53265,7 +53320,7 @@ var staticRenderFns = [
               "div",
               {
                 staticClass:
-                  "\n            rounded-circle\n            border-btn-next\n            animate-change-color\n            py-2\n            px-4\n          ",
+                  "\n          rounded-circle\n          border-btn-next\n          animate-change-color\n          py-2\n          px-4\n        ",
               },
               [
                 _c("p", { staticClass: "m-0 h2 text-center" }, [_vm._v("❯")]),
@@ -53710,18 +53765,20 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "h-100" }, [
-    _vm.typeExercise === _vm.$getConst("writing")
-      ? _c(
-          "div",
-          { staticClass: "h-100" },
-          [
-            _c("writing-component", {
-              attrs: { questionWriting: _vm.questions },
-            }),
-          ],
-          1
-        )
-      : _vm._e(),
+    _c("div", { staticClass: "text-center mt-5" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          on: {
+            click: function ($event) {
+              return _vm.startQuiz()
+            },
+          },
+        },
+        [_vm._v("Start Exam")]
+      ),
+    ]),
     _vm._v(" "),
     _vm.typeExercise === _vm.$getConst("reading")
       ? _c(
@@ -53729,7 +53786,20 @@ var render = function () {
           { staticClass: "h-100" },
           [
             _c("reading-component", {
-              attrs: { questionReading: _vm.questions },
+              attrs: { examId: _vm.examId, typeExam: _vm.typeExam },
+            }),
+          ],
+          1
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.typeExercise === _vm.$getConst("writing")
+      ? _c(
+          "div",
+          { staticClass: "h-100" },
+          [
+            _c("writing-component", {
+              attrs: { examId: _vm.examId, typeExam: _vm.typeExam },
             }),
           ],
           1
@@ -53740,11 +53810,7 @@ var render = function () {
       ? _c(
           "div",
           { staticClass: "h-100" },
-          [
-            _c("listening-component", {
-              attrs: { questionListening: _vm.questions },
-            }),
-          ],
+          [_c("listening-component", { attrs: { examId: _vm.examId } })],
           1
         )
       : _vm._e(),
@@ -53753,11 +53819,7 @@ var render = function () {
       ? _c(
           "div",
           { staticClass: "h-100" },
-          [
-            _c("speaking-component", {
-              attrs: { questionSpeaking: _vm.questions },
-            }),
-          ],
+          [_c("speaking-component", { attrs: { examId: _vm.examId } })],
           1
         )
       : _vm._e(),
@@ -53912,13 +53974,15 @@ var render = function () {
           _vm._v(" "),
           _c("div", { staticClass: "row container-fluid" }, [
             _c("div", { staticClass: "col-lg-6 py-4" }, [
-              _c("div", { staticClass: "px-3 lecture overflow-auto" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.passage) +
-                    "\n                "
-                ),
-              ]),
+              _vm.startQuiz === true
+                ? _c("div", { staticClass: "px-3 lecture overflow-auto" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.passage) +
+                        "\n                "
+                    ),
+                  ])
+                : _vm._e(),
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-lg-6 py-4" }, [
@@ -53936,12 +54000,13 @@ var render = function () {
                           _c("h3", {}, [
                             _vm._v(
                               _vm._s(
-                                _vm.questionReading[_vm.questionIndex].id
+                                _vm.questionReading[_vm.questionIndex]
+                                  .reading_question.id
                               ) +
                                 ". " +
                                 _vm._s(
                                   _vm.questionReading[_vm.questionIndex]
-                                    .question
+                                    .reading_question.question
                                 )
                             ),
                           ]),
@@ -53957,16 +54022,20 @@ var render = function () {
                                   type: "number",
                                   id:
                                     "ques" +
-                                    _vm.questionReading[_vm.questionIndex].id,
+                                    _vm.questionReading[_vm.questionIndex]
+                                      .reading_question.id,
                                   hidden: "",
                                 },
                                 domProps: {
-                                  value: _vm.questionReading[_vm.questionIndex],
+                                  value:
+                                    _vm.questionReading[_vm.questionIndex]
+                                      .reading_question.id,
                                 },
                               }),
                               _vm._v(" "),
                               _vm._l(
-                                _vm.questionReading[_vm.questionIndex].answers,
+                                _vm.questionReading[_vm.questionIndex]
+                                  .reading_question.answers,
                                 function (answer) {
                                   return _c(
                                     "div",
@@ -54115,12 +54184,13 @@ var render = function () {
                           _c("h3", {}, [
                             _vm._v(
                               _vm._s(
-                                _vm.questionReading[_vm.questionIndex].id
+                                _vm.questionReading[_vm.questionIndex]
+                                  .reading_question.id
                               ) +
                                 ". " +
                                 _vm._s(
                                   _vm.questionReading[_vm.questionIndex]
-                                    .question
+                                    .reading_question.question
                                 )
                             ),
                           ]),
@@ -54140,12 +54210,15 @@ var render = function () {
                                   hidden: "",
                                 },
                                 domProps: {
-                                  value: _vm.questionReading[_vm.questionIndex],
+                                  value:
+                                    _vm.questionReading[_vm.questionIndex]
+                                      .reading_question.id,
                                 },
                               }),
                               _vm._v(" "),
                               _vm._l(
-                                _vm.questionReading[_vm.questionIndex].answers,
+                                _vm.questionReading[_vm.questionIndex]
+                                  .reading_question.answers,
                                 function (answer) {
                                   return _c(
                                     "div",
@@ -54858,12 +54931,13 @@ var render = function () {
                           _c("h3", {}, [
                             _vm._v(
                               _vm._s(
-                                _vm.questionWriting[_vm.questionIndex].id
+                                _vm.questionWriting[_vm.questionIndex]
+                                  .writing_assessment_question.id
                               ) +
                                 ". " +
                                 _vm._s(
                                   _vm.questionWriting[_vm.questionIndex]
-                                    .question
+                                    .writing_assessment_question.question
                                 )
                             ),
                           ]),
@@ -54879,12 +54953,14 @@ var render = function () {
                                   type: "number",
                                   id:
                                     "ques" +
-                                    _vm.questionWriting[_vm.questionIndex].id,
+                                    _vm.questionWriting[_vm.questionIndex]
+                                      .writing_assessment_question.id,
                                   hidden: "",
                                 },
                                 domProps: {
                                   value:
-                                    _vm.questionWriting[_vm.questionIndex].id,
+                                    _vm.questionWriting[_vm.questionIndex]
+                                      .writing_assessment_question.id,
                                 },
                               }),
                               _vm._v(" "),
@@ -54990,7 +55066,7 @@ var render = function () {
                             ),
                             _vm._v(" "),
                             _vm._l(
-                              _vm.questionReading[_vm.questionIndex].answers,
+                              _vm.questionWriting[_vm.questionIndex].answers,
                               function (answer_item) {
                                 return _c(
                                   "h5",
@@ -55036,10 +55112,14 @@ var render = function () {
                     _vm._v(" "),
                     _c("h3", {}, [
                       _vm._v(
-                        _vm._s(_vm.questionWriting[_vm.questionIndex].id) +
+                        _vm._s(
+                          _vm.questionWriting[_vm.questionIndex]
+                            .writing_assessment_question.id
+                        ) +
                           ". " +
                           _vm._s(
-                            _vm.questionWriting[_vm.questionIndex].question
+                            _vm.questionWriting[_vm.questionIndex]
+                              .writing_assessment_question.question
                           )
                       ),
                     ]),

@@ -11,6 +11,10 @@ class StudentExamination extends Model
 
     protected $guarded = [];
 
+    const ANSWER_MC = 1;
+    const ANSWER_TEXT = 2;
+    const ANSWER_VIDEO = 3;
+
     public function student()
     {
         return $this->belongsTo(User::class);

@@ -36,16 +36,19 @@
                                 <thead>
                                     <tr>
                                         <th class="c-30">
-                                            course_id
+                                            course
                                         </th>
                                         <th>
-                                            exam_id
+                                            exam
                                         </th>
                                         <th>
-                                            quiz_id
+                                            quiz set
                                         </th>
                                         <th>
-                                            student
+                                            student name
+                                        </th>
+                                        <th>
+                                            reviewed
                                         </th>
                                         <th></th>
                                     </tr>
@@ -65,8 +68,23 @@
                                             <td>
                                                 {{ $value->student_id }}
                                             </td>
+                                            <td>
+                                                @if ($value->reviewed)
+                                                    <h4>
+                                                        <span class="badge badge-pill badge-secondary">
+                                                            Reviewed
+                                                        </span>
+                                                    </h4>
+                                                @else
+                                                    <h4>
+                                                        <span class="badge badge-pill badge-success">
+                                                            New
+                                                        </span>
+                                                    </h4>
+                                                @endif
+                                            </td>
                                             <td class="text-right">
-                                                    <a class="btn btn-outline-primary btn-sm" href="{{ route('admin.student-examination.mark', [
+                                                    <a class="btn btn-outline-primary btn-sm" href="{{ route('admin.student-examination.grade', [
                                                         'student'=> $value->student_id,
                                                         'course'=> $value->course_id,
                                                         'exam'=> $value->exam_id,

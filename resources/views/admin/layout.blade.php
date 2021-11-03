@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
     @stack('css')
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Helios</title>
 </head>
 
@@ -51,6 +53,12 @@
     <script type="application/javascript">
         document.body.addEventListener("onload", function() {
             this.style.display = 'block !important';
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
         });
     </script>
     <script src="{{ asset('js/moment.min.js') }}"></script>
