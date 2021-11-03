@@ -16,10 +16,14 @@
             </writing-component>
         </div>
         <div v-if="typeExercise === $getConst('listening')" class="h-100">
-            <listening-component v-bind:examId="examId"></listening-component>
+            <listening-component
+                v-bind:examId="examId"
+                v-bind:typeExam="typeExam"></listening-component>
         </div>
         <div v-if="typeExercise === $getConst('speaking')" class="h-100">
-            <speaking-component v-bind:examId="examId"></speaking-component>
+            <speaking-component
+                v-bind:examId="examId"
+                v-bind:typeExam="typeExam"></speaking-component>
         </div>
     </div>
 </template>

@@ -35,4 +35,9 @@ class Quiz extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    public function passage()
+    {
+        return $this->hasOne(Passage::class);
+    }
 }

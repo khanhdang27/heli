@@ -1,8 +1,8 @@
 <script>
 const Numbers = {
-    assessment: 5001,
-    exercise: 5002,
-    quiz: 5003,
+    assessment: 1,
+    exercise: 2,
+    quiz: 3,
     correct: 1,
     incorrect: -1,
     reading: 10,

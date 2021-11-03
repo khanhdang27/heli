@@ -259,51 +259,101 @@ class ExaminationController extends Controller
 
     public function getReadingAssessmentQuestionsClient(Examination $exams)
     {
-        $quiz = Quiz::query()->where('exam_id', $exams->id)->first();
-        $passage = Passage::query()->where('quiz_id', $quiz->id)->first();
-        $questions = Question::with('readingQuestion', 'readingQuestion.answers')
-            ->where('quiz_id', $quiz->id)
-            ->where('type','=', Question::READING)
-            ->get();
-        return response()->json(['passage' => $passage, 'questions' => $questions]);
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::READING);
+        }, 'quiz.question.readingQuestion','quiz.question.readingQuestion.answers', 'quiz.passage']);
+        $questions = $exams->quiz[0];
+        return response()->json(['questions' => $questions]);
     }
-    
+    public function getReadingExerciseQuestionsClient(Examination $exams)
+    {
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::READING);
+        }, 'quiz.question.readingQuestion','quiz.question.readingQuestion.answers', 'quiz.passage']);
+        $questions = $exams->quiz;
+        return response()->json(['questions' => $questions]);
+    }
+    public function getReadingQuizQuestionsClient(Examination $exams)
+    {
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::READING);
+        }, 'quiz.question.readingQuestion','quiz.question.readingQuestion.answers', 'quiz.passage']);
+        $questions = $exams->quiz;
+        return response()->json(['questions' => $questions]);
+    }
+
     public function getWritingAssessmentQuestionsClient(Examination $exams)
     {
-        $quiz = Quiz::query()->where('exam_id', $exams->id)->first();
-        $questions = Question::with('writingAssessmentQuestion', 'writingAssessmentQuestion.answers')
-            ->where('quiz_id', $quiz->id)
-            ->where('type','=', Question::WRITING)
-            ->get();
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::WRITING);
+        }, 'quiz.question.writingAssessmentQuestion','quiz.question.writingAssessmentQuestion.answers']);
+        $questions = $exams->quiz[0];
+        return response()->json(['questions' => $questions]);
+    }
+    public function getWritingExerciseQuestionsClient(Examination $exams)
+    {
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::WRITING);
+        }, 'quiz.question.writingAssessmentQuestion','quiz.question.writingAssessmentQuestion.answers']);
+        $questions = $exams->quiz;
         return response()->json(['questions' => $questions]);
     }
     public function getWritingQuizQuestionsClient(Examination $exams)
     {
-        $quiz = Quiz::query()->where('exam_id', $exams->id)->first();
-        $questions = Question::with('writingQuizQuestion')
-            ->where('quiz_id', $quiz->id)
-            ->where('type','=', Question::WRITING)
-            ->get();
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::WRITING);
+        }, 'quiz.question.writingQuizQuestion','quiz.question.writingQuizQuestion.answers']);
+        $questions = $exams->quiz;
         return response()->json(['questions' => $questions]);
     }
 
     public function getListeningAssessmentQuestionsClient(Examination $exams)
     {
-        $quiz = Quiz::query()->where('exam_id', $exams->id)->first();
-        $questions = Question::with('listenAssessmentQuestion','listenAssessmentQuestion.answers')
-            ->where('quiz_id', $quiz->id)
-            ->where('type','=', Question::LISTENING)
-            ->get();
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::LISTENING);
+        }, 'quiz.question.listenAssessmentQuestion','quiz.question.listenAssessmentQuestion.answers']);
+        $questions = $exams->quiz[0];
+        return response()->json(['questions' => $questions]);
+    }
+    public function getListeningExerciseQuestionsClient(Examination $exams)
+    {
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::LISTENING);
+        }, 'quiz.question.listenAssessmentQuestion','quiz.question.listenAssessmentQuestion.answers']);
+        $questions = $exams->quiz;
+        return response()->json(['questions' => $questions]);
+    }
+    public function getListeningQuizQuestionsClient(Examination $exams)
+    {
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::LISTENING);
+        }, 'quiz.question.listenAssessmentQuestion','quiz.question.listenAssessmentQuestion.answers']);
+        $questions = $exams->quiz;
         return response()->json(['questions' => $questions]);
     }
 
     public function getSpeakingAssessmentQuestionsClient(Examination $exams)
     {
-        $quiz = Quiz::query()->where('exam_id', $exams->id)->first();
-        $questions = Question::with('speakAssessmentQuestion')
-            ->where('quiz_id', $quiz->id)
-            ->where('type','=', Question::SPEAKING)
-            ->get();
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::SPEAKING);
+        }, 'quiz.question.speakAssessmentQuestion','quiz.question.speakAssessmentQuestion.answers']);
+        $questions = $exams->quiz[0];
+        return response()->json(['questions' => $questions]);
+    }
+    public function getSpeakingExerciseQuestionsClient(Examination $exams)
+    {
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::SPEAKING);
+        }, 'quiz.question.speakExercisesQuestion']);
+        $questions = $exams->quiz;
+        return response()->json(['questions' => $questions]);
+    }
+    public function getSpeakingQuizQuestionsClient(Examination $exams)
+    {
+        $exams->load(['quiz.question' => function ($query) {
+            $query->where('type','=', Question::SPEAKING);
+        }, 'quiz.question.speakQuizQuestion']);
+        $questions = $exams->quiz;
         return response()->json(['questions' => $questions]);
     }
 
