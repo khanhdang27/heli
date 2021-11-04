@@ -21,6 +21,7 @@ Route::group(['middleware' => 'language'], function () {
     Route::get('lang/{lang}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
 
     Route::resource('file', 'FileController');
+    Route::get('audio/{code}', 'AudioFileController@getByCode')->name('audio');
 
 });
 

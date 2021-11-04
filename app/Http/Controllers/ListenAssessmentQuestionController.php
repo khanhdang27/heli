@@ -54,7 +54,6 @@ class ListenAssessmentQuestionController extends Controller
                 'index' => $input['index']
             ]);
 
-            
             $listenQuestion = ListenAssessmentQuestion::create([
                 'question_id' => $question->id,
                 'question' => $input['question'],

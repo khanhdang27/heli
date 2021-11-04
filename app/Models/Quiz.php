@@ -40,4 +40,9 @@ class Quiz extends Model
     {
         return $this->hasOne(Passage::class);
     }
+
+    public function audioListen()
+    {
+        return $this->hasMany(AudioListen::class);
+    }
 }

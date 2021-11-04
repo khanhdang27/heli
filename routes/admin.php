@@ -178,6 +178,8 @@ Route::middleware('auth.admin')->group(function () {
     Route::post('student-examination/comment/{studentExam}', 'StudentExaminationController@comment')->name('student-examination.comment');
     Route::resource('student-examination', 'StudentExaminationController');
 
+    Route::post('audio-listen', 'AudioListenController@store')->name('audio-listen.store');
+
     Route::resource('setting', 'SettingController');
     Route::get('setting/edit/{key}', 'SettingController@edit');
     Route::get('setting/update/{key}', 'SettingController@update');

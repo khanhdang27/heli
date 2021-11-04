@@ -203,7 +203,6 @@ use App\Models\Examination;
     
 <script type="text/javascript">
     $(document).ready(function() {
-        console.log('it run')
         if (localStorage.quizQuestionSet) {
             if ( {{ $exam->type }} != 1 ) {
                 let quizSet = localStorage.getItem("quizQuestionSet")
@@ -222,7 +221,6 @@ use App\Models\Examination;
         }
         $('#accordionExample').on('shown.bs.collapse', function (event) {
             var scrollPosition = event.target.offsetTop;
-            console.log(scrollPosition)
             localStorage.setItem("scrollPosition", scrollPosition);
             if (event.target.dataset.parent == '#accordionExample') {
                 localStorage.setItem("collapseQuestion", event.target.id);
