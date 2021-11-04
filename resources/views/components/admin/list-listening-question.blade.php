@@ -1,3 +1,7 @@
+@php
+    use App\Models\ListenAssessmentQuestion;
+@endphp
+
 <ul class="list-group" id="listQuestionListening_{{ $quiz->set }}">   
     
     @foreach ($questions as $question)
@@ -38,6 +42,10 @@
                         <div class="form-group">
                             <label for="question" class="required text-dark">Question</label>
                             {{ Form::text('question', $question->questionContent()->question, ['class' => 'form-control', 'required']) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="part" class="required text-dark">Part</label>
+                            {{ Form::select('part', ListenAssessmentQuestion::PART, $question->questionContent()->part, ['class' => 'form-control', 'required']) }}
                         </div>
                         <div class="form-group">
                             <label for="message_wrong" class="required text-dark">Message Wrong</label>
@@ -91,8 +99,6 @@
                             document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;
                             $('#modalListeningAnswer{{ $question->id }}').modal('hide')
                         }
-                        console.log(data);
-
                     })
                     .fail(function (err) {
 
