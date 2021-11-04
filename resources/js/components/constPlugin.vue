@@ -5,10 +5,14 @@ const Numbers = {
     quiz: 3,
     correct: 1,
     incorrect: -1,
-    reading: 10,
-    writing: 20,
-    listening: 30,
-    speaking: 40,
+    reading: 1,
+    writing: 2,
+    listening: 3,
+    speaking: 4,
+    MC: 1,
+    Text: 2,
+    Video: 3
+
 };
 Numbers.install = function (Vue) {
     Vue.prototype.$getConst = (key) => {

@@ -1,29 +1,36 @@
 <template>
     <div class="h-100">
-        <div class="text-center mt-5">
-            <button class="btn btn-success" v-on:click="startQuiz()">Start Exam</button>
-        </div>
+<!--        <div class="text-center mt-5">-->
+<!--            <button class="btn btn-success" v-on:click="startQuiz()">Start Exam</button>-->
+<!--        </div>-->
         <div v-if="typeExercise === $getConst('reading')" class="h-100">
             <reading-component
                 v-bind:examId="examId"
-                v-bind:typeExam="typeExam">
+                v-bind:typeExam="typeExam"
+                v-bind:courseId="courseId"
+                @nextTypeExam="nextTypeExam">
             </reading-component>
         </div>
         <div v-if="typeExercise === $getConst('writing')" class="h-100">
             <writing-component
                 v-bind:examId="examId"
-                v-bind:typeExam="typeExam">
+                v-bind:typeExam="typeExam"
+                v-bind:courseId="courseId"
+                @nextTypeExam="nextTypeExam">
             </writing-component>
         </div>
         <div v-if="typeExercise === $getConst('listening')" class="h-100">
             <listening-component
                 v-bind:examId="examId"
-                v-bind:typeExam="typeExam"></listening-component>
+                v-bind:typeExam="typeExam"
+                v-bind:courseId="courseId"
+                @nextTypeExam="nextTypeExam"></listening-component>
         </div>
         <div v-if="typeExercise === $getConst('speaking')" class="h-100">
             <speaking-component
                 v-bind:examId="examId"
-                v-bind:typeExam="typeExam"></speaking-component>
+                v-bind:typeExam="typeExam"
+                v-bind:courseId="courseId"></speaking-component>
         </div>
     </div>
 </template>
@@ -48,15 +55,19 @@ export default {
                 correct: [],
                 wrong: [],
             },
-            typeExercise: ''
+            typeExercise: '',
         };
     },
     mounted: function () {
-        this.getAnswerUser();
+        this.typeExercise = this.$root.$getConst('reading');
     },
     methods: {
         startQuiz: function () {
             this.typeExercise = this.$root.$getConst('reading')
+        },
+        nextTypeExam: function(type){
+            console.log('next type is', type)
+            this.typeExercise = type
         },
         submitAnswer() {
             this.userAnswer();
@@ -157,5 +168,8 @@ export default {
             this.$emit("nextToLecture");
         },
     },
+    updated() {
+
+    }
 };
 </script>

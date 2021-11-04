@@ -14,20 +14,22 @@
                             />
                             <h5>Audio can played once only</h5>
                         </div>
-                        <h3 v-cloak>{{questionSpeaking[questionIndex].speak_assessment_question.id}}. {{ questionSpeaking[questionIndex].speak_assessment_question.question }}</h3>
+                        <h3 v-cloak>{{questionSpeaking[questionIndex].speak_assessment_question.id}}.
+                            {{ questionSpeaking[questionIndex].speak_assessment_question.question }}</h3>
                         <p>Choose the most correct answer</p>
                         <div class="mt-5">
                             <input type="number"
-                                   :id="'ques' + questionSpeaking[questionIndex].speak_assessment_question.id"
+                                   :id="'ques' + questionSpeaking[questionIndex].id"
                                    :value="questionSpeaking[questionIndex].id"
                                    hidden/>
                             <div v-for="answer in questionSpeaking[questionIndex].speak_assessment_question.answers"
                                  v-bind:key="answer.id"
                                  class="py-0 my-3 border border-primary rounded answer-selection">
-                                <input type="radio"
+                                <input class="ip-answer" type="radio"
                                        :id="answer.id"
                                        :value="answer.id"
                                        v-model="userChoose[questionIndex]"
+                                       v-bind:disabled="resultCheck.questions[questionIndex]"
                                        hidden/>
                                 <label :for="answer.id" class="w-100">
                                     <a class="btn text-left w-100">
@@ -44,6 +46,10 @@
                             :video-url="getVideoUrl()"
                             class="embed-responsive embed-responsive-16by9"
                         />
+<!--                        <div>-->
+<!--                            <PhotoCapture v-model="imageBase64" />-->
+<!--                            <VideoCapture uploadUrl="<example-server-address.com>" v-model="videoUrl" />-->
+<!--                        </div>-->
                     </div>
                     <div v-if="typeExam === $getConst('quiz')">
                         <h3 v-cloak v-for="question in questionSpeaking" :key="question.id">
@@ -61,7 +67,7 @@
             <button class="btn btn-primary" v-on:click="prev()" v-if="questionIndex > 0">
                 Previous
             </button>
-            <span v-if="typeExam !== $getConst('exercise')">
+            <span>
                 <button class="btn btn-primary mx-2" v-on:click="submit()"
                         v-if="questionIndex === questionSpeaking.length - 1">
                     Submit
@@ -74,7 +80,7 @@
         </div>
         <div class="text-right py-4 pr-3" v-else>
             <button class="btn btn-primary">
-                Submit
+                Upload
             </button>
         </div>
     </div>
@@ -86,7 +92,8 @@ import { vueVimeoPlayer } from "vue-vimeo-player";
 export default {
     props: {
         typeExam: Number,
-        examId: Number
+        examId: Number,
+        courseId: Number
     },
     components:{
         vueVimeoPlayer,
@@ -99,11 +106,19 @@ export default {
             videoId: "",
             imageBase64: null,
             videoUrl: null,
-            resultCheck: []
+            resultCheck: {
+                courseID: '',
+                examID:'',
+                quizID:'',
+                questions: []
+            },
+            timeStartDo: '',
+            timeDo: '',
         };
     },
     mounted () {
-        this.getQuestion()
+        this.getQuestion();
+        this.getAnswerUser()
     },
     methods: {
         getQuestion: function (){
@@ -148,6 +163,7 @@ export default {
         },
         next: function () {
             if (this.questionIndex < this.questionSpeaking.length - 1) {
+                this.userAnswer()
                 this.questionIndex++;
             }
         },
@@ -162,23 +178,50 @@ export default {
                 process.env.MIX_VIMEO_APP_ID
             );
         },
-        check: function () {
-            if (undefined) {
-                this.resultCheck.push(-1)
+        submit: function () {
+            this.userAnswer();
+            console.log('tra loi ne', this.resultCheck)
+        },
+        userAnswer: function () {
+            this.questionNo = document.getElementById(
+                "ques" + this.questionSpeaking[this.questionIndex].id
+            ).value;
+
+            this.userAnswerQuiz({
+                answerType: this.$root.$getConst('MC'),
+                questionID: parseInt(this.questionNo),
+                answerID: this.userChoose[this.questionIndex],
+                time: this.timeDo
+            });
+        },
+        userAnswerQuiz: function (value) {
+            if (this.resultCheck.questions.length === 0) {
+                this.resultCheck.courseID = this.courseId
+                this.resultCheck.examID = this.examId
+                this.resultCheck.quizID = this.questionSpeaking[this.questionIndex].quiz_id
+                this.resultCheck.questions.push(value)
             } else {
-                for (let i = 0; i < this.questionSpeaking[this.questionIndex].answers.length; i++) {
-                    if (this.questionSpeaking[this.questionIndex].answers[i].id === this.userChoose[this.questionIndex]) {
-                        if (this.questionSpeaking[this.questionIndex].answers[i].is_correct === 1) {
-                            return this.resultCheck.push(1)
+                if (
+                    this.resultCheck.questions.some((item) => {
+                        return value.questionID === item.questionID;
+                    })
+                ) {
+                    this.resultCheck.questions.map((item) => {
+                        if (value.questionID === item.questionID) {
+                            return (item.answerID = value.answerID);
                         }
-                        return this.resultCheck.push(-1)
-                    }
+                    });
+                } else {
+                    this.resultCheck.questions.push(value);
                 }
             }
-            console.log(this.resultCheck)
+            localStorage.setItem("speaking", JSON.stringify(this.resultCheck));
         },
-        submit: function () {
-            console.log('tra loi ne', this.userChoose)
+        getAnswerUser() {
+            this.resultCheck = JSON.parse(localStorage.getItem("speaking")) || new Array();
+            this.resultCheck.questions.forEach((item) => {
+                this.userChoose.push(item.answerID);
+            });
         },
     }
 }
