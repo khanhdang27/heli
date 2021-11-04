@@ -49,7 +49,6 @@ class PassageController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Create Success !!!');
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             return redirect()->back()->with('error', 'Create Fails !!!');
         }
@@ -98,7 +97,6 @@ class PassageController extends Controller
             DB::commit();
             return redirect()->back()->with('success', 'Create Success !!!');
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollBack();
             return redirect()->back()->with('error', 'Create Fails !!!');
         }

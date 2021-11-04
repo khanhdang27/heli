@@ -48,7 +48,6 @@ class WritingAssessmentAnswerController extends Controller
             return response()->json(['message' => 'Success', 'answer' => $readingAnswer]);
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return response()->json(['message' => 'error']);
         }
     }
@@ -98,7 +97,6 @@ class WritingAssessmentAnswerController extends Controller
         DB::beginTransaction();
         try {
             $answer->delete();
-            // dd(DB::getQueryLog());
             DB::commit();
             return response([
                 'message' => 'Delete success!'

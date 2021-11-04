@@ -95,7 +95,7 @@
                         if (data.message == 'Success') {
                             let answerHTML = `<li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input" id="answer_${data.answer.id}" name="answer">
+                                        <input type="radio" class="form-check-input" id="answer_${data.answer.id}" name="answer" value="${data.answer.id}">
                                         <label class="form-check-label " for="answer_${data.answer.id}">${data.answer.answer}</label>
                                     </div>
                                     <a href="javascript:void(0)">

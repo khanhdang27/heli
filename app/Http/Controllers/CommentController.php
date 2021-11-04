@@ -68,8 +68,6 @@ class CommentController extends Controller
             $refer->save();
 
             DB::commit();
-
-            // dd($comment, $refer);
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();

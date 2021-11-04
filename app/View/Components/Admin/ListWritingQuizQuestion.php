@@ -30,8 +30,6 @@ class ListWritingQuizQuestion extends Component
         // DB::enableQueryLog();
         $this->question = Question::where('quiz_id', $this->quiz->id)
             ->where('type', Question::WRITING)->get();
-        //     $this->question[0]->questionContent();
-        // dd(DB::getQueryLog());
         return view('components.admin.list-writing-quiz-question',['quiz' => $this->quiz, 'questions' => $this->question]);
     }
 }

@@ -65,7 +65,6 @@ class WritingAssessmentQuestionController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return back()->withErrors('Create error!');
         }
     }
@@ -104,7 +103,6 @@ class WritingAssessmentQuestionController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd( $th);
             return back()->withErrors('Update error!');
         }
     }

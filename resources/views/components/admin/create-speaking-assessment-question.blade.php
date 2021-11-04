@@ -21,14 +21,16 @@ use App\Models\ListenAssessmentQuestion;
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.assessment.store', ['quiz' => $quiz->id])]) !!}
+                {!! Form::open(['methods' => 'POST', 
+                        'url' => route('admin.quiz.question.speaking.assessment.store', ['quiz' => $quiz->id]), 
+                        'enctype'=>'multipart/form-data']) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}
                 </div>
-                <div class="form-group">
-                    <label for="audio_ref" class="required">Audio Ref</label>
-                    {{ Form::text('audio_ref', old('audio_ref'), ['class' => 'form-control', 'required']) }}
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="audioSpeakingAssessment" name="audio" accept=".mp3">
+                    <label class="custom-file-label" for="audioSpeakingAssessment">Choose file</label>
                 </div>
                 <div class="form-group">
                     <label for="question" class="required">Question</label>
@@ -51,3 +53,10 @@ use App\Models\ListenAssessmentQuestion;
         </div>
     </div>
 </div>
+
+<script type="application/javascript">
+    $("#audioSpeakingAssessment").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>

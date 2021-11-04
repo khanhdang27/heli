@@ -15,6 +15,7 @@ use App\Models\StudentCourses;
 use App\Models\Tutor;
 use App\Models\User;
 use App\Models\Examination;
+use App\Models\File;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -154,7 +155,7 @@ class CourseController extends Controller
                 'student_course' => $student_course,
             ]);
         } catch (\Throwable $th) {
-            dd($th);
+            return back()->withErrors('Error!');
         }
     }
 
@@ -182,7 +183,8 @@ class CourseController extends Controller
 
             return response()->json(['lectures' => $lecture_course->sortBy('index')->toArray(), 'student_lecture' => $student_course->toArray()]);
         } catch (\Throwable $th) {
-            dd($th);
+            
+            return back()->withErrors('Error!');
         }
     }
 
@@ -301,7 +303,6 @@ class CourseController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return back()->withErrors('Update Error!');
         }
     }
@@ -315,7 +316,14 @@ class CourseController extends Controller
 
     public function storeLecture(Request $request, Course $course)
     {
-        $input = $request->input();
+        $input = $request->validate([
+            'lectures_name'=> 'required',
+            'lectures_description'=> 'required',
+            'video_resource'=> 'required',
+            'index'=> 'required',
+            'level'=> 'required',
+            'file'=> 'required'
+        ]);
         DB::beginTransaction();
         try {
             $lecture = Lecture::create([
@@ -327,23 +335,65 @@ class CourseController extends Controller
                 'level' => $input['level'],
             ]);
 
+            if (!empty($input['file'])) {
+                $file = File::storeFile(
+                    $input['file'],
+                    Blog::class,
+                    $lecture->id
+                );
+            }
+
             DB::commit();
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             return back()->withErrors('Create Error!');
         }
     }
 
     public function editLecture(Course $course, Lecture $lecture)
     {
-        # code...
+        return view('admin.course.lecture.edit', [
+            'course' => $course,
+            'lecture' => $lecture,
+        ]);
     }
 
-    public function updateLecture(Course $course, Lecture $lecture)
+    public function updateLecture(Request $request, Course $course, Lecture $lecture)
     {
-        # code...
+        $input = $request->validate([
+            'lectures_name'=> 'required',
+            'lectures_description'=> 'required',
+            'video_resource'=> 'required',
+            'index'=> 'required',
+            'level'=> 'required',
+            'file'=> 'file|nullable'
+        ]);
+        DB::beginTransaction();
+        try {
+            $lecture->update([
+                'lectures_name' => $input['lectures_name'],
+                'lectures_description' => $input['lectures_description'],
+                'video_resource' => $input['video_resource'],
+                'index' => $input['index'],
+                'level' => $input['level'],
+            ]);
+            if (!empty($input['file'])) {
+                if (!empty($lecture->file)) {
+                    $lecture->file->delete();
+                }
+                $file = File::storeFile(
+                    $input['file'],
+                    Blog::class,
+                    $lecture->id
+                );
+            }
+            DB::commit();
+            return back()->with('success', 'Update success!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->withErrors('Update Error!');
+        }
     }
 
     public function destroyLecture(Course $course, Lecture $lecture)
@@ -451,7 +501,6 @@ class CourseController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return back()->withErrors('Create error!');
         }
     }
@@ -524,7 +573,6 @@ class CourseController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return back()->withErrors('Create error!');
         }
     }

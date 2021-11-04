@@ -61,13 +61,15 @@ use App\Models\Lecture;
                                 </div>
                             </div>
 
-                            <input type="text" id="clipbroad" class="hidden" name="clipbroad">
-
                             {{ Form::label('video_resource', 'Video Resource') }}
                             {{ Form::text('video_resource', old('video_resource'), ['class' => 'form-control', 'required', 'id' => 'index']) }}
                         </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile" name="file" accept=".pdf">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
                         <div class="form-group">
-                            <label for="" ></label>
+                            <label for="level" >Level</label>
                             {{ Form::select('level', Lecture::LEVELS, old('leve'), ['class' => 'form-control']) }}
                         </div>
                         <button type="submit" class="btn btn-primary" > Save </button>
@@ -79,5 +81,11 @@ use App\Models\Lecture;
         </div> <!-- / .row -->
     </div>
     <script src="{{ asset('js/vimeo_upload_process.js') }}"></script>
+    <script type="application/javascript">
+        $("#customFile").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 
 @endsection

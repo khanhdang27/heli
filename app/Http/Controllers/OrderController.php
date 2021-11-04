@@ -60,13 +60,11 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-//        dd(Auth::id());
         [
             $product_id,
             $courses_with_group,
             $student_bought
         ] = $this->getVariable($request);
-//        dd($courses_with_group->membershipCourses->course->id);
         $paymentMethods = $this->getPaymentMethod();
         if (empty($paymentMethods[0])) {
             if ($request->ajax()) {

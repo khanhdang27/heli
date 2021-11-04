@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AudioFile;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\SpeakAssessmentAnswer;
@@ -42,10 +43,11 @@ class SpeakAssessmentQuestionController extends Controller
         $input = $request->validate([
             'index'=> 'required',
             'question'=> 'required',
-            'audio_ref'=> 'required',
+            'audio'=> 'file',
             'message_wrong'=> 'required',
             'lecture_index'=> 'required',
         ]);
+
         DB::beginTransaction();
         try {
             $question = Question::create([
@@ -54,20 +56,21 @@ class SpeakAssessmentQuestionController extends Controller
                 'index' => $input['index']
             ]);
 
-            
-            $listenQuestion = SpeakAssessmentQuestion::create([
-                'question_id' => $question->id,
-                'question' => $input['question'],
-                'audio_ref' => $input['audio_ref'],
-                'message_wrong' => $input['message_wrong'],
-                'lecture_index' => $input['lecture_index'],
-            ]);
+            if(!empty($input['audio'])){
+                $file = AudioFile::storeFile($input['audio']);
+                $listenQuestion = SpeakAssessmentQuestion::create([
+                    'question_id' => $question->id,
+                    'question' => $input['question'],
+                    'audio_ref' => $file,
+                    'message_wrong' => $input['message_wrong'],
+                    'lecture_index' => $input['lecture_index'],
+                ]);
+            }
 
             DB::commit();
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return back()->withErrors('Create error!');
         }
     }
@@ -122,7 +125,7 @@ class SpeakAssessmentQuestionController extends Controller
         $input = $request->validate([
             'index'=> 'required',
             'question'=> 'required',
-            'audio_ref'=> 'required',
+            'audio'=> 'nullable|file',
             'message_wrong'=> 'required',
             'lecture_index'=> 'required',
         ]);
@@ -130,13 +133,18 @@ class SpeakAssessmentQuestionController extends Controller
         try {
             $question->update([
                 'index' => $input['index']
-            ]);
+            ]); 
 
-            $readQuestion = SpeakAssessmentQuestion::where(['question_id' => $question->id])->first();
+            $speakQuestion = SpeakAssessmentQuestion::where(['question_id' => $question->id])->first();
 
-            $readQuestion->update([
+            if(!empty($input['audio'])){
+                $file = AudioFile::storeFile($input['audio']);
+                $speakQuestion->update([
+                    'audio_ref' => $file,
+                ]);
+            }
+            $speakQuestion->update([
                 'question' => $input['question'],
-                'audio_ref' => $input['audio_ref'],
                 'message_wrong' => $input['message_wrong'],
                 'lecture_index' => $input['lecture_index'],
             ]);

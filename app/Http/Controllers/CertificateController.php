@@ -126,7 +126,6 @@ class CertificateController extends Controller
                         break;
                 }
             })->latest('created_at')->simplePaginate(15);
-        // dd(DB::getQueryLog());
 
         return view('certificate.index', [
             'courses' => $courses_with_group,

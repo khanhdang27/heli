@@ -67,9 +67,7 @@ class ExaminationController extends Controller
                 ->route('admin.course.examination.edit', ['course' => $course->id, 'exam' => $exam->id])
                 ->with('success', 'Create success!');
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollback();
-            dd($th);
             return back()->withErrors('errors', 'Create errors!');
         }
     }
@@ -165,7 +163,6 @@ class ExaminationController extends Controller
     public function checkExam(Request $request, Examination $exams)
     {
         $input = $request->input();
-        // dd($input);
         DB::beginTransaction();
         try {
             $courseId = $input['courseId'];

@@ -181,7 +181,6 @@ class DiscountController extends Controller
             DB::commit();
             return back()->with(['success'=> "Update Succeed"]);
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollback();
             return back()->with(['errors'=> "Update Error"]);
         }

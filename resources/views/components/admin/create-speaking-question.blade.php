@@ -20,7 +20,9 @@ use App\Models\Examination;
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.exercises.store', ['quiz' => $quiz->id])]) !!}
+                {!! Form::open(['methods' => 'POST', 
+                    'url' => route('admin.quiz.question.speaking.exercises.store', ['quiz' => $quiz->id]), 
+                    'enctype'=>'multipart/form-data']) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}

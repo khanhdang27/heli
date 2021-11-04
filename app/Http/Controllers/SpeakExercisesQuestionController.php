@@ -65,7 +65,6 @@ class SpeakExercisesQuestionController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return back()->withErrors('Create error!');
         }
     }

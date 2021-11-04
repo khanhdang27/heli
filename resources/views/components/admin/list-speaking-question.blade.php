@@ -30,7 +30,10 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.speaking.exercises.update', ['quiz' => $quiz->id, 'question' => $question->id]), 'id' => 'formReadingQuestion_{{ $question->id }}']) !!}
+                                {!! Form::open(['methods' => 'put', 
+                                    'url' => route('admin.quiz.question.speaking.exercises.update', ['quiz' => $quiz->id, 'question' => $question->id]), 
+                                    'id' => 'formReadingQuestion_{{ $question->id }}',
+                                    'enctype'=>'multipart/form-data']) !!}
 
                                 <div class="form-group">
                                     <label for="index" class="required text-dark">Index</label>

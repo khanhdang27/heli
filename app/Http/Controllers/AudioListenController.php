@@ -58,7 +58,6 @@ class AudioListenController extends Controller
                 ]);
 
                 DB::commit();
-                dd( $file, $audioListen);
                 return back()->with('success', 'Save success');
             } else {
                 DB::rollBack();
@@ -66,14 +65,8 @@ class AudioListenController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             return back()->withErrors('Save error');
         }
-        
-
-
-        
-        dd($input);
     }
 
     /**

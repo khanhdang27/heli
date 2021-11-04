@@ -8,8 +8,10 @@ $audio_2 = $quiz->audioListen->where('part',2)->first();
 @endphp
 
 <div class="d-flex mb-3">
+    <button type="button" class="btn btn-success ml-auto" data-toggle="modal"
+        data-target="#modalListening_{{ $quiz->id }}"> Add Question </button>
     @if (!empty($audio_1))
-        <button type="button" class="btn btn-outline-warning ml-auto" data-toggle="modal"
+        <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal"
             data-target="#modalAudioUpdate" 
             data-quiz="{{ $quiz->id }}" 
             data-exam="{{ $quiz->exam_id }}" 
@@ -17,7 +19,7 @@ $audio_2 = $quiz->audioListen->where('part',2)->first();
             data-audio="{{ asset(route('audio',$audio_1->audio_code)) }}"
             data-part="1"> Update Audio Part 1 </button>
     @else 
-        <button type="button" class="btn btn-outline-success ml-auto" data-toggle="modal"
+        <button type="button" class="btn btn-outline-success ml-2" data-toggle="modal"
             data-target="#modalAudio" 
             data-quiz="{{ $quiz->id }}" 
             data-exam="{{ $quiz->exam_id }}" 
@@ -25,12 +27,12 @@ $audio_2 = $quiz->audioListen->where('part',2)->first();
             data-part="1"> Add Audio Part 1 </button>
     @endif
     @if (!empty($audio_2))
-        <button type="button" class="btn btn-outline-warning ml-auto" data-toggle="modal"
+        <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal"
             data-target="#modalAudioUpdate" 
             data-quiz="{{ $quiz->id }}" 
             data-exam="{{ $quiz->exam_id }}" 
             data-course="{{ $quiz->exams->course_id }}" 
-            data-audio="{{ route('audio',$audio_2->audio_code) }}"
+            data-audio="{{ asset(route('audio',$audio_2->audio_code)) }}"
             data-part="2"> Update Audio Part 2 </button>
     @else 
         <button type="button" class="btn btn-outline-success ml-2" data-toggle="modal"
@@ -41,8 +43,7 @@ $audio_2 = $quiz->audioListen->where('part',2)->first();
             data-part="2"> Add Audio Part 2 </button>
     @endif
 
-    <button type="button" class="btn btn-success ml-2" data-toggle="modal"
-        data-target="#modalListening_{{ $quiz->id }}"> Add Question </button>
+    
 </div>
 
 <div class="modal fade" id="modalListening_{{ $quiz->id }}" tabindex="0" role="dialog"

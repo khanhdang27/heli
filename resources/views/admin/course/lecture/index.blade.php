@@ -123,6 +123,10 @@ use App\Models\Examination;
                                                                 data-id="{{ $lecture->id }}" data-type="Lecture">
                                                                 Index
                                                             </a>
+                                                            <a href="{{ route('admin.course.lecture.edit', ['course' => $course, 'lecture' => $lecture->id]) }}"
+                                                                class="dropdown-item">
+                                                                Update
+                                                            </a>
                                                             @can('course-delete')
                                                                 <a href="javascript:void(0)"
                                                                     onclick="itemDelete('{{ route('admin.course.lecture.destroy', ['course' => $course, 'lecture' => $lecture->id]) }}')"

@@ -30,7 +30,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.speaking.assessment.update', ['quiz' => $quiz->id, 'question' => $question->id]), 'id' => 'formReadingQuestion_{{ $question->id }}']) !!}
+                        {!! Form::open(['methods' => 'put', 
+                                'url' => route('admin.quiz.question.speaking.assessment.update', ['quiz' => $quiz->id, 'question' => $question->id]), 
+                                'id' => 'formReadingQuestion_{{ $question->id }}',
+                                'enctype'=>'multipart/form-data']) !!}
                         <div class="form-group">
                             <label for="index" class="required text-dark">Index</label>
                             {{ Form::number('index', $question->index, ['class' => 'form-control', 'required']) }}
@@ -39,9 +42,10 @@
                             <label for="question" class="required text-dark">Question</label>
                             {{ Form::text('question', $question->questionContent()->question, ['class' => 'form-control', 'required']) }}
                         </div>
-                        <div class="form-group">
-                            <label for="audio_ref" class="required text-dark">Audio</label>
-                            {{ Form::text('audio_ref', $question->questionContent()->audio_ref, ['class' => 'form-control', 'required']) }}
+                        <embed id="audio" type="text/html" src="{{asset(route('audio',  $question->questionContent()->audio_ref))}}" height="30" width="100%"> 
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="audioSpeakingAssessment_{{$question->id}}" name="audio" accept=".mp3">
+                            <label class="custom-file-label" for="audioSpeakingAssessment_{{$question->id}}">Choose file</label>
                         </div>
                         <div class="form-group">
                             <label for="message_wrong" class="required text-dark">Message Wrong</label>
@@ -84,8 +88,8 @@
                         if (data.message == 'Success') {
                             let answerHTML = `<li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div class="form-check">
-                                        <input type="radio" class="form-check-input" id="answer_${data.answer.id}" name="answer">
-                                        <label class="form-check-label " for="answer_${data.answer.id}">${data.answer.answer}</label>
+                                        <input type="radio" class="form-check-input" id="answer_${data.answer.id}" name="answer"  value="${data.answer.id}" >
+                                        <label class="form-check-label " for="answer_${data.answer.id}" >${data.answer.answer}</label>
                                     </div>
                                     <a href="javascript:void(0)">
                                         <i class="fe fe-trash mr-2 text-danger"></i>
@@ -155,5 +159,11 @@
     @endforeach
 </ul>
 
+<script type="application/javascript">
+    $("#audioSpeakingAssessment_{{$question->id}}").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
 
 <script src="{{ asset('js/admin/delete_data_item.js') }}"></script>

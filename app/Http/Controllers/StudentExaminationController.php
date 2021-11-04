@@ -68,7 +68,6 @@ class StudentExaminationController extends Controller
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             return back()->withErrors( 'Create error');
         }
 
@@ -162,7 +161,6 @@ class StudentExaminationController extends Controller
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             return back()->withErrors( 'Create error');
         }
     }
@@ -208,7 +206,6 @@ class StudentExaminationController extends Controller
             ]);
 
             DB::commit();
-            dd($studentExam);
             return response()->json(['message' =>'success']);
         } catch (\Throwable $th) {
             DB::rollBack();

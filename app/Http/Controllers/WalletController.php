@@ -152,7 +152,6 @@ class WalletController extends Controller
 
     public function payment(Request $request, $product_id)
     {
-//        dd($request->all());
         [
             $product_id,
             $courses_with_group,

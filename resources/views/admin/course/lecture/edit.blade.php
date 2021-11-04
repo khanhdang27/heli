@@ -1,97 +1,98 @@
 @php
-use \App\Utilities\SelectionByClass;
+
+use App\Utilities\SelectionByClass;
+use App\Models\Tutor;
+use App\Models\Subject;
+use App\Models\Lecture;
+
 @endphp
 
 @extends('admin.layout')
 @section('content')
-<!-- CARDS -->
-<div class="container-fluid mt-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 col-xl-8">
-            <!-- Goals -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex align-items-center">
-                        <div class="pr-2">
-                            <a class="btn btn-outline-dark btn-sm"
-                                href="{{route('admin.course.lecture.list', $course->id)}}">
-                                <i class="fe fe-arrow-left"></i>
-                            </a>
-                        </div>
-                        <div>
-                            <!-- Title -->
-                            <h4 class="card-header-title">
-                                Edit Lecture
-                            </h4>
-                        </div>
-                    </div> <!-- / .row -->
-                </div>
-                <div class="card-body">
+    <script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
+    <!-- CARDS -->
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-8">
+                <!-- Goals -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <div class="pr-2">
+                                <a class="btn btn-outline-dark btn-sm"
+                                    href="{{ route('admin.course.lecture.list', $course->id) }}">
+                                    <i class="fe fe-arrow-left"></i>
+                                </a>
+                            </div>
+                            <div>
+                                <!-- Title -->
+                                <h4 class="card-header-title">
+                                    Edit Lectures
+                                </h4>
+                            </div>
+                        </div> <!-- / .row -->
+                    </div>
                     <div class="card-body">
-                        {!! Form::open(['route' => ['admin.course.update', $course->id], 'method' => 'put', 'enctype' =>
-                        'multipart/form-data']) !!}
+                        {!! Form::open(['url' => route('admin.course.lecture.update', [ 'course' => $course->id, 'lecture' => $lecture->id]), 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group ">
-                            {{ Form::label('course_name:en', 'Course Name (English)') }}
-                            {{ Form::text('course_name:en', $course->course_name, ['class' => 'form-control']) }}
+                            {{ Form::label('lectures_name', 'Name') }}
+                            {{ Form::text('lectures_name', $lecture->lectures_name, ['class' => 'form-control', 'required', 'id' => 'lectures_name']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_name:cn', 'Course Name (Traditional Chinese)') }}
-                            {{ Form::text('course_name:cn', $course->course_name, ['class' => 'form-control']) }}
+                            {{ Form::label('lectures_description', 'Description') }}
+                            {{ Form::text('lectures_description', $lecture->lectures_description, ['class' => 'form-control', 'required', 'id' => 'lectures_description']) }}
                         </div>
                         <div class="form-group ">
-                            {{ Form::label('course_name:sc', 'Course Name (Simplify Chinese)') }}
-                            {{ Form::text('course_name:sc', $course->course_name, ['class' => 'form-control']) }}
+                            {{ Form::label('index', 'Index') }}
+                            {{ Form::number('index', $lecture->index, ['class' => 'form-control', 'required', 'id' => 'index']) }}
                         </div>
-                        <div class="d-flex flex-wrap justify-content-between">
-                            <div class="form-group w-25">
-                                {{ Form::label('subject_id', 'Subject') }}
-                                {{ Form::select('subject_id',
-                                        SelectionByClass::getValues(\App\Models\Subject::class,'subject_name','id'),
-                                        $course->subject->id, ['class' => 'form-control']) }}
+                        <div class="form-group ">
+                            Pick up video
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="browse"
+                                    accept="video/mp4,video/x-m4v,video/*">
+                                <label class="custom-file-label" for="customFile">Browse&hellip; </label>
                             </div>
-                            <div class="form-group w-25">
-                                {{ Form::label('tutor_id', 'Tutor') }}
-                                {{ Form::select('tutor_id',
-                                        SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'),
-                                        $course->tutor->id, ['class' => 'form-control']) }}
+                            <div id="results"></div>
+                            <div id="progress-container" class="progress">
+                                <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
+                                    role="progressbar" aria-valuenow="46" aria-valuemin="0" aria-valuemax="100"
+                                    style="width: 0%">&nbsp;0%
+                                </div>
                             </div>
-                            <div class="form-group w-25">
-                                {{ Form::label('type', 'Type') }}
-                                {{ Form::select('type', [1=>'Live course', 2=>'Course recorded video'],$course->type,['class'=>'form-control']) }}
-                            </div>
+
+                            {{ Form::label('video_resource', 'Video Resource') }}
+                            {{ Form::text('video_resource', $lecture->video_resource, ['class' => 'form-control', 'required', 'id' => 'index']) }}
+                            <div style="padding:25% 0 0 0;position:relative;">
+                                <iframe
+                                    src={{'https://player.vimeo.com/video/'.$lecture->video_resource.'?badge=0&autopause=0&app_id='. config('app.vimeo_app_id')}}
+                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;"    
+                                ></iframe>
+                            </div><script src="https://player.vimeo.com/api/player.js"></script>
                         </div>
-                        <div class="form-group ">
-                            {{ Form::label('course_description:en', 'Course Description (English)') }}
-                            {{ Form::text('course_description:en', $course->course_description, ['class' => 'form-control']) }}
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile" name="file" accept=".pdf">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
-                        <div class="form-group ">
-                            {{ Form::label('course_description:cn', 'Course Description (Traditional Chinese)') }}
-                            {{ Form::text('course_description:cn', $course->course_description, ['class' => 'form-control']) }}
+                        <div class="form-group">
+                            <label for="level">Level</label>
+                            {{ Form::select('level', Lecture::LEVELS, $lecture->level, ['class' => 'form-control']) }}
                         </div>
-                        <div class="form-group ">
-                            {{ Form::label('course_description:sc', 'Course Description (Simplify Chinese)') }}
-                            {{ Form::text('course_description:sc', $course->course_description, ['class' => 'form-control']) }}
-                        </div>
-                        <div class="form-group ">
-                            {{ Form::label('course_overview', 'Course Overview') }}
-                            {{ Form::textarea('course_overview',$course->course_overview,['class' => 'form-control','id'=>'ckeditor', 'required']) }}
-                        </div>
-                        <div class="form-group ">
-                            {{ Form::label('course_price', 'Course Price') }}
-                            {{ Form::text('course_price', $course->course_price, ['class' => 'form-control']) }}
-                        </div>
-                        {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
+                        <button type="submit" class="btn btn-primary"> Save </button>
                         {!! Form::close() !!}
                     </div>
                 </div>
+
             </div>
-        </div>
-    </div> <!-- / .row -->
-</div>
-<script type="application/javascript">
-    window.onload = function () {
-            CKEDITOR.replace('ckeditor');
-        };
-</script>
+        </div> <!-- / .row -->
+    </div>
+    <script src="{{ asset('js/vimeo_upload_process.js') }}"></script>
+    <script type="application/javascript">
+        $("#customFile").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
 @endsection
