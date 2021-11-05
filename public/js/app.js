@@ -4994,7 +4994,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -5081,7 +5080,6 @@ __webpack_require__.r(__webpack_exports__);
         _this2.studentLecture.push(_this2.lectureIndex);
 
         _this2.questions = response.data;
-        console.log("this.questions :>> ", _this2.questions);
       })["catch"](function (error) {
         console.error(error);
       });
@@ -5096,7 +5094,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios.get(route("site.course.related.list", this.courseId)).then(function (response) {
-        console.log("related >>>", response.data);
         _this3.related = response.data.courses;
       })["catch"](function (error) {
         console.error(error);
@@ -5106,7 +5103,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       axios.get(route("site.course.lectureList", this.courseId)).then(function (response) {
-        console.log("lectureList :>> ", response);
         _this4.isPassed = response.data.student_lecture.passed == 1;
         _this4.studentLecture = response.data.student_lecture.watched_list.split(",");
         _this4.lectureOpenTo = response.data.student_lecture.lecture_open;
@@ -5129,7 +5125,6 @@ __webpack_require__.r(__webpack_exports__);
     getLecture: function getLecture() {
       var _this5 = this;
 
-      console.log("showLecture", this.lectureList[this.lectureIndex]);
       axios.get(route("site.lecture.showLecture", {
         userId: this.userId,
         courseId: this.lectureList[this.lectureIndex].course_id,
@@ -5137,7 +5132,6 @@ __webpack_require__.r(__webpack_exports__);
         index: this.lectureList[this.lectureIndex].index,
         id: this.lectureList[this.lectureIndex].id
       })).then(function (response) {
-        console.log("showLecture", response);
         _this5.videoId = response.data.video_resource;
 
         _this5.studentLecture.push(_this5.lectureIndex);
@@ -5148,7 +5142,6 @@ __webpack_require__.r(__webpack_exports__);
     onClickLecture: function onClickLecture(index) {
       if (index <= this.lectureOpenTo) {
         this.lectureIndex = index;
-        this.showLecture();
       } else {
         confirm("This lecture not open now !");
       }
@@ -5167,13 +5160,12 @@ __webpack_require__.r(__webpack_exports__);
 
       this.syncDataLecture();
       setTimeout(function () {
-        return _this7.onClickLecture(parseInt(_this7.lectureIndex) + 1);
+        _this7.onClickLecture(parseInt(_this7.lectureIndex) + 1);
+
+        console.log('this.lectureIndex :>> ', _this7.lectureIndex);
       }, 2000);
     },
     showLecture: function showLecture() {
-      console.log(this.lectureList[this.lectureIndex].model_name);
-      console.log(this.lectureList[this.lectureIndex]);
-
       if (this.lectureList[this.lectureIndex].model_name === "Examination") {
         this.getExamination();
       } else {
@@ -5312,34 +5304,292 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var results = [{
-  type: 'quiz',
+  type: "quiz",
   score: 5.5,
   correct_question: 8,
   wrong_question: 5
 }, {
-  type: 'exercise',
+  type: "exercise",
   score: 6,
   correct_question: 10,
   wrong_question: 3
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    questionListening: Array
+    typeExam: Number,
+    examId: Number,
+    courseId: Number
   },
   data: function data() {
     return {
+      questionListening: [],
       questionIndex: 0,
-      questionNo: '',
+      questionNo: "",
       userChoose: [],
-      type: this.$root.$getConst('exercise'),
       allResults: [],
-      resultCheck: []
+      checkAnswer: [],
+      resultCheck: {
+        courseID: "",
+        examID: "",
+        quizID: "",
+        questions: []
+      },
+      timeStartDo: new Date(),
+      timeDo: 0,
+      audioSrc: "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3",
+      audioShow: false
     };
   },
+  mounted: function mounted() {
+    this.getQuestion();
+    this.getAnswerUser(); // if (this.typeExam === this.$root.$getConst('assessment') && this.resultCheck){
+    //     this.allResults = results
+    // }
+  },
   methods: {
+    audioStart: function audioStart() {
+      console.log("audio is start");
+      this.audioShow = true;
+    },
+    getQuestion: function getQuestion() {
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        this.getListeningAssessmentQuestionsClient();
+      } else if (this.typeExam === this.$root.$getConst("exercise")) {
+        this.getListeningExerciseQuestionsClient();
+      } else {
+        this.getListeningQuizQuestionsClient();
+      }
+    },
+    getListeningAssessmentQuestionsClient: function getListeningAssessmentQuestionsClient() {
+      var _this = this;
+
+      axios.get(route("site.exam.getListeningAssessmentQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data.questions);
+        _this.questionListening = response.data.questions.question;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getListeningExerciseQuestionsClient: function getListeningExerciseQuestionsClient() {
+      var _this2 = this;
+
+      axios.get(route("site.exam.getListeningExerciseQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data.questions);
+        _this2.questionListening = response.data.questions[0].question;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getListeningQuizQuestionsClient: function getListeningQuizQuestionsClient() {
+      var _this3 = this;
+
+      axios.get(route("site.exam.getListeningQuizQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data.questions);
+        _this3.questionListening = response.data.questions[0].question;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
     next: function next() {
       if (this.questionIndex < this.questionListening.length - 1) {
+        this.userAnswer();
         this.questionIndex++;
       }
     },
@@ -5348,47 +5598,69 @@ var results = [{
     },
     check: function check() {
       if (undefined) {
-        this.resultCheck.push(-1);
+        this.checkAnswer.push(-1);
       } else {
-        for (var i = 0; i < this.questionListening[this.questionIndex].answers.length; i++) {
-          if (this.questionListening[this.questionIndex].answers[i].id === this.userChoose[this.questionIndex]) {
-            if (this.questionListening[this.questionIndex].answers[i].is_correct === 1) {
-              return this.resultCheck.push(1);
+        for (var i = 0; i < this.questionListening[this.questionIndex].listen_assessment_question.answers.length; i++) {
+          if (this.questionListening[this.questionIndex].listen_assessment_question.answers[i].id === this.userChoose[this.questionIndex]) {
+            if (this.questionListening[this.questionIndex].listen_assessment_question.answers[i].is_correct === 1) {
+              return this.checkAnswer.push(1);
             }
 
-            return this.resultCheck.push(-1);
+            return this.checkAnswer.push(-1);
           }
         }
       }
 
-      console.log(this.resultCheck);
+      console.log(this.checkAnswer);
     },
     submit: function submit() {
-      console.log('cau tra loi ne', this.userChoose);
+      this.userAnswer();
+      this.allResults = results;
+      console.log("tra loi ne", this.resultCheck);
+    },
+    nextTypeExam: function nextTypeExam() {
+      this.$emit("nextTypeExam", this.$root.$getConst("speaking"));
     },
     userAnswer: function userAnswer() {
-      this.questionNo = document.getElementById("ques" + this.questions[this.questionIndex].id).value;
+      this.questionNo = document.getElementById("ques" + this.questionListening[this.questionIndex].id).value;
       this.userAnswerQuiz({
+        answerType: this.$root.$getConst("MC"),
         questionID: parseInt(this.questionNo),
-        answerID: this.userChoose[this.questionIndex]
+        answerID: this.userChoose[this.questionIndex],
+        time: this.timeDo
       });
     },
     userAnswerQuiz: function userAnswerQuiz(value) {
-      if (this.resultCheck.length === 0) {
-        this.resultCheck.push(value);
+      if (this.resultCheck.questions.length === 0) {
+        this.resultCheck.courseID = this.courseId;
+        this.resultCheck.examID = this.examId;
+        this.resultCheck.quizID = this.questionListening[this.questionIndex].quiz_id;
+        this.resultCheck.questions.push(value);
       } else {
-        if (this.resultCheck.some(function (item) {
+        if (this.resultCheck.questions.some(function (item) {
           return value.questionID === item.questionID;
         })) {
-          this.resultCheck.map(function (item) {
+          this.resultCheck.questions.map(function (item) {
             if (value.questionID === item.questionID) {
               return item.answerID = value.answerID;
             }
           });
         } else {
-          this.resultCheck.push(value);
+          this.resultCheck.questions.push(value);
         }
       }
+
+      localStorage.setItem("listening", JSON.stringify(this.resultCheck));
+    },
+    getAnswerUser: function getAnswerUser() {
+      var _this4 = this;
+
+      this.resultCheck = JSON.parse(localStorage.getItem("listening")) || {
+        questions: []
+      };
+      this.resultCheck.questions.forEach(function (item) {
+        _this4.userChoose.push(item.answerID);
+      });
     }
   }
 });
@@ -5407,6 +5679,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ReadingComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReadingComponent */ "./resources/js/components/Course/ReadingComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5453,61 +5737,61 @@ __webpack_require__.r(__webpack_exports__);
         correct: [],
         wrong: []
       },
-      typeExercise: ''
+      typeExercise: ""
     };
   },
   mounted: function mounted() {
-    this.getAnswerUser();
+    this.typeExercise = this.$root.$getConst("listening");
   },
   methods: {
-    startQuiz: function startQuiz() {
-      this.typeExercise = this.$root.$getConst('reading');
+    nextTypeExam: function nextTypeExam(type) {
+      this.typeExercise = type;
     },
-    submitAnswer: function submitAnswer() {
-      var _this = this;
-
-      this.userAnswer();
-      axios.post(route("site.exam.checkExam", {
-        exams: this.examId
-      }), {
-        courseId: this.courseId,
-        quiz: this.quiz
-      }).then(function (response) {
-        _this.result = response.data;
-        localStorage.removeItem('quiz');
-        var index = 0;
-
-        _this.result.quiz_result.forEach(function (item) {
-          var __question = _this.questions.find(function (_question) {
-            return _question.id === item.question;
-          });
-
-          var __answer = __question.answers.find(function (_answer) {
-            return _answer.is_correct;
-          });
-
-          if (item.is_correct == true) {
-            _this.showScore.correct.push({
-              key: index,
-              question: __question.question,
-              answer: __answer.answer
-            });
-          } else {
-            _this.showScore.wrong.push({
-              key: index,
-              question: __question.question,
-              answer: __answer.answer,
-              lecture: __question.lecture_index,
-              message: __question.message_wrong
-            });
-          }
-
-          index += 1;
-        });
-      })["catch"](function (error) {
-        console.error(error);
-      });
-    },
+    // submitAnswer() {
+    //     this.userAnswer();
+    //     axios
+    //         .post(
+    //             route("site.exam.checkExam", {
+    //                 exams: this.examId
+    //             }),
+    //             {
+    //                 courseId: this.courseId,
+    //                 quiz: this.quiz,
+    //             }
+    //         )
+    //         .then((response) => {
+    //             this.result = response.data;
+    //             localStorage.removeItem('quiz');
+    //             let index = 0;
+    //             this.result.quiz_result.forEach((item) => {
+    //                 let __question = this.questions.find((_question) => {
+    //                     return _question.id === item.question;
+    //                 });
+    //                 let __answer = __question.answers.find((_answer) => {
+    //                     return _answer.is_correct;
+    //                 });
+    //                 if (item.is_correct == true) {
+    //                     this.showScore.correct.push({
+    //                         key: index,
+    //                         question: __question.question,
+    //                         answer: __answer.answer,
+    //                     });
+    //                 } else {
+    //                     this.showScore.wrong.push({
+    //                         key: index,
+    //                         question: __question.question,
+    //                         answer: __answer.answer,
+    //                         lecture: __question.lecture_index,
+    //                         message: __question.message_wrong,
+    //                     });
+    //                 }
+    //                 index += 1;
+    //             });
+    //         })
+    //         .catch(function (error) {
+    //             console.error(error);
+    //         });
+    // },
     userAnswer: function userAnswer() {
       this.questionNo = document.getElementById("ques" + this.questions[this.questionIndex].id).value;
       this.userAnswerQuiz({
@@ -5544,11 +5828,13 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.setItem("quiz", JSON.stringify(this.quiz));
     },
     getAnswerUser: function getAnswerUser() {
-      var _this2 = this;
+      var _this = this;
 
-      this.quiz = JSON.parse(localStorage.getItem("quiz")) || new Array();
+      this.quiz = JSON.parse(localStorage.getItem("quiz")) || {
+        questions: []
+      };
       this.quiz.forEach(function (item) {
-        _this2.userChoose.push(item.answerID);
+        _this.userChoose.push(item.answerID);
       });
     },
     goToLecture: function goToLecture(index) {
@@ -5759,13 +6045,165 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var results = [{
-  type: 'quiz',
+  type: "exercise",
   score: 5.5,
   correct_question: 8,
   wrong_question: 5
 }, {
-  type: 'assessment',
+  type: "quiz",
   score: 6,
   correct_question: 10,
   wrong_question: 3
@@ -5773,73 +6211,148 @@ var results = [{
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     typeExam: Number,
-    examId: Number
+    examId: Number,
+    courseId: Number
   },
   data: function data() {
     return {
       questionReading: [],
       questionIndex: 0,
-      questionNo: '',
+      questionNo: "",
       userChoose: [],
-      type: Number,
-      passage: '',
+      passage: "",
       allResults: [],
-      resultCheck: [],
+      checkAnswer: [],
+      resultCheck: {
+        courseID: "",
+        examID: "",
+        quizID: "",
+        questions: []
+      },
       startQuiz: false,
-      timeNow: '',
-      timeEnd: '',
+      timeNow: "",
+      timeEnd: "",
       timeLimitQuiz: 60,
-      timeLimitAssessment: 2
+      timeLimitAssessment: 2,
+      timeStartDo: "",
+      timeDo: ""
     };
   },
+  mounted: function mounted() {
+    this.getQuestion();
+    this.getAnswerUser();
+  },
   methods: {
+    getQuestion: function getQuestion() {
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        this.getReadingAssessmentQuestions();
+      } else if (this.typeExam === this.$root.$getConst("exercise")) {
+        this.getReadingExerciseQuestions();
+      } else {
+        this.getReadingQuizQuestions();
+      }
+    },
+    getReadingAssessmentQuestions: function getReadingAssessmentQuestions() {
+      var _this = this;
+
+      axios.get(route("site.exam.getReadingAssessmentQuestionsClient", this.examId)).then(function (response) {
+        _this.passage = response.data.questions.passage.content;
+        _this.questionReading = response.data.questions.question;
+        console.log("this.questionReading :>> ", _this.questionReading);
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getReadingExerciseQuestions: function getReadingExerciseQuestions() {
+      var _this2 = this;
+
+      axios.get(route("site.exam.getReadingExerciseQuestionsClient", this.examId)).then(function (response) {
+        _this2.passage = response.data.questions[0].passage.content;
+        _this2.questionReading = response.data.questions[0].question;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getReadingQuizQuestions: function getReadingQuizQuestions() {
+      var _this3 = this;
+
+      axios.get(route("site.exam.getReadingQuizQuestionsClient", this.examId)).then(function (response) {
+        _this3.passage = response.data.questions[0].passage.content;
+        _this3.questionReading = response.data.questions[0].question;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
     check: function check() {
       if (undefined) {
-        this.resultCheck.push(-1);
+        this.checkAnswer.push(-1);
       } else {
         for (var i = 0; i < this.questionReading[this.questionIndex].answers.length; i++) {
           if (this.questionReading[this.questionIndex].answers[i].id === this.userChoose[this.questionIndex]) {
             if (this.questionReading[this.questionIndex].answers[i].is_correct === 1) {
-              return this.resultCheck.push(1);
+              return this.checkAnswer.push(1);
             }
 
-            return this.resultCheck.push(-1);
+            return this.checkAnswer.push(-1);
           }
         }
       }
 
-      console.log(this.resultCheck);
+      console.log(this.checkAnswer);
     },
     submit: function submit() {
-      console.log('tra loi ne', this.userChoose);
+      this.userAnswer();
+      this.allResults = results;
+    },
+    nextTypeExam: function nextTypeExam() {
+      this.$emit("nextTypeExam", this.$root.$getConst("writing"));
     },
     userAnswer: function userAnswer() {
-      this.questionNo = document.getElementById("ques" + this.questions[this.questionIndex].id).value;
+      this.questionNo = document.getElementById("ques" + this.questionReading[this.questionIndex].id).value;
+      this.timeDo = (new Date() - this.timeStartDo) / 1000;
+      this.timeStartDo = new Date();
       this.userAnswerQuiz({
+        answerType: this.$root.$getConst("MC"),
         questionID: parseInt(this.questionNo),
-        answerID: this.userChoose[this.questionIndex]
+        answerID: this.userChoose[this.questionIndex],
+        time: this.timeDo
       });
     },
     userAnswerQuiz: function userAnswerQuiz(value) {
-      if (this.resultCheck.length === 0) {
-        this.resultCheck.push(value);
+      if (this.resultCheck.questions.length === 0) {
+        this.resultCheck.courseID = this.courseId;
+        this.resultCheck.examID = this.examId;
+        this.resultCheck.quizID = this.questionReading[this.questionIndex].quiz_id;
+        this.resultCheck.questions.push(value);
       } else {
-        if (this.resultCheck.some(function (item) {
+        if (this.resultCheck.questions.some(function (item) {
           return value.questionID === item.questionID;
         })) {
-          this.resultCheck.map(function (item) {
+          this.resultCheck.questions.map(function (item) {
             if (value.questionID === item.questionID) {
               return item.answerID = value.answerID;
             }
           });
         } else {
-          this.resultCheck.push(value);
+          this.resultCheck.questions.push(value);
         }
-      } // localStorage.setItem("reading", JSON.stringify(this.resultCheck));
+      }
 
+      localStorage.setItem("reading", JSON.stringify(this.resultCheck));
+    },
+    getAnswerUser: function getAnswerUser() {
+      var _this4 = this;
+
+      this.resultCheck = JSON.parse(localStorage.getItem("reading")) || {
+        questions: []
+      };
+      this.resultCheck.questions.forEach(function (item) {
+        _this4.userChoose.push(item.answerID);
+      });
     },
     next: function next() {
       if (this.questionIndex < this.questionReading.length - 1) {
+        this.userAnswer();
         this.questionIndex++;
       }
     },
@@ -5849,43 +6362,25 @@ var results = [{
     startCallBack: function startCallBack(x) {
       console.log(x);
     },
-    endCallBack: function endCallBack(x) {// this.allResults = results;
-    },
-    getReadingAssessmentQuestions: function getReadingAssessmentQuestions() {
-      var _this = this;
-
-      axios.get(route("site.exam.getReadingAssessmentQuestionsClient", this.examId)).then(function (response) {
-        console.log(response.data);
-        _this.passage = response.data.passage.content;
-        _this.questionReading = response.data.questions;
-      })["catch"](function (error) {
-        console.error(error);
-      });
+    endCallBack: function endCallBack(x) {
+      console.log(x);
+      this.submit();
     },
     startExam: function startExam() {
-      if (this.typeExam === 1) {
-        this.type = this.$root.$getConst('assessment');
-      } else if (this.typeExam === 2) {
-        this.type = this.$root.$getConst('exercise');
-      } else {
-        this.type = this.$root.$getConst('quiz');
-      }
-
-      this.getReadingAssessmentQuestions();
       this.startQuiz = true;
       this.timeNow = new Date();
       this.timeEnd = new Date();
+      this.timeStartDo = this.timeNow;
 
-      if (this.type === this.$root.$getConst('quiz')) {
+      if (this.typeExam === this.$root.$getConst("quiz")) {
         this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitQuiz);
       }
 
-      if (this.type === this.$root.$getConst('assessment')) {
+      if (this.typeExam === this.$root.$getConst("assessment")) {
         this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitAssessment);
       }
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -5983,27 +6478,128 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    questionSpeaking: Array
+    typeExam: Number,
+    examId: Number,
+    courseId: Number
   },
   components: {
     vueVimeoPlayer: vue_vimeo_player__WEBPACK_IMPORTED_MODULE_0__.vueVimeoPlayer
   },
   data: function data() {
     return {
+      questionSpeaking: [],
       questionIndex: 0,
-      type: this.$root.$getConst('assessment'),
-      videoId: "588754544",
+      userChoose: [],
+      videoId: "",
       imageBase64: null,
       videoUrl: null,
-      resultCheck: []
+      resultCheck: {
+        courseID: "",
+        examID: "",
+        quizID: "",
+        questions: []
+      },
+      timeStartDo: "",
+      timeDo: ""
     };
   },
+  mounted: function mounted() {
+    this.getQuestion();
+    this.getAnswerUser();
+  },
   methods: {
+    getQuestion: function getQuestion() {
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        this.getSpeakingAssessmentQuestionsClient();
+      } else if (this.typeExam === this.$root.$getConst("exercise")) {
+        this.getSpeakingExerciseQuestionsClient();
+      } else {
+        this.getSpeakingQuizQuestionsClient();
+      }
+    },
+    getSpeakingAssessmentQuestionsClient: function getSpeakingAssessmentQuestionsClient() {
+      var _this = this;
+
+      axios.get(route("site.exam.getSpeakingAssessmentQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data.questions);
+        _this.questionSpeaking = response.data.questions.question;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getSpeakingExerciseQuestionsClient: function getSpeakingExerciseQuestionsClient() {
+      var _this2 = this;
+
+      axios.get(route("site.exam.getSpeakingExerciseQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data.questions);
+        _this2.questionSpeaking = response.data.questions[0].question;
+        _this2.videoId = _this2.questionSpeaking[_this2.questionIndex].speak_exercises_question.video_code;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getSpeakingQuizQuestionsClient: function getSpeakingQuizQuestionsClient() {
+      var _this3 = this;
+
+      axios.get(route("site.exam.getSpeakingQuizQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data.questions);
+        _this3.questionSpeaking = response.data.questions[0].question;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
     next: function next() {
       if (this.questionIndex < this.questionSpeaking.length - 1) {
+        this.userAnswer();
         this.questionIndex++;
       }
     },
@@ -6011,27 +6607,52 @@ __webpack_require__.r(__webpack_exports__);
       if (this.questionIndex > 0) this.questionIndex--;
     },
     getVideoUrl: function getVideoUrl() {
-      return "https://player.vimeo.com/video/" + this.videoId + "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" + "58479";
+      return "https://player.vimeo.com/video/" + this.questionSpeaking[this.questionIndex].speak_exercises_question.video_code + "?title=0&amp;byline=0&amp;portrait=0&amp;speed=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=" + "58479";
     },
-    check: function check() {
-      if (undefined) {
-        this.resultCheck.push(-1);
+    submit: function submit() {
+      this.userAnswer();
+      console.log("tra loi ne", this.resultCheck);
+    },
+    userAnswer: function userAnswer() {
+      this.questionNo = document.getElementById("ques" + this.questionSpeaking[this.questionIndex].id).value;
+      this.userAnswerQuiz({
+        answerType: this.$root.$getConst("MC"),
+        questionID: parseInt(this.questionNo),
+        answerID: this.userChoose[this.questionIndex],
+        time: this.timeDo
+      });
+    },
+    userAnswerQuiz: function userAnswerQuiz(value) {
+      if (this.resultCheck.questions.length === 0) {
+        this.resultCheck.courseID = this.courseId;
+        this.resultCheck.examID = this.examId;
+        this.resultCheck.quizID = this.questionSpeaking[this.questionIndex].quiz_id;
+        this.resultCheck.questions.push(value);
       } else {
-        for (var i = 0; i < this.questionSpeaking[this.questionIndex].answers.length; i++) {
-          if (this.questionSpeaking[this.questionIndex].answers[i].id === this.userChoose[this.questionIndex]) {
-            if (this.questionSpeaking[this.questionIndex].answers[i].is_correct === 1) {
-              return this.resultCheck.push(1);
+        if (this.resultCheck.questions.some(function (item) {
+          return value.questionID === item.questionID;
+        })) {
+          this.resultCheck.questions.map(function (item) {
+            if (value.questionID === item.questionID) {
+              return item.answerID = value.answerID;
             }
-
-            return this.resultCheck.push(-1);
-          }
+          });
+        } else {
+          this.resultCheck.questions.push(value);
         }
       }
 
-      console.log(this.resultCheck);
+      localStorage.setItem("speaking", JSON.stringify(this.resultCheck));
     },
-    submit: function submit() {
-      console.log('tra loi ne', this.userChoose);
+    getAnswerUser: function getAnswerUser() {
+      var _this4 = this;
+
+      this.resultCheck = JSON.parse(localStorage.getItem("speaking")) || {
+        questions: []
+      };
+      this.resultCheck.questions.forEach(function (item) {
+        _this4.userChoose.push(item.answerID);
+      });
     }
   }
 });
@@ -6209,11 +6830,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+var results = [{
+  type: "quiz",
+  score: 5.5,
+  correct_question: 8,
+  wrong_question: 5
+}, {
+  type: "assessment",
+  score: 6,
+  correct_question: 10,
+  wrong_question: 3
+}];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     typeExam: Number,
-    examId: Number
+    examId: Number,
+    courseId: Number
   },
   components: {
     ckeditor: (ckeditor4_vue__WEBPACK_IMPORTED_MODULE_0___default().component)
@@ -6222,22 +6895,42 @@ __webpack_require__.r(__webpack_exports__);
     return {
       questionWriting: [],
       questionIndex: 0,
-      type: Number,
-      editorData: '',
       editorConfig: {},
-      timeNow: '',
-      timeEnd: '',
+      timeNow: "",
+      timeEnd: "",
       timeLimitQuiz: 60,
       timeLimitAssessment: 20,
       startQuiz: false,
       userChoose: [],
       allResults: [],
-      resultCheck: []
+      checkAnswer: [],
+      resultCheck: {
+        courseID: "",
+        examID: "",
+        quizID: "",
+        questions: []
+      },
+      timeStartDo: "",
+      timeDo: ""
     };
   },
+  mounted: function mounted() {
+    this.getQuestion();
+    this.getAnswerUser();
+  },
   methods: {
+    getQuestion: function getQuestion() {
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        this.getWritingAssessmentQuestions();
+      } else if (this.typeExam === this.$root.$getConst("exercise")) {
+        this.getWritingExerciseQuestions();
+      } else {
+        this.getWritingQuizQuestions();
+      }
+    },
     next: function next() {
       if (this.questionIndex < this.questionWriting.length - 1) {
+        this.userAnswer();
         this.questionIndex++;
       }
     },
@@ -6254,53 +6947,126 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get(route("site.exam.getWritingAssessmentQuestionsClient", this.examId)).then(function (response) {
+        console.log("response.data >>>", response.data);
+        _this.questionWriting = response.data.questions.question.filter(function (question) {
+          return question.writing_assessment_question !== null;
+        });
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getWritingExerciseQuestions: function getWritingExerciseQuestions() {
+      var _this2 = this;
+
+      axios.get(route("site.exam.getWritingExerciseQuestionsClient", this.examId)).then(function (response) {
         console.log(response.data);
-        _this.questionWriting = response.data.questions;
+        _this2.questionWriting = response.data.questions[0].question;
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    getWritingQuizQuestions: function getWritingQuizQuestions() {
+      var _this3 = this;
+
+      axios.get(route("site.exam.getWritingQuizQuestionsClient", this.examId)).then(function (response) {
+        console.log(response.data);
+        _this3.questionWriting = response.data.questions[0].question;
       })["catch"](function (error) {
         console.error(error);
       });
     },
     startExam: function startExam() {
-      if (this.typeExam === 1) {
-        this.type = this.$root.$getConst('assessment');
-      } else if (this.typeExam === 2) {
-        this.type = this.$root.$getConst('exercise');
-      } else {
-        this.type = this.$root.$getConst('quiz');
-      }
-
-      this.getWritingAssessmentQuestions();
       this.startQuiz = true;
       this.timeNow = new Date();
       this.timeEnd = new Date();
+      this.timeStartDo = this.timeNow;
 
-      if (this.type === this.$root.$getConst('quiz')) {
+      if (this.typeExam === this.$root.$getConst("quiz")) {
         this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitQuiz);
       }
 
-      if (this.type === this.$root.$getConst('assessment')) {
+      if (this.typeExam === this.$root.$getConst("assessment")) {
         this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitAssessment);
       }
     },
     check: function check() {
       if (undefined) {
-        this.resultCheck.push(-1);
+        this.checkAnswer.push(-1);
       } else {
-        for (var i = 0; i < this.questionWriting[this.questionIndex].answers.length; i++) {
-          if (this.questionWriting[this.questionIndex].answers[i].id === this.userChoose[this.questionIndex]) {
-            if (this.questionWriting[this.questionIndex].answers[i].is_correct === 1) {
-              return this.resultCheck.push(1);
+        for (var i = 0; i < this.questionWriting[this.questionIndex].writing_assessment_question.answers.length; i++) {
+          if (this.questionWriting[this.questionIndex].writing_assessment_question.answers[i].id === this.userChoose[this.questionIndex]) {
+            if (this.questionWriting[this.questionIndex].writing_assessment_question.answers[i].is_correct === 1) {
+              return this.checkAnswer.push(1);
             }
 
-            return this.resultCheck.push(-1);
+            return this.checkAnswer.push(-1);
           }
         }
       }
 
-      console.log(this.resultCheck);
+      console.log(this.checkAnswer);
     },
     submit: function submit() {
-      console.log('tra loi ne', this.userChoose);
+      this.userAnswer();
+      this.allResults = results;
+      console.log("tra loi ne", this.resultCheck);
+    },
+    nextTypeExam: function nextTypeExam() {
+      this.$emit("nextTypeExam", this.$root.$getConst("listening"));
+    },
+    userAnswer: function userAnswer() {
+      var ansType;
+
+      if (this.typeExam === this.$root.$getConst("quiz")) {
+        ansType = this.$root.$getConst("text");
+      } else {
+        ansType = this.$root.$getConst("MC");
+      }
+
+      this.questionNo = document.getElementById("ques" + this.questionWriting[this.questionIndex].id).value;
+      this.timeDo = (new Date() - this.timeStartDo) / 1000;
+      this.timeStartDo = new Date();
+      this.userAnswerQuiz({
+        answerType: ansType,
+        questionID: parseInt(this.questionNo),
+        answerID: this.userChoose[this.questionIndex],
+        time: this.timeDo
+      });
+    },
+    userAnswerQuiz: function userAnswerQuiz(value) {
+      if (this.resultCheck.questions.length === 0) {
+        this.resultCheck.courseID = this.courseId;
+        this.resultCheck.examID = this.examId;
+        this.resultCheck.quizID = this.questionWriting[this.questionIndex].quiz_id;
+        this.resultCheck.questions.push(value);
+      } else {
+        if (this.resultCheck.questions.some(function (item) {
+          return value.questionID === item.questionID;
+        })) {
+          this.resultCheck.questions.map(function (item) {
+            if (value.questionID === item.questionID) {
+              return item.answerID = value.answerID;
+            }
+          });
+        } else {
+          this.resultCheck.questions.push(value);
+        }
+      }
+
+      localStorage.setItem("writing", JSON.stringify(this.resultCheck));
+    },
+    getAnswerUser: function getAnswerUser() {
+      var _this4 = this;
+
+      this.resultCheck = JSON.parse(localStorage.getItem("writing")) || {
+        questions: []
+      };
+      this.resultCheck.questions.forEach(function (item) {
+        console.log('item :>> ', item);
+
+        _this4.userChoose.push(item.answerID);
+      });
+      console.log('this.resultCheck :>> ', this.resultCheck);
     }
   }
 });
@@ -6934,15 +7700,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var Numbers = {
-  assessment: 5001,
-  exercise: 5002,
-  quiz: 5003,
+  assessment: 1,
+  exercise: 2,
+  quiz: 3,
   correct: 1,
   incorrect: -1,
-  reading: 10,
-  writing: 20,
-  listening: 30,
-  speaking: 40
+  reading: 1,
+  writing: 2,
+  listening: 3,
+  speaking: 4,
+  MC: 1,
+  Text: 2,
+  Video: 3
 };
 
 Numbers.install = function (Vue) {
@@ -53077,11 +53846,11 @@ var render = function () {
                             ? _c("div", [
                                 _c("h4", { staticClass: "mb-1" }, [
                                   _vm._v(
-                                    "\n                                    " +
+                                    "\n                  " +
                                       _vm._s(item.index) +
-                                      "\n                                    -\n                                    " +
+                                      "\n                  -\n                  " +
                                       _vm._s(item.name) +
-                                      "\n                                "
+                                      "\n                "
                                   ),
                                 ]),
                                 _vm._v(" "),
@@ -53116,11 +53885,11 @@ var render = function () {
                             ? _c("div", [
                                 _c("h4", { staticClass: "mb-1" }, [
                                   _vm._v(
-                                    "\n                                    " +
+                                    "\n                  " +
                                       _vm._s(item.index) +
-                                      "\n                                    -\n                                    " +
+                                      "\n                  -\n                  " +
                                       _vm._s(item.lectures_name) +
-                                      "\n                                "
+                                      "\n                "
                                   ),
                                 ]),
                                 _vm._v(" "),
@@ -53215,7 +53984,7 @@ var render = function () {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    " +
+                                      "\n                  " +
                                         _vm._s(
                                           course.subject.certificate
                                             .certificate_code
@@ -53245,9 +54014,9 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                        " +
+                                          "\n                    " +
                                             _vm._s(course.course_name) +
-                                            "\n                                    "
+                                            "\n                  "
                                         ),
                                       ]
                                     ),
@@ -53292,7 +54061,7 @@ var staticRenderFns = [
               "div",
               {
                 staticClass:
-                  "\n          rounded-circle\n          border-btn-next\n          animate-change-color\n          py-3\n          px-4\n        ",
+                  "\n            rounded-circle\n            border-btn-next\n            animate-change-color\n            py-3\n            px-4\n          ",
               },
               [_c("p", { staticClass: "h2 text-center mx-2" }, [_vm._v("❮")])]
             ),
@@ -53320,7 +54089,7 @@ var staticRenderFns = [
               "div",
               {
                 staticClass:
-                  "\n          rounded-circle\n          border-btn-next\n          animate-change-color\n          py-2\n          px-4\n        ",
+                  "\n            rounded-circle\n            border-btn-next\n            animate-change-color\n            py-2\n            px-4\n          ",
               },
               [
                 _c("p", { staticClass: "m-0 h2 text-center" }, [_vm._v("❯")]),
@@ -53358,20 +54127,20 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "h-100" }, [
+  return _c("div", { staticClass: "h-100 text-primary" }, [
+    _c("h1", { staticClass: "mt-4 text-center font-weight-bold" }, [
+      _vm._v("Listening"),
+    ]),
+    _vm._v(" "),
     _vm.allResults.length === 0
-      ? _c("div", { staticClass: "h-100" }, [
+      ? _c("div", [
           _c(
             "div",
             {
               staticClass:
-                "container-fluid h-100 d-flex flex-column justify-content-between text-primary",
+                "container-fluid h-100 d-flex flex-column justify-content-between",
             },
             [
-              _c("h1", { staticClass: "mt-4 text-center font-weight-bold" }, [
-                _vm._v("Listening"),
-              ]),
-              _vm._v(" "),
               _c(
                 "div",
                 {
@@ -53381,29 +54150,207 @@ var render = function () {
                 [
                   _c("div", { staticClass: "col-lg-8" }, [
                     _c("div", { staticClass: "h-100" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "border shadow-sm bg-white rounded p-3 mb-3 h4 text-center",
-                        },
-                        [
-                          _c("vimeo-player", {
-                            ref: "audio",
-                            attrs: {
-                              "player-height": 55,
-                              "video-id": "601557402",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("h5", [_vm._v("Audio can played once only")]),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm.type === _vm.$getConst("exercise")
+                      _vm.typeExam === _vm.$getConst("assessment")
                         ? _c("div", [
-                            _vm.resultCheck[_vm.questionIndex] ===
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "\n                  border\n                  shadow-sm\n                  bg-white\n                  rounded\n                  p-3\n                  mb-3\n                  h4\n                  text-center\n                ",
+                              },
+                              [
+                                _c(
+                                  "audio",
+                                  {
+                                    class: { "d-none": _vm.audioShow },
+                                    attrs: {
+                                      id: "audio",
+                                      controls: "",
+                                      controlsList:
+                                        "nodownload noremoteplayback",
+                                    },
+                                    on: {
+                                      play: function ($event) {
+                                        return _vm.audioStart()
+                                      },
+                                    },
+                                  },
+                                  [
+                                    _c("source", {
+                                      attrs: {
+                                        src: _vm.audioSrc,
+                                        type: "audio/mpeg",
+                                      },
+                                    }),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("h5", [
+                                  _vm._v("Audio can played once only"),
+                                ]),
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(
+                                      _vm.questionListening[_vm.questionIndex]
+                                        .listen_assessment_question
+                                    ) +
+                                    "\n              "
+                                ),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("h3", {}, [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(
+                                    _vm.questionListening[_vm.questionIndex]
+                                      .listen_assessment_question.id
+                                  ) +
+                                  ".\n                " +
+                                  _vm._s(
+                                    _vm.questionListening[_vm.questionIndex]
+                                      .listen_assessment_question.question
+                                  ) +
+                                  "\n              "
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Choose the most correct answer")]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "mt-5" },
+                              [
+                                _c("input", {
+                                  attrs: {
+                                    type: "number",
+                                    id:
+                                      "ques" +
+                                      _vm.questionListening[_vm.questionIndex]
+                                        .id,
+                                    hidden: "",
+                                  },
+                                  domProps: {
+                                    value:
+                                      _vm.questionListening[_vm.questionIndex]
+                                        .id,
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _vm._l(
+                                  _vm.questionListening[_vm.questionIndex]
+                                    .listen_assessment_question.answers,
+                                  function (answer) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key: answer.id,
+                                        staticClass:
+                                          "\n                    py-0\n                    my-2\n                    border border-primary\n                    rounded\n                    answer-selection\n                  ",
+                                      },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.userChoose[
+                                                  _vm.questionIndex
+                                                ],
+                                              expression:
+                                                "userChoose[questionIndex]",
+                                            },
+                                          ],
+                                          attrs: {
+                                            type: "radio",
+                                            id: answer.id,
+                                            disabled:
+                                              _vm.resultCheck.questions[
+                                                _vm.questionIndex
+                                              ],
+                                            hidden: "",
+                                          },
+                                          domProps: {
+                                            value: answer.id,
+                                            checked: _vm._q(
+                                              _vm.userChoose[_vm.questionIndex],
+                                              answer.id
+                                            ),
+                                          },
+                                          on: {
+                                            change: function ($event) {
+                                              return _vm.$set(
+                                                _vm.userChoose,
+                                                _vm.questionIndex,
+                                                answer.id
+                                              )
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "w-100",
+                                            attrs: { for: answer.id },
+                                          },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "btn text-left w-100",
+                                              },
+                                              [
+                                                _c(
+                                                  "h5",
+                                                  { staticClass: "mb-0" },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(answer.answer)
+                                                    ),
+                                                  ]
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    )
+                                  }
+                                ),
+                              ],
+                              2
+                            ),
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.typeExam === _vm.$getConst("exercise")
+                        ? _c("div", [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "\n                  border\n                  shadow-sm\n                  bg-white\n                  rounded\n                  p-3\n                  mb-3\n                  h4\n                  text-center\n                ",
+                              },
+                              [
+                                _c("vimeo-player", {
+                                  ref: "audio",
+                                  attrs: {
+                                    "player-height": 55,
+                                    "video-id": "601557402",
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("h5", [
+                                  _vm._v("Audio can played once only"),
+                                ]),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _vm.checkAnswer[_vm.questionIndex] ===
                             _vm.$getConst("incorrect")
                               ? _c(
                                   "div",
@@ -53416,14 +54363,14 @@ var render = function () {
                                       },
                                       [
                                         _vm._v(
-                                          "\n                                    Incorrect answer !\n                                "
+                                          "\n                  Incorrect answer !\n                "
                                         ),
                                       ]
                                     ),
                                     _vm._v(" "),
                                     _vm._l(
                                       _vm.questionListening[_vm.questionIndex]
-                                        .answers,
+                                        .listen_assessment_question.answers,
                                       function (answer_item) {
                                         return _c(
                                           "h5",
@@ -53436,11 +54383,11 @@ var render = function () {
                                             _vm.$getConst("correct")
                                               ? _c("span", [
                                                   _vm._v(
-                                                    "\n                                    Correct answer is: " +
+                                                    "\n                    Correct answer is: " +
                                                       _vm._s(
                                                         answer_item.answer
                                                       ) +
-                                                      "\n                                "
+                                                      "\n                  "
                                                   ),
                                                 ])
                                               : _vm._e(),
@@ -53453,7 +54400,7 @@ var render = function () {
                                 )
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm.resultCheck[_vm.questionIndex] ===
+                            _vm.checkAnswer[_vm.questionIndex] ===
                             _vm.$getConst("correct")
                               ? _c(
                                   "div",
@@ -53463,114 +54410,267 @@ var render = function () {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                Good job !\n                            "
+                                      "\n                Good job !\n              "
                                     ),
                                   ]
                                 )
                               : _vm._e(),
+                            _vm._v(" "),
+                            _c("h3", {}, [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(
+                                    _vm.questionListening[_vm.questionIndex]
+                                      .listen_assessment_question.id
+                                  ) +
+                                  ".\n                " +
+                                  _vm._s(
+                                    _vm.questionListening[_vm.questionIndex]
+                                      .listen_assessment_question.question
+                                  ) +
+                                  "\n              "
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Choose the most correct answer")]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "mt-5" },
+                              [
+                                _c("input", {
+                                  attrs: {
+                                    type: "number",
+                                    id:
+                                      "ques" +
+                                      _vm.questionListening[_vm.questionIndex]
+                                        .id,
+                                    hidden: "",
+                                  },
+                                  domProps: {
+                                    value:
+                                      _vm.questionListening[_vm.questionIndex]
+                                        .id,
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _vm._l(
+                                  _vm.questionListening[_vm.questionIndex]
+                                    .listen_assessment_question.answers,
+                                  function (answer) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key: answer.id,
+                                        staticClass:
+                                          "\n                    py-0\n                    my-2\n                    border border-primary\n                    rounded\n                    answer-selection\n                  ",
+                                      },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.userChoose[
+                                                  _vm.questionIndex
+                                                ],
+                                              expression:
+                                                "userChoose[questionIndex]",
+                                            },
+                                          ],
+                                          attrs: {
+                                            type: "radio",
+                                            id: answer.id,
+                                            disabled:
+                                              _vm.resultCheck.questions[
+                                                _vm.questionIndex
+                                              ],
+                                            hidden: "",
+                                          },
+                                          domProps: {
+                                            value: answer.id,
+                                            checked: _vm._q(
+                                              _vm.userChoose[_vm.questionIndex],
+                                              answer.id
+                                            ),
+                                          },
+                                          on: {
+                                            change: function ($event) {
+                                              return _vm.$set(
+                                                _vm.userChoose,
+                                                _vm.questionIndex,
+                                                answer.id
+                                              )
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "w-100",
+                                            attrs: { for: answer.id },
+                                          },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "btn text-left w-100",
+                                              },
+                                              [
+                                                _c(
+                                                  "h5",
+                                                  { staticClass: "mb-0" },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(answer.answer)
+                                                    ),
+                                                  ]
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    )
+                                  }
+                                ),
+                              ],
+                              2
+                            ),
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _c("h3", {}, [
-                        _vm._v(
-                          _vm._s(_vm.questionListening[_vm.questionIndex].id) +
-                            ". " +
-                            _vm._s(
-                              _vm.questionListening[_vm.questionIndex].question
-                            )
-                        ),
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("Choose the most correct answer")]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "mt-5" },
-                        [
-                          _c("input", {
-                            attrs: {
-                              type: "number",
-                              id:
-                                "ques" +
-                                _vm.questionListening[_vm.questionIndex].id,
-                              hidden: "",
-                            },
-                            domProps: {
-                              value: _vm.questionListening[_vm.questionIndex],
-                            },
-                          }),
-                          _vm._v(" "),
-                          _vm._l(
-                            _vm.questionListening[_vm.questionIndex].answers,
-                            function (answer) {
-                              return _c(
-                                "div",
-                                {
-                                  key: answer.id,
-                                  staticClass:
-                                    "py-0 my-2 border border-primary rounded answer-selection",
-                                },
-                                [
-                                  _c("input", {
-                                    directives: [
+                      _vm.typeExam === _vm.$getConst("quiz")
+                        ? _c("div", [
+                            _c("h3", {}, [
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(
+                                    _vm.questionListening[_vm.questionIndex]
+                                      .listen_assessment_question.id
+                                  ) +
+                                  ".\n                " +
+                                  _vm._s(
+                                    _vm.questionListening[_vm.questionIndex]
+                                      .listen_assessment_question.question
+                                  ) +
+                                  "\n              "
+                              ),
+                            ]),
+                            _vm._v(" "),
+                            _c("p", [_vm._v("Choose the most correct answer")]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "mt-5" },
+                              [
+                                _c("input", {
+                                  attrs: {
+                                    type: "number",
+                                    id:
+                                      "ques" +
+                                      _vm.questionListening[_vm.questionIndex]
+                                        .id,
+                                    hidden: "",
+                                  },
+                                  domProps: {
+                                    value:
+                                      _vm.questionListening[_vm.questionIndex]
+                                        .id,
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _vm._l(
+                                  _vm.questionListening[_vm.questionIndex]
+                                    .listen_assessment_question.answers,
+                                  function (answer) {
+                                    return _c(
+                                      "div",
                                       {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value:
-                                          _vm.userChoose[_vm.questionIndex],
-                                        expression: "userChoose[questionIndex]",
+                                        key: answer.id,
+                                        staticClass:
+                                          "\n                    py-0\n                    my-2\n                    border border-primary\n                    rounded\n                    answer-selection\n                  ",
                                       },
-                                    ],
-                                    attrs: {
-                                      type: "radio",
-                                      id: answer.id,
-                                      disabled:
-                                        _vm.resultCheck[_vm.questionIndex],
-                                      hidden: "",
-                                    },
-                                    domProps: {
-                                      value: answer.id,
-                                      checked: _vm._q(
-                                        _vm.userChoose[_vm.questionIndex],
-                                        answer.id
-                                      ),
-                                    },
-                                    on: {
-                                      change: function ($event) {
-                                        return _vm.$set(
-                                          _vm.userChoose,
-                                          _vm.questionIndex,
-                                          answer.id
-                                        )
-                                      },
-                                    },
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "w-100",
-                                      attrs: { for: answer.id },
-                                    },
-                                    [
-                                      _c(
-                                        "a",
-                                        { staticClass: "btn text-left w-100" },
-                                        [
-                                          _c("h5", { staticClass: "mb-0" }, [
-                                            _vm._v(_vm._s(answer.answer)),
-                                          ]),
-                                        ]
-                                      ),
-                                    ]
-                                  ),
-                                ]
-                              )
-                            }
-                          ),
-                        ],
-                        2
-                      ),
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.userChoose[
+                                                  _vm.questionIndex
+                                                ],
+                                              expression:
+                                                "userChoose[questionIndex]",
+                                            },
+                                          ],
+                                          attrs: {
+                                            type: "radio",
+                                            id: answer.id,
+                                            disabled:
+                                              _vm.resultCheck.questions[
+                                                _vm.questionIndex
+                                              ],
+                                            hidden: "",
+                                          },
+                                          domProps: {
+                                            value: answer.id,
+                                            checked: _vm._q(
+                                              _vm.userChoose[_vm.questionIndex],
+                                              answer.id
+                                            ),
+                                          },
+                                          on: {
+                                            change: function ($event) {
+                                              return _vm.$set(
+                                                _vm.userChoose,
+                                                _vm.questionIndex,
+                                                answer.id
+                                              )
+                                            },
+                                          },
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "label",
+                                          {
+                                            staticClass: "w-100",
+                                            attrs: { for: answer.id },
+                                          },
+                                          [
+                                            _c(
+                                              "a",
+                                              {
+                                                staticClass:
+                                                  "btn text-left w-100",
+                                              },
+                                              [
+                                                _c(
+                                                  "h5",
+                                                  { staticClass: "mb-0" },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(answer.answer)
+                                                    ),
+                                                  ]
+                                                ),
+                                              ]
+                                            ),
+                                          ]
+                                        ),
+                                      ]
+                                    )
+                                  }
+                                ),
+                              ],
+                              2
+                            ),
+                          ])
+                        : _vm._e(),
                     ]),
                   ]),
                 ]
@@ -53588,15 +54688,11 @@ var render = function () {
                           },
                         },
                       },
-                      [
-                        _vm._v(
-                          "\n                    Previous\n                "
-                        ),
-                      ]
+                      [_vm._v("\n          Previous\n        ")]
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.type === _vm.$getConst("exercise")
+                _vm.typeExam === _vm.$getConst("exercise")
                   ? _c("span", [
                       _c(
                         "button",
@@ -53614,15 +54710,10 @@ var render = function () {
                             },
                           },
                         },
-                        [
-                          _vm._v(
-                            "\n                        Check\n                    "
-                          ),
-                        ]
+                        [_vm._v("\n            Check\n          ")]
                       ),
                       _vm._v(" "),
-                      _vm.questionIndex < _vm.questionListening.length - 1 &&
-                      _vm.resultCheck[_vm.questionIndex]
+                      _vm.questionIndex < _vm.questionListening.length - 1
                         ? _c(
                             "button",
                             {
@@ -53633,17 +54724,13 @@ var render = function () {
                                 },
                               },
                             },
-                            [
-                              _vm._v(
-                                "\n                        Next\n                    "
-                              ),
-                            ]
+                            [_vm._v("\n            Next\n          ")]
                           )
                         : _vm._e(),
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _vm.type !== _vm.$getConst("exercise")
+                _vm.typeExam !== _vm.$getConst("exercise")
                   ? _c("span", [
                       _vm.questionIndex === _vm.questionListening.length - 1
                         ? _c(
@@ -53656,11 +54743,7 @@ var render = function () {
                                 },
                               },
                             },
-                            [
-                              _vm._v(
-                                "\n                        Submit\n                    "
-                              ),
-                            ]
+                            [_vm._v("\n            Submit\n          ")]
                           )
                         : _vm._e(),
                       _vm._v(" "),
@@ -53675,11 +54758,7 @@ var render = function () {
                                 },
                               },
                             },
-                            [
-                              _vm._v(
-                                "\n                        Next\n                    "
-                              ),
-                            ]
+                            [_vm._v("\n            Next\n          ")]
                           )
                         : _vm._e(),
                     ])
@@ -53690,53 +54769,92 @@ var render = function () {
         ])
       : _c("div", { staticClass: "mt-5 h-100" }, [
           _c("div", { staticClass: "text-center" }, [
-            _c("h2", { staticClass: "text-success" }, [
-              _vm._v("You score " + _vm._s(_vm.allResults[0].score)),
-            ]),
+            _vm.typeExam !== _vm.$getConst("assessment")
+              ? _c("div", [
+                  _c("h2", { staticClass: "text-success" }, [
+                    _vm._v("You score " + _vm._s(_vm.allResults[0].score)),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "row justify-content-center align-items-start",
+                    },
+                    [
+                      _c("div", { staticClass: "col-lg-4" }, [
+                        _c("div", { staticClass: "text-left mb-2" }, [
+                          _c("i", {
+                            staticClass: "fe fe-check-circle h4 text-success",
+                          }),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("exercise")
+                            ? _c("span", { staticClass: "h4" }, [
+                                _vm._v(
+                                  "Number of correct question\n                " +
+                                    _vm._s(_vm.allResults[0].correct_question)
+                                ),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("quiz")
+                            ? _c("span", { staticClass: "h4" }, [
+                                _vm._v(
+                                  "Number of wrong question\n                " +
+                                    _vm._s(_vm.allResults[1].correct_question)
+                                ),
+                              ])
+                            : _vm._e(),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-left" }, [
+                          _c("i", {
+                            staticClass: "fe fe-x-circle h4 text-danger",
+                          }),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("exercise")
+                            ? _c("span", { staticClass: "h4" }, [
+                                _vm._v(
+                                  "Number of wrong question\n                " +
+                                    _vm._s(_vm.allResults[0].wrong_question)
+                                ),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("quiz")
+                            ? _c("span", { staticClass: "h4" }, [
+                                _vm._v(
+                                  "Number of wrong question\n                " +
+                                    _vm._s(_vm.allResults[1].wrong_question)
+                                ),
+                              ])
+                            : _vm._e(),
+                        ]),
+                      ]),
+                    ]
+                  ),
+                ])
+              : _c("div", { staticClass: "text-success" }, [
+                  _vm._v(
+                    "\n        You have completed the this part. Please select continue to complete\n        the First Free Assessment!\n      "
+                  ),
+                ]),
             _vm._v(" "),
-            _c("div", [
-              _c("i", { staticClass: "fe fe-check-circle h4 text-success" }),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("quiz")
-                ? _c("span", { staticClass: "h4" }, [
-                    _vm._v(
-                      "Number of correct question " +
-                        _vm._s(_vm.allResults[0].correct_question)
-                    ),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("assessment")
-                ? _c("span", { staticClass: "h4" }, [
-                    _vm._v(
-                      "Number of wrong question " +
-                        _vm._s(_vm.allResults[1].correct_question)
-                    ),
-                  ])
-                : _vm._e(),
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _c("i", { staticClass: "fe fe-x-circle h4 text-danger" }),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("quiz")
-                ? _c("span", { staticClass: "h4" }, [
-                    _vm._v(
-                      "Number of wrong question " +
-                        _vm._s(_vm.allResults[0].wrong_question)
-                    ),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("assessment")
-                ? _c("span", { staticClass: "h4" }, [
-                    _vm._v(
-                      "Number of wrong question " +
-                        _vm._s(_vm.allResults[1].wrong_question)
-                    ),
-                  ])
-                : _vm._e(),
-            ]),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary my-5",
+                on: {
+                  click: function ($event) {
+                    return _vm.nextTypeExam()
+                  },
+                },
+              },
+              [
+                _vm._v("\n        Continue "),
+                _c("i", { staticClass: "fe fe-arrow-right" }),
+              ]
+            ),
           ]),
         ]),
   ])
@@ -53765,28 +54883,18 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "h-100" }, [
-    _c("div", { staticClass: "text-center mt-5" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success",
-          on: {
-            click: function ($event) {
-              return _vm.startQuiz()
-            },
-          },
-        },
-        [_vm._v("Start Exam")]
-      ),
-    ]),
-    _vm._v(" "),
     _vm.typeExercise === _vm.$getConst("reading")
       ? _c(
           "div",
           { staticClass: "h-100" },
           [
             _c("reading-component", {
-              attrs: { examId: _vm.examId, typeExam: _vm.typeExam },
+              attrs: {
+                examId: _vm.examId,
+                typeExam: _vm.typeExam,
+                courseId: _vm.courseId,
+              },
+              on: { nextTypeExam: _vm.nextTypeExam },
             }),
           ],
           1
@@ -53799,7 +54907,12 @@ var render = function () {
           { staticClass: "h-100" },
           [
             _c("writing-component", {
-              attrs: { examId: _vm.examId, typeExam: _vm.typeExam },
+              attrs: {
+                examId: _vm.examId,
+                typeExam: _vm.typeExam,
+                courseId: _vm.courseId,
+              },
+              on: { nextTypeExam: _vm.nextTypeExam },
             }),
           ],
           1
@@ -53810,7 +54923,16 @@ var render = function () {
       ? _c(
           "div",
           { staticClass: "h-100" },
-          [_c("listening-component", { attrs: { examId: _vm.examId } })],
+          [
+            _c("listening-component", {
+              attrs: {
+                examId: _vm.examId,
+                typeExam: _vm.typeExam,
+                courseId: _vm.courseId,
+              },
+              on: { nextTypeExam: _vm.nextTypeExam },
+            }),
+          ],
           1
         )
       : _vm._e(),
@@ -53819,7 +54941,15 @@ var render = function () {
       ? _c(
           "div",
           { staticClass: "h-100" },
-          [_c("speaking-component", { attrs: { examId: _vm.examId } })],
+          [
+            _c("speaking-component", {
+              attrs: {
+                examId: _vm.examId,
+                typeExam: _vm.typeExam,
+                courseId: _vm.courseId,
+              },
+            }),
+          ],
           1
         )
       : _vm._e(),
@@ -53855,7 +54985,7 @@ var render = function () {
     _vm._v(" "),
     _vm.allResults.length === 0
       ? _c("div", [
-          _vm.type !== _vm.$getConst("exercise")
+          _vm.typeExam !== _vm.$getConst("exercise")
             ? _c(
                 "div",
                 { staticClass: "text-center h4 my-3" },
@@ -53896,7 +55026,7 @@ var render = function () {
                                   scope.props.labelPosition === "begin"
                                     ? _c("span", [
                                         _vm._v(
-                                          "\n                    " +
+                                          "\n            " +
                                             _vm._s(scope.props.startLabel) +
                                             ":"
                                         ),
@@ -53908,7 +55038,7 @@ var render = function () {
                                   scope.props.labelPosition === "begin"
                                     ? _c("span", [
                                         _vm._v(
-                                          "\n                    " +
+                                          "\n            " +
                                             _vm._s(scope.props.endLabel) +
                                             ":"
                                         ),
@@ -53946,7 +55076,7 @@ var render = function () {
                           ],
                           null,
                           false,
-                          2307984957
+                          791662999
                         ),
                       })
                     : _vm._e(),
@@ -53963,7 +55093,7 @@ var render = function () {
                               },
                             },
                           },
-                          [_vm._v("Start")]
+                          [_vm._v("\n          Start\n        ")]
                         ),
                       ])
                     : _vm._e(),
@@ -53972,16 +55102,21 @@ var render = function () {
               )
             : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "row container-fluid" }, [
+          _c("div", { staticClass: "row container-fluid m-0" }, [
             _c("div", { staticClass: "col-lg-6 py-4" }, [
               _vm.startQuiz === true
-                ? _c("div", { staticClass: "px-3 lecture overflow-auto" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.passage) +
-                        "\n                "
-                    ),
-                  ])
+                ? _c(
+                    "div",
+                    {
+                      staticClass: "pr-3 lecture overflow-auto",
+                      domProps: { innerHTML: _vm._s(_vm.passage) },
+                    },
+                    [
+                      _vm._v(
+                        "\n          " + _vm._s(_vm.passage) + "\n        "
+                      ),
+                    ]
+                  )
                 : _vm._e(),
             ]),
             _vm._v(" "),
@@ -53990,208 +55125,26 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "h-100 d-flex flex-column justify-content-between lecture overflow-auto",
+                    "\n            h-100\n            d-flex\n            flex-column\n            justify-content-between\n            lecture\n            overflow-auto\n          ",
                 },
                 [
                   _c("div", { staticClass: "h-100" }, [
-                    _vm.type !== _vm.$getConst("exercise") &&
+                    _vm.typeExam === _vm.$getConst("assessment") &&
                     _vm.startQuiz === true
                       ? _c("div", [
                           _c("h3", {}, [
                             _vm._v(
-                              _vm._s(
-                                _vm.questionReading[_vm.questionIndex]
-                                  .reading_question.id
-                              ) +
-                                ". " +
+                              "\n                " +
+                                _vm._s(
+                                  _vm.questionReading[_vm.questionIndex]
+                                    .reading_question.id
+                                ) +
+                                ".\n                " +
                                 _vm._s(
                                   _vm.questionReading[_vm.questionIndex]
                                     .reading_question.question
-                                )
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [_vm._v("Choose the most correct answer")]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "mt-5" },
-                            [
-                              _c("input", {
-                                attrs: {
-                                  type: "number",
-                                  id:
-                                    "ques" +
-                                    _vm.questionReading[_vm.questionIndex]
-                                      .reading_question.id,
-                                  hidden: "",
-                                },
-                                domProps: {
-                                  value:
-                                    _vm.questionReading[_vm.questionIndex]
-                                      .reading_question.id,
-                                },
-                              }),
-                              _vm._v(" "),
-                              _vm._l(
-                                _vm.questionReading[_vm.questionIndex]
-                                  .reading_question.answers,
-                                function (answer) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      key: answer.id,
-                                      staticClass:
-                                        "py-0 my-2 border border-primary rounded answer-selection",
-                                    },
-                                    [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value:
-                                              _vm.userChoose[_vm.questionIndex],
-                                            expression:
-                                              "userChoose[questionIndex]",
-                                          },
-                                        ],
-                                        staticClass: "ip-answer",
-                                        attrs: {
-                                          type: "radio",
-                                          id: answer.id,
-                                          disabled:
-                                            _vm.resultCheck[_vm.questionIndex],
-                                          hidden: "",
-                                        },
-                                        domProps: {
-                                          value: answer.id,
-                                          checked: _vm._q(
-                                            _vm.userChoose[_vm.questionIndex],
-                                            answer.id
-                                          ),
-                                        },
-                                        on: {
-                                          change: function ($event) {
-                                            return _vm.$set(
-                                              _vm.userChoose,
-                                              _vm.questionIndex,
-                                              answer.id
-                                            )
-                                          },
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass: "w-100",
-                                          attrs: { for: answer.id },
-                                        },
-                                        [
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass:
-                                                "btn text-left w-100",
-                                            },
-                                            [
-                                              _c(
-                                                "h5",
-                                                { staticClass: "mb-0" },
-                                                [_vm._v(_vm._s(answer.answer))]
-                                              ),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  )
-                                }
-                              ),
-                            ],
-                            2
-                          ),
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.type === _vm.$getConst("exercise")
-                      ? _c("div", [
-                          _vm.resultCheck[_vm.questionIndex] ===
-                          _vm.$getConst("incorrect")
-                            ? _c(
-                                "div",
-                                [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "p-3 bg-danger rounded h5 text-white font-weight-bold",
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    Incorrect answer !\n                                "
-                                      ),
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm._l(
-                                    _vm.questionReading[_vm.questionIndex]
-                                      .answers,
-                                    function (answer_item) {
-                                      return _c(
-                                        "h5",
-                                        {
-                                          key: answer_item.id,
-                                          staticClass: "text-success",
-                                        },
-                                        [
-                                          answer_item.is_correct ===
-                                          _vm.$getConst("correct")
-                                            ? _c("span", [
-                                                _vm._v(
-                                                  "\n                                    Correct answer is: " +
-                                                    _vm._s(answer_item.answer) +
-                                                    "\n                                "
-                                                ),
-                                              ])
-                                            : _vm._e(),
-                                        ]
-                                      )
-                                    }
-                                  ),
-                                ],
-                                2
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.resultCheck[_vm.questionIndex] ===
-                          _vm.$getConst("correct")
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "p-3 bg-success rounded h5 text-white font-weight-bold",
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Good job !\n                            "
-                                  ),
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("h3", {}, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.questionReading[_vm.questionIndex]
-                                  .reading_question.id
-                              ) +
-                                ". " +
-                                _vm._s(
-                                  _vm.questionReading[_vm.questionIndex]
-                                    .reading_question.question
-                                )
+                                ) +
+                                "\n              "
                             ),
                           ]),
                           _vm._v(" "),
@@ -54211,8 +55164,7 @@ var render = function () {
                                 },
                                 domProps: {
                                   value:
-                                    _vm.questionReading[_vm.questionIndex]
-                                      .reading_question.id,
+                                    _vm.questionReading[_vm.questionIndex].id,
                                 },
                               }),
                               _vm._v(" "),
@@ -54225,7 +55177,7 @@ var render = function () {
                                     {
                                       key: answer.id,
                                       staticClass:
-                                        "py-0 my-2 border border-primary rounded answer-selection",
+                                        "\n                    py-0\n                    my-2\n                    border border-primary\n                    rounded\n                    answer-selection\n                  ",
                                     },
                                     [
                                       _c("input", {
@@ -54244,7 +55196,318 @@ var render = function () {
                                           type: "radio",
                                           id: answer.id,
                                           disabled:
-                                            _vm.resultCheck[_vm.questionIndex],
+                                            _vm.resultCheck.questions[
+                                              _vm.questionIndex
+                                            ],
+                                          hidden: "",
+                                        },
+                                        domProps: {
+                                          value: answer.id,
+                                          checked: _vm._q(
+                                            _vm.userChoose[_vm.questionIndex],
+                                            answer.id
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              _vm.userChoose,
+                                              _vm.questionIndex,
+                                              answer.id
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "w-100",
+                                          attrs: { for: answer.id },
+                                        },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn text-left w-100",
+                                            },
+                                            [
+                                              _c(
+                                                "h5",
+                                                { staticClass: "mb-0" },
+                                                [_vm._v(_vm._s(answer.answer))]
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  )
+                                }
+                              ),
+                            ],
+                            2
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.typeExam === _vm.$getConst("exercise")
+                      ? _c("div", [
+                          _vm.checkAnswer[_vm.questionIndex] ===
+                          _vm.$getConst("incorrect")
+                            ? _c(
+                                "div",
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "p-3 bg-danger rounded h5 text-white font-weight-bold",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                  Incorrect answer !\n                "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(
+                                    _vm.questionReading[_vm.questionIndex]
+                                      .reading_question.answers,
+                                    function (answer_item) {
+                                      return _c(
+                                        "h5",
+                                        {
+                                          key: answer_item.id,
+                                          staticClass: "text-success",
+                                        },
+                                        [
+                                          answer_item.is_correct ===
+                                          _vm.$getConst("correct")
+                                            ? _c("span", [
+                                                _vm._v(
+                                                  "\n                    Correct answer is: " +
+                                                    _vm._s(answer_item.answer) +
+                                                    "\n                  "
+                                                ),
+                                              ])
+                                            : _vm._e(),
+                                        ]
+                                      )
+                                    }
+                                  ),
+                                ],
+                                2
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.checkAnswer[_vm.questionIndex] ===
+                          _vm.$getConst("correct")
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "p-3 bg-success rounded h5 text-white font-weight-bold",
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                Good job !\n              "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("h3", {}, [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(
+                                  _vm.questionReading[_vm.questionIndex]
+                                    .reading_question.id
+                                ) +
+                                ".\n                " +
+                                _vm._s(
+                                  _vm.questionReading[_vm.questionIndex]
+                                    .reading_question.question
+                                ) +
+                                "\n              "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Choose the most correct answer")]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "mt-5" },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "number",
+                                  id:
+                                    "ques" +
+                                    _vm.questionReading[_vm.questionIndex].id,
+                                  hidden: "",
+                                },
+                                domProps: {
+                                  value:
+                                    _vm.questionReading[_vm.questionIndex].id,
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._l(
+                                _vm.questionReading[_vm.questionIndex]
+                                  .reading_question.answers,
+                                function (answer) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: answer.id,
+                                      staticClass:
+                                        "\n                    py-0\n                    my-2\n                    border border-primary\n                    rounded\n                    answer-selection\n                  ",
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.userChoose[_vm.questionIndex],
+                                            expression:
+                                              "userChoose[questionIndex]",
+                                          },
+                                        ],
+                                        staticClass: "ip-answer",
+                                        attrs: {
+                                          type: "radio",
+                                          id: answer.id,
+                                          disabled:
+                                            _vm.resultCheck.questions[
+                                              _vm.questionIndex
+                                            ],
+                                          hidden: "",
+                                        },
+                                        domProps: {
+                                          value: answer.id,
+                                          checked: _vm._q(
+                                            _vm.userChoose[_vm.questionIndex],
+                                            answer.id
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              _vm.userChoose,
+                                              _vm.questionIndex,
+                                              answer.id
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "w-100",
+                                          attrs: { for: answer.id },
+                                        },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn text-left w-100",
+                                            },
+                                            [
+                                              _c(
+                                                "h5",
+                                                { staticClass: "mb-0" },
+                                                [_vm._v(_vm._s(answer.answer))]
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  )
+                                }
+                              ),
+                            ],
+                            2
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.typeExam === _vm.$getConst("quiz") &&
+                    _vm.startQuiz === true
+                      ? _c("div", [
+                          _c("h3", {}, [
+                            _vm._v(
+                              "\n                " +
+                                _vm._s(
+                                  _vm.questionReading[_vm.questionIndex]
+                                    .reading_question.id
+                                ) +
+                                ".\n                " +
+                                _vm._s(
+                                  _vm.questionReading[_vm.questionIndex]
+                                    .reading_question.question
+                                ) +
+                                "\n              "
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Choose the most correct answer")]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "mt-5" },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "number",
+                                  id:
+                                    "ques" +
+                                    _vm.questionReading[_vm.questionIndex].id,
+                                  hidden: "",
+                                },
+                                domProps: {
+                                  value:
+                                    _vm.questionReading[_vm.questionIndex].id,
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._l(
+                                _vm.questionReading[_vm.questionIndex]
+                                  .reading_question.answers,
+                                function (answer) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: answer.id,
+                                      staticClass:
+                                        "\n                    py-0\n                    my-2\n                    border border-primary\n                    rounded\n                    answer-selection\n                  ",
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.userChoose[_vm.questionIndex],
+                                            expression:
+                                              "userChoose[questionIndex]",
+                                          },
+                                        ],
+                                        staticClass: "ip-answer",
+                                        attrs: {
+                                          type: "radio",
+                                          id: answer.id,
+                                          disabled:
+                                            _vm.resultCheck.questions[
+                                              _vm.questionIndex
+                                            ],
                                           hidden: "",
                                         },
                                         domProps: {
@@ -54298,170 +55561,189 @@ var render = function () {
                         ])
                       : _vm._e(),
                   ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "text-right" }, [
-                    _vm.questionIndex > 0 && _vm.resultCheck[_vm.questionIndex]
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-right w-100 pb-3" }, [
+              _vm.questionIndex > 0 &&
+              _vm.resultCheck.questions[_vm.questionIndex]
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function ($event) {
+                          return _vm.prev()
+                        },
+                      },
+                    },
+                    [_vm._v("\n          Previous\n        ")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.typeExam === _vm.$getConst("exercise")
+                ? _c("span", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary mx-2",
+                        attrs: {
+                          id: "check" + _vm.questionReading[_vm.questionIndex],
+                          disabled: _vm.resultCheck[_vm.questionIndex],
+                        },
+                        on: {
+                          click: function ($event) {
+                            return _vm.check()
+                          },
+                        },
+                      },
+                      [_vm._v("\n            Check\n          ")]
+                    ),
+                    _vm._v(" "),
+                    _vm.questionIndex < _vm.questionReading.length - 1 &&
+                    _vm.resultCheck[_vm.questionIndex]
                       ? _c(
                           "button",
                           {
-                            staticClass: "btn btn-primary",
+                            staticClass: "btn btn-primary mx-2",
                             on: {
                               click: function ($event) {
-                                return _vm.prev()
+                                return _vm.next()
                               },
                             },
                           },
-                          [
-                            _vm._v(
-                              "\n                            Previous\n                        "
-                            ),
-                          ]
+                          [_vm._v("\n            Next\n          ")]
+                        )
+                      : _vm._e(),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.typeExam !== _vm.$getConst("exercise") &&
+              _vm.startQuiz === true
+                ? _c("span", [
+                    _vm.questionIndex === _vm.questionReading.length - 1
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary mx-2",
+                            on: {
+                              click: function ($event) {
+                                return _vm.submit()
+                              },
+                            },
+                          },
+                          [_vm._v("\n            Submit\n          ")]
                         )
                       : _vm._e(),
                     _vm._v(" "),
-                    _vm.type === _vm.$getConst("exercise")
-                      ? _c("span", [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary mx-2",
-                              attrs: {
-                                id:
-                                  "check" +
-                                  _vm.questionReading[_vm.questionIndex],
-                                disabled: _vm.resultCheck[_vm.questionIndex],
-                              },
-                              on: {
-                                click: function ($event) {
-                                  return _vm.check()
-                                },
+                    _vm.questionIndex < _vm.questionReading.length - 1
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary mx-2",
+                            on: {
+                              click: function ($event) {
+                                return _vm.next()
                               },
                             },
-                            [
-                              _vm._v(
-                                "\n                                Check\n                            "
-                              ),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm.questionIndex < _vm.questionReading.length - 1 &&
-                          _vm.resultCheck[_vm.questionIndex]
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary mx-2",
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.next()
-                                    },
-                                  },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Next\n                            "
-                                  ),
-                                ]
-                              )
-                            : _vm._e(),
-                        ])
+                          },
+                          [_vm._v("\n            Next\n          ")]
+                        )
                       : _vm._e(),
-                    _vm._v(" "),
-                    _vm.type !== _vm.$getConst("exercise")
-                      ? _c("span", [
-                          _vm.questionIndex === _vm.questionReading.length - 1
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary mx-2",
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.submit()
-                                    },
-                                  },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Submit\n                            "
-                                  ),
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.questionIndex < _vm.questionReading.length - 1
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary mx-2",
-                                  on: {
-                                    click: function ($event) {
-                                      return _vm.next()
-                                    },
-                                  },
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                Next\n                            "
-                                  ),
-                                ]
-                              )
-                            : _vm._e(),
-                        ])
-                      : _vm._e(),
-                  ]),
-                ]
-              ),
+                  ])
+                : _vm._e(),
             ]),
           ]),
         ])
       : _c("div", { staticClass: "mt-5 h-100" }, [
           _c("div", { staticClass: "text-center" }, [
-            _c("h2", { staticClass: "text-success" }, [
-              _vm._v("You score " + _vm._s(_vm.allResults[0].score)),
-            ]),
+            _vm.typeExam !== _vm.$getConst("assessment")
+              ? _c("div", [
+                  _c("h2", { staticClass: "text-success" }, [
+                    _vm._v("You score " + _vm._s(_vm.allResults[0].score)),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "row justify-content-center align-items-start",
+                    },
+                    [
+                      _c("div", { staticClass: "col-lg-4" }, [
+                        _c("div", { staticClass: "text-left mb-2" }, [
+                          _c("i", {
+                            staticClass: "fe fe-check-circle h4 text-success",
+                          }),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("exercise")
+                            ? _c("span", { staticClass: "h4" }, [
+                                _vm._v(
+                                  "Number of correct question\n                " +
+                                    _vm._s(_vm.allResults[0].correct_question)
+                                ),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("quiz")
+                            ? _c("span", { staticClass: "h4" }, [
+                                _vm._v(
+                                  "Number of wrong question\n                " +
+                                    _vm._s(_vm.allResults[1].correct_question)
+                                ),
+                              ])
+                            : _vm._e(),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "text-left" }, [
+                          _c("i", {
+                            staticClass: "fe fe-x-circle h4 text-danger",
+                          }),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("exercise")
+                            ? _c("span", { staticClass: "h4" }, [
+                                _vm._v(
+                                  "Number of wrong question\n                " +
+                                    _vm._s(_vm.allResults[0].wrong_question)
+                                ),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("quiz")
+                            ? _c("span", { staticClass: "h4" }, [
+                                _vm._v(
+                                  "Number of wrong question\n                " +
+                                    _vm._s(_vm.allResults[1].wrong_question)
+                                ),
+                              ])
+                            : _vm._e(),
+                        ]),
+                      ]),
+                    ]
+                  ),
+                ])
+              : _c("div", { staticClass: "text-success" }, [
+                  _vm._v(
+                    "\n        You have completed the this part. Please select continue to complete\n        the First Free Assessment!\n      "
+                  ),
+                ]),
             _vm._v(" "),
-            _c("div", [
-              _c("i", { staticClass: "fe fe-check-circle h4 text-success" }),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("quiz")
-                ? _c("span", { staticClass: "h4" }, [
-                    _vm._v(
-                      "Number of correct question " +
-                        _vm._s(_vm.allResults[0].correct_question)
-                    ),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("assessment")
-                ? _c("span", { staticClass: "h4" }, [
-                    _vm._v(
-                      "Number of wrong question " +
-                        _vm._s(_vm.allResults[1].correct_question)
-                    ),
-                  ])
-                : _vm._e(),
-            ]),
-            _vm._v(" "),
-            _c("div", [
-              _c("i", { staticClass: "fe fe-x-circle h4 text-danger" }),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("quiz")
-                ? _c("span", { staticClass: "h4" }, [
-                    _vm._v(
-                      "Number of wrong question " +
-                        _vm._s(_vm.allResults[0].wrong_question)
-                    ),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("assessment")
-                ? _c("span", { staticClass: "h4" }, [
-                    _vm._v(
-                      "Number of wrong question " +
-                        _vm._s(_vm.allResults[1].wrong_question)
-                    ),
-                  ])
-                : _vm._e(),
-            ]),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary my-5",
+                on: {
+                  click: function ($event) {
+                    return _vm.nextTypeExam()
+                  },
+                },
+              },
+              [
+                _vm._v("\n        Continue "),
+                _c("i", { staticClass: "fe fe-arrow-right" }),
+              ]
+            ),
           ]),
         ]),
   ])
@@ -54493,7 +55775,7 @@ var render = function () {
     "div",
     {
       staticClass:
-        "container-fluid h-100 d-flex flex-column justify-content-between text-primary",
+        "\n    container-fluid\n    h-100\n    d-flex\n    flex-column\n    justify-content-between\n    text-primary\n  ",
     },
     [
       _c("h1", { staticClass: "mt-4 text-center font-weight-bold" }, [
@@ -54509,7 +55791,7 @@ var render = function () {
         [
           _c("div", { staticClass: "col-lg-8" }, [
             _c("div", { staticClass: "h-100" }, [
-              _vm.type === _vm.$getConst("assessment")
+              _vm.typeExam === _vm.$getConst("assessment")
                 ? _c("div", [
                     _c(
                       "div",
@@ -54519,9 +55801,9 @@ var render = function () {
                       },
                       [
                         _vm._v(
-                          "\n                            Audio " +
+                          "\n            Audio " +
                             _vm._s(_vm.questionSpeaking[_vm.questionIndex].id) +
-                            ":\n                            "
+                            ":\n            "
                         ),
                         _c("vimeo-player", {
                           ref: "audio",
@@ -54538,11 +55820,17 @@ var render = function () {
                     _vm._v(" "),
                     _c("h3", {}, [
                       _vm._v(
-                        _vm._s(_vm.questionSpeaking[_vm.questionIndex].id) +
-                          ". " +
+                        "\n            " +
                           _vm._s(
-                            _vm.questionSpeaking[_vm.questionIndex].question
-                          )
+                            _vm.questionSpeaking[_vm.questionIndex]
+                              .speak_assessment_question.id
+                          ) +
+                          ".\n            " +
+                          _vm._s(
+                            _vm.questionSpeaking[_vm.questionIndex]
+                              .speak_assessment_question.question
+                          ) +
+                          "\n          "
                       ),
                     ]),
                     _vm._v(" "),
@@ -54566,7 +55854,8 @@ var render = function () {
                         }),
                         _vm._v(" "),
                         _vm._l(
-                          _vm.questionSpeaking[_vm.questionIndex].answers,
+                          _vm.questionSpeaking[_vm.questionIndex]
+                            .speak_assessment_question.answers,
                           function (answer) {
                             return _c(
                               "div",
@@ -54574,584 +55863,6 @@ var render = function () {
                                 key: answer.id,
                                 staticClass:
                                   "py-0 my-3 border border-primary rounded answer-selection",
-                              },
-                              [
-                                _c("input", {
-                                  attrs: {
-                                    type: "radio",
-                                    id: answer.id,
-                                    hidden: "",
-                                  },
-                                  domProps: { value: answer.id },
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "w-100",
-                                    attrs: { for: answer.id },
-                                  },
-                                  [
-                                    _c(
-                                      "a",
-                                      { staticClass: "btn text-left w-100" },
-                                      [
-                                        _c("h5", { staticClass: "mb-0" }, [
-                                          _vm._v(_vm._s(answer.answer)),
-                                        ]),
-                                      ]
-                                    ),
-                                  ]
-                                ),
-                              ]
-                            )
-                          }
-                        ),
-                      ],
-                      2
-                    ),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("exercise")
-                ? _c(
-                    "div",
-                    [
-                      _c("vimeo-player", {
-                        ref: "player",
-                        staticClass: "embed-responsive embed-responsive-16by9",
-                        attrs: {
-                          "video-id": _vm.videoId,
-                          "video-url": _vm.getVideoUrl(),
-                        },
-                      }),
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("quiz")
-                ? _c(
-                    "div",
-                    [
-                      _vm._l(_vm.questionSpeaking, function (question) {
-                        return _c("h3", { key: question.id }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(question.id) +
-                              ". " +
-                              _vm._s(question.question)
-                          ),
-                        ])
-                      }),
-                      _vm._v(" "),
-                      _c("p", [
-                        _vm._v(
-                          "Please record one video with voice that answers all question."
-                        ),
-                      ]),
-                    ],
-                    2
-                  )
-                : _vm._e(),
-            ]),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _vm.type === _vm.$getConst("assessment")
-        ? _c("div", { staticClass: "text-right py-4 pr-3" }, [
-            _vm.questionIndex > 0
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    on: {
-                      click: function ($event) {
-                        return _vm.prev()
-                      },
-                    },
-                  },
-                  [_vm._v("\n                Previous\n            ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.type !== _vm.$getConst("exercise")
-              ? _c("span", [
-                  _vm.questionIndex === _vm.questionSpeaking.length - 1
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary mx-2",
-                          on: {
-                            click: function ($event) {
-                              return _vm.submit()
-                            },
-                          },
-                        },
-                        [
-                          _vm._v(
-                            "\n                    Submit\n                "
-                          ),
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.questionIndex < _vm.questionSpeaking.length - 1
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary mx-2",
-                          on: {
-                            click: function ($event) {
-                              return _vm.next()
-                            },
-                          },
-                        },
-                        [_vm._v("\n                    Next\n                ")]
-                      )
-                    : _vm._e(),
-                ])
-              : _vm._e(),
-          ])
-        : _c("div", { staticClass: "text-right py-4 pr-3" }, [
-            _c("button", { staticClass: "btn btn-primary" }, [
-              _vm._v("\n                Submit\n            "),
-            ]),
-          ]),
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/WritingComponent.vue?vue&type=template&id=42abd7fa&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/WritingComponent.vue?vue&type=template&id=42abd7fa&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass:
-        "container-fluid h-100 d-flex flex-column justify-content-between text-primary",
-    },
-    [
-      _c("h1", { staticClass: "mt-3 text-center font-weight-bold" }, [
-        _vm._v("Writing"),
-      ]),
-      _vm._v(" "),
-      _vm.type !== _vm.$getConst("exercise")
-        ? _c(
-            "div",
-            { staticClass: "h5 text-center" },
-            [
-              _vm.startQuiz === true
-                ? _c("vue-countdown-timer", {
-                    attrs: {
-                      "start-time": _vm.timeNow,
-                      "end-time": _vm.timeEnd,
-                      interval: 1000,
-                      "start-label": "Until start:",
-                      "end-label": "Time limit",
-                      "label-position": "begin",
-                      "end-text": "Ended!",
-                      "day-txt": "days",
-                      "hour-txt": "hours",
-                      "minutes-txt": "minutes",
-                      "seconds-txt": "seconds",
-                    },
-                    on: {
-                      start_callback: function ($event) {
-                        return _vm.startCallBack("event started")
-                      },
-                      end_callback: function ($event) {
-                        return _vm.endCallBack("event ended")
-                      },
-                    },
-                    scopedSlots: _vm._u(
-                      [
-                        {
-                          key: "start-label",
-                          fn: function (scope) {
-                            return [
-                              _c("i", { staticClass: "fe fe-clock" }),
-                              _vm._v(" "),
-                              scope.props.startLabel !== "" &&
-                              scope.props.tips &&
-                              scope.props.labelPosition === "begin"
-                                ? _c("span", [
-                                    _vm._v(
-                                      "\n                    " +
-                                        _vm._s(scope.props.startLabel) +
-                                        ":"
-                                    ),
-                                  ])
-                                : _vm._e(),
-                              _vm._v(" "),
-                              scope.props.endLabel !== "" &&
-                              !scope.props.tips &&
-                              scope.props.labelPosition === "begin"
-                                ? _c("span", [
-                                    _vm._v(
-                                      "\n                    " +
-                                        _vm._s(scope.props.endLabel) +
-                                        ":"
-                                    ),
-                                  ])
-                                : _vm._e(),
-                            ]
-                          },
-                        },
-                        {
-                          key: "countdown",
-                          fn: function (scope) {
-                            return [
-                              _c("span", [
-                                _vm._v(_vm._s(scope.props.days) + " "),
-                              ]),
-                              _c("a", [_vm._v(":")]),
-                              _vm._v(" "),
-                              _c("span", [
-                                _vm._v(_vm._s(scope.props.hours) + " "),
-                              ]),
-                              _c("a", [_vm._v(":")]),
-                              _vm._v(" "),
-                              _c("span", [
-                                _vm._v(_vm._s(scope.props.minutes) + " "),
-                              ]),
-                              _c("a", [_vm._v(":")]),
-                              _vm._v(" "),
-                              _c("span", [
-                                _vm._v(_vm._s(scope.props.seconds) + " "),
-                              ]),
-                              _c("a"),
-                            ]
-                          },
-                        },
-                      ],
-                      null,
-                      false,
-                      2307984957
-                    ),
-                  })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.startQuiz === false
-                ? _c("div", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success mt-3",
-                        on: {
-                          click: function ($event) {
-                            return _vm.startExam()
-                          },
-                        },
-                      },
-                      [_vm._v("Start")]
-                    ),
-                  ])
-                : _vm._e(),
-            ],
-            1
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "py-4 h-100 row justify-content-center lecture overflow-auto",
-        },
-        [
-          _c("div", { staticClass: "col-lg-8" }, [
-            _c("div", { staticClass: "h-100" }, [
-              _vm.type !== _vm.$getConst("exercise") && _vm.startQuiz === true
-                ? _c("div", [
-                    _vm.type === _vm.$getConst("quiz")
-                      ? _c("div", [
-                          _c("h3", {}, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.questionWriting[_vm.questionIndex].id
-                              ) +
-                                ". " +
-                                _vm._s(
-                                  _vm.questionWriting[_vm.questionIndex]
-                                    .question
-                                )
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _vm.type === _vm.$getConst("quiz")
-                            ? _c("div", { staticClass: "mt-5" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "form-group",
-                                    attrs: {
-                                      id: _vm.questionWriting[_vm.questionIndex]
-                                        .id,
-                                    },
-                                  },
-                                  [
-                                    _c("ckeditor", {
-                                      attrs: { config: _vm.editorConfig },
-                                      model: {
-                                        value: _vm.editorData,
-                                        callback: function ($$v) {
-                                          _vm.editorData = $$v
-                                        },
-                                        expression: "editorData",
-                                      },
-                                    }),
-                                  ],
-                                  1
-                                ),
-                              ])
-                            : _vm._e(),
-                        ])
-                      : _c("div", [
-                          _c("h3", {}, [
-                            _vm._v(
-                              _vm._s(
-                                _vm.questionWriting[_vm.questionIndex]
-                                  .writing_assessment_question.id
-                              ) +
-                                ". " +
-                                _vm._s(
-                                  _vm.questionWriting[_vm.questionIndex]
-                                    .writing_assessment_question.question
-                                )
-                            ),
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [_vm._v("Choose the most correct answer")]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "mt-5" },
-                            [
-                              _c("input", {
-                                attrs: {
-                                  type: "number",
-                                  id:
-                                    "ques" +
-                                    _vm.questionWriting[_vm.questionIndex]
-                                      .writing_assessment_question.id,
-                                  hidden: "",
-                                },
-                                domProps: {
-                                  value:
-                                    _vm.questionWriting[_vm.questionIndex]
-                                      .writing_assessment_question.id,
-                                },
-                              }),
-                              _vm._v(" "),
-                              _vm._l(
-                                _vm.questionWriting[_vm.questionIndex].answers,
-                                function (answer) {
-                                  return _c(
-                                    "div",
-                                    {
-                                      key: answer.id,
-                                      staticClass:
-                                        "py-0 my-2 border border-primary rounded answer-selection",
-                                    },
-                                    [
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value:
-                                              _vm.userChoose[_vm.questionIndex],
-                                            expression:
-                                              "userChoose[questionIndex]",
-                                          },
-                                        ],
-                                        attrs: {
-                                          type: "radio",
-                                          id: answer.id,
-                                          disabled:
-                                            _vm.resultCheck[_vm.questionIndex],
-                                          hidden: "",
-                                        },
-                                        domProps: {
-                                          value: answer.id,
-                                          checked: _vm._q(
-                                            _vm.userChoose[_vm.questionIndex],
-                                            answer.id
-                                          ),
-                                        },
-                                        on: {
-                                          change: function ($event) {
-                                            return _vm.$set(
-                                              _vm.userChoose,
-                                              _vm.questionIndex,
-                                              answer.id
-                                            )
-                                          },
-                                        },
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "label",
-                                        {
-                                          staticClass: "w-100",
-                                          attrs: { for: answer.id },
-                                        },
-                                        [
-                                          _c(
-                                            "a",
-                                            {
-                                              staticClass:
-                                                "btn text-left w-100",
-                                            },
-                                            [
-                                              _c(
-                                                "h5",
-                                                { staticClass: "mb-0" },
-                                                [_vm._v(_vm._s(answer.answer))]
-                                              ),
-                                            ]
-                                          ),
-                                        ]
-                                      ),
-                                    ]
-                                  )
-                                }
-                              ),
-                            ],
-                            2
-                          ),
-                        ]),
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.type === _vm.$getConst("exercise")
-                ? _c("div", [
-                    _vm.resultCheck[_vm.questionIndex] ===
-                    _vm.$getConst("incorrect")
-                      ? _c(
-                          "div",
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "p-3 bg-danger rounded h5 text-white font-weight-bold",
-                              },
-                              [
-                                _vm._v(
-                                  "\n                            Incorrect answer !\n                        "
-                                ),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(
-                              _vm.questionWriting[_vm.questionIndex].answers,
-                              function (answer_item) {
-                                return _c(
-                                  "h5",
-                                  {
-                                    key: answer_item.id,
-                                    staticClass: "text-success",
-                                  },
-                                  [
-                                    answer_item.is_correct ===
-                                    _vm.$getConst("correct")
-                                      ? _c("span", [
-                                          _vm._v(
-                                            "\n                                    Correct answer is: " +
-                                              _vm._s(answer_item.answer) +
-                                              "\n                                "
-                                          ),
-                                        ])
-                                      : _vm._e(),
-                                  ]
-                                )
-                              }
-                            ),
-                          ],
-                          2
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.resultCheck[_vm.questionIndex] ===
-                    _vm.$getConst("correct")
-                      ? _c(
-                          "div",
-                          {
-                            staticClass:
-                              "p-3 bg-success rounded h5 text-white font-weight-bold",
-                          },
-                          [
-                            _vm._v(
-                              "\n                        Good job !\n                    "
-                            ),
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("h3", {}, [
-                      _vm._v(
-                        _vm._s(
-                          _vm.questionWriting[_vm.questionIndex]
-                            .writing_assessment_question.id
-                        ) +
-                          ". " +
-                          _vm._s(
-                            _vm.questionWriting[_vm.questionIndex]
-                              .writing_assessment_question.question
-                          )
-                      ),
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Choose the most correct answer")]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "mt-5" },
-                      [
-                        _c("input", {
-                          attrs: {
-                            type: "number",
-                            id:
-                              "ques" +
-                              _vm.questionWriting[_vm.questionIndex].id,
-                            hidden: "",
-                          },
-                          domProps: {
-                            value: _vm.questionWriting[_vm.questionIndex].id,
-                          },
-                        }),
-                        _vm._v(" "),
-                        _vm._l(
-                          _vm.questionWriting[_vm.questionIndex].answers,
-                          function (answer) {
-                            return _c(
-                              "div",
-                              {
-                                key: answer.id,
-                                staticClass:
-                                  "py-0 my-2 border border-primary rounded answer-selection",
                               },
                               [
                                 _c("input", {
@@ -55163,11 +55874,14 @@ var render = function () {
                                       expression: "userChoose[questionIndex]",
                                     },
                                   ],
+                                  staticClass: "ip-answer",
                                   attrs: {
                                     type: "radio",
                                     id: answer.id,
                                     disabled:
-                                      _vm.resultCheck[_vm.questionIndex],
+                                      _vm.resultCheck.questions[
+                                        _vm.questionIndex
+                                      ],
                                     hidden: "",
                                   },
                                   domProps: {
@@ -55215,67 +55929,73 @@ var render = function () {
                     ),
                   ])
                 : _vm._e(),
+              _vm._v(" "),
+              _vm.typeExam === _vm.$getConst("exercise")
+                ? _c(
+                    "div",
+                    [
+                      _c("vimeo-player", {
+                        ref: "player",
+                        staticClass: "embed-responsive embed-responsive-16by9",
+                        attrs: {
+                          "video-id": _vm.videoId,
+                          "video-url": _vm.getVideoUrl(),
+                        },
+                      }),
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.typeExam === _vm.$getConst("quiz")
+                ? _c(
+                    "div",
+                    [
+                      _vm._l(_vm.questionSpeaking, function (question) {
+                        return _c("h3", { key: question.id }, [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(question.speak_quiz_question.id) +
+                              ".\n            " +
+                              _vm._s(question.speak_quiz_question.question) +
+                              "\n          "
+                          ),
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _c("p", [
+                        _vm._v(
+                          "Please record one video with voice that answers all question."
+                        ),
+                      ]),
+                    ],
+                    2
+                  )
+                : _vm._e(),
             ]),
           ]),
         ]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "text-right pb-4 pr-3" }, [
-        _vm.questionIndex > 0
-          ? _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                on: {
-                  click: function ($event) {
-                    return _vm.prev()
-                  },
-                },
-              },
-              [_vm._v("\n            Previous\n        ")]
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.type === _vm.$getConst("exercise")
-          ? _c("span", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary mx-2",
-                  attrs: {
-                    id: "check" + _vm.questionWriting[_vm.questionIndex],
-                    disabled: _vm.resultCheck[_vm.questionIndex],
-                  },
-                  on: {
-                    click: function ($event) {
-                      return _vm.check()
-                    },
-                  },
-                },
-                [_vm._v("\n                Check\n            ")]
-              ),
-              _vm._v(" "),
-              _vm.questionIndex < _vm.questionWriting.length - 1 &&
-              _vm.resultCheck[_vm.questionIndex]
-                ? _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary mx-2",
-                      on: {
-                        click: function ($event) {
-                          return _vm.next()
-                        },
+      _vm.typeExam === _vm.$getConst("assessment")
+        ? _c("div", { staticClass: "text-right py-4 pr-3" }, [
+            _vm.questionIndex > 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: {
+                      click: function ($event) {
+                        return _vm.prev()
                       },
                     },
-                    [_vm._v("\n                Next\n            ")]
-                  )
-                : _vm._e(),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.type !== _vm.$getConst("exercise")
-          ? _c("span", [
-              _vm.questionIndex === _vm.questionWriting.length - 1
+                  },
+                  [_vm._v("\n      Previous\n    ")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c("span", [
+              _vm.questionIndex === _vm.questionSpeaking.length - 1
                 ? _c(
                     "button",
                     {
@@ -55286,11 +56006,11 @@ var render = function () {
                         },
                       },
                     },
-                    [_vm._v("\n                Submit\n            ")]
+                    [_vm._v("\n        Submit\n      ")]
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.questionIndex < _vm.questionWriting.length - 1
+              _vm.questionIndex < _vm.questionSpeaking.length - 1
                 ? _c(
                     "button",
                     {
@@ -55301,12 +56021,715 @@ var render = function () {
                         },
                       },
                     },
-                    [_vm._v("\n                Next\n            ")]
+                    [_vm._v("\n        Next\n      ")]
                   )
                 : _vm._e(),
-            ])
-          : _vm._e(),
+            ]),
+          ])
+        : _c("div", { staticClass: "text-right py-4 pr-3" }, [
+            _c("button", { staticClass: "btn btn-primary" }, [
+              _vm._v("Upload"),
+            ]),
+          ]),
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/WritingComponent.vue?vue&type=template&id=42abd7fa&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Course/WritingComponent.vue?vue&type=template&id=42abd7fa&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container-fluid h-100 d-flex flex-column text-primary" },
+    [
+      _c("h1", { staticClass: "mt-3 text-center font-weight-bold" }, [
+        _vm._v("Writing"),
       ]),
+      _vm._v(" "),
+      _vm.allResults.length === 0
+        ? _c("div", [
+            _vm.typeExam !== _vm.$getConst("exercise")
+              ? _c(
+                  "div",
+                  { staticClass: "h5 text-center" },
+                  [
+                    _vm.startQuiz === true
+                      ? _c("vue-countdown-timer", {
+                          attrs: {
+                            "start-time": _vm.timeNow,
+                            "end-time": _vm.timeEnd,
+                            interval: 1000,
+                            "start-label": "Until start:",
+                            "end-label": "Time limit",
+                            "label-position": "begin",
+                            "end-text": "Ended!",
+                            "day-txt": "days",
+                            "hour-txt": "hours",
+                            "minutes-txt": "minutes",
+                            "seconds-txt": "seconds",
+                          },
+                          on: {
+                            start_callback: function ($event) {
+                              return _vm.startCallBack("event started")
+                            },
+                            end_callback: function ($event) {
+                              return _vm.endCallBack("event ended")
+                            },
+                          },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "start-label",
+                                fn: function (scope) {
+                                  return [
+                                    _c("i", { staticClass: "fe fe-clock" }),
+                                    _vm._v(" "),
+                                    scope.props.startLabel !== "" &&
+                                    scope.props.tips &&
+                                    scope.props.labelPosition === "begin"
+                                      ? _c("span", [
+                                          _vm._v(
+                                            "\n                    " +
+                                              _vm._s(scope.props.startLabel) +
+                                              ":"
+                                          ),
+                                        ])
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    scope.props.endLabel !== "" &&
+                                    !scope.props.tips &&
+                                    scope.props.labelPosition === "begin"
+                                      ? _c("span", [
+                                          _vm._v(
+                                            "\n                    " +
+                                              _vm._s(scope.props.endLabel) +
+                                              ":"
+                                          ),
+                                        ])
+                                      : _vm._e(),
+                                  ]
+                                },
+                              },
+                              {
+                                key: "countdown",
+                                fn: function (scope) {
+                                  return [
+                                    _c("span", [
+                                      _vm._v(_vm._s(scope.props.days) + " "),
+                                    ]),
+                                    _c("a", [_vm._v(":")]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(_vm._s(scope.props.hours) + " "),
+                                    ]),
+                                    _c("a", [_vm._v(":")]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(_vm._s(scope.props.minutes) + " "),
+                                    ]),
+                                    _c("a", [_vm._v(":")]),
+                                    _vm._v(" "),
+                                    _c("span", [
+                                      _vm._v(_vm._s(scope.props.seconds) + " "),
+                                    ]),
+                                    _c("a"),
+                                  ]
+                                },
+                              },
+                            ],
+                            null,
+                            false,
+                            2307984957
+                          ),
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.startQuiz === false
+                      ? _c("div", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success mt-3",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.startExam()
+                                },
+                              },
+                            },
+                            [_vm._v("Start")]
+                          ),
+                        ])
+                      : _vm._e(),
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "py-4 row justify-content-center lecture overflow-auto",
+              },
+              [
+                _c("div", { staticClass: "col-lg-8" }, [
+                  _c("div", { staticClass: "h-100" }, [
+                    _vm.typeExam === _vm.$getConst("assessment") &&
+                    _vm.startQuiz === true
+                      ? _c("div", [
+                          _c("h3", {}, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.questionWriting[_vm.questionIndex]
+                                  .writing_assessment_question.id
+                              ) +
+                                ". " +
+                                _vm._s(
+                                  _vm.questionWriting[_vm.questionIndex]
+                                    .writing_assessment_question.question
+                                )
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Choose the most correct answer")]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "mt-5" },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "number",
+                                  id:
+                                    "ques" +
+                                    _vm.questionWriting[_vm.questionIndex].id,
+                                  hidden: "",
+                                },
+                                domProps: {
+                                  value:
+                                    _vm.questionWriting[_vm.questionIndex].id,
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._l(
+                                _vm.questionWriting[_vm.questionIndex]
+                                  .writing_assessment_question.answers,
+                                function (answer) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: answer.id,
+                                      staticClass:
+                                        "py-0 my-2 border border-primary rounded answer-selection",
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.userChoose[_vm.questionIndex],
+                                            expression:
+                                              "userChoose[questionIndex]",
+                                          },
+                                        ],
+                                        attrs: {
+                                          type: "radio",
+                                          id: answer.id,
+                                          disabled:
+                                            _vm.resultCheck.questions[
+                                              _vm.questionIndex
+                                            ],
+                                          hidden: "",
+                                        },
+                                        domProps: {
+                                          value: answer.id,
+                                          checked: _vm._q(
+                                            _vm.userChoose[_vm.questionIndex],
+                                            answer.id
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              _vm.userChoose,
+                                              _vm.questionIndex,
+                                              answer.id
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "w-100",
+                                          attrs: { for: answer.id },
+                                        },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn text-left w-100",
+                                            },
+                                            [
+                                              _c(
+                                                "h5",
+                                                { staticClass: "mb-0" },
+                                                [_vm._v(_vm._s(answer.answer))]
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  )
+                                }
+                              ),
+                            ],
+                            2
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.typeExam === _vm.$getConst("exercise")
+                      ? _c("div", [
+                          _vm.resultCheck[_vm.questionIndex] ===
+                          _vm.$getConst("incorrect")
+                            ? _c(
+                                "div",
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "p-3 bg-danger rounded h5 text-white font-weight-bold",
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                Incorrect answer !\n                            "
+                                      ),
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _vm._l(
+                                    _vm.questionWriting[_vm.questionIndex]
+                                      .writing_assessment_question.answers,
+                                    function (answer_item) {
+                                      return _c(
+                                        "h5",
+                                        {
+                                          key: answer_item.id,
+                                          staticClass: "text-success",
+                                        },
+                                        [
+                                          answer_item.is_correct ===
+                                          _vm.$getConst("correct")
+                                            ? _c("span", [
+                                                _vm._v(
+                                                  "\n                                    Correct answer is: " +
+                                                    _vm._s(answer_item.answer) +
+                                                    "\n                                "
+                                                ),
+                                              ])
+                                            : _vm._e(),
+                                        ]
+                                      )
+                                    }
+                                  ),
+                                ],
+                                2
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.resultCheck[_vm.questionIndex] ===
+                          _vm.$getConst("correct")
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "p-3 bg-success rounded h5 text-white font-weight-bold",
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            Good job !\n                        "
+                                  ),
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("h3", {}, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.questionWriting[_vm.questionIndex]
+                                  .writing_assessment_question.id
+                              ) +
+                                ". " +
+                                _vm._s(
+                                  _vm.questionWriting[_vm.questionIndex]
+                                    .writing_assessment_question.question
+                                )
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [_vm._v("Choose the most correct answer")]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "mt-5" },
+                            [
+                              _c("input", {
+                                attrs: {
+                                  type: "number",
+                                  id:
+                                    "ques" +
+                                    _vm.questionWriting[_vm.questionIndex].id,
+                                  hidden: "",
+                                },
+                                domProps: {
+                                  value:
+                                    _vm.questionWriting[_vm.questionIndex].id,
+                                },
+                              }),
+                              _vm._v(" "),
+                              _vm._l(
+                                _vm.questionWriting[_vm.questionIndex]
+                                  .writing_assessment_question.answers,
+                                function (answer) {
+                                  return _c(
+                                    "div",
+                                    {
+                                      key: answer.id,
+                                      staticClass:
+                                        "py-0 my-2 border border-primary rounded answer-selection",
+                                    },
+                                    [
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value:
+                                              _vm.userChoose[_vm.questionIndex],
+                                            expression:
+                                              "userChoose[questionIndex]",
+                                          },
+                                        ],
+                                        attrs: {
+                                          type: "radio",
+                                          id: answer.id,
+                                          disabled:
+                                            _vm.resultCheck.questions[
+                                              _vm.questionIndex
+                                            ],
+                                          hidden: "",
+                                        },
+                                        domProps: {
+                                          value: answer.id,
+                                          checked: _vm._q(
+                                            _vm.userChoose[_vm.questionIndex],
+                                            answer.id
+                                          ),
+                                        },
+                                        on: {
+                                          change: function ($event) {
+                                            return _vm.$set(
+                                              _vm.userChoose,
+                                              _vm.questionIndex,
+                                              answer.id
+                                            )
+                                          },
+                                        },
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "label",
+                                        {
+                                          staticClass: "w-100",
+                                          attrs: { for: answer.id },
+                                        },
+                                        [
+                                          _c(
+                                            "a",
+                                            {
+                                              staticClass:
+                                                "btn text-left w-100",
+                                            },
+                                            [
+                                              _c(
+                                                "h5",
+                                                { staticClass: "mb-0" },
+                                                [_vm._v(_vm._s(answer.answer))]
+                                              ),
+                                            ]
+                                          ),
+                                        ]
+                                      ),
+                                    ]
+                                  )
+                                }
+                              ),
+                            ],
+                            2
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.typeExam === _vm.$getConst("quiz") &&
+                    _vm.startQuiz === true
+                      ? _c("div", [
+                          _c("h3", {}, [
+                            _vm._v(
+                              _vm._s(
+                                _vm.questionWriting[_vm.questionIndex]
+                                  .writing_quiz_question.id
+                              ) +
+                                ". " +
+                                _vm._s(
+                                  _vm.questionWriting[_vm.questionIndex]
+                                    .writing_quiz_question.question
+                                )
+                            ),
+                          ]),
+                          _vm._v(" "),
+                          _vm.typeExam === _vm.$getConst("quiz")
+                            ? _c("div", { staticClass: "mt-5" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "form-group",
+                                    attrs: {
+                                      id: _vm.questionWriting[_vm.questionIndex]
+                                        .id,
+                                    },
+                                  },
+                                  [
+                                    _c("ckeditor", {
+                                      attrs: { config: _vm.editorConfig },
+                                      model: {
+                                        value:
+                                          _vm.userChoose[_vm.questionIndex],
+                                        callback: function ($$v) {
+                                          _vm.$set(
+                                            _vm.userChoose,
+                                            _vm.questionIndex,
+                                            $$v
+                                          )
+                                        },
+                                        expression: "userChoose[questionIndex]",
+                                      },
+                                    }),
+                                  ],
+                                  1
+                                ),
+                              ])
+                            : _vm._e(),
+                        ])
+                      : _vm._e(),
+                  ]),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "text-right pb-4 pr-3" }, [
+              _vm.questionIndex > 0
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function ($event) {
+                          return _vm.prev()
+                        },
+                      },
+                    },
+                    [_vm._v("\n                Previous\n            ")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.typeExam === _vm.$getConst("exercise")
+                ? _c("span", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary mx-2",
+                        attrs: {
+                          id: "check" + _vm.questionWriting[_vm.questionIndex],
+                          disabled: _vm.resultCheck[_vm.questionIndex],
+                        },
+                        on: {
+                          click: function ($event) {
+                            return _vm.check()
+                          },
+                        },
+                      },
+                      [_vm._v("\n                Check\n            ")]
+                    ),
+                    _vm._v(" "),
+                    _vm.questionIndex < _vm.questionWriting.length - 1 &&
+                    _vm.resultCheck[_vm.questionIndex]
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary mx-2",
+                            on: {
+                              click: function ($event) {
+                                return _vm.next()
+                              },
+                            },
+                          },
+                          [_vm._v("\n                Next\n            ")]
+                        )
+                      : _vm._e(),
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.typeExam !== _vm.$getConst("exercise")
+                ? _c("span", [
+                    _vm.questionIndex === _vm.questionWriting.length - 1
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary mx-2",
+                            on: {
+                              click: function ($event) {
+                                return _vm.submit()
+                              },
+                            },
+                          },
+                          [_vm._v("\n                Submit\n            ")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.questionIndex < _vm.questionWriting.length - 1
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary mx-2",
+                            on: {
+                              click: function ($event) {
+                                return _vm.next()
+                              },
+                            },
+                          },
+                          [_vm._v("\n                Next\n            ")]
+                        )
+                      : _vm._e(),
+                  ])
+                : _vm._e(),
+            ]),
+          ])
+        : _c("div", { staticClass: "mt-5 h-100" }, [
+            _c("div", { staticClass: "text-center" }, [
+              _vm.typeExam !== _vm.$getConst("assessment")
+                ? _c("div", [
+                    _c("h2", { staticClass: "text-success" }, [
+                      _vm._v("You score " + _vm._s(_vm.allResults[0].score)),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "row justify-content-center align-items-start",
+                      },
+                      [
+                        _c("div", { staticClass: "col-lg-4" }, [
+                          _c("div", { staticClass: "text-left mb-2" }, [
+                            _c("i", {
+                              staticClass: "fe fe-check-circle h4 text-success",
+                            }),
+                            _vm._v(" "),
+                            _vm.typeExam === _vm.$getConst("exercise")
+                              ? _c("span", { staticClass: "h4" }, [
+                                  _vm._v(
+                                    "Number of correct question " +
+                                      _vm._s(_vm.allResults[0].correct_question)
+                                  ),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.typeExam === _vm.$getConst("quiz")
+                              ? _c("span", { staticClass: "h4" }, [
+                                  _vm._v(
+                                    "Number of wrong question " +
+                                      _vm._s(_vm.allResults[1].correct_question)
+                                  ),
+                                ])
+                              : _vm._e(),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "text-left" }, [
+                            _c("i", {
+                              staticClass: "fe fe-x-circle h4 text-danger",
+                            }),
+                            _vm._v(" "),
+                            _vm.typeExam === _vm.$getConst("exercise")
+                              ? _c("span", { staticClass: "h4" }, [
+                                  _vm._v(
+                                    "Number of wrong question " +
+                                      _vm._s(_vm.allResults[0].wrong_question)
+                                  ),
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.typeExam === _vm.$getConst("quiz")
+                              ? _c("span", { staticClass: "h4" }, [
+                                  _vm._v(
+                                    "Number of wrong question " +
+                                      _vm._s(_vm.allResults[1].wrong_question)
+                                  ),
+                                ])
+                              : _vm._e(),
+                          ]),
+                        ]),
+                      ]
+                    ),
+                  ])
+                : _c("div", { staticClass: "text-success" }, [
+                    _vm._v(
+                      "\n                You have completed the this part.\n                Please select continue to complete the First Free Assessment!\n            "
+                    ),
+                  ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary my-5",
+                  on: {
+                    click: function ($event) {
+                      return _vm.nextTypeExam()
+                    },
+                  },
+                },
+                [
+                  _vm._v("Continue "),
+                  _c("i", { staticClass: "fe fe-arrow-right" }),
+                ]
+              ),
+            ]),
+          ]),
     ]
   )
 }

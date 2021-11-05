@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid h-100 d-flex flex-column justify-content-between text-primary">
+    <div class="container-fluid h-100 d-flex flex-column text-primary">
         <h1 class="mt-3 text-center font-weight-bold">Writing</h1>
         <div v-if="allResults.length === 0">
             <div class="h5 text-center" v-if="typeExam !== $getConst('exercise')">
@@ -195,195 +195,221 @@
     </div>
 </template>
 
+
 <script>
-import CKEditor from 'ckeditor4-vue'
+import CKEditor from "ckeditor4-vue";
 
 const results = [
-    {type: 'quiz', score: 5.5, correct_question: 8, wrong_question: 5},
-    {type: 'assessment', score: 6, correct_question: 10, wrong_question: 3},
-]
+  { type: "quiz", score: 5.5, correct_question: 8, wrong_question: 5 },
+  { type: "assessment", score: 6, correct_question: 10, wrong_question: 3 },
+];
 export default {
-    props: {
-        typeExam: Number,
-        examId: Number,
-        courseId: Number,
+  props: {
+    typeExam: Number,
+    examId: Number,
+    courseId: Number,
+  },
+  components: {
+    ckeditor: CKEditor.component,
+  },
+  data() {
+    return {
+      questionWriting: [],
+      questionIndex: 0,
+      editorConfig: {},
+      timeNow: "",
+      timeEnd: "",
+      timeLimitQuiz: 60,
+      timeLimitAssessment: 20,
+      startQuiz: false,
+      userChoose: [],
+      allResults: [],
+      checkAnswer: [],
+      resultCheck: {
+        courseID: "",
+        examID: "",
+        quizID: "",
+        questions: [],
+      },
+      timeStartDo: "",
+      timeDo: "",
+    };
+  },
+  mounted() {
+    this.getQuestion();
+    this.getAnswerUser();
+    
+  },
+  methods: {
+    getQuestion: function () {
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        this.getWritingAssessmentQuestions();
+      } else if (this.typeExam === this.$root.$getConst("exercise")) {
+        this.getWritingExerciseQuestions();
+      } else {
+        this.getWritingQuizQuestions();
+      }
     },
-    components: {
-        ckeditor: CKEditor.component
+    next: function () {
+      if (this.questionIndex < this.questionWriting.length - 1) {
+        this.userAnswer();
+        this.questionIndex++;
+      }
     },
-    data() {
-        return {
-            questionWriting: [],
-            questionIndex: 0,
-            editorConfig: {},
-            timeNow: '',
-            timeEnd: '',
-            timeLimitQuiz: 60,
-            timeLimitAssessment: 20,
-            startQuiz: false,
-            userChoose: [],
-            allResults: [],
-            checkAnswer: [],
-            resultCheck: {
-                courseID: '',
-                examID:'',
-                quizID:'',
-                questions: []
-            },
-            timeStartDo: '',
-            timeDo: '',
-        };
+    prev: function () {
+      if (this.questionIndex > 0) this.questionIndex--;
     },
-    mounted() {
-        this.getQuestion();
-        this.getAnswerUser()
-        // if (this.typeExam === this.$root.$getConst('assessment') && this.resultCheck){
-        //     this.allResults = results
-        // }
+    startCallBack: function (x) {
+      console.log(x);
     },
-    methods: {
-        getQuestion: function () {
-            if (this.typeExam === this.$root.$getConst('assessment')) {
-                this.getWritingAssessmentQuestions();
-            } else if (this.typeExam === this.$root.$getConst('exercise')) {
-                this.getWritingExerciseQuestions();
-            } else {
-                this.getWritingQuizQuestions();
-            }
-        },
-        next: function () {
-            if (this.questionIndex < this.questionWriting.length - 1) {
-                this.userAnswer();
-                this.questionIndex++;
-            }
-        },
-        prev: function () {
-            if (this.questionIndex > 0) this.questionIndex--;
-        },
-        startCallBack: function (x) {
-            console.log(x);
-        },
-        endCallBack: function (x) {
-            console.log(x);
-        },
-        getWritingAssessmentQuestions() {
-            axios.get(route("site.exam.getWritingAssessmentQuestionsClient", this.examId))
-                .then((response) => {
-                    console.log(response.data)
-                    this.questionWriting = response.data.questions.question
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
-        },
-        getWritingExerciseQuestions() {
-            axios.get(route("site.exam.getWritingExerciseQuestionsClient", this.examId))
-                .then((response) => {
-                    console.log(response.data)
-                    this.questionWriting = response.data.questions[0].question
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
-        },
-        getWritingQuizQuestions() {
-            axios.get(route("site.exam.getWritingQuizQuestionsClient", this.examId))
-                .then((response) => {
-                    console.log(response.data)
-                    this.questionWriting = response.data.questions[0].question
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
-        },
-        startExam: function () {
-            this.startQuiz = true;
-            this.timeNow = new Date();
-            this.timeEnd = new Date();
-            this.timeStartDo = this.timeNow;
-            if (this.typeExam === this.$root.$getConst('quiz')) {
-                this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitQuiz)
-            }
-            if (this.typeExam === this.$root.$getConst('assessment')) {
-                this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitAssessment)
-            }
-        },
-        check: function () {
-            if (undefined) {
-                this.checkAnswer.push(-1)
-            } else {
-                for (let i = 0; i < this.questionWriting[this.questionIndex].writing_assessment_question.answers.length; i++) {
-                    if (this.questionWriting[this.questionIndex].writing_assessment_question.answers[i].id === this.userChoose[this.questionIndex]) {
-                        if (this.questionWriting[this.questionIndex].writing_assessment_question.answers[i].is_correct === 1) {
-                            return this.checkAnswer.push(1)
-                        }
-                        return this.checkAnswer.push(-1)
-                    }
-                }
-            }
-            console.log(this.checkAnswer)
-        },
-        submit: function () {
-            this.userAnswer();
-            this.allResults = results;
-            console.log('tra loi ne', this.resultCheck)
-        },
-        nextTypeExam() {
-            this.$emit('nextTypeExam', this.$root.$getConst('listening'))
-        },
-        userAnswer: function () {
-            let ansType;
-            if (this.typeExam === this.$root.$getConst('quiz')) {
-                ansType = this.$root.$getConst('text')
-            } else {
-                ansType = this.$root.$getConst('MC')
-            }
-            this.questionNo = document.getElementById(
-                "ques" + this.questionWriting[this.questionIndex].id
-            ).value;
-            this.timeDo = (new Date() - this.timeStartDo) / 1000;
-            this.timeStartDo = new Date();
+    endCallBack: function (x) {
+      console.log(x);
+    },
+    getWritingAssessmentQuestions() {
+      axios
+        .get(
+          route("site.exam.getWritingAssessmentQuestionsClient", this.examId)
+        )
+        .then((response) => {
+          console.log("response.data >>>", response.data);
 
-            this.userAnswerQuiz({
-                answerType: ansType,
-                questionID: parseInt(this.questionNo),
-                answerID: this.userChoose[this.questionIndex],
-                time: this.timeDo
-            });
-        },
-        userAnswerQuiz: function (value) {
-            if (this.resultCheck.questions.length === 0) {
-                this.resultCheck.courseID = this.courseId
-                this.resultCheck.examID = this.examId
-                this.resultCheck.quizID = this.questionWriting[this.questionIndex].quiz_id
-                this.resultCheck.questions.push(value)
-            } else {
-                if (
-                    this.resultCheck.questions.some((item) => {
-                        return value.questionID === item.questionID;
-                    })
-                ) {
-                    this.resultCheck.questions.map((item) => {
-                        if (value.questionID === item.questionID) {
-                            return (item.answerID = value.answerID);
-                        }
-                    });
-                } else {
-                    this.resultCheck.questions.push(value);
-                }
-            }
-            localStorage.setItem("writing", JSON.stringify(this.resultCheck));
-        },
-        getAnswerUser() {
-            this.resultCheck = JSON.parse(localStorage.getItem("writing")) || new Array();
-            this.resultCheck.questions.forEach((item) => {
-                this.userChoose.push(item.answerID);
-            });
-        },
+          this.questionWriting = response.data.questions.question.filter((question) => {
+            return (question.writing_assessment_question !== null)
+          });
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     },
-}
+    getWritingExerciseQuestions() {
+      axios
+        .get(route("site.exam.getWritingExerciseQuestionsClient", this.examId))
+        .then((response) => {
+          console.log(response.data);
+          this.questionWriting = response.data.questions[0].question;
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
+    getWritingQuizQuestions() {
+      axios
+        .get(route("site.exam.getWritingQuizQuestionsClient", this.examId))
+        .then((response) => {
+          console.log(response.data);
+          this.questionWriting = response.data.questions[0].question;
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
+    },
+    startExam: function () {
+      this.startQuiz = true;
+      this.timeNow = new Date();
+      this.timeEnd = new Date();
+      this.timeStartDo = this.timeNow;
+      if (this.typeExam === this.$root.$getConst("quiz")) {
+        this.timeEnd.setMinutes(this.timeEnd.getMinutes() + this.timeLimitQuiz);
+      }
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        this.timeEnd.setMinutes(
+          this.timeEnd.getMinutes() + this.timeLimitAssessment
+        );
+      }
+    },
+    check: function () {
+      if (undefined) {
+        this.checkAnswer.push(-1);
+      } else {
+        for (
+          let i = 0;
+          i <
+          this.questionWriting[this.questionIndex].writing_assessment_question
+            .answers.length;
+          i++
+        ) {
+          if (
+            this.questionWriting[this.questionIndex].writing_assessment_question
+              .answers[i].id === this.userChoose[this.questionIndex]
+          ) {
+            if (
+              this.questionWriting[this.questionIndex]
+                .writing_assessment_question.answers[i].is_correct === 1
+            ) {
+              return this.checkAnswer.push(1);
+            }
+            return this.checkAnswer.push(-1);
+          }
+        }
+      }
+      console.log(this.checkAnswer);
+    },
+    submit: function () {
+      this.userAnswer();
+      this.allResults = results;
+      console.log("tra loi ne", this.resultCheck);
+    },
+    nextTypeExam() {
+      this.$emit("nextTypeExam", this.$root.$getConst("listening"));
+    },
+    userAnswer: function () {
+      let ansType;
+      if (this.typeExam === this.$root.$getConst("quiz")) {
+        ansType = this.$root.$getConst("text");
+      } else {
+        ansType = this.$root.$getConst("MC");
+      }
+      this.questionNo = document.getElementById(
+        "ques" + this.questionWriting[this.questionIndex].id
+      ).value;
+      this.timeDo = (new Date() - this.timeStartDo) / 1000;
+      this.timeStartDo = new Date();
+
+      this.userAnswerQuiz({
+        answerType: ansType,
+        questionID: parseInt(this.questionNo),
+        answerID: this.userChoose[this.questionIndex],
+        time: this.timeDo,
+      });
+    },
+    userAnswerQuiz: function (value) {
+      if (this.resultCheck.questions.length === 0) {
+        this.resultCheck.courseID = this.courseId;
+        this.resultCheck.examID = this.examId;
+        this.resultCheck.quizID =
+          this.questionWriting[this.questionIndex].quiz_id;
+        this.resultCheck.questions.push(value);
+      } else {
+        if (
+          this.resultCheck.questions.some((item) => {
+            return value.questionID === item.questionID;
+          })
+        ) {
+          this.resultCheck.questions.map((item) => {
+            if (value.questionID === item.questionID) {
+              return (item.answerID = value.answerID);
+            }
+          });
+        } else {
+          this.resultCheck.questions.push(value);
+        }
+      }
+      localStorage.setItem("writing", JSON.stringify(this.resultCheck));
+    },
+    getAnswerUser() {
+      this.resultCheck = JSON.parse(localStorage.getItem("writing")) || {
+        questions: [],
+      };
+      this.resultCheck.questions.forEach((item) => {
+        console.log('item :>> ', item);
+        this.userChoose.push(item.answerID);
+      });
+
+      console.log('this.resultCheck :>> ', this.resultCheck);
+    },
+  },
+};
 </script>
 
 <style scoped>
-
 </style>

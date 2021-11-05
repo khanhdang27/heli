@@ -172,13 +172,13 @@ class ExaminationController extends Controller
                 'course_id' => $courseId
             ])->first();
 
-            $version = $student_course->level_quiz;
+            $quiz_set = $student_course->level_quiz;
 
             $quiz = Quiz::with('question')
                 ->with('question.answers')
                 ->where('exam_id', 1)
-                ->whereHas('question', function ($query) use ($version) {
-                    return $query->where('version', $version);
+                ->whereHas('question', function ($query) use ($quiz_set) {
+                    return $query->where('set', $quiz_set);
                 })
                 ->first();
             [$result, $score] = $this->doGrade($quiz->question, $input['quiz']);
@@ -281,9 +281,11 @@ class ExaminationController extends Controller
 
     public function getWritingAssessmentQuestionsClient(Examination $exams)
     {
+        DB::enableQueryLog();
         $exams->load(['quiz.question' => function ($query) {
             $query->where('type','=', Question::WRITING);
         }, 'quiz.question.writingAssessmentQuestion','quiz.question.writingAssessmentQuestion.answers']);
+        // dd(DB::getQueryLog());
         $questions = $exams->quiz[0];
         return response()->json(['questions' => $questions]);
     }

@@ -122,6 +122,7 @@ class LectureController extends Controller
     {
         $input = $request->input();
 
+        dd($input);
         DB::beginTransaction();
         try {
             $lecture = Lecture::find($input['id']);
