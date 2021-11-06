@@ -23,17 +23,14 @@
                     text-center
                   "
                 >
-                
                   <audio id="audio" controls controlsList="nodownload noremoteplayback" @play="audioStart()" :class="{ 'd-none':audioShow  }">
                     <source
                       :src="audioSrc"
                       type="audio/mpeg"
                     />
-                   
                   </audio>
 
                   <h5>Audio can played once only</h5>
-                  {{questionListening[questionIndex].listen_assessment_question}}
                 </div>
                 <h3 v-cloak>
                   {{
@@ -340,6 +337,7 @@ export default {
       timeDo: 0,
       audioSrc: "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3",
       audioShow: false,
+      audioCodes: {},
     };
   },
   mounted() {
@@ -351,8 +349,10 @@ export default {
     // }
   },
   methods: {
+    loadAudio () {      
+      this.audioSrc = route('audio',this.audioCodes[1].audio_code)
+    },
     audioStart() {
-      console.log("audio is start");
       this.audioShow = true
     },
     getQuestion: function () {
@@ -370,8 +370,24 @@ export default {
           route("site.exam.getListeningAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          console.log(response.data.questions);
-          this.questionListening = response.data.questions.question;
+          this.questionListening = response.data.questions.question.filter(
+            (question) => {
+              return question.listen_assessment_question !== null;
+            }
+          );
+          this.questionListening.sort(( first, second) => {
+            if ( first.listen_assessment_question.part > second.listen_assessment_question.part ) {
+              return 1;
+            } else {
+              if ( first.index > second.index ) {
+                return 1
+              } else {
+                return -1
+              }
+            }
+          })
+          this.audioCodes = response.data.audioCodes;
+          this.loadAudio ()
         })
         .catch(function (error) {
           console.error(error);

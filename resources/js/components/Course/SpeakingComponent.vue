@@ -17,18 +17,26 @@
             <div
               class="border shadow-sm bg-white rounded p-3 mb-3 h4 text-center"
             >
-              Audio {{ questionSpeaking[questionIndex].id }}:
-              <vimeo-player
-                :player-height="55"
-                ref="audio"
-                :video-id="'601557402'"
-              />
+              <audio
+                id="audio"
+                controls
+                controlsList="nodownload noremoteplayback"
+                @play="audioStart()"
+                :class="{ 'd-none': audioShow }"
+                v-cloak
+              >
+                <source
+                  :src="
+                    questionSpeaking[questionIndex].speak_assessment_question
+                      .audio_ref
+                  "
+                  type="audio/mpeg"
+                />
+              </audio>
               <h5>Audio can played once only</h5>
             </div>
             <h3 v-cloak>
-              {{
-                questionSpeaking[questionIndex].speak_assessment_question.id
-              }}.
+              {{ questionIndex }}
               {{
                 questionSpeaking[questionIndex].speak_assessment_question
                   .question
@@ -72,10 +80,6 @@
               :video-url="getVideoUrl()"
               class="embed-responsive embed-responsive-16by9"
             />
-            <!--                        <div>-->
-            <!--                            <PhotoCapture v-model="imageBase64" />-->
-            <!--                            <VideoCapture uploadUrl="<example-server-address.com>" v-model="videoUrl" />-->
-            <!--                        </div>-->
           </div>
           <div v-if="typeExam === $getConst('quiz')">
             <h3 v-cloak v-for="question in questionSpeaking" :key="question.id">
@@ -83,10 +87,11 @@
               {{ question.speak_quiz_question.question }}
             </h3>
             <p>Please record one video with voice that answers all question.</p>
-            <!--                        <div>-->
-            <!--                            <PhotoCapture v-model="imageBase64" />-->
-            <!--                            <VideoCapture uploadUrl="<example-server-address.com>" v-model="videoUrl" />-->
-            <!--                        </div>-->
+            <video
+              id="myVideo"
+              class="video-js vjs-default-skin"
+              playsinline
+            ></video>
           </div>
         </div>
       </div>
@@ -127,6 +132,14 @@
 
 <script>
 import { vueVimeoPlayer } from "vue-vimeo-player";
+import 'video.js/dist/video-js.css'
+import 'videojs-record/dist/css/videojs.record.css'
+import videojs from 'video.js'
+import 'webrtc-adapter'
+import RecordRTC from 'recordrtc'
+
+import Record from 'videojs-record/dist/videojs.record.js'
+
 
 export default {
   props: {
@@ -153,13 +166,78 @@ export default {
       },
       timeStartDo: "",
       timeDo: "",
+      audioShow: false,
+      player: '',
+      options: {
+        controls: true,
+        autoplay: false,
+        fluid: false,
+        loop: false,
+        width: 320,
+        height: 240,
+        bigPlayButton: false,
+        controlBar: {
+          volumePanel: false
+        },
+        plugins: {
+          record: {
+            audio: false,
+            video: true,
+            debug: true
+          }
+        }
+      }    
     };
   },
   mounted() {
     this.getQuestion();
     this.getAnswerUser();
+    this.createVideoRecord();
+  },
+  beforeDestroy() { 
+    if (this.player) {
+      this.player.dispose();
+    }
   },
   methods: {
+    createVideoRecord() {
+      this.player = videojs('#myVideo', this.options, () => {
+        // print version information at startup
+        var msg = 'Using video.js ' + videojs.VERSION +
+          ' with videojs-record ' + videojs.getPluginVersion('record') +
+          ' and recordrtc ' + RecordRTC.version;
+        videojs.log(msg);
+      });
+
+      // device is ready
+      this.player.on('deviceReady', () => {
+        console.log('device is ready!');
+      });
+
+      // user clicked the record button and started recording
+      this.player.on('startRecord', () => {
+        console.log('started recording!');
+      });
+
+      // user completed recording and stream is available
+      this.player.on('finishRecord', () => {
+        // the blob object contains the recorded data that
+        // can be downloaded by the user, stored on server etc.
+        console.log('finished recording: ', this.player.recordedData);
+      });
+
+      // error handling
+      this.player.on('error', (element, error) => {
+        console.warn(error);
+      });
+
+      this.player.on('deviceError', () => {
+        console.error('device error:', this.player.deviceErrorCode);
+      });
+    },
+    audioStart() {
+      this.audioShow = true
+    },
     getQuestion: function () {
       if (this.typeExam === this.$root.$getConst("assessment")) {
         this.getSpeakingAssessmentQuestionsClient();
@@ -175,8 +253,15 @@ export default {
           route("site.exam.getSpeakingAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          console.log(response.data.questions);
-          this.questionSpeaking = response.data.questions.question;
+          this.questionSpeaking = response.data.questions.question.filter(
+            (question) => {
+              return question.speak_assessment_question !== null;
+            }
+          );
+          this.questionSpeaking.map((item) => {
+            item.speak_assessment_question.audio_ref = route('audio',this.questionSpeaking[this.questionIndex].speak_assessment_question.audio_ref);
+          })
+          console.log(this.questionSpeaking);
         })
         .catch(function (error) {
           console.error(error);
@@ -187,7 +272,12 @@ export default {
         .get(route("site.exam.getSpeakingExerciseQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data.questions);
-          this.questionSpeaking = response.data.questions[0].question;
+          this.questionSpeaking = response.data.questions.question.filter(
+            (question) => {
+              return question.speak_exercises_question !== null;
+            }
+          );
+          // this.questionSpeaking = response.data.questions[0].question;
           this.videoId =
             this.questionSpeaking[
               this.questionIndex
