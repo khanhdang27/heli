@@ -19,4 +19,8 @@ class WritingAssessmentQuestion extends Model
     {
         return $this->hasMany(WritingAssessmentAnswer::class, 'w_a_question_id');
     }
+    public function findAnswerById($id)
+    {
+        return $this->answers->where('id', $id)->first();
+    }
 }

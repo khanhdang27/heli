@@ -43,6 +43,8 @@ Vue.component('writing-component', require('./components/Course/WritingComponent
 Vue.component('listening-component', require('./components/Course/ListeningComponent.vue').default);
 Vue.component('speaking-component', require('./components/Course/SpeakingComponent.vue').default);
 
+Vue.component('review-exam-component', require('./components/Course/ReviewExamComponent.vue').default);
+
 Vue.component('blog-latest-component', require('./components/Blog/BlogLatestComponent.vue').default);
 Vue.component('news-component', require('./components/Blog/NewsComponent.vue').default);
 

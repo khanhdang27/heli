@@ -113,6 +113,7 @@ Route::middleware('auth')->group(function () {
     Route::get('exam/speakingQuiz/{exams}', 'ExaminationController@getSpeakingQuizQuestionsClient')
         ->name('exam.getSpeakingQuizQuestionsClient');
 
+    Route::get('course/{course}/exam/{exam}/quiz/{quiz}', 'CourseController@showExam')->name('showExam');
 
 
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');

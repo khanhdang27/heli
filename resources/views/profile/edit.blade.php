@@ -88,18 +88,24 @@
                         {{ Form::label('full_name', 'Full Name') }}
                         {{ Form::text('full_name', $user_info->full_name ?? null, ['class' => 'form-control']) }}
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between flex-wrap">
                         <div class="form-group w-50">
                             {{ Form::label('day_of_birth', 'Date of birth') }}
                             {{ Form::date('day_of_birth', $user_info->day_of_birth ?? null, ['class' => 'form-control']) }}
                         </div>
-                        <div class="px-3"></div>
-                        <div class="form-group w-100">
+                        <div class="form-group">
                             {{ Form::label('phone_no', 'Phone') }}
                             {{ Form::text('phone_no', $user_info->phone_no ?? null, ['class' => 'form-control']) }}
                         </div>
+                        <div class="form-group">
+                            {{ Form::label('age', 'Age') }}
+                            {{ Form::text('age', $user_info->age ?? null, ['class' => 'form-control']) }}
+                        </div>
                     </div>
-
+                    <div class="form-group">
+                        {{ Form::label('education_level', 'Education level') }}
+                        {{ Form::text('education_level', $user_info->education_level ?? null, ['class' => 'form-control']) }}
+                    </div>
                     <div class="d-flex">
                         {{ Form::submit('Save', ['class' => 'btn btn-primary ml-auto mt-3']) }}
                     </div>

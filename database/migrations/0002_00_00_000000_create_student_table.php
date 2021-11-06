@@ -21,6 +21,8 @@ class CreateStudentTable extends Migration
             $table->string('full_name')->nullable();
             $table->date('day_of_birth')->nullable();
             $table->string('phone_no')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('education_level')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

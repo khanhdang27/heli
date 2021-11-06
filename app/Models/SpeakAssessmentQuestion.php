@@ -22,4 +22,9 @@ class SpeakAssessmentQuestion extends Model
     {
         return $this->hasMany(SpeakAssessmentAnswer::class, 's_a_question_id');
     }
+
+    public function findAnswerById($id)
+    {
+        return $this->answers->where('id', $id)->first();
+    }
 }

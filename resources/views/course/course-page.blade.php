@@ -86,6 +86,8 @@ if (!empty($student_course)) {
                 <div class="col-xl-4 col-md-6">
                     @if (empty($student_course))
                         <x-product-detail.buy-course :courseDetail=$courseDetail></x-product-detail.buy-course>
+                    @elseif($course->type == Course::RECORD)
+                        <review-exam-component v-bind:exams="{{$exams}}"></review-exam-component>
                     @endif
                 </div>
             </div>
