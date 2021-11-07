@@ -10,7 +10,12 @@
         >
           <div class="col-lg-8">
             <div class="h-100">
-              <div v-if="typeExam === $getConst('assessment')">
+              <div
+                v-if="
+                  typeExam === $getConst('assessment') &&
+                  questionListening[questionIndex]
+                "
+              >
                 <div
                   class="
                     border
@@ -23,21 +28,26 @@
                     text-center
                   "
                 >
-                  <audio id="audio" controls controlsList="nodownload noremoteplayback" @play="audioStart()" :class="{ 'd-none':audioShow  }">
-                    <source
-                      :src="audioSrc"
-                      type="audio/mpeg"
-                    />
+                  <audio
+                    id="audio"
+                    controls
+                    controlsList="nodownload noremoteplayback"
+                    @play="audioStart()"
+                    :class="{ 'd-none': audioShow }"
+                  >
+                    <source :src="audioSrc" type="audio/mpeg" />
                   </audio>
 
                   <h5>Audio can played once only</h5>
                 </div>
                 <h3 v-cloak>
                   {{
-                    questionListening[questionIndex].listen_assessment_question.id
+                    questionListening[questionIndex].listen_assessment_question
+                      .id
                   }}.
                   {{
-                    questionListening[questionIndex].listen_assessment_question.question
+                    questionListening[questionIndex].listen_assessment_question
+                      .question
                   }}
                 </h3>
                 <p>Choose the most correct answer</p>
@@ -76,7 +86,12 @@
                   </div>
                 </div>
               </div>
-              <div v-if="typeExam === $getConst('exercise')">
+              <div
+                v-if="
+                  typeExam === $getConst('exercise') &&
+                  questionListening[questionIndex]
+                "
+              >
                 <div
                   class="
                     border
@@ -170,7 +185,12 @@
                   </div>
                 </div>
               </div>
-              <div v-if="typeExam === $getConst('quiz')">
+              <div
+                v-if="
+                  typeExam === $getConst('quiz') &&
+                  questionListening[questionIndex]
+                "
+              >
                 <h3 v-cloak>
                   {{
                     questionListening[questionIndex].listen_assessment_question
@@ -335,7 +355,8 @@ export default {
       },
       timeStartDo: new Date(),
       timeDo: 0,
-      audioSrc: "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3",
+      audioSrc:
+        "https://file-examples-com.github.io/uploads/2017/11/file_example_MP3_5MG.mp3",
       audioShow: false,
       audioCodes: {},
     };
@@ -343,17 +364,17 @@ export default {
   mounted() {
     this.getQuestion();
     this.getAnswerUser();
-    
+
     // if (this.typeExam === this.$root.$getConst('assessment') && this.resultCheck){
     //     this.allResults = results
     // }
   },
   methods: {
-    loadAudio () {      
-      this.audioSrc = route('audio',this.audioCodes[1].audio_code)
+    loadAudio() {
+      this.audioSrc = route("audio", this.audioCodes[1].audio_code);
     },
     audioStart() {
-      this.audioShow = true
+      this.audioShow = true;
     },
     getQuestion: function () {
       if (this.typeExam === this.$root.$getConst("assessment")) {
@@ -375,19 +396,22 @@ export default {
               return question.listen_assessment_question !== null;
             }
           );
-          this.questionListening.sort(( first, second) => {
-            if ( first.listen_assessment_question.part > second.listen_assessment_question.part ) {
+          this.questionListening.sort((first, second) => {
+            if (
+              first.listen_assessment_question.part >
+              second.listen_assessment_question.part
+            ) {
               return 1;
             } else {
-              if ( first.index > second.index ) {
-                return 1
+              if (first.index > second.index) {
+                return 1;
               } else {
-                return -1
+                return -1;
               }
             }
-          })
+          });
           this.audioCodes = response.data.audioCodes;
-          this.loadAudio ()
+          this.loadAudio();
         })
         .catch(function (error) {
           console.error(error);

@@ -121,8 +121,6 @@ class LectureController extends Controller
     public function showLecture(Request $request)
     {
         $input = $request->input();
-
-        dd($input);
         DB::beginTransaction();
         try {
             $lecture = Lecture::find($input['id']);
@@ -156,14 +154,12 @@ class LectureController extends Controller
 
             $student_course = StudentCourses::where([
                 'student_id' => Auth::user()->id,
-                'course_id' => $courseId
+                'course_id' => $courseId,
             ])->first();
 
-            if (empty($student_course->quiz_lecture) || 
-                ($student_course->quiz_lecture != $exams->id && $index == $student_course->lecture_open)) {
-
-                    $student_course->quiz_lecture = $exams->id;
-                    $student_course->level_quiz = 1;
+            if (empty($student_course->quiz_lecture) || ($student_course->quiz_lecture != $exams->id && $index == $student_course->lecture_open)) {
+                $student_course->quiz_lecture = $exams->id;
+                $student_course->level_quiz = 1;
             } else {
                 return response()->json(
                     [
@@ -182,7 +178,7 @@ class LectureController extends Controller
                     return $query->where('version', $version);
                 })
                 ->first();
-            
+
             if (empty($quiz)) {
                 return response()->json(
                     [

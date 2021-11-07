@@ -30,10 +30,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {!! Form::open(['methods' => 'put', 
-                                    'url' => route('admin.quiz.question.speaking.exercises.update', ['quiz' => $quiz->id, 'question' => $question->id]), 
-                                    'id' => 'formReadingQuestion_{{ $question->id }}',
-                                    'enctype'=>'multipart/form-data']) !!}
+                                {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.speaking.exercises.update', ['quiz' => $quiz->id, 'question' => $question->id]), 'id' => 'formReadingQuestion_{{ $question->id }}', 'enctype' => 'multipart/form-data']) !!}
 
                                 <div class="form-group">
                                     <label for="index" class="required text-dark">Index</label>
@@ -43,10 +40,19 @@
                                     <label for="question" class="required text-dark">Question</label>
                                     {{ Form::text('question', $question->questionContent()->question, ['class' => 'form-control', 'required']) }}
                                 </div>
+                                <div class="form-group">
+                                    <label for="video_code_practice" class="required text-dark"> Video Practice </label>
+                                    {{ Form::text('video_code_practice', $question->questionContent()->video_code_practice, ['class' => 'form-control', 'required']) }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="video_code_response" class="required text-dark"> Video Response </label>
+                                    {{ Form::text('video_code_response', $question->questionContent()->video_code_response, ['class' => 'form-control', 'required']) }}
+                                </div>
                                 <div class="form-group ">
                                     Pick up video
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="browse_{{ $question->index }}"
+                                        <input type="file" class="custom-file-input"
+                                            id="browse_{{ $question->index }}"
                                             accept="video/mp4,video/x-m4v,video/*">
                                         <label class="custom-file-label" for="customFile">Browse&hellip; </label>
                                     </div>
@@ -59,10 +65,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="video_code" class="required text-dark"> Video </label>
-                                    {{ Form::text('video_code', $question->questionContent()->video_code, ['class' => 'form-control', 'required']) }}
-                                </div>
+
                                 <div class="form-group">
                                     <label for="message_wrong" class="required text-dark">Message Wrong</label>
                                     {{ Form::text('message_wrong', $question->questionContent()->message_wrong, ['class' => 'form-control', 'required']) }}
@@ -110,7 +113,8 @@
                         token: 'a4e21d56502edc34f8e27e0244fc46b9',
                         upgrade_to_1080: true,
                         onError: function(data) {
-                            showMessage_{{ $question->index }}('<strong>Error</strong>: ' + JSON.parse(data).error, 'danger')
+                            showMessage_{{ $question->index }}('<strong>Error</strong>: ' + JSON.parse(data).error,
+                                'danger')
                         },
                         onProgress: function(data) {
                             updateProgress_{{ $question->index }}(data.loaded / data.total)

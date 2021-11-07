@@ -57,7 +57,11 @@
         <div class="col-lg-8">
           <div class="h-100">
             <div
-              v-if="typeExam === $getConst('assessment') && startQuiz === true"
+              v-if="
+                typeExam === $getConst('assessment') &&
+                startQuiz === true &&
+                questionWriting[questionIndex]
+              "
             >
               <h3 v-cloak>
                 {{
@@ -105,7 +109,12 @@
               </div>
             </div>
 
-            <div v-if="typeExam === $getConst('exercise')">
+            <div
+              v-if="
+                typeExam === $getConst('exercise') &&
+                questionWriting[questionIndex]
+              "
+            >
               <div v-if="resultCheck[questionIndex] === $getConst('incorrect')">
                 <div
                   class="p-3 bg-danger rounded h5 text-white font-weight-bold"
@@ -177,7 +186,7 @@
               </div>
             </div>
 
-            <div v-if="typeExam === $getConst('quiz') && startQuiz === true">
+            <div v-if="typeExam === $getConst('quiz') && startQuiz === true && questionWriting[questionIndex]">
               <h3 v-cloak>
                 {{ questionWriting[questionIndex].writing_quiz_question.id }}.
                 {{

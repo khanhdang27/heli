@@ -9,6 +9,7 @@
               lectureList[lectureIndex].model_name == 'Examination'
             "
             class="h-100"
+            v-cloak
           >
             <quiz-component
               v-cloak
@@ -242,7 +243,7 @@ export default {
       },
     };
   },
-  mounted() {
+  created() {
     this.syncDataLecture();
     this.syncCourseRelate();
     setTimeout(() => this.showLecture(), 2000);
@@ -296,7 +297,6 @@ export default {
       axios
         .get(route("site.course.lectureList", this.courseId))
         .then((response) => {
-
           this.isPassed = response.data.student_lecture.passed == 1;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
@@ -314,6 +314,8 @@ export default {
             this.lectureList.sort(function (a, b) {
               return a.index - b.index;
             });
+
+            console.log("this.lectureList >>>", this.lectureList);
           }
         })
         .catch(function (error) {
@@ -353,19 +355,19 @@ export default {
     },
     nextToLecture() {
       this.syncDataLecture();
-      setTimeout(
-        () => {
-          this.onClickLecture(parseInt(this.lectureIndex) + 1)
-          console.log('this.lectureIndex :>> ', this.lectureIndex);
-        },
-        2000
-      );
+      setTimeout(() => {
+        this.onClickLecture(parseInt(this.lectureIndex) + 1);
+      }, 2000);
     },
     showLecture() {
-      if (this.lectureList[this.lectureIndex].model_name === "Examination") {
-        this.getExamination();
-      } else {
-        this.getLecture();
+      if (this.lectureList[this.lectureIndex]) {
+        if (
+          this.lectureList[this.lectureIndex].model_name === "Examination"
+        ) {
+          this.getExamination();
+        } else {
+          this.getLecture();
+        }
       }
     },
   },

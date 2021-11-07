@@ -60,57 +60,12 @@ export default {
     };
   },
   mounted: function () {
-    this.typeExercise = this.$root.$getConst("speaking");
+    this.typeExercise = this.$root.$getConst("reading");
   },
   methods: {
     nextTypeExam: function (type) {
       this.typeExercise = type;
     },
-    // submitAnswer() {
-    //     this.userAnswer();
-    //     axios
-    //         .post(
-    //             route("site.exam.checkExam", {
-    //                 exams: this.examId
-    //             }),
-    //             {
-    //                 courseId: this.courseId,
-    //                 quiz: this.quiz,
-    //             }
-    //         )
-    //         .then((response) => {
-    //             this.result = response.data;
-    //             localStorage.removeItem('quiz');
-    //             let index = 0;
-    //             this.result.quiz_result.forEach((item) => {
-    //                 let __question = this.questions.find((_question) => {
-    //                     return _question.id === item.question;
-    //                 });
-    //                 let __answer = __question.answers.find((_answer) => {
-    //                     return _answer.is_correct;
-    //                 });
-    //                 if (item.is_correct == true) {
-    //                     this.showScore.correct.push({
-    //                         key: index,
-    //                         question: __question.question,
-    //                         answer: __answer.answer,
-    //                     });
-    //                 } else {
-    //                     this.showScore.wrong.push({
-    //                         key: index,
-    //                         question: __question.question,
-    //                         answer: __answer.answer,
-    //                         lecture: __question.lecture_index,
-    //                         message: __question.message_wrong,
-    //                     });
-    //                 }
-    //                 index += 1;
-    //             });
-    //         })
-    //         .catch(function (error) {
-    //             console.error(error);
-    //         });
-    // },
     userAnswer: function () {
       this.questionNo = document.getElementById(
         "ques" + this.questions[this.questionIndex].id
