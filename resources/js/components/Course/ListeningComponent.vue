@@ -5,7 +5,7 @@
             <div class="container-fluid h-100 d-flex flex-column justify-content-between">
                 <div class="py-4 h-100 row justify-content-center lecture overflow-auto">
                     <div class="col-lg-8">
-                        <div class="h-100" v-if="questionListening[questionIndex]">
+                        <div class="h-100">
                             <div v-if="typeExam === $getConst('assessment')">
                                 <div class="border shadow-sm bg-white rounded p-3 mb-3 h4 text-center">
                                     <vimeo-player
@@ -223,11 +223,11 @@ export default {
         };
     },
     mounted() {
-
-    },
-    created() {
         this.getQuestion()
         this.getAnswerUser()
+        // if (this.typeExam === this.$root.$getConst('assessment') && this.resultCheck){
+        //     this.allResults = results
+        // }
     },
     methods: {
         getQuestion: function () {
@@ -338,9 +338,7 @@ export default {
             localStorage.setItem("listening", JSON.stringify(this.resultCheck));
         },
         getAnswerUser() {
-            this.resultCheck = JSON.parse(localStorage.getItem("listening")) || {
-                questions: []
-            };
+            this.resultCheck = JSON.parse(localStorage.getItem("listening")) || new Array();
             this.resultCheck.questions.forEach((item) => {
                 this.userChoose.push(item.answerID);
             });

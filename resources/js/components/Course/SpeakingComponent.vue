@@ -3,7 +3,7 @@
         <h1 class="mt-4 text-center font-weight-bold">Speaking</h1>
         <div class="py-4 row h-100 justify-content-center lecture overflow-auto">
             <div class="col-lg-8">
-                <div class="h-100" v-if="questionSpeaking[questionIndex]">
+                <div class="h-100">
                     <div v-if="typeExam === $getConst('assessment')">
                         <div class="border shadow-sm bg-white rounded p-3 mb-3 h4 text-center">
                             Audio {{questionSpeaking[questionIndex].id}}:
@@ -117,9 +117,6 @@ export default {
         };
     },
     mounted () {
-
-    },
-    created() {
         this.getQuestion();
         this.getAnswerUser()
     },
@@ -221,9 +218,7 @@ export default {
             localStorage.setItem("speaking", JSON.stringify(this.resultCheck));
         },
         getAnswerUser() {
-            this.resultCheck = JSON.parse(localStorage.getItem("speaking")) || {
-                questions: []
-            };
+            this.resultCheck = JSON.parse(localStorage.getItem("speaking")) || new Array();
             this.resultCheck.questions.forEach((item) => {
                 this.userChoose.push(item.answerID);
             });
