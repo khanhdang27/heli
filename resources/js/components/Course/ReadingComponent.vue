@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-lg-6 py-4">
                     <div class="h-100 d-flex flex-column justify-content-between lecture overflow-auto">
-                        <div class="h-100">
+                        <div class="h-100" v-if="questionReading[questionIndex]">
                             <div v-if="typeExam === $getConst('assessment') && startQuiz===true">
                                 <h3 v-cloak>{{ questionReading[questionIndex].reading_question.id }}. {{
                                         questionReading[questionIndex].reading_question.question
@@ -256,11 +256,11 @@ export default {
         };
     },
     mounted() {
+
+    },
+    created() {
         this.getQuestion();
         this.getAnswerUser()
-        // if (this.typeExam === this.$root.$getConst('assessment') && this.resultCheck){
-        //     this.allResults = results
-        // }
     },
     methods: {
         getQuestion: function (){
@@ -366,7 +366,9 @@ export default {
             localStorage.setItem("reading", JSON.stringify(this.resultCheck));
         },
         getAnswerUser() {
-            this.resultCheck = JSON.parse(localStorage.getItem("reading")) || new Array();
+            this.resultCheck = JSON.parse(localStorage.getItem("reading")) || {
+                questions: []
+            };
             this.resultCheck.questions.forEach((item) => {
                 this.userChoose.push(item.answerID);
             });

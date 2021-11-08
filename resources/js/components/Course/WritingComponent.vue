@@ -40,7 +40,7 @@
             </div>
             <div class="py-4 row justify-content-center lecture overflow-auto">
                 <div class="col-lg-8">
-                    <div class="h-100">
+                    <div class="h-100" v-if="questionWriting[questionIndex]">
                         <div v-if="typeExam === $getConst('assessment') && startQuiz===true">
                             <h3 v-cloak>{{ questionWriting[questionIndex].writing_assessment_question.id }}. {{
                                     questionWriting[questionIndex].writing_assessment_question.question
@@ -235,11 +235,11 @@ export default {
         };
     },
     mounted() {
+
+    },
+    created() {
         this.getQuestion();
         this.getAnswerUser()
-        // if (this.typeExam === this.$root.$getConst('assessment') && this.resultCheck){
-        //     this.allResults = results
-        // }
     },
     methods: {
         getQuestion: function () {
@@ -343,7 +343,7 @@ export default {
             ).value;
             this.timeDo = (new Date() - this.timeStartDo) / 1000;
             this.timeStartDo = new Date();
-
+            
             this.userAnswerQuiz({
                 answerType: ansType,
                 questionID: parseInt(this.questionNo),
@@ -375,7 +375,9 @@ export default {
             localStorage.setItem("writing", JSON.stringify(this.resultCheck));
         },
         getAnswerUser() {
-            this.resultCheck = JSON.parse(localStorage.getItem("writing")) || new Array();
+            this.resultCheck = JSON.parse(localStorage.getItem("writing")) || {
+                questions: []
+            };
             this.resultCheck.questions.forEach((item) => {
                 this.userChoose.push(item.answerID);
             });

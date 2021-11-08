@@ -178,12 +178,6 @@
                     </li>
                 @endcan
                 <li class="nav-item">
-                    <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.wallet-manager')) active @endif"
-                       href="{{ route('admin.wallet-manager.index') }}">
-                        <i class="fe fe-credit-card"></i> Wallet Manager
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link @if(Str::startsWith(request()->route()->getName(), 'admin.setting')) active @endif"
                        href="{{ route('admin.setting.index') }}">
                         <i class="fe fe-settings"></i> Settings

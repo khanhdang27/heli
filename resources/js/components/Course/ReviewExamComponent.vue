@@ -4,8 +4,8 @@
         <hr/>
         <div class="list-group border-0">
             <a class="list-group-item list-group-item-action border-0"
-               :href="exam.course_id + '/exam/' + exam.exam_id + '/quiz/' +exam.quiz_id"
-               v-for="exam in exams" :key="exam.exam_id">
+               v-for="exam in exams" :key="exam.exam_id"
+               :href="routeHref(exam.course_id, exam.exam_id, exam.quiz_id)">
                 {{exam.exam.name}}
             </a>
         </div>
@@ -20,8 +20,20 @@ export default {
     props:{
         exams: [],
     },
-    mounted() {
-        console.log(this.exams)
+    data() {
+        return {
+
+        }
+    },
+    created() {
+       this.routeHref()
+    },
+    methods: {
+        routeHref(course, exam, quiz){
+            if (course && exam && quiz){
+                return route("site.showExam", {course, exam, quiz});
+            }
+        }
     }
 }
 </script>

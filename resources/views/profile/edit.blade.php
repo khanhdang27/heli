@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Blog Page')
+@section('title', 'Profile')
 
 @section('content')
 <hr class="mt-0" />
@@ -88,18 +88,15 @@
                         {{ Form::label('full_name', 'Full Name') }}
                         {{ Form::text('full_name', $user_info->full_name ?? null, ['class' => 'form-control']) }}
                     </div>
-                    <div class="d-flex justify-content-between flex-wrap">
-                        <div class="form-group w-50">
+                    <div class="d-flex flex-wrap">
+                        <div class="form-group">
                             {{ Form::label('day_of_birth', 'Date of birth') }}
                             {{ Form::date('day_of_birth', $user_info->day_of_birth ?? null, ['class' => 'form-control']) }}
                         </div>
+                        <div class="px-3"></div>
                         <div class="form-group">
                             {{ Form::label('phone_no', 'Phone') }}
                             {{ Form::text('phone_no', $user_info->phone_no ?? null, ['class' => 'form-control']) }}
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('age', 'Age') }}
-                            {{ Form::text('age', $user_info->age ?? null, ['class' => 'form-control']) }}
                         </div>
                     </div>
                     <div class="form-group">

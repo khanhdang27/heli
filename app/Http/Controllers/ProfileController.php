@@ -108,19 +108,21 @@ class ProfileController extends Controller
         if ($user->hasRole('student')) {
             $student = Student::where('user_id', $user_id)->first();
             $student->update([
-                    'user_id' => $user_id,
-                    'full_name' => $input['full_name'],
-                    'day_of_birth' => $input['day_of_birth'],
-                    'phone_no' => $input['phone_no'],
-                    'age' => $input['age'],
-                    'education_level' => $input['education_level'],
-                ]);
+                'user_id' => $user_id,
+                'full_name' => $input['full_name'],
+                'day_of_birth' => $input['day_of_birth'],
+                'phone_no' => $input['phone_no'],
+                'education_level' => $input['education_level'],
+            ]);
             $student->save();
         } elseif ($user->hasRole('tutor')) {
             $tutor = Tutor::where('user_id', $user_id)->first();
-            $tutor->update(
-                ['user_id' => $user_id, 'full_name' => $input['full_name'], 'day_of_birth' => $input['day_of_birth'], 'phone_no' => $input['phone_no']]
-            );
+            $tutor->update([
+                'user_id' => $user_id,
+                'full_name' => $input['full_name'],
+                'day_of_birth' => $input['day_of_birth'],
+                'phone_no' => $input['phone_no']
+            ]);
             $tutor->save();
         }
         $user->name = $input['name'];

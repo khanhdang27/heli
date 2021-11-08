@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Moderator\UpdateModeratorRequest;
+use App\Models\File;
 use App\Models\Moderator;
+use App\Models\Order;
 use App\Models\Student;
 use App\Models\Tutor;
 use App\Models\User;
+use Bavix\Wallet\Models\Transaction;
+use Bavix\Wallet\Models\Wallet;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -79,7 +84,7 @@ class UserManagerController extends Controller
      */
     public function studentIndex()
     {
-        $students = Student::with('user','user.membership')->paginate(15);
+        $students = Student::with('user','user.wallet','user.membership')->paginate(15);
         return view('admin.user-manager.Student.index', [
             'students' => $students
         ]);
@@ -110,6 +115,7 @@ class UserManagerController extends Controller
             'full_name'=>'required',
             'day_of_birth'=>'required',
             'phone_no'=>'required|numeric',
+            'education_level'=>'required',
             'membership' => 'required|numeric',
         ]);
         DB::beginTransaction();
@@ -119,10 +125,21 @@ class UserManagerController extends Controller
                 'name' => $_request['name'],
                 'membership_group' => $_request['membership']
             ]);
+            if (!empty($request['photo'])) {
+                if (!empty($user->avatar)) {
+                    $user->avatar->delete();
+                }
+                $file = File::storeFile(
+                    $request['photo'],
+                    User::class,
+                    $user->id,
+                );
+            }
             $student->update([
                 'full_name' => $_request['full_name'],
                 'day_of_birth' => $_request['day_of_birth'],
                 'phone_no' => $_request['phone_no'],
+                'education_level' => $_request['education_level'],
             ]);
             DB::commit();
             return back()->with('success', 'Save success');
@@ -132,6 +149,47 @@ class UserManagerController extends Controller
         }
     }
 
+    public function editToken(Wallet $wallet){
+
+        $user = User::where('id', $wallet->holder_id)->first();
+        return view('admin.user-manager.Student.token', [
+            'wallet' =>$wallet,
+            'user' => $user
+        ]);
+    }
+    public function updateToken(Request $request, Wallet $wallet){
+        $validate_request = $request->validate([
+            'balance' => 'required|numeric|min:0'
+        ]);
+        DB::beginTransaction();
+        try {
+            $wallet->update([
+                'balance' =>$validate_request['balance']
+            ]);
+            DB::commit();
+            return back()->with('success', 'Update success');
+        } catch (\Throwable $th){
+            DB::rollBack();
+            return back()->withErrors('Update error');
+        }
+    }
+    public function depositHistory(Wallet $wallet){
+        $transactions = Transaction::where('wallet_id', $wallet->id)->where('type', 'deposit')
+            ->orderBy('created_at', 'desc')->paginate(9);
+        $user = User::where('id', $wallet->holder_id)->first();
+        return \view('admin.user-manager.Student.deposit-history', [
+            'transactions' => $transactions,
+            'user' => $user
+        ]);
+    }
+    public function paymentHistory(User $user){
+        $payment_history = Order::with('course')->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')->paginate(9);
+        return \view('admin.user-manager.Student.payment-history', [
+            'user' => $user,
+            'payment_history' => $payment_history
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *

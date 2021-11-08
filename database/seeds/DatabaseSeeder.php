@@ -67,5 +67,18 @@ class DatabaseSeeder extends Seeder
             'key' => 'address_cbs_footer',
             'value' => 'Helios Education (Causeway Bay Store) To Make An Appointment Room 2202, Causeway Bay Plaza 1, 489 Hennessy Road, Causeway Bay',
         ]);
+        // buy level
+        $setting = Setting::create([
+            'key' => 'token_buy_level_5_5',
+            'value' => '100',
+        ]);
+        $setting = Setting::create([
+            'key' => 'token_buy_level_6_0',
+            'value' => '100',
+        ]);
+        $setting = Setting::create([
+            'key' => 'token_buy_level_6_5',
+            'value' => '100',
+        ]);
     }
 }

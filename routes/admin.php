@@ -43,7 +43,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('/course/{course}/examination/{exam}/edit', 'ExaminationController@edit')->name('course.examination.edit');
     Route::put('/course/{course}/examination/{exam}', 'ExaminationController@update')->name('course.examination.update');
     Route::delete('/course/{course}/examination/{exam}', 'ExaminationController@destroy')->name('course.examination.destroy');
-    
+
     Route::get('course/{course}/exam/{exam}/grade', 'PassGradeController@index')->name('course.grade.list');
     Route::get('course/{course}/exam/{exam}/grade/create', 'PassGradeController@create')->name('course.grade.create');
     Route::post('course/{course}/exam/{exam}/grade', 'PassGradeController@store')->name('course.grade.store');
@@ -158,6 +158,14 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('manager-student', 'UserManagerController@studentIndex')->name('user-manager.student');
     Route::get('manager-student/edit/{id}', 'UserManagerController@studentEdit')->name('user-manager.student.edit');
     Route::put('manager-student/update/{id}', 'UserManagerController@studentUpdate')->name('user-manager.student.update');
+    Route::get('manager-student/token/edit/{wallet}', 'UserManagerController@editToken')
+        ->name('user-manager.student.editToken');
+    Route::put('manager-student/token/update/{wallet}', 'UserManagerController@updateToken')
+        ->name('user-manager.student.updateToken');
+    Route::get('manager-student/depositHistory/{wallet}', 'UserManagerController@depositHistory')
+        ->name('user-manager.student.depositHistory');
+    Route::get('manager-student/paymentHistory/{user}', 'UserManagerController@paymentHistory')
+        ->name('user-manager.student.paymentHistory');
 
     Route::get('manager-tutor', 'UserManagerController@tutorIndex')->name('user-manager.tutor');
     Route::get('manager-tutor/edit/{id}', 'UserManagerController@tutorEdit')->name('user-manager.tutor.edit');
