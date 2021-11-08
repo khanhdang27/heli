@@ -234,7 +234,7 @@ class CourseController extends Controller
     public function lectureList(Course $course)
     {
         try {
-            $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture', 'membershipCourses.course.exams')
+            $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture','membershipCourses.course.lecture.file', 'membershipCourses.course.exams')
                 ->where('publish', 1)
                 ->whereHas('membershipCourses.course', function ($query) use ($course) {
                     return $query->where('id', $course->id);
@@ -404,7 +404,7 @@ class CourseController extends Controller
             if (!empty($input['file'])) {
                 $file = File::storeFile(
                     $input['file'],
-                    Blog::class,
+                    Lecture::class,
                     $lecture->id
                 );
             }
@@ -450,7 +450,7 @@ class CourseController extends Controller
                 }
                 $file = File::storeFile(
                     $input['file'],
-                    Blog::class,
+                    Lecture::class,
                     $lecture->id
                 );
             }

@@ -66,8 +66,8 @@ use App\Models\Lecture;
                             {{ Form::text('video_resource', $lecture->video_resource, ['class' => 'form-control', 'required', 'id' => 'index']) }}
                             <div style="padding:25% 0 0 0;position:relative;">
                                 <iframe
-                                    src={{'https://player.vimeo.com/video/'.$lecture->video_resource.'?badge=0&autopause=0&app_id='. config('app.vimeo_app_id')}}
-                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;"    
+                                    src="{{'https://player.vimeo.com/video/'.$lecture->video_resource.'?badge=0&autopause=0&app_id='. config('app.vimeo_app_id')}}"
+                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;"
                                 ></iframe>
                             </div><script src="https://player.vimeo.com/api/player.js"></script>
                         </div>

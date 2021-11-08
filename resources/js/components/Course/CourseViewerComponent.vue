@@ -35,61 +35,65 @@
                         v-for="item in lectureList"
                         :key="item.index"
                     >
-                        <button
-                            class="list-group-item list-group-item-action"
-                            v-bind:class="{ active: item.index == lectureIndex }"
-                            v-on:click="onClickLecture(item.index)"
-                        >
-                            <div class="d-flex w-100 justify-content-left">
-                                <div class="my-auto mr-3">
-                                    <input
-                                        readonly
-                                        type="checkbox"
-                                        :value="item.index"
-                                        name="index"
-                                        id="index"
-                                        v-model="studentLecture"
-                                    />
-                                </div>
-                                <div v-if="item.model_name == 'Examination'">
-                                    <h4 class="mb-1">
-                                        {{ item.index }}
-                                        -
-                                        {{ item.name }}
-                                    </h4>
-                                    <strong
-                                        v-if="item.index <= lectureOpenTo"
-                                        class="text-dark text-wrap"
-                                    >
-                                        <i class="fe fe-message-square mr-2"></i>
-                                        <span>Quiz</span>
-                                    </strong>
-                                    <strong v-else class="text-dark text-wrap">
-                                        <i class="fe fe-lock mr-2"></i>
-                                        <span>Quiz</span>
-                                    </strong>
-                                </div>
+                        <div class="d-flex">
+                            <button
+                                class="list-group-item list-group-item-action border-0"
+                                v-bind:class="{ active: item.index == lectureIndex }"
+                                v-on:click="onClickLecture(item.index)"
+                            >
 
-                                <div v-if="item.model_name == 'Lecture'">
-                                    <h4 class="mb-1">
-                                        {{ item.index }}
-                                        -
-                                        {{ item.lectures_name }}
-                                    </h4>
-                                    <strong
-                                        v-if="item.index <= lectureOpenTo"
-                                        class="text-dark text-wrap"
-                                    >
-                                        <i class="fe fe-youtube mr-2"></i>
-                                        <span>Video</span>
-                                    </strong>
-                                    <strong v-else class="text-dark text-wrap">
-                                        <i class="fe fe-lock mr-2"></i>
-                                        <span>Video</span>
-                                    </strong>
+                                <div class="d-flex w-100 justify-content-left">
+                                    <div class="my-auto mr-3">
+                                        <input
+                                            readonly
+                                            type="checkbox"
+                                            :value="item.index"
+                                            name="index"
+                                            id="index"
+                                            v-model="studentLecture"
+                                        />
+                                    </div>
+                                    <div v-if="item.model_name == 'Examination'">
+                                        <h4 class="mb-1">
+                                            {{ item.index }}
+                                            -
+                                            {{ item.name }}
+                                        </h4>
+                                        <strong v-if="item.index <= lectureOpenTo"
+                                                class="text-dark text-wrap">
+                                            <i class="fe fe-message-square mr-2"></i>
+                                            <span>Quiz</span>
+                                        </strong>
+                                        <strong v-else class="text-dark text-wrap">
+                                            <i class="fe fe-lock mr-2"></i>
+                                            <span>Quiz</span>
+                                        </strong>
+                                    </div>
+
+                                    <div v-if="item.model_name == 'Lecture'">
+                                        <h4 class="mb-1">
+                                            {{ item.index }}
+                                            -
+                                            {{ item.lectures_name }}
+                                        </h4>
+                                        <strong v-if="item.index <= lectureOpenTo"
+                                                class="text-dark text-wrap">
+                                            <i class="fe fe-youtube mr-2"></i>
+                                            <span>Video</span>
+                                        </strong>
+                                        <strong v-else class="text-dark text-wrap">
+                                            <i class="fe fe-lock mr-2"></i>
+                                            <span>Video</span>
+                                        </strong>
+                                    </div>
                                 </div>
+                            </button>
+                            <div v-if="item.model_name == 'Lecture' && item.file">
+                                <a class="btn btn-light text-nowrap font-weight-bold shadow-sm h-100 pt-4"
+                                   v-bind:href="downloadPDF(item.file)">
+                                    <i class="fe fe-download"></i> PDF</a>
                             </div>
-                        </button>
+                        </div>
                     </ul>
                 </div>
             </div>
@@ -246,9 +250,15 @@ export default {
     mounted() {
         this.syncDataLecture();
         this.syncCourseRelate();
+        this.downloadPDF();
         setTimeout(() => this.showLecture(), 2000);
     },
     methods: {
+        downloadPDF(lecture) {
+            if (lecture) {
+                return route('site.file.download', lecture)
+            }
+        },
         getExamination() {
             axios
                 .get(
@@ -300,6 +310,7 @@ export default {
                 .get(route("site.course.lectureList", this.courseId))
                 .then((response) => {
                     console.log("lectureList :>> ", response);
+
 
                     this.isPassed = response.data.student_lecture.passed == 1;
                     this.studentLecture =
