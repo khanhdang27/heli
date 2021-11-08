@@ -366,7 +366,14 @@ export default {
     },
     submit: function () {
       this.userAnswer();
-      console.log("tra loi ne", this.resultCheck);
+      axios
+        .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
+        .then((data) => {
+          this.allResults = data.data;
+        })
+        .catch((error) => {
+          console.log("error :>> ", error);
+        });
     },
     userAnswer: function () {
       if (this.typeExam === this.$root.$getConst("assessment")) {

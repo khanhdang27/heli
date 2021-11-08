@@ -82,38 +82,25 @@ Route::middleware('auth')->group(function () {
     Route::get('lecture/showLecture', 'LectureController@showLecture')->name('lecture.showLecture');
     Route::resource('lecture', 'LectureController');
 
-    Route::post('exam/{exams}', 'ExaminationController@checkExam')->name('exam.checkExam');
+    Route::post('exam/handleSubmit', 'StudentExaminationController@handleSubmitAnswer')->name('exam.handleSubmitAnswer');
+
     Route::get('exam/{exams}', 'LectureController@showExam')->name('exam.showLecture');
 
-    Route::get('exam/readingAssessment/{exams}', 'ExaminationController@getReadingAssessmentQuestionsClient')
-        ->name('exam.getReadingAssessmentQuestionsClient');
-    Route::get('exam/readingExercise/{exams}', 'ExaminationController@getReadingExerciseQuestionsClient')
-        ->name('exam.getReadingExerciseQuestionsClient');
-    Route::get('exam/readingQuiz/{exams}', 'ExaminationController@getReadingQuizQuestionsClient')
-        ->name('exam.getReadingQuizQuestionsClient');
+    Route::get('exam/readingAssessment/{exams}', 'ExaminationController@getReadingAssessmentQuestionsClient')->name('exam.getReadingAssessmentQuestionsClient');
+    Route::get('exam/readingExercise/{exams}', 'ExaminationController@getReadingExerciseQuestionsClient')->name('exam.getReadingExerciseQuestionsClient');
+    Route::get('exam/readingQuiz/{exams}', 'ExaminationController@getReadingQuizQuestionsClient')->name('exam.getReadingQuizQuestionsClient');
 
-    Route::get('exam/writingAssessment/{exams}', 'ExaminationController@getWritingAssessmentQuestionsClient')
-        ->name('exam.getWritingAssessmentQuestionsClient');
-    Route::get('exam/writingExercise/{exams}', 'ExaminationController@getWritingExerciseQuestionsClient')
-        ->name('exam.getWritingExerciseQuestionsClient');
-    Route::get('exam/writingQuiz/{exams}', 'ExaminationController@getWritingQuizQuestionsClient')
-        ->name('exam.getWritingQuizQuestionsClient');
+    Route::get('exam/writingAssessment/{exams}', 'ExaminationController@getWritingAssessmentQuestionsClient')->name('exam.getWritingAssessmentQuestionsClient');
+    Route::get('exam/writingExercise/{exams}', 'ExaminationController@getWritingExerciseQuestionsClient')->name('exam.getWritingExerciseQuestionsClient');
+    Route::get('exam/writingQuiz/{exams}', 'ExaminationController@getWritingQuizQuestionsClient')->name('exam.getWritingQuizQuestionsClient');
 
-    Route::get('exam/listenAssessment/{exams}', 'ExaminationController@getListeningAssessmentQuestionsClient')
-        ->name('exam.getListeningAssessmentQuestionsClient');
-    Route::get('exam/listenExercise/{exams}', 'ExaminationController@getListeningExerciseQuestionsClient')
-        ->name('exam.getListeningExerciseQuestionsClient');
-    Route::get('exam/listenQuiz/{exams}', 'ExaminationController@getListeningQuizQuestionsClient')
-        ->name('exam.getListeningQuizQuestionsClient');
+    Route::get('exam/listenAssessment/{exams}', 'ExaminationController@getListeningAssessmentQuestionsClient')->name('exam.getListeningAssessmentQuestionsClient');
+    Route::get('exam/listenExercise/{exams}', 'ExaminationController@getListeningExerciseQuestionsClient')->name('exam.getListeningExerciseQuestionsClient');
+    Route::get('exam/listenQuiz/{exams}', 'ExaminationController@getListeningQuizQuestionsClient')->name('exam.getListeningQuizQuestionsClient');
 
-    Route::get('exam/speakingAssessment/{exams}', 'ExaminationController@getSpeakingAssessmentQuestionsClient')
-        ->name('exam.getSpeakingAssessmentQuestionsClient');
-    Route::get('exam/speakingExercise/{exams}', 'ExaminationController@getSpeakingExerciseQuestionsClient')
-        ->name('exam.getSpeakingExerciseQuestionsClient');
-    Route::get('exam/speakingQuiz/{exams}', 'ExaminationController@getSpeakingQuizQuestionsClient')
-        ->name('exam.getSpeakingQuizQuestionsClient');
-
-
+    Route::get('exam/speakingAssessment/{exams}', 'ExaminationController@getSpeakingAssessmentQuestionsClient')->name('exam.getSpeakingAssessmentQuestionsClient');
+    Route::get('exam/speakingExercise/{exams}', 'ExaminationController@getSpeakingExerciseQuestionsClient')->name('exam.getSpeakingExerciseQuestionsClient');
+    Route::get('exam/speakingQuiz/{exams}', 'ExaminationController@getSpeakingQuizQuestionsClient')->name('exam.getSpeakingQuizQuestionsClient');
 
     Route::get('live/{room_live_course_id}', 'LiveController@show')->name('live_show');
 

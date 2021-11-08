@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Examination;
 use App\Models\Question;
+use App\Models\StudentCourses;
 use App\Models\Quiz;
 use App\Models\StudentExamination;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class StudentExaminationController extends Controller
 {
@@ -148,9 +150,269 @@ class StudentExaminationController extends Controller
         }
     }
 
-    public function handleSubmitAnswer(Request $resquest)
+    public function handleSubmitAnswer(Request $request)
     {
-        dd($resquest->input());
+        $input = $request->input();
+        DB::beginTransaction();
+        try {
+            $courseId = $input['courseID'];
+            $quizId = $input['quizID'];
+
+            $exams = Examination::find($input['examID']);
+
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $courseId,
+            ])->first();
+
+            $quiz = Quiz::find($quizId)->load('question');
+            if ($exams->type == Examination::ASSESSMENT) {
+                [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+
+                $question = Question::find($input['questions'][0]['questionID']);
+                if ($question->type == Question::WRITING) {
+                    $scoreGrade = $this->assessment($courseId, $quizId, $exams->id);
+
+                    DB::commit();
+                    return response()->json(['passgrade' => $scoreGrade]);
+                }
+                DB::commit();
+                return response()->json(['quiz_result' => $result, 'score' => $score]);
+            } elseif ($exams->type == Examination::EXERCISES) {
+                if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
+                    [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                } else {
+                    $this->saveAnswer($input['questions'], $courseId, $quizId, $exams->id);
+                }
+            } else {
+                // Quiz Type
+                if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
+                    [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                } else {
+                    $this->saveAnswer($input['questions'], $courseId, $quizId, $exams->id);
+                }
+            }
+        } catch (\Throwable $th) {
+            DB::rollback();
+            dd($th);
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
+    }
+
+    public function saveAnswer(array $answer, $courseId, $quizId, $examId)
+    {
+        foreach ($answer as $item) {
+            StudentExamination::create([
+                'student_id' => Auth::user()->id,
+                'course_id' => $courseId,
+                'quiz_id' => $quizId,
+                'exam_id' => $examId,
+                'question_id' => $item['questionID'],
+                'answer_type' => $item['answerType'],
+                'answer' => $item['answerID'],
+                'time' => $item['time'],
+                'reviewed' => false,
+            ]);
+        }
+    }
+
+    public function doGrade($question, array $answer, $courseId, $quizId, $examId)
+    {
+        $result = [];
+        $score = 0;
+        foreach ($answer as $item) {
+            $answerRecord = StudentExamination::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $courseId,
+                'quiz_id' => $quizId,
+                'exam_id' => $examId,
+                'question_id' => $item['questionID'],
+            ])->first();
+            if (empty($answerRecord)) {
+                $_question = $question->where('id', $item['questionID'])->first();
+                $_answer = $_question
+                    ->questionContent()
+                    ->answers->where('id', $item['answerID'])
+                    ->first();
+
+                array_push($result, [
+                    'is_correct' => $_answer->is_correct,
+                    'question' => $_question->id,
+                ]);
+
+                if ($_answer->is_correct) {
+                    $score += Examination::BASE_SCORE_MC;
+                }
+
+                StudentExamination::create([
+                    'student_id' => Auth::user()->id,
+                    'course_id' => $courseId,
+                    'quiz_id' => $quizId,
+                    'exam_id' => $examId,
+                    'question_id' => $item['questionID'],
+                    'answer_type' => StudentExamination::ANSWER_MC,
+                    'answer' => $item['answerID'],
+                    'time' => $item['time'],
+                    'reviewed' => true,
+                    'score' => $_answer->is_correct ? Examination::BASE_SCORE_MC : 0,
+                ]);
+            } else {
+                $score += $answerRecord->score;
+                array_push($result, [
+                    'is_correct' => $answerRecord->score != 0 ? true : false,
+                    'question' => $answerRecord->question_id,
+                ]);
+            }
+        }
+
+        return [$result, $score];
+    }
+
+    public function assessment($courseId, $quizId, $exams)
+    {
+        $answerRecords = StudentExamination::where([
+            'student_id' => Auth::user()->id,
+            'course_id' => $courseId,
+            'quiz_id' => $quizId,
+            'exam_id' => $examId,
+        ])
+            ->with('question')
+            ->get();
+
+        $answerRecordsReading = clone $answerRecords;
+        $answerRecordsSpeaking = clone $answerRecords;
+        $answerRecordsListening = clone $answerRecords;
+        $answerRecordsWriting = clone $answerRecords;
+
+        $answerRecordsReading
+            ->whereHas('question', function ($query) {
+                return $question->where('type', '=', Question::READING);
+            })
+            ->get();
+        $answerRecordsSpeaking
+            ->whereHas('question', function ($query) {
+                return $question->where('type', '=', Question::SPEAKING);
+            })
+            ->get();
+        $answerRecordsListening
+            ->whereHas('question', function ($query) {
+                return $question->where('type', '=', Question::LISTENING);
+            })
+            ->get();
+        $answerRecordsWriting
+            ->whereHas('question', function ($query) {
+                return $question->where('type', '=', Question::WRITING);
+            })
+            ->get();
+
+        $scoreReading = $this->scoreGrade($answerRecordsReading, Question::READING);
+        $scoreWriting = $this->scoreGrade($answerRecordsWriting, Question::WRITING);
+        $scoreListening = $this->scoreGrade($answerRecordsListening, Question::LISTENING);
+        $scoreSpeaking = $this->scoreGrade($answerRecordsSpeaking, Question::SPEAKING);
+
+        $summaryScore = ($scoreReading + $scoreWriting + $scoreListening + $scoreSpeaking) / 4;
+
+        $summaryScore = round($summaryScore * 2) / 2;
+
+        $studentCourse = StudentCourses::where([
+            'course_id' => $courseId,
+            'student_id' => Auth::user()->id,
+        ]);
+
+        if ($summaryScore == 5) {
+            $studentCourse->update([
+                'watched_list' => '0,1,',
+                'level_read' => 5.0,
+                'level_write' => 5.0,
+                'level_speak' => 5.0,
+                'level_listen' => 5.0,
+            ]);
+        } elseif ($summaryScore == 5.5) {
+            $studentCourse->update([
+                'watched_list' => '0,1,',
+                'level_read' => 5.5,
+                'level_write' => 5.5,
+                'level_speak' => 5.5,
+                'level_listen' => 5.5,
+            ]);
+        } elseif ($summaryScore == 6) {
+            $studentCourse->update([
+                'watched_list' => '0,1,',
+                'level_read' => 6.0,
+                'level_write' => 6.0,
+                'level_speak' => 6.0,
+                'level_listen' => 6.0,
+            ]);
+        } else {
+            $studentCourse->update([
+                'watched_list' => '0,1,',
+                'level_read' => 6.5,
+                'level_write' => 6.5,
+                'level_speak' => 6.5,
+                'level_listen' => 6.5,
+            ]);
+        }
+
+        return $summaryScore;
+    }
+
+    public function scoreGrade($answers, $questionType)
+    {
+        $correctAnswer = 0;
+        foreach ($answers as $item) {
+            if ($item->score != 0) {
+                $correctAnswer += 1;
+            }
+        }
+        switch ($questionType) {
+            case Question::READING:
+                if ($correctAnswer < 8) {
+                    return 5.0;
+                } elseif ($correctAnswer > 7 && $correctAnswer < 9) {
+                    return 5.5;
+                } elseif ($correctAnswer > 8 && $correctAnswer < 11) {
+                    return 6.0;
+                } else {
+                    return 6.5;
+                }
+            case Question::WRITING:
+                if ($correctAnswer < 12) {
+                    return 5.0;
+                } elseif ($correctAnswer > 12 && $correctAnswer < 17) {
+                    return 5.5;
+                } elseif ($correctAnswer > 16 && $correctAnswer < 20) {
+                    return 6.0;
+                } else {
+                    return 6.5;
+                }
+            case Question::LISTENING:
+                if ($correctAnswer < 5) {
+                    return 5.0;
+                } elseif ($correctAnswer > 4 && $correctAnswer < 6) {
+                    return 5.5;
+                } elseif ($correctAnswer > 5 && $correctAnswer < 7) {
+                    return 6.0;
+                } else {
+                    return 6.5;
+                }
+            case Question::SPEAKING:
+                if ($correctAnswer < 15) {
+                    return 5.0;
+                } elseif ($correctAnswer > 14 && $correctAnswer < 18) {
+                    return 5.5;
+                } elseif ($correctAnswer > 17 && $correctAnswer < 22) {
+                    return 6.0;
+                } else {
+                    return 6.5;
+                }
+            default:
+                return null;
+        }
     }
 
     /**

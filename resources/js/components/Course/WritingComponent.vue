@@ -186,7 +186,13 @@
               </div>
             </div>
 
-            <div v-if="typeExam === $getConst('quiz') && startQuiz === true && questionWriting[questionIndex]">
+            <div
+              v-if="
+                typeExam === $getConst('quiz') &&
+                startQuiz === true &&
+                questionWriting[questionIndex]
+              "
+            >
               <h3 v-cloak>
                 {{ questionWriting[questionIndex].writing_quiz_question.id }}.
                 {{
@@ -460,8 +466,14 @@ export default {
     },
     submit: function () {
       this.userAnswer();
-      this.allResults = results;
-      console.log("tra loi ne", this.resultCheck);
+      axios
+        .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
+        .then((data) => {
+          this.allResults = data.data;
+        })
+        .catch((error) => {
+          console.log("error :>> ", error);
+        });
     },
     nextTypeExam() {
       this.$emit("nextTypeExam", this.$root.$getConst("listening"));

@@ -481,8 +481,14 @@ export default {
     },
     submit: function () {
       this.userAnswer();
-      this.allResults = results;
-      console.log("tra loi ne", this.resultCheck);
+      axios
+        .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
+        .then((data) => {
+          this.allResults = data.data;
+        })
+        .catch((error) => {
+          console.log("error :>> ", error);
+        });
     },
     nextTypeExam() {
       this.$emit("nextTypeExam", this.$root.$getConst("speaking"));
