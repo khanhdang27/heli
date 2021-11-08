@@ -10,8 +10,11 @@ use App\Models\CourseSchedule;
 use App\Models\Lecture;
 use App\Models\Membership;
 use App\Models\MembershipCourse;
+use App\Models\Question;
+use App\Models\Quiz;
 use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
+use App\Models\StudentExamination;
 use App\Models\Tutor;
 use App\Models\User;
 use App\Models\Examination;
@@ -149,16 +152,79 @@ class CourseController extends Controller
                     ->where('course_id', $course->id)
                     ->where('student_id', Auth::user()->id)
                     ->first();
+                $exams = StudentExamination::select(
+                    'student_id',
+                    'course_id',
+                    'exam_id',
+                    'quiz_id',
+                    'reviewed'
+                )->distinct()->with('exam')->whereHas('exam', function ($query){
+                    return $query->where('type', '!=', Examination::ASSESSMENT);
+                })
+                    ->where('course_id', $course->id)
+                    ->where('student_id',Auth::user()->id)->orderBy('reviewed')->get();
             }
             return view('course.course-page', [
                 'courseDetail' => $courses_with_group,
                 'student_course' => $student_course,
+                'exams' => $exams
             ]);
         } catch (\Throwable $th) {
             return back()->withErrors('Error!');
         }
     }
 
+    public function showExam( Course $course,
+                              Examination $exam,
+                              Quiz $quiz)
+    {
+        $exam_details = StudentExamination::where(
+            [
+                'student_id' => Auth::user()->id,
+                'course_id' => $course->id,
+                'exam_id' => $exam->id,
+                'quiz_id' => $quiz->id,
+            ]
+        )->with('question','quiz.passage', 'quiz.audioListen')->whereHas('question', function ($query){
+            return $query->orderBy('type');
+        })->orderBy('reviewed', 'asc')->orderBy('created_at', 'desc')->get();
+
+        $reading = 0;
+        $writing = 0;
+        $listening =  0;
+        $speaking = 0;
+        foreach ($exam_details as $detail) {
+            switch ($detail->question->type) {
+                case Question::READING:
+                    $reading += $detail->time;
+                    break;
+
+                case Question::WRITING:
+                    $writing += $detail->time;
+                    break;
+
+                case Question::LISTENING:
+                    $listening += $detail->time;
+                    break;
+
+                case Question::SPEAKING:
+                    $speaking += $detail->time;
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
+        }
+
+        return \view('course.show-exam',[
+            'exam_details' => $exam_details,
+            'reading' => $reading,
+            'writing' => $writing,
+            'listening' => $listening,
+            'speaking' => $speaking
+        ]);
+    }
     /**
      * Display the specified resource.
      *
@@ -183,7 +249,7 @@ class CourseController extends Controller
 
             return response()->json(['lectures' => $lecture_course->sortBy('index')->toArray(), 'student_lecture' => $student_course->toArray()]);
         } catch (\Throwable $th) {
-            
+
             return back()->withErrors('Error!');
         }
     }

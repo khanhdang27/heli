@@ -7,10 +7,15 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
+                            <div class="pr-2">
+                                <a href="{{ route('admin.user-manager.student') }}" class="btn btn-outline-dark btn-sm">
+                                    <i class="fe fe-arrow-left"></i>
+                                </a>
+                            </div>
                             <div>
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    List Wallets
+                                    Deposit histories - Holder name: {{$user->name}}
                                 </h4>
                             </div>
                             <div class="ml-auto col-auto">
@@ -25,43 +30,32 @@
                             <table id="data-table" class="table table-sm table-nowrap card-table">
                                 <thead>
                                 <tr>
-                                    <th>Holder name</th>
-                                    <th>Balance</th>
-                                    <th></th>
+                                    <th>Date</th>
+                                    <th>Course</th>
+                                    <th>Total</th>
+                                    <th>Invoice</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list">
-                                @foreach ($wallets as $wallet)
+                                @foreach ($payment_history as $item)
                                     <tr>
                                         <td class="goal-project">
-                                            {{$wallet->name}}
+                                            {{$item->created_at}}
                                         </td>
                                         <td class="goal-project">
-                                            {{$wallet->wallet->balance}}
+                                            {{$item->course->course_name}}
                                         </td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a href="#" class="dropdown-ellipses dropdown-toggle" role="button"
-                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fe fe-more-vertical"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item"
-                                                       href="{{route('admin.wallet-manager.edit', $wallet->wallet->id)}}">
-                                                        Update balance
-                                                    </a>
-                                                    <a class="dropdown-item"
-                                                       href="{{route('admin.wallet-manager.show', $wallet->wallet->id)}}">
-                                                        Deposit history
-                                                    </a>
-                                                </div>
-                                            </div>
+                                        <td class="goal-project">
+                                            {{$item->final_price}}
+                                        </td>
+                                        <td class="goal-project">
+                                            {{$item->payment_id}}
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{$wallets->links()}}
+                            {{$payment_history->links()}}
                         </div>
                     </div>
                 </div>
@@ -70,3 +64,5 @@
         </div> <!-- / .row -->
     </div>
 @endsection
+
+

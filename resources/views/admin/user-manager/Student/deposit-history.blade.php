@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <div class="pr-2">
-                                <a href="{{ route('admin.wallet-manager.index') }}" class="btn btn-outline-dark btn-sm">
+                                <a href="{{ route('admin.user-manager.student') }}" class="btn btn-outline-dark btn-sm">
                                     <i class="fe fe-arrow-left"></i>
                                 </a>
                             </div>

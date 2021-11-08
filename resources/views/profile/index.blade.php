@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Blog Page')
+@section('title','Profile')
 
 @section('content')
     <hr class="mt-0"/>
@@ -49,26 +49,22 @@
                         <p class="text-primary">{{$user_info->day_of_birth ?? null}}</p>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <p>Education_level:</p>
+                    </td>
+                    <td>
+                        <p class="text-primary">{{$user_info->education_level ?? null}}</p>
+                    </td>
+                </tr>
             </table>
-            <div class="row">
+            <div class="row justify-content-end">
 
                 <div class="col-sm-4">
                     <a href="{{ route('site.profile.edit',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold w-100 mb-3">
                         Update your profile
                     </a>
                 </div>
-                @if(Auth::User()->hasRole('student'))
-                    <div class="col-sm-4">
-                        <a href="{{ route('site.payment-history') }}" class="btn btn-outline-primary font-weight-bold w-100 mb-3">
-                            Payment History
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="{{ route('site.order.updateCard',Auth::user()->id) }}" class="btn btn-outline-primary font-weight-bold w-100 mb-3">
-                            Update Payment Card
-                        </a>
-                    </div>
-                @endif
             </div>
         </div>
     </div>
