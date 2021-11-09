@@ -57,11 +57,11 @@ class ProfileController extends Controller
         $tutor = Tutor::where('user_id', $user_id)->first();
         $moderator = Moderator::where('user_id', $user_id)->first();
         $_user = User::find($user_id);
-        if ($_user->hasRole('student')){
+        if ($_user->hasRole('student')) {
             $user = $student;
-        }elseif ($_user->hasRole('tutor')){
+        } elseif ($_user->hasRole('tutor')) {
             $user = $tutor;
-        }else{
+        } else {
             $user = $moderator;
         }
         return view('profile.index', [
@@ -81,11 +81,11 @@ class ProfileController extends Controller
         $tutor = Tutor::where('user_id', $user_id)->first();
         $moderator = Moderator::where('user_id', $user_id)->first();
         $_user = User::find($user_id);
-        if ($_user->hasRole('student')){
+        if ($_user->hasRole('student')) {
             $user = $student;
-        }elseif ($_user->hasRole('tutor')){
+        } elseif ($_user->hasRole('tutor')) {
             $user = $tutor;
-        }else{
+        } else {
             $user = $moderator;
         }
         return view('profile.edit', [
@@ -107,15 +107,22 @@ class ProfileController extends Controller
         $user = User::find($user_id);
         if ($user->hasRole('student')) {
             $student = Student::where('user_id', $user_id)->first();
-            $student->update(
-                ['user_id' => $user_id, 'full_name' => $input['full_name'], 'day_of_birth' => $input['day_of_birth'], 'phone_no' => $input['phone_no']]
-            );
+            $student->update([
+                'user_id' => $user_id,
+                'full_name' => $input['full_name'],
+                'day_of_birth' => $input['day_of_birth'],
+                'phone_no' => $input['phone_no'],
+                'education_level' => $input['education_level'],
+            ]);
             $student->save();
         } elseif ($user->hasRole('tutor')) {
             $tutor = Tutor::where('user_id', $user_id)->first();
-            $tutor->update(
-                ['user_id' => $user_id, 'full_name' => $input['full_name'], 'day_of_birth' => $input['day_of_birth'], 'phone_no' => $input['phone_no']]
-            );
+            $tutor->update([
+                'user_id' => $user_id,
+                'full_name' => $input['full_name'],
+                'day_of_birth' => $input['day_of_birth'],
+                'phone_no' => $input['phone_no']
+            ]);
             $tutor->save();
         }
         $user->name = $input['name'];
@@ -131,7 +138,7 @@ class ProfileController extends Controller
         if (!empty($request['photo'])) {
             $alreadyFile = File::query()->where('fileable_id', Auth::user()->id)
                 ->where('fileable_type', 'App\Models\User')->first();
-            if (!empty($alreadyFile)){
+            if (!empty($alreadyFile)) {
                 $alreadyFile->delete();
             }
             $file = File::storeFile(

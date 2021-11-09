@@ -9,14 +9,14 @@
                     <div class="card-header">
                         <div class="d-flex align-items-center">
                             <div class="pr-2">
-                                <a href="{{ route('admin.wallet-manager.index') }}" class="btn btn-outline-dark btn-sm">
+                                <a href="{{ route('admin.user-manager.student') }}" class="btn btn-outline-dark btn-sm">
                                     <i class="fe fe-arrow-left"></i>
                                 </a>
                             </div>
                             <div>
                                 <!-- Title -->
                                 <h4 class="card-header-title">
-                                    Add tokens
+                                    Update tokens
                                 </h4>
                             </div>
                         </div> <!-- / .row -->
@@ -32,13 +32,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-0">
-                                    {{ Form::label('name', 'Balance:', ['class' => 'col-sm-2 col-form-label']) }}
+                                    {{ Form::label('token', 'Current tokens:', ['class' => 'col-sm-2 col-form-label']) }}
                                     <div class="col-sm-10">
-                                        {{ Form::text('name', $wallet->balance,['class' => 'form-control-plaintext', 'disabled'] ) }}
+                                        {{ Form::text('token', $wallet->balance,['class' => 'form-control-plaintext', 'disabled'] ) }}
                                     </div>
                                 </div>
                             </div>
-                            {!! Form::open(['route' => ['admin.wallet-manager.update', $wallet->id], 'method'=> 'put', 'enctype' =>
+                            {!! Form::open(['route' => ['admin.user-manager.student.updateToken', $wallet->id], 'method'=> 'put', 'enctype' =>
                             'multipart/form-data']) !!}
 
                             <div class="form-group">

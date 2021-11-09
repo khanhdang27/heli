@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ListenAssessmentQuestion extends Model
 {
     use SoftDeletes;
-    
+
     public $timestamps = true;
 
     protected $guarded = [];
@@ -27,5 +27,10 @@ class ListenAssessmentQuestion extends Model
     public function answers()
     {
         return $this->hasMany(ListenAssessmentAnswer::class, 'l_a_question_id');
+    }
+
+    public function findAnswerById($id)
+    {
+        return $this->answers->where('id', $id)->first();
     }
 }
