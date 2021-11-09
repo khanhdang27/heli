@@ -4,7 +4,7 @@ const Numbers = {
     exercise: 2,
     quiz: 3,
     correct: 1,
-    incorrect: -1,
+    incorrect: 0,
     reading: 1,
     writing: 2,
     listening: 3,
