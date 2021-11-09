@@ -23,6 +23,8 @@ class Examination extends Model
         return 'Examination';
     }
 
+    const BASE_SCORE_MC = 1;
+
     const ASSESSMENT = 1;
     const EXERCISES = 2;
     const QUIZ = 3;
@@ -47,5 +49,4 @@ class Examination extends Model
     {
         return $this->hasMany(PassGrade::class);
     }
-
 }

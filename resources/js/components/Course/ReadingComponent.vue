@@ -80,7 +80,9 @@
             <div class="h-100">
               <div
                 v-if="
-                  typeExam === $getConst('assessment') && startQuiz === true
+                  typeExam === $getConst('assessment') &&
+                  startQuiz === true &&
+                  questionReading[questionIndex]
                 "
               >
                 <h3 v-cloak>
@@ -125,7 +127,12 @@
                   </div>
                 </div>
               </div>
-              <div v-if="typeExam === $getConst('exercise')">
+              <div
+                v-if="
+                  typeExam === $getConst('exercise') &&
+                  questionReading[questionIndex]
+                "
+              >
                 <div
                   v-if="checkAnswer[questionIndex] === $getConst('incorrect')"
                 >
@@ -150,7 +157,10 @@
 
                 <div
                   class="p-3 bg-success rounded h5 text-white font-weight-bold"
-                  v-if="checkAnswer[questionIndex] === $getConst('correct')"
+                  v-if="
+                    questionReading[questionIndex] &&
+                    checkAnswer[questionIndex] === $getConst('correct')
+                  "
                 >
                   Good job !
                 </div>
@@ -197,7 +207,13 @@
                   </div>
                 </div>
               </div>
-              <div v-if="typeExam === $getConst('quiz') && startQuiz === true">
+              <div
+                v-if="
+                  typeExam === $getConst('quiz') &&
+                  startQuiz === true &&
+                  questionReading[questionIndex]
+                "
+              >
                 <h3 v-cloak>
                   {{ questionReading[questionIndex].reading_question.id }}.
                   {{ questionReading[questionIndex].reading_question.question }}
@@ -271,7 +287,13 @@
               Next
             </button>
           </span>
-          <span v-if="typeExam !== $getConst('exercise') && startQuiz === true">
+          <span
+            v-if="
+              typeExam !== $getConst('exercise') &&
+              startQuiz === true &&
+              questionReading[questionIndex]
+            "
+          >
             <button
               class="btn btn-primary mx-2"
               v-on:click="submit()"
@@ -293,10 +315,14 @@
     <div v-else class="mt-5 h-100">
       <div class="text-center">
         <div v-if="typeExam !== $getConst('assessment')">
-          <h2 class="text-success">You score {{ allResults[0].score }}</h2>
+          <h2 class="text-success">You score {{ allResults.score }}</h2>
           <div class="row justify-content-center align-items-start">
-            <div class="col-lg-4">
-              <div class="text-left mb-2">
+            <div class="col-lg-6 col-md-10 col-12">
+              <div
+                class="text-left mb-2"
+                v-for="result in allResults.quiz_result"
+                :key="result.question"
+              >
                 <i class="fe fe-check-circle h4 text-success"></i>
                 <span class="h4" v-if="typeExam === $getConst('exercise')"
                   >Number of correct question
@@ -305,17 +331,6 @@
                 <span class="h4" v-if="typeExam === $getConst('quiz')"
                   >Number of wrong question
                   {{ allResults[1].correct_question }}</span
-                >
-              </div>
-              <div class="text-left">
-                <i class="fe fe-x-circle h4 text-danger"></i>
-                <span class="h4" v-if="typeExam === $getConst('exercise')"
-                  >Number of wrong question
-                  {{ allResults[0].wrong_question }}</span
-                >
-                <span class="h4" v-if="typeExam === $getConst('quiz')"
-                  >Number of wrong question
-                  {{ allResults[1].wrong_question }}</span
                 >
               </div>
             </div>
@@ -334,11 +349,6 @@
 </template>
 
 <script>
-const results = [
-  { type: "exercise", score: 5.5, correct_question: 8, wrong_question: 5 },
-  { type: "quiz", score: 6, correct_question: 10, wrong_question: 3 },
-];
-
 export default {
   props: {
     typeExam: Number,
@@ -391,7 +401,6 @@ export default {
         .then((response) => {
           this.passage = response.data.questions.passage.content;
           this.questionReading = response.data.questions.question;
-          console.log("this.questionReading :>> ", this.questionReading);
         })
         .catch(function (error) {
           console.error(error);
@@ -446,7 +455,14 @@ export default {
     },
     submit: function () {
       this.userAnswer();
-      this.allResults = results;
+      axios
+        .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
+        .then((data) => {
+          this.allResults = data.data;
+        })
+        .catch((error) => {
+          console.log("error :>> ", error);
+        });
     },
     nextTypeExam() {
       this.$emit("nextTypeExam", this.$root.$getConst("writing"));
@@ -490,10 +506,9 @@ export default {
       localStorage.setItem("reading", JSON.stringify(this.resultCheck));
     },
     getAnswerUser() {
-      this.resultCheck =
-        JSON.parse(localStorage.getItem("reading")) || {
-          questions: []
-        };
+      this.resultCheck = JSON.parse(localStorage.getItem("reading")) || {
+        questions: [],
+      };
       this.resultCheck.questions.forEach((item) => {
         this.userChoose.push(item.answerID);
       });
