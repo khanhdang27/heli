@@ -13,7 +13,7 @@ use App\Models\Examination;
     @else
         <button type="button" class="btn btn-success ml-3" data-toggle="modal"
             data-target="#addPassage_{{ $quiz->id }}"> Add
-            Passage {{ $quiz->id }} </button>
+            Passage </button>
     @endif
 </div>
 

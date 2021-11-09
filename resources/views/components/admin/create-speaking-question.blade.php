@@ -11,7 +11,7 @@ use App\Models\Examination;
 <div class="modal fade" id="modalSpeakingExercises_{{ $quiz->id }}" tabindex="0" role="dialog"
     aria-labelledby="modalSpeakingExercises_{{ $quiz->aid }}_Title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content"> 
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     Speaking Question</h5>
@@ -20,9 +20,7 @@ use App\Models\Examination;
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 
-                    'url' => route('admin.quiz.question.speaking.exercises.store', ['quiz' => $quiz->id]), 
-                    'enctype'=>'multipart/form-data']) !!}
+                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.exercises.store', ['quiz' => $quiz->id]), 'enctype' => 'multipart/form-data']) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}
@@ -32,15 +30,19 @@ use App\Models\Examination;
                     {{ Form::text('question', old('question'), ['class' => 'form-control', 'required']) }}
                 </div>
                 <div class="form-group">
-                    <label for="video_code"> Video </label>
-                    {{ Form::text('video_code', old('video_code'), ['class' => 'form-control', 'required']) }}
+                    <label for="video_code_practice"> Video Practice </label>
+                    {{ Form::text('video_code_practice', null, ['class' => 'form-control', 'required']) }}
+                </div>
+                <div class="form-group">
+                    <label for="video_code_response"> Video Response </label>
+                    {{ Form::text('video_code_response', null, ['class' => 'form-control', 'required']) }}
                 </div>
                 <div class="form-group ">
                     Pick up video
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="browse" accept="video/mp4,video/x-m4v,video/*">
                         <label class="custom-file-label" for="customFile">Browse&hellip; </label>
-                      </div>
+                    </div>
                     <div id="results"></div>
                     <div id="progress-container" class="progress">
                         <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
@@ -65,7 +67,7 @@ use App\Models\Examination;
             </div>
         </div>
     </div>
-    
+
     <script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
     <script src="{{ asset('js/vimeo_upload_process.js') }}"></script>
 </div>

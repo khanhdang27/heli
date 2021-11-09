@@ -39,24 +39,26 @@ class SpeakExercisesQuestionController extends Controller
     public function store(Request $request, Quiz $quiz)
     {
         $input = $request->validate([
-            'video_code'=> 'required',
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'video_code_practice' => 'required',
+            'video_code_response' => 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
                 'type' => Question::SPEAKING,
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $readQuestion = SpeakExercisesQuestion::create([
                 'question_id' => $question->id,
                 'question' => $input['question'],
-                'video_code' => $input['video_code'],
+                'video_code_practice' => $input['video_code_practice'],
+                'video_code_response' => $input['video_code_response'],
                 'message_wrong' => $input['message_wrong'],
                 'lecture_index' => $input['lecture_index'],
             ]);
@@ -101,22 +103,24 @@ class SpeakExercisesQuestionController extends Controller
     public function update(Request $request, Quiz $quiz, Question $question)
     {
         $input = $request->validate([
-            'video_code' => 'required',
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'video_code_practice' => 'required',
+            'video_code_response' => 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $readQuestion = SpeakExercisesQuestion::where(['question_id' => $question->id])->first();
 
             $readQuestion->update([
-                'video_code' => $input['video_code'],
+                'video_code_practice' => $input['video_code_practice'],
+                'video_code_response' => $input['video_code_response'],
                 'question' => $input['question'],
                 'message_wrong' => $input['message_wrong'],
                 'lecture_index' => $input['lecture_index'],
@@ -147,7 +151,7 @@ class SpeakExercisesQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );
