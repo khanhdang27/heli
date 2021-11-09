@@ -152,46 +152,46 @@ class CourseController extends Controller
                     ->where('course_id', $course->id)
                     ->where('student_id', Auth::user()->id)
                     ->first();
-                $exams = StudentExamination::select(
-                    'student_id',
-                    'course_id',
-                    'exam_id',
-                    'quiz_id',
-                    'reviewed'
-                )->distinct()->with('exam')->whereHas('exam', function ($query){
-                    return $query->where('type', '!=', Examination::ASSESSMENT);
-                })
+                $exams = StudentExamination::select('student_id', 'course_id', 'exam_id', 'quiz_id', 'reviewed')
+                    ->distinct()
+                    ->with('exam')
+                    ->whereHas('exam', function ($query) {
+                        return $query->where('type', '!=', Examination::ASSESSMENT);
+                    })
                     ->where('course_id', $course->id)
-                    ->where('student_id',Auth::user()->id)->orderBy('reviewed')->get();
+                    ->where('student_id', Auth::user()->id)
+                    ->orderBy('reviewed')
+                    ->get();
             }
             return view('course.course-page', [
                 'courseDetail' => $courses_with_group,
                 'student_course' => $student_course,
-                'exams' => $exams
+                'exams' => $exams,
             ]);
         } catch (\Throwable $th) {
             return back()->withErrors('Error!');
         }
     }
 
-    public function showExam( Course $course,
-                              Examination $exam,
-                              Quiz $quiz)
+    public function showExam(Course $course, Examination $exam, Quiz $quiz)
     {
-        $exam_details = StudentExamination::where(
-            [
-                'student_id' => Auth::user()->id,
-                'course_id' => $course->id,
-                'exam_id' => $exam->id,
-                'quiz_id' => $quiz->id,
-            ]
-        )->with('question','quiz.passage', 'quiz.audioListen')->whereHas('question', function ($query){
-            return $query->orderBy('type');
-        })->orderBy('reviewed', 'asc')->orderBy('created_at', 'desc')->get();
+        $exam_details = StudentExamination::where([
+            'student_id' => Auth::user()->id,
+            'course_id' => $course->id,
+            'exam_id' => $exam->id,
+            'quiz_id' => $quiz->id,
+        ])
+            ->with('question', 'quiz.passage', 'quiz.audioListen')
+            ->whereHas('question', function ($query) {
+                return $query->orderBy('type');
+            })
+            ->orderBy('reviewed', 'asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $reading = 0;
         $writing = 0;
-        $listening =  0;
+        $listening = 0;
         $speaking = 0;
         foreach ($exam_details as $detail) {
             switch ($detail->question->type) {
@@ -217,12 +217,12 @@ class CourseController extends Controller
             }
         }
 
-        return \view('course.show-exam',[
+        return \view('course.show-exam', [
             'exam_details' => $exam_details,
             'reading' => $reading,
             'writing' => $writing,
             'listening' => $listening,
-            'speaking' => $speaking
+            'speaking' => $speaking,
         ]);
     }
     /**
@@ -234,7 +234,7 @@ class CourseController extends Controller
     public function lectureList(Course $course)
     {
         try {
-            $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture','membershipCourses.course.lecture.file', 'membershipCourses.course.exams')
+            $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture', 'membershipCourses.course.lecture.file', 'membershipCourses.course.exams')
                 ->where('publish', 1)
                 ->whereHas('membershipCourses.course', function ($query) use ($course) {
                     return $query->where('id', $course->id);
@@ -249,7 +249,6 @@ class CourseController extends Controller
 
             return response()->json(['lectures' => $lecture_course->sortBy('index')->toArray(), 'student_lecture' => $student_course->toArray()]);
         } catch (\Throwable $th) {
-
             return back()->withErrors('Error!');
         }
     }
@@ -383,12 +382,13 @@ class CourseController extends Controller
     public function storeLecture(Request $request, Course $course)
     {
         $input = $request->validate([
-            'lectures_name'=> 'required',
-            'lectures_description'=> 'required',
-            'video_resource'=> 'required',
-            'index'=> 'required',
-            'level'=> 'required',
-            'file'=> 'required'
+            'lectures_name' => 'required',
+            'lectures_description' => 'required',
+            'video_resource' => 'required',
+            'index' => 'required',
+            'level' => 'required',
+            'file' => 'required',
+            'type' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -399,14 +399,11 @@ class CourseController extends Controller
                 'video_resource' => $input['video_resource'],
                 'index' => $input['index'],
                 'level' => $input['level'],
+                'type' => $input['type'],
             ]);
 
             if (!empty($input['file'])) {
-                $file = File::storeFile(
-                    $input['file'],
-                    Lecture::class,
-                    $lecture->id
-                );
+                $file = File::storeFile($input['file'], Lecture::class, $lecture->id);
             }
 
             DB::commit();
@@ -428,12 +425,13 @@ class CourseController extends Controller
     public function updateLecture(Request $request, Course $course, Lecture $lecture)
     {
         $input = $request->validate([
-            'lectures_name'=> 'required',
-            'lectures_description'=> 'required',
-            'video_resource'=> 'required',
-            'index'=> 'required',
-            'level'=> 'required',
-            'file'=> 'file|nullable'
+            'lectures_name' => 'required',
+            'lectures_description' => 'required',
+            'video_resource' => 'required',
+            'index' => 'required',
+            'level' => 'required',
+            'type' => 'required',
+            'file' => 'file|nullable',
         ]);
         DB::beginTransaction();
         try {
@@ -443,21 +441,19 @@ class CourseController extends Controller
                 'video_resource' => $input['video_resource'],
                 'index' => $input['index'],
                 'level' => $input['level'],
+                'type' => $input['type'],
             ]);
             if (!empty($input['file'])) {
                 if (!empty($lecture->file)) {
                     $lecture->file->delete();
                 }
-                $file = File::storeFile(
-                    $input['file'],
-                    Lecture::class,
-                    $lecture->id
-                );
+                $file = File::storeFile($input['file'], Lecture::class, $lecture->id);
             }
             DB::commit();
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollBack();
+            dd($th);
             return back()->withErrors('Update Error!');
         }
     }

@@ -50,9 +50,10 @@ use App\Models\Lecture;
                         <div class="form-group ">
                             Pick up video
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="browse" accept="video/mp4,video/x-m4v,video/*">
+                                <input type="file" class="custom-file-input" id="browse"
+                                    accept="video/mp4,video/x-m4v,video/*">
                                 <label class="custom-file-label" for="customFile">Browse&hellip; </label>
-                              </div>
+                            </div>
                             <div id="results"></div>
                             <div id="progress-container" class="progress">
                                 <div id="progress" class="progress-bar progress-bar-info progress-bar-striped active"
@@ -60,7 +61,6 @@ use App\Models\Lecture;
                                     style="width: 0%">&nbsp;0%
                                 </div>
                             </div>
-
                             {{ Form::label('video_resource', 'Video Resource') }}
                             {{ Form::text('video_resource', old('video_resource'), ['class' => 'form-control', 'required', 'id' => 'index']) }}
                         </div>
@@ -69,14 +69,17 @@ use App\Models\Lecture;
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                         <div class="form-group">
-                            <label for="level" >Level</label>
-                            {{ Form::select('level', Lecture::LEVELS, old('leve'), ['class' => 'form-control']) }}
+                            <label for="level">Level</label>
+                            {{ Form::select('level', Lecture::LEVELS, old('level'), ['class' => 'form-control']) }}
                         </div>
-                        <button type="submit" class="btn btn-primary" > Save </button>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            {{ Form::select('type', Lecture::TYPES, old('type'), ['class' => 'form-control']) }}
+                        </div>
+                        <button type="submit" class="btn btn-primary"> Save </button>
                         {!! Form::close() !!}
                     </div>
                 </div>
-
             </div>
         </div> <!-- / .row -->
     </div>

@@ -11,6 +11,7 @@ use App\Models\Setting;
 use App\Models\StudentCourses;
 use App\Models\StudentSchedule;
 use App\Models\User;
+use App\Models\SkipLevel;
 use Bavix\Wallet\Exceptions\InsufficientFunds;
 use Bavix\Wallet\Models\Transaction;
 use Bavix\Wallet\Models\Wallet;
@@ -30,35 +31,39 @@ class WalletController extends Controller
      */
     public function index()
     {
-        $stripe = new \Stripe\StripeClient(
-            config('app.stripe_secret')
-        );
+        $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $auth_stripe = $stripe->paymentMethods->all([
             'customer' => Auth::user()->stripe_id,
-            'type' => 'card'
+            'type' => 'card',
         ]);
         $user = Auth::user();
         $user->balance;
-        $wallet = Wallet::where('holder_type','App\Models\User')->where('holder_id', Auth::user()->id)->first();
+        $wallet = Wallet::where('holder_type', 'App\Models\User')
+            ->where('holder_id', Auth::user()->id)
+            ->first();
         return view('wallet.manage-wallet', [
             'wallet' => $wallet,
-            'cards' => $auth_stripe
+            'cards' => $auth_stripe,
         ]);
     }
 
     public function listTopUp()
     {
-        $topUp_history = Transaction::query()->where('payable_id', Auth::user()->id)
+        $topUp_history = Transaction::query()
+            ->where('payable_id', Auth::user()->id)
             ->where('type', 'deposit')
             ->where('meta', '<>', null)
-            ->orderBy('created_at', 'desc')->paginate(9);
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
         return response()->json($topUp_history);
     }
 
     public function listPayment()
     {
-        $payment_history = Order::with('course')->where('user_id', Auth::user()->id)
-            ->orderBy('created_at', 'desc')->paginate(9);
+        $payment_history = Order::with('course')
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
 
         return response()->json($payment_history);
     }
@@ -66,18 +71,16 @@ class WalletController extends Controller
     public function topUpIndex()
     {
         $balance = Auth::user()->balance;
-        $stripe = new \Stripe\StripeClient(
-            config('app.stripe_secret')
-        );
+        $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $auth_stripe = $stripe->paymentMethods->all([
             'customer' => Auth::user()->stripe_id,
-            'type' => 'card'
+            'type' => 'card',
         ]);
         $exchange_rate = Setting::where('key', 'token_exchange_rate')->first();
         return view('wallet.top-up', [
             'balance' => $balance,
             'cards' => $auth_stripe,
-            'exchange_rate' => $exchange_rate
+            'exchange_rate' => $exchange_rate,
         ]);
     }
 
@@ -85,12 +88,10 @@ class WalletController extends Controller
     {
         $_request = $request->validate([
             'card' => 'required',
-            'amount' => 'required|numeric|min:10'
+            'amount' => 'required|numeric|min:10',
         ]);
         $paymentMethods = $this->getPaymentMethod();
-        $stripe = new \Stripe\StripeClient(
-            config('app.stripe_secret')
-        );
+        $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
         $payment_intent = $stripe->paymentIntents->create([
             'amount' => $_request['amount'] * 100,
             'currency' => 'HKD',
@@ -101,7 +102,7 @@ class WalletController extends Controller
                 'user_id' => Auth::user()->id,
                 'price' => $_request['amount'],
             ],
-            'return_url' => config('app.home_url') . '/payment'
+            'return_url' => config('app.home_url') . '/payment',
         ]);
         $user = User::where('id', Auth::user()->id)->first();
         $exchange_rate = Setting::where('key', 'token_exchange_rate')->first();
@@ -126,17 +127,20 @@ class WalletController extends Controller
     {
         \Stripe\Stripe::setApiKey(config('app.stripe_secret'));
         $stripe = \Stripe\PaymentIntent::all(['limit' => 10, 'customer' => Auth::user()->stripe_id]);
-        $topUp_history = Transaction::query()->where('payable_id', Auth::user()->id)->latest()->first();
+        $topUp_history = Transaction::query()
+            ->where('payable_id', Auth::user()->id)
+            ->latest()
+            ->first();
         return view('wallet.top-up-success', [
             'topUp_history' => $topUp_history,
-            'stripe' => $stripe
+            'stripe' => $stripe,
         ]);
     }
 
     public function paymentHistory(Order $order)
     {
         return view('wallet.detail-history.payment-invoice', [
-            'order' => $order
+            'order' => $order,
         ]);
     }
 
@@ -145,28 +149,24 @@ class WalletController extends Controller
         $wallet = Wallet::where('holder_id', Auth::user()->id)->first();
         return view('wallet.detail-history.top-up-invoice', [
             'transaction' => $transaction,
-            'wallet' => $wallet
+            'wallet' => $wallet,
         ]);
     }
 
-
     public function payment(Request $request, $product_id)
     {
-        [
-            $product_id,
-            $courses_with_group,
-            $student_bought
-        ] = $this->getVariable($product_id);
+        [$product_id, $courses_with_group, $student_bought] = $this->getVariable($product_id);
         $room = 0;
         $duplicate = false;
         if ($courses_with_group->membershipCourses->course->type == Course::LIVE) {
             $_request = $request->validate([
-                'room_id' => 'required'
+                'room_id' => 'required',
             ]);
             $room = $_request['room_id'];
             $request_course_id = $courses_with_group->membershipCourses->course->id;
             $request_schedule = CourseSchedule::where('course_id', $request_course_id)
-                ->where('room_live_course_id', $room)->get();    //request schedule
+                ->where('room_live_course_id', $room)
+                ->get(); //request schedule
 
             $student_schedule = StudentSchedule::where('student_id', Auth::user()->id)->get();
 
@@ -185,49 +185,40 @@ class WalletController extends Controller
             'course_with_group' => $courses_with_group,
             'product_id' => $product_id,
             'room' => $room,
-            'duplicate' => $duplicate
+            'duplicate' => $duplicate,
         ]);
-
     }
-
 
     public function confirmPayment($product_id, $room)
     {
-        [
-            $product_id,
-            $courses_with_group,
-            $student_bought
-        ] = $this->getVariable($product_id);
+        [$product_id, $courses_with_group, $student_bought] = $this->getVariable($product_id);
         return \view('payments.confirm-payment', [
             'course_with_group' => $courses_with_group,
             'product_id' => $product_id,
-            'room' => $room
+            'room' => $room,
         ]);
     }
 
     public function paymentSuccess($product_id, $room)
     {
-        [
-            $product_id,
-            $courses_with_group,
-            $student_bought
-        ] = $this->getVariable($product_id);
+        [$product_id, $courses_with_group, $student_bought] = $this->getVariable($product_id);
         try {
-            $user = User::query()->where('id', Auth::user()->id)->first();
+            $user = User::query()
+                ->where('id', Auth::user()->id)
+                ->first();
             $item = $courses_with_group;
             $item->getAmountProduct($user);
             $user->pay($item);
             return $this->createBuyCourse($courses_with_group, $room);
-        } catch (InsufficientFunds $insufficientFunds){
+        } catch (InsufficientFunds $insufficientFunds) {
             return back()->with('errors', $insufficientFunds->getMessage());
         }
-
     }
 
     public function success($course_id)
     {
         return \view('payments.payment-success', [
-            'course_id' => $course_id
+            'course_id' => $course_id,
         ]);
     }
 
@@ -245,7 +236,7 @@ class WalletController extends Controller
                 'membership' => $courses_with_group->membershipCourses->membership_id,
                 'membership_discount' => $courses_with_group->membershipCourses->price_value,
                 'discount_info' => !empty($courses_with_group->courseDiscounts) ? $courses_with_group->courseDiscounts->discount_id : 0,
-                'status' => 10
+                'status' => 10,
             ]);
             if ($room != 0) {
                 $this->updateSchedule($room);
@@ -256,13 +247,15 @@ class WalletController extends Controller
                 'room_live_course_id' => $room == 0 ? null : $room,
                 'latest_study' => new DateTime(),
                 'lecture_study' => 0,
-                'watched_list' => ""
+                'watched_list' => '',
             ]);
             DB::commit();
             return redirect()->route('site.user.pay-success', ['course_id' => $student_course->course_id]);
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect()->route('site.home')->with('errors', 'Buy Fails');
+            return redirect()
+                ->route('site.home')
+                ->with('errors', 'Buy Fails');
         }
     }
 
@@ -273,10 +266,7 @@ class WalletController extends Controller
             $roomInitial->number_member = $roomInitial->number_member + 1;
             $roomInitial->save();
 
-            $course_schedules = CourseSchedule::where(
-                'course_id',
-                $roomInitial->course_id
-            )->get();
+            $course_schedules = CourseSchedule::where('course_id', $roomInitial->course_id)->get();
 
             foreach ($course_schedules as $course_schedule) {
                 StudentSchedule::create([
@@ -298,26 +288,16 @@ class WalletController extends Controller
         $product_id = $request;
 
         // DB::enableQueryLog();
-        $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses',
-            'courseDiscounts',
-            'membershipCourses.course',
-            'membershipCourses.course.subject',
-            'membershipCourses.course.subject.certificate',
-            'membershipCourses.course.tutor',
-            'membershipCourses.course.courseMaterial'
-        )->find($product_id);
+        $courses_with_group = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts', 'membershipCourses.course', 'membershipCourses.course.subject', 'membershipCourses.course.subject.certificate', 'membershipCourses.course.tutor', 'membershipCourses.course.courseMaterial')->find($product_id);
 
-        $student_bought = StudentCourses::query()->where([
-            'course_id' => $courses_with_group->membershipCourses->course_id,
-            'student_id' => Auth::user()->id
-        ])->first();
+        $student_bought = StudentCourses::query()
+            ->where([
+                'course_id' => $courses_with_group->membershipCourses->course_id,
+                'student_id' => Auth::user()->id,
+            ])
+            ->first();
 
-        return [
-            $product_id,
-            $courses_with_group,
-            $student_bought
-        ];
+        return [$product_id, $courses_with_group, $student_bought];
     }
 
     public function addVisa()
@@ -350,6 +330,23 @@ class WalletController extends Controller
             return response()->json($payment_method);
         } catch (\Throwable $th) {
             response()->json(['error_message' => $th->getMessage()], 400);
+        }
+    }
+
+    public function paymentSkipLevel(Request $request)
+    {
+        try {
+            $input = $request->input();
+            $price = $input['price'];
+            $user = User::query()
+                ->where('id', Auth::user()->id)
+                ->first();
+            $item = new SkipLevel($price);
+            $item->getAmountProduct($user);
+            $user->pay($item);
+            return response()->json(['message' => 'pay success']);
+        } catch (InsufficientFunds $insufficientFunds) {
+            return response()->json(['error_message' => $insufficientFunds->getMessage()], 400);
         }
     }
 

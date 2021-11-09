@@ -17,27 +17,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CourseMembershipDiscount extends Model implements Product
 {
-//    này mới là product nè
     use SoftDeletes;
     protected $guarded = [];
     protected $table = 'course_membership_discounts';
     use HasWallet;
     public function membershipCourses()
     {
-        return $this->belongsTo(
-            MembershipCourse::class,
-            'membership_course_id',
-            'id',
-        );
+        return $this->belongsTo(MembershipCourse::class, 'membership_course_id', 'id');
     }
 
     public function courseDiscounts()
     {
-        return $this->belongsTo(
-            CourseDiscount::class,
-            'course_discount_id',
-            'id',
-        );
+        return $this->belongsTo(CourseDiscount::class, 'course_discount_id', 'id');
     }
 
     public function getPrice()
@@ -45,11 +36,9 @@ class CourseMembershipDiscount extends Model implements Product
         return $this->membershipCourses->price_value;
     }
 
-
     public function getDiscount()
     {
         if ($this->courseDiscounts) {
-
             return $this->courseDiscounts->discount_value;
         }
 
@@ -58,7 +47,7 @@ class CourseMembershipDiscount extends Model implements Product
 
     public function getPriceDiscount()
     {
-        return $this->getPrice() - ($this->getPrice() * $this->getDiscount()/100);
+        return $this->getPrice() - ($this->getPrice() * $this->getDiscount()) / 100;
     }
 
     public function canBuy(Customer $customer, int $quantity = 1, bool $force = null): bool
@@ -85,6 +74,6 @@ class CourseMembershipDiscount extends Model implements Product
 
     public function getUniqueId(): string
     {
-        return (string)$this->getKey();
+        return (string) $this->getKey();
     }
 }

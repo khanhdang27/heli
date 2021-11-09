@@ -22,7 +22,7 @@
               @nextToLecture="nextToLecture()"
             ></quiz-component>
           </div>
-          <div v-else>
+          <div v-else-if="videoId">
             <vimeo-player
               ref="player"
               :video-id="videoId"
@@ -31,61 +31,46 @@
               class="embed-responsive embed-responsive-16by9"
             />
           </div>
+          <div v-else></div>
         </div>
       </div>
       <div class="col-lg-3 bg-white">
         <div class="box-list-video text-primary lecture overflow-auto">
           <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
-          <ul
-            class="list-group list-group-flush"
-            v-for="item in lectureList"
-            :key="item.index"
-          >
-            <button
-              class="list-group-item list-group-item-action"
-              v-bind:class="{ active: item.index == lectureIndex }"
-              v-on:click="onClickLecture(item.index)"
-            >
-              <div class="d-flex w-100 justify-content-left">
-                <div class="my-auto mr-3">
-                  <input
-                    readonly
-                    type="checkbox"
-                    :value="item.index"
-                    name="index"
-                    id="index"
-                    v-model="studentLecture"
-                  />
-                </div>
-                <div v-if="item.model_name == 'Examination'">
-                  <h4 class="mb-1">
-                    {{ item.index }}
-                    -
-                    {{ item.name }}
-                  </h4>
-                  <strong
-                    v-if="item.index <= lectureOpenTo"
-                    class="text-dark text-wrap"
+          <!-- +++++++++++++++++++++++++++++ -->
+          <div class="container vue">
+            <div v-for="(group, key) in lectureCollapse" :key="key">
+              <button
+                class="btn btn-outline-primary btn-lg btn-block"
+                @click="toggleExpansion(key)"
+              >
+                <h3>
+                  {{ key | uppercase }}
+                </h3>
+              </button>
+              <div v-show="isExpanded(key)">
+                <div
+                  v-for="(items, key) in group"
+                  :key="key"
+                  class="list-group list-group-flush"
+                >
+                  <div
+                    class="border-bottom mt-1 d-flex justify-content-between"
                   >
-                    <i class="fe fe-message-square mr-2"></i>
-                    <span>Quiz</span>
-                  </strong>
-                  <strong v-else class="text-dark text-wrap">
-                    <i class="fe fe-lock mr-2"></i>
-                    <span>Quiz</span>
-                  </strong>
-                </div>
-              </div>
-              <div class="col-lg-3 bg-white">
-                <div class="box-list-video text-primary lecture overflow-auto">
-                  <h2 class="font-weight-bolder pb-2 background-">
-                    Course Content
-                  </h2>
-                  <ul
-                    class="list-group list-group-flush"
-                    v-for="item in lectureList"
-                    :key="item.index"
-                  >
+                    <div class="h4">
+                      {{ key | uppercase | replace }}
+                    </div>
+                    <button
+                      class="btn btn-primary btn-sm my-2"
+                      ref="skip_button"
+                      :data-level="key"
+                      data-toggle="modal"
+                      data-target="#skip_level"
+                    >
+                      skip level >
+                    </button>
+                  </div>
+                  <div v-for="item in items" :key="item.id">
                     <div class="d-flex">
                       <button
                         class="list-group-item list-group-item-action border-0"
@@ -105,7 +90,11 @@
                           </div>
                           <div v-if="item.model_name == 'Examination'">
                             <h4 class="mb-1">
-                              {{ item.index }}
+                              {{
+                                item.type == $getConst("exercise")
+                                  ? "Exercise"
+                                  : "Quiz"
+                              }}
                               -
                               {{ item.name }}
                             </h4>
@@ -158,11 +147,13 @@
                         >
                       </div>
                     </div>
-                  </ul>
+                  </div>
                 </div>
               </div>
-            </button>
-          </ul>
+              <hr />
+            </div>
+          </div>
+          <!-- +++++++++++++++++++++++++++++ -->
         </div>
       </div>
     </div>
@@ -244,6 +235,53 @@
         </div>
       </div>
     </div>
+    <div
+      class="modal fade"
+      ref="modal_skip"
+      id="skip_level"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="skipModalComfirm"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="skipModalComfirm">Skip Level</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4 class="text-danger">
+              You will pay <strong>{{ tokenSkip }} Tokens </strong> to skip this
+              level
+            </h4>
+            <h5>
+              Use this opportunity to shorten your study time effectively, good
+              luck
+            </h5>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" @click="buySkip()">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -254,6 +292,14 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
 
 export default {
+  filters: {
+    uppercase: function (v) {
+      return v.charAt(0).toUpperCase() + v.slice(1);
+    },
+    replace: function (v) {
+      return v.replace("_", " ");
+    },
+  },
   props: {
     courseId: Number,
     userId: Number,
@@ -266,9 +312,36 @@ export default {
   },
   data() {
     return {
+      expandedGroup: [],
       lectureIndex: 0,
       lectureList: [],
-      videoId: "588754544",
+      lectureCollapse: {
+        reading: {
+          level_50: [],
+          level_55: [],
+          level_60: [],
+          level_65: [],
+        },
+        listening: {
+          level_50: [],
+          level_55: [],
+          level_60: [],
+          level_65: [],
+        },
+        speaking: {
+          level_50: [],
+          level_55: [],
+          level_60: [],
+          level_65: [],
+        },
+        writing: {
+          level_50: [],
+          level_55: [],
+          level_60: [],
+          level_65: [],
+        },
+      },
+      videoId: "",
       studentLecture: [],
       lectureOpenTo: 0,
       questions: [],
@@ -307,6 +380,7 @@ export default {
           },
         },
       },
+      tokenSkip: 9999,
     };
   },
   created() {
@@ -315,7 +389,41 @@ export default {
     this.downloadPDF();
     setTimeout(() => this.showLecture(), 2000);
   },
+  mounted() {
+    $(this.$refs.modal_skip).on("shown.bs.modal", (event) => {
+      var button = $(event.relatedTarget);
+      var level = button.data("level");
+      console.log("level >>>", level);
+      axios
+        .get(route("site.token.skipPrice"), {
+          params: { level: level },
+        })
+        .then((data) => {
+          console.log(data);
+          this.tokenSkip = data.data.token;
+        })
+        .catch((error) => {});
+    });
+  },
   methods: {
+    buySkip() {
+      axios
+        .post(route("site.token.skipPrice.pay"), {
+          price: this.tokenSkip,
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {});
+    },
+    isExpanded(key) {
+      return this.expandedGroup.indexOf(key) !== -1;
+    },
+    toggleExpansion(key) {
+      if (this.isExpanded(key))
+        this.expandedGroup.splice(this.expandedGroup.indexOf(key), 1);
+      else this.expandedGroup.push(key);
+    },
     downloadPDF(lecture) {
       if (lecture) {
         return route("site.file.download", lecture);
@@ -380,19 +488,218 @@ export default {
               this.studentLecture.length != 1
                 ? this.studentLecture[this.studentLecture.length - 2]
                 : 0;
-            for (let item in response.data.lectures) {
-              this.lectureList.push(response.data.lectures[item]);
+            let _lectures = response.data.lectures;
+            for (let item in _lectures) {
+              this.lectureList.push(_lectures[item]);
+              if (_lectures[item].model_name === "Examination") {
+                if (_lectures[item].type === this.$root.$getConst("exercise")) {
+                  _lectures[item].index = 999;
+                  this.addExamsToAllPart(
+                    _lectures,
+                    item,
+                    _lectures[item].level
+                  );
+                } else if (
+                  _lectures[item].type === this.$root.$getConst("quiz")
+                ) {
+                  _lectures[item].index = 1000;
+                  this.addExamsToAllPart(
+                    _lectures,
+                    item,
+                    _lectures[item].level
+                  );
+                } else {
+                  // do not thing with assessment
+                }
+              } else {
+                if (_lectures[item].type === this.$root.$getConst("reading")) {
+                  this.addLectureByReading(_lectures, item);
+                }
+                if (_lectures[item].type === this.$root.$getConst("writing")) {
+                  // this.lectureCollapse.writing.push(_lectures[item]);
+                  this.addLectureByWriting(_lectures, item);
+                }
+                if (
+                  _lectures[item].type === this.$root.$getConst("listening")
+                ) {
+                  // this.lectureCollapse.listening.push(_lectures[item]);
+                  this.addLectureByListening(_lectures, item);
+                }
+                if (_lectures[item].type === this.$root.$getConst("speaking")) {
+                  // this.lectureCollapse.speaking.push(_lectures[item]);
+                  this.addLectureBySpeaking(_lectures, item);
+                }
+              }
             }
-            this.lectureList.sort(function (a, b) {
-              return a.index - b.index;
-            });
-
-            console.log("this.lectureList >>>", this.lectureList);
+            this.sortLecture(_lectures);
+            // console.log("this.lectureList >>>", this.lectureList);
+            // console.log("this.lectureCollapse :>> ", this.lectureCollapse);
           }
         })
         .catch(function (error) {
           console.error(error);
         });
+    },
+    addExamsToAllPart(lectures, index, part) {
+      switch (part) {
+        case this.$root.$getConst("level_50"):
+          this.lectureCollapse.reading.level_50.push(lectures[index]);
+          this.lectureCollapse.listening.level_50.push(lectures[index]);
+          this.lectureCollapse.speaking.level_50.push(lectures[index]);
+          this.lectureCollapse.writing.level_50.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_55"):
+          this.lectureCollapse.reading.level_55.push(lectures[index]);
+          this.lectureCollapse.listening.level_55.push(lectures[index]);
+          this.lectureCollapse.speaking.level_55.push(lectures[index]);
+          this.lectureCollapse.writing.level_55.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_60"):
+          this.lectureCollapse.reading.level_60.push(lectures[index]);
+          this.lectureCollapse.listening.level_60.push(lectures[index]);
+          this.lectureCollapse.speaking.level_60.push(lectures[index]);
+          this.lectureCollapse.writing.level_60.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_65"):
+          this.lectureCollapse.reading.level_65.push(lectures[index]);
+          this.lectureCollapse.listening.level_65.push(lectures[index]);
+          this.lectureCollapse.speaking.level_65.push(lectures[index]);
+          this.lectureCollapse.writing.level_65.push(lectures[index]);
+          break;
+
+        default:
+          break;
+      }
+    },
+    addLectureBySpeaking(lectures, index) {
+      switch (lectures[index].level) {
+        case this.$root.$getConst("level_50"):
+          this.lectureCollapse.speaking.level_50.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_55"):
+          this.lectureCollapse.speaking.level_55.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_60"):
+          this.lectureCollapse.speaking.level_60.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_65"):
+          this.lectureCollapse.speaking.level_65.push(lectures[index]);
+          break;
+        default:
+          break;
+      }
+    },
+    addLectureByListening(lectures, index) {
+      switch (lectures[index].level) {
+        case this.$root.$getConst("level_50"):
+          this.lectureCollapse.listening.level_50.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_55"):
+          this.lectureCollapse.listening.level_55.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_60"):
+          this.lectureCollapse.listening.level_60.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_65"):
+          this.lectureCollapse.listening.level_65.push(lectures[index]);
+          break;
+        default:
+          break;
+      }
+    },
+    addLectureByReading(lectures, index) {
+      switch (lectures[index].level) {
+        case this.$root.$getConst("level_50"):
+          this.lectureCollapse.reading.level_50.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_55"):
+          this.lectureCollapse.reading.level_55.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_60"):
+          this.lectureCollapse.reading.level_60.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_65"):
+          this.lectureCollapse.reading.level_65.push(lectures[index]);
+          break;
+        default:
+          break;
+      }
+    },
+    addLectureByWriting(lectures, index) {
+      switch (lectures[index].level) {
+        case this.$root.$getConst("level_50"):
+          this.lectureCollapse.writing.level_50.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_55"):
+          this.lectureCollapse.writing.level_55.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_60"):
+          this.lectureCollapse.writing.level_60.push(lectures[index]);
+          break;
+        case this.$root.$getConst("level_65"):
+          this.lectureCollapse.writing.level_65.push(lectures[index]);
+          break;
+        default:
+          break;
+      }
+    },
+    sortLecture(lectures) {
+      // level 5
+      this.lectureCollapse.reading.level_50.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.writing.level_50.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.listening.level_50.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.speaking.level_50.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      // level 5.5
+      this.lectureCollapse.reading.level_55.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.writing.level_55.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.listening.level_55.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.speaking.level_55.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      // level 6.0
+      this.lectureCollapse.reading.level_60.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.writing.level_60.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.listening.level_60.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.speaking.level_60.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      // level 6.6
+      this.lectureCollapse.reading.level_65.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.writing.level_65.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.listening.level_65.sort(function (a, b) {
+        return a.index - b.index;
+      });
+      this.lectureCollapse.speaking.level_65.sort(function (a, b) {
+        return a.index - b.index;
+      });
+
+      this.lectureList.sort(function (a, b) {
+        return a.index - b.index;
+      });
     },
     getLecture() {
       axios

@@ -1,11 +1,12 @@
 @php
 use App\Models\Examination;
+use App\Models\Lecture;
 @endphp
 
 @extends('admin.layout')
 @section('content')
 
-<script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
+    <script src="{{ asset('js/admin/vimeo-upload.js') }}"></script>
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10 col-xl-8">
@@ -45,6 +46,11 @@ use App\Models\Examination;
                             {!! Form::select('type', Examination::TYPES, $exam->type, ['class' => 'form-control', 'required']) !!}
                             @error('type') <span class="error">{{ $message }}</span> @enderror
                         </div>
+                        <div class="form-group">
+                            <label class="required" for="level">Level</label>
+                            {!! Form::select('level', Lecture::LEVELS, $exam->level, ['class' => 'form-control', 'required']) !!}
+                            @error('level') <span class="error">{{ $message }}</span> @enderror
+                        </div>
                         <div class="d-flex">
                             <button type="submit" class="btn btn-success ml-auto"> Save </button>
                         </div>
@@ -54,15 +60,15 @@ use App\Models\Examination;
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 @foreach ($quizzes as $quiz)
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link"
-                                            id="set_{{ $quiz->set }}" data-toggle="tab" href="#set-{{ $quiz->set }}"
-                                            role="tab" aria-controls="set-{{ $quiz->set }}" aria-selected="true">Set
+                                        <a class="nav-link" id="set_{{ $quiz->set }}" data-toggle="tab"
+                                            href="#set-{{ $quiz->set }}" role="tab"
+                                            aria-controls="set-{{ $quiz->set }}" aria-selected="true">Set
                                             {{ $quiz->set }}</a>
                                     </li>
                                     @if ($exam->type == Examination::ASSESSMENT)
                                     @break
                                 @endif
-                                
+
                                 @endforeach
                             </ul>
                             <br>
@@ -107,7 +113,7 @@ use App\Models\Examination;
                                                 <div id="collapseWritingSet1" class="collapse"
                                                     aria-labelledby="headingTwo" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        @if($exam->type == Examination::QUIZ)
+                                                        @if ($exam->type == Examination::QUIZ)
                                                             <x-admin.create-writing-quiz-question :quiz="$quiz">
                                                             </x-admin.create-writing-quiz-question>
                                                             <br>
@@ -137,10 +143,10 @@ use App\Models\Examination;
                                                 <div id="collapseListeningSet1" class="collapse"
                                                     aria-labelledby="headingThree" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                       <x-admin.create-listening-question :quiz="$quiz">
-                                                            </x-admin.create-listening-question>
+                                                        <x-admin.create-listening-question :quiz="$quiz">
+                                                        </x-admin.create-listening-question>
                                                         <x-admin.list-listening-question :quiz="$quiz">
-                                                            </x-admin.list-listening-question>
+                                                        </x-admin.list-listening-question>
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,21 +166,21 @@ use App\Models\Examination;
                                                     <div class="card-body">
                                                         @if ($exam->type == Examination::ASSESSMENT)
                                                             <x-admin.create-speaking-assessment-question :quiz="$quiz">
-                                                                </x-admin.create-speaking-assessment-question>
+                                                            </x-admin.create-speaking-assessment-question>
                                                             <x-admin.list-speaking-assessment-question :quiz="$quiz">
-                                                                </x-admin.list-speaking-assessment-question>
+                                                            </x-admin.list-speaking-assessment-question>
 
                                                         @elseif ($exam->type == Examination::EXERCISES)
                                                             <x-admin.create-speaking-question :quiz="$quiz">
-                                                                </x-admin.create-speaking-question>
+                                                            </x-admin.create-speaking-question>
                                                             <x-admin.list-speaking-question :quiz="$quiz">
-                                                                </x-admin.list-speaking-question>
+                                                            </x-admin.list-speaking-question>
 
                                                         @else
                                                             <x-admin.create-speaking-quiz-question :quiz="$quiz">
-                                                                </x-admin.create-speaking-quiz-question>
+                                                            </x-admin.create-speaking-quiz-question>
                                                             <x-admin.list-speaking-quiz-question :quiz="$quiz">
-                                                                </x-admin.list-speaking-quiz-question>
+                                                            </x-admin.list-speaking-quiz-question>
 
                                                         @endif
                                                     </div>
@@ -196,40 +202,40 @@ use App\Models\Examination;
     </div>
     <script type="application/javascript">
         window.onload = function() {
-            CKEDITOR.replaceAll('rich-text' );
+            CKEDITOR.replaceAll('rich-text');
         };
     </script>
 
-    
-<script type="text/javascript">
-    $(document).ready(function() {
-        if (localStorage.quizQuestionSet) {
-            if ( {{ $exam->type }} != 1 ) {
-                let quizSet = localStorage.getItem("quizQuestionSet")
-                $(`a[id="${quizSet}"]`).tab('show');
-            } else {
-                $(`a[id="set_1"]`).tab('show');
-            }
-        }
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (event) {
-            localStorage.setItem("quizQuestionSet", event.target.id);
-        })
 
-        if (localStorage.collapseQuestion) {
-            let quizSet = localStorage.getItem("collapseQuestion")
-            $(`div[id="${quizSet}"]`).collapse('show');
-        }
-        $('#accordionExample').on('shown.bs.collapse', function (event) {
-            var scrollPosition = event.target.offsetTop;
-            localStorage.setItem("scrollPosition", scrollPosition);
-            if (event.target.dataset.parent == '#accordionExample') {
-                localStorage.setItem("collapseQuestion", event.target.id);
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if (localStorage.quizQuestionSet) {
+                if ({{ $exam->type }} != 1) {
+                    let quizSet = localStorage.getItem("quizQuestionSet")
+                    $(`a[id="${quizSet}"]`).tab('show');
+                } else {
+                    $(`a[id="set_1"]`).tab('show');
+                }
             }
-        })
-        if (localStorage.scrollPosition) {
-            let pos = localStorage.getItem("scrollPosition")
-            window.scrollTo(0, pos+20);
-        }
-    });
-</script>
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(event) {
+                localStorage.setItem("quizQuestionSet", event.target.id);
+            })
+
+            if (localStorage.collapseQuestion) {
+                let quizSet = localStorage.getItem("collapseQuestion")
+                $(`div[id="${quizSet}"]`).collapse('show');
+            }
+            $('#accordionExample').on('shown.bs.collapse', function(event) {
+                var scrollPosition = event.target.offsetTop;
+                localStorage.setItem("scrollPosition", scrollPosition);
+                if (event.target.dataset.parent == '#accordionExample') {
+                    localStorage.setItem("collapseQuestion", event.target.id);
+                }
+            })
+            if (localStorage.scrollPosition) {
+                let pos = localStorage.getItem("scrollPosition")
+                window.scrollTo(0, pos + 20);
+            }
+        });
+    </script>
 @endsection

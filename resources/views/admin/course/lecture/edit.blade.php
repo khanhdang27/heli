@@ -33,7 +33,7 @@ use App\Models\Lecture;
                         </div> <!-- / .row -->
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => route('admin.course.lecture.update', [ 'course' => $course->id, 'lecture' => $lecture->id]), 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
+                        {!! Form::open(['url' => route('admin.course.lecture.update', ['course' => $course->id, 'lecture' => $lecture->id]), 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
                         @csrf
                         <div class="form-group ">
                             {{ Form::label('lectures_name', 'Name') }}
@@ -47,8 +47,10 @@ use App\Models\Lecture;
                             {{ Form::label('index', 'Index') }}
                             {{ Form::number('index', $lecture->index, ['class' => 'form-control', 'required', 'id' => 'index']) }}
                         </div>
-                        <div class="form-group ">
-                            Pick up video
+                        <div class="form-group">
+                            <label>
+                                Pick up video
+                            </label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="browse"
                                     accept="video/mp4,video/x-m4v,video/*">
@@ -63,21 +65,27 @@ use App\Models\Lecture;
                             </div>
 
                             {{ Form::label('video_resource', 'Video Resource') }}
-                            {{ Form::text('video_resource', $lecture->video_resource, ['class' => 'form-control', 'required', 'id' => 'index']) }}
+                            {{ Form::text('video_resource', $lecture->video_resource, ['class' => 'form-control mb-2', 'required', 'id' => 'index']) }}
                             <div style="padding:25% 0 0 0;position:relative;">
                                 <iframe
-                                    src="{{'https://player.vimeo.com/video/'.$lecture->video_resource.'?badge=0&autopause=0&app_id='. config('app.vimeo_app_id')}}"
-                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;"
-                                ></iframe>
+                                    src="{{ 'https://player.vimeo.com/video/' . $lecture->video_resource . '?badge=0&autopause=0&app_id=' . config('app.vimeo_app_id') }}"
+                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                                    style="position:absolute;top:0;left:0;"></iframe>
                             </div><script src="https://player.vimeo.com/api/player.js"></script>
                         </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFile" name="file" accept=".pdf">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        <div class="form-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" name="file" accept=".pdf">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="level">Level</label>
                             {{ Form::select('level', Lecture::LEVELS, $lecture->level, ['class' => 'form-control']) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            {{ Form::select('type', Lecture::TYPES, $lecture->type, ['class' => 'form-control']) }}
                         </div>
                         <button type="submit" class="btn btn-primary"> Save </button>
                         {!! Form::close() !!}
