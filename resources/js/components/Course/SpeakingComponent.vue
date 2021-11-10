@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid h-100 d-flex flex-column justify-content-between text-primary pt-4">
         <h1 class="text-center font-weight-bold">Speaking</h1>
-        <div class="py-4 row h-100 justify-content-center lecture overflow-auto">
+        <div class="py-4 row h-100 justify-content-center lecture overflow-auto" v-if="allResults.length === 0">
             <div class="col-lg-8">
                 <div class="h-100">
                     <div v-if="allResults.length === 0">
@@ -72,11 +72,98 @@
                     </div>
                     <div v-if="allResults.length === 0">
                         <div v-if="typeExam === $getConst('quiz')">
-                            <h3 v-cloak v-if="questionSpeaking[questionIndex]">
+                            <div class="h4 text-center">
+                                <vue-countdown-timer id="timePause"
+                                    v-if="pause === true"
+                                    @start_callback="startCallBackTimePause('event started')"
+                                    @end_callback="endCallBackTimePause('event ended')"
+                                    :start-time="timeNow"
+                                    :end-time="timeEnd"
+                                    :interval="1000"
+                                    :start-label="'Until start:'"
+                                    :end-label="'You have 1 minute pause'"
+                                    label-position="begin"
+                                    :end-text="''"
+                                    :day-txt="'days'"
+                                    :hour-txt="'hours'"
+                                    :minutes-txt="'minutes'"
+                                    :seconds-txt="'seconds'"
+                                >
+                                    <template slot="start-label" slot-scope="scope">
+                                        <i class="fe fe-clock"></i>
+                                        <span
+                                            v-if="scope.props.startLabel !== '' &&
+                                              scope.props.tips &&
+                                              scope.props.labelPosition === 'begin'
+                                              ">
+                                            {{ scope.props.startLabel }}:</span>
+                                        <span
+                                            v-if="scope.props.endLabel !== '' &&
+                                              !scope.props.tips &&
+                                              scope.props.labelPosition === 'begin'
+                                             ">
+                                            {{ scope.props.endLabel }}:</span>
+                                    </template>
+                                    <template slot="countdown" slot-scope="scope">
+                                        <span>{{ scope.props.days }} </span><a>:</a>
+                                        <span>{{ scope.props.hours }} </span><a>:</a>
+                                        <span>{{ scope.props.minutes }} </span><a>:</a>
+                                        <span>{{ scope.props.seconds }} </span><a></a>
+                                        <h4 class="mt-3">After 1 minute is over, you will have 2 minutes to answer the last question?</h4>
+                                    </template>
+
+                                </vue-countdown-timer>
+                                <vue-countdown-timer id="timeAnswer"
+                                    v-if="showLastQuestion === true"
+                                    @start_callback="startCallBack('event started')"
+                                    @end_callback="endCallBack('event ended')"
+                                    :start-time="timeStartAnswer"
+                                    :end-time="timeEndAnswer"
+                                    :interval="1000"
+                                    :start-label="'Until start:'"
+                                    :end-label="'Time limit'"
+                                    label-position="begin"
+                                    :end-text="''"
+                                    :day-txt="'days'"
+                                    :hour-txt="'hours'"
+                                    :minutes-txt="'minutes'"
+                                    :seconds-txt="'seconds'"
+                                >
+                                    <template slot="start-label" slot-scope="scope">
+                                        <i class="fe fe-clock"></i>
+                                        <span
+                                            v-if="scope.props.startLabel !== '' &&
+                                              scope.props.tips &&
+                                              scope.props.labelPosition === 'begin'
+                                              ">
+                                            {{ scope.props.startLabel }}:</span>
+                                        <span
+                                            v-if="scope.props.endLabel !== '' &&
+                                              !scope.props.tips &&
+                                              scope.props.labelPosition === 'begin'
+                                             ">
+                                            {{ scope.props.endLabel }}:</span>
+                                    </template>
+                                    <template slot="countdown" slot-scope="scope">
+                                        <span>{{ scope.props.days }} </span><a>:</a>
+                                        <span>{{ scope.props.hours }} </span><a>:</a>
+                                        <span>{{ scope.props.minutes }} </span><a>:</a>
+                                        <span>{{ scope.props.seconds }} </span><a></a>
+                                    </template>
+
+                                </vue-countdown-timer>
+                            </div>
+                            <div v-if="questionIndex < questionSpeaking.length - 1">
+                                <h3 v-cloak v-if="questionSpeaking[questionIndex]">
+                                    {{ questionIndex + 1 }}
+                                    {{ questionSpeaking[questionIndex].speak_quiz_question.question }}
+                                </h3>
+                                <p>Please record one video with voice that answers all question.</p>
+                            </div>
+                            <h3 v-cloak v-if="showLastQuestion === true">
                                 {{ questionIndex + 1 }}
                                 {{ questionSpeaking[questionIndex].speak_quiz_question.question }}
                             </h3>
-                            <p>Please record one video with voice that answers all question.</p>
                             <div>
                                 <video
                                     v-cloak
@@ -131,11 +218,14 @@
         <div v-if="allResults.length !== 0" class="h-100">
             <div class="text-center">
                 <div v-if="typeExam !== $getConst('assessment')">
-                    <div class="text-success">
+                    <div class="h4 text-success">
                         You have completed this section.
                         Your exam is being graded by the tutor.
                         Please wait for the results and come back later!
                     </div>
+                </div>
+                <div v-else>
+                    <h2>Congratulation! You got level: {{allResults.passgrade}}</h2>
                 </div>
             </div>
         </div>
@@ -196,7 +286,13 @@ export default {
                 },
             },
             allResults: [],
-            countClick: 0
+            countClick: 0,
+            timeNow: "",
+            timeEnd: "",
+            timeStartAnswer: "",
+            timeEndAnswer: "",
+            pause: false,
+            showLastQuestion: false
         };
     },
     created() {
@@ -326,9 +422,19 @@ export default {
         },
         next: function () {
             if (this.questionIndex < this.questionSpeaking.length - 1) {
-                this.userAnswer();
+                if (this.typeExam === this.$root.$getConst('assessment')){
+                    this.userAnswer();
+                }else if (this.questionIndex === this.questionSpeaking.length - 2){
+                    this.pause = true
+                    console.log('pause', this.pause)
+                    this.timeNow = new Date();
+                    this.timeEnd = new Date();
+                    this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
+                }
+
                 this.questionIndex++;
             }
+
         },
         prev: function () {
             if (this.questionIndex > 0) this.questionIndex--;
@@ -349,7 +455,8 @@ export default {
             axios
                 .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
                 .then((data) => {
-                    this.allResults = data.data;console.log(this.allResults)
+                    this.allResults = data.data;
+                    console.log('speaking:',this.allResults)
                 })
                 .catch((error) => {
                     console.log("error :>> ", error);
@@ -361,7 +468,7 @@ export default {
                 this.questionNo = document.getElementById(
                     "ques" + this.questionSpeaking[this.questionIndex].id
                 ).value;
-
+                this.timeDo = 0;
                 this.userAnswerQuiz({
                     answerType: this.$root.$getConst("MC"),
                     questionID: parseInt(this.questionNo),
@@ -402,6 +509,22 @@ export default {
                 this.userChoose.push(item.answerID);
             });
         },
+        startCallBackTimePause: function (x) {
+            console.log(x);
+        },
+        endCallBackTimePause: function (x) {
+            console.log(x);
+            this.pause= false
+            this.showLastQuestion = true
+            this.timeStartAnswer = new Date()
+            this.timeEndAnswer = new Date()
+            this.timeEndAnswer.setMinutes(this.timeEnd.getMinutes() + 2);
+        },
+        startCallBack: function (x) {
+        },
+        endCallBack: function (x) {
+            this.submit()
+        }
     },
 };
 </script>
