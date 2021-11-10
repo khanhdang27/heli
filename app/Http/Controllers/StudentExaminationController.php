@@ -170,9 +170,11 @@ class StudentExaminationController extends Controller
                 [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
 
                 $question = Question::find($input['questions'][0]['questionID']);
+//                type cuoi cung
                 if ($question->type == Question::WRITING) {
                     $scoreGrade = $this->assessment($courseId, $quizId, $exams->id);
-
+//                    open level Student Course -> open_lecture_part_read,
+//                    5.0,5.5,
                     DB::commit();
                     return response()->json(['passgrade' => $scoreGrade]);
                 }

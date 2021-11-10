@@ -172,119 +172,101 @@
           <!-- +++++++++++++++++++++++++++++ -->
         </div>
       </div>
-      
     </div>
-    <div v-if="isPassed" class="row mb-4">
-        <div class="col-xl-1 col-lg-2 col-1 d-none d-md-block">
-          <div class="swiper-button-prev btn-prev btn-prev-tutor" id="btn_prev">
+
+        <div v-if="isPassed" class="row mb-4">
+          <div class="col-xl-1 col-lg-2 col-1 d-none d-md-block">
             <div
-              class="
-                rounded-circle
-                border-btn-next
-                animate-change-color
-                py-3
-                px-4
-              "
+              class="swiper-button-prev btn-prev btn-prev-tutor"
+              id="btn_prev"
             >
-              <p class="h2 text-center mx-2">❮</p>
-            </div>
-          </div>
-          <div v-if="isPassed" class="row mb-4">
-            <div class="col-xl-1 col-lg-2 col-1 d-none d-md-block">
               <div
-                class="swiper-button-prev btn-prev btn-prev-tutor"
-                id="btn_prev"
+                class="
+                  rounded-circle
+                  border-btn-next
+                  animate-change-color
+                  py-3
+                  px-4
+                "
               >
-                <div
-                  class="
-                    rounded-circle
-                    border-btn-next
-                    animate-change-color
-                    py-3
-                    px-4
-                  "
-                >
-                  <p class="h2 text-center mx-2">❮</p>
-                </div>
+                <p class="h2 text-center mx-2">❮</p>
               </div>
             </div>
-            <div class="col-lg-7 col-10">
-              <swiper :options="swiperOptions">
-                <swiper-slide v-for="course in related" :key="course.id">
+          </div>
+          <div class="col-lg-7 col-10">
+            <swiper :options="swiperOptions">
+              <swiper-slide v-for="course in related" :key="course.id">
+                <div
+                  class="top-product col-12"
+                  v-on:click="goToCourse(course.id)"
+                >
                   <div
-                    class="top-product col-12"
-                    v-on:click="goToCourse(course.id)"
+                    class="content-product py-5 rounded-top-course"
+                    v-bind:style="{
+                      backgroundColor: course.subject.subject_color_background,
+                    }"
                   >
                     <div
-                      class="content-product py-5 rounded-top-course"
+                      class="
+                        body-product-content
+                        d-flex
+                        flex-column
+                        justify-content-between
+                        align-items-center
+                        col-10
+                        mx-auto
+                      "
                       v-bind:style="{
-                        backgroundColor:
-                          course.subject.subject_color_background,
+                        color: course.subject.subject_color_text,
                       }"
                     >
                       <div
-                        class="
-                          body-product-content
-                          d-flex
-                          flex-column
-                          justify-content-between
-                          align-items-center
-                          col-10
-                          mx-auto
-                        "
-                        v-bind:style="{
-                          color: course.subject.subject_color_text,
-                        }"
+                        class="content-top text-wrap w-100"
+                        style="text-align: center"
+                      >
+                        {{ course.subject.certificate.certificate_code }}<br />
+                        <div v-if="course.type == 1">Live Course</div>
+
+                        <div v-else>Course Record</div>
+                      </div>
+                      <div
+                        class="box-content-bot py-4 px-5 w-100"
+                        style="border: 1px solid"
                       >
                         <div
-                          class="content-top text-wrap w-100"
-                          style="text-align: center"
+                          class="content-bot"
+                          v-bind:title="course.course_name"
                         >
-                          {{ course.subject.certificate.certificate_code
-                          }}<br />
-                          <div v-if="course.type == 1">Live Course</div>
-
-                          <div v-else>Course Record</div>
-                        </div>
-                        <div
-                          class="box-content-bot py-4 px-5 w-100"
-                          style="border: 1px solid"
-                        >
-                          <div
-                            class="content-bot"
-                            v-bind:title="course.course_name"
-                          >
-                            {{ course.course_name }}
-                          </div>
+                          {{ course.course_name }}
                         </div>
                       </div>
                     </div>
                   </div>
-                </swiper-slide>
-              </swiper>
-            </div>
-            <div class="col-xl-1 col-lg-2 col-1 d-none d-md-block">
-              <div
-                class="swiper-button-next btn-next btn-next-tutor"
-                id="btn_next"
-              >
-                <div
-                  class="
-                    rounded-circle
-                    border-btn-next
-                    animate-change-color
-                    py-2
-                    px-4
-                  "
-                >
-                  <p class="m-0 h2 text-center">❯</p>
-                  <p class="text-nowrap text-center m-0">更多</p>
                 </div>
+              </swiper-slide>
+            </swiper>
+          </div>
+          <div class="col-xl-1 col-lg-2 col-1 d-none d-md-block">
+            <div
+              class="swiper-button-next btn-next btn-next-tutor"
+              id="btn_next"
+            >
+              <div
+                class="
+                  rounded-circle
+                  border-btn-next
+                  animate-change-color
+                  py-2
+                  px-4
+                "
+              >
+                <p class="m-0 h2 text-center">❯</p>
+                <p class="text-nowrap text-center m-0">更多</p>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+
+    </div>
     <div
       class="modal fade"
       ref="modal_skip"
