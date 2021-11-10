@@ -17,7 +17,7 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('index');
-            $table->integer('level')->nullable(true);
+            $table->double('level')->nullable(true);
             $table->integer('type');
             $table
                 ->foreignId('course_id')

@@ -248,7 +248,7 @@
         <div v-else class="mt-5 h-100">
             <div class="text-center">
                 <div v-if="typeExam !== $getConst('assessment')">
-                    <div v-if="typeExam !== $getConst('exercise')">
+                    <div v-if="typeExam === $getConst('exercise')">
                         <h2 class="text-success">You score {{ allResults.score }}</h2>
                         <div class="row justify-content-center align-items-start">
                             <div class="col-lg-6 col-md-10 col-12">

@@ -50,17 +50,17 @@
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('subject_id', 'Subject', ['class' => 'required']) }}
                                     {{ Form::select(
-    'subject_id',
-    array_filter(
-        SelectionByClass::getValues(Subject::class, 'subject_name', 'id'),
-        function ($var, $id) {
-            return $id != 1;
-        },
-        ARRAY_FILTER_USE_BOTH,
-    ),
-    null,
-    ['class' => 'form-control'],
-) }}
+                                        'subject_id',
+                                        array_filter(
+                                            SelectionByClass::getValues(Subject::class, 'subject_name', 'id'),
+                                            function ($var, $id) {
+                                                return $id ;
+                                            },
+                                            ARRAY_FILTER_USE_BOTH,
+                                        ),
+                                        null,
+                                        ['class' => 'form-control'],
+                                    ) }}
                                 </div>
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('type', 'Type', ['class' => 'required']) }}
@@ -69,17 +69,17 @@
                                 <div class="form-group col-12 col-md-4" id="tutor">
                                     {{ Form::label('tutor_id', 'Tutor', ['class' => 'required']) }}
                                     {{ Form::select(
-    'tutor_id',
-    array_filter(
-        SelectionByClass::getValues(Tutor::class, 'full_name', 'id'),
-        function ($var, $id) {
-            return $id != 1;
-        },
-        ARRAY_FILTER_USE_BOTH,
-    ),
-    null,
-    ['class' => 'form-control'],
-) }}
+                                        'tutor_id',
+                                        array_filter(
+                                            SelectionByClass::getValues(Tutor::class, 'full_name', 'id'),
+                                            function ($var, $id) {
+                                                return $id;
+                                            },
+                                            ARRAY_FILTER_USE_BOTH,
+                                        ),
+                                        null,
+                                        ['class' => 'form-control'],
+                                    ) }}
                                 </div>
                             </div>
                             <div class="form-group ">

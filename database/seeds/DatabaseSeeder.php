@@ -1,9 +1,7 @@
 <?php
 
 use App\Models\Certificate;
-use App\Models\Course;
-use App\Models\Subject;
-use App\Models\Tutor;
+use App\Models\SkipLevel;
 use App\Models\Setting;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -68,17 +66,17 @@ class DatabaseSeeder extends Seeder
             'value' => 'Helios Education (Causeway Bay Store) To Make An Appointment Room 2202, Causeway Bay Plaza 1, 489 Hennessy Road, Causeway Bay',
         ]);
         // buy level
-        $setting = Setting::create([
-            'key' => 'token_buy_level_5_5',
-            'value' => '100',
+        $skipLevel = SkipLevel::create([
+            'name' => 'level_55',
+            'tokens' => '100',
         ]);
-        $setting = Setting::create([
-            'key' => 'token_buy_level_6_0',
-            'value' => '100',
+        $skipLevel = SkipLevel::create([
+            'name' => 'level_60',
+            'tokens' => '200',
         ]);
-        $setting = Setting::create([
-            'key' => 'token_buy_level_6_5',
-            'value' => '100',
+        $skipLevel = SkipLevel::create([
+            'name' => 'level_65',
+            'tokens' => '300',
         ]);
     }
 }

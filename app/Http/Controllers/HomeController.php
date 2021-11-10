@@ -6,12 +6,10 @@ use App\Models\Banner;
 use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\News;
-use App\Models\Setting;
 use App\Models\StudentCourses;
 use App\Models\Subject;
 use App\Models\Tutor;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 

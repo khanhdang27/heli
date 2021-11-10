@@ -17,10 +17,10 @@ const Numbers = {
   Text: 2,
   Video: 3,
   // Level
-  level_50: 1,
-  level_55: 2,
-  level_60: 3,
-  level_65: 4,
+  level_50: 5.0,
+  level_55: 5.5,
+  level_60: 6.0,
+  level_65: 6.5,
 };
 Numbers.install = function (Vue) {
   Vue.prototype.$getConst = (key) => {
