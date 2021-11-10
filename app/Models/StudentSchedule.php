@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Models;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +9,7 @@ class StudentSchedule extends Model
 
     protected $table = 'student_schedules';
 
-    public $timestamps = TRUE;
+    public $timestamps = true;
 
     protected $guarded = [];
 
@@ -34,5 +32,4 @@ class StudentSchedule extends Model
     {
         return $this->belongsTo(RoomLiveCourse::class);
     }
-
 }

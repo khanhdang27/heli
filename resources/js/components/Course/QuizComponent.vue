@@ -60,7 +60,7 @@ export default {
     };
   },
   mounted: function () {
-    this.typeExercise = this.$root.$getConst("reading");
+    this.typeExercise = this.$root.$getConst("speaking");
   },
   methods: {
     nextTypeExam: function (type) {

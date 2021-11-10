@@ -124,36 +124,4 @@ class SettingController extends Controller
     {
         //
     }
-
-    public function skipPrice(Request $request)
-    {
-        $input = $request->input();
-        $level = $input['level'];
-        $tokens = 0;
-        switch ($level) {
-            case 'level_50':
-                $setting = Setting::query()
-                    ->where('key', 'token_buy_level_5_5')
-                    ->first();
-                $tokens = $setting->value;
-                break;
-            case 'level_55':
-                $setting = Setting::query()
-                    ->where('key', 'token_buy_level_6_0')
-                    ->first();
-                $tokens = $setting->value;
-                break;
-            case 'level_60':
-                $setting = Setting::query()
-                    ->where('key', 'token_buy_level_6_5')
-                    ->first();
-                $tokens = $setting->value;
-                break;
-
-            default:
-                # code...
-                break;
-        }
-        return response()->json(['token' => $tokens]);
-    }
 }
