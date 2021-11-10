@@ -1,23 +1,31 @@
 <script>
 const Numbers = {
-    assessment: 1,
-    exercise: 2,
-    quiz: 3,
-    correct: 1,
-    incorrect: 0,
-    reading: 1,
-    writing: 2,
-    listening: 3,
-    speaking: 4,
-    MC: 1,
-    Text: 2,
-    Video: 3
-
+  // exircise
+  assessment: 1,
+  exercise: 2,
+  quiz: 3,
+  // answer correct
+  correct: 1,
+  incorrect: 0,
+  // Type Lecture
+  reading: 1,
+  writing: 2,
+  listening: 3,
+  speaking: 4,
+  // Type Answer
+  MC: 1,
+  Text: 2,
+  Video: 3,
+  // Level
+  level_50: 1,
+  level_55: 2,
+  level_60: 3,
+  level_65: 4,
 };
 Numbers.install = function (Vue) {
-    Vue.prototype.$getConst = (key) => {
-        return Numbers[key];
-    }
+  Vue.prototype.$getConst = (key) => {
+    return Numbers[key];
+  };
 };
 export default Numbers;
 </script>

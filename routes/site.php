@@ -107,6 +107,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('course/related/{course}', 'CourseController@courseListRelatedClient')->name('course.related.list');
 
+    Route::get('token/skipPrice', 'SettingController@skipPrice')->name('token.skipPrice');
+    Route::post('token/skipPrice', 'WalletController@paymentSkipLevel')->name('token.skipPrice.pay');
+
     Route::prefix('my/')
         ->name('user.')
         ->group(function () {

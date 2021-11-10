@@ -40,16 +40,12 @@ class OrderController extends Controller
     {
         $_user = User::find(Auth::user()->id);
 
-        [
-            $product_id,
-            $courses_with_group,
-            $student_bought
-        ] = $this->getVariable($request);
+        [$product_id, $courses_with_group, $student_bought] = $this->getVariable($request);
 
         return view('payments.update-payment-method', [
             'intent' => $_user->createSetupIntent(),
             'courses_with_group' => $courses_with_group,
-            'room_id' => $request->query('room_id') ?? null
+            'room_id' => $request->query('room_id') ?? null,
         ]);
     }
 
@@ -60,11 +56,7 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-        [
-            $product_id,
-            $courses_with_group,
-            $student_bought
-        ] = $this->getVariable($request);
+        [$product_id, $courses_with_group, $student_bought] = $this->getVariable($request);
         $paymentMethods = $this->getPaymentMethod();
         if (empty($paymentMethods[0])) {
             if ($request->ajax()) {
@@ -75,12 +67,12 @@ class OrderController extends Controller
             }
             return redirect()->route('site.order.addCard', $request->input());
         } else {
-
             if (empty($student_bought)) {
                 if ($courses_with_group->membershipCourses->course->type == 1) {
                     $request_course_id = $courses_with_group->membershipCourses->course->id;
                     $request_schedule = CourseSchedule::where('course_id', $request_course_id)
-                        ->where('room_live_course_id', $request['room_id'])->get();    //request schedule
+                        ->where('room_live_course_id', $request['room_id'])
+                        ->get(); //request schedule
 
                     $student_schedule = StudentSchedule::where('student_id', Auth::user()->id)->get();
                     foreach ($request_schedule as $item_request) {
@@ -92,10 +84,11 @@ class OrderController extends Controller
                     }
                 }
                 return $this->createBuyCourse($courses_with_group, $paymentMethods, $request);
-
             } else {
-                $order = Order::with('course')->where('course_id', $student_bought->course_id)
-                    ->where('user_id', Auth::user()->id)->first();
+                $order = Order::with('course')
+                    ->where('course_id', $student_bought->course_id)
+                    ->where('user_id', Auth::user()->id)
+                    ->first();
                 return redirect()->route('site.order.show', $order->id);
             }
         }
@@ -103,50 +96,52 @@ class OrderController extends Controller
 
     public function createBuyCourse($courses_with_group, $paymentMethods, $request)
     {
-        $room = $request->query('room_id');
-        DB::beginTransaction();
-        try {
-            $order = Order::create_instance([
-                'user_id' => Auth::user()->id,
-                'course_id' => $courses_with_group->membershipCourses->course_id,
-                'course_price' => $courses_with_group->getPrice(),
-                'discount' => $courses_with_group->getDiscount(), //$course_detail->discount,
-                'total' => $courses_with_group->getPriceDiscount(),
-                'membership' => $courses_with_group->membershipCourses->membership_id,
-                'membership_discount' => $courses_with_group->membershipCourses->price_value,
-                'discount_info' => !empty($courses_with_group->courseDiscounts) ? $courses_with_group->courseDiscounts->discount_id : 0
-            ]);
-            $result = $order->createPaymentIntent($paymentMethods[0]);
+        // $room = $request->query('room_id');
+        // DB::beginTransaction();
+        // try {
+        //     $order = Order::create_instance([
+        //         'user_id' => Auth::user()->id,
+        //         'course_id' => $courses_with_group->membershipCourses->course_id,
+        //         'course_price' => $courses_with_group->getPrice(),
+        //         'discount' => $courses_with_group->getDiscount(), //$course_detail->discount,
+        //         'total' => $courses_with_group->getPriceDiscount(),
+        //         'membership' => $courses_with_group->membershipCourses->membership_id,
+        //         'membership_discount' => $courses_with_group->membershipCourses->price_value,
+        //         'discount_info' => !empty($courses_with_group->courseDiscounts) ? $courses_with_group->courseDiscounts->discount_id : 0,
+        //     ]);
+        //     $result = $order->createPaymentIntent($paymentMethods[0]);
 
-            if ($result instanceof RedirectResponse) {
-                DB::commit();
-                return $result;
-            } else {
-                if ($result instanceof Order) {
-                    if ($room) {
-                        $this->updateSchedule($room);
-                    }
-                    $student_course = StudentCourses::create([
-                        'course_id' => (int)$courses_with_group->membershipCourses->course_id,
-                        'student_id' => Auth::user()->id,
-                        'room_live_course_id' => $room,
-                        'latest_study' => new DateTime(),
-                        'lecture_study' => 0
-                    ]);
-                }
-                DB::commit();
-                if ($request->ajax()) {
-                    return response()->json([
-                        'path' => route('site.order.show', $result->id),
-                        'status' => 200,
-                    ]);
-                }
-                return redirect()->route('site.order.show', $result->id);
-            }
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return redirect()->route('site.home')->with('errors', 'Buy Fails');
-        }
+        //     if ($result instanceof RedirectResponse) {
+        //         DB::commit();
+        //         return $result;
+        //     } else {
+        //         if ($result instanceof Order) {
+        //             if ($room) {
+        //                 $this->updateSchedule($room);
+        //             }
+        //             $student_course = StudentCourses::create([
+        //                 'course_id' => (int) $courses_with_group->membershipCourses->course_id,
+        //                 'student_id' => Auth::user()->id,
+        //                 'room_live_course_id' => $room,
+        //                 'latest_study' => new DateTime(),
+        //                 'lecture_study' => 0,
+        //             ]);
+        //         }
+        //         DB::commit();
+        //         if ($request->ajax()) {
+        //             return response()->json([
+        //                 'path' => route('site.order.show', $result->id),
+        //                 'status' => 200,
+        //             ]);
+        //         }
+        //         return redirect()->route('site.order.show', $result->id);
+        //     }
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        //     return redirect()
+        //         ->route('site.home')
+        //         ->with('errors', 'Buy Fails');
+        // }
     }
 
     public function getVariable($request)
@@ -154,26 +149,16 @@ class OrderController extends Controller
         $product_id = $request->query('product_id');
 
         // DB::enableQueryLog();
-        $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses',
-            'courseDiscounts',
-            'membershipCourses.course',
-            'membershipCourses.course.subject',
-            'membershipCourses.course.subject.certificate',
-            'membershipCourses.course.tutor',
-            'membershipCourses.course.courseMaterial'
-        )->find($product_id);
+        $courses_with_group = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts', 'membershipCourses.course', 'membershipCourses.course.subject', 'membershipCourses.course.subject.certificate', 'membershipCourses.course.tutor', 'membershipCourses.course.courseMaterial')->find($product_id);
 
-        $student_bought = StudentCourses::query()->where([
-            'course_id' => $courses_with_group->membershipCourses->course_id,
-            'student_id' => Auth::user()->id
-        ])->first();
+        $student_bought = StudentCourses::query()
+            ->where([
+                'course_id' => $courses_with_group->membershipCourses->course_id,
+                'student_id' => Auth::user()->id,
+            ])
+            ->first();
 
-        return [
-            $product_id,
-            $courses_with_group,
-            $student_bought
-        ];
+        return [$product_id, $courses_with_group, $student_bought];
     }
 
     public function getPaymentMethod()
@@ -194,10 +179,7 @@ class OrderController extends Controller
             $roomInitial->number_member = $roomInitial->number_member + 1;
             $roomInitial->save();
 
-            $course_schedules = CourseSchedule::where(
-                'course_id',
-                $roomInitial->course_id
-            )->get();
+            $course_schedules = CourseSchedule::where('course_id', $roomInitial->course_id)->get();
 
             foreach ($course_schedules as $course_schedule) {
                 StudentSchedule::create([
@@ -239,12 +221,14 @@ class OrderController extends Controller
 
     public function paymentHistory()
     {
-        $order = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate('15');
+        $order = Order::where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate('15');
         \Stripe\Stripe::setApiKey(config('app.stripe_secret'));
         $stripe = \Stripe\PaymentIntent::all(['limit' => 15, 'customer' => Auth::user()->stripe_id]);
         return view('payments.payment-history', [
             'order' => $order,
-            'stripe' => $stripe
+            'stripe' => $stripe,
         ]);
     }
 

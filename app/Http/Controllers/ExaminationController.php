@@ -55,6 +55,7 @@ class ExaminationController extends Controller
                 'name' => $input['name'],
                 'index' => $input['index'],
                 'type' => $input['type'],
+                'level' => $input['level'],
             ]);
 
             for ($i = 1; $i <= 4; $i++) {
@@ -122,6 +123,7 @@ class ExaminationController extends Controller
                 'name' => $input['name'],
                 'index' => $input['index'],
                 'type' => $input['type'],
+                'level' => $input['level'],
             ]);
 
             DB::commit();

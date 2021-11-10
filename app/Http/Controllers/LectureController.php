@@ -230,6 +230,6 @@ class LectureController extends Controller
                 $newWatchList = $student_course->watched_list;
             }
         }
-        $student_course->update(['watched_list' => $newWatchList]);
+        $student_course->update(['watched_list' => $newWatchList, 'lecture_study' => $input['index']]);
     }
 }
