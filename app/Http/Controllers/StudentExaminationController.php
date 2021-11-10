@@ -181,15 +181,23 @@ class StudentExaminationController extends Controller
             } elseif ($exams->type == Examination::EXERCISES) {
                 if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
                     [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                    DB::commit();
+                    return response()->json(['quiz_result' => $result, 'score' => $score]);
                 } else {
                     $this->saveAnswer($input['questions'], $courseId, $quizId, $exams->id);
+                    DB::commit();
+                    return response()->json(['message' => 'grading']);
                 }
             } else {
                 // Quiz Type
                 if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
                     [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                    DB::commit();
+                    return response()->json(['quiz_result' => $result, 'score' => $score]);
                 } else {
                     $this->saveAnswer($input['questions'], $courseId, $quizId, $exams->id);
+                    DB::commit();
+                    return response()->json(['message' => 'grading']);
                 }
             }
         } catch (\Throwable $th) {
@@ -273,7 +281,7 @@ class StudentExaminationController extends Controller
         return [$result, $score];
     }
 
-    public function assessment($courseId, $quizId, $exams)
+    public function assessment($courseId, $quizId, $examId)
     {
         $answerRecords = StudentExamination::where([
             'student_id' => Auth::user()->id,
@@ -291,22 +299,22 @@ class StudentExaminationController extends Controller
 
         $answerRecordsReading
             ->whereHas('question', function ($query) {
-                return $question->where('type', '=', Question::READING);
+                return $query->where('type', '=', Question::READING);
             })
             ->get();
         $answerRecordsSpeaking
             ->whereHas('question', function ($query) {
-                return $question->where('type', '=', Question::SPEAKING);
+                return $query->where('type', '=', Question::SPEAKING);
             })
             ->get();
         $answerRecordsListening
             ->whereHas('question', function ($query) {
-                return $question->where('type', '=', Question::LISTENING);
+                return $query->where('type', '=', Question::LISTENING);
             })
             ->get();
         $answerRecordsWriting
             ->whereHas('question', function ($query) {
-                return $question->where('type', '=', Question::WRITING);
+                return $query->where('type', '=', Question::WRITING);
             })
             ->get();
 
