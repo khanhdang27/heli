@@ -15,10 +15,10 @@ class Lecture extends Model
 
     protected $guarded = [];
 
-    const LEVEL_5_0 = 1;
-    const LEVEL_5_5 = 2;
-    const LEVEL_6_0 = 3;
-    const LEVEL_6_5 = 4;
+    const LEVEL_5_0 = '5.0';
+    const LEVEL_5_5 = '5.5';
+    const LEVEL_6_0 = '6.0';
+    const LEVEL_6_5 = '6.5';
 
     const LEVELS = [
         self::LEVEL_5_0 => 'Level 5.0',

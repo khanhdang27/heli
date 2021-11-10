@@ -76,7 +76,7 @@
                       <button
                         class="list-group-item list-group-item-action border-0"
                         v-bind:class="{ active: item.index == lectureIndex }"
-                        v-on:click="onClickLecture(item.index)"
+                        v-on:click="onClickLecture(item.index, item.level, item.type)"
                       >
                         <div class="d-flex w-100 justify-content-left">
                           <div class="my-auto mr-3">
@@ -131,21 +131,6 @@
                             </strong>
                           </div>
                         </div>
-                        <div v-if="item.model_name == 'Lecture' && item.file">
-                          <a
-                            class="
-                              btn btn-light
-                              text-nowrap
-                              font-weight-bold
-                              shadow-sm
-                              h-100
-                              pt-4
-                            "
-                            v-bind:href="downloadPDF(item.file)"
-                          >
-                            <i class="fe fe-download"></i> PDF</a
-                          >
-                        </div>
                       </button>
                       <div v-if="item.model_name == 'Lecture' && item.file">
                         <a
@@ -153,14 +138,12 @@
                             btn btn-light
                             text-nowrap
                             font-weight-bold
-                            shadow-sm
                             h-100
                             pt-4
                           "
                           v-bind:href="downloadPDF(item.file)"
                         >
-                          <i class="fe fe-download"></i> PDF</a
-                        >
+                          <i class="fe fe-download"></i> PDF</a>
                       </div>
                     </div>
                   </div>
@@ -413,6 +396,7 @@ export default {
         },
       },
       tokenSkip: 9999,
+      studentCourse: []
     };
   },
   created() {
@@ -477,7 +461,9 @@ export default {
           }
         )
         .then((response) => {
+
           this.studentLecture.push(this.lectureIndex);
+          console.log(this.studentLecture)
           this.questions = response.data;
         })
         .catch(function (error) {
@@ -509,23 +495,30 @@ export default {
       axios
         .get(route("site.course.lectureList", this.courseId))
         .then((response) => {
+          this.studentCourse = response.data.student_lecture;
           this.isPassed = response.data.student_lecture.passed == 1;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
-
-          this.lectureOpenTo = response.data.student_lecture.lecture_open;
-
+          this.lectureOpenTo = response.data.student_lecture.lecture_study;
           if (this.lectureList.length == 0) {
             this.lectureIndex =
               this.studentLecture.length != 1
                 ? this.studentLecture[this.studentLecture.length - 2]
                 : 0;
-            let _lectures = response.data.lectures;
+            let temp = response.data.lectures;
+            let _lectures = [];
+            for ( let item in temp ) {
+              _lectures.push(temp[item])
+            }
+
+            _lectures.map((itemLecture) => {
+              itemLecture.sortIndex = itemLecture.index
+            })
             for (let item in _lectures) {
               this.lectureList.push(_lectures[item]);
               if (_lectures[item].model_name === "Examination") {
                 if (_lectures[item].type === this.$root.$getConst("exercise")) {
-                  _lectures[item].index = 999;
+                  _lectures[item].sortIndex = 999;
                   this.addExamsToAllPart(
                     _lectures,
                     item,
@@ -534,7 +527,7 @@ export default {
                 } else if (
                   _lectures[item].type === this.$root.$getConst("quiz")
                 ) {
-                  _lectures[item].index = 1000;
+                  _lectures[item].sortIndex = 1000;
                   this.addExamsToAllPart(
                     _lectures,
                     item,
@@ -564,8 +557,6 @@ export default {
               }
             }
             this.sortLecture(_lectures);
-            // console.log("this.lectureList >>>", this.lectureList);
-            // console.log("this.lectureCollapse :>> ", this.lectureCollapse);
           }
         })
         .catch(function (error) {
@@ -640,6 +631,7 @@ export default {
       }
     },
     addLectureByReading(lectures, index) {
+       console.log('lectures[index].level >>>',lectures[index])
       switch (lectures[index].level) {
         case this.$root.$getConst("level_50"):
           this.lectureCollapse.reading.level_50.push(lectures[index]);
@@ -678,59 +670,59 @@ export default {
     sortLecture(lectures) {
       // level 5
       this.lectureCollapse.reading.level_50.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.writing.level_50.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.listening.level_50.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.speaking.level_50.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       // level 5.5
       this.lectureCollapse.reading.level_55.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.writing.level_55.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.listening.level_55.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.speaking.level_55.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       // level 6.0
       this.lectureCollapse.reading.level_60.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.writing.level_60.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.listening.level_60.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.speaking.level_60.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       // level 6.6
       this.lectureCollapse.reading.level_65.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.writing.level_65.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.listening.level_65.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
       this.lectureCollapse.speaking.level_65.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
 
       this.lectureList.sort(function (a, b) {
-        return a.index - b.index;
+        return a.sortIndex - b.sortIndex;
       });
     },
     getLecture() {
@@ -752,12 +744,32 @@ export default {
           console.error(error);
         });
     },
-    onClickLecture(index) {
-      if (index <= this.lectureOpenTo) {
-        this.lectureIndex = index;
-      } else {
-        confirm("This lecture not open now !");
-      }
+    onClickLecture(index, level, type) {
+        if (type === this.$root.$getConst("reading")){
+            if (level <= this.studentCourse.exam_buy_read  || level <= this.studentCourse.level_read){
+                this.showLecture(index)
+            } else {
+                confirm("This lecture not open now !");
+            }
+        } else if(type === this.$root.$getConst("writing")){
+            if (level <= this.studentCourse.exam_buy_write || level <= this.studentCourse.level_write){
+                this.showLecture(index)
+            } else {
+                confirm("This lecture not open now !");
+            }
+        } else if(type === this.$root.$getConst("listening")){
+            if (level <= this.studentCourse.exam_buy_listen || level <= this.studentCourse.level_listen){
+                this.showLecture(index)
+            } else {
+                confirm("This lecture not open now !");
+            }
+        }else {
+            if (level <= this.studentCourse.exam_buy_speak || level <= this.studentCourse.level_speak){
+                this.showLecture(index)
+            } else {
+                confirm("This lecture not open now !");
+            }
+        }
     },
     reTryLecture() {
       this.syncDataLecture();
@@ -770,7 +782,8 @@ export default {
         this.onClickLecture(parseInt(this.lectureIndex) + 1);
       }, 2000);
     },
-    showLecture() {
+    showLecture(index) {
+      this.lectureIndex = index
       if (this.lectureList[this.lectureIndex]) {
         if (this.lectureList[this.lectureIndex].model_name === "Examination") {
           this.getExamination();
