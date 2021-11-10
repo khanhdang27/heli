@@ -11,14 +11,7 @@ class SkipLevel extends Model implements Product
 {
     use HasWallet;
 
-    private $id = 9999;
-    private $price = 0;
-
-    function __construct($price)
-    {
-        parent::__construct();
-        $this->price = $price;
-    }
+    protected $guarded = [];
 
     public function canBuy(Customer $customer, int $quantity = 1, bool $force = null): bool
     {
@@ -31,7 +24,7 @@ class SkipLevel extends Model implements Product
 
     public function getAmountProduct(Customer $customer)
     {
-        return $this->price;
+        return $this->tokens;
     }
 
     public function getMetaProduct(): ?array
@@ -44,6 +37,6 @@ class SkipLevel extends Model implements Product
 
     public function getUniqueId(): string
     {
-        return (string) dechex(time());
+        return (string) $this->getKey();
     }
 }

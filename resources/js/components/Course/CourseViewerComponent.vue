@@ -64,6 +64,7 @@
                       class="btn btn-primary btn-sm my-2"
                       ref="skip_button"
                       :data-level="key"
+                      v-if="key !== 'level_65'"
                       data-toggle="modal"
                       data-target="#skip_level"
                     >

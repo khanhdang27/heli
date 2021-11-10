@@ -341,9 +341,9 @@ class WalletController extends Controller
             $user = User::query()
                 ->where('id', Auth::user()->id)
                 ->first();
-            $item = new SkipLevel($price);
+            $item = SkipLevel::where('tokens', $price)->first();
             $item->getAmountProduct($user);
-            $user->pay($item);
+            $user->forcePay($item);
             return response()->json(['message' => 'pay success']);
         } catch (InsufficientFunds $insufficientFunds) {
             return response()->json(['error_message' => $insufficientFunds->getMessage()], 400);
