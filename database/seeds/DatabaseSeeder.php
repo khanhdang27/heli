@@ -67,15 +67,15 @@ class DatabaseSeeder extends Seeder
         ]);
         // buy level
         $skipLevel = SkipLevel::create([
-            'name' => 'level_55',
+            'name' => 'level_50',
             'tokens' => '100',
         ]);
         $skipLevel = SkipLevel::create([
-            'name' => 'level_60',
+            'name' => 'level_55',
             'tokens' => '200',
         ]);
         $skipLevel = SkipLevel::create([
-            'name' => 'level_65',
+            'name' => 'level_60',
             'tokens' => '300',
         ]);
     }
