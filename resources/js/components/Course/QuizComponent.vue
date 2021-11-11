@@ -31,6 +31,7 @@
         v-bind:examId="examId"
         v-bind:typeExam="typeExam"
         v-bind:courseId="courseId"
+        @nextToLecture="nextToLecture"
       ></speaking-component>
     </div>
   </div>
@@ -44,6 +45,7 @@ export default {
     typeExam: Number,
     courseId: Number,
     examId: Number,
+    questionType: Number,
   },
   data() {
     return {
@@ -60,7 +62,7 @@ export default {
     };
   },
   mounted: function () {
-    this.typeExercise = this.$root.$getConst("reading");
+    this.typeExercise = this.questionType;
   },
   methods: {
     nextTypeExam: function (type) {

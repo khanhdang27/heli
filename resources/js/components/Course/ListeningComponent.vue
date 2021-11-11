@@ -325,10 +325,6 @@
 </template>
 
 <script>
-const results = [
-  { type: "quiz", score: 5.5, correct_question: 8, wrong_question: 5 },
-  { type: "exercise", score: 6, correct_question: 10, wrong_question: 3 },
-];
 
 export default {
   props: {
@@ -363,9 +359,6 @@ export default {
     this.getQuestion();
     this.getAnswerUser();
 
-    // if (this.typeExam === this.$root.$getConst('assessment') && this.resultCheck){
-    //     this.allResults = results
-    // }
   },
   methods: {
     loadAudio() {
@@ -559,10 +552,10 @@ export default {
           this.resultCheck.questions.push(value);
         }
       }
-      localStorage.setItem("listening", JSON.stringify(this.resultCheck));
+      localStorage.setItem("listening_"+this.examId, JSON.stringify(this.resultCheck));
     },
     getAnswerUser() {
-      this.resultCheck = JSON.parse(localStorage.getItem("listening")) || {
+      this.resultCheck = JSON.parse(localStorage.getItem("listening_"+this.examId)) || {
         questions: [],
       };
       this.resultCheck.questions.forEach((item) => {

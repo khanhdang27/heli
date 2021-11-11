@@ -417,6 +417,7 @@ export default {
       axios
         .get(route("site.exam.getReadingExerciseQuestionsClient", this.examId))
         .then((response) => {
+            console.log(response.data);
           this.passage = response.data.questions[0].passage.content;
           this.questionReading = response.data.questions[0].question;
         })
@@ -514,10 +515,10 @@ export default {
           this.resultCheck.questions.push(value);
         }
       }
-      localStorage.setItem("reading", JSON.stringify(this.resultCheck));
+      localStorage.setItem("reading_"+this.examId, JSON.stringify(this.resultCheck));
     },
     getAnswerUser() {
-      this.resultCheck = JSON.parse(localStorage.getItem("reading")) || {
+      this.resultCheck = JSON.parse(localStorage.getItem("answer_result")) || {
         questions: [],
       };
       this.resultCheck.questions.forEach((item) => {

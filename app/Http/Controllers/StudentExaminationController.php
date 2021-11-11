@@ -295,26 +295,22 @@ class StudentExaminationController extends Controller
         $answerRecordsListening = clone $answerRecords;
         $answerRecordsWriting = clone $answerRecords;
 
-        $answerRecordsReading
+        $answerRecordsReading = $answerRecordsReading
             ->whereHas('question', function ($query) {
                 return $query->where('type', '=', Question::READING);
-            })
-            ->get();
-        $answerRecordsSpeaking
+            })->get();
+        $answerRecordsSpeaking = $answerRecordsSpeaking
             ->whereHas('question', function ($query) {
                 return $query->where('type', '=', Question::SPEAKING);
-            })
-            ->get();
-        $answerRecordsListening
+            })->get();
+        $answerRecordsListening = $answerRecordsListening
             ->whereHas('question', function ($query) {
                 return $query->where('type', '=', Question::LISTENING);
-            })
-            ->get();
-        $answerRecordsWriting
+            })->get();
+        $answerRecordsWriting = $answerRecordsWriting
             ->whereHas('question', function ($query) {
                 return $query->where('type', '=', Question::WRITING);
-            })
-            ->get();
+            })->get();
 
         $scoreReading = $this->scoreGrade($answerRecordsReading, Question::READING);
         $scoreWriting = $this->scoreGrade($answerRecordsWriting, Question::WRITING);
@@ -363,6 +359,9 @@ class StudentExaminationController extends Controller
                 'level_listen' => 6.5,
             ]);
         }
+        $studentCourse->update([
+            'lecture_study'=> 1
+        ]);
 
         return $summaryScore;
     }
@@ -370,6 +369,7 @@ class StudentExaminationController extends Controller
     public function scoreGrade($answers, $questionType)
     {
         $correctAnswer = 0;
+
         foreach ($answers as $item) {
             if ($item->score != 0) {
                 $correctAnswer += 1;

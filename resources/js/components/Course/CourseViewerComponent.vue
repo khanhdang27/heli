@@ -3,41 +3,31 @@
     <div class="row mb-4" id="video-lecture">
       <div class="col-lg-9 bg-white">
         <div class="min-vh-50 h-100 border border-primary">
-          <div
-            v-if="
-              lectureList[lectureIndex] &&
-              lectureList[lectureIndex].model_name == 'Examination'
-            "
-            class="h-100"
-            v-cloak
-          >
-            <quiz-component
-              v-cloak
-              v-bind:typeExam="lectureList[lectureIndex].type"
-              v-bind:courseId="lectureList[lectureIndex].course_id"
-              v-bind:examId="lectureList[lectureIndex].id"
-              v-if="questions"
-              @goToLecture="onClickLecture(index)"
-              @reTryLecture="reTryLecture()"
-              @nextToLecture="nextToLecture()"
-            ></quiz-component>
+          <div v-if="lectureList[lectureIndex]" class="h-100" v-cloak>
+            <div v-if="lectureList[lectureIndex].model_name == 'Examination'">
+              <quiz-component
+                v-cloak
+                :typeExam="lectureList[lectureIndex].type"
+                :courseId="lectureList[lectureIndex].course_id"
+                :examId="lectureList[lectureIndex].id"
+                :questionType="questionType"
+                v-if="questions"
+                @goToLecture="onClickLecture(index)"
+                @reTryLecture="reTryLecture()"
+                @nextToLecture="nextToLecture()"
+              ></quiz-component>
+            </div>
+            <div v-if="lectureList[lectureIndex].model_name == 'Lecture'">
+              <vimeo-player
+                ref="player"
+                :video-id="videoId"
+                :video-url="getVideoUrl()"
+                @ended="nextToLecture()"
+                class="embed-responsive embed-responsive-16by9"
+              />
+            </div>
           </div>
-          <div v-if="lectureList[lectureIndex].model_name == 'Lecture'">
-            <vimeo-player
-              ref="player"
-              :video-id="videoId"
-              :video-url="getVideoUrl()"
-              @ended="nextToLecture()"
-              class="embed-responsive embed-responsive-16by9"
-            />
-          </div>
-          <div v-else>
-              {{ lectureList[lectureIndex].model_name }}
-              <h1>
-              {{videoId}}
-
-              </h1>
-          </div>
+          <div v-else></div>
         </div>
       </div>
       <div class="col-lg-3 bg-white">
@@ -69,7 +59,7 @@
                     <button
                       class="btn btn-primary btn-sm my-2"
                       ref="skip_button"
-                      v-if="key_level !== 'level_65'"
+                      v-if="canSkipLevel(key_level, key)"
                       data-toggle="modal"
                       :data-part="key"
                       :data-level="key_level"
@@ -82,8 +72,12 @@
                     <div class="d-flex">
                       <button
                         class="list-group-item list-group-item-action border-0"
-                        v-bind:class="{ active: item.index == lectureIndex }"
-                        v-on:click="onClickLecture(item.index, item.level, item.type)"
+                        v-bind:class="{
+                          active: item.index == lectureIndex,
+                        }"
+                        v-on:click="
+                          onClickLecture(item.index, item.level, item.type, $getConst(key))
+                        "
                       >
                         <div class="d-flex w-100 justify-content-left">
                           <div class="my-auto mr-3">
@@ -107,7 +101,7 @@
                               {{ item.name }}
                             </h4>
                             <strong
-                              v-if="item.index <= lectureOpenTo"
+                              v-if="canLoadlecture(item.index, item.level, item.type)"
                               class="text-dark text-wrap"
                             >
                               <i class="fe fe-message-square mr-2"></i>
@@ -126,7 +120,7 @@
                               {{ item.lectures_name }}
                             </h4>
                             <strong
-                              v-if="item.index <= lectureOpenTo"
+                              v-if="canLoadlecture(item.index, item.level, item.type)"
                               class="text-dark text-wrap"
                             >
                               <i class="fe fe-youtube mr-2"></i>
@@ -148,9 +142,11 @@
                             h-100
                             pt-4
                           "
-                          v-bind:href="downloadPDF(item.file)"
+                          v-bind:href="[ canLoadlecture(item.index, item.level, item.type) ? downloadPDF(item.file) : 'javascript:void(0)']"
                         >
-                          <i class="fe fe-download"></i> PDF</a>
+                          <i class="fe fe-download"></i>
+                          PDF</a
+                        >
                       </div>
                     </div>
                   </div>
@@ -268,8 +264,8 @@
           </div>
           <div class="modal-body">
             <h4 class="text-danger">
-              You will pay <strong>{{ tokenSkip }} Tokens </strong> to skip this
-              level
+              You will pay
+              <strong>{{ tokenSkip }} Tokens </strong> to skip this level
             </h4>
             <h5>
               Use this opportunity to shorten your study time effectively, good
@@ -352,7 +348,6 @@ export default {
       },
       videoId: "641364405",
       studentLecture: [],
-      lectureOpenTo: 0,
       questions: [],
       quiz: [],
       related: [],
@@ -392,14 +387,14 @@ export default {
       tokenSkip: 9999,
       skipFormLevel: "",
       skipInPart: 0,
-      studentCourse: []
+      studentCourse: [],
+      questionType: 0,
     };
   },
   created() {
     this.syncDataLecture();
     this.syncCourseRelate();
     this.downloadPDF();
-    setTimeout(() => this.showLecture(), 2000);
   },
   mounted() {
     $(this.$refs.modal_skip).on("shown.bs.modal", (event) => {
@@ -447,7 +442,8 @@ export default {
         return route("site.file.download", lecture);
       }
     },
-    getExamination() {
+    getExamination(questionType) {
+        // # Need update
       axios
         .get(
           route("site.exam.showLecture", {
@@ -455,6 +451,7 @@ export default {
           }),
           {
             params: {
+              questionType: questionType,
               courseId: this.lectureList[this.lectureIndex].course_id,
               modelName: this.lectureList[this.lectureIndex].model_name,
               index: this.lectureList[this.lectureIndex].index,
@@ -463,10 +460,8 @@ export default {
           }
         )
         .then((response) => {
-
           this.studentLecture.push(this.lectureIndex);
-          console.log(this.studentLecture)
-          this.questions = response.data;
+        //   this.questions = response.data;
         })
         .catch(function (error) {
           console.error(error);
@@ -501,21 +496,17 @@ export default {
           this.isPassed = response.data.student_lecture.passed == 1;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
-          this.lectureOpenTo = response.data.student_lecture.lecture_study;
           if (this.lectureList.length == 0) {
-            this.lectureIndex =
-              this.studentLecture.length != 1
-                ? this.studentLecture[this.studentLecture.length - 2]
-                : 0;
+            this.lectureIndex = response.data.student_lecture.lecture_study;
             let temp = response.data.lectures;
             let _lectures = [];
-            for ( let item in temp ) {
-              _lectures.push(temp[item])
+            for (let item in temp) {
+              _lectures.push(temp[item]);
             }
 
             _lectures.map((itemLecture) => {
-              itemLecture.sortIndex = itemLecture.index
-            })
+              itemLecture.sortIndex = itemLecture.index;
+            });
             for (let item in _lectures) {
               this.lectureList.push(_lectures[item]);
               if (_lectures[item].model_name === "Examination") {
@@ -556,7 +547,7 @@ export default {
               }
             }
             this.sortLecture(_lectures);
-            console.log(this.lectureList)
+            setTimeout(() => this.showLecture(this.lectureIndex), 2000);
           }
         })
         .catch(function (error) {
@@ -743,32 +734,52 @@ export default {
           console.error(error);
         });
     },
-    onClickLecture(index, level, type) {
-        if (type === this.$root.$getConst("reading")){
-            if (level <= this.studentCourse.exam_buy_read  || level <= this.studentCourse.level_read){
-                this.showLecture(index)
-            } else {
-                confirm("This lecture not open now !");
-            }
-        } else if(type === this.$root.$getConst("writing")){
-            if (level <= this.studentCourse.exam_buy_write || level <= this.studentCourse.level_write){
-                this.showLecture(index)
-            } else {
-                confirm("This lecture not open now !");
-            }
-        } else if(type === this.$root.$getConst("listening")){
-            if (level <= this.studentCourse.exam_buy_listen || level <= this.studentCourse.level_listen){
-                this.showLecture(index)
-            } else {
-                confirm("This lecture not open now !");
-            }
-        }else {
-            if (level <= this.studentCourse.exam_buy_speak || level <= this.studentCourse.level_speak){
-                this.showLecture(index)
-            } else {
-                confirm("This lecture not open now !");
-            }
-        }
+    onClickLecture(index, level, type, questionType=null) {
+        this.questionType = questionType;
+        if (this.canLoadlecture(index, level, type)) {
+        this.showLecture(index);
+      } else {
+        confirm("This lecture not open now !");
+      }
+    },
+    canLoadlecture(index, level, type) {
+      switch (type) {
+        case this.$root.$getConst("reading"):
+          if (
+            level <= this.studentCourse.exam_buy_read ||
+            level <= this.studentCourse.level_read
+          ) {
+            return true;
+          }
+          return false;
+        case this.$root.$getConst("writing"):
+          if (
+            level <= this.studentCourse.exam_buy_write ||
+            level <= this.studentCourse.level_write
+          ) {
+            return true;
+          }
+          return false;
+        case this.$root.$getConst("listening"):
+          if (
+            level <= this.studentCourse.exam_buy_listen ||
+            level <= this.studentCourse.level_listen
+          ) {
+            return true;
+          }
+          return false;
+        case this.$root.$getConst("speaking"):
+          if (
+            level <= this.studentCourse.exam_buy_speak ||
+            level <= this.studentCourse.level_speak
+          ) {
+            return true;
+          }
+          return false;
+
+        default:
+          return false;
+      }
     },
     reTryLecture() {
       this.syncDataLecture();
@@ -782,15 +793,53 @@ export default {
       }, 2000);
     },
     showLecture(index) {
-      this.lectureIndex = index
-      if (this.lectureList[this.lectureIndex]) {
-        if (this.lectureList[this.lectureIndex].model_name === "Examination") {
-          this.getExamination();
-        } else {
-          this.getLecture();
-        }
+      this.lectureIndex = index;
+      if (this.lectureList[this.lectureIndex].model_name === "Examination") {
+        this.getExamination(this.questionType);
+      } else {
+        this.getLecture();
       }
     },
+    canSkipLevel (level, type) {
+        switch (type) {
+        case 'reading':
+          if (
+            !this.studentCourse.exam_buy_read &&
+            level == 'level_'+ this.studentCourse.level_read*10
+          ) {
+
+            return true;
+          }
+          return false;
+        case 'writing':
+          if (
+            !this.studentCourse.exam_buy_write &&
+            level == this.studentCourse.level_write*10
+          ) {
+            return true;
+          }
+          return false;
+        case 'listening':
+          if (
+            !this.studentCourse.exam_buy_listen &&
+            level == this.studentCourse.level_listen*10
+          ) {
+            return true;
+          }
+          return false;
+        case 'speaking':
+          if (
+            !this.studentCourse.exam_buy_speak &&
+            level == this.studentCourse.level_speak*10
+          ) {
+            return true;
+          }
+          return false;
+
+        default:
+          return true;
+      }
+    }
   },
 };
 </script>

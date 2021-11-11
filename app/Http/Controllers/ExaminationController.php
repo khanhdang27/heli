@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AudioListen;
 use App\Models\Examination;
-use App\Models\Passage;
-use App\Models\ReadingQuestion;
 use Illuminate\Http\Request;
 use App\Models\Course;
-use App\Models\PassGrade;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\StudentCourses;
@@ -172,34 +169,75 @@ class ExaminationController extends Controller
     }
     public function getReadingExerciseQuestionsClient(Examination $exams)
     {
-        $exams->load([
-            'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::READING);
-            },
-            'quiz.question.readingQuestion',
-            'quiz.question.readingQuestion.answers',
-            'quiz.passage',
-        ]);
-        $questions = $exams->quiz;
-        return response()->json(['questions' => $questions]);
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $exams->course_id,
+            ])->first();
+            $set = $student_course->set_exam_read ?? 1;
+            $exams->load([
+                'quiz' => function ($query) use ($set) {
+                    $query->where('set', '=', $set);
+                },
+                'quiz.question' => function ($query) {
+                    $query->where('type', '=', Question::READING);
+                },
+                'quiz.question.readingQuestion',
+                'quiz.question.readingQuestion.answers',
+                'quiz.passage',
+            ]);
+            $questions = $exams->quiz;
+
+            DB::commit();
+            return response()->json(['questions' => $questions]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
     public function getReadingQuizQuestionsClient(Examination $exams)
     {
-        $exams->load([
-            'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::READING);
-            },
-            'quiz.question.readingQuestion',
-            'quiz.question.readingQuestion.answers',
-            'quiz.passage',
-        ]);
-        $questions = $exams->quiz;
-        return response()->json(['questions' => $questions]);
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $exams->course_id,
+            ])->first();
+            $set = $student_course->set_exam_read ?? 1;
+            $exams->load([
+                'quiz' => function ($query) use ($set) {
+                    $query->where('set', '=', $set);
+                },
+                'quiz.question' => function ($query) {
+                    $query->where('type', '=', Question::READING);
+                },
+                'quiz.question.readingQuestion',
+                'quiz.question.readingQuestion.answers',
+                'quiz.passage',
+            ]);
+            $questions = $exams->quiz;
+
+            DB::commit();
+            return response()->json(['questions' => $questions]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
 
     public function getWritingAssessmentQuestionsClient(Examination $exams)
     {
-        DB::enableQueryLog();
         $exams->load([
             'quiz.question' => function ($query) {
                 $query->where('type', '=', Question::WRITING);
@@ -207,33 +245,75 @@ class ExaminationController extends Controller
             'quiz.question.writingAssessmentQuestion',
             'quiz.question.writingAssessmentQuestion.answers',
         ]);
-        // dd(DB::getQueryLog());
         $questions = $exams->quiz[0];
         return response()->json(['questions' => $questions]);
     }
+
     public function getWritingExerciseQuestionsClient(Examination $exams)
     {
-        $exams->load([
-            'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::WRITING);
-            },
-            'quiz.question.writingAssessmentQuestion',
-            'quiz.question.writingAssessmentQuestion.answers',
-        ]);
-        $questions = $exams->quiz;
-        return response()->json(['questions' => $questions]);
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $exams->course_id,
+            ])->first();
+            $set = $student_course->set_exam_read ?? 1;
+            $exams->load([
+                'quiz' => function ($query) use ($set) {
+                    $query->where('set', '=', $set);
+                },
+                'quiz.question' => function ($query) {
+                    $query->where('type', '=', Question::WRITING);
+                },
+                'quiz.question.writingAssessmentQuestion',
+                'quiz.question.writingAssessmentQuestion.answers',
+            ]);
+            $questions = $exams->quiz;
+            return response()->json(['questions' => $questions]);
+            DB::commit();
+            return response()->json(['questions' => $questions]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
+
     public function getWritingQuizQuestionsClient(Examination $exams)
     {
-        $exams->load([
-            'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::WRITING);
-            },
-            'quiz.question.writingQuizQuestion',
-            'quiz.question.writingQuizQuestion.answers',
-        ]);
-        $questions = $exams->quiz;
-        return response()->json(['questions' => $questions]);
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $exams->course_id,
+            ])->first();
+            $set = $student_course->set_exam_read ?? 1;
+            $exams->load([
+                'quiz' => function ($query) use ($set) {
+                    $query->where('set', '=', $set);
+                },
+                'quiz.question' => function ($query) {
+                    $query->where('type', '=', Question::WRITING);
+                },
+                'quiz.question.writingQuizQuestion',
+                'quiz.question.writingQuizQuestion.answers',
+            ]);
+            $questions = $exams->quiz;
+            DB::commit();
+            return response()->json(['questions' => $questions]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
 
     public function getListeningAssessmentQuestionsClient(Examination $exams)
@@ -249,31 +329,73 @@ class ExaminationController extends Controller
         $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
         return response()->json(['questions' => $questions, 'audioCodes' => $audioCodes]);
     }
+
     public function getListeningExerciseQuestionsClient(Examination $exams)
     {
-        $exams->load([
-            'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::LISTENING);
-            },
-            'quiz.question.listenAssessmentQuestion',
-            'quiz.question.listenAssessmentQuestion.answers',
-        ]);
-        $questions = $exams->quiz;
-        $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
-        return response()->json(['questions' => $questions, 'audioCodes' => $audioCodes]);
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $exams->course_id,
+            ])->first();
+            $set = $student_course->set_exam_read ?? 1;
+            $exams->load([
+                'quiz' => function ($query) use ($set) {
+                    $query->where('set', '=', $set);
+                },
+                'quiz.question' => function ($query) {
+                    $query->where('type', '=', Question::LISTENING);
+                },
+                'quiz.question.listenAssessmentQuestion',
+                'quiz.question.listenAssessmentQuestion.answers',
+            ]);
+            $questions = $exams->quiz;
+            $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
+            DB::commit();
+            return response()->json(['questions' => $questions, 'audioCodes' => $audioCodes]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
+
     public function getListeningQuizQuestionsClient(Examination $exams)
     {
-        $exams->load([
-            'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::LISTENING);
-            },
-            'quiz.question.listenAssessmentQuestion',
-            'quiz.question.listenAssessmentQuestion.answers',
-        ]);
-        $questions = $exams->quiz;
-        $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
-        return response()->json(['questions' => $questions, 'audioCodes' => $audioCodes]);
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $exams->course_id,
+            ])->first();
+            $set = $student_course->set_exam_read ?? 1;
+            $exams->load([
+                'quiz' => function ($query) use ($set) {
+                    $query->where('set', '=', $set);
+                },
+                'quiz.question' => function ($query) {
+                    $query->where('type', '=', Question::LISTENING);
+                },
+                'quiz.question.listenAssessmentQuestion',
+                'quiz.question.listenAssessmentQuestion.answers',
+            ]);
+            $questions = $exams->quiz;
+            $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
+            DB::commit();
+            return response()->json(['questions' => $questions, 'audioCodes' => $audioCodes]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
 
     public function getSpeakingAssessmentQuestionsClient(Examination $exams)
@@ -288,26 +410,68 @@ class ExaminationController extends Controller
         $questions = $exams->quiz[0];
         return response()->json(['questions' => $questions]);
     }
+
     public function getSpeakingExerciseQuestionsClient(Examination $exams)
     {
-        $exams->load([
-            'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::SPEAKING);
-            },
-            'quiz.question.speakExercisesQuestion',
-        ]);
-        $questions = $exams->quiz[0];
-        return response()->json(['questions' => $questions]);
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $exams->course_id,
+            ])->first();
+            $set = $student_course->set_exam_read ?? 1;
+            $exams->load([
+                'quiz' => function ($query) use ($set) {
+                    $query->where('set', '=', $set);
+                },
+                'quiz.question' => function ($query) {
+                    $query->where('type', '=', Question::SPEAKING);
+                },
+                'quiz.question.speakExercisesQuestion',
+            ]);
+            $questions = $exams->quiz[0];
+            DB::commit();
+            return response()->json(['questions' => $questions]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
+
     public function getSpeakingQuizQuestionsClient(Examination $exams)
     {
-        $exams->load([
-            'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::SPEAKING);
-            },
-            'quiz.question.speakQuizQuestion',
-        ]);
-        $questions = $exams->quiz[0];
-        return response()->json(['questions' => $questions]);
+        DB::beginTransaction();
+        try {
+            $student_course = StudentCourses::where([
+                'student_id' => Auth::user()->id,
+                'course_id' => $exams->course_id,
+            ])->first();
+            $set = $student_course->set_exam_read ?? 1;
+            $exams->load([
+                'quiz' => function ($query) use ($set) {
+                    $query->where('set', '=', $set);
+                },
+                'quiz.question' => function ($query) {
+                    $query->where('type', '=', Question::SPEAKING);
+                },
+                'quiz.question.speakQuizQuestion',
+            ]);
+            $questions = $exams->quiz[0];
+            DB::commit();
+            return response()->json(['questions' => $questions]);
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => $th->getMessage(),
+                ],
+                400,
+            );
+        }
     }
 }
