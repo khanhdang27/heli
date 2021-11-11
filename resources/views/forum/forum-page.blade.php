@@ -26,9 +26,9 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body pt-3">
-                                {!! Form::open(['url' => URL::route('site.post.store',['type'=>'post', 'ref'=>0]),
+                            {!! Form::open(['url' => URL::route('site.post.store',['type'=>'post', 'ref'=>0]),
                                 'enctype' => 'multipart/form-data', 'id'=>'postCreate' ]) !!}
+                            <div class="modal-body pt-3">
                                 <div class="form-group">
                                     {{ Form::label('tag_id', 'Tag') }}
                                     {{ Form::select('tag_id',$tags->pluck('tag_name', 'id'),null, ['class' => 'form-control','required', 'id'=>'postCreateTag']) }}

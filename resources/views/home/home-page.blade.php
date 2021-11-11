@@ -1,3 +1,11 @@
+@php
+    use Spatie\Newsletter\NewsletterFacade;
+    $lang = [ 'subscribeUs' => __('keywords.subscribe.subscribeUs'),
+              'registerNowToExperience' => __('keywords.registerNowToExperience') ,
+              'success' => __('keywords.subscribe.success') ,
+              'fail' => __('keywords.subscribe.fail') ,
+            ];
+@endphp
 @extends('layout.app')
 
 @section('title', 'Home Page')
@@ -179,7 +187,10 @@
             @endpush
             <x-home.review></x-home.review>
         @endif
-        <x-subscribe-container></x-subscribe-container>
+        @if (!Auth::check() || (!NewsletterFacade::isSubscribed(Auth::user()->email)))
+{{--        <x-subscribe-container></x-subscribe-container>--}}
+            <subscribe-container v-bind:lang="{{json_encode($lang)}}"></subscribe-container>
+        @endif
     </div>
 
 @endsection

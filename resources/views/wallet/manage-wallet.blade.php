@@ -25,6 +25,12 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-12 col-sm-9 text-primary pb-5 mb-5">
+                    @if (session('success'))
+                        <div class="alert alert-success text-center mt-5">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ session('success') }}</strong>
+                        </div>
+                    @endif
                     <h1 class="font-weight-bold my-5">@lang('keywords.wallet.walletManagement')</h1>
                     <div class="row mb-5">
                         <div class="col-lg-6">
@@ -77,10 +83,3 @@
         </div>
     </div>
 @endsection
-<script>
-    import PaymentHistoryComponent from "../../js/components/Wallet/PaymentHistoryComponent";
-
-    export default {
-        components: {PaymentHistoryComponent}
-    }
-</script>

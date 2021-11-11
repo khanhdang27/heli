@@ -2,15 +2,16 @@
 <template>
   <div>
     <button
-      class="ml-1 border-0 bg-white text-primary h4 mb-0"
+      class="ml-1 border-0 bg-white text-primary h4 mb-0 d-flex"
       v-on:click="clicklike"
     >
       <img class="ic-action" :src="imageSrc" />
 
-      <div v-if="likeModule === 'Post' || likeModule === 'UserComment'" v-cloak>
-        {{ _likeNo }}
-      </div>
+        <div v-if="likeModule === 'App\\Models\\Post' || likeModule === 'App\\Models\\UserComment'" v-cloak>
+             {{ likeNoCurrent }}
+        </div>
     </button>
+
   </div>
 </template>
 
@@ -32,7 +33,7 @@ export default {
   },
   data() {
     return {
-      _likeNo: this.likeNo,
+      likeNoCurrent: this.likeNo,
       like: 0,
       imageSrc: "",
     };
@@ -54,7 +55,7 @@ export default {
           })
           .then((response) => {
             this.imageSrc = "/images/ic/ic_fullHeart.svg";
-            this._likeNo = this._likeNo + 1;
+            this.likeNoCurrent = this.likeNoCurrent + 1;
             this.like = 1;
           })
           .catch(function (error) {
@@ -69,7 +70,7 @@ export default {
           })
           .then((response) => {
             this.imageSrc = "/images/ic/ic_heart.svg";
-            this._likeNo = this._likeNo - 1;
+            this.likeNoCurrent = this.likeNoCurrent - 1;
             this.like = 0;
           })
           .catch(function (error) {

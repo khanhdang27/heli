@@ -90,26 +90,37 @@ class WalletController extends Controller
             'card' => 'required',
             'amount' => 'required|numeric|min:10',
         ]);
-        $paymentMethods = $this->getPaymentMethod();
-        $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
-        $payment_intent = $stripe->paymentIntents->create([
-            'amount' => $_request['amount'] * 100,
-            'currency' => 'HKD',
-            'payment_method' => $paymentMethods[$_request['card']]->id,
-            'confirm' => true,
-            'customer' => $paymentMethods[$_request['card']]->customer,
-            'metadata' => [
-                'user_id' => Auth::user()->id,
-                'price' => $_request['amount'],
-            ],
-            'return_url' => config('app.home_url') . '/payment',
-        ]);
-        $user = User::where('id', Auth::user()->id)->first();
-        $exchange_rate = Setting::where('key', 'token_exchange_rate')->first();
-        $topUp_value = $_request['amount'] * $exchange_rate->value;
-        $user->deposit($topUp_value, ['card' => $paymentMethods[$_request['card']]->card->last4]);
+        DB::beginTransaction();
+        try {
+            $paymentMethods = $this->getPaymentMethod();
+            $stripe = new \Stripe\StripeClient(config('app.stripe_secret'));
+            $payment_intent = $stripe->paymentIntents->create([
+                'amount' => $_request['amount'] * 100,
+                'currency' => 'HKD',
+                'payment_method' => $paymentMethods[$_request['card']]->id,
+                'confirm' => true,
+                'customer' => $paymentMethods[$_request['card']]->customer,
+                'metadata' => [
+                    'user_id' => Auth::user()->id,
+                    'price' => $_request['amount'],
+                ],
+                'return_url' => config('app.home_url') . '/payment',
+            ]);
+            if ($payment_intent){
+                $user = User::where('id', Auth::user()->id)->first();
+                $exchange_rate = Setting::where('key', 'token_exchange_rate')->first();
+                $topUp_value = $_request['amount'] * $exchange_rate->value;
+                $user->deposit($topUp_value, ['card' => $paymentMethods[$_request['card']]->card->last4]);
+            }
+            DB::commit();
+            return redirect()->route('site.user.topUp-success');
+        }catch (\Throwable $th){
+            DB::rollBack();
+            return back()->with('error','Top-up error!');
+        }
 
-        return redirect()->route('site.user.topUp-success');
+
+
     }
 
     public function getPaymentMethod()
@@ -137,6 +148,9 @@ class WalletController extends Controller
         ]);
     }
 
+    public function redirectSuccess(){
+        return redirect()->route('site.user.wallet')->with('success', 'Top-up success');
+    }
     public function paymentHistory(Order $order)
     {
         return view('wallet.detail-history.payment-invoice', [

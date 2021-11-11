@@ -1,5 +1,13 @@
 @php
 use Illuminate\Support\Facades\Auth;
+if (Auth::check()){
+    $user_liked = $post->likeable
+    ->filter(function ($item) {
+        return $item->user_id == Auth::user()->id;
+    })
+    ->first();
+$liked = empty($user_liked) ? 0 : $user_liked->like_style;
+}
 @endphp
 <div>
     <div class="row row-question border-primary pt-5 pb-5 bg-white">
@@ -45,14 +53,14 @@ use Illuminate\Support\Facades\Auth;
                 @endif
             </div>
             <div class="text-forum d-flex flex-wrap-reverse align-items-center justify-content-between">
-                <div>
+                <div class="d-flex">
                     <button class="border-0 bg-white mr-3">
                         <img class="ic-action" src="{{ asset('images/ic/ic_bookmark.svg') }}">
                     </button>
                     {{-- <x-like.like :likeRef=$post :likeModule=\App\Models\Post::class></x-like.like> --}}
                     <like-component v-bind:user-id="{{ Auth::user()->id }}" v-bind:like-ref-id="{{ $post->id }}"
-                        v-bind:like-module="'App\\Models\\Post'" v-bind:like-no="0"
-                        v-bind:is-liked="{{ 0 }}">
+                        v-bind:like-module="'App\\Models\\Post'" v-bind:like-no="{{$post->like_no}}"
+                        v-bind:is-liked="{{ $liked }}">
                     </like-component>
                     <a class="ml-3 h4 mb-0" href="{{ route('site.post.show', $post->id) }}">
                         <img class="ic-action" src="{{ asset('images/ic/ic_mess.svg') }}">

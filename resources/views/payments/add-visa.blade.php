@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    
+
     @push('scripts')
     <script type="application/javascript" src="https://js.stripe.com/v3/"></script>
 
@@ -65,22 +65,23 @@
             );
 
             if (error) {
-                console.error("error: ", error);
+                toastr["error"](error.message);
             } else {
                 console.info('success: ', setupIntent.payment_method);
                 axios.post("{{ route('site.store-card') }}", {
                     payment_method: setupIntent.payment_method,
                 })
                     .then(function (response) {
-                        location.reload();
-                        console.log('ok');
+                        toastr["success"]("@lang('keywords.addSuccessCard')");
+                        window.location.href = "{{URL::route('site.user.wallet')}}"
                     })
                     .catch(function (error) {
+                        toastr["error"]("@lang('keywords.addErrorCard')");
                     });
             }
         });
 
     </script>
-    
+
 @endpush
 @endsection
