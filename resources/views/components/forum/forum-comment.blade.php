@@ -1,5 +1,15 @@
 {{-- {{dd($comment->comment)}} --}}
 @foreach ($comment->comment as $item)
+    @php
+        if (Auth::check()){
+            $user_liked = $item->likeable
+            ->filter(function ($item) {
+                return $item->user_id == Auth::user()->id;
+            })
+            ->first();
+        $liked = empty($user_liked) ? 0 : $user_liked->like_style;
+        }
+    @endphp
     <div class="">
     <div class=" row row-question pt-5 pb-5 border-primary">
         <div class="col-lg-3">
@@ -48,8 +58,8 @@
             <div class="text-forum d-flex">
                 {{-- <x-like.like :likeRef=$item :likeModule=\App\Models\UserComment::class></x-like.like> --}}
                 <like-component v-bind:user-id="{{ Auth::user()->id }}" v-bind:like-ref-id="{{ $item->id }}"
-                    v-bind:like-module="'App\\Models\\UserComment'" v-bind:like-no="0"
-                    v-bind:is-liked="{{ 0 }}">
+                    v-bind:like-module="'App\\Models\\UserComment'" v-bind:like-no="{{$item->like_no}}"
+                    v-bind:is-liked="{{ $liked }}">
                 </like-component>
             </div>
             <div class="d-flex justify-content-end text-forum pt-2 m-0">

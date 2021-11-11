@@ -3,7 +3,7 @@
         <div class="d-flex flex-wrap justify-content-end align-items-center mb-3">
             <h5 class="text-primary mb-0 mr-5">@lang('keywords.rate.rateCourse'):</h5>
             <rating-component v-bind:rating="{{ $refComment->ratingsByUser() }}" v-bind:read-only="false"
-                v-bind:course-id={{ $refComment->id }} v-bind:user-id={{ Auth::user()->id }}>
+                v-bind:course-id="{{ $refComment->id }}" v-bind:user-id={{ Auth::user()->id }}>
             </rating-component>
         </div>
         <h5 class="text-primary">
