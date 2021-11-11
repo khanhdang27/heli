@@ -30,6 +30,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 use Illuminate\Support\Carbon;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CourseController extends Controller
 {
@@ -142,13 +143,14 @@ class CourseController extends Controller
                 })
                 ->first();
 
-                // dd($courses_with_group);
+//                 dd($courses_with_group);
 
             // if (empty($courses_with_group)) {
             //     return redirect(route('site.home'));
             // }
 
             $student_course = null;
+            $exams = null;
             if (Auth::check()) {
                 $student_course = StudentCourses::query()
                     ->where('course_id', $course->id)

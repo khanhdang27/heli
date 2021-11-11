@@ -118,7 +118,7 @@ class PaypalController extends Controller
             $topUp_value = $total * $exchange_rate->value;
             $user->deposit($topUp_value, ['card' => 'paypal']);
 
-            return Redirect::route('site.user.top-up')->with('success','Payment success !!');
+            return Redirect::route('site.user.topUp-success')->with('success','Payment success !!');
         }
 
         return Redirect::route('site.user.top-up')->with('error','Payment failed !!');

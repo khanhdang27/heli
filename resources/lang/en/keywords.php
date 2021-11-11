@@ -185,4 +185,6 @@ return [
     ],
     'coursePayment' => 'Course payment',
     'addVisaCard' => 'Add visa card',
+    'addSuccessCard' => 'Add success card',
+    'addErrorCard' => 'Error, can not add card'
 ];

@@ -185,5 +185,7 @@ return [
     ],
     'coursePayment' => '課程付款',
     'addVisaCard' => '添加簽證卡',
+    'addSuccessCard' => '添加成功卡',
+    'addErrorCard' => '錯誤, 無法添加卡'
 
 ];

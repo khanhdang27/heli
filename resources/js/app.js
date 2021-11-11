@@ -49,6 +49,7 @@ Vue.component('blog-latest-component', require('./components/Blog/BlogLatestComp
 Vue.component('news-component', require('./components/Blog/NewsComponent.vue').default);
 
 Vue.component('slide-tutor-component', require('./components/Home/SlideTutorComponent.vue').default);
+Vue.component('subscribe-container', require('./components/Share/SubscribeContainer.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

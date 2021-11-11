@@ -16,11 +16,14 @@
                             <table width="100%" class="mb-5">
                                 <tr>
                                     <td><h4 class="font-weight-bold mb-4">@lang('keywords.wallet.topUpAmount')</h4></td>
-                                    <td class="text-right"><h4 class="font-weight-bold mb-4">{{$topUp_history->amount * 10}}HK$</h4></td>
+                                    <td class="text-right"><h4
+                                            class="font-weight-bold mb-4">{{$topUp_history->amount * 10}}HK$</h4></td>
                                 </tr>
                                 <tr class="font-weight-bold">
-                                    <td><h4 class="font-weight-bold mb-4">@lang('keywords.wallet.tokensReceived')</h4></td>
-                                    <td class="text-right"><h4 class="font-weight-bold mb-4">{{$topUp_history->amount}} tokens</h4></td>
+                                    <td><h4 class="font-weight-bold mb-4">@lang('keywords.wallet.tokensReceived')</h4>
+                                    </td>
+                                    <td class="text-right"><h4 class="font-weight-bold mb-4">{{$topUp_history->amount}}
+                                            tokens</h4></td>
                                 </tr>
                                 <tr class="font-weight-bold">
                                     <td><h4 class="font-weight-bold mb-4">@lang('keywords.wallet.topUpTo')</h4></td>
@@ -29,10 +32,10 @@
                                     </td>
                                 </tr>
                                 <tr class="font-weight-bold">
-                                    <td><h4 class="font-weight-bold mb-4">Visa card</h4></td>
+                                    <td><h4 class="font-weight-bold mb-4">Card</h4></td>
                                     <td class="text-right">
                                         <h4 class="font-weight-bold mb-4">
-                                            **** **** **** {{$stripe->data[0]->charges->data[0]->payment_method_details->card->last4}}</h4>
+                                            **** **** **** {{$topUp_history->meta['card']}}</h4>
                                     </td>
                                 </tr>
                                 <tr class="font-weight-bold">
@@ -49,7 +52,7 @@
                                 </tr>
                             </table>
                             <a class="btn btn-primary w-100 py-3 h4 font-weight-bold"
-                            href="{{route('site.user.wallet')}}">@lang('keywords.wallet.completed')</a>
+                               href="{{route('site.user.wallet.redirectSuccess')}}">@lang('keywords.wallet.completed')</a>
                         </div>
                     </div>
                 </div>

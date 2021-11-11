@@ -19,6 +19,15 @@ switch ($typeOfUI) {
         $class = '';
         break;
 }
+if (Auth::check()){
+    $user_liked = $course_card->likeable
+    ->filter(function ($item) {
+        return $item->user_id == Auth::user()->id;
+    })
+    ->first();
+$liked = empty($user_liked) ? 0 : $user_liked->like_style;
+}
+
 @endphp
 
 @if (!empty($course_card))
@@ -68,7 +77,7 @@ switch ($typeOfUI) {
                                 <like-component v-bind:user-id="{{ Auth::user()->id }}"
                                     v-bind:like-ref-id="{{ $course_card->id }}"
                                     v-bind:like-module="'App\\Models\\Course'" v-bind:like-no="0"
-                                    v-bind:is-liked="{{ 0 }}">
+                                    v-bind:is-liked="{{ $liked }}">
                                 </like-component>
                             @endif
                         </div>

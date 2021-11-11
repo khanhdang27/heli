@@ -125,6 +125,7 @@ Route::middleware('auth')->group(function () {
             Route::get('wallet/list-payment', 'WalletController@listPayment')->name('wallet.listPayment');
             Route::get('wallet/payment-history/{order}', 'WalletController@paymentHistory')->name('wallet.payment-history');
             Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
+            Route::get('wallet/top-up/redirect','WalletController@redirectSuccess')->name('wallet.redirectSuccess');
 
             Route::get('payment/{product_id}', 'WalletController@payment')->name('payment');
             Route::get('confirm-payment/{product_id}/{room}', 'WalletController@confirmPayment')->name('confirm');

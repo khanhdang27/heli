@@ -17,6 +17,12 @@
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-12 col-sm-9 text-primary pb-5 mb-5">
 {{--                    <h1 class="font-weight-bold my-5">@lang('keywords.wallet.topUpViaVisa')</h1>--}}
+                    @if (session('error'))
+                        <div class="alert alert-danger text-center mt-5">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ session('error') }}</strong>
+                        </div>
+                    @endif
                     <div class="row justify-content-between mt-5">
                         <div class="col-lg-5">
                             <top-up-component v-bind:lang="{{json_encode($lang)}}"
