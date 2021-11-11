@@ -142,9 +142,11 @@ class CourseController extends Controller
                 })
                 ->first();
 
-            if (empty($courses_with_group)) {
-                return redirect(route('site.home'));
-            }
+                // dd($courses_with_group);
+
+            // if (empty($courses_with_group)) {
+            //     return redirect(route('site.home'));
+            // }
 
             $student_course = null;
             if (Auth::check()) {

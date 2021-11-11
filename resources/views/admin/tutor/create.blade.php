@@ -99,7 +99,7 @@ use \App\Models\Subject;
                             {{ Form::label('subject_id', 'Subject'), ['class' => 'required'] }}
                             {{ Form::select('subject_id',array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
                                 {
-                                    return $id != 1;
+                                    return $id ;
                                 }, ARRAY_FILTER_USE_BOTH), null, ['class' => 'form-control', 'required']) }}
                             @error('subject_id')
                             <div class="alert text-danger">{{ $message }}</div>
@@ -217,12 +217,12 @@ use \App\Models\Subject;
         })
 </script>
 @push('inputFile')
-<script type="application/javascript">
-    // Add the following code if you want the name of the file appear on select
-            $(".custom-file-input").on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
-</script>
+    <script type="application/javascript">
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 @endpush
 @endsection

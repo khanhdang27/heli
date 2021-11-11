@@ -34,7 +34,7 @@ use App\Utilities\SelectionByClass;
                             {{ Form::select('certificate_id',
                                 array_filter(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_name', 'id'), function($var, $id)
                                     {
-                                        return $id != 1;
+                                        return $id;
                                     }, ARRAY_FILTER_USE_BOTH)
                                 ,$subject->certificate_id, ['class' => 'form-control']) }}
                         </div>

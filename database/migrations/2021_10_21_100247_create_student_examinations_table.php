@@ -37,7 +37,7 @@ class CreateStudentExaminationsTable extends Migration
                 ->cascadeOnDelete();
             $table->longText('answer');
             $table->integer('answer_type');
-            $table->double('time');
+            $table->double('time')->nullable();
             $table->longText('comment')->nullable();
             $table->double('score')->nullable();
             $table->boolean('reviewed')->default(false);

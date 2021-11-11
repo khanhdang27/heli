@@ -333,23 +333,6 @@ class WalletController extends Controller
         }
     }
 
-    public function paymentSkipLevel(Request $request)
-    {
-        try {
-            $input = $request->input();
-            $price = $input['price'];
-            $user = User::query()
-                ->where('id', Auth::user()->id)
-                ->first();
-            $item = SkipLevel::where('tokens', $price)->first();
-            $item->getAmountProduct($user);
-            $user->forcePay($item);
-            return response()->json(['message' => 'pay success']);
-        } catch (InsufficientFunds $insufficientFunds) {
-            return response()->json(['error_message' => $insufficientFunds->getMessage()], 400);
-        }
-    }
-
     /**
      * Show the form for creating a new resource.
      *
