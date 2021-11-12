@@ -60,8 +60,7 @@ class HomeController extends Controller
         [$courseVideo, $latesLecture] = $this->getCourseVideo();
 
         $news = News::query()->orderByDesc('created_at')->limit(8)->get();
-        $tutors = Tutor::with('user', 'user.avatar')
-            ->where('id','!=', 1)->limit(9)->get();
+        $tutors = Tutor::with('user', 'user.avatar')->limit(9)->get();
         return view('home.home-page',[
             'banners' => $banners,
             'courseVideo'=>$courseVideo,
@@ -112,22 +111,22 @@ class HomeController extends Controller
 
         $courseIGCSE->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
-            return $query->where('id', 2);
+            return $query->where('id', 1);
         })->paginate(15);
 
         $courseUKISET->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
-            return $query->where('id', 3);
+            return $query->where('id', 2);
         })->paginate(15);
 
         $courseIELTS->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
-            return $query->where('id', 4);
+            return $query->where('id', 3);
         })->paginate(15);
 
         $courseIAL->whereHas('membershipCourses.course.subject.certificate', function ( $query )
         {
-            return $query->where('id', 5);
+            return $query->where('id', 4);
         })->paginate(15);
 
         return [

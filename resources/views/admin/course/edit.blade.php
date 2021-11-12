@@ -51,7 +51,7 @@ use App\Models\Course;
                                 {{ Form::select('subject_id',
                                         array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
                                         {
-                                            return $id != 1;
+                                            return $id;
                                         }, ARRAY_FILTER_USE_BOTH) ,
                                         $course->subject->id, ['class' => 'form-control', 'required'])
                                     }}
@@ -61,7 +61,7 @@ use App\Models\Course;
                                 {{ Form::select('tutor_id',
                                         array_filter(SelectionByClass::getValues(\App\Models\Tutor::class,'full_name','id'), function($var, $id)
                                             {
-                                                return $id != 1;
+                                                return $id;
                                             }, ARRAY_FILTER_USE_BOTH),
                                         $course->tutor->id, ['class' => 'form-control', 'required']) }}
                             </div>

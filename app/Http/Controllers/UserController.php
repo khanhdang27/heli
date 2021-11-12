@@ -115,8 +115,8 @@ class UserController extends Controller
     {
         $tutor = Tutor::where('user_id', Auth::user()->id)->first();
         $tutor->load(['translations', 'user', 'subject']);
-        
-        return view('admin.tutor.edit', 
+
+        return view('admin.tutor.edit',
             [
                 'tutor' => $tutor,
             ]
@@ -127,7 +127,7 @@ class UserController extends Controller
     {
         $moderator = Moderator::where('user_id', Auth::user()->id)->first();
         $moderator->load(['user']);
-        
+
         return view('admin.moderator.edit', [
             'moderator' => $moderator
         ]);
@@ -176,7 +176,7 @@ class UserController extends Controller
     }
 
 
-    
+
     public function validateUser($input)
     {
         $userLogin = User::where('email', Auth::user()->email)->first();

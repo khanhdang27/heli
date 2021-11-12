@@ -3,7 +3,7 @@ use \App\Utilities\SelectionByClass;
 
 
 $default_certificate = 2;
-if (app('request')->input('certificate') != 1 && !empty(app('request')->input('certificate'))){
+if (app('request')->input('certificate') && !empty(app('request')->input('certificate'))){
 $default_certificate = app('request')->input('certificate');
 }
 
@@ -25,7 +25,7 @@ $url = 'site.certificate.show';
                 <div class="dropdown-menu bg-primary border border-white rounded-0 dropdown-menu-language">
                     @foreach (SelectionByClass::getValues(\App\Models\Certificate::class, 'certificate_code', 'id') as
                     $key => $value)
-                    @if ($key != 1)
+                    @if ($key)
                     @if ($page != 'home')
                     <a class="dropdown-item" href="{{ route($url, $cer_show). '?certificate='.$key }}"> {{$value}}</a>
                     @else
@@ -38,7 +38,7 @@ $url = 'site.certificate.show';
             <div class="swiper-container w-100 mt-2" id="swpSubjects">
                 <div class="swiper-wrapper mt-1 pb-3">
                     @foreach ($subjects as $item)
-                    @if ($item->certificate_id != 1)
+                    @if ($item->certificate_id)
                     <div class="swiper-slide item-slide">
                         <a href="{{ route('site.subject.show', $item->id) }}" class="text-white p-2 text-nowrap mt-1">
                             {{ $item->subject_name }} </a>

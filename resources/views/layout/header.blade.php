@@ -70,7 +70,7 @@ use App\Utilities\SelectionByClass;
                         aria-labelledby="certificateDrop">
                         @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_code', 'id') as
                         $key => $value)
-                        @if ($key != 1)
+                        @if ($key)
                         <a class="dropdown-item"
                             href="{{ URL::route('site.certificate.show',$key, true)}}">{{$value}}</a>
                         @endif

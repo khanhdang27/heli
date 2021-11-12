@@ -35,7 +35,7 @@ use App\Utilities\SelectionByClass;
                             {{ Form::label('course_id', 'Course', ['class' => 'required']) }}
                             {{ Form::select('course_id', array_filter(SelectionByClass::getValues(\App\Models\Course::class,'course_name','id'), function($var, $id)
                                 {
-                                    return $id != 1;
+                                    return $id;
                                 }, ARRAY_FILTER_USE_BOTH) ,
                                 null, ['class' => 'form-control']) }}
                         </div>

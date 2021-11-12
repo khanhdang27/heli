@@ -210,7 +210,7 @@ use App\Models\Lecture;
     <script type="text/javascript">
         $(document).ready(function() {
             if (localStorage.quizQuestionSet) {
-                if ({{ $exam->type }} != 1) {
+                if ({{ $exam->type }}) {
                     let quizSet = localStorage.getItem("quizQuestionSet")
                     $(`a[id="${quizSet}"]`).tab('show');
                 } else {

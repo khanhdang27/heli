@@ -52,7 +52,7 @@ use App\Utilities\SelectionByClass;
                                     {{ Form::select('subject_id',
                                                     array_filter(SelectionByClass::getValues(Subject::class,'subject_name','id'), function($var, $id)
                                                     {
-                                                        return $id != 1;
+                                                        return $id;
                                                     }, ARRAY_FILTER_USE_BOTH),
                                                     $tutor->subject[0]->id,
                                                     ['class' => 'form-control', 'required'])
