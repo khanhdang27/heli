@@ -91,7 +91,7 @@
                             />
                           </div>
                           <div v-if="item.model_name == 'Examination'">
-                            <h4 class="mb-1">
+                            <h5 class="mb-1">
                               {{
                                 item.type == $getConst("exercise")
                                   ? "Exercise"
@@ -99,7 +99,7 @@
                               }}
                               -
                               {{ item.name }}
-                            </h4>
+                            </h5>
                             <strong
                               v-if="canLoadlecture(item.index, item.level, item.type)"
                               class="text-dark text-wrap"
@@ -547,6 +547,15 @@ export default {
               }
             }
             this.sortLecture(_lectures);
+            if (this.lectureList[this.lectureIndex].model_name === "Examination") {
+                for (let i =  this.lectureList.length - 1 ; i >= 0; i--) {
+                    if (this.lectureList[i].model_name !== "Examination"){
+                        this.lectureIndex = i
+                        break;
+                    }
+                }
+
+            }
             setTimeout(() => this.showLecture(this.lectureIndex), 2000);
           }
         })

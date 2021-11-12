@@ -40,9 +40,10 @@
                                     <label for="question" class="required text-dark">Question</label>
                                     {{ Form::text('question', $question->questionContent()->question, ['class' => 'form-control', 'required']) }}
                                 </div>
-                                <embed id="audio" type="text/html"
-                                    src="{{ asset(route('audio', $question->questionContent()->audio_ref)) }}"
-                                    height="30" width="100%">
+                                <audio id="audio"  controls>
+                                    <source src="{{ asset(route('audio', $question->questionContent()->audio_ref)) }}" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input"
                                         id="audioSpeakingAssessment_{{ $question->id }}" name="audio" accept=".mp3">

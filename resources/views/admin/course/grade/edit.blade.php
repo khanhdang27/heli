@@ -29,7 +29,6 @@
                     <div class="card-body">
                         {!! Form::open(['url' => route('admin.course.grade.update', ['course' => $course->id, 'exam' => $exam, 'grade' => $grade->id]), 'method' => 'put', 'enctype' => 'multipart/form-data']) !!}
                         @csrf
-
                         <div class="form-group ">
                             {{ Form::label('index', 'Index', ['class' => 'required']) }}
                             {{ Form::number('index', $grade->lecture_index, ['class' => 'form-control', 'required', 'id' => 'index']) }}

@@ -94,7 +94,10 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
                 <input type="text" hidden id="quiz_update" name="quiz">
                 <input type="text" hidden id="exam_update" name="exam">
                 <input type="text" hidden id="course_update" name="course">
-                <embed id="audio" type="text/html" src="" height="30" width="100%">
+                <audio id="audio"  controls>
+                    <source src="" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
                 <div class="form-group">
                     <label for="part" class="required">Part</label>
                     {{ Form::text('part', old('part'), ['class' => 'form-control', 'required', 'readonly', 'id' => 'part_audio_update']) }}

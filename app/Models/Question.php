@@ -18,7 +18,7 @@ class Question extends Model
     const WRITING = 2;
     const LISTENING = 3;
     const SPEAKING = 4;
-    
+
     const TYPES = [
         self::READING => 'reading',
         self::WRITING => 'writing',

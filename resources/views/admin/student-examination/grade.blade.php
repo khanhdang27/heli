@@ -22,7 +22,7 @@
                         <div>
                             <!-- Title -->
                             <h4 class="card-header-title">
-                                Grade Exam 
+                                Grade Exam
                             </h4>
                         </div>
                     </div> <!-- / .row -->
@@ -60,11 +60,11 @@
                         <div class="col-4">
                             <div class="d-flex">
 
-                                <label class="ml-auto btn btn-primary" for="check-reviewed"> Check Reviewed </label> 
+                                <label class="ml-auto btn btn-primary" for="check-reviewed"> Check Reviewed </label>
                             </div>
                         </div>
                     </div>
-                    
+
                     {!! Form::open(['url'=> route('admin.student-examination.handleGrade', [
                         'student' => $exam_details[0]->student->id,
                         'course' => $exam_details[0]->course->id,
@@ -91,8 +91,8 @@
                                 <td class="c-20">
                                     @if ($detail->answer_type === StudentExamination::ANSWER_MC)
                                         {{$detail->question->questionContent()->findAnswerById($detail->answer)->answer}}
-                                    @elseif ($detail->answer_type === StudentExamination::ANSWER_TEXT) 
-                                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" 
+                                    @elseif ($detail->answer_type === StudentExamination::ANSWER_TEXT)
+                                        <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
                                             data-target="#reviewTextAnswer" data-answer="{{ $detail->answer }}"
                                             data-comment-url="{{ route('admin.student-examination.comment',['studentExam'=>$detail->id]) }}"
                                             data-detail-id="{{ $detail->id }}" data-detail-comment="{{ $detail->comment }}">
@@ -107,9 +107,9 @@
                                 </td>
                                 <td class="c-10">
                                     <div class="custom-control custom-checkbox">
-                                        <input name="is_review[]" value="{{$detail->id}}" 
-                                            type="checkbox" class="custom-control-input" 
-                                            id="review_{{$detail->id}}" 
+                                        <input name="is_review[]" value="{{$detail->id}}"
+                                            type="checkbox" class="custom-control-input"
+                                            id="review_{{$detail->id}}"
                                             {{$detail->reviewed == 1 ? 'checked' : ''}}>
                                         <label class="custom-control-label" for="review_{{$detail->id}}"></label>
                                     </div>
@@ -133,7 +133,7 @@
 <div class="modal fade" id="reviewTextAnswer" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
-            
+
             <form id='commentForm' >
                 <div class="modal-header">
                     <h3 class="modal-title" id="exampleModalLabel">Related Lecture</h3>
@@ -147,13 +147,10 @@
                     </div>
                     <div class="col-6">
                         @csrf
-                        
                         <label for="score"> Score </label>
-                        <input type="number" min="0" step=".1" class="form-control" name="score" id="score">
-                        
+                        <input type="number" min="0" max="10" step="1" class="form-control" name="score" id="score">
                         <label for="comment"> Comment </label>
                         <textarea class="form-control rich-text mb-3" name="comment" id="ckeditor" ></textarea>
-                        
                     </div>
                 </div>
                 <div class="modal-footer">

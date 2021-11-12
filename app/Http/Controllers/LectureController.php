@@ -169,12 +169,10 @@ class LectureController extends Controller
             //         205,
             //     );
             // }
-
             // $quiz = Quiz::with('question')
             //     ->with('question.answers')
             //     ->where('set', $set)
             //     ->where('exam_id', $exams->id)->first();
-
             // if (empty($quiz)) {
             //     return response()->json(
             //         [

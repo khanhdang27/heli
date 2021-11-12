@@ -41,6 +41,7 @@ class CreateStudentExaminationsTable extends Migration
             $table->longText('comment')->nullable();
             $table->double('score')->nullable();
             $table->boolean('reviewed')->default(false);
+            $table->boolean('had_update')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

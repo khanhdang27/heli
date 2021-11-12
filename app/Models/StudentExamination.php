@@ -15,6 +15,8 @@ class StudentExamination extends Model
     const ANSWER_TEXT = 2;
     const ANSWER_VIDEO = 3;
 
+    const BASE_SCORE_PASS = 5;
+
     public function student()
     {
         return $this->belongsTo(User::class);
