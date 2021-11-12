@@ -314,6 +314,7 @@
                 <div
                   v-for="questionItem in questionReading"
                   v-bind:key="questionItem.id"
+                  v-if="result.question === questionItem.id"
                 >
                   <h5 v-if="result.is_correct">
                     <i class="fe fe-check-circle text-success"></i>
@@ -345,10 +346,11 @@
         <div v-else class="text-success">
           You have completed the this part. Please select continue to complete
           the First Free Assessment!
+          <button class="btn btn-primary my-5" v-on:click="nextTypeExam()">
+            Continue <i class="fe fe-arrow-right"></i>
+          </button>
         </div>
-        <button class="btn btn-primary my-5" v-on:click="nextTypeExam()">
-          Continue <i class="fe fe-arrow-right"></i>
-        </button>
+
       </div>
     </div>
   </div>
@@ -426,6 +428,7 @@ export default {
           console.log(response.data);
           this.passage = response.data.questions[0].passage.content;
           this.questionReading = response.data.questions[0].question;
+          this.timeStartDo = new Date();
         })
         .catch(function (error) {
           console.error(error);
