@@ -353,7 +353,7 @@ export default {
         quizID: "",
         questions: [],
       },
-      timeStartDo: "",
+      timeStartDo: new Date(),
       timeDo: "",
       player: "",
       options: {
@@ -569,7 +569,8 @@ export default {
         this.questionNo = document.getElementById(
           "ques" + this.questionSpeaking[this.questionIndex].id
         ).value;
-
+        this.timeDo = (new Date() - this.timeStartDo) / 1000;
+        this.timeStartDo = new Date();
         this.userAnswerQuiz({
           answerType: this.$root.$getConst("MC"),
           questionID: parseInt(this.questionNo),

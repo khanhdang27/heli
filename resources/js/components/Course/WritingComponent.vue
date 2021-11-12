@@ -422,6 +422,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.questionWriting = response.data.questions[0].question;
+          this.timeStartDo = new Date();
         })
         .catch(function (error) {
           console.error(error);

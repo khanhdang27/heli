@@ -420,6 +420,7 @@ export default {
             console.log(response.data);
           this.passage = response.data.questions[0].passage.content;
           this.questionReading = response.data.questions[0].question;
+          this.timeStartDo = new Date();
         })
         .catch(function (error) {
           console.error(error);
