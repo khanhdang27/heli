@@ -42,17 +42,17 @@
                 <div class="table-responsive">
                     <table class="table mt-3">
                         <tr>
-                            <th class="c-40">Question</th>
-                            <th class="c-10 text-center">Time</th>
-                            <th class="c-20">Answer</th>
-                            <th class="c-10">Correct</th>
-                            <th class="c-10">Score</th>
-                            <th class="c-10">Had update</th>
+                            <th>Question</th>
+                            <th class="text-center">Time</th>
+                            <th>Answer</th>
+                            <th>Correct</th>
+                            <th>Score</th>
+                            <th>Had update</th>
                         </tr>
                         <tbody>
                         @foreach ($exam_details as $detail)
                             <tr>
-                                <td class="c-40">
+                                <td>
                                     <div class="d-flex justify-content-between">
                                         <p class="text-truncate" style="max-width: 200px">
                                             {{$detail->question->questionContent()->question}}
@@ -136,10 +136,10 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="c-10 text-center">
+                                <td class="text-center">
                                     {{$detail->time}}
                                 </td>
-                                <td class="c-20">
+                                <td>
                                     <div class="d-flex justify-content-between">
                                         @if ($detail->answer_type === StudentExamination::ANSWER_MC)
                                             <p class="text-truncate" style="max-width: 200px">
@@ -194,7 +194,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="c-10">
+                                <td>
                                     @if ($detail->answer_type === StudentExamination::ANSWER_MC)
                                         @if($detail->question->questionContent()->findAnswerById($detail->answer)->is_correct)
                                             <i class="fe fe-check text-success h3"></i>
@@ -203,10 +203,10 @@
                                         @endif
                                     @endif
                                 </td>
-                                <td id="score-show{{$detail->id}}" class="c-10">
+                                <td id="score-show{{$detail->id}}">
                                     {{$detail->score}}
                                 </td>
-                                <td class="c-10">
+                                <td>
                                     @if($detail->had_update)
                                         <span class="badge badge-danger">Updated</span>
                                     @endif
