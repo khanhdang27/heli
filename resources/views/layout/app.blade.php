@@ -10,8 +10,6 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-logged.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-calendar.css') }}" rel="stylesheet">
@@ -27,6 +25,8 @@
 
     <script src="{{ asset('js/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/popper.min.js') }}"></script>
 
 </head>
 

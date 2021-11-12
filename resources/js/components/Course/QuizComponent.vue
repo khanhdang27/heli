@@ -1,6 +1,6 @@
 <template>
   <div class="h-100">
-    <div v-if="typeExercise === $getConst('reading')" class="h-100">
+    <div v-if="questionType === $getConst('reading') || typeExercise === $getConst('reading')" class="h-100">
       <reading-component
         v-bind:examId="examId"
         v-bind:typeExam="typeExam"
@@ -9,7 +9,7 @@
       >
       </reading-component>
     </div>
-    <div v-if="typeExercise === $getConst('writing')" class="h-100">
+    <div v-if="questionType === $getConst('writing') || typeExercise === $getConst('writing')" class="h-100">
       <writing-component
         v-bind:examId="examId"
         v-bind:typeExam="typeExam"
@@ -18,7 +18,7 @@
       >
       </writing-component>
     </div>
-    <div v-if="typeExercise === $getConst('listening')" class="h-100">
+    <div v-if="questionType === $getConst('listening') || typeExercise === $getConst('listening')" class="h-100">
       <listening-component
         v-bind:examId="examId"
         v-bind:typeExam="typeExam"
@@ -26,7 +26,7 @@
         @nextTypeExam="nextTypeExam"
       ></listening-component>
     </div>
-    <div v-if="typeExercise === $getConst('speaking')" class="h-100">
+    <div v-if="questionType === $getConst('speaking') || typeExercise === $getConst('speaking')" class="h-100">
       <speaking-component
         v-bind:examId="examId"
         v-bind:typeExam="typeExam"
@@ -58,15 +58,17 @@ export default {
         correct: [],
         wrong: [],
       },
-      typeExercise: "",
+      typeExercise: 0,
     };
   },
   mounted: function () {
-    this.typeExercise = this.questionType;
+
   },
   methods: {
     nextTypeExam: function (type) {
-      this.typeExercise = type;
+        if (this.typeExam === this.$root.$getConst('exercise')){
+            this.typeExercise = type;
+        }
     },
     userAnswer: function () {
       this.questionNo = document.getElementById(

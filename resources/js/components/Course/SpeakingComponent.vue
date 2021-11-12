@@ -96,10 +96,12 @@
               questionSpeaking[questionIndex]
             "
           >
+            <h3 v-if="videoId === videoPracticeId">Video for you to self-practice</h3>
+            <h3 v-else>A guide for you how to response</h3>
             <vimeo-player
               ref="player"
               :video-id="videoId"
-              :video-url="getVideoUrl()"
+              :video-url="getVideoUrl(videoId)"
               class="embed-responsive embed-responsive-16by9"
               height="100%"
               width="100%"
@@ -263,6 +265,22 @@
           </button>
         </span>
       </div>
+      <div class="text-right py-4 pr-3" v-if="typeExam === $getConst('exercise')">
+        <span>
+          <button
+              class="btn btn-primary mx-2"
+              v-on:click="showVideoExercise(videoPracticeId)"
+          >
+            Practice
+          </button>
+          <button
+              class="btn btn-primary mx-2"
+              v-on:click="showVideoExercise(videoResponseId)"
+          >
+            How to response
+          </button>
+        </span>
+      </div>
       <div
         v-if="typeExam === $getConst('quiz') && allResults.length === 0"
         class="text-right py-4 pr-3"
@@ -335,7 +353,7 @@ export default {
         quizID: "",
         questions: [],
       },
-      timeStartDo: "",
+      timeStartDo: new Date(),
       timeDo: "",
       player: "",
       options: {
@@ -366,6 +384,8 @@ export default {
       timeEndAnswer: "",
       pause: false,
       showLastQuestion: false,
+      videoPracticeId: "",
+      videoResponseId: "",
     };
   },
   created() {},
@@ -470,10 +490,9 @@ export default {
               return question.speak_exercises_question !== null;
             }
           );
-          this.videoId =
-            this.questionSpeaking[
-              this.questionIndex
-            ].speak_exercises_question.video_code;
+          this.videoPracticeId = this.questionSpeaking[this.questionIndex].speak_exercises_question.video_code_practice;
+          this.videoResponseId = this.questionSpeaking[this.questionIndex].speak_exercises_question.video_code_response;
+          this.videoId = this.videoPracticeId
         })
         .catch(function (error) {
           console.error(error);
@@ -508,22 +527,15 @@ export default {
         }
 
         this.questionIndex++;
-      }
-    },
-    next: function () {
-      if (this.questionIndex < this.questionSpeaking.length - 1) {
-        this.userAnswer();
-        this.questionIndex++;
-        this.loadAudio();
+        if (this.typeExam === this.$root.$getConst("assessment")){
+            this.loadAudio();
+        }
       }
     },
     prev: function () {
       if (this.questionIndex > 0) this.questionIndex--;
     },
-    getVideoUrl() {
-      let id =
-        this.questionSpeaking[this.questionIndex].speak_exercises_question
-          .video_code || "";
+    getVideoUrl(id) {
       return (
         "https://player.vimeo.com/video/" +
         id +
@@ -547,7 +559,8 @@ export default {
         this.questionNo = document.getElementById(
           "ques" + this.questionSpeaking[this.questionIndex].id
         ).value;
-
+        this.timeDo = (new Date() - this.timeStartDo) / 1000;
+        this.timeStartDo = new Date();
         this.userAnswerQuiz({
           answerType: this.$root.$getConst("MC"),
           questionID: parseInt(this.questionNo),
@@ -609,6 +622,9 @@ export default {
         localStorage.removeItem('writing_'+this.examId);
         localStorage.removeItem('reading_'+this.examId);
         window.location.reload()
+    },
+    showVideoExercise(video){
+      this.videoId = video;
     }
   },
 };
