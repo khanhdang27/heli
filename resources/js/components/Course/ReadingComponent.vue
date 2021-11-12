@@ -388,6 +388,12 @@ export default {
       countClick: 0,
     };
   },
+  watch: {
+    typeExam: function (value) {
+      this.getQuestion();
+      this.getAnswerUser();
+    },
+  },
   mounted() {
     this.getQuestion();
     this.getAnswerUser();
@@ -419,7 +425,7 @@ export default {
       axios
         .get(route("site.exam.getReadingExerciseQuestionsClient", this.examId))
         .then((response) => {
-            console.log(response.data);
+          console.log(response.data);
           this.passage = response.data.questions[0].passage.content;
           this.questionReading = response.data.questions[0].question;
           this.timeStartDo = new Date();
@@ -518,7 +524,10 @@ export default {
           this.resultCheck.questions.push(value);
         }
       }
-      localStorage.setItem("reading_"+this.examId, JSON.stringify(this.resultCheck));
+      localStorage.setItem(
+        "reading_" + this.examId,
+        JSON.stringify(this.resultCheck)
+      );
     },
     getAnswerUser() {
       this.resultCheck = JSON.parse(localStorage.getItem("answer_result")) || {

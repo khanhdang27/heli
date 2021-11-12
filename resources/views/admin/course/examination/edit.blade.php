@@ -67,7 +67,7 @@ use App\Models\Lecture;
                                     </li>
                                     @if ($exam->type == Examination::ASSESSMENT)
                                     @break
-                                @endif
+                                    @endif
 
                                 @endforeach
                             </ul>

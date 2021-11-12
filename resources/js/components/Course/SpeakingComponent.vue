@@ -313,8 +313,11 @@
         </div>
         <div v-else>
           <h2>Congratulation! You got level: {{ allResults.passgrade }}</h2>
-          <button class="btn btn-primary btn-lg btn-block" @click="cleanOldAnswers()">
-              Start the Course
+          <button
+            class="btn btn-primary btn-lg btn-block"
+            @click="cleanOldAnswers()"
+          >
+            Start the Course
           </button>
         </div>
       </div>
@@ -388,7 +391,12 @@ export default {
       videoResponseId: "",
     };
   },
-  created() {},
+  watch: {
+    typeExam: function (value) {
+      this.getQuestion();
+      this.getAnswerUser();
+    },
+  },
   mounted() {
     this.getQuestion();
     this.getAnswerUser();
@@ -591,10 +599,15 @@ export default {
           this.resultCheck.questions.push(value);
         }
       }
-      localStorage.setItem("speaking_"+this.examId, JSON.stringify(this.resultCheck));
+      localStorage.setItem(
+        "speaking_" + this.examId,
+        JSON.stringify(this.resultCheck)
+      );
     },
     getAnswerUser() {
-      this.resultCheck = JSON.parse(localStorage.getItem("speaking_"+this.examId)) || {
+      this.resultCheck = JSON.parse(
+        localStorage.getItem("speaking_" + this.examId)
+      ) || {
         questions: [],
       };
       this.resultCheck.questions.forEach((item) => {

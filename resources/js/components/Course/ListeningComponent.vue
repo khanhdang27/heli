@@ -326,7 +326,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     typeExam: Number,
@@ -356,10 +355,15 @@ export default {
       audioPart: 0,
     };
   },
+  watch: {
+    typeExam: function (value) {
+      this.getQuestion();
+      this.getAnswerUser();
+    },
+  },
   mounted() {
     this.getQuestion();
     this.getAnswerUser();
-
   },
   methods: {
     loadAudio() {
@@ -553,10 +557,15 @@ export default {
           this.resultCheck.questions.push(value);
         }
       }
-      localStorage.setItem("listening_"+this.examId, JSON.stringify(this.resultCheck));
+      localStorage.setItem(
+        "listening_" + this.examId,
+        JSON.stringify(this.resultCheck)
+      );
     },
     getAnswerUser() {
-      this.resultCheck = JSON.parse(localStorage.getItem("listening_"+this.examId)) || {
+      this.resultCheck = JSON.parse(
+        localStorage.getItem("listening_" + this.examId)
+      ) || {
         questions: [],
       };
       this.resultCheck.questions.forEach((item) => {

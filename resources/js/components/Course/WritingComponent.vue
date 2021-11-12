@@ -341,6 +341,12 @@ export default {
       countClick: 0,
     };
   },
+  watch: {
+    typeExam: function (value) {
+      this.getQuestion();
+      this.getAnswerUser();
+    },
+  },
   mounted() {
     this.getQuestion();
     this.getAnswerUser();
