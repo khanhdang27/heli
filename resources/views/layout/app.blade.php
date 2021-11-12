@@ -18,16 +18,13 @@
     <link href="{{ asset('cpanel/assets/fonts/feather/feather.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('js/swiper/swiper-bundle.min.css') }}" />
 
-    <script src="{{ asset('js/sharethis.js') }}"></script>
-    <script src="{{ asset('js/anime.min.js') }}"></script>
-    <script src="{{ asset('js/moment.min.js') }}"></script>
-    <script src="{{ asset('js/axios.min.js') }}"></script>
+
+    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
 
     <script src="{{ asset('js/swiper/swiper-bundle.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-
+    <script src="{{ asset('js/moment.min.js') }}"></script>
+    <script src="{{ asset('js/axios.min.js') }}"></script>
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
 </head>
 
 <body>
@@ -38,14 +35,21 @@
     </div>
     @routes
     <script src="{{ asset('js/app.js') }}"></script>
+
+    <script src="{{ asset('js/popper.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lib/main.js') }}"></script>
     <script src="{{ asset('js/home/app.js') }}"></script>
-    <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/vue@2.6.14') }}"></script>
     @stack('scripts')
     @stack('scriptsLogin')
     @stack('inputFile')
     @stack('showNavbar')
+
+
+    <script src="{{ asset('js/sharethis.js') }}"></script>
+    <script src="{{ asset('js/anime.min.js') }}"></script>
+
     <!-- Start of LiveChat (www.livechatinc.com) code -->
     <script>
         window.__lc = window.__lc || {};
