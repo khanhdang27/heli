@@ -25,9 +25,6 @@ export default {
 
         }
     },
-    created() {
-       this.routeHref()
-    },
     methods: {
         routeHref(course, exam, quiz){
             if (course && exam && quiz){

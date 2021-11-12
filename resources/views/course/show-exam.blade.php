@@ -47,6 +47,7 @@
                             <th class="c-20">Answer</th>
                             <th class="c-10">Correct</th>
                             <th class="c-10">Score</th>
+                            <th class="c-10">Had update</th>
                         </tr>
                         <tbody>
                         @foreach ($exam_details as $detail)
@@ -204,6 +205,11 @@
                                 </td>
                                 <td id="score-show{{$detail->id}}" class="c-10">
                                     {{$detail->score}}
+                                </td>
+                                <td class="c-10">
+                                    @if($detail->had_update)
+                                        <span class="badge badge-danger">Updated</span>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
