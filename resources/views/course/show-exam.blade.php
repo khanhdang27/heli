@@ -110,14 +110,6 @@
                                                                 @endif
                                                             @endif
                                                         @elseif($detail->question->type == Question::SPEAKING)
-                                                            @if($detail->exam->type == Examination::EXERCISES
-                                                                && !empty($detail->question->questionContent()->video_code))
-                                                                <vimeo-player
-                                                                    class="embed-responsive embed-responsive-16by9"
-                                                                    ref="player"
-                                                                    :video-id="{{$detail->question->questionContent()->video_code}}">
-                                                                </vimeo-player>
-                                                            @endif
                                                         @else
                                                             @if($detail->exam->type == Examination::QUIZ)
                                                                 @if($detail->question->questionContent()->part == WritingQuizQuestion::PART_1
@@ -204,7 +196,23 @@
                                     @endif
                                 </td>
                                 <td id="score-show{{$detail->id}}">
-                                    {{$detail->score}}
+                                    @if($detail->answer_type !== StudentExamination::ANSWER_MC)
+                                        @if($detail->score < 5)
+                                            <div class="text-danger">
+                                                {{$detail->score}}
+                                            </div>
+                                        @elseif($detail->score >=8 )
+                                            <div class="text-success">
+                                                {{$detail->score}}
+                                            </div>
+                                        @else
+                                            <div class="text-warning">
+                                                {{$detail->score}}
+                                            </div>
+                                        @endif
+                                    @else
+                                        {{$detail->score}}
+                                    @endif
                                 </td>
                                 <td>
                                     @if($detail->had_update)

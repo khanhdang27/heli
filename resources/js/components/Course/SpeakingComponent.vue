@@ -490,14 +490,8 @@ export default {
               return question.speak_exercises_question !== null;
             }
           );
-          this.videoPracticeId =
-            this.questionSpeaking[
-              this.questionIndex
-            ].speak_exercises_question.video_code_practice;
-          this.videoResponseId =
-            this.questionSpeaking[
-              this.questionIndex
-            ].speak_exercises_question.video_code_response;
+          this.videoPracticeId = this.questionSpeaking[this.questionIndex].speak_exercises_question.video_code_practice;
+          this.videoResponseId = this.questionSpeaking[this.questionIndex].speak_exercises_question.video_code_response;
           this.videoId = this.videoPracticeId
         })
         .catch(function (error) {
@@ -533,13 +527,9 @@ export default {
         }
 
         this.questionIndex++;
-      }
-    },
-    next: function () {
-      if (this.questionIndex < this.questionSpeaking.length - 1) {
-        this.userAnswer();
-        this.questionIndex++;
-        this.loadAudio();
+        if (this.typeExam === this.$root.$getConst("assessment")){
+            this.loadAudio();
+        }
       }
     },
     prev: function () {
