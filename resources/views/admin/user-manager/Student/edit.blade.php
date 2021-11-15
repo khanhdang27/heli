@@ -118,7 +118,7 @@ use App\Models\Membership;
         </div>
     </div> <!-- / .row -->
 </div>
-<script type="application/javascript">
+<script type="text/javascript">
     const displayPhotoStudent = new Vue({
         el: '#editStudent',
         data() {

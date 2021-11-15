@@ -27,7 +27,10 @@
               />
             </div>
           </div>
-          <div v-else></div>
+          <div v-else>
+            {{ lectureList }}
+            {{ lectureIndex }}
+          </div>
         </div>
       </div>
       <div class="col-lg-3 bg-white">
@@ -76,7 +79,12 @@
                           active: item.index == lectureIndex,
                         }"
                         v-on:click="
-                          onClickLecture(item.index, item.level, item.type, $getConst(key))
+                          onClickLecture(
+                            item.index,
+                            item.level,
+                            item.type,
+                            $getConst(key)
+                          )
                         "
                       >
                         <div class="d-flex w-100 justify-content-left">
@@ -101,7 +109,13 @@
                               {{ item.name }}
                             </h5>
                             <strong
-                              v-if="canLoadlecture(item.index, item.level, item.type)"
+                              v-if="
+                                canLoadlecture(
+                                  item.index,
+                                  item.level,
+                                  item.type
+                                )
+                              "
                               class="text-dark text-wrap"
                             >
                               <i class="fe fe-message-square mr-2"></i>
@@ -120,7 +134,13 @@
                               {{ item.lectures_name }}
                             </h4>
                             <strong
-                              v-if="canLoadlecture(item.index, item.level, item.type)"
+                              v-if="
+                                canLoadlecture(
+                                  item.index,
+                                  item.level,
+                                  item.type
+                                )
+                              "
                               class="text-dark text-wrap"
                             >
                               <i class="fe fe-youtube mr-2"></i>
@@ -142,7 +162,11 @@
                             h-100
                             pt-4
                           "
-                          v-bind:href="[ canLoadlecture(item.index, item.level, item.type) ? downloadPDF(item.file) : 'javascript:void(0)']"
+                          v-bind:href="[
+                            canLoadlecture(item.index, item.level, item.type)
+                              ? downloadPDF(item.file)
+                              : 'javascript:void(0)',
+                          ]"
                         >
                           <i class="fe fe-download"></i>
                           PDF</a
@@ -444,7 +468,7 @@ export default {
       }
     },
     getExamination(questionType) {
-        // # Need update
+      // # Need update
       axios
         .get(
           route("site.exam.showLecture", {
@@ -462,7 +486,7 @@ export default {
         )
         .then((response) => {
           this.studentLecture.push(this.lectureIndex);
-        //   this.questions = response.data;
+          //   this.questions = response.data;
         })
         .catch(function (error) {
           console.error(error);
@@ -548,14 +572,19 @@ export default {
               }
             }
             this.sortLecture(_lectures);
-            if (this.lectureList[this.lectureIndex].model_name === "Examination") {
-                for (let i =  this.lectureList.length - 1 ; i >= 0; i--) {
-                    if (this.lectureList[i].model_name !== "Examination"){
-                        this.lectureIndex = i
-                        break;
-                    }
+            if (response.data.student_lecture.lecture_study !== 0) {
+              if (
+                this.lectureList[this.lectureIndex].model_name === "Examination"
+              ) {
+                for (let i = this.lectureList.length - 1; i >= 0; i--) {
+                  if (this.lectureList[i].model_name !== "Examination") {
+                    this.lectureIndex = i;
+                    break;
+                  }
                 }
-
+              }
+            } else {
+                this.questionType = this.$root.$getConst("assessment")
             }
             setTimeout(() => this.showLecture(this.lectureIndex), 2000);
           }
@@ -744,9 +773,9 @@ export default {
           console.error(error);
         });
     },
-    onClickLecture(index, level, type, questionType=null) {
-        this.questionType = questionType;
-        if (this.canLoadlecture(index, level, type)) {
+    onClickLecture(index, level, type, questionType = null) {
+      this.questionType = questionType;
+      if (this.canLoadlecture(index, level, type)) {
         this.showLecture(index);
       } else {
         confirm("This lecture not open now !");
@@ -810,37 +839,36 @@ export default {
         this.getLecture();
       }
     },
-    canSkipLevel (level, type) {
-        switch (type) {
-        case 'reading':
+    canSkipLevel(level, type) {
+      switch (type) {
+        case "reading":
           if (
             !this.studentCourse.exam_buy_read &&
-            level == 'level_'+ this.studentCourse.level_read*10
+            level == "level_" + this.studentCourse.level_read * 10
           ) {
-
             return true;
           }
           return false;
-        case 'writing':
+        case "writing":
           if (
             !this.studentCourse.exam_buy_write &&
-            level == this.studentCourse.level_write*10
+            level == this.studentCourse.level_write * 10
           ) {
             return true;
           }
           return false;
-        case 'listening':
+        case "listening":
           if (
             !this.studentCourse.exam_buy_listen &&
-            level == this.studentCourse.level_listen*10
+            level == this.studentCourse.level_listen * 10
           ) {
             return true;
           }
           return false;
-        case 'speaking':
+        case "speaking":
           if (
             !this.studentCourse.exam_buy_speak &&
-            level == this.studentCourse.level_speak*10
+            level == this.studentCourse.level_speak * 10
           ) {
             return true;
           }
@@ -849,7 +877,7 @@ export default {
         default:
           return true;
       }
-    }
+    },
   },
 };
 </script>

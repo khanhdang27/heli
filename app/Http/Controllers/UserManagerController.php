@@ -201,7 +201,6 @@ class UserManagerController extends Controller
             ->when(request('name') != '', function (Builder $query) {
                 $query->where('full_name', 'like', '%' . request('name') . '%');
             })
-            ->where('id', '!=', 1)
             ->paginate(15)
             ->withQueryString();
         return view('admin.user-manager.Tutor.index', [

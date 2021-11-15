@@ -284,7 +284,6 @@
                 <div
                   v-for="questionItem in questionListening"
                   v-bind:key="questionItem.id"
-                  v-if="result.question === questionItem.id"
                 >
                   <h5 v-if="result.is_correct">
                     <i class="fe fe-check-circle text-success"></i>

@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
 {
-
-    public static $POST = 1;
-    public static $BLOG = 2;
-
     use SoftDeletes;
+
+    const POST = 1;
+    const BLOG = 2;
+
+    const TAG_TYPES = [
+        self::POST => 'Forum hashtag',
+        self::BLOG => 'Blog hashtag'
+    ];
+
     protected $table = 'tags';
     protected $guarded = [];
 }

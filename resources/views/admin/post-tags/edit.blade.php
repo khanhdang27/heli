@@ -1,3 +1,7 @@
+@php
+    use App\Models\Tag;
+@endphp
+
 @extends('admin.layout')
 @section('content')
 <!-- CARDS -->
@@ -31,7 +35,7 @@
                         </div>
                         <div class="form-group ">
                             {{ Form::label('tag_type', 'Type') }}
-                            {{ Form::select('tag_type',['1'=>'1- Forum hashtag','2'=>'2- Blog hashtag'],$tags->tag_type,['class'=>'form-control w-25']) }}
+                            {{ Form::select('tag_type', Tag::TAG_TYPES, $tags->tag_type,['class'=>'form-control w-25']) }}
                         </div>
                         {{ Form::submit('Save', ['class'=>'btn btn-primary mt-5']) }}
                         {!! Form::close() !!}

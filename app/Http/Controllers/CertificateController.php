@@ -22,7 +22,7 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        $certificates = Certificate::where('id', '!=', 1)->orderBy('created_at', 'desc')->paginate(15);
+        $certificates = Certificate::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.certificate.index', [
             'certificates' => $certificates,
         ]);
@@ -59,7 +59,7 @@ class CertificateController extends Controller
             DB::rollBack();
             return back()->withErrors('Create error');
         }
-        
+
     }
 
 

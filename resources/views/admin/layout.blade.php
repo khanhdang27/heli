@@ -17,6 +17,7 @@
     @stack('css')
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="{{ asset('js/vue@2.6.14') }}"></script>
 
     <title>Helios</title>
 </head>

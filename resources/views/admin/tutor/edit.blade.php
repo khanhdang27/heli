@@ -231,7 +231,7 @@ use App\Utilities\SelectionByClass;
     </div> <!-- / .row -->
 </div>
 
-<script type="application/javascript">
+<script type="text/javascript">
     const displayPhoto = new Vue({
             el: '#editTutor',
             data() {

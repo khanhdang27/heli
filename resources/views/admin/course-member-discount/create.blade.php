@@ -98,7 +98,7 @@
         </div>
     </div> <!-- / .row -->
 </div>
-<script type="application/javascript">
+<script type="text/javascript">
     var newPriceTag = new Vue({
         el: "#priceTag",
         data: {
