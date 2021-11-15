@@ -33,7 +33,7 @@ class TutorController extends Controller
             })
             ->when(request('subject') != '', function (Builder $query) {
                 $query->where('subject_id', request('subject'));
-            })->where('id','!=', 1)
+            })
             ->paginate(15)
             ->withQueryString();
         return view('admin.tutor.index', [
@@ -84,7 +84,7 @@ class TutorController extends Controller
         ]);
         DB::beginTransaction();
         try {
-            
+
             $_user = new User([
                 "name" => $_request["name"],
                 "email" => $_request["email"],
@@ -92,7 +92,7 @@ class TutorController extends Controller
             ]);
             $_user->assignRole('tutor');
             $_user->save();
-            
+
             if (!empty($request['photo'])) {
                 $file = File::storeFile(
                     $request['photo'],
@@ -121,14 +121,14 @@ class TutorController extends Controller
 
             $tutorTeachSubject = new TutorTeachSubject(['tutor_id' => $tutor->id, 'subject_id' => $_subject]);
             $tutorTeachSubject->save();
-    
+
             DB::commit();
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors('Create error');
         }
-        
+
     }
 
     /**
@@ -184,7 +184,7 @@ class TutorController extends Controller
                 'tutor_specialized:cn' => 'required',
                 'tutor_specialized:sc' => 'required',
             ]);
-            
+
             $user = User::find($tutor->user_id);
             $user->name = $input['name'];
             $tutor->fill([

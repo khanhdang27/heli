@@ -143,12 +143,6 @@ class CourseController extends Controller
                 })
                 ->first();
 
-//                 dd($courses_with_group);
-
-            // if (empty($courses_with_group)) {
-            //     return redirect(route('site.home'));
-            // }
-
             $student_course = null;
             $exams = null;
             if (Auth::check()) {
@@ -320,16 +314,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        // try {
-        //     $course->delete();
-        //     return response([
-        //         'message' => 'Delete success!'
-        //     ]);
-        // } catch (\Exception $exception) {
-        //     return response([
-        //         'message' => 'Cannot delete course'
-        //     ], 400);
-        // }
+
     }
 
     /**

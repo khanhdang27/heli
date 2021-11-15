@@ -101,7 +101,7 @@
                                                        class="dropdown-item">
                                                         Edit
                                                     </a>
-                                                    <a href="{{ route('admin.user-manager.student.editToken', $value->user->wallet->id) }}"
+                                                    <a href="{{ route('admin.user-manager.student.editToken', ['wallet' => $value->user->wallet->id]) }}"
                                                        class="dropdown-item">
                                                         Token
                                                     </a>

@@ -314,7 +314,6 @@
                 <div
                   v-for="questionItem in questionReading"
                   v-bind:key="questionItem.id"
-                  v-if="result.question === questionItem.id"
                 >
                   <h5 v-if="result.is_correct">
                     <i class="fe fe-check-circle text-success"></i>
@@ -530,7 +529,7 @@ export default {
       );
     },
     getAnswerUser() {
-      this.resultCheck = JSON.parse(localStorage.getItem("answer_result")) || {
+      this.resultCheck = JSON.parse(localStorage.getItem("reading_" + this.examId)) || {
         questions: [],
       };
       this.resultCheck.questions.forEach((item) => {

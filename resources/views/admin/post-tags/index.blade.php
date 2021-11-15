@@ -1,3 +1,7 @@
+@php
+    use App\Models\Tag;
+@endphp
+
 @extends('admin.layout')
 @section('content')
     <div class="container-fluid mt-5">
@@ -51,7 +55,8 @@
                                                 {{ $value->tag_name }}
                                             </td>
                                             <td class="goal-project">
-                                                {{ $value->tag_type }}
+
+                                                {{ Tag::TAG_TYPES[$value->tag_type] }}
                                             </td>
                                             <td class="text-right">
                                                 <div class="dropdown">

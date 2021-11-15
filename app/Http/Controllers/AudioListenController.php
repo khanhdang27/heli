@@ -54,7 +54,7 @@ class AudioListenController extends Controller
                     'quiz_id' => $input['quiz'],
                     'exam_id' => $input['exam'],
                     'course_id' => $input['course'],
-                    'audio_code' => $file 
+                    'audio_code' => $file
                 ]);
 
                 DB::commit();

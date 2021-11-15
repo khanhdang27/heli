@@ -56,7 +56,7 @@
                     </div>
                     @push('scripts')
 
-                    <script type="application/javascript">
+                    <script type="text/javascript">
                         const displayPhoto = new Vue({
                                 el: '#modalUploadAvatar',
                                 data() {

@@ -1,3 +1,6 @@
+@php
+    use App\Models\Tag;
+@endphp
 @extends('admin.layout')
 @section('content')
 <!-- CARDS -->
@@ -14,13 +17,9 @@
                             </a>
                         </div>
                         <div>
-
-                            <!-- Title -->
-
                             <h4 class="card-header-title">
                                 Create Tags
                             </h4>
-
                         </div>
                     </div> <!-- / .row -->
                 </div>
@@ -36,7 +35,7 @@
                         </div>
                         <div class="form-group ">
                             {{ Form::label('tag_type', 'Type') }}
-                            {{ Form::select('tag_type',['1'=>'1- Forum hashtag','2'=>'2- Blog hashtag'],null,['class'=>'form-control w-25']) }}
+                            {{ Form::select('tag_type', Tag::TAG_TYPES, $tags->tag_type ,null,['class'=>'form-control w-25']) }}
                             @error('tag_type')
                             <div class="alert text-danger">{{ $message }}</div>
                             @enderror

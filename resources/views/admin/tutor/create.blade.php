@@ -198,9 +198,9 @@ use \App\Models\Subject;
 
     </div> <!-- / .row -->
 </div>
-<script type="application/javascript">
+<script type="text/javascript">
     const displayPhoto = new Vue({
-            el: '#editTutor',
+            el: '#createTutor',
             data() {
                 return {
                     url: null,

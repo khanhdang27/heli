@@ -103,7 +103,7 @@ use App\Models\Course;
             CKEDITOR.replace('ckeditor');
         };
 </script>
-<script type="application/javascript">
+<script type="text/javascript">
     var create_course = new Vue({
             el: '#create_course',
             methods:
