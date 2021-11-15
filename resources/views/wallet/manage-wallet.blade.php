@@ -26,7 +26,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-8 col-lg-12 col-sm-9 text-primary pb-5 mb-5">
                     @if (session('success'))
-                        <div class="alert alert-success text-center mt-5">
+                        <div class="alert alert-success text-center mt-5 h3 py-3">
                             <button type="button" class="close" data-dismiss="alert">×</button>
                             <strong>{{ session('success') }}</strong>
                         </div>

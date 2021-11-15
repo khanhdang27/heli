@@ -65,21 +65,31 @@
             );
 
             if (error) {
-                toastr["error"](error.message);
+                toastr["error"](error.message, "Error");
             } else {
                 console.info('success: ', setupIntent.payment_method);
                 axios.post("{{ route('site.store-card') }}", {
                     payment_method: setupIntent.payment_method,
                 })
                     .then(function (response) {
-                        toastr["success"]("@lang('keywords.addSuccessCard')");
+                        toastr["success"]("@lang('keywords.addSuccessCard')", "Success");
                         window.location.href = "{{URL::route('site.user.wallet')}}"
                     })
                     .catch(function (error) {
-                        toastr["error"]("@lang('keywords.addErrorCard')");
+                        toastr["error"]("@lang('keywords.addErrorCard')", "Success");
                     });
             }
         });
+        toastAddCard();
+
+        function toastAddCard() {
+            toastr.options = {
+                "closeButton": true,
+                "newestOnTop": false,
+                "positionClass": "toast-bottom-left",
+                "timeOut": false,
+            }
+        }
 
     </script>
 

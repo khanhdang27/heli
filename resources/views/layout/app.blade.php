@@ -17,6 +17,9 @@
     <link href="{{ asset('js/lib/main.css') }}" rel="stylesheet">
     <link href="{{ asset('cpanel/assets/fonts/feather/feather.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('js/swiper/swiper-bundle.min.css') }}" />
+    <script type="text/javascript"
+            src="https://platform-api.sharethis.com/js/sharethis.js#property=60e7b308b06e7600197f484d&product=inline-share-buttons"
+            async="async"></script>
 
 
     <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
