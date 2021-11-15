@@ -106,7 +106,7 @@ class WalletController extends Controller
                 ],
                 'return_url' => config('app.home_url') . '/payment',
             ]);
-            if ($payment_intent){
+            if ($payment_intent) {
                 $user = User::where('id', Auth::user()->id)->first();
                 $exchange_rate = Setting::where('key', 'token_exchange_rate')->first();
                 $topUp_value = $_request['amount'] * $exchange_rate->value;
@@ -114,13 +114,10 @@ class WalletController extends Controller
             }
             DB::commit();
             return redirect()->route('site.user.topUp-success');
-        }catch (\Throwable $th){
+        } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error','Top-up error!');
+            return back()->with('error', 'Top-up error!');
         }
-
-
-
     }
 
     public function getPaymentMethod()
@@ -148,8 +145,11 @@ class WalletController extends Controller
         ]);
     }
 
-    public function redirectSuccess(){
-        return redirect()->route('site.user.wallet')->with('success', 'Top-up success');
+    public function redirectSuccess()
+    {
+        return redirect()
+            ->route('site.user.wallet')
+            ->with('success', 'Top-up success');
     }
     public function paymentHistory(Order $order)
     {
@@ -261,7 +261,7 @@ class WalletController extends Controller
                 'room_live_course_id' => $room == 0 ? null : $room,
                 'latest_study' => new DateTime(),
                 'lecture_study' => 0,
-                'watched_list' => '',
+                'watched_list' => '0,',
             ]);
             DB::commit();
             return redirect()->route('site.user.pay-success', ['course_id' => $student_course->course_id]);

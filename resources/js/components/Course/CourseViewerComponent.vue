@@ -528,7 +528,6 @@ export default {
             for (let item in temp) {
               _lectures.push(temp[item]);
             }
-
             _lectures.map((itemLecture) => {
               itemLecture.sortIndex = itemLecture.index;
             });
@@ -584,7 +583,7 @@ export default {
                 }
               }
             } else {
-                this.questionType = this.$root.$getConst("assessment")
+              this.questionType = this.$root.$getConst("assessment");
             }
             setTimeout(() => this.showLecture(this.lectureIndex), 2000);
           }

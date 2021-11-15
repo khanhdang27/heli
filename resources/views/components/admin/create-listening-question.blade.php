@@ -14,7 +14,11 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
         <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#modalAudioUpdate"
             data-quiz="{{ $quiz->id }}" data-exam="{{ $quiz->exam_id }}"
             data-course="{{ $quiz->exams->course_id }}"
-            data-audio="{{ asset(route('audio', $audio_1->audio_code)) }}" data-part="1"> Update Audio Part 1 </button>
+            data-audio="{{ asset(route('audio', $audio_1->audio_code)) }}"
+            data-url="{{ route('admin.audio-listen.update', ['audioListen' => $audio_1->id]) }}" data-part="1"> Update
+            Audio
+            Part 1
+        </button>
     @else
         <button type="button" class="btn btn-outline-success ml-2" data-toggle="modal" data-target="#modalAudio"
             data-quiz="{{ $quiz->id }}" data-exam="{{ $quiz->exam_id }}"
@@ -24,7 +28,10 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
         <button type="button" class="btn btn-outline-warning ml-2" data-toggle="modal" data-target="#modalAudioUpdate"
             data-quiz="{{ $quiz->id }}" data-exam="{{ $quiz->exam_id }}"
             data-course="{{ $quiz->exams->course_id }}"
-            data-audio="{{ asset(route('audio', $audio_2->audio_code)) }}" data-part="2"> Update Audio Part 2
+            data-audio="{{ asset(route('audio', $audio_2->audio_code)) }}"
+            data-url="{{ route('admin.audio-listen.update', ['audioListen' => $audio_2->id]) }}" data-part="2">
+            Update Audio
+            Part 2
         </button>
     @else
         <button type="button" class="btn btn-outline-success ml-2" data-toggle="modal" data-target="#modalAudio"
@@ -47,7 +54,7 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.listening.assessment.store', ['quiz' => $quiz->id])]) !!}
+                {!! Form::open(['method' => 'POST', 'url' => route('admin.quiz.question.listening.assessment.store', ['quiz' => $quiz->id])]) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}
@@ -89,12 +96,12 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 'url' => route('admin.audio-listen.store'), 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::open(['method' => 'PUT', 'enctype' => 'multipart/form-data', 'id' => 'audio-listen-udate']) !!}
                 @csrf
                 <input type="text" hidden id="quiz_update" name="quiz">
                 <input type="text" hidden id="exam_update" name="exam">
                 <input type="text" hidden id="course_update" name="course">
-                <audio id="audio"  controls>
+                <audio id="audio" controls>
                     <source src="" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
@@ -190,11 +197,13 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
             var exam = button.data('exam');
             var course = button.data('course');
             var audio = button.data('audio');
+            var url = button.data('url');
             document.getElementById('part_audio_update').value = part;
             document.getElementById('quiz_update').value = quiz;
             document.getElementById('exam_update').value = exam;
             document.getElementById('course_update').value = course;
             document.getElementById('audio').src = audio;
+            document.getElementById('audio-listen-udate').action = url;
         })
     })
 </script>

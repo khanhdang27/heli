@@ -153,6 +153,7 @@ class StudentExaminationController extends Controller
     public function handleSubmitAnswer(Request $request)
     {
         $input = $request->input();
+
         DB::beginTransaction();
         try {
             $courseId = $input['courseID'];
@@ -165,7 +166,7 @@ class StudentExaminationController extends Controller
                 'quiz_id' => $quizId,
                 'exam_id' => $exams->id,
                 'student_id' => Auth::user()->id,
-                'question_id' => $input['questions']
+                'question_id' => $input['questions'],
             ])->first();
 
             $student_course = StudentCourses::where([
@@ -199,8 +200,8 @@ class StudentExaminationController extends Controller
                 // Quiz Type
                 if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
                     [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
-                    if ($score/count($result) > 0.8) {
-                        $this->upLevel( $student_course, $studentExam->question->type);
+                    if ($score / count($result) > 0.8) {
+                        $this->upLevel($student_course, $studentExam->question->type);
                     } else {
                         $this->resetLevel($student_course, $studentExam->question->type);
                     }
@@ -214,7 +215,6 @@ class StudentExaminationController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollback();
-            dd($th);
             return response()->json(
                 [
                     'message' => $th->getMessage(),
@@ -269,7 +269,7 @@ class StudentExaminationController extends Controller
                     $score += Examination::BASE_SCORE_MC;
                 }
 
-                StudentExamination::create([
+                $_answerRecord = StudentExamination::create([
                     'student_id' => Auth::user()->id,
                     'course_id' => $courseId,
                     'quiz_id' => $quizId,
@@ -282,7 +282,7 @@ class StudentExaminationController extends Controller
                     'score' => $_answer->is_correct ? Examination::BASE_SCORE_MC : 0,
                 ]);
 
-                $answerRecord->update([
+                $_answerRecord->update([
                     'had_update' => true,
                 ]);
             } else {
@@ -314,19 +314,23 @@ class StudentExaminationController extends Controller
         $answerRecordsReading = $answerRecordsReading
             ->whereHas('question', function ($query) {
                 return $query->where('type', '=', Question::READING);
-            })->get();
+            })
+            ->get();
         $answerRecordsSpeaking = $answerRecordsSpeaking
             ->whereHas('question', function ($query) {
                 return $query->where('type', '=', Question::SPEAKING);
-            })->get();
+            })
+            ->get();
         $answerRecordsListening = $answerRecordsListening
             ->whereHas('question', function ($query) {
                 return $query->where('type', '=', Question::LISTENING);
-            })->get();
+            })
+            ->get();
         $answerRecordsWriting = $answerRecordsWriting
             ->whereHas('question', function ($query) {
                 return $query->where('type', '=', Question::WRITING);
-            })->get();
+            })
+            ->get();
 
         $scoreReading = $this->scoreGrade($answerRecordsReading, Question::READING);
         $scoreWriting = $this->scoreGrade($answerRecordsWriting, Question::WRITING);
@@ -376,7 +380,7 @@ class StudentExaminationController extends Controller
             ]);
         }
         $studentCourse->update([
-            'lecture_study'=> 1
+            'lecture_study' => 1,
         ]);
 
         return $summaryScore;
@@ -476,14 +480,14 @@ class StudentExaminationController extends Controller
                 'comment' => $input['comment'],
                 'reviewed' => true,
                 'score' => $input['score'],
-                'has_updated' => true
+                'has_updated' => true,
             ]);
             $student_course = StudentCourses::where([
                 'student_id' => Auth::user()->id,
                 'course_id' => $studentExam->course_id,
             ])->first();
             if ($input['score'] >= StudentExamination::BASE_SCORE_PASS) {
-                $this->upLevel( $student_course, $studentExam->question->type);
+                $this->upLevel($student_course, $studentExam->question->type);
             } else {
                 $this->resetLevel($student_course, $studentExam->question->type);
             }
@@ -496,47 +500,47 @@ class StudentExaminationController extends Controller
         }
     }
 
-    public function resetLevel( $student_course, $type)
+    public function resetLevel($student_course, $type)
     {
         switch ($type) {
-            case Question::READING :
+            case Question::READING:
                 if ($student_course->set_exam_read < 4) {
                     $student_course->update(['set_exam_read' => $student_course->set_exam_read + 1]);
                 } else {
-                    if ($student_course->exam_buy_read){
+                    if ($student_course->exam_buy_read) {
                         $student_course->update(['set_exam_read' => 1, 'exam_buy_read' => null]);
                     } else {
                         $student_course->update(['set_exam_read' => 1]);
                     }
                 }
                 break;
-            case Question::WRITING :
+            case Question::WRITING:
                 if ($student_course->set_exam_write <= 4) {
                     $student_course->update(['set_exam_write' => $student_course->set_exam_write + 1]);
                 } else {
-                    if ($student_course->exam_buy_read){
+                    if ($student_course->exam_buy_read) {
                         $student_course->update(['set_exam_write' => 1, 'exam_buy_write' => null]);
                     } else {
                         $student_course->update(['set_exam_write' => 1]);
                     }
                 }
                 break;
-            case Question::LISTENING :
+            case Question::LISTENING:
                 if ($student_course->set_exam_listen <= 4) {
                     $student_course->update(['set_exam_listen' => $student_course->set_exam_listen + 1]);
                 } else {
-                    if ($student_course->exam_buy_read){
+                    if ($student_course->exam_buy_read) {
                         $student_course->update(['set_exam_listen' => 1, 'exam_buy_listen' => null]);
                     } else {
                         $student_course->update(['set_exam_listen' => 1]);
                     }
                 }
                 break;
-            case Question::SPEAKING :
+            case Question::SPEAKING:
                 if ($student_course->set_exam_speak <= 4) {
                     $student_course->update(['set_exam_speak' => $student_course->set_exam_speak + 1]);
                 } else {
-                    if ($student_course->exam_buy_read){
+                    if ($student_course->exam_buy_read) {
                         $student_course->update(['set_exam_speak' => 1, 'exam_buy_speak' => null]);
                     } else {
                         $student_course->update(['set_exam_speak' => 1]);
@@ -552,36 +556,32 @@ class StudentExaminationController extends Controller
     public function upLevel($student_course, $type)
     {
         switch ($type) {
-            case Question::READING :
-                if ($student_course->exam_buy_read){
+            case Question::READING:
+                if ($student_course->exam_buy_read) {
                     $student_course->update(['level_read' => $student_course->exam_buy_read + 0.5]);
-                } {
-                    $student_course->update(['level_read' => $student_course->level_read + 0.5]);
                 }
-                $student_course->update(['exam_buy_read' => null ]);
+                $student_course->update(['level_read' => $student_course->level_read + 0.5]);
+                $student_course->update(['exam_buy_read' => null]);
                 break;
-            case Question::WRITING :
-                if ($student_course->exam_buy_write){
+            case Question::WRITING:
+                if ($student_course->exam_buy_write) {
                     $student_course->update(['level_write' => $student_course->exam_buy_write + 0.5]);
-                } {
-                    $student_course->update(['level_write' => $student_course->level_write + 0.5]);
                 }
+                $student_course->update(['level_write' => $student_course->level_write + 0.5]);
                 $student_course->update(['exam_buy_write' => null]);
                 break;
-            case Question::LISTENING :
-                if ($student_course->exam_buy_listen){
+            case Question::LISTENING:
+                if ($student_course->exam_buy_listen) {
                     $student_course->update(['level_listen' => $student_course->exam_buy_listen + 0.5]);
-                } {
-                    $student_course->update(['level_listen' => $student_course->level_listen + 0.5]);
                 }
+                $student_course->update(['level_listen' => $student_course->level_listen + 0.5]);
                 $student_course->update(['exam_buy_listen' => null]);
                 break;
-            case Question::SPEAKING :
-                if ($student_course->exam_buy_speak){
+            case Question::SPEAKING:
+                if ($student_course->exam_buy_speak) {
                     $student_course->update(['level_speak' => $student_course->exam_buy_speak + 0.5]);
-                } {
-                    $student_course->update(['level_speak' => $student_course->level_speak + 0.5]);
                 }
+                $student_course->update(['level_speak' => $student_course->level_speak + 0.5]);
                 $student_course->update(['exam_buy_speak' => null]);
                 break;
 
