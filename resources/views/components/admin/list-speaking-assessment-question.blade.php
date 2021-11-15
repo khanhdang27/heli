@@ -4,7 +4,7 @@
         @if ($question->questionContent())
             <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info selectable"
                 id="headingQuestion_{{ $question->id }}">
-                <div class="w-75" data-toggle="collapse"
+                <div class="w-75 py-5" data-toggle="collapse"
                     data-target="#collapseAnswerSpeakingAssessment__{{ $question->id }}" aria-expanded="true"
                     aria-controls="collapseAnswerSpeakingAssessment__{{ $question->id }}">
                     {{ $question->index }} - {{ $question->questionContent()->question }}
@@ -40,8 +40,10 @@
                                     <label for="question" class="required text-dark">Question</label>
                                     {{ Form::text('question', $question->questionContent()->question, ['class' => 'form-control', 'required']) }}
                                 </div>
-                                <audio id="audio"  controls>
-                                    <source src="{{ asset(route('audio', $question->questionContent()->audio_ref)) }}" type="audio/mpeg">
+                                <audio id="audio" controls>
+                                    <source
+                                        src="{{ asset(route('audio', $question->questionContent()->audio_ref)) }}"
+                                        type="audio/mpeg">
                                     Your browser does not support the audio element.
                                 </audio>
                                 <div class="custom-file">

@@ -3,7 +3,7 @@
         @if ($question->questionContent())
             <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info selectable"
                 id="headingQuestion_{{ $question->id }}">
-                <div class="w-75" data-toggle="collapse"
+                <div class="w-75 py-5" data-toggle="collapse"
                     data-target="#collapseAnswerSpeakingExercises_{{ $question->id }}" aria-expanded="true"
                     aria-controls="collapseAnswerSpeakingExercises_{{ $question->id }}">
                     {{ $question->index }} - {{ $question->questionContent()->question }}

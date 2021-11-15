@@ -96,7 +96,9 @@
               questionSpeaking[questionIndex]
             "
           >
-            <h3 v-if="videoId === videoPracticeId">Video for you to self-practice</h3>
+            <h3 v-if="videoId === videoPracticeId">
+              Video for you to self-practice
+            </h3>
             <h3 v-else>A guide for you how to response</h3>
             <vimeo-player
               ref="player"
@@ -109,7 +111,7 @@
           </div>
           <div v-if="allResults.length === 0">
             <div v-if="typeExam === $getConst('quiz')">
-              <div class="h4 text-center">
+              <!-- <div class="h4 text-center">
                 <vue-countdown-timer
                   id="timePause"
                   v-if="pause === true"
@@ -204,8 +206,8 @@
                     <span>{{ scope.props.seconds }} </span><a></a>
                   </template>
                 </vue-countdown-timer>
-              </div>
-              <div v-if="questionIndex < questionSpeaking.length - 1">
+              </div> -->
+              <!-- <div v-if="questionIndex < questionSpeaking.length - 1">
                 <h3 v-cloak v-if="questionSpeaking[questionIndex]">
                   {{ questionIndex + 1 }}
                   {{
@@ -221,15 +223,38 @@
                 {{
                   questionSpeaking[questionIndex].speak_quiz_question.question
                 }}
+              </h3> -->
+              <h3 v-if="questionSpeaking[questionIndex]">
+                {{ questionIndex + 1 }}
+                {{
+                  questionSpeaking[questionIndex].speak_quiz_question.question
+                }}
               </h3>
+              <p>
+                Please record one video with voice that answers all question.
+              </p>
               <div>
                 <video
                   v-cloak
                   id="myVideo"
                   ref="videoPlayer"
-                  class="video-js vjs-fluid"
+                  class="video-js"
                   playsinline
                 ></video>
+                <div
+                  id="progress"
+                  class="
+                    progress-bar progress-bar-info progress-bar-striped
+                    active
+                  "
+                  role="progressbar"
+                  aria-valuenow="46"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 0%"
+                >
+                  &nbsp;0%
+                </div>
               </div>
             </div>
           </div>
@@ -265,17 +290,20 @@
           </button>
         </span>
       </div>
-      <div class="text-right py-4 pr-3" v-if="typeExam === $getConst('exercise')">
+      <div
+        class="text-right py-4 pr-3"
+        v-if="typeExam === $getConst('exercise')"
+      >
         <span>
           <button
-              class="btn btn-primary mx-2"
-              v-on:click="showVideoExercise(videoPracticeId)"
+            class="btn btn-primary mx-2"
+            v-on:click="showVideoExercise(videoPracticeId)"
           >
             Practice
           </button>
           <button
-              class="btn btn-primary mx-2"
-              v-on:click="showVideoExercise(videoResponseId)"
+            class="btn btn-primary mx-2"
+            v-on:click="showVideoExercise(videoResponseId)"
           >
             How to response
           </button>
@@ -332,6 +360,9 @@ import "videojs-record/dist/css/videojs.record.css";
 import videojs from "video.js";
 import "webrtc-adapter";
 import RecordRTC from "recordrtc";
+import Record from "videojs-record/dist/videojs.record.js";
+
+import VimeoUpload from "../../../../public/js/admin/vimeo-upload.js";
 
 export default {
   props: {
@@ -444,7 +475,11 @@ export default {
         // the blob object contains the recorded data that
         // can be downloaded by the user, stored on server etc.
         console.log("finished recording: ", this.player.recordedData);
-        this.player.record().saveAs({ video: "my-video-file-name.mp4" });
+        this.uploadVideo(
+          "student_answer_" + new Date().getTime(),
+          this.player.recordedData
+        );
+        this.player.record().saveAs({ video: "my-video.mp4" });
       });
 
       // error handling
@@ -498,9 +533,15 @@ export default {
               return question.speak_exercises_question !== null;
             }
           );
-          this.videoPracticeId = this.questionSpeaking[this.questionIndex].speak_exercises_question.video_code_practice;
-          this.videoResponseId = this.questionSpeaking[this.questionIndex].speak_exercises_question.video_code_response;
-          this.videoId = this.videoPracticeId
+          this.videoPracticeId =
+            this.questionSpeaking[
+              this.questionIndex
+            ].speak_exercises_question.video_code_practice;
+          this.videoResponseId =
+            this.questionSpeaking[
+              this.questionIndex
+            ].speak_exercises_question.video_code_response;
+          this.videoId = this.videoPracticeId;
         })
         .catch(function (error) {
           console.error(error);
@@ -515,7 +556,6 @@ export default {
               return question.speak_quiz_question !== null;
             }
           );
-          console.log(this.questionSpeaking);
           this.createVideoRecord();
         })
         .catch(function (error) {
@@ -535,8 +575,8 @@ export default {
         }
 
         this.questionIndex++;
-        if (this.typeExam === this.$root.$getConst("assessment")){
-            this.loadAudio();
+        if (this.typeExam === this.$root.$getConst("assessment")) {
+          this.loadAudio();
         }
       }
     },
@@ -629,16 +669,56 @@ export default {
     endCallBack: function (x) {
       this.submit();
     },
-    cleanOldAnswers(){
-        localStorage.removeItem('speaking_'+this.examId);
-        localStorage.removeItem('listening_'+this.examId);
-        localStorage.removeItem('writing_'+this.examId);
-        localStorage.removeItem('reading_'+this.examId);
-        window.location.reload()
+    cleanOldAnswers() {
+      localStorage.removeItem("speaking_" + this.examId);
+      localStorage.removeItem("listening_" + this.examId);
+      localStorage.removeItem("writing_" + this.examId);
+      localStorage.removeItem("reading_" + this.examId);
+      window.location.reload();
     },
-    showVideoExercise(video){
+    showVideoExercise(video) {
       this.videoId = video;
-    }
+    },
+    uploadVideo(fileName, file) {
+      new VimeoUpload({
+        name: fileName,
+        description: fileName,
+        private: true,
+        file: file,
+        token: "a4e21d56502edc34f8e27e0244fc46b9",
+        upgrade_to_1080: true,
+        onError: function (data) {},
+        onProgress: function (data) {
+          console.log("data >>", data.loaded);
+          this.updateProgress(data.loaded / data.total);
+        },
+        onComplete: function (videoId, index) {
+          console.log("videoId :>>", videoId);
+          // typeExam
+          // examId
+          // courseId
+          this.resultCheck = {
+            courseID: this.courseId,
+            examID: this.examId,
+            questions: [
+              {
+                answerID: videoId,
+                answerType: 3,
+                questionID: this.questionSpeaking.id,
+                time: "",
+              },
+            ],
+            quizID: this.questionSpeaking[this.questionIndex].quiz_id,
+          };
+        },
+      }).upload();
+    },
+    updateProgress: function (progress) {
+      progress = Math.floor(progress * 100);
+      var element = document.getElementById("progress");
+      element.setAttribute("style", "width:" + progress + "%");
+      element.innerHTML = "&nbsp;" + progress + "%";
+    },
   },
 };
 </script>

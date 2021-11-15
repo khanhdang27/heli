@@ -293,7 +293,6 @@
             Continue <i class="fe fe-arrow-right"></i>
           </button>
         </div>
-
       </div>
     </div>
   </div>

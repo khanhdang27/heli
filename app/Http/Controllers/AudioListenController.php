@@ -47,14 +47,14 @@ class AudioListenController extends Controller
 
         try {
             DB::beginTransaction();
-            if(!empty($input['audio'])){
+            if (!empty($input['audio'])) {
                 $file = AudioFile::storeFile($input['audio']);
                 $audioListen = AudioListen::create([
                     'part' => $input['part'],
                     'quiz_id' => $input['quiz'],
                     'exam_id' => $input['exam'],
                     'course_id' => $input['course'],
-                    'audio_code' => $file
+                    'audio_code' => $file,
                 ]);
 
                 DB::commit();
@@ -100,7 +100,42 @@ class AudioListenController extends Controller
      */
     public function update(Request $request, AudioListen $audioListen)
     {
-        //
+        $input = $request->validate([
+            'part' => 'required',
+            'quiz' => 'required',
+            'exam' => 'required',
+            'course' => 'required',
+            'audio' => 'file|nullable ',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            if (!empty($input['audio'])) {
+                $file = AudioFile::storeFile($input['audio']);
+                $audioListen->update([
+                    'part' => $input['part'],
+                    'quiz_id' => $input['quiz'],
+                    'exam_id' => $input['exam'],
+                    'course_id' => $input['course'],
+                    'audio_code' => $file,
+                ]);
+
+                DB::commit();
+                return back()->with('success', 'Save success');
+            } else {
+                $audioListen->update([
+                    'part' => $input['part'],
+                    'quiz_id' => $input['quiz'],
+                    'exam_id' => $input['exam'],
+                    'course_id' => $input['course'],
+                ]);
+                DB::commit();
+                return back()->with('success', 'Save success');
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return back()->withErrors('Save error');
+        }
     }
 
     /**

@@ -158,14 +158,10 @@ Route::middleware('auth.admin')->group(function () {
     Route::get('manager-student', 'UserManagerController@studentIndex')->name('user-manager.student');
     Route::get('manager-student/edit/{id}', 'UserManagerController@studentEdit')->name('user-manager.student.edit');
     Route::put('manager-student/update/{id}', 'UserManagerController@studentUpdate')->name('user-manager.student.update');
-    Route::get('manager-student/token/edit/{wallet}', 'UserManagerController@editToken')
-        ->name('user-manager.student.editToken');
-    Route::put('manager-student/token/update/{wallet}', 'UserManagerController@updateToken')
-        ->name('user-manager.student.updateToken');
-    Route::get('manager-student/depositHistory/{wallet}', 'UserManagerController@depositHistory')
-        ->name('user-manager.student.depositHistory');
-    Route::get('manager-student/paymentHistory/{user}', 'UserManagerController@paymentHistory')
-        ->name('user-manager.student.paymentHistory');
+    Route::get('manager-student/token/edit/{wallet}', 'UserManagerController@editToken')->name('user-manager.student.editToken');
+    Route::put('manager-student/token/update/{wallet}', 'UserManagerController@updateToken')->name('user-manager.student.updateToken');
+    Route::get('manager-student/depositHistory/{wallet}', 'UserManagerController@depositHistory')->name('user-manager.student.depositHistory');
+    Route::get('manager-student/paymentHistory/{user}', 'UserManagerController@paymentHistory')->name('user-manager.student.paymentHistory');
 
     Route::get('manager-tutor', 'UserManagerController@tutorIndex')->name('user-manager.tutor');
     Route::get('manager-tutor/edit/{id}', 'UserManagerController@tutorEdit')->name('user-manager.tutor.edit');
@@ -187,6 +183,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('student-examination', 'StudentExaminationController');
 
     Route::post('audio-listen', 'AudioListenController@store')->name('audio-listen.store');
+    Route::put('audio-listen/{audioListen}', 'AudioListenController@update')->name('audio-listen.update');
 
     Route::resource('setting', 'SettingController');
     Route::get('setting/edit/{key}', 'SettingController@edit');
