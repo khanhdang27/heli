@@ -25,7 +25,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with('postTag', 'user')->orderByDesc('created_at')->get();
-        $tags = Tag::where('tag_type', Tag::$POST)->get();
+        $tags = Tag::where('tag_type', Tag::POST)->get();
         return view('forum.forum-page', [
             'posts' => $posts,
             'tags' => $tags,
@@ -86,7 +86,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $_post = Post::with('user', 'postTag')->find($post->id);
-        $tags = Tag::where('tag_type', Tag::$POST)->get();
+        $tags = Tag::where('tag_type', Tag::POST)->get();
         return view('forum.post-view', [
             'post' => $_post,
             'tags' => $tags
@@ -179,7 +179,7 @@ class PostController extends Controller
 
     public function showPostByTag(Tag $tag)
     {
-        $tags = Tag::where('tag_type', Tag::$POST)->get();
+        $tags = Tag::where('tag_type', Tag::POST)->get();
         $posts = Post::with('postTag', 'image')->whereHas('postTag', function ($query) use ($tag){
             return $query->where('tags.id', $tag->id);
         })->orderBy('created_at', 'desc')->paginate(9);
