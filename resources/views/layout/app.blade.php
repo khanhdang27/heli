@@ -40,7 +40,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+{{--    <script src="{{ asset('js/bootstrap.min.js') }}"></script>--}}
     <script src="{{ asset('js/lib/main.js') }}"></script>
     <script src="{{ asset('js/home/app.js') }}"></script>
     <script src="{{ asset('js/vue@2.6.14') }}"></script>

@@ -33,7 +33,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $tags = Tag::where('tag_type', Tag::$BLOG)->get();
+        $tags = Tag::where('tag_type', Tag::BLOG)->get();
         return view('admin.blog.create', compact('tags'));
     }
 
@@ -100,7 +100,7 @@ class BlogController extends Controller
     {
         $_blog = Blog::with('tags')
             ->where('id', $blog->id)->first();
-        $tags = Tag::where('tag_type', Tag::$BLOG)->get();
+        $tags = Tag::where('tag_type', Tag::BLOG)->get();
         return view('admin.blog.edit', [
             'blog' => $_blog,
             'tags' => $tags
@@ -154,7 +154,7 @@ class BlogController extends Controller
         $blogs_list = $blogs_list->orderBy('view_no','desc')->limit(5)->get();
 
 
-        $tags = Tag::where('tag_type',Tag::$BLOG)->get();
+        $tags = Tag::where('tag_type',Tag::BLOG)->get();
 
         return view('blog.blog-page',[
             'blog_top' => $blog_top,
@@ -171,7 +171,7 @@ class BlogController extends Controller
 
     public function showBlogPageByTag(Tag $tag)
     {
-        $tags = Tag::where('tag_type',Tag::$BLOG)->get();
+        $tags = Tag::where('tag_type',Tag::BLOG)->get();
 
         return view('blog.blog-page-tag',[
             'tags' => $tags,
