@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <p>Education_level:</p>
+                        <p>Education level:</p>
                     </td>
                     <td>
                         <p class="text-primary">{{$user_info->education_level ?? null}}</p>

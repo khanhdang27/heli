@@ -1,3 +1,12 @@
+@php
+    $education_level = [
+    'Primary education' => 'Primary education',
+    'Junior Secondary education' => 'Junior Secondary education',
+    'Senior Secondary education' => 'Senior Secondary education',
+    'University education' => 'University education',
+    'Went to work' => 'Went to work'
+    ]
+@endphp
 @extends('layout.app')
 
 @section('title', 'Profile')
@@ -58,7 +67,7 @@
 
                     <script type="application/javascript">
                         const displayPhoto = new Vue({
-                                el: '#modalUploadAvatar',
+                                el: '#app',
                                 data() {
                                     return {
                                         url: null,
@@ -101,7 +110,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('education_level', 'Education level') }}
-                        {{ Form::text('education_level', $user_info->education_level ?? null, ['class' => 'form-control']) }}
+                        {{ Form::select('education_level', $education_level, null, ['class' => 'form-control']) }}
                     </div>
                     <div class="d-flex">
                         {{ Form::submit('Save', ['class' => 'btn btn-primary ml-auto mt-3']) }}

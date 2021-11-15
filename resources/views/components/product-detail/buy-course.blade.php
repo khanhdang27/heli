@@ -26,7 +26,7 @@ $course = $courseDetail->membershipCourses->course;
                     @csrf
                     <input name="product_id" value="{{ $courseDetail->id }}" form="form-room" required hidden>
                     <div class="btn-above-video w-100">
-                        <button type="submit" class="btn-register-now w-100 border-primary h4 m-0 py-2">
+                        <button type="submit" class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
                             @lang('keywords.coursePage.buyNow')
                         </button>
                     </div>
@@ -35,7 +35,7 @@ $course = $courseDetail->membershipCourses->course;
         @else
             <div class="btn-above-video">
                 <a href="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
-                    <div class="btn-register-now w-100 border-primary h4 m-0 py-2">
+                    <div class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
                         @lang('keywords.coursePage.buyNow')
                     </div>
                 </a>
@@ -43,7 +43,7 @@ $course = $courseDetail->membershipCourses->course;
         @endif
     @else
         <div class="btn-above-video">
-            <button class="btn-register-now w-100 border-primary h4 m-0 py-2" data-toggle="modal"
+            <button class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2" data-toggle="modal"
                 data-target="#registerModal">
                 @lang('keywords.coursePage.registerNow')
             </button>
@@ -51,12 +51,12 @@ $course = $courseDetail->membershipCourses->course;
     @endif
     <div class="d-flex align-items-center share-bar">
         <span class="mr-2"><img width="36" src="{{ asset('images/ic/ic_share.svg') }}"></span>
-        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
-            aria-controls="collapseExample">
+        <a data-toggle="collapse" href="#collapseShare" role="button" aria-expanded="false"
+            aria-controls="collapseShare">
             <h5 class="pt-1 mb-0">@lang('keywords.coursePage.shareCourse')</h5>
         </a>
     </div>
-    <div class="collapse" id="collapseExample">
+    <div class="collapse" id="collapseShare">
         <div class="sharethis-inline-share-buttons"></div>
     </div>
 </div>
