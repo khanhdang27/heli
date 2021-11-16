@@ -161,14 +161,6 @@ class StudentExaminationController extends Controller
 
             $exams = Examination::find($input['examID']);
 
-            $studentExam = StudentExamination::where([
-                'course_id' => $courseId,
-                'quiz_id' => $quizId,
-                'exam_id' => $exams->id,
-                'student_id' => Auth::user()->id,
-                'question_id' => $input['questions'],
-            ])->first();
-
             $student_course = StudentCourses::where([
                 'student_id' => Auth::user()->id,
                 'course_id' => $courseId,
@@ -176,7 +168,7 @@ class StudentExaminationController extends Controller
 
             $quiz = Quiz::find($quizId)->load('question');
             if ($exams->type == Examination::ASSESSMENT) {
-                [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                [$result, $score, $_] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
 
                 $question = Question::find($input['questions'][0]['questionID']);
                 if ($question->type == Question::SPEAKING) {
@@ -186,9 +178,10 @@ class StudentExaminationController extends Controller
                 }
                 DB::commit();
                 return response()->json(['quiz_result' => $result, 'score' => $score]);
-            } elseif ($exams->type == Examination::EXERCISES) {
+            }
+            elseif ($exams->type == Examination::EXERCISES) {
                 if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
-                    [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                    [$result, $score,  $_] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
                     DB::commit();
                     return response()->json(['quiz_result' => $result, 'score' => $score]);
                 } else {
@@ -196,14 +189,16 @@ class StudentExaminationController extends Controller
                     DB::commit();
                     return response()->json(['message' => 'grading']);
                 }
-            } else {
+            }
+            else {
                 // Quiz Type
                 if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
-                    [$result, $score] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                    [$result, $score, $questionType] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+
                     if ($score / count($result) > 0.8) {
-                        $this->upLevel($student_course, $studentExam->question->type);
+                        $this->upLevel($student_course, $questionType);
                     } else {
-                        $this->resetLevel($student_course, $studentExam->question->type);
+                        $this->resetLevel($student_course, $questionType);
                     }
                     DB::commit();
                     return response()->json(['quiz_result' => $result, 'score' => $score]);
@@ -245,6 +240,7 @@ class StudentExaminationController extends Controller
     {
         $result = [];
         $score = 0;
+        $questionType = 0;
         foreach ($answer as $item) {
             $answerRecord = StudentExamination::where([
                 'student_id' => Auth::user()->id,
@@ -282,6 +278,11 @@ class StudentExaminationController extends Controller
                     'score' => $_answer->is_correct ? Examination::BASE_SCORE_MC : 0,
                 ]);
 
+                if ( $questionType == 0) {
+                    $_answerRecord->load('question');
+                    $questionType = $_answerRecord->question->type;
+                }
+
                 $_answerRecord->update([
                     'had_update' => true,
                 ]);
@@ -294,7 +295,7 @@ class StudentExaminationController extends Controller
             }
         }
 
-        return [$result, $score];
+        return [$result, $score, $questionType];
     }
 
     public function assessment($courseId, $quizId, $examId)

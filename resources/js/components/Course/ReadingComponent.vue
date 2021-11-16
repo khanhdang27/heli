@@ -287,7 +287,7 @@
         <div v-if="typeExam !== $getConst('assessment')">
           <h2 class="text-success">You score {{ allResults.score }}</h2>
           <div class="row justify-content-center align-items-start">
-            <div class="col-lg-6 col-md-10 col-12">
+            <div class="col-lg-7 col-md-10 col-12">
               <div
                 class="text-left mb-2"
                 v-for="result in allResults.quiz_result"
@@ -296,6 +296,7 @@
                 <div
                   v-for="questionItem in questionReading"
                   v-bind:key="questionItem.id"
+                  v-if="result.question === questionItem.id"
                 >
                   <h5 v-if="result.is_correct">
                     <i class="fe fe-check-circle text-success"></i>
@@ -306,18 +307,28 @@
                       <i class="fe fe-x-circle text-danger"></i>
                       {{ questionItem.reading_question.question }}
                     </h5>
-                    <h5
+                    <div
                       class="ml-4"
                       v-for="answerItem in questionItem.reading_question
                         .answers"
                       v-bind:key="answerItem.id"
                     >
-                      <span
+                      <div
                         v-if="answerItem.is_correct === $getConst('correct')"
                       >
-                        Correct answer is: {{ answerItem.answer }}
-                      </span>
-                    </h5>
+                          <div class="d-flex flex-wrap">
+                              <h5 class="mr-2">Correct answer is:</h5>
+                              <div class="h5 mb-0">{{ answerItem.answer }}</div>
+                          </div>
+                          <div class="h5" v-if="typeExam === $getConst('quiz')">
+                              Lecture related:
+                              <a href="#" class="h5 mb-0 border-primary border-bottom"
+                                 v-on:click="goToLecture(questionItem.reading_question.lecture_index)">
+                                  Lecture {{questionItem.reading_question.lecture_index}}
+                              </a>
+                          </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -560,6 +571,21 @@ export default {
         );
       }
     },
+    goToLecture(index){
+        axios.post(route("site.lecture.getLectureRelated"), {
+            courseID: this.courseId,
+            index: index
+        })
+            .then((response) => {
+                console.log("Lecture",response);
+                let level = response.data.level;
+                this.$emit("goToLecture", index,level,this.$root.$getConst('reading'));
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+    }
   },
 };
 </script>
