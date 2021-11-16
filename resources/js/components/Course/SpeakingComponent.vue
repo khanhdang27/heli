@@ -3,19 +3,16 @@
     class="
       container-fluid
       h-100
-      d-flex
-      flex-column
-      justify-content-between
       text-primary
       pt-4
     "
   >
     <h1 class="text-center font-weight-bold">Speaking</h1>
-    <div class="py-4 row h-100 justify-content-center lecture overflow-auto">
-      <div class="col-lg-8">
+    <div v-if="allResults.length === 0">
+      <div class="py-4 row h-100 justify-content-center lecture overflow-auto">
+        <div class="col-lg-8">
         <div class="h-100">
-          <div v-if="allResults.length === 0">
-            <div
+          <div
               v-if="
                 typeExam === $getConst('assessment') &&
                 questionSpeaking[questionIndex]
@@ -54,12 +51,6 @@
               </h3>
               <p>Choose the most correct answer</p>
               <div class="mt-5">
-                <input
-                  :id="'ques' + questionSpeaking[questionIndex].id"
-                  :value="questionSpeaking[questionIndex].id"
-                  hidden
-                  type="number"
-                />
                 <div
                   v-for="answer in questionSpeaking[questionIndex]
                     .speak_assessment_question.answers"
@@ -89,12 +80,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            v-if="
-              typeExam === $getConst('exercise') &&
-              questionSpeaking[questionIndex]
-            "
+          <div v-if="typeExam === $getConst('exercise') &&
+                    questionSpeaking[questionIndex]"
           >
             <h3 v-if="videoId === videoPracticeId">
               Video for you to self-practice
@@ -109,9 +96,8 @@
               width="100%"
             />
           </div>
-          <div v-if="allResults.length === 0">
-            <div v-if="typeExam === $getConst('quiz')">
-              <!-- <div class="h4 text-center">
+          <div class="h-100" v-if="typeExam === $getConst('quiz')">
+              <div class="h4 text-center timer mb-3">
                 <vue-countdown-timer
                   id="timePause"
                   v-if="pause === true"
@@ -155,10 +141,10 @@
                     <span>{{ scope.props.hours }} </span><a>:</a>
                     <span>{{ scope.props.minutes }} </span><a>:</a>
                     <span>{{ scope.props.seconds }} </span><a></a>
-                    <h4 class="mt-3">
+                    <h5 class="mt-3">
                       After 1 minute is over, you will have 2 minutes to answer
-                      the last question?
-                    </h4>
+                      the last question.
+                    </h5>
                   </template>
                 </vue-countdown-timer>
                 <vue-countdown-timer
@@ -206,24 +192,24 @@
                     <span>{{ scope.props.seconds }} </span><a></a>
                   </template>
                 </vue-countdown-timer>
-              </div> -->
-              <!-- <div v-if="questionIndex < questionSpeaking.length - 1">
-                <h3 v-cloak v-if="questionSpeaking[questionIndex]">
-                  {{ questionIndex + 1 }}
-                  {{
-                    questionSpeaking[questionIndex].speak_quiz_question.question
-                  }}
-                </h3>
-                <p>
-                  Please record one video with voice that answers all question.
-                </p>
               </div>
-              <h3 v-cloak v-if="showLastQuestion === true">
-                {{ questionIndex + 1 }}
-                {{
-                  questionSpeaking[questionIndex].speak_quiz_question.question
-                }}
-              </h3> -->
+<!--              <div v-if="questionIndex < questionSpeaking.length - 1">-->
+<!--                <h3 v-cloak v-if="questionSpeaking[questionIndex]">-->
+<!--                  {{ questionIndex + 1 }}-->
+<!--                  {{-->
+<!--                    questionSpeaking[questionIndex].speak_quiz_question.question-->
+<!--                  }}-->
+<!--                </h3>-->
+<!--                <p>-->
+<!--                  Please record one video with voice that answers all question.-->
+<!--                </p>-->
+<!--              </div>-->
+<!--              <h3 v-cloak v-if="showLastQuestion === true">-->
+<!--                {{ questionIndex + 1 }}-->
+<!--                {{-->
+<!--                  questionSpeaking[questionIndex].speak_quiz_question.question-->
+<!--                }}-->
+<!--              </h3>-->
               <h3 v-if="questionSpeaking[questionIndex]">
                 {{ questionIndex + 1 }}
                 {{
@@ -257,13 +243,12 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
-    </div>
-    <div class="button control">
+      </div>
+      <div class="button control">
       <div
-        v-if="typeExam === $getConst('assessment') && allResults.length === 0"
+        v-if="typeExam === $getConst('assessment')"
         class="text-right py-4 pr-3"
       >
         <button
@@ -310,7 +295,7 @@
         </span>
       </div>
       <div
-        v-if="typeExam === $getConst('quiz') && allResults.length === 0"
+        v-if="typeExam === $getConst('quiz')"
         class="text-right py-4 pr-3"
       >
         <span>
@@ -331,7 +316,8 @@
         </span>
       </div>
     </div>
-    <div v-if="allResults.length !== 0" class="h-100">
+    </div>
+    <div v-else class="h-100">
       <div class="text-center">
         <div v-if="typeExam !== $getConst('assessment')">
           <div class="text-success">
@@ -566,12 +552,13 @@ export default {
       if (this.questionIndex < this.questionSpeaking.length - 1) {
         if (this.typeExam === this.$root.$getConst("assessment")) {
           this.userAnswer();
-        } else if (this.questionIndex === this.questionSpeaking.length - 2) {
-          this.pause = true;
-          console.log("pause", this.pause);
-          this.timeNow = new Date();
-          this.timeEnd = new Date();
-          this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
+        } else {
+            if (this.questionIndex === this.questionSpeaking.length - 2){
+                this.pause = true;
+                this.timeNow = new Date();
+                this.timeEnd = new Date();
+                this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
+            }
         }
 
         this.questionIndex++;
@@ -604,14 +591,11 @@ export default {
     },
     userAnswer: function () {
       if (this.typeExam === this.$root.$getConst("assessment")) {
-        this.questionNo = document.getElementById(
-          "ques" + this.questionSpeaking[this.questionIndex].id
-        ).value;
         this.timeDo = (new Date() - this.timeStartDo) / 1000;
         this.timeStartDo = new Date();
         this.userAnswerQuiz({
           answerType: this.$root.$getConst("MC"),
-          questionID: parseInt(this.questionNo),
+          questionID: parseInt(this.questionSpeaking[this.questionIndex].id),
           answerID: this.userChoose[this.questionIndex],
           time: this.timeDo,
         });
@@ -724,4 +708,7 @@ export default {
 </script>
 
 <style scoped>
+    .timer{
+        min-height: 60px;
+    }
 </style>

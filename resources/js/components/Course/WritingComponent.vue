@@ -74,12 +74,6 @@
               </h3>
               <p>Choose the most correct answer</p>
               <div class="mt-5">
-                <input
-                  :id="'ques' + questionWriting[questionIndex].id"
-                  :value="questionWriting[questionIndex].id"
-                  hidden
-                  type="number"
-                />
                 <div
                   v-for="answer in questionWriting[questionIndex]
                     .writing_assessment_question.answers"
@@ -149,12 +143,6 @@
               </h3>
               <p>Choose the most correct answer</p>
               <div class="mt-5">
-                <input
-                  :id="'ques' + questionWriting[questionIndex].id"
-                  :value="questionWriting[questionIndex].id"
-                  hidden
-                  type="number"
-                />
                 <div
                   v-for="answer in questionWriting[questionIndex]
                     .writing_assessment_question.answers"
@@ -507,15 +495,12 @@ export default {
       } else {
         ansType = this.$root.$getConst("MC");
       }
-      this.questionNo = document.getElementById(
-        "ques" + this.questionWriting[this.questionIndex].id
-      ).value;
       this.timeDo = (new Date() - this.timeStartDo) / 1000;
       this.timeStartDo = new Date();
 
       this.userAnswerQuiz({
         answerType: ansType,
-        questionID: parseInt(this.questionNo),
+        questionID: parseInt(this.questionWriting[this.questionIndex].id),
         answerID: this.userChoose[this.questionIndex],
         time: this.timeDo,
       });

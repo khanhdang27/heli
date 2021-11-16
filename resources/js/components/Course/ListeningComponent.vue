@@ -49,12 +49,6 @@
                 </h3>
                 <p>Choose the most correct answer</p>
                 <div class="mt-5">
-                  <input
-                    :id="'ques' + questionListening[questionIndex].id"
-                    :value="questionListening[questionIndex].id"
-                    hidden
-                    type="number"
-                  />
                   <div
                     v-for="answer in questionListening[questionIndex]
                       .listen_assessment_question.answers"
@@ -149,12 +143,6 @@
                 </h3>
                 <p>Choose the most correct answer</p>
                 <div class="mt-5">
-                  <input
-                    :id="'ques' + questionListening[questionIndex].id"
-                    :value="questionListening[questionIndex].id"
-                    hidden
-                    type="number"
-                  />
                   <div
                     v-for="answer in questionListening[questionIndex]
                       .listen_assessment_question.answers"
@@ -201,12 +189,6 @@
                 </h3>
                 <p>Choose the most correct answer</p>
                 <div class="mt-5">
-                  <input
-                    :id="'ques' + questionListening[questionIndex].id"
-                    :value="questionListening[questionIndex].id"
-                    hidden
-                    type="number"
-                  />
                   <div
                     v-for="answer in questionListening[questionIndex]
                       .listen_assessment_question.answers"
@@ -523,13 +505,10 @@ export default {
       this.$emit("nextTypeExam", this.$root.$getConst("speaking"));
     },
     userAnswer: function () {
-      this.questionNo = document.getElementById(
-        "ques" + this.questionListening[this.questionIndex].id
-      ).value;
 
       this.userAnswerQuiz({
         answerType: this.$root.$getConst("MC"),
-        questionID: parseInt(this.questionNo),
+        questionID: parseInt(this.questionListening[this.questionIndex].id),
         answerID: this.userChoose[this.questionIndex],
         time: this.timeDo,
       });

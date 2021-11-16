@@ -95,12 +95,6 @@
                 <p>Choose the most correct answer</p>
 
                 <div class="mt-5">
-                  <input
-                    type="number"
-                    :id="'ques' + questionReading[questionIndex].id"
-                    :value="questionReading[questionIndex].id"
-                    hidden
-                  />
                   <div
                     v-for="answer in questionReading[questionIndex]
                       .reading_question.answers"
@@ -175,12 +169,6 @@
                 <p>Choose the most correct answer</p>
 
                 <div class="mt-5">
-                  <input
-                    type="number"
-                    :id="'ques' + questionReading[questionIndex].id"
-                    :value="questionReading[questionIndex].id"
-                    hidden
-                  />
                   <div
                     v-for="answer in questionReading[questionIndex]
                       .reading_question.answers"
@@ -224,12 +212,6 @@
                 <p>Choose the most correct answer</p>
 
                 <div class="mt-5">
-                  <input
-                    type="number"
-                    :id="'ques' + questionReading[questionIndex].id"
-                    :value="questionReading[questionIndex].id"
-                    hidden
-                  />
                   <div
                     v-for="answer in questionReading[questionIndex]
                       .reading_question.answers"
@@ -488,15 +470,12 @@ export default {
       this.$emit("nextTypeExam", this.$root.$getConst("writing"));
     },
     userAnswer: function () {
-      this.questionNo = document.getElementById(
-        "ques" + this.questionReading[this.questionIndex].id
-      ).value;
       this.timeDo = (new Date() - this.timeStartDo) / 1000;
       this.timeStartDo = new Date();
 
       this.userAnswerQuiz({
         answerType: this.$root.$getConst("MC"),
-        questionID: parseInt(this.questionNo),
+        questionID: parseInt(this.questionReading[this.questionIndex].id),
         answerID: this.userChoose[this.questionIndex],
         time: this.timeDo,
       });
