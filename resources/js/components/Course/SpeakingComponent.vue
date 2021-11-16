@@ -406,7 +406,7 @@ export default {
       showLastQuestion: false,
       videoPracticeId: "",
       videoResponseId: "",
-      videoID: null,
+      videoSubmitID: null,
     };
   },
   watch: {
@@ -553,6 +553,7 @@ export default {
       if (this.questionIndex < this.questionSpeaking.length - 1) {
         if (this.typeExam === this.$root.$getConst("assessment")) {
           this.userAnswer();
+          this.loadAudio();
         } else {
             if (this.questionIndex === this.questionSpeaking.length - 2){
                 this.pause = true;
@@ -561,11 +562,15 @@ export default {
                 this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
             }
         }
-
-        this.questionIndex++;
-        if (this.typeExam === this.$root.$getConst("assessment")) {
-          this.loadAudio();
+        if (this.typeExam === this.$root.$getConst("quiz")) {
+            this.userAnswerQuiz({
+                answerType: this.$root.$getConst("Video"),
+                questionID: parseInt(this.questionSpeaking[this.questionIndex].id),
+                answerID: '',
+                time: null,
+            });
         }
+        this.questionIndex++;
       }
     },
     prev: function () {
@@ -581,9 +586,14 @@ export default {
     },
     submit: function () {
       this.userAnswer();
+      if (this.typeExam === this.$root.$getConst("quiz")) {
+        this.player.record().stop();
+        console.log('is waiting upload video');
+      }
       axios
         .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
         .then((data) => {
+            console.log('push data success');
           this.allResults = data.data;
         })
         .catch((error) => {
@@ -678,7 +688,11 @@ export default {
           this.updateProgress(data.loaded / data.total);
         },
         onComplete: function (videoId, index) {
-          this.videoID = videoId;
+          this.videoSubmitID = videoId;
+
+          this.resultCheck.questions.map((item) => {
+              return (item.answerID = this.videoSubmitID);
+          });
         },
       }).upload();
     },
