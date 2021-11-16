@@ -420,6 +420,7 @@ export default {
       showLastQuestion: false,
       videoPracticeId: "",
       videoResponseId: "",
+      videoID: null,
     };
   },
   watch: {
@@ -693,23 +694,7 @@ export default {
           this.updateProgress(data.loaded / data.total);
         },
         onComplete: function (videoId, index) {
-          console.log("videoId :>>", videoId);
-          // typeExam
-          // examId
-          // courseId
-          this.resultCheck = {
-            courseID: this.courseId,
-            examID: this.examId,
-            questions: [
-              {
-                answerID: videoId,
-                answerType: 3,
-                questionID: this.questionSpeaking.id,
-                time: "",
-              },
-            ],
-            quizID: this.questionSpeaking[this.questionIndex].quiz_id,
-          };
+          this.videoID = videoId;
         },
       }).upload();
     },
