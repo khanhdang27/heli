@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 5.5.62, for Win64 (AMD64)
 --
--- Host: 178.128.213.86    Database: helios_test
+-- Host: localhost    Database: helios_test
 -- ------------------------------------------------------
--- Server version	8.0.27-0ubuntu0.20.04.1
+-- Server version	8.0.21
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -923,7 +923,7 @@ CREATE TABLE `orders` (
   KEY `orders_course_id_foreign` (`course_id`),
   CONSTRAINT `orders_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE,
   CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -932,7 +932,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (2,4,'618c06747083c',1,1,30,0,30,0,30,10,NULL,NULL,'2021-11-10 17:50:44','2021-11-10 17:50:44',NULL),(3,7,'6191b831b8840',1,1,30,0,30,0,30,10,NULL,NULL,'2021-11-15 01:30:25','2021-11-15 01:30:25',NULL),(4,7,'6191c94a414e6',3,1,32,0,32,0,32,10,NULL,NULL,'2021-11-15 02:43:22','2021-11-15 02:43:22',NULL);
+INSERT INTO `orders` VALUES (2,4,'618c06747083c',1,1,30,0,30,0,30,10,NULL,NULL,'2021-11-10 17:50:44','2021-11-10 17:50:44',NULL),(3,7,'6191b831b8840',1,1,30,0,30,0,30,10,NULL,NULL,'2021-11-15 01:30:25','2021-11-15 01:30:25',NULL),(4,7,'6191c94a414e6',3,1,32,0,32,0,32,10,NULL,NULL,'2021-11-15 02:43:22','2021-11-15 02:43:22',NULL),(5,4,'619287de5a6d7',3,1,32,0,32,0,32,10,NULL,NULL,'2021-11-15 09:16:30','2021-11-15 09:16:30',NULL);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1102,7 +1102,7 @@ CREATE TABLE `questions` (
   PRIMARY KEY (`id`),
   KEY `questions_quiz_id_foreign` (`quiz_id`),
   CONSTRAINT `questions_quiz_id_foreign` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1111,7 +1111,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,1,1,1,'2021-11-10 09:09:56','2021-11-10 09:09:56',NULL),(2,1,1,2,'2021-11-10 09:10:10','2021-11-10 09:10:10',NULL),(3,1,2,3,'2021-11-10 09:11:26','2021-11-10 09:11:26',NULL),(4,1,2,4,'2021-11-10 09:11:44','2021-11-10 09:11:44',NULL),(5,1,3,5,'2021-11-10 09:21:51','2021-11-10 09:21:51',NULL),(6,1,3,6,'2021-11-10 09:22:13','2021-11-10 09:22:13',NULL),(7,1,4,7,'2021-11-10 09:23:51','2021-11-10 09:23:51',NULL),(8,1,4,8,'2021-11-10 09:24:25','2021-11-10 09:24:25',NULL),(9,5,1,1,'2021-11-15 01:38:04','2021-11-15 01:50:40',NULL),(10,5,4,1,'2021-11-15 01:49:56','2021-11-15 01:49:56',NULL),(11,5,3,1,'2021-11-15 01:50:57','2021-11-15 01:51:05','2021-11-15 01:51:05'),(12,6,1,1,'2021-11-15 01:53:14','2021-11-15 01:53:14',NULL),(13,5,2,1,'2021-11-15 01:54:17','2021-11-15 01:54:17',NULL),(14,5,3,1,'2021-11-15 01:54:48','2021-11-15 01:54:48',NULL),(15,10,1,1,'2021-11-15 01:58:51','2021-11-15 01:58:51',NULL),(16,10,2,1,'2021-11-15 02:02:58','2021-11-15 02:02:58',NULL),(17,10,3,1,'2021-11-15 02:03:56','2021-11-15 02:03:56',NULL),(18,10,4,1,'2021-11-15 02:04:46','2021-11-15 02:04:46',NULL);
+INSERT INTO `questions` VALUES (1,1,1,1,'2021-11-10 09:09:56','2021-11-10 09:09:56',NULL),(2,1,1,2,'2021-11-10 09:10:10','2021-11-10 09:10:10',NULL),(3,1,2,3,'2021-11-10 09:11:26','2021-11-10 09:11:26',NULL),(4,1,2,4,'2021-11-10 09:11:44','2021-11-10 09:11:44',NULL),(5,1,3,5,'2021-11-10 09:21:51','2021-11-10 09:21:51',NULL),(6,1,3,6,'2021-11-10 09:22:13','2021-11-10 09:22:13',NULL),(7,1,4,7,'2021-11-10 09:23:51','2021-11-10 09:23:51',NULL),(8,1,4,8,'2021-11-10 09:24:25','2021-11-10 09:24:25',NULL),(9,5,1,1,'2021-11-15 01:38:04','2021-11-15 01:50:40',NULL),(10,5,4,1,'2021-11-15 01:49:56','2021-11-15 01:49:56',NULL),(11,5,3,1,'2021-11-15 01:50:57','2021-11-15 01:51:05','2021-11-15 01:51:05'),(12,6,1,1,'2021-11-15 01:53:14','2021-11-15 01:53:14',NULL),(13,5,2,1,'2021-11-15 01:54:17','2021-11-15 01:54:17',NULL),(14,5,3,1,'2021-11-15 01:54:48','2021-11-15 01:54:48',NULL),(15,10,1,1,'2021-11-15 01:58:51','2021-11-15 01:58:51',NULL),(16,10,2,1,'2021-11-15 02:02:58','2021-11-15 02:02:58',NULL),(17,10,3,1,'2021-11-15 02:03:56','2021-11-15 02:03:56',NULL),(18,10,4,1,'2021-11-15 02:04:46','2021-11-15 02:04:46',NULL),(19,9,4,1,'2021-11-16 00:23:27','2021-11-16 00:23:27',NULL),(20,9,4,2,'2021-11-16 00:24:03','2021-11-16 00:24:03',NULL),(21,9,4,3,'2021-11-16 00:24:20','2021-11-16 00:24:20',NULL),(22,9,4,4,'2021-11-16 00:26:16','2021-11-16 00:26:16',NULL);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1597,7 +1597,7 @@ CREATE TABLE `speak_quiz_questions` (
   PRIMARY KEY (`id`),
   KEY `speak_quiz_questions_question_id_foreign` (`question_id`),
   CONSTRAINT `speak_quiz_questions_question_id_foreign` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1606,7 +1606,7 @@ CREATE TABLE `speak_quiz_questions` (
 
 LOCK TABLES `speak_quiz_questions` WRITE;
 /*!40000 ALTER TABLE `speak_quiz_questions` DISABLE KEYS */;
-INSERT INTO `speak_quiz_questions` VALUES (1,18,'Lorem ipsum, or lipsum as it is sometimes known ?','wrong',2,NULL,'2021-11-15 02:04:46','2021-11-15 02:04:46');
+INSERT INTO `speak_quiz_questions` VALUES (1,18,'Lorem ipsum, or lipsum as it is sometimes known ?','wrong',2,NULL,'2021-11-15 02:04:46','2021-11-15 02:04:46'),(2,19,'Question 1','Question 1',1,NULL,'2021-11-16 00:23:27','2021-11-16 00:23:48'),(3,20,'Question 2','Question 1',1,NULL,'2021-11-16 00:24:03','2021-11-16 00:24:03'),(4,21,'Question 3','Question 1',1,NULL,'2021-11-16 00:24:20','2021-11-16 00:24:20'),(5,22,'Question 4','Question 4',1,NULL,'2021-11-16 00:26:16','2021-11-16 00:26:16');
 /*!40000 ALTER TABLE `speak_quiz_questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1650,7 +1650,7 @@ CREATE TABLE `student_courses` (
   KEY `student_courses_course_id_foreign` (`course_id`),
   CONSTRAINT `student_courses_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE,
   CONSTRAINT `student_courses_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1659,7 +1659,7 @@ CREATE TABLE `student_courses` (
 
 LOCK TABLES `student_courses` WRITE;
 /*!40000 ALTER TABLE `student_courses` DISABLE KEYS */;
-INSERT INTO `student_courses` VALUES (2,1,4,NULL,'2021-11-10 17:50:44',1,'0,1,2,3,6,',5,5,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-10 17:50:44','2021-11-12 15:19:20',NULL),(3,1,7,NULL,'2021-11-15 01:30:25',8,'8,',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 01:30:25','2021-11-15 01:30:30',NULL),(4,3,7,NULL,'2021-11-15 02:43:22',1,'1,',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 02:43:22','2021-11-15 02:43:27',NULL);
+INSERT INTO `student_courses` VALUES (2,1,4,NULL,'2021-11-10 17:50:44',1,'0,1,2,3,6,',5,5,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-10 17:50:44','2021-11-12 15:19:20',NULL),(3,1,7,NULL,'2021-11-15 01:30:25',8,'8,',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 01:30:25','2021-11-15 01:30:30',NULL),(4,3,7,NULL,'2021-11-15 02:43:22',1,'1,',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 02:43:22','2021-11-15 02:43:27',NULL),(5,3,4,NULL,'2021-11-15 16:16:30',6,'0,16,4,6,',5,5,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 09:16:30','2021-11-16 00:33:40',NULL);
 /*!40000 ALTER TABLE `student_courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2024,7 +2024,7 @@ CREATE TABLE `transactions` (
   KEY `transactions_type_index` (`type`),
   KEY `transactions_wallet_id_foreign` (`wallet_id`),
   CONSTRAINT `transactions_wallet_id_foreign` FOREIGN KEY (`wallet_id`) REFERENCES `wallets` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2033,7 +2033,7 @@ CREATE TABLE `transactions` (
 
 LOCK TABLES `transactions` WRITE;
 /*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
-INSERT INTO `transactions` VALUES (1,'App\\Models\\User',3,1,'deposit',2000,1,'{\"card\": \"4242\"}','208dd127-4b8a-43ee-a57b-c0ebfb4fd7f5','2021-11-10 09:38:05','2021-11-10 09:38:05'),(2,'App\\Models\\User',3,1,'withdraw',-30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','c3fe46e6-a092-4286-b873-7ed2ed552826','2021-11-10 09:38:45','2021-11-10 09:38:45'),(3,'App\\Models\\CourseMembershipDiscount',1,2,'deposit',30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','73e7be3f-1ce2-46a8-906a-1ccee159bfa2','2021-11-10 09:38:45','2021-11-10 09:38:45'),(4,'App\\Models\\User',4,3,'deposit',2000,1,'{\"card\": \"4242\"}','71261329-ed5a-4f76-a5d9-99e3727326ec','2021-11-10 17:50:27','2021-11-10 17:50:27'),(5,'App\\Models\\User',4,3,'withdraw',-30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','db88f6e2-d059-4691-bf58-ebebe39955c4','2021-11-10 17:50:44','2021-11-10 17:50:44'),(6,'App\\Models\\CourseMembershipDiscount',1,2,'deposit',30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','2736c83b-f463-494d-902d-72eaa5d086b2','2021-11-10 17:50:44','2021-11-10 17:50:44'),(7,'App\\Models\\User',7,5,'deposit',2000,1,'{\"card\": \"4242\"}','4533d865-3026-427a-bdbb-6489265a03b3','2021-11-15 01:20:39','2021-11-15 01:20:39'),(8,'App\\Models\\User',7,5,'withdraw',-30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','b36cade9-a9b6-42d4-a51a-eb9c43786b2d','2021-11-15 01:30:25','2021-11-15 01:30:25'),(9,'App\\Models\\CourseMembershipDiscount',1,2,'deposit',30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','bdcece38-bbdb-4f69-ba05-18e11975cc02','2021-11-15 01:30:25','2021-11-15 01:30:25'),(10,'App\\Models\\User',7,5,'withdraw',-32,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','b43ae749-d4be-457d-8d20-f6bd4f9abf50','2021-11-15 02:43:22','2021-11-15 02:43:22'),(11,'App\\Models\\CourseMembershipDiscount',2,6,'deposit',32,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','adb4b86d-21b9-4020-a468-7d37b454d5d4','2021-11-15 02:43:22','2021-11-15 02:43:22');
+INSERT INTO `transactions` VALUES (1,'App\\Models\\User',3,1,'deposit',2000,1,'{\"card\": \"4242\"}','208dd127-4b8a-43ee-a57b-c0ebfb4fd7f5','2021-11-10 09:38:05','2021-11-10 09:38:05'),(2,'App\\Models\\User',3,1,'withdraw',-30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','c3fe46e6-a092-4286-b873-7ed2ed552826','2021-11-10 09:38:45','2021-11-10 09:38:45'),(3,'App\\Models\\CourseMembershipDiscount',1,2,'deposit',30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','73e7be3f-1ce2-46a8-906a-1ccee159bfa2','2021-11-10 09:38:45','2021-11-10 09:38:45'),(4,'App\\Models\\User',4,3,'deposit',2000,1,'{\"card\": \"4242\"}','71261329-ed5a-4f76-a5d9-99e3727326ec','2021-11-10 17:50:27','2021-11-10 17:50:27'),(5,'App\\Models\\User',4,3,'withdraw',-30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','db88f6e2-d059-4691-bf58-ebebe39955c4','2021-11-10 17:50:44','2021-11-10 17:50:44'),(6,'App\\Models\\CourseMembershipDiscount',1,2,'deposit',30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','2736c83b-f463-494d-902d-72eaa5d086b2','2021-11-10 17:50:44','2021-11-10 17:50:44'),(7,'App\\Models\\User',7,5,'deposit',2000,1,'{\"card\": \"4242\"}','4533d865-3026-427a-bdbb-6489265a03b3','2021-11-15 01:20:39','2021-11-15 01:20:39'),(8,'App\\Models\\User',7,5,'withdraw',-30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','b36cade9-a9b6-42d4-a51a-eb9c43786b2d','2021-11-15 01:30:25','2021-11-15 01:30:25'),(9,'App\\Models\\CourseMembershipDiscount',1,2,'deposit',30,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','bdcece38-bbdb-4f69-ba05-18e11975cc02','2021-11-15 01:30:25','2021-11-15 01:30:25'),(10,'App\\Models\\User',7,5,'withdraw',-32,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','b43ae749-d4be-457d-8d20-f6bd4f9abf50','2021-11-15 02:43:22','2021-11-15 02:43:22'),(11,'App\\Models\\CourseMembershipDiscount',2,6,'deposit',32,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','adb4b86d-21b9-4020-a468-7d37b454d5d4','2021-11-15 02:43:22','2021-11-15 02:43:22'),(12,'App\\Models\\User',4,3,'withdraw',-32,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','5548d15c-c3f8-4bb0-8163-14a32cdcb482','2021-11-15 09:16:30','2021-11-15 09:16:30'),(13,'App\\Models\\CourseMembershipDiscount',2,6,'deposit',32,1,'{\"title\": \"course\", \"description\": \"Purchase of Product course\"}','6da6bdbc-54b3-40b2-abd6-a3b1ca5e7c56','2021-11-15 09:16:30','2021-11-15 09:16:30');
 /*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2067,7 +2067,7 @@ CREATE TABLE `transfers` (
   KEY `transfers_withdraw_id_foreign` (`withdraw_id`),
   CONSTRAINT `transfers_deposit_id_foreign` FOREIGN KEY (`deposit_id`) REFERENCES `transactions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `transfers_withdraw_id_foreign` FOREIGN KEY (`withdraw_id`) REFERENCES `transactions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2076,7 +2076,7 @@ CREATE TABLE `transfers` (
 
 LOCK TABLES `transfers` WRITE;
 /*!40000 ALTER TABLE `transfers` DISABLE KEYS */;
-INSERT INTO `transfers` VALUES (1,'Bavix\\Wallet\\Models\\Wallet',1,'App\\Models\\CourseMembershipDiscount',1,'paid',NULL,3,2,0,0,'489a05f8-427b-4df3-a697-cc213068cd8b','2021-11-10 09:38:45','2021-11-10 09:38:45'),(2,'Bavix\\Wallet\\Models\\Wallet',3,'App\\Models\\CourseMembershipDiscount',1,'paid',NULL,6,5,0,0,'019a69d8-b444-4ba8-a8ac-a68254105bb4','2021-11-10 17:50:44','2021-11-10 17:50:44'),(3,'Bavix\\Wallet\\Models\\Wallet',5,'App\\Models\\CourseMembershipDiscount',1,'paid',NULL,9,8,0,0,'4f737c1a-a868-4068-80a3-c80d891a4f15','2021-11-15 01:30:25','2021-11-15 01:30:25'),(4,'Bavix\\Wallet\\Models\\Wallet',5,'App\\Models\\CourseMembershipDiscount',2,'paid',NULL,11,10,0,0,'29ce6b21-a2a7-4f44-a491-f9a068b4bd08','2021-11-15 02:43:22','2021-11-15 02:43:22');
+INSERT INTO `transfers` VALUES (1,'Bavix\\Wallet\\Models\\Wallet',1,'App\\Models\\CourseMembershipDiscount',1,'paid',NULL,3,2,0,0,'489a05f8-427b-4df3-a697-cc213068cd8b','2021-11-10 09:38:45','2021-11-10 09:38:45'),(2,'Bavix\\Wallet\\Models\\Wallet',3,'App\\Models\\CourseMembershipDiscount',1,'paid',NULL,6,5,0,0,'019a69d8-b444-4ba8-a8ac-a68254105bb4','2021-11-10 17:50:44','2021-11-10 17:50:44'),(3,'Bavix\\Wallet\\Models\\Wallet',5,'App\\Models\\CourseMembershipDiscount',1,'paid',NULL,9,8,0,0,'4f737c1a-a868-4068-80a3-c80d891a4f15','2021-11-15 01:30:25','2021-11-15 01:30:25'),(4,'Bavix\\Wallet\\Models\\Wallet',5,'App\\Models\\CourseMembershipDiscount',2,'paid',NULL,11,10,0,0,'29ce6b21-a2a7-4f44-a491-f9a068b4bd08','2021-11-15 02:43:22','2021-11-15 02:43:22'),(5,'Bavix\\Wallet\\Models\\Wallet',3,'App\\Models\\CourseMembershipDiscount',2,'paid',NULL,13,12,0,0,'c55c28e7-5b48-4734-aeab-9a6fb4c17d70','2021-11-15 09:16:30','2021-11-15 09:16:30');
 /*!40000 ALTER TABLE `transfers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2283,7 +2283,7 @@ CREATE TABLE `wallets` (
 
 LOCK TABLES `wallets` WRITE;
 /*!40000 ALTER TABLE `wallets` DISABLE KEYS */;
-INSERT INTO `wallets` VALUES (1,'App\\Models\\User',3,'Default Wallet','default',NULL,'[]',1970,2,'2021-11-10 09:36:27','2021-11-10 09:38:45','wallet618beb7bc48044.74556969'),(2,'App\\Models\\CourseMembershipDiscount',1,'Default Wallet','default',NULL,'[]',90,2,'2021-11-10 09:38:45','2021-11-15 01:30:25','wallet618beb7bc48044.74556969'),(3,'App\\Models\\User',4,'Default Wallet','default',NULL,'[]',1970,2,'2021-11-10 17:49:06','2021-11-10 17:50:44','wallet618beb7bc48044.74556969'),(4,'App\\Models\\User',5,'Default Wallet','default',NULL,'[]',0,2,'2021-11-10 18:00:18','2021-11-10 18:00:18','wallet618beb7bc48044.74556969'),(5,'App\\Models\\User',7,'Default Wallet','default',NULL,'[]',1938,2,'2021-11-15 01:19:12','2021-11-15 02:43:22','wallet618beb7bc48044.74556969'),(6,'App\\Models\\CourseMembershipDiscount',2,'Default Wallet','default',NULL,'[]',32,2,'2021-11-15 02:43:22','2021-11-15 02:43:22','wallet618beb7bc48044.74556969');
+INSERT INTO `wallets` VALUES (1,'App\\Models\\User',3,'Default Wallet','default',NULL,'[]',1970,2,'2021-11-10 09:36:27','2021-11-10 09:38:45','wallet618beb7bc48044.74556969'),(2,'App\\Models\\CourseMembershipDiscount',1,'Default Wallet','default',NULL,'[]',90,2,'2021-11-10 09:38:45','2021-11-15 01:30:25','wallet618beb7bc48044.74556969'),(3,'App\\Models\\User',4,'Default Wallet','default',NULL,'[]',1938,2,'2021-11-10 17:49:06','2021-11-15 09:16:30','wallet618beb7bc48044.74556969'),(4,'App\\Models\\User',5,'Default Wallet','default',NULL,'[]',0,2,'2021-11-10 18:00:18','2021-11-10 18:00:18','wallet618beb7bc48044.74556969'),(5,'App\\Models\\User',7,'Default Wallet','default',NULL,'[]',1938,2,'2021-11-15 01:19:12','2021-11-15 02:43:22','wallet618beb7bc48044.74556969'),(6,'App\\Models\\CourseMembershipDiscount',2,'Default Wallet','default',NULL,'[]',64,2,'2021-11-15 02:43:22','2021-11-15 09:16:30','wallet618beb7bc48044.74556969');
 /*!40000 ALTER TABLE `wallets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2425,4 +2425,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-15 15:07:23
+-- Dump completed on 2021-11-16 15:02:58
