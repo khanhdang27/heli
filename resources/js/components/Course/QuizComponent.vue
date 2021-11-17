@@ -6,6 +6,7 @@
         v-bind:typeExam="typeExam"
         v-bind:courseId="courseId"
         @nextTypeExam="nextTypeExam"
+        @goToLecture="goToLecture"
       >
       </reading-component>
     </div>
@@ -24,6 +25,7 @@
         v-bind:typeExam="typeExam"
         v-bind:courseId="courseId"
         @nextTypeExam="nextTypeExam"
+        @goToLecture="goToLecture"
       ></listening-component>
     </div>
     <div v-if="typeExercise === $getConst('speaking')" class="h-100">
@@ -121,8 +123,8 @@ export default {
         this.userChoose.push(item.answerID);
       });
     },
-    goToLecture(index) {
-      this.$emit("goToLecture", index);
+    goToLecture(index, level, type) {
+      this.$emit("goToLecture", index, level, type);
     },
     reTryLecture() {
       this.$emit("reTryLecture");

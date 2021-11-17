@@ -12,7 +12,7 @@
                 :examId="lectureList[lectureIndex].id"
                 :questionType="questionType"
                 v-if="questions"
-                @goToLecture="onClickLecture(index)"
+                @goToLecture="onClickLecture"
                 @reTryLecture="reTryLecture()"
                 @nextToLecture="nextToLecture()"
               ></quiz-component>

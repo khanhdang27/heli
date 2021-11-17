@@ -266,6 +266,7 @@
                 <div
                   v-for="questionItem in questionListening"
                   v-bind:key="questionItem.id"
+                  v-if="result.question === questionItem.id"
                 >
                   <h5 v-if="result.is_correct">
                     <i class="fe fe-check-circle text-success"></i>
@@ -276,18 +277,28 @@
                       <i class="fe fe-x-circle text-danger"></i>
                       {{ questionItem.listen_assessment_question.question }}
                     </h5>
-                    <h5
+                    <div
                       class="ml-4"
                       v-for="answerItem in questionItem
                         .listen_assessment_question.answers"
                       v-bind:key="answerItem.id"
                     >
-                      <span
+                      <div
                         v-if="answerItem.is_correct === $getConst('correct')"
                       >
-                        Correct answer is: {{ answerItem.answer }}
-                      </span>
-                    </h5>
+                        <div class="d-flex flex-wrap">
+                              <h5 class="mr-2">Correct answer is:</h5>
+                              <div class="h5 mb-0">{{ answerItem.answer }}</div>
+                        </div>
+                          <div class="h5" v-if="typeExam === $getConst('quiz')">
+                              Lecture related:
+                              <a href="#" class="h5 mb-0 border-primary border-bottom"
+                                 v-on:click="goToLecture(questionItem.listen_assessment_question.lecture_index)">
+                                  Lecture {{questionItem.listen_assessment_question.lecture_index}}
+                              </a>
+                          </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -550,6 +561,21 @@ export default {
         this.userChoose.push(item.answerID);
       });
     },
+    goToLecture(index){
+          axios.post(route("site.lecture.getLectureRelated"), {
+              courseID: this.courseId,
+              index: index
+          })
+              .then((response) => {
+                  console.log("Lecture",response);
+                  let level = response.data.level;
+                  this.$emit("goToLecture", index,level,this.$root.$getConst('listening'));
+              })
+              .catch((error) => {
+                  console.error(error);
+              });
+
+    }
   },
 };
 </script>

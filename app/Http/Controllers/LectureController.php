@@ -227,4 +227,12 @@ class LectureController extends Controller
         }
         $student_course->update(['watched_list' => $newWatchList, 'lecture_study' => $input['index']]);
     }
+
+    public function getLectureRelated(Request $request)
+    {
+        $input = $request->input();
+        $lecture = Lecture::query()->where('course_id', $input['courseID'])
+            ->where('index', '=', $input['index'])->first();
+        return response()->json($lecture);
+    }
 }
