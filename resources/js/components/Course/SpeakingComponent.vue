@@ -1,18 +1,11 @@
 <template>
-  <div
-    class="
-      container-fluid
-      h-100
-      text-primary
-      pt-4
-    "
-  >
+  <div class="container-fluid h-100 text-primary pt-4">
     <h1 class="text-center font-weight-bold">Speaking</h1>
     <div v-if="allResults.length === 0">
       <div class="py-4 row h-100 justify-content-center lecture overflow-auto">
         <div class="col-lg-8">
-        <div class="h-100">
-          <div
+          <div class="h-100">
+            <div
               v-if="
                 typeExam === $getConst('assessment') &&
                 questionSpeaking[questionIndex]
@@ -80,23 +73,26 @@
                 </div>
               </div>
             </div>
-          <div v-if="typeExam === $getConst('exercise') &&
-                    questionSpeaking[questionIndex]"
-          >
-            <h3 v-if="videoId === videoPracticeId">
-              Video for you to self-practice
-            </h3>
-            <h3 v-else>A guide for you how to response</h3>
-            <vimeo-player
-              ref="player"
-              :video-id="videoId"
-              :video-url="getVideoUrl(videoId)"
-              class="embed-responsive embed-responsive-16by9"
-              height="100%"
-              width="100%"
-            />
-          </div>
-          <div class="h-100" v-if="typeExam === $getConst('quiz')">
+            <div
+              v-if="
+                typeExam === $getConst('exercise') &&
+                questionSpeaking[questionIndex]
+              "
+            >
+              <h3 v-if="videoId === videoPracticeId">
+                Video for you to self-practice
+              </h3>
+              <h3 v-else>A guide for you how to response</h3>
+              <vimeo-player
+                ref="player"
+                :video-id="videoId"
+                :video-url="getVideoUrl(videoId)"
+                class="embed-responsive embed-responsive-16by9"
+                height="100%"
+                width="100%"
+              />
+            </div>
+            <div class="h-100" v-if="typeExam === $getConst('quiz')">
               <div class="h4 text-center timer mb-3">
                 <vue-countdown-timer
                   id="timePause"
@@ -193,23 +189,23 @@
                   </template>
                 </vue-countdown-timer>
               </div>
-<!--              <div v-if="questionIndex < questionSpeaking.length - 1">-->
-<!--                <h3 v-cloak v-if="questionSpeaking[questionIndex]">-->
-<!--                  {{ questionIndex + 1 }}-->
-<!--                  {{-->
-<!--                    questionSpeaking[questionIndex].speak_quiz_question.question-->
-<!--                  }}-->
-<!--                </h3>-->
-<!--                <p>-->
-<!--                  Please record one video with voice that answers all question.-->
-<!--                </p>-->
-<!--              </div>-->
-<!--              <h3 v-cloak v-if="showLastQuestion === true">-->
-<!--                {{ questionIndex + 1 }}-->
-<!--                {{-->
-<!--                  questionSpeaking[questionIndex].speak_quiz_question.question-->
-<!--                }}-->
-<!--              </h3>-->
+              <!--              <div v-if="questionIndex < questionSpeaking.length - 1">-->
+              <!--                <h3 v-cloak v-if="questionSpeaking[questionIndex]">-->
+              <!--                  {{ questionIndex + 1 }}-->
+              <!--                  {{-->
+              <!--                    questionSpeaking[questionIndex].speak_quiz_question.question-->
+              <!--                  }}-->
+              <!--                </h3>-->
+              <!--                <p>-->
+              <!--                  Please record one video with voice that answers all question.-->
+              <!--                </p>-->
+              <!--              </div>-->
+              <!--              <h3 v-cloak v-if="showLastQuestion === true">-->
+              <!--                {{ questionIndex + 1 }}-->
+              <!--                {{-->
+              <!--                  questionSpeaking[questionIndex].speak_quiz_question.question-->
+              <!--                }}-->
+              <!--              </h3>-->
               <h3 v-if="questionSpeaking[questionIndex]">
                 {{ questionIndex + 1 }}
                 {{
@@ -243,79 +239,76 @@
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
-      </div>
       <div class="button control">
-      <div
-        v-if="typeExam === $getConst('assessment')"
-        class="text-right py-4 pr-3"
-      >
-        <button
-          v-if="questionIndex > 0"
-          class="btn btn-primary"
-          v-on:click="prev()"
+        <div
+          v-if="typeExam === $getConst('assessment')"
+          class="text-right py-4 pr-3"
         >
-          Previous
-        </button>
-        <span>
           <button
-            v-if="questionIndex === questionSpeaking.length - 1"
-            class="btn btn-primary mx-2"
-            v-on:click="submit()"
+            v-if="questionIndex > 0"
+            class="btn btn-primary"
+            v-on:click="prev()"
           >
-            Submit
+            Previous
           </button>
-          <button
-            v-if="questionIndex < questionSpeaking.length - 1"
-            class="btn btn-primary mx-2"
-            v-on:click="next()"
-          >
-            Next
-          </button>
-        </span>
+          <span>
+            <button
+              v-if="questionIndex === questionSpeaking.length - 1"
+              class="btn btn-primary mx-2"
+              v-on:click="submit()"
+            >
+              Submit
+            </button>
+            <button
+              v-if="questionIndex < questionSpeaking.length - 1"
+              class="btn btn-primary mx-2"
+              v-on:click="next()"
+            >
+              Next
+            </button>
+          </span>
+        </div>
+        <div
+          class="text-right py-4 pr-3"
+          v-if="typeExam === $getConst('exercise')"
+        >
+          <span>
+            <button
+              class="btn btn-primary mx-2"
+              v-on:click="showVideoExercise(videoPracticeId)"
+            >
+              Practice
+            </button>
+            <button
+              class="btn btn-primary mx-2"
+              v-on:click="showVideoExercise(videoResponseId)"
+            >
+              How to response
+            </button>
+          </span>
+        </div>
+        <div v-if="typeExam === $getConst('quiz')" class="text-right py-4 pr-3">
+          <span>
+            <button
+              v-if="questionIndex === questionSpeaking.length - 1"
+              class="btn btn-primary mx-2"
+              v-on:click="submit()"
+            >
+              Submit
+            </button>
+            <button
+              v-if="questionIndex < questionSpeaking.length - 1"
+              class="btn btn-primary mx-2"
+              v-on:click="next()"
+            >
+              Next
+            </button>
+          </span>
+        </div>
       </div>
-      <div
-        class="text-right py-4 pr-3"
-        v-if="typeExam === $getConst('exercise')"
-      >
-        <span>
-          <button
-            class="btn btn-primary mx-2"
-            v-on:click="showVideoExercise(videoPracticeId)"
-          >
-            Practice
-          </button>
-          <button
-            class="btn btn-primary mx-2"
-            v-on:click="showVideoExercise(videoResponseId)"
-          >
-            How to response
-          </button>
-        </span>
-      </div>
-      <div
-        v-if="typeExam === $getConst('quiz')"
-        class="text-right py-4 pr-3"
-      >
-        <span>
-          <button
-            v-if="questionIndex === questionSpeaking.length - 1"
-            class="btn btn-primary mx-2"
-            v-on:click="submit()"
-          >
-            Submit
-          </button>
-          <button
-            v-if="questionIndex < questionSpeaking.length - 1"
-            class="btn btn-primary mx-2"
-            v-on:click="next()"
-          >
-            Next
-          </button>
-        </span>
-      </div>
-    </div>
     </div>
     <div v-else class="h-100">
       <div class="text-center">
@@ -555,20 +548,20 @@ export default {
           this.userAnswer();
           this.loadAudio();
         } else {
-            if (this.questionIndex === this.questionSpeaking.length - 2){
-                this.pause = true;
-                this.timeNow = new Date();
-                this.timeEnd = new Date();
-                this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
-            }
+          if (this.questionIndex === this.questionSpeaking.length - 2) {
+            this.pause = true;
+            this.timeNow = new Date();
+            this.timeEnd = new Date();
+            this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
+          }
         }
         if (this.typeExam === this.$root.$getConst("quiz")) {
-            this.userAnswerQuiz({
-                answerType: this.$root.$getConst("Video"),
-                questionID: parseInt(this.questionSpeaking[this.questionIndex].id),
-                answerID: '',
-                time: null,
-            });
+          this.userAnswerQuiz({
+            answerType: this.$root.$getConst("Video"),
+            questionID: parseInt(this.questionSpeaking[this.questionIndex].id),
+            answerID: "",
+            time: null,
+          });
         }
         this.questionIndex++;
       }
@@ -588,17 +581,18 @@ export default {
       this.userAnswer();
       if (this.typeExam === this.$root.$getConst("quiz")) {
         this.player.record().stop();
-        console.log('is waiting upload video');
+        console.log("is waiting upload video");
+      } else {
+        axios
+          .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
+          .then((data) => {
+            console.log("push data success");
+            this.allResults = data.data;
+          })
+          .catch((error) => {
+            console.log("error :>> ", error);
+          });
       }
-      axios
-        .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
-        .then((data) => {
-            console.log('push data success');
-          this.allResults = data.data;
-        })
-        .catch((error) => {
-          console.log("error :>> ", error);
-        });
     },
     userAnswer: function () {
       if (this.typeExam === this.$root.$getConst("assessment")) {
@@ -682,21 +676,31 @@ export default {
         file: file,
         token: "a4e21d56502edc34f8e27e0244fc46b9",
         upgrade_to_1080: true,
-        onError: function (data) {},
-        onProgress: function (data) {
+        onError: (data) => {},
+        onProgress: (data) => {
           console.log("data >>", data.loaded);
           this.updateProgress(data.loaded / data.total);
         },
-        onComplete: function (videoId, index) {
+        onComplete: (videoId, index) => {
           this.videoSubmitID = videoId;
-
+          console.log("this.resultCheck :>> ", this.resultCheck);
           this.resultCheck.questions.map((item) => {
-              return (item.answerID = this.videoSubmitID);
+            return (item.answerID = this.videoSubmitID);
           });
+          axios
+            .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
+            .then((data) => {
+              console.log("push data success");
+              this.allResults = data.data;
+              localStorage.removeItem("speaking_" + this.examId);
+            })
+            .catch((error) => {
+              console.log("error :>> ", error);
+            });
         },
       }).upload();
     },
-    updateProgress: function (progress) {
+    updateProgress(progress) {
       progress = Math.floor(progress * 100);
       var element = document.getElementById("progress");
       element.setAttribute("style", "width:" + progress + "%");
@@ -707,7 +711,7 @@ export default {
 </script>
 
 <style scoped>
-    .timer{
-        min-height: 60px;
-    }
+.timer {
+  min-height: 60px;
+}
 </style>

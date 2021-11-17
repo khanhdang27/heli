@@ -298,7 +298,7 @@
           You have completed the this part. Please select continue to complete
           the First Free Assessment!
           <button class="btn btn-primary my-5" v-on:click="nextTypeExam()">
-              Continue <i class="fe fe-arrow-right"></i>
+            Continue <i class="fe fe-arrow-right"></i>
           </button>
         </div>
       </div>
@@ -408,7 +408,7 @@ export default {
           console.log(response.data.questions);
           this.questionListening = response.data.questions[0].question;
         })
-        .catch( (error) => {
+        .catch((error) => {
           console.error(error);
         });
     },
@@ -496,6 +496,7 @@ export default {
         .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
         .then((data) => {
           this.allResults = data.data;
+          localStorage.removeItem("listening_" + this.examId);
         })
         .catch((error) => {
           console.log("error :>> ", error);
@@ -505,7 +506,6 @@ export default {
       this.$emit("nextTypeExam", this.$root.$getConst("speaking"));
     },
     userAnswer: function () {
-
       this.userAnswerQuiz({
         answerType: this.$root.$getConst("MC"),
         questionID: parseInt(this.questionListening[this.questionIndex].id),

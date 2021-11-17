@@ -180,7 +180,7 @@
               "
             >
               <h3 v-cloak>
-                {{ questionWriting[questionIndex].writing_quiz_question.id }}.
+                {{ questionIndex }}.
                 {{
                   questionWriting[questionIndex].writing_quiz_question.question
                 }}
@@ -480,6 +480,7 @@ export default {
         .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
         .then((data) => {
           this.allResults = data.data;
+          localStorage.removeItem("writing_" + this.examId);
         })
         .catch((error) => {
           console.log("error :>> ", error);
@@ -489,17 +490,13 @@ export default {
       this.$emit("nextTypeExam", this.$root.$getConst("listening"));
     },
     userAnswer: function () {
-      let ansType;
-      if (this.typeExam === this.$root.$getConst("quiz")) {
-        ansType = this.$root.$getConst("text");
-      } else {
-        ansType = this.$root.$getConst("MC");
-      }
       this.timeDo = (new Date() - this.timeStartDo) / 1000;
       this.timeStartDo = new Date();
-
       this.userAnswerQuiz({
-        answerType: ansType,
+        answerType:
+          this.typeExam === this.$root.$getConst("quiz")
+            ? this.$root.$getConst("Text")
+            : this.$root.$getConst("MC"),
         questionID: parseInt(this.questionWriting[this.questionIndex].id),
         answerID: this.userChoose[this.questionIndex],
         time: this.timeDo,

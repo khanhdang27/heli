@@ -71,7 +71,8 @@ use App\Models\Lecture;
                                     src="{{ 'https://player.vimeo.com/video/' . $lecture->video_resource . '?badge=0&autopause=0&app_id=' . config('app.vimeo_app_id') }}"
                                     allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
                                     style="position:absolute;top:0;left:0;"></iframe>
-                            </div><script src="https://player.vimeo.com/api/player.js"></script>
+                            </div>
+                            <script src="https://player.vimeo.com/api/player.js"></script>
                         </div>
                         <div class="form-group">
                             <div class="custom-file">
