@@ -342,7 +342,6 @@
             Continue <i class="fe fe-arrow-right"></i>
           </button>
         </div>
-
       </div>
     </div>
   </div>
@@ -471,7 +470,8 @@ export default {
         .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
         .then((data) => {
           this.allResults = data.data;
-          console.log("result", this.allResults);
+
+          localStorage.removeItem("reading_" + this.examId);
         })
         .catch((error) => {
           console.log("error :>> ", error);
@@ -519,7 +519,9 @@ export default {
       );
     },
     getAnswerUser() {
-      this.resultCheck = JSON.parse(localStorage.getItem("reading_" + this.examId)) || {
+      this.resultCheck = JSON.parse(
+        localStorage.getItem("reading_" + this.examId)
+      ) || {
         questions: [],
       };
       this.resultCheck.questions.forEach((item) => {

@@ -223,6 +223,7 @@ class CourseController extends Controller
             'speaking' => $speaking,
         ]);
     }
+
     /**
      * Display the specified resource.
      *
@@ -314,7 +315,6 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-
     }
 
     /**
