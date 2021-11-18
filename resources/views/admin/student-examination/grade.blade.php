@@ -181,22 +181,25 @@ use App\Models\Quiz;
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div style="padding:10% 10% 10% 10%;position:relative;">
-                                <iframe id="answerVideo" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
-                                    style="position:absolute;top:0;left:0;"></iframe>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe id="answerVideo" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                                            style="position:absolute;top:0;left:0;" height="320" width="640" frameborder="0"></iframe>
+                                </div>
+                                <script type="application/javascript" src="https://player.vimeo.com/api/player.js"></script>
                             </div>
-                            <script src="https://player.vimeo.com/api/player.js"></script>
-                        </div>
-                        <div class="col-6">
-                            @csrf
-                            <label for="score"> Score </label>
-                            <input type="number" min="0" max="10" step="1" class="form-control" name="score" id="score">
-                            <label for="comment"> Comment </label>
-                            <textarea class="form-control rich-text mb-3" name="comment" id="ckeditor"></textarea>
+                            <div class="col-lg-6">
+                                @csrf
+                                <label for="scoreVideo"> Score </label>
+                                <input type="number" min="0" max="10" step="1" class="form-control" name="score" id="scoreVideo">
+                                <label for="comment"> Comment </label>
+                                <textarea class="form-control rich-text mb-3" name="comment" id="ckeditorVideo"></textarea>
+                            </div>
                         </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" onclick="handleGrade()" class="btn btn-primary"> Save </button>
                     </div>
@@ -211,21 +214,21 @@ use App\Models\Quiz;
 
         function handleGrade() {
             let com = CKEDITOR.instances['ckeditor'].getData();
-            let score = document.getElementById('score').value;
+            let comVideo = document.getElementById('ckeditorVideo').value;
+            let scoreText = document.getElementById('score').value;
+            let scoreVideo = document.getElementById('scoreVideo').value;
             $.ajax({
                 type: 'POST',
                 url: submitUrl,
                 dataType: 'json',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    comment: com,
-                    score: score
+                    comment: com || comVideo,
+                    score: scoreText || scoreVideo
                 },
                 success: function(data) {
-                    console.log(data);
                     if (data.message == 'success') {
                         var scoreCol = document.getElementById('score-show' + detailId);
-                        scoreCol.innerHTML = score;
                         window.location.reload();
                     }
                 }
@@ -248,12 +251,11 @@ use App\Models\Quiz;
                 let textAnswer = document.getElementById('answerVideo');
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var anwser = button.data('answer') // Extract info from data-* attributes
-                console.log(textAnswer)
                 textAnswer.setAttribute('src', anwser);
                 submitUrl = button.data('commentUrl')
                 detailId = button.data('detailId')
                 detailComment = button.data('detailComment')
-                CKEDITOR.instances['ckeditor'].setData(detailComment)
+                // CKEDITOR.instances['ckeditorVideo'].setData(detailComment)
             })
         })
     </script>

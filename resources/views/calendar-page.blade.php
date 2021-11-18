@@ -185,15 +185,4 @@ $tkb[] = array('start'=>$start_date, 'end'=>$end_date, 'title' => $item->course-
         }
 
 </script>
-
-<style>
-    .fc-daygrid-dot-event .fc-event-title {
-        flex-grow: 1;
-        flex-shrink: 1;
-        min-width: 0;
-        overflow: hidden;
-        font-weight: bold;
-        white-space: normal;
-    }
-</style>
 @endsection

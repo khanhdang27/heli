@@ -28,6 +28,7 @@
     <script src="{{ asset('js/moment.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/anime.min.js') }}"></script>
 </head>
 
 <body>
@@ -51,7 +52,7 @@
 
 
     <script src="{{ asset('js/sharethis.js') }}"></script>
-    <script src="{{ asset('js/anime.min.js') }}"></script>
+
 
     <!-- Start of LiveChat (www.livechatinc.com) code -->
     <script>

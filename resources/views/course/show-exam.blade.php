@@ -177,7 +177,7 @@ use App\Models\ListenAssessmentQuestion;
                                                             <h4 class="font-weight-bold">Score: {{ $detail->score }}</h4>
                                                             <hr />
                                                             <h4 class="font-weight-bold">Comment:</h4>
-                                                            <h5>{{ $detail->comment }}</h5>
+                                                            <h5>{!! $detail->comment !!}</h5>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer border-0"></div>
