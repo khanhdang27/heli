@@ -1414,7 +1414,11 @@ body {
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     }
 }
-
+.card-brand{
+    min-width: 140px;
+    border-radius: 10px;
+    padding: 1.5rem 0;
+}
 //Slide tutor
 
 .card-tutor{

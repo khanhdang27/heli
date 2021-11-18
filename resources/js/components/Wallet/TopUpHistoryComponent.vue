@@ -15,7 +15,7 @@
                         <th scope="col">Time</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Tokens</th>
-                        <th scope="col">Visa card</th>
+                        <th scope="col">Card</th>
                         <th scope="col">Top-up ID</th>
                         <th scope="col">Details</th>
                     </tr>

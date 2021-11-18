@@ -25,11 +25,11 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between mt-5 pb-3 border-bottom border-primary">
-                                <div class="d-flex">
-                                    <h4 class="mr-5">Date Issued:<span class="font-weight-bold ml-3">16-09-21</span>
-                                    </h4>
-                                    <h4>Date Due:<span class="font-weight-bold ml-3">17-09-21</span></h4>
-                                </div>
+{{--                                <div class="d-flex">--}}
+{{--                                    <h4 class="mr-5">Date Issued:<span class="font-weight-bold ml-3">16-09-21</span>--}}
+{{--                                    </h4>--}}
+{{--                                    <h4>Date Due:<span class="font-weight-bold ml-3">17-09-21</span></h4>--}}
+{{--                                </div>--}}
                                 <h4>Top-up ID:<span class="font-weight-bold ml-3">{{$transaction->uuid}}</span></h4>
                             </div>
                             <div class="d-flex justify-content-between flex-wrap flex-lg-nowrap">
@@ -37,7 +37,7 @@
                                     <h3 class="font-weight-bold mr-5">From:</h3>
                                     <div>
                                         <h3>{{Auth::user()->name}}</h3>
-                                        <h3>Visa Card: **** **** **** 8097</h3>
+                                        <h3>Card: **** **** **** {{!empty($transaction->meta['card']) ? $transaction->meta['card'] : ''}}</h3>
                                     </div>
                                 </div>
                                 <div class="d-flex my-5">

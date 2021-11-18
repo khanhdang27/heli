@@ -55,13 +55,13 @@
                                 <h4 class="font-weight-bold">@lang('keywords.wallet.wallet')</h4>
                             </div>
 
-                            <h5 class="font-weight-bold">@lang('keywords.wallet.chooseVisa')</h5>
+                            <h5 class="font-weight-bold">@lang('keywords.wallet.chooseCard')</h5>
                             <button
                                 class="btn btn-light mb-2 w-100 text-left h5 font-weight-bold px-3 py-2 text-primary"
                                 type="button" data-toggle="collapse"
                                 data-target="#collapseSelectCard" aria-expanded="false"
                                 aria-controls="collapseSelectCard">
-                                @lang('keywords.wallet.visaCardLinked')
+                                @lang('keywords.wallet.cardLinked')
                             </button>
                             @error('amount')
                             <div class="alert text-danger">{{$message}}</div>
@@ -101,7 +101,7 @@
                                             <img class="mr-4 ml-1" src="{{asset('images/ic/ic_plus.svg')}}" width="64"
                                                  height="64">
                                             <div>
-                                                <h3 class="m-0 font-weight-bold">@lang('keywords.wallet.addNewVisaCard')</h3>
+                                                <h3 class="m-0 font-weight-bold">@lang('keywords.wallet.addNewCard')</h3>
                                             </div>
                                         </a>
                                     </div>

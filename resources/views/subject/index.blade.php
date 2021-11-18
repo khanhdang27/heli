@@ -34,9 +34,6 @@
 
                             <input class="btn-sort" type="radio" name="optradio">
                             <label class="mr-5">@lang('keywords.recordALesson')</label>
-
-                            <input class="btn-sort" type="radio" name="optradio">
-                            <label class="mr-5 ">@lang('keywords.learningMaterial')</label>
                         </div>
                     </div>
                     <div class="btn-group dropleft sort-sm text-right d-block d-md-none">
@@ -56,9 +53,6 @@
                             </label>
                             <label class="dropdown-item d-flex h5 mb-3">
                                 <input class="btn-sort" type="radio" name="optradio">@lang('keywords.recordALesson')
-                            </label>
-                            <label class="dropdown-item d-flex h5">
-                                <input class="btn-sort" type="radio" name="optradio">@lang('keywords.learningMaterial')
                             </label>
                         </div>
                     </div>

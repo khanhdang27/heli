@@ -155,7 +155,7 @@ return [
         'walletManagement' => 'Wallet Management',
         'balance' => 'Balance',
         'fastAndSecureTopUp' => 'Fast and secure token top-up',
-        'yourVisaCard' => 'Your Visa Card',
+        'yourCard' => 'Your Card',
         'hereYouCanReviewAllPayment' => 'Here you can review all of your payment to Helios',
         'hereYouCanReviewAllTopUp' => 'Here you can review all of your Top-up to Wallet',
         'paymentHistory' => 'Payment history',
@@ -169,9 +169,9 @@ return [
         'transactionDetails' => 'Transaction Detail',
         'topUpTo' => 'Top-up to',
         'wallet' => 'Wallet',
-        'chooseVisa' => 'Choose Visa Card',
-        'visaCardLinked' => 'Visa card linked',
-        'addNewVisaCard' => 'Add new Visa card',
+        'chooseCard' => 'Choose Card',
+        'cardLinked' => 'Card linked',
+        'addNewCard' => 'Add new card',
         'topUpValue' => 'Top-up value',
         'amount' => 'Amount',
         'exchangeValue' => 'Exchange Value',
@@ -184,7 +184,7 @@ return [
         'completed' => 'Completed'
     ],
     'coursePayment' => 'Course payment',
-    'addVisaCard' => 'Add visa card',
+    'addCard' => 'Add card',
     'addSuccessCard' => 'Add success card',
     'addErrorCard' => 'Error, can not add card'
 ];
