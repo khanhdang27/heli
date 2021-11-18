@@ -32,10 +32,6 @@
                         <input class="btn-sort" type="radio" value="record" name="sortable"
                             {{ app('request')->input('sort') == 'record' ? 'checked' : null }}>
                         <label class="mr-5">@lang('keywords.recordALesson')</label>
-
-                        <input class="btn-sort" type="radio" value="document" name="sortable"
-                            {{ app('request')->input('sort') == 'document' ? 'checked' : null }}>
-                        <label class="mr-5 ">@lang('keywords.learningMaterial')</label>
                     </div>
                 </div>
             </form>
@@ -62,10 +58,6 @@
                         <label class="dropdown-item d-flex h5 mb-3">
                             <input class="btn-sort" type="radio" value="record" name="m_sortable"
                                 {{ app('request')->input('sort') == 'record' ? 'checked' : null }}>@lang('keywords.recordALesson')
-                        </label>
-                        <label class="dropdown-item d-flex h5">
-                            <input class="btn-sort" type="radio" value="document" name="m_sortable"
-                                {{ app('request')->input('sort') == 'document' ? 'checked' : null }}>@lang('keywords.learningMaterial')
                         </label>
                     </div>
                 </div>

@@ -47,6 +47,7 @@ Vue.component('review-exam-component', require('./components/Course/ReviewExamCo
 
 Vue.component('blog-latest-component', require('./components/Blog/BlogLatestComponent.vue').default);
 Vue.component('news-component', require('./components/Blog/NewsComponent.vue').default);
+Vue.component('blog-page-tag-component', require('./components/Blog/BlogPageTagComponent.vue').default);
 
 Vue.component('slide-tutor-component', require('./components/Home/SlideTutorComponent.vue').default);
 Vue.component('subscribe-container', require('./components/Share/SubscribeContainer.vue').default);

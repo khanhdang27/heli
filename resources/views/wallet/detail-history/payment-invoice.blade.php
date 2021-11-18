@@ -25,10 +25,10 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between mt-5 pb-3 border-bottom border-primary">
-                                <div class="d-flex">
-                                    <h4 class="mr-5">Date Issued:<span class="font-weight-bold ml-3">16-09-21</span></h4>
-                                    <h4>Date Due:<span class="font-weight-bold ml-3">17-09-21</span></h4>
-                                </div>
+{{--                                <div class="d-flex">--}}
+{{--                                    <h4 class="mr-5">Date Issued:<span class="font-weight-bold ml-3">16-09-21</span></h4>--}}
+{{--                                    <h4>Date Due:<span class="font-weight-bold ml-3">17-09-21</span></h4>--}}
+{{--                                </div>--}}
                                 <h4>Invoice No:<span class="font-weight-bold ml-3">#{{$order->payment_id}}</span></h4>
                             </div>
                             <div class="d-flex my-5">

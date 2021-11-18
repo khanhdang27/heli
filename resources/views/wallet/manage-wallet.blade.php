@@ -34,7 +34,7 @@
                     <h1 class="font-weight-bold my-5">@lang('keywords.wallet.walletManagement')</h1>
                     <div class="row mb-5">
                         <div class="col-lg-6">
-                            <div class="border-2 border-primary rounded p-5 mb-4 wallet-card">
+                            <div class="border-2 border-primary rounded p-4 mb-4 wallet-card">
                                 <h2 class="font-weight-bold">@lang('keywords.wallet.yourWallet')</h2>
                                 <div class="d-flex justify-content-between mt-5 mb-3">
                                     <h4 class="font-weight-bold">@lang('keywords.wallet.balance'):</h4>
@@ -52,12 +52,14 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="border-2 border-primary rounded p-5 wallet-card">
-                                <h2 class="font-weight-bold">@lang('keywords.wallet.yourVisaCard') </h2>
+                            <div class="border-2 border-primary rounded p-4 wallet-card">
+                                <h2 class="font-weight-bold">@lang('keywords.wallet.yourCard') </h2>
                                 @foreach($cards as $card)
                                     <div class="d-flex my-5 align-items-center">
-                                        <img class="mr-4 btn-wallet" src="{{asset('images/ic/ic_btn_visa.svg')}}"
-                                             height="85">
+                                        <div class="border-2 border-primary btn mr-4
+                                                    text-primary card-brand h3 font-weight-bold mb-0">
+                                            {{$card->card->brand}}
+                                        </div>
 
                                         <div>
                                             <p class="h3 font-weight-bold">**** **** **** {{$card->card->last4}}</p>
@@ -71,7 +73,7 @@
                                         <img class="mr-4 btn-wallet btn-add-visa rounded"
                                              src="{{asset('images/ic/ic_btn_plus.svg')}}"
                                              height="85">
-                                        <p class="h4 font-weight-bold">@lang('keywords.wallet.addNewVisaCard')</p></a>
+                                        <p class="h4 font-weight-bold">@lang('keywords.wallet.addNewCard')</p></a>
                                 </div>
                             </div>
                         </div>

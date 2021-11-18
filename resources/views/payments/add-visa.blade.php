@@ -3,12 +3,12 @@
 @section('content')
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
-            @lang('keywords.addVisaCard')
+            @lang('keywords.addCard')
         </div>
         <div class="container-fluid text-primary pb-5">
             <div class="row justify-content-center">
                 <div class="col-sm-10 col-lg-7 col-xl-4">
-                    <h1 class="text-center my-5 font-weight-bold">@lang('keywords.addVisaCard')</h1>
+                    <h1 class="text-center my-5 font-weight-bold">@lang('keywords.addCard')</h1>
                     <div class="card border-0">
                         <div class="text-primary">
                             <div class="form-group h4">

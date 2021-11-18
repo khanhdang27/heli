@@ -150,7 +150,7 @@ class CourseController extends Controller
                     ->where('course_id', $course->id)
                     ->where('student_id', Auth::user()->id)
                     ->first();
-                $exams = StudentExamination::select('student_id', 'course_id', 'exam_id', 'quiz_id', 'reviewed')
+                $exams = StudentExamination::select('student_id', 'course_id', 'exam_id', 'quiz_id')
                     ->distinct()
                     ->with('exam')
                     ->whereHas('exam', function ($query) {
@@ -158,7 +158,6 @@ class CourseController extends Controller
                     })
                     ->where('course_id', $course->id)
                     ->where('student_id', Auth::user()->id)
-                    ->orderBy('reviewed')
                     ->get();
             }
             return view('course.course-page', [
