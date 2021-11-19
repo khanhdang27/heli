@@ -17,7 +17,7 @@ class StudentSession
     public function handle($request, Closure $next)
     {
         if (Auth::check() && Auth::user()->hasRole(['super-admin','moderator', 'tutor'])) {
-            return redirect('home');
+            return redirect('site');
         }
         return $next($request);
     }

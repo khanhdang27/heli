@@ -117,7 +117,6 @@ use App\Utilities\SelectionByClass;
                         @lang('keywords.navBar.logOut')
                     </a>
                 </li>
-
                 @endif
             </ul>
         </div>
@@ -141,12 +140,14 @@ use App\Utilities\SelectionByClass;
                     <img src={{asset("images/ic/ic_user.svg")}} width="24">
                 </a>
                 <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0">
+                    @if (Auth::user()->hasRole('student'))
                     <a class="dropdown-item"
                         href="{{ URL::route('site.user.wishlist') }}">@lang('keywords.coursePage.wishlist')</a>
                     <a class="dropdown-item"
                         href="{{ URL::route('site.user.wallet') }}">@lang('keywords.wallet.myWallet')</a>
                     <a class="dropdown-item"
                         href="{{ URL::route('site.profile.show', Auth::user()->id) }}">@lang('keywords.navBar.profile')</a>
+                    @endif
                     <a class="dropdown-item"
                         href="{{ URL::route('site.userLogout')}}">@lang('keywords.navBar.logOut')</a>
                 </div>

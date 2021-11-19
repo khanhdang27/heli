@@ -8,6 +8,7 @@ $course = $courseDetail->membershipCourses->course;
         <strong>Must select a class in Course frequency !</strong>
     </div>
 @enderror
+
 <div class="bg-white border border-primary p-5 text-primary buy-course-box mb-5">
     <div class="mb-3 title-course">
         <p class="h2 m-0 font-weight-bold">
@@ -19,27 +20,29 @@ $course = $courseDetail->membershipCourses->course;
     @endif
     <h2 class="my-5 font-weight-bold">HKD: {{ $courseDetail->getPriceDiscount() }}$ </h2>
     @if (Auth::check())
-        @if ($course->type == Course::LIVE)
-            <div id="buy_live">
-                <form id="form-room" class="form-inline" method="get"
-                    action="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
-                    @csrf
-                    <input name="product_id" value="{{ $courseDetail->id }}" form="form-room" required hidden>
-                    <div class="btn-above-video w-100">
-                        <button type="submit" class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
+        @if (Auth::user()->hasRole('student'))
+            @if ($course->type == Course::LIVE)
+                <div id="buy_live">
+                    <form id="form-room" class="form-inline" method="get"
+                        action="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
+                        @csrf
+                        <input name="product_id" value="{{ $courseDetail->id }}" form="form-room" required hidden>
+                        <div class="btn-above-video w-100">
+                            <button type="submit" class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
+                                @lang('keywords.coursePage.buyNow')
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            @else
+                <div class="btn-above-video">
+                    <a href="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
+                        <div class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
                             @lang('keywords.coursePage.buyNow')
-                        </button>
-                    </div>
-                </form>
-            </div>
-        @else
-            <div class="btn-above-video">
-                <a href="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
-                    <div class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
-                        @lang('keywords.coursePage.buyNow')
-                    </div>
-                </a>
-            </div>
+                        </div>
+                    </a>
+                </div>
+            @endif
         @endif
     @else
         <div class="btn-above-video">
