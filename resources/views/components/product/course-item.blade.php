@@ -92,21 +92,21 @@ $liked = empty($user_liked) ? 0 : $user_liked->like_style;
                         @if ($typeOfUI != 'welcome' && $typeOfUI != 'lasted' && $typeOfUI != 'recommended')
                             @if ($course->getDiscount() > 0)
                                 <h4 class="font-weight-bold text-danger">
-                                    HK${{ $course->getPriceDiscount() }}/@lang('keywords.course-item.section')﹥
+                                    {{ $course->getPriceDiscount() }} token﹥
                                 </h4>
                             @else
                                 <h4 class="font-weight-bold">
-                                    HK${{ $course->getPrice() }}/@lang('keywords.course-item.section')﹥
+                                    {{ $course->getPrice() }} token﹥
                                 </h4>
                             @endif
                         @else
                             @if ($course->getDiscount() > 0)
                                 <h4 class="font-weight-bold text-danger">
-                                    HK${{ $course->getPriceDiscount() }}﹥
+                                    {{ $course->getPriceDiscount() }} token﹥
                                 </h4>
                             @else
                                 <h4 class="font-weight-bold">
-                                    HK${{ $course->getPrice() }}﹥
+                                    {{ $course->getPrice() }} token﹥
                                 </h4>
                             @endif
                         @endif

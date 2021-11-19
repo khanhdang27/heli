@@ -89,29 +89,31 @@ use App\Utilities\SelectionByClass;
                 </li>
                 <hr class="m-0">
                 @if(Auth::check())
-                <li class="nav-item item-header d-md-none">
-                    <a class="nav-link" href="{{ route('site.user.course') }}">@lang('keywords.footer.myCourses')
-                    </a>
-                </li>
-                <li class="nav-item item-header d-md-none">
-                    <a class="nav-link"
-                        href="{{ URL::route('site.user.wishlist') }}">@lang('keywords.coursePage.wishlist')</a>
-                </li>
-                <li class="nav-item item-header d-md-none">
-                    <a class="nav-link"
-                        href="{{ URL::route('site.user.wallet') }}">@lang('keywords.wallet.myWallet')</a>
-                </li>
-                <li class="nav-item item-header d-md-none">
-                    <a class="nav-link"
-                        href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')
-                    </a>
-                </li>
-                <li class="nav-item item-header d-md-none">
-                    <a class="nav-link d-flex justify-content-between"
-                        href="{{ URL::route('site.profile.show', Auth::user()->id) }}">
-                        @lang('keywords.navBar.profile')
-                    </a>
-                </li>
+                    @if(Auth::user()->hasRole('student'))
+                        <li class="nav-item item-header d-md-none">
+                            <a class="nav-link" href="{{ route('site.user.course') }}">@lang('keywords.footer.myCourses')
+                            </a>
+                        </li>
+                        <li class="nav-item item-header d-md-none">
+                            <a class="nav-link"
+                                href="{{ URL::route('site.user.wishlist') }}">@lang('keywords.coursePage.wishlist')</a>
+                        </li>
+                        <li class="nav-item item-header d-md-none">
+                            <a class="nav-link"
+                                href="{{ URL::route('site.user.wallet') }}">@lang('keywords.wallet.myWallet')</a>
+                        </li>
+                        <li class="nav-item item-header d-md-none">
+                            <a class="nav-link"
+                                href="{{ URL::route('site.user.calendar') }}">@lang('keywords.footer.mySchedule')
+                            </a>
+                        </li>
+                        <li class="nav-item item-header d-md-none">
+                            <a class="nav-link d-flex justify-content-between"
+                                href="{{ URL::route('site.profile.show', Auth::user()->id) }}">
+                                @lang('keywords.navBar.profile')
+                            </a>
+                        </li>
+                    @endif
                 <li class="nav-item item-header d-md-none">
                     <a class="nav-link d-flex justify-content-between" href="{{ URL::route('site.userLogout')}}">
                         @lang('keywords.navBar.logOut')
