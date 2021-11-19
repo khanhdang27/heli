@@ -61,14 +61,18 @@ Route::get('forumAnswer', function () {
 Route::post('subscribe', 'UserSubscribeController@customerSubscribe')->name('customerSubscribe');
 
 Route::middleware('auth')->group(function () {
-    Route::get('file/download/{file}', 'FileController@download')->name('file.download');
 
-    Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
-    Route::resource('payment', 'PaymentController');
-    Route::get('order/addCard', 'OrderController@addCard')->name('order.addCard');
-    Route::get('order/updateCard', 'OrderController@updateCard')->name('order.updateCard');
-    Route::resource('order', 'OrderController');
-    Route::get('payment-history', 'OrderController@paymentHistory')->name('payment-history');
+    Route::get('file/download/{file}', 'FileController@download')->name('file.download');
+    Route::middleware('student')->group(function () {
+        Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
+        Route::resource('payment', 'PaymentController');
+        Route::get('order/addCard', 'OrderController@addCard')->name('order.addCard');
+        Route::get('order/updateCard', 'OrderController@updateCard')->name('order.updateCard');
+        Route::resource('order', 'OrderController');
+        Route::get('payment-history', 'OrderController@paymentHistory')->name('payment-history');
+        Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');
+        Route::post('store-card', 'WalletController@storeCard')->name('store-card');
+    });
 
     Route::resource('post', 'PostController');
     Route::get('pin-comment/{post_id}/{comment_id}', 'PostController@pinComment')->name('pinComment');
@@ -118,28 +122,28 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('course', 'CourseController@my')->name('course');
             Route::get('wishlist', 'HomeController@wishlist')->name('wishlist');
-            Route::get('calendar', 'ScheduleController@index')->name('calendar');
-            Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
-            Route::get('wallet', 'WalletController@index')->name('wallet');
-            Route::get('wallet/top-up', 'WalletController@topUpIndex')->name('top-up');
-            Route::post('wallet/top-up/top-up-to', 'WalletController@topUpToWallet')->name('top-up-to');
-            Route::get('wallet/top-up/success', 'WalletController@topUpSuccess')->name('topUp-success');
-            Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.listHistory');
-            Route::get('wallet/list-payment', 'WalletController@listPayment')->name('wallet.listPayment');
-            Route::get('wallet/payment-history/{order}', 'WalletController@paymentHistory')->name('wallet.payment-history');
-            Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
-            Route::get('wallet/top-up/redirect', 'WalletController@redirectSuccess')->name('wallet.redirectSuccess');
 
-            Route::get('payment/{product_id}', 'WalletController@payment')->name('payment');
-            Route::get('confirm-payment/{product_id}/{room}', 'WalletController@confirmPayment')->name('confirm');
-            Route::get('confirm-payment/payment-success/{product_id}/{room}', 'WalletController@paymentSuccess')->name('success');
-            Route::get('success/{course_id}', 'WalletController@success')->name('pay-success');
+            Route::middleware('student')->group(function () {
+                Route::get('calendar', 'ScheduleController@index')->name('calendar');
+                Route::get('calendar/{month}', 'ScheduleController@getMonth')->name('getMonth');
+                Route::get('wallet', 'WalletController@index')->name('wallet');
+                Route::get('wallet/top-up', 'WalletController@topUpIndex')->name('top-up');
+                Route::post('wallet/top-up/top-up-to', 'WalletController@topUpToWallet')->name('top-up-to');
+                Route::get('wallet/top-up/success', 'WalletController@topUpSuccess')->name('topUp-success');
+                Route::get('wallet/list', 'WalletController@listTopUp')->name('wallet.listHistory');
+                Route::get('wallet/list-payment', 'WalletController@listPayment')->name('wallet.listPayment');
+                Route::get('wallet/payment-history/{order}', 'WalletController@paymentHistory')->name('wallet.payment-history');
+                Route::get('wallet/top-up-history/{transaction}', 'WalletController@topUpHistory')->name('top-up-history');
+                Route::get('wallet/top-up/redirect', 'WalletController@redirectSuccess')->name('wallet.redirectSuccess');
 
-            Route::get('paywithpaypal', 'PaypalController@payWithPaypal')->name('paywithpaypal');
-            Route::post('paypal', 'PaypalController@postPaymentWithpaypal')->name('paypal');
-            Route::get('paypal', 'PaypalController@getPaymentStatus')->name('status');
+                Route::get('payment/{product_id}', 'WalletController@payment')->name('payment');
+                Route::get('confirm-payment/{product_id}/{room}', 'WalletController@confirmPayment')->name('confirm');
+                Route::get('confirm-payment/payment-success/{product_id}/{room}', 'WalletController@paymentSuccess')->name('success');
+                Route::get('success/{course_id}', 'WalletController@success')->name('pay-success');
+
+                Route::get('paywithpaypal', 'PaypalController@payWithPaypal')->name('paywithpaypal');
+                Route::post('paypal', 'PaypalController@postPaymentWithpaypal')->name('paypal');
+                Route::get('paypal', 'PaypalController@getPaymentStatus')->name('status');
+            });
         });
-
-    Route::get('add-visa', 'WalletController@addVisa')->name('add-visa');
-    Route::post('store-card', 'WalletController@storeCard')->name('store-card');
 });
