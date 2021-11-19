@@ -162,7 +162,7 @@ return [
         'topUpHistory' => 'Top-up history',
         'viewAllHistory' => 'View All History',
         'topUp' => 'Top-up',
-        'topUpViaVisa' => 'Top-up via linked visa card',
+        'topUpViaVisa' => 'Top-up via linked card',
         'exchangeRate' => 'Exchange rate',
         'totalFee' => 'Total Fee',
         'walletBalance' => 'Wallet Balance',

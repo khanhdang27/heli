@@ -162,7 +162,7 @@ return [
         'topUpHistory' => '充值記錄',
         'viewAllHistory' => '查看所有歷史記錄',
         'topUp' => '充值',
-        'topUpViaVisa' => '通過關聯的簽證卡充值',
+        'topUpViaVisa' => '聯動卡充值',
         'exchangeRate' => '匯率',
         'totalFee' => '總費用',
         'walletBalance' => '錢包餘額',

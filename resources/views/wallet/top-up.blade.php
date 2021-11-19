@@ -84,8 +84,10 @@
                                                            value="{{$card_item++}}">
                                                     <label class="p-0 mb-0 w-100" for="card{{$card->id}}">
                                                         <a class="btn btn-white text-primary d-flex align-items-center w-100">
-                                                            <img class="mr-4" src="{{asset('images/ic/ic_visa.svg')}}"
-                                                                 width="64">
+                                                            <div class="border border-primary rounded font-weight-bold
+                                                                        px-3 py-4 h5 mb-0 mr-4">
+                                                                {{$card->card->brand}}
+                                                            </div>
                                                             <div>
                                                                 <h3 class="font-weight-bold">**** ****
                                                                     **** {{$card->card->last4}}</h3>
