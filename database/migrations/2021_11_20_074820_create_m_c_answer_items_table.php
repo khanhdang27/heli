@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpeakExercisesAnswersTable extends Migration
+class CreateMCAnswerItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateSpeakExercisesAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('speak_exercises_answers', function (Blueprint $table) {
+        Schema::create('answer_items', function (Blueprint $table) {
             $table->id();
-            $table
-                ->foreignId('s_e_question_id')
-                ->constrained('speak_exercises_questions')
-                ->cascadeOnDelete();
-            $table->string('audio_ref');
+            $table->bigInteger('answerItemable_id');
+            $table->string('answerItemable_type');
+            $table->text('answer');
+            $table->boolean('is_correct');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -32,6 +31,6 @@ class CreateSpeakExercisesAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('speak_exercises_answers');
+        Schema::dropIfExists('answer_items');
     }
 }

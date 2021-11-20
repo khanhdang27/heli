@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\WritingAssessmentQuestion;
-use App\Models\WritingAssessmentAnswer;
+use App\Models\MCAnswerItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,10 +40,10 @@ class WritingAssessmentQuestionController extends Controller
     public function store(Request $request, Quiz $quiz)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -53,7 +53,7 @@ class WritingAssessmentQuestionController extends Controller
                 'index' => $input['index']
             ]);
 
-            
+
             $writingQuestion = WritingAssessmentQuestion::create([
                 'question_id' => $question->id,
                 'question' => $input['question'],
@@ -96,8 +96,8 @@ class WritingAssessmentQuestionController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            WritingAssessmentAnswer::where('w_a_question_id', $question->id)->update(['is_correct' => false]);
-            $answer = WritingAssessmentAnswer::find($input['answer']);
+            $question->answers()->update(['is_correct' => false]);
+            $answer = MCAnswerItem::find($input['answer']);
             $answer->update(['is_correct' => true]);
             DB::commit();
             return back()->with('success', 'Update success!');
@@ -117,10 +117,10 @@ class WritingAssessmentQuestionController extends Controller
     public function update(Request $request, Quiz $quiz, Question $question)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -150,7 +150,7 @@ class WritingAssessmentQuestionController extends Controller
      * @param  \App\WritingAssessmentQuestion  $writingAssessmentQuestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Quiz $quiz, Question $question)
+    public function destroy(Quiz $quiz, Question $question)
     {
         try {
             $question->delete();

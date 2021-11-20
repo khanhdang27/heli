@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ListenAssessmentAnswer;
+use App\Models\MCAnswerItem;
+use App\Models\ListenAssessmentQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,13 +40,20 @@ class ListenAssessmentAnswerController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            $listenAnswer = ListenAssessmentAnswer::create([
-                'l_a_question_id' => $input['question_id'],
-                'answer' => $input['answer'],
-                'is_correct' => false
-            ]);
+            // $listenAnswer = ListenAssessmentAnswer::create([
+            //     'l_a_question_id' => $input['question_id'],
+            //     'answer' => $input['answer'],
+            //     'is_correct' => false
+            // ]);
+            $question = ListenAssessmentQuestion::find($input['question_id']);
+
+            $answer = new MCAnswerItem();
+            $answer->answer = $input['answer'];
+            $answer->is_correct = false;
+
+            $question->answers()->save($answer);
             DB::commit();
-            return response()->json(['message' => 'Success', 'answer' => $listenAnswer]);
+            return response()->json(['message' => 'Success', 'answer' => $answer]);
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json(['message' => 'error', $th]);
@@ -53,46 +61,12 @@ class ListenAssessmentAnswerController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\ListenAssessmentAnswer  $listenAssessmentAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ListenAssessmentAnswer $listenAssessmentAnswer)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ListenAssessmentAnswer  $listenAssessmentAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ListenAssessmentAnswer $listenAssessmentAnswer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ListenAssessmentAnswer  $listenAssessmentAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ListenAssessmentAnswer $listenAssessmentAnswer)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ListenAssessmentAnswer  $listenAssessmentAnswer
+     * @param  \App\MCAnswerItem  $listenAssessmentAnswer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ListenAssessmentAnswer $answer)
+    public function destroy(MCAnswerItem $answer)
     {
         DB::beginTransaction();
         try {

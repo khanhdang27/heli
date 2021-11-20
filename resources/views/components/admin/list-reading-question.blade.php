@@ -154,7 +154,6 @@
                                         {{ $item->is_correct == 1 ? 'checked=true' : '' }}>
                                     <label class="form-check-label "
                                         for="answer_{{ $item->id }}">{{ $item->answer }}</label>
-                                    {{ $item->is_correct }}
                                 </div>
 
                                 <a href="javascript:void(0)"

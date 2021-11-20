@@ -22,6 +22,8 @@ class CreateCourseTable extends Migration
                 ->constrained('tutors')
                 ->cascadeOnDelete();
             $table->integer('type');
+            $table->integer('type_part');
+            $table->bigInteger('level');
             $table->longText('course_overview');
             $table->double('course_price');
             $table->boolean('published')->default(false);

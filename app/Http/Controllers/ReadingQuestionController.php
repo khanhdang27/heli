@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Quiz;
-use App\Models\ReadingAnswer;
+use App\Models\MCAnswerItem;
 use App\Models\ReadingQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,11 +40,11 @@ class ReadingQuestionController extends Controller
     public function store(Request $request, Quiz $quiz)
     {
         $input = $request->validate([
-            'passage_id'=> 'required',
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'passage_id' => 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -97,8 +97,8 @@ class ReadingQuestionController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            ReadingAnswer::where('reading_question_id', $question->id)->update(['is_correct' => false]);
-            $answer = ReadingAnswer::find($input['answer']);
+            $question->answers()->update(['is_correct' => false]);
+            $answer = MCAnswerItem::find($input['answer']);
             $answer->update(['is_correct' => true]);
             DB::commit();
             return back()->with('success', 'Update success!');
@@ -118,10 +118,10 @@ class ReadingQuestionController extends Controller
     public function update(Request $request, Quiz $quiz, Question $question)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -151,7 +151,7 @@ class ReadingQuestionController extends Controller
      * @param  \App\ReadingQuestion  $readingQuestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy( Quiz $quiz, Question $question)
+    public function destroy(Quiz $quiz, Question $question)
     {
         try {
             $question->delete();

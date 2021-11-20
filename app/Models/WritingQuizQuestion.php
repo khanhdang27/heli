@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -23,13 +24,12 @@ class WritingQuizQuestion extends Model
         return $this->belongsTo(Question::class);
     }
 
+    // public function answers()
+    // {
+    //     return $this->hasMany(WritingQuizAnswer::class);
+    // }
     public function answers()
     {
-        return $this->hasMany(WritingQuizAnswer::class);
-    }
-
-    public function file()
-    {
-        return $this->morphOne(File::class, 'fileable');
+        return $this->morphMany(MCAnswerItem::class, 'answerItemable');
     }
 }

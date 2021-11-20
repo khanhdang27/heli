@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStudentTable extends Migration
+class UpdateStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,7 @@ class CreateStudentTable extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
-            $table->string('full_name')->nullable();
-            $table->date('day_of_birth')->nullable();
-            $table->string('phone_no')->nullable();
-            $table->string('education_level')->nullable();
-
+        Schema::table('students', function (Blueprint $table) {
             $table->double('level_read')->nullable();
             $table->double('level_write')->nullable();
             $table->double('level_speak')->nullable();
@@ -32,10 +23,15 @@ class CreateStudentTable extends Migration
             $table->double('exam_buy_write')->nullable(); // id of exam buy with token
             $table->double('exam_buy_speak')->nullable(); // id of exam buy with token
             $table->double('exam_buy_listen')->nullable(); // id of exam buy with token
-
-            $table->softDeletes();
-            $table->timestamps();
         });
+
+        Schema::table(
+            'courses',
+            function (Blueprint $table) {
+                $table->double('level');
+                $table->integer('type_part');
+            }
+        );
     }
 
     /**
@@ -45,6 +41,6 @@ class CreateStudentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student');
+        //
     }
 }

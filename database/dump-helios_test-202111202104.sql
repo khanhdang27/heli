@@ -16,6 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `answer_items`
+--
+
+DROP TABLE IF EXISTS `answer_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `answer_items` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `answerItemable_id` bigint NOT NULL,
+  `answerItemable_type` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_correct` tinyint(1) NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `answer_items`
+--
+
+LOCK TABLES `answer_items` WRITE;
+/*!40000 ALTER TABLE `answer_items` DISABLE KEYS */;
+INSERT INTO `answer_items` VALUES (1,1,'App\\Models\\ReadingQuestion','ha',1,NULL,'2021-11-20 02:01:27','2021-11-20 02:54:07'),(2,1,'App\\Models\\ReadingQuestion','hai',0,NULL,'2021-11-20 02:01:47','2021-11-20 02:54:07');
+/*!40000 ALTER TABLE `answer_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `audio_files`
 --
 
@@ -452,6 +482,8 @@ CREATE TABLE `courses` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `level` bigint NOT NULL,
+  `type_part` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `courses_subject_id_foreign` (`subject_id`),
   KEY `courses_tutor_id_foreign` (`tutor_id`),
@@ -466,7 +498,7 @@ CREATE TABLE `courses` (
 
 LOCK TABLES `courses` WRITE;
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
-INSERT INTO `courses` VALUES (1,1,1,2,'<p>Curabitur porttitor suscipit tortor, sed condimentum metus gravida molestie. Donec eu ullamcorper justo. Mauris posuere accumsan velit. Sed ultrices dui leo, sit amet volutpat metus iaculis sit amet. Maecenas ut pretium velit. Fusce quis elit nec mi pharetra ornare. Quisque nec metus cursus, blandit risus eu, finibus odio.</p>',30,0,1,1,1,3,'3',NULL,'2021-11-10 09:08:53','2021-11-15 01:30:47'),(3,1,1,2,'<p>deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>',32,0,0,0,0,0,NULL,NULL,'2021-11-10 09:42:37','2021-11-10 09:42:37'),(4,1,1,1,'<p><em>Lorem ipsum</em>, or&nbsp;<em>lipsum</em>&nbsp;as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero&#39;s&nbsp;<em>De Finibus Bonorum et Malorum</em>&nbsp;for use in a type specimen book. It usually begins with:</p>\r\n\r\n<blockquote>&ldquo;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&rdquo;</blockquote>\r\n\r\n<p>The purpose of&nbsp;<em>lorem ipsum</em>&nbsp;is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn&#39;t distract from the layout. A practice not without&nbsp;controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content.</p>\r\n\r\n<p>The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it&#39;s seen all around the web; on templates, websites, and stock designs. Use our&nbsp;generator&nbsp;to get your own, or read on for the authoritative history of&nbsp;<em>lorem ipsum</em>.</p>',80,0,0,0,0,0,NULL,NULL,'2021-11-15 02:28:37','2021-11-15 02:28:37');
+INSERT INTO `courses` VALUES (1,1,1,2,'<p>Curabitur porttitor suscipit tortor, sed condimentum metus gravida molestie. Donec eu ullamcorper justo. Mauris posuere accumsan velit. Sed ultrices dui leo, sit amet volutpat metus iaculis sit amet. Maecenas ut pretium velit. Fusce quis elit nec mi pharetra ornare. Quisque nec metus cursus, blandit risus eu, finibus odio.</p>',30,0,1,1,1,3,'3',NULL,'2021-11-10 09:08:53','2021-11-15 01:30:47',0,0),(3,1,1,2,'<p>deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>',32,0,1,0,0,0,NULL,NULL,'2021-11-10 09:42:37','2021-11-18 20:42:16',0,0),(4,1,1,1,'<p><em>Lorem ipsum</em>, or&nbsp;<em>lipsum</em>&nbsp;as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero&#39;s&nbsp;<em>De Finibus Bonorum et Malorum</em>&nbsp;for use in a type specimen book. It usually begins with:</p>\r\n\r\n<blockquote>&ldquo;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&rdquo;</blockquote>\r\n\r\n<p>The purpose of&nbsp;<em>lorem ipsum</em>&nbsp;is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn&#39;t distract from the layout. A practice not without&nbsp;controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content.</p>\r\n\r\n<p>The passage experienced a surge in popularity during the 1960s when Letraset used it on their dry-transfer sheets, and again during the 90s as desktop publishers bundled the text with their software. Today it&#39;s seen all around the web; on templates, websites, and stock designs. Use our&nbsp;generator&nbsp;to get your own, or read on for the authoritative history of&nbsp;<em>lorem ipsum</em>.</p>',80,0,0,0,0,0,NULL,NULL,'2021-11-15 02:28:37','2021-11-15 02:28:37',0,0);
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -769,7 +801,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -778,7 +810,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'0000_00_00_000000_create_file_table',1),(2,'0001_00_00_000000_create_users_table',1),(3,'0002_00_00_000000_create_student_table',1),(4,'0003_00_00_000000_create_tutor_table',1),(5,'0003_00_00_000001_create_tutor_translations',1),(6,'0003_00_00_100000_create_certificates_table',1),(7,'0004_00_00_000000_create_subject_table',1),(8,'0004_00_00_000001_create_subject_translations_table',1),(9,'0004_00_00_000300_create_tutor_teach_subject_table',1),(10,'0005_00_00_000000_create_course_table',1),(11,'0005_00_00_000000_create_student_courses_table',1),(12,'0005_00_00_000001_create_course_translations_table',1),(13,'0005_00_00_000002_create_course_material_table',1),(14,'0005_00_00_000003_create_course_material_translations_table',1),(15,'0006_00_00_000000_create_lecture_table',1),(16,'0007_00_00_000000_create_banner_table',1),(17,'0008_00_00_000000_create_tags_table',1),(18,'0009_00_00_000000_create_blogs_table',1),(19,'0009_00_00_000001_create_posts_table',1),(20,'0009_00_00_100000_create_comments_table',1),(21,'0009_00_00_200000_create_user_likes_table',1),(22,'0010_00_00_000000_create_study_sessions_table',1),(23,'0010_00_00_000001_create_room_live_courses_table',1),(24,'0010_00_00_100000_create_course_schedules_table',1),(25,'0010_00_00_100002_create_student_schedules_table',1),(26,'0011_00_00_000000_create_news_table',1),(27,'2014_10_12_100000_create_password_resets_table',1),(28,'2018_11_06_222923_create_transactions_table',1),(29,'2018_11_07_192923_create_transfers_table',1),(30,'2018_11_07_202152_update_transfers_table',1),(31,'2018_11_15_124230_create_wallets_table',1),(32,'2018_11_19_164609_update_transactions_table',1),(33,'2018_11_20_133759_add_fee_transfers_table',1),(34,'2018_11_22_131953_add_status_transfers_table',1),(35,'2018_11_22_133438_drop_refund_transfers_table',1),(36,'2019_05_03_000001_create_customer_columns',1),(37,'2019_05_03_000002_create_subscriptions_table',1),(38,'2019_05_03_000003_create_subscription_items_table',1),(39,'2019_05_13_111553_update_status_transfers_table',1),(40,'2019_06_25_103755_add_exchange_status_transfers_table',1),(41,'2019_07_29_184926_decimal_places_wallets_table',1),(42,'2019_10_02_193759_add_discount_transfers_table',1),(43,'2020_10_30_193412_add_meta_wallets_table',1),(44,'2021_06_02_070717_create_blog_tags_table',1),(45,'2021_06_05_105255_create_permission_tables',1),(46,'2021_06_16_070732_create_discounts_table',1),(47,'2021_06_16_071553_create_course_discounts_table',1),(48,'2021_06_16_094905_create_memberships_table',1),(49,'2021_06_16_094955_create_membership_courses_table',1),(50,'2021_06_16_101630_create_course_membership_discounts_table',1),(51,'2021_06_17_082211_create_orders_table',1),(52,'2021_06_18_071425_create_ratings_table',1),(53,'2021_07_06_082346_create_social_accounts_table',1),(54,'2021_07_08_011523_create_moderators_table',1),(55,'2021_09_27_025026_create_exams_table',1),(56,'2021_09_27_025526_create_pass_grades_table',1),(57,'2021_09_27_025608_create_quizzes_table',1),(58,'2021_09_27_033154_create_questions_table',1),(59,'2021_09_28_014621_add_wallet_id_wallets_table',1),(60,'2021_10_05_113819_create_settings_table',1),(61,'2021_10_21_084647_create_passages_table',1),(62,'2021_10_21_085602_create_reading_questions_table',1),(63,'2021_10_21_085805_create_writing_assessment_questions_table',1),(64,'2021_10_21_092247_create_writing_quiz_questions_table',1),(65,'2021_10_21_092337_create_listen_assessment_questions_table',1),(66,'2021_10_21_094820_create_speak_assessment_questions_table',1),(67,'2021_10_21_094855_create_speak_quiz_questions_table',1),(68,'2021_10_21_094924_create_speak_exercises_questions_table',1),(69,'2021_10_21_095627_create_reading_answers_table',1),(70,'2021_10_21_095706_create_writing_assessment_answers_table',1),(71,'2021_10_21_095744_create_writing_quiz_answers_table',1),(72,'2021_10_21_095845_create_listen_assessment_answers_table',1),(73,'2021_10_21_100020_create_speak_assessment_answers_table',1),(74,'2021_10_21_100051_create_speak_quiz_answers_table',1),(75,'2021_10_21_100144_create_speak_exercises_answers_table',1),(76,'2021_10_21_100247_create_student_examinations_table',1),(77,'2021_11_04_020323_create_audio_files_table',1),(78,'2021_11_04_030027_create_audio_listens_table',1),(79,'2021_11_10_013023_create_skip_levels_table',1);
+INSERT INTO `migrations` VALUES (1,'0000_00_00_000000_create_file_table',1),(2,'0001_00_00_000000_create_users_table',1),(3,'0002_00_00_000000_create_student_table',1),(4,'0003_00_00_000000_create_tutor_table',1),(5,'0003_00_00_000001_create_tutor_translations',1),(6,'0003_00_00_100000_create_certificates_table',1),(7,'0004_00_00_000000_create_subject_table',1),(8,'0004_00_00_000001_create_subject_translations_table',1),(9,'0004_00_00_000300_create_tutor_teach_subject_table',1),(10,'0005_00_00_000000_create_course_table',1),(11,'0005_00_00_000000_create_student_courses_table',1),(12,'0005_00_00_000001_create_course_translations_table',1),(13,'0005_00_00_000002_create_course_material_table',1),(14,'0005_00_00_000003_create_course_material_translations_table',1),(15,'0006_00_00_000000_create_lecture_table',1),(16,'0007_00_00_000000_create_banner_table',1),(17,'0008_00_00_000000_create_tags_table',1),(18,'0009_00_00_000000_create_blogs_table',1),(19,'0009_00_00_000001_create_posts_table',1),(20,'0009_00_00_100000_create_comments_table',1),(21,'0009_00_00_200000_create_user_likes_table',1),(22,'0010_00_00_000000_create_study_sessions_table',1),(23,'0010_00_00_000001_create_room_live_courses_table',1),(24,'0010_00_00_100000_create_course_schedules_table',1),(25,'0010_00_00_100002_create_student_schedules_table',1),(26,'0011_00_00_000000_create_news_table',1),(27,'2014_10_12_100000_create_password_resets_table',1),(28,'2018_11_06_222923_create_transactions_table',1),(29,'2018_11_07_192923_create_transfers_table',1),(30,'2018_11_07_202152_update_transfers_table',1),(31,'2018_11_15_124230_create_wallets_table',1),(32,'2018_11_19_164609_update_transactions_table',1),(33,'2018_11_20_133759_add_fee_transfers_table',1),(34,'2018_11_22_131953_add_status_transfers_table',1),(35,'2018_11_22_133438_drop_refund_transfers_table',1),(36,'2019_05_03_000001_create_customer_columns',1),(37,'2019_05_03_000002_create_subscriptions_table',1),(38,'2019_05_03_000003_create_subscription_items_table',1),(39,'2019_05_13_111553_update_status_transfers_table',1),(40,'2019_06_25_103755_add_exchange_status_transfers_table',1),(41,'2019_07_29_184926_decimal_places_wallets_table',1),(42,'2019_10_02_193759_add_discount_transfers_table',1),(43,'2020_10_30_193412_add_meta_wallets_table',1),(44,'2021_06_02_070717_create_blog_tags_table',1),(45,'2021_06_05_105255_create_permission_tables',1),(46,'2021_06_16_070732_create_discounts_table',1),(47,'2021_06_16_071553_create_course_discounts_table',1),(48,'2021_06_16_094905_create_memberships_table',1),(49,'2021_06_16_094955_create_membership_courses_table',1),(50,'2021_06_16_101630_create_course_membership_discounts_table',1),(51,'2021_06_17_082211_create_orders_table',1),(52,'2021_06_18_071425_create_ratings_table',1),(53,'2021_07_06_082346_create_social_accounts_table',1),(54,'2021_07_08_011523_create_moderators_table',1),(55,'2021_09_27_025026_create_exams_table',1),(56,'2021_09_27_025526_create_pass_grades_table',1),(57,'2021_09_27_025608_create_quizzes_table',1),(58,'2021_09_27_033154_create_questions_table',1),(59,'2021_09_28_014621_add_wallet_id_wallets_table',1),(60,'2021_10_05_113819_create_settings_table',1),(61,'2021_10_21_084647_create_passages_table',1),(62,'2021_10_21_085602_create_reading_questions_table',1),(63,'2021_10_21_085805_create_writing_assessment_questions_table',1),(64,'2021_10_21_092247_create_writing_quiz_questions_table',1),(65,'2021_10_21_092337_create_listen_assessment_questions_table',1),(66,'2021_10_21_094820_create_speak_assessment_questions_table',1),(67,'2021_10_21_094855_create_speak_quiz_questions_table',1),(68,'2021_10_21_094924_create_speak_exercises_questions_table',1),(69,'2021_10_21_095627_create_reading_answers_table',1),(70,'2021_10_21_095706_create_writing_assessment_answers_table',1),(71,'2021_10_21_095744_create_writing_quiz_answers_table',1),(72,'2021_10_21_095845_create_listen_assessment_answers_table',1),(73,'2021_10_21_100020_create_speak_assessment_answers_table',1),(74,'2021_10_21_100051_create_speak_quiz_answers_table',1),(75,'2021_10_21_100144_create_speak_exercises_answers_table',1),(76,'2021_10_21_100247_create_student_examinations_table',1),(77,'2021_11_04_020323_create_audio_files_table',1),(78,'2021_11_04_030027_create_audio_listens_table',1),(79,'2021_11_10_013023_create_skip_levels_table',1),(80,'2021_11_20_044407_update_students_table',2),(81,'2021_11_20_074820_create_m_c_answer_items_table',2);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1072,7 +1104,7 @@ CREATE TABLE `posts` (
   PRIMARY KEY (`id`),
   KEY `posts_user_id_foreign` (`user_id`),
   CONSTRAINT `posts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1081,6 +1113,7 @@ CREATE TABLE `posts` (
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES (1,1,'Where can I get some?','dsfsdf',0,0,0,NULL,2,'2021-11-18 20:42:50','2021-11-18 20:42:50',NULL);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1204,7 +1237,7 @@ CREATE TABLE `reading_answers` (
 
 LOCK TABLES `reading_answers` WRITE;
 /*!40000 ALTER TABLE `reading_answers` DISABLE KEYS */;
-INSERT INTO `reading_answers` VALUES (1,1,'1',0,'2021-11-10 09:10:22','2021-11-10 09:10:35',NULL),(2,1,'2',1,'2021-11-10 09:10:27','2021-11-10 09:10:35',NULL),(3,1,'3',0,'2021-11-10 09:10:31','2021-11-10 09:10:35',NULL),(4,2,'1',0,'2021-11-10 09:10:43','2021-11-10 09:10:54',NULL),(5,2,'2',0,'2021-11-10 09:10:47','2021-11-10 09:10:54',NULL),(6,2,'3',1,'2021-11-10 09:10:52','2021-11-10 09:10:54',NULL),(7,3,'yes',1,'2021-11-15 01:45:29','2021-11-15 01:45:38',NULL),(8,5,'Lorem ipsum',1,'2021-11-15 01:59:06','2021-11-15 01:59:18',NULL),(9,5,'lipsum',0,'2021-11-15 01:59:13','2021-11-15 01:59:18',NULL);
+INSERT INTO `reading_answers` VALUES (1,1,'1',0,'2021-11-10 09:10:22','2021-11-20 02:01:59',NULL),(2,1,'2',1,'2021-11-10 09:10:27','2021-11-20 02:01:59',NULL),(3,1,'3',0,'2021-11-10 09:10:31','2021-11-20 02:01:59',NULL),(4,2,'1',0,'2021-11-10 09:10:43','2021-11-10 09:10:54',NULL),(5,2,'2',0,'2021-11-10 09:10:47','2021-11-10 09:10:54',NULL),(6,2,'3',1,'2021-11-10 09:10:52','2021-11-10 09:10:54',NULL),(7,3,'yes',1,'2021-11-15 01:45:29','2021-11-15 01:45:38',NULL),(8,5,'Lorem ipsum',1,'2021-11-15 01:59:06','2021-11-15 01:59:18',NULL),(9,5,'lipsum',0,'2021-11-15 01:59:13','2021-11-15 01:59:18',NULL);
 /*!40000 ALTER TABLE `reading_answers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1659,7 +1692,7 @@ CREATE TABLE `student_courses` (
 
 LOCK TABLES `student_courses` WRITE;
 /*!40000 ALTER TABLE `student_courses` DISABLE KEYS */;
-INSERT INTO `student_courses` VALUES (2,1,4,NULL,'2021-11-10 17:50:44',1,'0,1,2,3,6,',5,5,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-10 17:50:44','2021-11-12 15:19:20',NULL),(3,1,7,NULL,'2021-11-15 01:30:25',8,'8,',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 01:30:25','2021-11-15 01:30:30',NULL),(4,3,7,NULL,'2021-11-15 02:43:22',1,'1,',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 02:43:22','2021-11-15 02:43:27',NULL),(5,3,4,NULL,'2021-11-15 16:16:30',6,'0,16,4,6,',5,5,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 09:16:30','2021-11-16 00:33:40',NULL);
+INSERT INTO `student_courses` VALUES (2,1,4,NULL,'2021-11-10 17:50:44',1,'0,1,2,3,6,',5,5,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-10 17:50:44','2021-11-12 15:19:20',NULL),(3,1,7,NULL,'2021-11-15 01:30:25',8,'8,',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 01:30:25','2021-11-15 01:30:30',NULL),(4,3,7,NULL,'2021-11-15 02:43:22',1,'1,',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 02:43:22','2021-11-15 02:43:27',NULL),(5,3,4,NULL,'2021-11-15 16:16:30',4,'0,16,4,6,',5,5,5,5,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,'2021-11-15 09:16:30','2021-11-18 20:46:11',NULL);
 /*!40000 ALTER TABLE `student_courses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1764,6 +1797,14 @@ CREATE TABLE `students` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `level_read` double DEFAULT NULL,
+  `level_write` double DEFAULT NULL,
+  `level_speak` double DEFAULT NULL,
+  `level_listen` double DEFAULT NULL,
+  `exam_buy_read` double DEFAULT NULL,
+  `exam_buy_write` double DEFAULT NULL,
+  `exam_buy_speak` double DEFAULT NULL,
+  `exam_buy_listen` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `students_user_id_foreign` (`user_id`),
   CONSTRAINT `students_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
@@ -1776,7 +1817,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (2,4,NULL,NULL,NULL,NULL,NULL,'2021-11-10 17:48:51','2021-11-10 17:48:51'),(3,5,NULL,NULL,NULL,NULL,NULL,'2021-11-10 17:59:58','2021-11-10 17:59:58'),(4,6,NULL,NULL,NULL,NULL,NULL,'2021-11-15 01:12:26','2021-11-15 01:12:26'),(5,7,'Banh Phuoc Trung','1999-05-13','+841279095508','12',NULL,'2021-11-15 01:18:58','2021-11-15 01:34:52'),(6,9,NULL,NULL,NULL,NULL,NULL,'2021-11-15 08:02:59','2021-11-15 08:02:59');
+INSERT INTO `students` VALUES (2,4,NULL,NULL,NULL,NULL,NULL,'2021-11-10 17:48:51','2021-11-10 17:48:51',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,5,NULL,NULL,NULL,NULL,NULL,'2021-11-10 17:59:58','2021-11-10 17:59:58',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,6,NULL,NULL,NULL,NULL,NULL,'2021-11-15 01:12:26','2021-11-15 01:12:26',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(5,7,'Banh Phuoc Trung','1999-05-13','+841279095508','12',NULL,'2021-11-15 01:18:58','2021-11-15 01:34:52',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(6,9,NULL,NULL,NULL,NULL,NULL,'2021-11-15 08:02:59','2021-11-15 08:02:59',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2198,7 +2239,7 @@ CREATE TABLE `user_likes` (
   PRIMARY KEY (`id`),
   KEY `user_likes_user_id_foreign` (`user_id`),
   CONSTRAINT `user_likes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2207,7 +2248,7 @@ CREATE TABLE `user_likes` (
 
 LOCK TABLES `user_likes` WRITE;
 /*!40000 ALTER TABLE `user_likes` DISABLE KEYS */;
-INSERT INTO `user_likes` VALUES (1,7,1,1,'App\\Models\\Course','2021-11-15 01:28:34','2021-11-15 01:28:34',NULL);
+INSERT INTO `user_likes` VALUES (1,7,1,1,'App\\Models\\Course','2021-11-15 01:28:34','2021-11-15 01:28:34',NULL),(2,1,1,3,'App\\Models\\Course','2021-11-18 20:42:16','2021-11-18 20:42:16',NULL);
 /*!40000 ALTER TABLE `user_likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2246,7 +2287,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Super admin','admin@gmail.com',NULL,1,'$2y$10$hmIRWuMoNP1G3cUDzO3yuONsuhHWEq8XavC2n6kVq38nKg.ExiH9y',1,'fVY8AYho25aBYkE7g5Aj0oOmsvZ1nEu0ylJ1caNMqGNxkGrbGW3c3dxkOZMi','2021-11-10 08:55:48','2021-11-10 08:55:48',NULL,NULL,NULL,NULL,NULL),(2,'Chow','stephen@gmail.com',NULL,1,'$2y$10$8qQqln7xxZffH.5hgkN8..jptdKlzcmUbobO..N/SzrTsMH1zU03u',1,NULL,'2021-11-10 09:07:54','2021-11-10 09:07:54',NULL,NULL,NULL,NULL,NULL),(4,'Phước Trung Bành','phuoctrungbanh.mkd@gmail.com',NULL,1,'$2y$10$6RvbHLAg4otiMPNzDPNdOuxTn9YyWGcimrCReQvJzzjJst8AAAHPS',1,NULL,'2021-11-10 17:48:51','2021-11-10 17:49:38',NULL,'cus_KZTswR4aatmD2Y','visa','4242',NULL),(5,'Kevin Yuen','kevintik289@gmail.com',NULL,1,'$2y$10$6Zx012LkHd4l1r5h7dKpUOVgXfNDWbyyvNGqsNHPg.Jikl/D1Kndi',1,NULL,'2021-11-10 17:59:58','2021-11-10 18:01:13',NULL,'cus_KZU3oFPO6iYTZl','visa','4242',NULL),(6,'Khánh Đăng Trần','trankhanhdang1904@gmail.com',NULL,1,'$2y$10$JgT1/Q2C8oH1KdI7ruyCo.4zkLAhrxsEJojMJSetXLAU2c8qEk1JS',1,NULL,'2021-11-15 01:12:26','2021-11-15 01:12:27',NULL,'cus_Kb5w3tQMTkU3Je',NULL,NULL,NULL),(7,'Banh Phuoc Trung','trungbanh97@gmail.com',NULL,1,'$2y$10$XFGCuSmWm5qqqtc9bD050.RBSNSBGA6cIGyb0bPpJbZt9LtrC8DUm',1,NULL,'2021-11-15 01:18:58','2021-11-15 01:34:52',NULL,'cus_Kb6226J6ofniM9','visa','4242',NULL),(8,'Mr.Kenny Or','kenny@gmail.com',NULL,1,'$2y$10$dgGugRQawC1WgEH8barkceVqOzFC.3jjJej533pfKg/zB3DmbQREm',1,NULL,'2021-11-15 02:10:59','2021-11-15 02:10:59',NULL,NULL,NULL,NULL,NULL),(9,'Phung Le','phungle.mkd@gmail.com',NULL,1,'$2y$10$vvcu4PlWIn4voZ8CovilguFyEmB7a7UOcI3xtwXai3xne69/cn02i',1,NULL,'2021-11-15 08:02:59','2021-11-15 08:03:00',NULL,'cus_KbCYa5DpWz83Gp',NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'Super admin','admin@gmail.com',NULL,1,'$2y$10$hmIRWuMoNP1G3cUDzO3yuONsuhHWEq8XavC2n6kVq38nKg.ExiH9y',1,'abS8NEwwNhWR6AWLFNWh1TkLfva9F2Mmz4zlnkqDQDZLrWECyBNMIpvZUJ4B','2021-11-10 08:55:48','2021-11-10 08:55:48',NULL,NULL,NULL,NULL,NULL),(2,'Chow','stephen@gmail.com',NULL,1,'$2y$10$8qQqln7xxZffH.5hgkN8..jptdKlzcmUbobO..N/SzrTsMH1zU03u',1,NULL,'2021-11-10 09:07:54','2021-11-10 09:07:54',NULL,NULL,NULL,NULL,NULL),(4,'Phước Trung Bành','phuoctrungbanh.mkd@gmail.com',NULL,1,'$2y$10$6RvbHLAg4otiMPNzDPNdOuxTn9YyWGcimrCReQvJzzjJst8AAAHPS',1,NULL,'2021-11-10 17:48:51','2021-11-10 17:49:38',NULL,'cus_KZTswR4aatmD2Y','visa','4242',NULL),(5,'Kevin Yuen','kevintik289@gmail.com',NULL,1,'$2y$10$6Zx012LkHd4l1r5h7dKpUOVgXfNDWbyyvNGqsNHPg.Jikl/D1Kndi',1,NULL,'2021-11-10 17:59:58','2021-11-10 18:01:13',NULL,'cus_KZU3oFPO6iYTZl','visa','4242',NULL),(6,'Khánh Đăng Trần','trankhanhdang1904@gmail.com',NULL,1,'$2y$10$JgT1/Q2C8oH1KdI7ruyCo.4zkLAhrxsEJojMJSetXLAU2c8qEk1JS',1,NULL,'2021-11-15 01:12:26','2021-11-15 01:12:27',NULL,'cus_Kb5w3tQMTkU3Je',NULL,NULL,NULL),(7,'Banh Phuoc Trung','trungbanh97@gmail.com',NULL,1,'$2y$10$XFGCuSmWm5qqqtc9bD050.RBSNSBGA6cIGyb0bPpJbZt9LtrC8DUm',1,NULL,'2021-11-15 01:18:58','2021-11-15 01:34:52',NULL,'cus_Kb6226J6ofniM9','visa','4242',NULL),(8,'Mr.Kenny Or','kenny@gmail.com',NULL,1,'$2y$10$dgGugRQawC1WgEH8barkceVqOzFC.3jjJej533pfKg/zB3DmbQREm',1,NULL,'2021-11-15 02:10:59','2021-11-15 02:10:59',NULL,NULL,NULL,NULL,NULL),(9,'Phung Le','phungle.mkd@gmail.com',NULL,1,'$2y$10$vvcu4PlWIn4voZ8CovilguFyEmB7a7UOcI3xtwXai3xne69/cn02i',1,NULL,'2021-11-15 08:02:59','2021-11-15 08:03:00',NULL,'cus_KbCYa5DpWz83Gp',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2425,4 +2466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-16 15:02:58
+-- Dump completed on 2021-11-20 21:04:50

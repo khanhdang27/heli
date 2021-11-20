@@ -30,7 +30,7 @@ class Examination extends Model
     const QUIZ = 3;
 
     const TYPES = [
-        self::ASSESSMENT => 'Assessment',
+        // self::ASSESSMENT => 'Assessment',
         self::EXERCISES => 'Exercises',
         self::QUIZ => 'Quiz',
     ];
