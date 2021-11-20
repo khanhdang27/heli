@@ -49,10 +49,9 @@ class WritingAssessmentQuestionController extends Controller
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::WRITING,
-                'index' => $input['index']
+                'type' => \Constants::COURSE_WRITING,
+                'index' => $input['index'],
             ]);
-
 
             $writingQuestion = WritingAssessmentQuestion::create([
                 'question_id' => $question->id,
@@ -125,7 +124,7 @@ class WritingAssessmentQuestionController extends Controller
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $readQuestion = WritingAssessmentQuestion::where(['question_id' => $question->id])->first();
@@ -161,7 +160,7 @@ class WritingAssessmentQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );

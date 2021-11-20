@@ -149,7 +149,7 @@ use App\Models\Examination;
                                                     {{ $lecture->name }}
                                                 </td>
                                                 <td>
-                                                    {{ Examination::TYPES[$lecture->type] }}
+                                                    {{ \Constants::EXAMINATION_TYPES[$lecture->type] }}
                                                 </td>
                                                 <td>
 

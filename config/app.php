@@ -1,9 +1,8 @@
 <?php
 
 return [
-
-    'stripe_key' => env('STRIPE_KEY',''),
-    'stripe_secret' => env('STRIPE_SECRET',''),
+    'stripe_key' => env('STRIPE_KEY', ''),
+    'stripe_secret' => env('STRIPE_SECRET', ''),
 
     'home_url' => env('APP_HOME_URL', ''),
 
@@ -96,7 +95,6 @@ return [
 
     'locale' => 'en',
 
-
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -150,7 +148,6 @@ return [
     */
 
     'providers' => [
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -207,7 +204,6 @@ return [
     */
 
     'aliases' => [
-
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
@@ -248,6 +244,6 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
+        'Constants' => App\Utilities\Constants::class,
     ],
-
 ];

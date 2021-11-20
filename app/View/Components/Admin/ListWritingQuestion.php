@@ -18,7 +18,7 @@ class ListWritingQuestion extends Component
     {
         $this->quiz = $quiz;
     }
-    
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -26,8 +26,9 @@ class ListWritingQuestion extends Component
      */
     public function render()
     {
-        $this->questions = Question::where( 'quiz_id', $this->quiz->id)
-        ->where('type', Question::WRITING)->get();
+        $this->questions = Question::where('quiz_id', $this->quiz->id)
+            ->where('type', \Constants::COURSE_WRITING)
+            ->get();
 
         return view('components.admin.list-writing-question', [
             'questions' => $this->questions,

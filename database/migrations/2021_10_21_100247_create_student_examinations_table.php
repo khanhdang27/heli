@@ -15,13 +15,17 @@ class CreateStudentExaminationsTable extends Migration
     {
         Schema::create('student_examinations', function (Blueprint $table) {
             $table->id();
+            // $table
+            //     ->foreignId('student_id')
+            //     ->constrained('users')
+            //     ->cascadeOnDelete();
+            // $table
+            //     ->foreignId('course_id')
+            //     ->constrained('courses')
+            //     ->cascadeOnDelete();
             $table
-                ->foreignId('student_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
-            $table
-                ->foreignId('course_id')
-                ->constrained('courses')
+                ->foreignId('student_course_id')
+                ->constrained('student_courses')
                 ->cascadeOnDelete();
             $table
                 ->foreignId('exam_id')

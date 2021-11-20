@@ -15,13 +15,13 @@ $course = $courseDetail->membershipCourses->course;
             {{ $course->course_name }}
         </p>
     </div>
-    @if ($course->type != Course::DOCUMENT)
+    @if ($course->type != \Constants::COURSE_DOCUMENT)
         <p class="my-5 h4">{{ $course->tutor->full_name }}</p>
     @endif
     <h2 class="my-5 font-weight-bold">HKD: {{ $courseDetail->getPriceDiscount() }}$ </h2>
     @if (Auth::check())
         @if (Auth::user()->hasRole('student'))
-            @if ($course->type == Course::LIVE)
+            @if ($course->type == \Constants::COURSE_LIVE)
                 <div id="buy_live">
                     <form id="form-room" class="form-inline" method="get"
                         action="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">

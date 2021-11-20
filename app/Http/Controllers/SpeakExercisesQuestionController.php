@@ -50,7 +50,7 @@ class SpeakExercisesQuestionController extends Controller
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::SPEAKING,
+                'type' => \Constants::COURSE_SPEAKING,
                 'index' => $input['index'],
             ]);
 

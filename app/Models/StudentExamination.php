@@ -11,20 +11,15 @@ class StudentExamination extends Model
 
     protected $guarded = [];
 
-    const ANSWER_MC = 1;
-    const ANSWER_TEXT = 2;
-    const ANSWER_VIDEO = 3;
+    // const ANSWER_MC = 1;
+    // const ANSWER_TEXT = 2;
+    // const ANSWER_VIDEO = 3;
 
-    const BASE_SCORE_PASS = 5;
+    // const BASE_SCORE_PASS = 5;
 
-    public function student()
+    public function studentCourse()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(StudentCourses::class);
     }
 
     public function exam()

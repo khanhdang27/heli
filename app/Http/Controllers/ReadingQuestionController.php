@@ -50,8 +50,8 @@ class ReadingQuestionController extends Controller
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::READING,
-                'index' => $input['index']
+                'type' => \Constants::COURSE_READING,
+                'index' => $input['index'],
             ]);
 
             $readQuestion = ReadingQuestion::create([
@@ -126,7 +126,7 @@ class ReadingQuestionController extends Controller
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $readQuestion = ReadingQuestion::where(['question_id' => $question->id])->first();
@@ -162,7 +162,7 @@ class ReadingQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );

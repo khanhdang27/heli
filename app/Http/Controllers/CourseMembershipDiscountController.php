@@ -20,7 +20,8 @@ class CourseMembershipDiscountController extends Controller
     public function index()
     {
         $courses_priceTag = CourseMembershipDiscount::with('membershipCourses.course', 'membershipCourses.membership')
-            ->orderBy('created_at', 'desc')->paginate(15);
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
         return view('admin.course-member-discount.index', [
             'courses_priceTag' => $courses_priceTag,
         ]);
@@ -67,9 +68,10 @@ class CourseMembershipDiscountController extends Controller
     public function edit(CourseMembershipDiscount $price_tag)
     {
         $courseMembershipDiscount = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts')
-            ->where('id', $price_tag->id)->first();
+            ->where('id', $price_tag->id)
+            ->first();
         return view('admin.course-member-discount.edit', [
-            'price_tag' => $courseMembershipDiscount
+            'price_tag' => $courseMembershipDiscount,
         ]);
     }
 
@@ -84,14 +86,9 @@ class CourseMembershipDiscountController extends Controller
     {
         $input = $request->input();
 
-        $new_price_tag = CourseMembershipDiscount::with(
-            'membershipCourses',
-            'membershipCourses.course',
-            'membershipCourses.course.courseMaterial',
-            'membershipCourses.course.rooms',
-            'membershipCourses.course.lecture',
-            )
-            ->where('id', $price_tag->id)->first();
+        $new_price_tag = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.courseMaterial', 'membershipCourses.course.rooms', 'membershipCourses.course.lecture')
+            ->where('id', $price_tag->id)
+            ->first();
 
         if ($this->canPublic($new_price_tag->membershipCourses->course)) {
             DB::beginTransaction();
@@ -109,37 +106,36 @@ class CourseMembershipDiscountController extends Controller
                 return back()->with('success', 'Update success!');
             } catch (\Throwable $th) {
                 DB::rollBack();
-                return back()->withErrors( 'Update error!');
+                return back()->withErrors('Update error!');
             }
         } else {
             $_course_type = Course::COURSE_TYPE[$new_price_tag->membershipCourses->course->type];
             $_url = '';
             switch ($new_price_tag->membershipCourses->course->type) {
-                case Course::LIVE:
+                case \Constants::COURSE_LIVE:
                     $_url = route('admin.course.index');
                     break;
-                case Course::RECORD:
+                case \Constants::COURSE_RECORD:
                     $_url = route('admin.course.index');
                     break;
-                case Course::DOCUMENT:
+                case \Constants::COURSE_DOCUMENT:
                     $_url = route('admin.course-material.index');
                     break;
                 default:
                     return false;
             }
-            return back()->withErrors( 'please check cousre <a href="'.$_url.'" ><strong> ['.$_course_type.'] </strong> </a> already before public', );
+            return back()->withErrors('please check cousre <a href="' . $_url . '" ><strong> [' . $_course_type . '] </strong> </a> already before public');
         }
-        
     }
 
-    public function canPublic($course): bool 
+    public function canPublic($course): bool
     {
         switch ($course->type) {
-            case Course::LIVE:
+            case \Constants::COURSE_LIVE:
                 return $course->rooms->isNotEmpty();
-            case Course::RECORD:
+            case \Constants::COURSE_RECORD:
                 return $course->lecture->isNotEmpty();
-            case Course::DOCUMENT:
+            case \Constants::COURSE_DOCUMENT:
                 return $course->courseMaterial->isNotEmpty();
             default:
                 return false;

@@ -43,12 +43,12 @@ use App\Models\Lecture;
                         </div>
                         <div class="form-group">
                             <label class="required" for="type">Type</label>
-                            {!! Form::select('type', Examination::TYPES, $exam->type, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('type', \Constants::EXAMINATION_TYPES, $exam->type, ['class' => 'form-control', 'required']) !!}
                             @error('type') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label class="required" for="level">Level</label>
-                            {!! Form::select('level', Lecture::LEVELS, $exam->level, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('level', \Constants::LEVELS, $exam->level, ['class' => 'form-control', 'required']) !!}
                             @error('level') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div class="d-flex">
@@ -65,9 +65,9 @@ use App\Models\Lecture;
                                             aria-controls="set-{{ $quiz->set }}" aria-selected="true">Set
                                             {{ $quiz->set }}</a>
                                     </li>
-                                    @if ($exam->type == Examination::ASSESSMENT)
+                                    @if ($exam->type == \Constants::EXAMINATION_ASSESSMENT)
                                     @break
-                                    @endif
+                                @endif
 
                                 @endforeach
                             </ul>
@@ -113,7 +113,7 @@ use App\Models\Lecture;
                                                 <div id="collapseWritingSet1" class="collapse"
                                                     aria-labelledby="headingTwo" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        @if ($exam->type == Examination::QUIZ)
+                                                        @if ($exam->type == \Constants::EXAMINATION_QUIZ)
                                                             <x-admin.create-writing-quiz-question :quiz="$quiz">
                                                             </x-admin.create-writing-quiz-question>
                                                             <br>
@@ -164,13 +164,13 @@ use App\Models\Lecture;
                                                 <div id="collapseSpeakingSet1" class="collapse"
                                                     aria-labelledby="headingThree" data-parent="#accordionExample">
                                                     <div class="card-body">
-                                                        @if ($exam->type == Examination::ASSESSMENT)
+                                                        @if ($exam->type == \Constants::EXAMINATION_ASSESSMENT)
                                                             <x-admin.create-speaking-assessment-question :quiz="$quiz">
                                                             </x-admin.create-speaking-assessment-question>
                                                             <x-admin.list-speaking-assessment-question :quiz="$quiz">
                                                             </x-admin.list-speaking-assessment-question>
 
-                                                        @elseif ($exam->type == Examination::EXERCISES)
+                                                        @elseif ($exam->type == \Constants::EXAMINATION_EXERCISES)
                                                             <x-admin.create-speaking-question :quiz="$quiz">
                                                             </x-admin.create-speaking-question>
                                                             <x-admin.list-speaking-question :quiz="$quiz">
@@ -188,7 +188,7 @@ use App\Models\Lecture;
                                             </div>
                                         </div>
                                     </div>
-                                    @if ($exam->type == Examination::ASSESSMENT)
+                                    @if ($exam->type == \Constants::EXAMINATION_ASSESSMENT)
                                     @break
                                 @endif
 

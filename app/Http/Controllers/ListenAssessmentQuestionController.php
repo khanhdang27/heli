@@ -50,8 +50,8 @@ class ListenAssessmentQuestionController extends Controller
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::LISTENING,
-                'index' => $input['index']
+                'type' => \Constants::COURSE_LISTENING,
+                'index' => $input['index'],
             ]);
 
             $listenQuestion = ListenAssessmentQuestion::create([
@@ -126,7 +126,7 @@ class ListenAssessmentQuestionController extends Controller
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $readQuestion = ListenAssessmentQuestion::where(['question_id' => $question->id])->first();
@@ -162,7 +162,7 @@ class ListenAssessmentQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );

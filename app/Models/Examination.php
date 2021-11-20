@@ -23,17 +23,17 @@ class Examination extends Model
         return 'Examination';
     }
 
-    const BASE_SCORE_MC = 1;
+    // const BASE_SCORE_MC = 1;
 
-    const ASSESSMENT = 1;
-    const EXERCISES = 2;
-    const QUIZ = 3;
+    // const ASSESSMENT = 1;
+    // const EXERCISES = 2;
+    // const QUIZ = 3;
 
-    const TYPES = [
-        // self::ASSESSMENT => 'Assessment',
-        self::EXERCISES => 'Exercises',
-        self::QUIZ => 'Quiz',
-    ];
+    // const TYPES = [
+    //     // self::ASSESSMENT => 'Assessment',
+    //     self::EXERCISES => 'Exercises',
+    //     self::QUIZ => 'Quiz',
+    // ];
 
     public function course()
     {

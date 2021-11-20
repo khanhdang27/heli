@@ -50,7 +50,8 @@ class CreateStudentCoursesTable extends Migration
             // $table->double('exam_buy_listen')->nullable(); // id of exam buy with token
 
             $table->boolean('passed')->default(false);
-            $table->unique(['student_id', 'course_id']);
+            $table->dateTime('failed')->nullable();
+            $table->unique(['student_id', 'course_id', 'failed']);
             $table->timestamps();
             $table->softDeletes();
         });

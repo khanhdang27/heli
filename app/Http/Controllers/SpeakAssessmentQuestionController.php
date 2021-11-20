@@ -52,8 +52,8 @@ class SpeakAssessmentQuestionController extends Controller
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::SPEAKING,
-                'index' => $input['index']
+                'type' => \Constants::COURSE_SPEAKING,
+                'index' => $input['index'],
             ]);
 
             if (!empty($input['audio'])) {
@@ -132,7 +132,7 @@ class SpeakAssessmentQuestionController extends Controller
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $speakQuestion = SpeakAssessmentQuestion::where(['question_id' => $question->id])->first();
@@ -174,7 +174,7 @@ class SpeakAssessmentQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );

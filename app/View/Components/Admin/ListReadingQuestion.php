@@ -28,8 +28,8 @@ class ListReadingQuestion extends Component
     public function render()
     {
         $this->questions = Question::where('quiz_id', $this->quiz->id)
-        ->where('type', Question::READING)
-        ->get();
+            ->where('type', \Constants::COURSE_READING)
+            ->get();
 
         $passage = Passage::where('quiz_id', $this->quiz->id)->first();
         return view('components.admin.list-reading-question', [

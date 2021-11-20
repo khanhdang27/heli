@@ -40,12 +40,12 @@ use App\Models\Lecture;
                         </div>
                         <div class="form-group">
                             <label for="type">Type</label>
-                            {!! Form::select('type', Examination::TYPES, old('type'), ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('type', \Constants::EXAMINATION_TYPES, old('type'), ['class' => 'form-control', 'required']) !!}
                             @error('examination.type') <span class="error">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
                             <label for="level">Level</label>
-                            {!! Form::select('level', Lecture::LEVELS, old('level'), ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('level', \Constants::LEVELS, old('level'), ['class' => 'form-control', 'required']) !!}
                             @error('examination.level') <span class="error">{{ $message }}</span> @enderror
                         </div>
 

@@ -172,7 +172,7 @@ class WalletController extends Controller
         [$product_id, $courses_with_group, $student_bought] = $this->getVariable($product_id);
         $room = 0;
         $duplicate = false;
-        if ($courses_with_group->membershipCourses->course->type == Course::LIVE) {
+        if ($courses_with_group->membershipCourses->course->type == \Constants::COURSE_LIVE) {
             $_request = $request->validate([
                 'room_id' => 'required',
             ]);

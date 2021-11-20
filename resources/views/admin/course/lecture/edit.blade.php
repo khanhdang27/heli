@@ -82,11 +82,11 @@ use App\Models\Lecture;
                         </div>
                         <div class="form-group">
                             <label for="level">Level</label>
-                            {{ Form::select('level', Lecture::LEVELS, $lecture->level, ['class' => 'form-control']) }}
+                            {{ Form::select('level', \Constants::LEVELS, $lecture->level, ['class' => 'form-control']) }}
                         </div>
                         <div class="form-group">
                             <label for="type">Type</label>
-                            {{ Form::select('type', Lecture::TYPES, $lecture->type, ['class' => 'form-control']) }}
+                            {{ Form::select('type', \Constants::COURSE_TYPES, $lecture->type, ['class' => 'form-control']) }}
                         </div>
                         <button type="submit" class="btn btn-primary"> Save </button>
                         {!! Form::close() !!}

@@ -27,7 +27,8 @@ class ListListeningQuestion extends Component
     public function render()
     {
         $this->question = Question::where('quiz_id', $this->quiz->id)
-            ->where('type', Question::LISTENING)->get();
+            ->where('type', \Constants::COURSE_LISTENING)
+            ->get();
         return view('components.admin.list-listening-question', ['quiz' => $this->quiz, 'questions' => $this->question]);
     }
 }

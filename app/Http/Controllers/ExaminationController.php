@@ -158,7 +158,7 @@ class ExaminationController extends Controller
     {
         $exams->load([
             'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::READING);
+                $query->where('type', '=', \Constants::COURSE_READING);
             },
             'quiz.question.readingQuestion',
             'quiz.question.readingQuestion.answers',
@@ -181,7 +181,7 @@ class ExaminationController extends Controller
                     $query->where('set', '=', $set);
                 },
                 'quiz.question' => function ($query) {
-                    $query->where('type', '=', Question::READING);
+                    $query->where('type', '=', \Constants::COURSE_READING);
                 },
                 'quiz.question.readingQuestion',
                 'quiz.question.readingQuestion.answers',
@@ -215,7 +215,7 @@ class ExaminationController extends Controller
                     $query->where('set', '=', $set);
                 },
                 'quiz.question' => function ($query) {
-                    $query->where('type', '=', Question::READING);
+                    $query->where('type', '=', \Constants::COURSE_READING);
                 },
                 'quiz.question.readingQuestion',
                 'quiz.question.readingQuestion.answers',
@@ -240,7 +240,7 @@ class ExaminationController extends Controller
     {
         $exams->load([
             'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::WRITING);
+                $query->where('type', '=', \Constants::COURSE_WRITING);
             },
             'quiz.question.writingAssessmentQuestion',
             'quiz.question.writingAssessmentQuestion.answers',
@@ -263,7 +263,7 @@ class ExaminationController extends Controller
                     $query->where('set', '=', $set);
                 },
                 'quiz.question' => function ($query) {
-                    $query->where('type', '=', Question::WRITING);
+                    $query->where('type', '=', \Constants::COURSE_WRITING);
                 },
                 'quiz.question.writingAssessmentQuestion',
                 'quiz.question.writingAssessmentQuestion.answers',
@@ -297,7 +297,7 @@ class ExaminationController extends Controller
                     $query->where('set', '=', $set);
                 },
                 'quiz.question' => function ($query) {
-                    $query->where('type', '=', Question::WRITING);
+                    $query->where('type', '=', \Constants::COURSE_WRITING);
                 },
                 'quiz.question.writingQuizQuestion',
                 'quiz.question.writingQuizQuestion.answers',
@@ -320,7 +320,7 @@ class ExaminationController extends Controller
     {
         $exams->load([
             'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::LISTENING);
+                $query->where('type', '=', \Constants::COURSE_LISTENING);
             },
             'quiz.question.listenAssessmentQuestion',
             'quiz.question.listenAssessmentQuestion.answers',
@@ -344,7 +344,7 @@ class ExaminationController extends Controller
                     $query->where('set', '=', $set);
                 },
                 'quiz.question' => function ($query) {
-                    $query->where('type', '=', Question::LISTENING);
+                    $query->where('type', '=', \Constants::COURSE_LISTENING);
                 },
                 'quiz.question.listenAssessmentQuestion',
                 'quiz.question.listenAssessmentQuestion.answers',
@@ -378,7 +378,7 @@ class ExaminationController extends Controller
                     $query->where('set', '=', $set);
                 },
                 'quiz.question' => function ($query) {
-                    $query->where('type', '=', Question::LISTENING);
+                    $query->where('type', '=', \Constants::COURSE_LISTENING);
                 },
                 'quiz.question.listenAssessmentQuestion',
                 'quiz.question.listenAssessmentQuestion.answers',
@@ -402,7 +402,7 @@ class ExaminationController extends Controller
     {
         $exams->load([
             'quiz.question' => function ($query) {
-                $query->where('type', '=', Question::SPEAKING);
+                $query->where('type', '=', \Constants::COURSE_SPEAKING);
             },
             'quiz.question.speakAssessmentQuestion',
             'quiz.question.speakAssessmentQuestion.answers',
@@ -425,7 +425,7 @@ class ExaminationController extends Controller
                     $query->where('set', '=', $set);
                 },
                 'quiz.question' => function ($query) {
-                    $query->where('type', '=', Question::SPEAKING);
+                    $query->where('type', '=', \Constants::COURSE_SPEAKING);
                 },
                 'quiz.question.speakExercisesQuestion',
             ]);
@@ -457,7 +457,7 @@ class ExaminationController extends Controller
                     $query->where('set', '=', $set);
                 },
                 'quiz.question' => function ($query) {
-                    $query->where('type', '=', Question::SPEAKING);
+                    $query->where('type', '=', \Constants::COURSE_SPEAKING);
                 },
                 'quiz.question.speakQuizQuestion',
             ]);

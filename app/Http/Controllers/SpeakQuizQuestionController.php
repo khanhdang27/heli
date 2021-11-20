@@ -39,17 +39,17 @@ class SpeakQuizQuestionController extends Controller
     public function store(Request $request, Quiz $quiz)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::SPEAKING,
-                'index' => $input['index']
+                'type' => \Constants::COURSE_SPEAKING,
+                'index' => $input['index'],
             ]);
 
             $speakingQuestion = SpeakQuizQuestion::create([
@@ -99,15 +99,15 @@ class SpeakQuizQuestionController extends Controller
     public function update(Request $request, Quiz $quiz, Question $question)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $speakingQuestion = SpeakQuizQuestion::where(['question_id' => $question->id])->first();
@@ -143,7 +143,7 @@ class SpeakQuizQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );

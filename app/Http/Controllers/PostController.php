@@ -24,8 +24,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('postTag', 'user')->orderByDesc('created_at')->get();
-        $tags = Tag::where('tag_type', Tag::POST)->get();
+        $posts = Post::with('postTag', 'user')
+            ->orderByDesc('created_at')
+            ->get();
+        $tags = Tag::where('tag_type', \Constants::HASTAG_POST)->get();
         return view('forum.forum-page', [
             'posts' => $posts,
             'tags' => $tags,
@@ -51,7 +53,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         if (empty($request->tag_id)) {
-            return back()->withErrors( 'Tag not found');
+            return back()->withErrors('Tag not found');
         }
         $input = $request->all();
 
@@ -62,7 +64,7 @@ class PostController extends Controller
                 'title' => $input['title'],
                 'content' => $input['content'],
                 'tag_id' => $input['tag_id'],
-                'user_id' => Auth::user()->id
+                'user_id' => Auth::user()->id,
             ]);
 
             if (!empty($input['file'])) {
@@ -73,7 +75,7 @@ class PostController extends Controller
             return back()->with('success', 'Save success');
         } catch (Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Save error');
+            return back()->withErrors('Save error');
         }
     }
 
@@ -86,10 +88,10 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $_post = Post::with('user', 'postTag')->find($post->id);
-        $tags = Tag::where('tag_type', Tag::POST)->get();
+        $tags = Tag::where('tag_type', \Constants::HASTAG_POST)->get();
         return view('forum.post-view', [
             'post' => $_post,
-            'tags' => $tags
+            'tags' => $tags,
         ]);
     }
 
@@ -118,10 +120,10 @@ class PostController extends Controller
             $post->update([
                 'title' => $request['title'],
                 'content' => $request['content'],
-                'tag_id' => $request['tag_id']
+                'tag_id' => $request['tag_id'],
             ]);
             if (!empty($request['file'])) {
-                if (!empty($post->image)){
+                if (!empty($post->image)) {
                     $post->image->delete();
                 }
                 $file = File::storeFile($request['file'], Post::class, $post->id);
@@ -129,10 +131,9 @@ class PostController extends Controller
 
             DB::commit();
             return back()->with('success', 'Save success');
-
         } catch (Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Save error');
+            return back()->withErrors('Save error');
         }
     }
 
@@ -143,13 +144,13 @@ class PostController extends Controller
             $post = Post::where('id', $post_id)->first();
             $post->update([
                 'pin_comment' => $comment_id,
-                'close_post' => 1
+                'close_post' => 1,
             ]);
             DB::commit();
             return back()->with('success', 'Save success');
-        }catch (Throwable $th){
+        } catch (Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Save error');
+            return back()->withErrors('Save error');
         }
     }
     /**
@@ -161,32 +162,37 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         try {
-            $comment = UserComment::query()->where([
-                ['commentable_type', Post::class],
-                ['commentable_id', $post->id]
-            ])->delete();
+            $comment = UserComment::query()
+                ->where([['commentable_type', Post::class], ['commentable_id', $post->id]])
+                ->delete();
             $post->delete();
             return response([
-                'message' => 'Delete success!'
+                'message' => 'Delete success!',
             ]);
         } catch (Exception $exception) {
-            return response([
-                'message' => 'Cannot delete',
-                'detail' => $exception->getMessage()
-            ], 400);
+            return response(
+                [
+                    'message' => 'Cannot delete',
+                    'detail' => $exception->getMessage(),
+                ],
+                400,
+            );
         }
     }
 
     public function showPostByTag(Tag $tag)
     {
-        $tags = Tag::where('tag_type', Tag::POST)->get();
-        $posts = Post::with('postTag', 'image')->whereHas('postTag', function ($query) use ($tag){
-            return $query->where('tags.id', $tag->id);
-        })->orderBy('created_at', 'desc')->paginate(9);
+        $tags = Tag::where('tag_type', \Constants::HASTAG_POST)->get();
+        $posts = Post::with('postTag', 'image')
+            ->whereHas('postTag', function ($query) use ($tag) {
+                return $query->where('tags.id', $tag->id);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
         return \view('forum.forum-page-tag', [
             'tags' => $tags,
             'tag' => $tag,
-            'posts' => $posts
+            'posts' => $posts,
         ]);
     }
 }

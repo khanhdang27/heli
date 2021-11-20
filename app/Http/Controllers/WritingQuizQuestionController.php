@@ -40,19 +40,19 @@ class WritingQuizQuestionController extends Controller
     public function store(Request $request, Quiz $quiz)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'part'=> 'required',
-            'photo'=> 'file|required_if:part,1',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'part' => 'required',
+            'photo' => 'file|required_if:part,1',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::WRITING,
-                'index' => $input['index']
+                'type' => \Constants::COURSE_WRITING,
+                'index' => $input['index'],
             ]);
 
             $writingQuestion = WritingQuizQuestion::create([
@@ -67,11 +67,7 @@ class WritingQuizQuestionController extends Controller
                 if (!empty($writingQuestion->photo)) {
                     $writingQuestion->photo->delete();
                 }
-                $file = File::storeFile(
-                    $request['photo'],
-                    WritingQuizQuestion::class,
-                    $writingQuestion->id,
-                );
+                $file = File::storeFile($request['photo'], WritingQuizQuestion::class, $writingQuestion->id);
             }
 
             DB::commit();
@@ -114,17 +110,17 @@ class WritingQuizQuestionController extends Controller
     public function update(Request $request, Quiz $quiz, Question $question)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
-            'part'=> 'required',
-            'photo'=> 'file|nullable',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
+            'part' => 'required',
+            'photo' => 'file|nullable',
         ]);
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $writingQuestion = WritingQuizQuestion::where(['question_id' => $question->id])->first();
@@ -140,13 +136,8 @@ class WritingQuizQuestionController extends Controller
                 if (!empty($writingQuestion->photo)) {
                     $writingQuestion->photo->delete();
                 }
-                $file = File::storeFile(
-                    $request['photo'],
-                    WritingQuizQuestion::class,
-                    $writingQuestion->id,
-                );
+                $file = File::storeFile($request['photo'], WritingQuizQuestion::class, $writingQuestion->id);
             }
-
 
             DB::commit();
             return back()->with('success', 'Update success!');
@@ -173,7 +164,7 @@ class WritingQuizQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );

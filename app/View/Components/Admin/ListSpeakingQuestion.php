@@ -27,8 +27,8 @@ class ListSpeakingQuestion extends Component
     public function render()
     {
         $this->questions = Question::where('quiz_id', $this->quiz->id)
-        ->where('type', Question::SPEAKING)
-        ->get();
-        return view('components.admin.list-speaking-question',['quiz' => $this->quiz, 'questions' => $this->questions]);
+            ->where('type', \Constants::COURSE_SPEAKING)
+            ->get();
+        return view('components.admin.list-speaking-question', ['quiz' => $this->quiz, 'questions' => $this->questions]);
     }
 }

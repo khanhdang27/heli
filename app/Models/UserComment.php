@@ -9,18 +9,20 @@ use App\Models\User;
 use App\Models\Post;
 
 class UserComment extends Model
-{   use SoftDeletes;
-    static $POST=1;
-    static $COURSE=2;
+{
+    use SoftDeletes;
+    // static $POST=1;
+    // static $COURSE=2;
 
     protected $table = 'comments';
     protected $guarded = [];
 
-
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function post() {
+    public function post()
+    {
         return $this->belongsTo(Post::class);
     }
     public function likeable()
