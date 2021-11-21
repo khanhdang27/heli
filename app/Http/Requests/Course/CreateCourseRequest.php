@@ -34,6 +34,8 @@ class CreateCourseRequest extends FormRequest
             'course_description:cn' => 'required',
             'course_description:sc' => 'required',
             'course_overview' => 'required',
+            'level' => 'required',
+            'type_part' => 'required',
             'course_price' => 'required|integer|min:4',
         ];
     }

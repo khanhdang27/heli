@@ -1,9 +1,9 @@
 @php
 
-    use App\Utilities\SelectionByClass;
-    use App\Models\Tutor;
-    use App\Models\Subject;
-    use App\Models\Course;
+use App\Utilities\SelectionByClass;
+use App\Models\Tutor;
+use App\Models\Subject;
+use App\Models\Course;
 
 @endphp
 
@@ -54,7 +54,7 @@
                                         array_filter(
                                             SelectionByClass::getValues(Subject::class, 'subject_name', 'id'),
                                             function ($var, $id) {
-                                                return $id ;
+                                                return $id;
                                             },
                                             ARRAY_FILTER_USE_BOTH,
                                         ),
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="form-group col-12 col-md-4">
                                     {{ Form::label('type', 'Type', ['class' => 'required']) }}
-                                    {{ Form::select('type', Course::COURSE_TYPE, null, ['class' => 'form-control', 'v-on:change' => 'setDefaultInvisible']) }}
+                                    {{ Form::select('type', \Constants::COURSE_TYPES, null, ['class' => 'form-control', 'v-on:change' => 'setDefaultInvisible']) }}
                                 </div>
                                 <div class="form-group col-12 col-md-4" id="tutor">
                                     {{ Form::label('tutor_id', 'Tutor', ['class' => 'required']) }}
@@ -80,6 +80,14 @@
                                         null,
                                         ['class' => 'form-control'],
                                     ) }}
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="level">Level</label>
+                                    {{ Form::select('level', \Constants::LEVELS, old('level'), ['class' => 'form-control']) }}
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="type_part">Type Part</label>
+                                    {{ Form::select('type_part', \Constants::COURSE_PARTS, old('type_part'), ['class' => 'form-control']) }}
                                 </div>
                             </div>
                             <div class="form-group ">
@@ -112,7 +120,7 @@
         </div> <!-- / .row -->
     </div>
     <script type="application/javascript">
-        window.onload = function () {
+        window.onload = function() {
             CKEDITOR.replace('ckeditor');
         };
     </script>

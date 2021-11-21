@@ -46,11 +46,7 @@ use App\Models\Lecture;
                             {!! Form::select('type', \Constants::EXAMINATION_TYPES, $exam->type, ['class' => 'form-control', 'required']) !!}
                             @error('type') <span class="error">{{ $message }}</span> @enderror
                         </div>
-                        <div class="form-group">
-                            <label class="required" for="level">Level</label>
-                            {!! Form::select('level', \Constants::LEVELS, $exam->level, ['class' => 'form-control', 'required']) !!}
-                            @error('level') <span class="error">{{ $message }}</span> @enderror
-                        </div>
+
                         <div class="d-flex">
                             <button type="submit" class="btn btn-success ml-auto"> Save </button>
                         </div>
@@ -65,10 +61,6 @@ use App\Models\Lecture;
                                             aria-controls="set-{{ $quiz->set }}" aria-selected="true">Set
                                             {{ $quiz->set }}</a>
                                     </li>
-                                    @if ($exam->type == \Constants::EXAMINATION_ASSESSMENT)
-                                    @break
-                                @endif
-
                                 @endforeach
                             </ul>
                             <br>
@@ -78,120 +70,119 @@ use App\Models\Lecture;
                                         id="set-{{ $quiz->set }}" role="tabpanel"
                                         aria-labelledby="set_{{ $quiz->set }}">
                                         <div class="accordion" id="accordionExample">
-                                            <div class="card">
-                                                <div class="card-header" id="headingOne">
-                                                    <h2 class="mb-0">
-                                                        <button class="btn btn-link btn-block text-left" type="button"
-                                                            data-toggle="collapse" data-target="#collapseReadingSet1"
-                                                            aria-expanded="true" aria-controls="collapseReadingSet1">
-                                                            Reading
-                                                        </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="collapseReadingSet1" class="collapse show"
-                                                    aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <x-admin.create-read-question :quiz="$quiz">
-                                                        </x-admin.create-read-question>
-                                                        <br>
-                                                        <x-admin.list-reading-question :quiz="$quiz">
-                                                        </x-admin.list-reading-question>
+                                            @switch($course->type_part)
+                                                @case(\Constants::COURSE_READING)
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingOne">
+                                                            <h2 class="mb-0">
+                                                                <button class="btn btn-link btn-block text-left" type="button"
+                                                                    data-toggle="collapse" data-target="#collapseReadingSet1"
+                                                                    aria-expanded="true" aria-controls="collapseReadingSet1">
+                                                                    Reading
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div id="collapseReadingSet1" class="collapse show"
+                                                            aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                            <div class="card-body">
+                                                                <x-admin.create-read-question :quiz="$quiz">
+                                                                </x-admin.create-read-question>
+                                                                <br>
+                                                                <x-admin.list-reading-question :quiz="$quiz">
+                                                                </x-admin.list-reading-question>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header" id="headingTwo">
-                                                    <h2 class="mb-0">
-                                                        <button class="btn btn-link btn-block text-left collapsed"
-                                                            type="button" data-toggle="collapse"
-                                                            data-target="#collapseWritingSet1" aria-expanded="false"
-                                                            aria-controls="collapseWritingSet1">
-                                                            Writing
-                                                        </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="collapseWritingSet1" class="collapse"
-                                                    aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        @if ($exam->type == \Constants::EXAMINATION_QUIZ)
-                                                            <x-admin.create-writing-quiz-question :quiz="$quiz">
-                                                            </x-admin.create-writing-quiz-question>
-                                                            <br>
-                                                            <x-admin.list-writing-quiz-question :quiz="$quiz">
-                                                            </x-admin.list-writing-quiz-question>
-                                                        @else
-                                                            <x-admin.create-writing-question :quiz="$quiz">
-                                                            </x-admin.create-writing-question>
-                                                            <br>
-                                                            <x-admin.list-writing-question :quiz="$quiz">
-                                                            </x-admin.list-writing-question>
-                                                        @endif
+                                                @break
+                                                @case(\Constants::COURSE_WRITING)
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingTwo">
+                                                            <h2 class="mb-0">
+                                                                <button class="btn btn-link btn-block text-left collapsed"
+                                                                    type="button" data-toggle="collapse"
+                                                                    data-target="#collapseWritingSet1" aria-expanded="false"
+                                                                    aria-controls="collapseWritingSet1">
+                                                                    Writing
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div id="collapseWritingSet1" class="collapse show"
+                                                            aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                                            <div class="card-body">
+                                                                @if ($exam->type == \Constants::EXAMINATION_QUIZ)
+                                                                    <x-admin.create-writing-quiz-question :quiz="$quiz">
+                                                                    </x-admin.create-writing-quiz-question>
+                                                                    <br>
+                                                                    <x-admin.list-writing-quiz-question :quiz="$quiz">
+                                                                    </x-admin.list-writing-quiz-question>
+                                                                @else
+                                                                    <x-admin.create-writing-question :quiz="$quiz">
+                                                                    </x-admin.create-writing-question>
+                                                                    <br>
+                                                                    <x-admin.list-writing-question :quiz="$quiz">
+                                                                    </x-admin.list-writing-question>
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header" id="headingThree">
-                                                    <h2 class="mb-0">
-                                                        <button class="btn btn-link btn-block text-left collapsed"
-                                                            type="button" data-toggle="collapse"
-                                                            data-target="#collapseListeningSet1" aria-expanded="false"
-                                                            aria-controls="collapseListeningSet1">
-                                                            Listening
-                                                        </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="collapseListeningSet1" class="collapse"
-                                                    aria-labelledby="headingThree" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <x-admin.create-listening-question :quiz="$quiz">
-                                                        </x-admin.create-listening-question>
-                                                        <x-admin.list-listening-question :quiz="$quiz">
-                                                        </x-admin.list-listening-question>
+                                                @break
+                                                @case(\Constants::COURSE_LISTENING)
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingThree">
+                                                            <h2 class="mb-0">
+                                                                <button class="btn btn-link btn-block text-left collapsed"
+                                                                    type="button" data-toggle="collapse"
+                                                                    data-target="#collapseListeningSet1" aria-expanded="false"
+                                                                    aria-controls="collapseListeningSet1">
+                                                                    Listening
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div id="collapseListeningSet1" class="collapse show"
+                                                            aria-labelledby="headingThree" data-parent="#accordionExample">
+                                                            <div class="card-body">
+                                                                <x-admin.create-listening-question :quiz="$quiz">
+                                                                </x-admin.create-listening-question>
+                                                                <x-admin.list-listening-question :quiz="$quiz">
+                                                                </x-admin.list-listening-question>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header" id="headingThree">
-                                                    <h2 class="mb-0">
-                                                        <button class="btn btn-link btn-block text-left collapsed"
-                                                            type="button" data-toggle="collapse"
-                                                            data-target="#collapseSpeakingSet1" aria-expanded="false"
-                                                            aria-controls="collapseSpeakingSet1">
-                                                            Speaking
-                                                        </button>
-                                                    </h2>
-                                                </div>
-                                                <div id="collapseSpeakingSet1" class="collapse"
-                                                    aria-labelledby="headingThree" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        @if ($exam->type == \Constants::EXAMINATION_ASSESSMENT)
-                                                            <x-admin.create-speaking-assessment-question :quiz="$quiz">
-                                                            </x-admin.create-speaking-assessment-question>
-                                                            <x-admin.list-speaking-assessment-question :quiz="$quiz">
-                                                            </x-admin.list-speaking-assessment-question>
-
-                                                        @elseif ($exam->type == \Constants::EXAMINATION_EXERCISES)
-                                                            <x-admin.create-speaking-question :quiz="$quiz">
-                                                            </x-admin.create-speaking-question>
-                                                            <x-admin.list-speaking-question :quiz="$quiz">
-                                                            </x-admin.list-speaking-question>
-
-                                                        @else
-                                                            <x-admin.create-speaking-quiz-question :quiz="$quiz">
-                                                            </x-admin.create-speaking-quiz-question>
-                                                            <x-admin.list-speaking-quiz-question :quiz="$quiz">
-                                                            </x-admin.list-speaking-quiz-question>
-
-                                                        @endif
+                                                @break
+                                                @case(\Constants::COURSE_SPEAKING)
+                                                    <div class="card">
+                                                        <div class="card-header" id="headingThree">
+                                                            <h2 class="mb-0">
+                                                                <button class="btn btn-link btn-block text-left collapsed"
+                                                                    type="button" data-toggle="collapse"
+                                                                    data-target="#collapseSpeakingSet1" aria-expanded="false"
+                                                                    aria-controls="collapseSpeakingSet1">
+                                                                    Speaking
+                                                                </button>
+                                                            </h2>
+                                                        </div>
+                                                        <div id="collapseSpeakingSet1" class="collapse show"
+                                                            aria-labelledby="headingThree" data-parent="#accordionExample">
+                                                            <div class="card-body">
+                                                                @if ($exam->type == \Constants::EXAMINATION_EXERCISES)
+                                                                    <x-admin.create-speaking-question :quiz="$quiz">
+                                                                    </x-admin.create-speaking-question>
+                                                                    <x-admin.list-speaking-question :quiz="$quiz">
+                                                                    </x-admin.list-speaking-question>
+                                                                @else
+                                                                    <x-admin.create-speaking-quiz-question :quiz="$quiz">
+                                                                    </x-admin.create-speaking-quiz-question>
+                                                                    <x-admin.list-speaking-quiz-question :quiz="$quiz">
+                                                                    </x-admin.list-speaking-quiz-question>
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                @break
+                                                @default
+                                            @endswitch
                                         </div>
                                     </div>
-                                    @if ($exam->type == \Constants::EXAMINATION_ASSESSMENT)
-                                    @break
-                                @endif
-
                                 @endforeach
                             </div>
                         </div>
@@ -205,7 +196,6 @@ use App\Models\Lecture;
             CKEDITOR.replaceAll('rich-text');
         };
     </script>
-
 
     <script type="text/javascript">
         $(document).ready(function() {

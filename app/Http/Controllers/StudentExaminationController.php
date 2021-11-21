@@ -192,11 +192,11 @@ class StudentExaminationController extends Controller
                 // Quiz Type
                 if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
                     [$result, $score, $questionType] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
-
+                    $studentInfo = User::find($studentExam->student_id)->studentInfo();
                     if ($score / count($result) > 0.8) {
-                        $this->upLevel($student_course, $questionType);
+                        $this->upLevel($studentInfo, $student_course, $questionType);
                     } else {
-                        $this->resetLevel($student_course, $questionType);
+                        $this->resetLevel($studentInfo, $student_course, $questionType);
                     }
                     DB::commit();
                     return response()->json(['quiz_result' => $result, 'score' => $score]);
@@ -315,6 +315,8 @@ class StudentExaminationController extends Controller
             'exam_id' => $examId,
         ])->with('question');
 
+        $studentInfo = Auth::user()->studentInfo();
+
         $answerRecordsReading = clone $answerRecords;
         $answerRecordsSpeaking = clone $answerRecords;
         $answerRecordsListening = clone $answerRecords;
@@ -356,32 +358,28 @@ class StudentExaminationController extends Controller
         ]);
 
         if ($summaryScore == 5) {
-            $studentCourse->update([
-                'watched_list' => '0,1,',
+            $studentInfo->update([
                 'level_read' => 5.0,
                 'level_write' => 5.0,
                 'level_speak' => 5.0,
                 'level_listen' => 5.0,
             ]);
         } elseif ($summaryScore == 5.5) {
-            $studentCourse->update([
-                'watched_list' => '0,1,',
+            $studentInfo->update([
                 'level_read' => 5.5,
                 'level_write' => 5.5,
                 'level_speak' => 5.5,
                 'level_listen' => 5.5,
             ]);
         } elseif ($summaryScore == 6) {
-            $studentCourse->update([
-                'watched_list' => '0,1,',
+            $studentInfo->update([
                 'level_read' => 6.0,
                 'level_write' => 6.0,
                 'level_speak' => 6.0,
                 'level_listen' => 6.0,
             ]);
         } else {
-            $studentCourse->update([
-                'watched_list' => '0,1,',
+            $studentInfo->update([
                 'level_read' => 6.5,
                 'level_write' => 6.5,
                 'level_speak' => 6.5,
@@ -389,6 +387,7 @@ class StudentExaminationController extends Controller
             ]);
         }
         $studentCourse->update([
+            'watched_list' => '0,1,',
             'lecture_study' => 1,
         ]);
 
@@ -495,10 +494,12 @@ class StudentExaminationController extends Controller
                 'student_id' => $studentExam->student_id,
                 'course_id' => $studentExam->course_id,
             ])->first();
+
+            $studentInfo = User::find($studentExam->student_id)->studentInfo();
             if ((int) $input['score'] >= StudentExamination::BASE_SCORE_PASS) {
-                $this->upLevel($student_course, $studentExam->question->type);
+                $this->upLevel($studentInfo, $student_course, $studentExam->question->type);
             } else {
-                $this->resetLevel($student_course, $studentExam->question->type);
+                $this->resetLevel($studentInfo, $student_course, $studentExam->question->type);
             }
 
             DB::commit();
@@ -509,50 +510,54 @@ class StudentExaminationController extends Controller
         }
     }
 
-    public function resetLevel($student_course, $type)
+    public function resetLevel($studentInfo, $student_course, $type)
     {
         switch ($type) {
             case \Constants::COURSE_READING:
-                if (empty($student_course->set_exam_read) && $student_course->set_exam_read < 4) {
-                    $student_course->update(['set_exam_read' => $student_course->set_exam_read + 1]);
+                if (empty($studentInfo->set_exam_read) && $studentInfo->set_exam_read < 4) {
+                    $studentInfo->update(['set_exam_read' => $studentInfo->set_exam_read + 1]);
                 } else {
-                    if ($student_course->exam_buy_read) {
-                        $student_course->update(['set_exam_read' => 1, 'exam_buy_read' => null]);
+                    if ($studentInfo->exam_buy_read) {
+                        $studentInfo->update(['set_exam_read' => 1, 'exam_buy_read' => null]);
+                        $student_course->update(['failed' => time()]);
                     } else {
-                        $student_course->update(['set_exam_read' => 1]);
+                        $studentInfo->update(['set_exam_read' => 1]);
                     }
                 }
                 break;
             case \Constants::COURSE_WRITING:
-                if (empty($student_course->set_exam_write) && $student_course->set_exam_write <= 4) {
-                    $student_course->update(['set_exam_write' => $student_course->set_exam_write + 1]);
+                if (empty($studentInfo->set_exam_write) && $studentInfo->set_exam_write <= 4) {
+                    $studentInfo->update(['set_exam_write' => $studentInfo->set_exam_write + 1]);
                 } else {
-                    if ($student_course->exam_buy_read) {
-                        $student_course->update(['set_exam_write' => 1, 'exam_buy_write' => null]);
+                    if ($studentInfo->exam_buy_read) {
+                        $studentInfo->update(['set_exam_write' => 1, 'exam_buy_write' => null]);
+                        $student_course->update(['failed' => time()]);
                     } else {
-                        $student_course->update(['set_exam_write' => 1]);
+                        $studentInfo->update(['set_exam_write' => 1]);
                     }
                 }
                 break;
             case \Constants::COURSE_LISTENING:
-                if (empty($student_course->set_exam_listen) && $student_course->set_exam_listen <= 4) {
-                    $student_course->update(['set_exam_listen' => $student_course->set_exam_listen + 1]);
+                if (empty($studentInfo->set_exam_listen) && $studentInfo->set_exam_listen <= 4) {
+                    $studentInfo->update(['set_exam_listen' => $studentInfo->set_exam_listen + 1]);
                 } else {
-                    if ($student_course->exam_buy_read) {
-                        $student_course->update(['set_exam_listen' => 1, 'exam_buy_listen' => null]);
+                    if ($studentInfo->exam_buy_read) {
+                        $studentInfo->update(['set_exam_listen' => 1, 'exam_buy_listen' => null]);
+                        $student_course->update(['failed' => time()]);
                     } else {
-                        $student_course->update(['set_exam_listen' => 1]);
+                        $studentInfo->update(['set_exam_listen' => 1]);
                     }
                 }
                 break;
             case \Constants::COURSE_SPEAKING:
-                if (empty($student_course->set_exam_speak) && $student_course->set_exam_speak <= 4) {
-                    $student_course->update(['set_exam_speak' => $student_course->set_exam_speak + 1]);
+                if (empty($studentInfo->set_exam_speak) && $studentInfo->set_exam_speak <= 4) {
+                    $studentInfo->update(['set_exam_speak' => $studentInfo->set_exam_speak + 1]);
                 } else {
-                    if ($student_course->exam_buy_read) {
-                        $student_course->update(['set_exam_speak' => 1, 'exam_buy_speak' => null]);
+                    if ($studentInfo->exam_buy_read) {
+                        $studentInfo->update(['set_exam_speak' => 1, 'exam_buy_speak' => null]);
+                        $student_course->update(['failed' => time()]);
                     } else {
-                        $student_course->update(['set_exam_speak' => 1]);
+                        $studentInfo->update(['set_exam_speak' => 1]);
                     }
                 }
                 break;
@@ -562,42 +567,41 @@ class StudentExaminationController extends Controller
         }
     }
 
-    public function upLevel($student_course, $type)
+    public function upLevel($studentInfo, $student_course, $type)
     {
         switch ($type) {
             case \Constants::COURSE_READING:
-                if ($student_course->exam_buy_read) {
-                    $student_course->update(['level_read' => $student_course->exam_buy_read + 0.5]);
+                if ($studentInfo->exam_buy_read) {
+                    $studentInfo->update(['level_read' => $studentInfo->exam_buy_read + 0.5]);
                 } else {
-                    $student_course->update(['level_read' => $student_course->level_read + 0.5]);
+                    $studentInfo->update(['level_read' => $studentInfo->level_read + 0.5]);
                 }
-                $student_course->update(['exam_buy_read' => null]);
+                $studentInfo->update(['exam_buy_read' => null]);
                 break;
             case \Constants::COURSE_WRITING:
-                if ($student_course->exam_buy_write) {
-                    $student_course->update(['level_write' => $student_course->exam_buy_write + 0.5]);
+                if ($studentInfo->exam_buy_write) {
+                    $studentInfo->update(['level_write' => $studentInfo->exam_buy_write + 0.5]);
                 } else {
-                    $student_course->update(['level_write' => $student_course->level_write + 0.5]);
+                    $studentInfo->update(['level_write' => $studentInfo->level_write + 0.5]);
                 }
-                $student_course->update(['exam_buy_write' => null]);
+                $studentInfo->update(['exam_buy_write' => null]);
                 break;
             case \Constants::COURSE_LISTENING:
-                if ($student_course->exam_buy_listen) {
-                    $student_course->update(['level_listen' => $student_course->exam_buy_listen + 0.5]);
+                if ($studentInfo->exam_buy_listen) {
+                    $studentInfo->update(['level_listen' => $studentInfo->exam_buy_listen + 0.5]);
                 } else {
-                    $student_course->update(['level_listen' => $student_course->level_listen + 0.5]);
+                    $studentInfo->update(['level_listen' => $studentInfo->level_listen + 0.5]);
                 }
-                $student_course->update(['exam_buy_listen' => null]);
+                $studentInfo->update(['exam_buy_listen' => null]);
                 break;
             case \Constants::COURSE_SPEAKING:
-                if ($student_course->exam_buy_speak) {
-                    $student_course->update(['level_speak' => $student_course->exam_buy_speak + 0.5]);
+                if ($studentInfo->exam_buy_speak) {
+                    $studentInfo->update(['level_speak' => $studentInfo->exam_buy_speak + 0.5]);
                 } else {
-                    $student_course->update(['level_speak' => $student_course->level_speak + 0.5]);
+                    $studentInfo->update(['level_speak' => $studentInfo->level_speak + 0.5]);
                 }
-                $student_course->update(['exam_buy_speak' => null]);
+                $studentInfo->update(['exam_buy_speak' => null]);
                 break;
-
             default:
                 // code...
                 break;

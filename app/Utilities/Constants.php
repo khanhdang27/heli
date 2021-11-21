@@ -26,7 +26,7 @@ class Constants
     const COURSE_LISTENING = 3;
     const COURSE_SPEAKING = 4;
 
-    const COURSE_TYPES = [
+    const COURSE_PARTS = [
         self::COURSE_READING => 'Reading',
         self::COURSE_WRITING => 'Writing',
         self::COURSE_LISTENING => 'Listening',
@@ -56,7 +56,7 @@ class Constants
     const COURSE_RECORD = 2;
     const COURSE_DOCUMENT = 3;
 
-    const COURSE_TYPE = [
+    const COURSE_TYPES = [
         self::COURSE_LIVE => 'Live Course',
         self::COURSE_RECORD => 'Record Video',
     ];
@@ -79,7 +79,7 @@ class Constants
     const EXAMINATION_QUIZ = 3;
 
     const EXAMINATION_TYPES = [
-        self::EXAMINATION_ASSESSMENT => 'Assessment',
+        // self::EXAMINATION_ASSESSMENT => 'Assessment',
         self::EXAMINATION_EXERCISES => 'Exercises',
         self::EXAMINATION_QUIZ => 'Quiz',
     ];

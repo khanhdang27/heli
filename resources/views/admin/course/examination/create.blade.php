@@ -43,11 +43,6 @@ use App\Models\Lecture;
                             {!! Form::select('type', \Constants::EXAMINATION_TYPES, old('type'), ['class' => 'form-control', 'required']) !!}
                             @error('examination.type') <span class="error">{{ $message }}</span> @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="level">Level</label>
-                            {!! Form::select('level', \Constants::LEVELS, old('level'), ['class' => 'form-control', 'required']) !!}
-                            @error('examination.level') <span class="error">{{ $message }}</span> @enderror
-                        </div>
 
                         <div class="d-flex">
                             <button type="submit" class="btn btn-success ml-auto"> Save </button>

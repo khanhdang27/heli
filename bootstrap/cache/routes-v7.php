@@ -103,7 +103,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::iE90Yo22yjVfmtjc',
+            '_route' => 'generated::mLgf48O5Zcn1fgI7',
           ),
           1 => NULL,
           2 => 
@@ -201,7 +201,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::wJMvEexpPWkd28Zw',
+            '_route' => 'generated::CcXVestJOrUC7oeL',
           ),
           1 => NULL,
           2 => 
@@ -256,7 +256,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Wd3dlRnLTmZnJJGk',
+            '_route' => 'generated::vrCuPotYGLrMPwQL',
           ),
           1 => NULL,
           2 => 
@@ -347,7 +347,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::QIsj4IH9B8xeq0DC',
+            '_route' => 'generated::jxZflXMy4ySkhviD',
           ),
           1 => NULL,
           2 => 
@@ -439,7 +439,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.generated::gchE313oTzGqT36z',
+            '_route' => 'admin.generated::SIzG0rgWoCOfVVDa',
           ),
           1 => NULL,
           2 => 
@@ -741,6 +741,26 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => 'admin.course.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/admin/course/examination/assessment' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.course.examination.getExaminationAssessment',
           ),
           1 => NULL,
           2 => 
@@ -3836,7 +3856,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'site.generated::37wFuZ1NFY0kB6Nc',
+            '_route' => 'site.generated::e10tfikOsRl54gsB',
           ),
           1 => 
           array (
@@ -6866,7 +6886,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.generated::viTJnoRNXSjDteHI',
+            '_route' => 'admin.generated::KQXED27sPWNKXFEu',
           ),
           1 => 
           array (
@@ -6889,7 +6909,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'admin.generated::K9WFsmILgnQCOdfh',
+            '_route' => 'admin.generated::OzmPdrdC8nxjoX7C',
           ),
           1 => 
           array (
@@ -9348,7 +9368,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'generated::iE90Yo22yjVfmtjc' => 
+    'generated::mLgf48O5Zcn1fgI7' => 
     array (
       'methods' => 
       array (
@@ -9374,7 +9394,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::iE90Yo22yjVfmtjc',
+        'as' => 'generated::mLgf48O5Zcn1fgI7',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9758,7 +9778,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'generated::wJMvEexpPWkd28Zw' => 
+    'generated::CcXVestJOrUC7oeL' => 
     array (
       'methods' => 
       array (
@@ -9778,7 +9798,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::wJMvEexpPWkd28Zw',
+        'as' => 'generated::CcXVestJOrUC7oeL',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9864,7 +9884,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'generated::Wd3dlRnLTmZnJJGk' => 
+    'generated::vrCuPotYGLrMPwQL' => 
     array (
       'methods' => 
       array (
@@ -9884,7 +9904,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Wd3dlRnLTmZnJJGk',
+        'as' => 'generated::vrCuPotYGLrMPwQL',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10077,7 +10097,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'generated::QIsj4IH9B8xeq0DC' => 
+    'generated::jxZflXMy4ySkhviD' => 
     array (
       'methods' => 
       array (
@@ -10097,7 +10117,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::QIsj4IH9B8xeq0DC',
+        'as' => 'generated::jxZflXMy4ySkhviD',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10256,7 +10276,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'admin.generated::gchE313oTzGqT36z' => 
+    'admin.generated::SIzG0rgWoCOfVVDa' => 
     array (
       'methods' => 
       array (
@@ -10271,7 +10291,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\Admin\\ResetPasswordController@reset',
         'controller' => 'App\\Http\\Controllers\\Admin\\ResetPasswordController@reset',
-        'as' => 'admin.generated::gchE313oTzGqT36z',
+        'as' => 'admin.generated::SIzG0rgWoCOfVVDa',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => 'admin',
         'where' => 
@@ -12430,6 +12450,43 @@ app('router')->setCompiledRoutes(
         'as' => 'admin.course.destroy',
         'uses' => 'App\\Http\\Controllers\\CourseController@destroy',
         'controller' => 'App\\Http\\Controllers\\CourseController@destroy',
+        'namespace' => 'App\\Http\\Controllers',
+        'prefix' => 'admin',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+    ),
+    'admin.course.examination.getExaminationAssessment' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin/course/examination/assessment',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth.admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\ExaminationController@getExaminationAssessment',
+        'controller' => 'App\\Http\\Controllers\\ExaminationController@getExaminationAssessment',
+        'as' => 'admin.course.examination.getExaminationAssessment',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => 'admin',
         'where' => 
@@ -19207,7 +19264,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'admin.generated::viTJnoRNXSjDteHI' => 
+    'admin.generated::KQXED27sPWNKXFEu' => 
     array (
       'methods' => 
       array (
@@ -19224,7 +19281,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\SettingController@edit',
         'controller' => 'App\\Http\\Controllers\\SettingController@edit',
-        'as' => 'admin.generated::viTJnoRNXSjDteHI',
+        'as' => 'admin.generated::KQXED27sPWNKXFEu',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => 'admin',
         'where' => 
@@ -19244,7 +19301,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'admin.generated::K9WFsmILgnQCOdfh' => 
+    'admin.generated::OzmPdrdC8nxjoX7C' => 
     array (
       'methods' => 
       array (
@@ -19261,7 +19318,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\SettingController@update',
         'controller' => 'App\\Http\\Controllers\\SettingController@update',
-        'as' => 'admin.generated::K9WFsmILgnQCOdfh',
+        'as' => 'admin.generated::OzmPdrdC8nxjoX7C',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => 'admin',
         'where' => 
@@ -19758,7 +19815,7 @@ app('router')->setCompiledRoutes(
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
     ),
-    'site.generated::37wFuZ1NFY0kB6Nc' => 
+    'site.generated::e10tfikOsRl54gsB' => 
     array (
       'methods' => 
       array (
@@ -19775,7 +19832,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'App\\Http\\Controllers\\SocialAccountController@handleProviderCallback',
         'controller' => 'App\\Http\\Controllers\\SocialAccountController@handleProviderCallback',
-        'as' => 'site.generated::37wFuZ1NFY0kB6Nc',
+        'as' => 'site.generated::e10tfikOsRl54gsB',
         'namespace' => 'App\\Http\\Controllers',
         'prefix' => 'site',
         'where' => 

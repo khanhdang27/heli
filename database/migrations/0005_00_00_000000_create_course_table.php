@@ -15,15 +15,17 @@ class CreateCourseTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subject_id')
+            $table
+                ->foreignId('subject_id')
                 ->constrained('subjects')
                 ->cascadeOnDelete();
-            $table->foreignId('tutor_id')
+            $table
+                ->foreignId('tutor_id')
                 ->constrained('tutors')
                 ->cascadeOnDelete();
             $table->integer('type');
             $table->integer('type_part');
-            $table->bigInteger('level');
+            $table->double('level');
             $table->longText('course_overview');
             $table->double('course_price');
             $table->boolean('published')->default(false);

@@ -474,4 +474,14 @@ class ExaminationController extends Controller
             );
         }
     }
+
+    public function getExaminationAssessment(Request $request)
+    {
+        $quiz = Quiz::where('exam_id', 1)->first();
+        $questions = Question::where('quiz_id', $quiz->id)->get();
+        return view('admin.assessment-manage.index', [
+            'quiz' => $quiz,
+            'questions' => $questions,
+        ]);
+    }
 }
