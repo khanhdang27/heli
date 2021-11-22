@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 
 class ChangePasswordController extends Controller
 {
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
         $is_confirmed = $request->validate([
             'old_password' => 'required',
@@ -37,10 +37,8 @@ class ChangePasswordController extends Controller
             Auth::guard()->login($user);
 
             return redirect()->back();
-
         } else {
-            return redirect()->back()->withErrors(['password'=>'wrong password']);
+            return redirect()->back()->withErrors(['password' => 'wrong password']);
         }
     }
-
 }

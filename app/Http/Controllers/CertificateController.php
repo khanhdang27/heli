@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Certificate\CreateCertificateRequest;
 use App\Models\Certificate;
-use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\Subject;
 use Illuminate\Contracts\View\View;

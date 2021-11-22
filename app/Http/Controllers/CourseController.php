@@ -10,7 +10,6 @@ use App\Models\CourseSchedule;
 use App\Models\Lecture;
 use App\Models\Membership;
 use App\Models\MembershipCourse;
-use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
@@ -31,7 +30,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\Utilities\Constants;
 
 use Illuminate\Support\Carbon;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CourseController extends Controller
 {
@@ -151,12 +149,12 @@ class CourseController extends Controller
                     ->where('course_id', $course->id)
                     ->where('student_id', Auth::user()->id)
                     ->first();
-                if ($student_course){
+                if (!empty($student_course)) {
                     $exams = StudentExamination::select('student_course_id', 'exam_id', 'quiz_id')
                         ->distinct()
                         ->with('exam')
                         ->whereHas('exam', function ($query) {
-                            return $query->where('type', '!=', Constants::EXAMINATION_ASSESSMENT);
+                            return $query->where('type', '!=', \Constants::EXAMINATION_ASSESSMENT);
                         })
                         ->where('student_course_id', $student_course->id)
                         ->get();

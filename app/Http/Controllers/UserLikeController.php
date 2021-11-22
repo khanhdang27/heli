@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\UserLike;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -26,13 +25,13 @@ class UserLikeController extends Controller
             $refer->save();
             DB::commit();
             return new JsonResponse([
-                'status'=> 200,
+                'status' => 200,
                 'message' => 'succeed'
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
             return new JsonResponse([
-                'status'=> 400,
+                'status' => 400,
                 'message' => 'fails'
             ], 400);
         }
@@ -41,10 +40,10 @@ class UserLikeController extends Controller
     public function update(Request $request)
     {
         $input = $request->all();
-        $modelTable = explode('\\' ,$input['like_module'])[2];
+        $modelTable = explode('\\', $input['like_module'])[2];
         $userLike = UserLike::where('user_id', '=', $input['user_id'])
             ->where('likeable_id', '=', $input['like_ref_id'])
-            ->where('likeable_type', 'like', '%'.$modelTable.'%' )->first();
+            ->where('likeable_type', 'like', '%' . $modelTable . '%')->first();
 
         DB::beginTransaction();
 
@@ -52,25 +51,24 @@ class UserLikeController extends Controller
             if ($userLike) {
                 $userLike->delete();
                 $refer = $input['like_module']::find($input['like_ref_id']);
-                if ($refer->like_no != 0 ) {
-                    $refer->like_no = $refer->like_no -1;
+                if ($refer->like_no != 0) {
+                    $refer->like_no = $refer->like_no - 1;
                     $refer->save();
                 }
             }
             DB::commit();
 
             return new JsonResponse([
-                'status'=> 200,
+                'status' => 200,
                 'message' => 'succeed'
             ]);
         } catch (\Throwable $th) {
             // throw ;
             DB::rollback();
             return new JsonResponse([
-                'status'=> 400,
+                'status' => 400,
                 'message' => 'fails'
             ], 400);
         }
-        
     }
 }

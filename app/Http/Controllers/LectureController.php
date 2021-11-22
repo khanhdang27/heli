@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Lecture;
 use App\Models\StudentCourses;
 use App\Models\Examination;
-use App\Models\Question;
-use App\Models\Quiz;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
