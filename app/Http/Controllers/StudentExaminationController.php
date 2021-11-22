@@ -518,10 +518,10 @@ class StudentExaminationController extends Controller
                     $studentInfo->update(['set_exam_read' => $studentInfo->set_exam_read + 1]);
                 } else {
                     if ($studentInfo->exam_buy_read) {
-                        $studentInfo->update(['set_exam_read' => 1, 'exam_buy_read' => null]);
-                        $student_course->update(['failed' => time()]);
+                        $studentInfo->update(['exam_buy_read' => null]);
+                        $student_course->update(['failed' => time(), 'set_exam' => 1]);
                     } else {
-                        $studentInfo->update(['set_exam_read' => 1]);
+                        $student_course->update(['set_exam' => 1]);
                     }
                 }
                 break;
@@ -530,10 +530,10 @@ class StudentExaminationController extends Controller
                     $studentInfo->update(['set_exam_write' => $studentInfo->set_exam_write + 1]);
                 } else {
                     if ($studentInfo->exam_buy_read) {
-                        $studentInfo->update(['set_exam_write' => 1, 'exam_buy_write' => null]);
-                        $student_course->update(['failed' => time()]);
+                        $studentInfo->update(['exam_buy_write' => null]);
+                        $student_course->update(['failed' => time(), 'set_exam' => 1]);
                     } else {
-                        $studentInfo->update(['set_exam_write' => 1]);
+                        $student_course->update(['set_exam' => 1]);
                     }
                 }
                 break;
@@ -542,10 +542,10 @@ class StudentExaminationController extends Controller
                     $studentInfo->update(['set_exam_listen' => $studentInfo->set_exam_listen + 1]);
                 } else {
                     if ($studentInfo->exam_buy_read) {
-                        $studentInfo->update(['set_exam_listen' => 1, 'exam_buy_listen' => null]);
-                        $student_course->update(['failed' => time()]);
+                        $studentInfo->update(['exam_buy_listen' => null]);
+                        $student_course->update(['failed' => time(), 'set_exam' => 1]);
                     } else {
-                        $studentInfo->update(['set_exam_listen' => 1]);
+                        $student_course->update(['set_exam' => 1]);
                     }
                 }
                 break;
@@ -554,10 +554,10 @@ class StudentExaminationController extends Controller
                     $studentInfo->update(['set_exam_speak' => $studentInfo->set_exam_speak + 1]);
                 } else {
                     if ($studentInfo->exam_buy_read) {
-                        $studentInfo->update(['set_exam_speak' => 1, 'exam_buy_speak' => null]);
-                        $student_course->update(['failed' => time()]);
+                        $studentInfo->update(['exam_buy_speak' => null]);
+                        $student_course->update(['failed' => time(), 'set_exam' => 1]);
                     } else {
-                        $studentInfo->update(['set_exam_speak' => 1]);
+                        $student_course->update(['set_exam' => 1]);
                     }
                 }
                 break;
@@ -606,6 +606,7 @@ class StudentExaminationController extends Controller
                 // code...
                 break;
         }
+        $student_course->update(['passed' => true]);
     }
 
     public function viewedExam(StudentExamination $studentExam)
