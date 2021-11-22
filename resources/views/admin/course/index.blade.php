@@ -1,5 +1,6 @@
 @php
 use App\Models\Course;
+use App\Utilities\Constants
 @endphp
 @extends('admin.layout')
 @section('content')
@@ -93,7 +94,7 @@ use App\Models\Course;
                                                         <i class="fe fe-more-vertical"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        @if ($value->type == \Constants::COURSE_RECORD)
+                                                        @if ($value->type == Constants::COURSE_RECORD)
                                                             <a href="{{ route('admin.course.lecture.list', $value->id) }}"
                                                                 class="dropdown-item">
                                                                 Manage Lecture
@@ -105,7 +106,7 @@ use App\Models\Course;
                                                                 Related Lecture
                                                             </a>
                                                         @endif
-                                                        @if ($value->type == \Constants::COURSE_LIVE)
+                                                        @if ($value->type == Constants::COURSE_LIVE)
                                                             <a href="{{ route('admin.course.room.list', $value->id) }}"
                                                                 class="dropdown-item">
                                                                 Manage Room Live

@@ -43,6 +43,7 @@ Vue.component('writing-component', require('./components/Course/WritingComponent
 Vue.component('listening-component', require('./components/Course/ListeningComponent.vue').default);
 Vue.component('speaking-component', require('./components/Course/SpeakingComponent.vue').default);
 Vue.component('assessment-component', require('./components/Course/AssessmentComponent.vue').default);
+Vue.component('modal-assessment-component', require('./components/Course/ModalAssessmentComponent.vue').default);
 
 Vue.component('review-exam-component', require('./components/Course/ReviewExamComponent.vue').default);
 
