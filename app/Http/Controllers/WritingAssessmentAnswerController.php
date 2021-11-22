@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\WritingAssessmentAnswer;
+use App\Models\MCAnswerItem;
+use App\Models\WritingAssessmentQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,52 +40,27 @@ class WritingAssessmentAnswerController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            $readingAnswer = WritingAssessmentAnswer::create([
-                'w_a_question_id' => $input['question_id'],
-                'answer' => $input['answer'],
-                'is_correct' => false
-            ]);
+            // $readingAnswer = WritingAssessmentAnswer::create([
+            //     'w_a_question_id' => $input['question_id'],
+            //     'answer' => $input['answer'],
+            //     'is_correct' => false
+            // ]);
+
+            $question = WritingAssessmentQuestion::find($input['question_id']);
+
+            $answer = new MCAnswerItem();
+            $answer->answer = $input['answer'];
+            $answer->is_correct = false;
+
+            $question->answers()->save($answer);
             DB::commit();
-            return response()->json(['message' => 'Success', 'answer' => $readingAnswer]);
+            return response()->json(['message' => 'Success', 'answer' => $answer]);
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json(['message' => 'error']);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\WritingAssessmentAnswer  $writingAssessmentAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(WritingAssessmentAnswer $writingAssessmentAnswer)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\WritingAssessmentAnswer  $writingAssessmentAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(WritingAssessmentAnswer $writingAssessmentAnswer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\WritingAssessmentAnswer  $writingAssessmentAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, WritingAssessmentAnswer $writingAssessmentAnswer)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -92,7 +68,7 @@ class WritingAssessmentAnswerController extends Controller
      * @param  \App\WritingAssessmentAnswer  $writingAssessmentAnswer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WritingAssessmentAnswer $answer)
+    public function destroy(MCAnswerItem $answer)
     {
         DB::beginTransaction();
         try {

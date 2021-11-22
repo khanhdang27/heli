@@ -22,7 +22,7 @@ class BlogController extends Controller
     {
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.blog.index', [
-            'blogs' => $blogs
+            'blogs' => $blogs,
         ]);
     }
 
@@ -33,7 +33,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $tags = Tag::where('tag_type', Tag::BLOG)->get();
+        $tags = Tag::where('tag_type', \Constants::HASTAG_BLOG)->get();
         return view('admin.blog.create', compact('tags'));
     }
 
@@ -48,31 +48,25 @@ class BlogController extends Controller
         DB::beginTransaction();
         try {
             $blog = Blog::create([
-                    'title' => $request['title'],
-                    'content' => $request['content']
-                ]
-            );
+                'title' => $request['title'],
+                'content' => $request['content'],
+            ]);
             foreach ($request['tag_id'] as $tag_id) {
                 $blogTag = BlogTags::create([
                     'blog_id' => $blog->id,
-                    'tag_id' => $tag_id
+                    'tag_id' => $tag_id,
                 ]);
             }
             if (!empty($request['photo'])) {
-                $file = File::storeFile(
-                    $request['photo'],
-                    Blog::class,
-                    $blog->id,
-                );
+                $file = File::storeFile($request['photo'], Blog::class, $blog->id);
             }
 
             DB::commit();
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Create error');
+            return back()->withErrors('Create error');
         }
-
     }
 
     /**
@@ -83,7 +77,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $postTag = Tag::where('id',$blog->tag_id)->first();
+        $postTag = Tag::where('id', $blog->tag_id)->first();
         return view('blog.blog-view', [
             'blog' => $blog,
             'postTag' => $postTag,
@@ -99,11 +93,12 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $_blog = Blog::with('tags')
-            ->where('id', $blog->id)->first();
-        $tags = Tag::where('tag_type', Tag::BLOG)->get();
+            ->where('id', $blog->id)
+            ->first();
+        $tags = Tag::where('tag_type', \Constants::HASTAG_BLOG)->get();
         return view('admin.blog.edit', [
             'blog' => $_blog,
-            'tags' => $tags
+            'tags' => $tags,
         ]);
     }
 
@@ -121,7 +116,7 @@ class BlogController extends Controller
             ->delete();
         $blog->update([
             'title' => $request['title'],
-            'content' => $request['content']
+            'content' => $request['content'],
         ]);
         $blog->save();
 
@@ -129,16 +124,12 @@ class BlogController extends Controller
             if (!empty($blog->photo)) {
                 $blog->photo->delete();
             }
-            $file = File::storeFile(
-                $request['photo'],
-                Blog::class,
-                $blog->id,
-            );
+            $file = File::storeFile($request['photo'], Blog::class, $blog->id);
         }
-        foreach ($request['tag_id'] as $tag_id){
+        foreach ($request['tag_id'] as $tag_id) {
             $blogTag = new BlogTags([
                 'blog_id' => $blog->id,
-                'tag_id' => $tag_id
+                'tag_id' => $tag_id,
             ]);
             $blogTag->save();
         }
@@ -150,56 +141,71 @@ class BlogController extends Controller
         $allBlog = Blog::with('tags');
         $blog_top = clone $allBlog;
         $blogs_list = clone $allBlog;
-        $blog_top = $blog_top->orderBy('view_no','desc')->first();
-        $blogs_list = $blogs_list->orderBy('view_no','desc')->limit(5)->get();
+        $blog_top = $blog_top->orderBy('view_no', 'desc')->first();
+        $blogs_list = $blogs_list
+            ->orderBy('view_no', 'desc')
+            ->limit(5)
+            ->get();
 
+        $tags = Tag::where('tag_type', \Constants::HASTAG_BLOG)->get();
 
-        $tags = Tag::where('tag_type',Tag::BLOG)->get();
-
-        return view('blog.blog-page',[
+        return view('blog.blog-page', [
             'blog_top' => $blog_top,
             'blogs' => $blogs_list,
-            'tags' => $tags
+            'tags' => $tags,
         ]);
     }
 
     public function list()
     {
-        $allBlog = Blog::with('tags', 'photo')->orderBy('created_at','desc')->paginate(9);
+        $allBlog = Blog::with('tags', 'photo')
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
         return response()->json($allBlog);
     }
 
     public function showBlogPageByTag(Tag $tag)
     {
-        $tags = Tag::where('tag_type',Tag::BLOG)->get();
+        $tags = Tag::where('tag_type', \Constants::HASTAG_BLOG)->get();
 
-        return view('blog.blog-page-tag',[
+        return view('blog.blog-page-tag', [
             'tags' => $tags,
-            'tag' => $tag
+            'tag' => $tag,
         ]);
     }
 
     public function listByTag(Tag $tag)
     {
-        $blogs = Blog::with('tags', 'photo')->whereHas('tags', function($query) use ($tag){
-            return $query->where('tags.id', $tag->id);
-        })->orderBy('created_at','desc')->paginate(9);
+        $blogs = Blog::with('tags', 'photo')
+            ->whereHas('tags', function ($query) use ($tag) {
+                return $query->where('tags.id', $tag->id);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
         return response()->json($blogs);
     }
 
-    public function viewBlog($id){
-        $blogs = Blog::where('id',$id)->with('tags')->first();
+    public function viewBlog($id)
+    {
+        $blogs = Blog::where('id', $id)
+            ->with('tags')
+            ->first();
         $blogs->view_no = $blogs->view_no + 1;
         $blogs->save();
 
         $tags = $blogs->tags;
 
-        $blog_related = Blog::with('tags')->where('id','!=',$blogs->id)->whereHas('tags', function($query) use ($tags){
-            $query->whereIn('tags.id', array_column($tags->toArray(),'id'));
-        })->orderBy('created_at', 'desc')->limit(10)->get();
-        return view('blog.blog-view',[
-            'blog'=>$blogs,
-            'blog_related' => $blog_related
+        $blog_related = Blog::with('tags')
+            ->where('id', '!=', $blogs->id)
+            ->whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('tags.id', array_column($tags->toArray(), 'id'));
+            })
+            ->orderBy('created_at', 'desc')
+            ->limit(10)
+            ->get();
+        return view('blog.blog-view', [
+            'blog' => $blogs,
+            'blog_related' => $blog_related,
         ]);
     }
     /**
@@ -215,13 +221,16 @@ class BlogController extends Controller
             $blog->delete();
             DB::commit();
             return response([
-                'message' => 'Delete success!'
+                'message' => 'Delete success!',
             ]);
         } catch (\Exception $exception) {
             DB::rollBack();
-            return response([
-                'message' => $exception->getMessage()
-            ], 400);
+            return response(
+                [
+                    'message' => $exception->getMessage(),
+                ],
+                400,
+            );
         }
     }
 }

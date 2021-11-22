@@ -61,7 +61,7 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
                 </div>
                 <div class="form-group">
                     <label for="part" class="required">Part</label>
-                    {{ Form::select('part', ListenAssessmentQuestion::PART, old('part'), ['class' => 'form-control', 'required']) }}
+                    {{ Form::select('part', Constants::QUESTION_PARTS, old('part'), ['class' => 'form-control', 'required']) }}
                 </div>
                 <div class="form-group">
                     <label for="question" class="required">Question</label>

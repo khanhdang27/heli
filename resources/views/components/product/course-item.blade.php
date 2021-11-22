@@ -19,13 +19,13 @@ switch ($typeOfUI) {
         $class = '';
         break;
 }
-if (Auth::check()){
+if (Auth::check()) {
     $user_liked = $course_card->likeable
-    ->filter(function ($item) {
-        return $item->user_id == Auth::user()->id;
-    })
-    ->first();
-$liked = empty($user_liked) ? 0 : $user_liked->like_style;
+        ->filter(function ($item) {
+            return $item->user_id == Auth::user()->id;
+        })
+        ->first();
+    $liked = empty($user_liked) ? 0 : $user_liked->like_style;
 }
 
 @endphp
@@ -41,9 +41,9 @@ $liked = empty($user_liked) ? 0 : $user_liked->like_style;
                         style="color: {{ $course_card->subject->subject_color_text }}">
                         <div class="content-top text-wrap w-100">
                             {{ $course_card->subject->certificate->certificate_code }}<br>
-                            @if ($course_card->type == Course::LIVE)
+                            @if ($course_card->type == \Constants::COURSE_LIVE)
                                 @lang('keywords.course-item.liveCourse')
-                            @elseif($course_card->type== Course::RECORD)
+                            @elseif($course_card->type== \Constants::COURSE_RECORD)
                                 @lang('keywords.course-item.courseRecord')
                             @else
                                 Document
@@ -65,7 +65,7 @@ $liked = empty($user_liked) ? 0 : $user_liked->like_style;
                                 {{ rtrim(mb_substr($course_card->course_description, 0, 100)) }}
                             </div>
                             <div class="pt-3 align-bottom">
-                                @if ($course_card->type != Course::DOCUMENT)
+                                @if ($course_card->type != \Constants::COURSE_DOCUMENT)
                                     {{ $course_card->tutor->full_name }}
                                 @endif
                             </div>
@@ -73,7 +73,6 @@ $liked = empty($user_liked) ? 0 : $user_liked->like_style;
                         <div class="ic-heart text-right h-50"
                             id="{{ $screen }}_heart{{ $typeOfUI }}{{ $course_card->id }}">
                             @if (Auth::check())
-                                {{-- <x-like.like :likeRef=$course_card :likeModule=\App\Models\Course::class></x-like.like> --}}
                                 <like-component v-bind:user-id="{{ Auth::user()->id }}"
                                     v-bind:like-ref-id="{{ $course_card->id }}"
                                     v-bind:like-module="'App\\Models\\Course'" v-bind:like-no="0"

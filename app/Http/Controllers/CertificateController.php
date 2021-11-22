@@ -49,9 +49,7 @@ class CertificateController extends Controller
         DB::beginTransaction();
 
         try {
-            $certificate = new Certificate(
-                $request->validated()
-            );
+            $certificate = new Certificate($request->validated());
             $certificate->save();
             DB::commit();
             return back()->with('success', 'Create success');
@@ -59,9 +57,7 @@ class CertificateController extends Controller
             DB::rollBack();
             return back()->withErrors('Create error');
         }
-
     }
-
 
     /**
      * Display the specified resource.
@@ -74,32 +70,32 @@ class CertificateController extends Controller
         $input = $request->input();
         $subjects = null;
         if (empty($input['certificate'])) {
-            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query) {
-                return $query->where('id', 1);
-            })->get();
+            $subjects = Subject::with('certificate')
+                ->whereHas('certificate', function (Builder $query) {
+                    return $query->where('id', 1);
+                })
+                ->get();
         } else {
-            $subjects = Subject::with('certificate')->whereHas('certificate', function (Builder $query) use ($input) {
-                return $query->where('id', $input['certificate']);
-            })->get();
+            $subjects = Subject::with('certificate')
+                ->whereHas('certificate', function (Builder $query) use ($input) {
+                    return $query->where('id', $input['certificate']);
+                })
+                ->get();
         }
 
-        $_certificate = Certificate::with('subject')->where('id', $certificate->id)->first();
+        $_certificate = Certificate::with('subject')
+            ->where('id', $certificate->id)
+            ->first();
         DB::enableQueryLog();
-        $courses_with_group = CourseMembershipDiscount::with(
-            'membershipCourses',
-            'courseDiscounts',
-            'membershipCourses.course',
-            'membershipCourses.course.subject',
-            'membershipCourses.course.subject.certificate',
-            'membershipCourses.course.tutor',
-            'membershipCourses.course.courseMaterial'
-        )->where('publish', 1)
+        $courses_with_group = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts', 'membershipCourses.course', 'membershipCourses.course.subject', 'membershipCourses.course.subject.certificate', 'membershipCourses.course.tutor', 'membershipCourses.course.courseMaterial')
+            ->where('publish', 1)
             ->whereHas('membershipCourses', function ($query) {
                 return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
             })
             ->whereHas('membershipCourses.course.subject.certificate', function ($query) use ($certificate) {
                 return $query->where('id', $certificate->id);
-            })->when(!empty($input['sort']), function ($query) use ($input) {
+            })
+            ->when(!empty($input['sort']), function ($query) use ($input) {
                 switch ($input['sort']) {
                     case 'latest':
                         return $query->orderBy('created_at', 'desc');
@@ -110,27 +106,29 @@ class CertificateController extends Controller
                         break;
                     case 'live':
                         return $query->whereHas('membershipCourses.course', function ($query) {
-                            return $query->where('type', Course::LIVE);
+                            return $query->where('type', \Constants::COURSE_LIVE);
                         });
                         break;
                     case 'record':
                         return $query->whereHas('membershipCourses.course', function ($query) {
-                            return $query->where('type', Course::RECORD);
+                            return $query->where('type', \Constants::COURSE_RECORD);
                         });
                         break;
                     case 'document':
                         $query->whereHas('membershipCourses.course', function ($query) {
-                            return $query->where('type', Course::DOCUMENT);
+                            return $query->where('type', \Constants::COURSE_DOCUMENT);
                         });
                     default:
                         break;
                 }
-            })->latest('created_at')->simplePaginate(15);
+            })
+            ->latest('created_at')
+            ->simplePaginate(15);
 
         return view('certificate.index', [
             'courses' => $courses_with_group,
             'certificate' => $_certificate,
-            'subjects' => $subjects
+            'subjects' => $subjects,
         ]);
     }
 
@@ -143,7 +141,7 @@ class CertificateController extends Controller
     public function edit(Certificate $certificate)
     {
         return view('admin.certificate.edit', [
-            'certificate' => $certificate
+            'certificate' => $certificate,
         ]);
     }
 
@@ -157,10 +155,9 @@ class CertificateController extends Controller
      */
     public function update(CreateCertificateRequest $request, Certificate $certificate)
     {
-        $certificate->update(
-            $request->validated()
-        );
-        return redirect()->route('admin.certificate.index')
+        $certificate->update($request->validated());
+        return redirect()
+            ->route('admin.certificate.index')
             ->with('success', 'Update success');
     }
 
@@ -179,19 +176,25 @@ class CertificateController extends Controller
                 $certificate->delete();
                 DB::commit();
                 return response([
-                    'message' => 'Delete success!'
+                    'message' => 'Delete success!',
                 ]);
             } else {
-                return response([
-                    'message' => 'Cannot delete!'
-                ], 400);
+                return response(
+                    [
+                        'message' => 'Cannot delete!',
+                    ],
+                    400,
+                );
             }
         } catch (\Throwable $th) {
             DB::rollback();
-            return response([
-                'message' => 'Cannot delete',
-                'detail' => $th->getMessage()
-            ], 400);
+            return response(
+                [
+                    'message' => 'Cannot delete',
+                    'detail' => $th->getMessage(),
+                ],
+                400,
+            );
         }
     }
 }

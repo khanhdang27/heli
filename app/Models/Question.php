@@ -14,18 +14,17 @@ class Question extends Model
 
     protected $guarded = [];
 
-    const READING = 1;
-    const WRITING = 2;
-    const LISTENING = 3;
-    const SPEAKING = 4;
+    // const READING = 1;
+    // const WRITING = 2;
+    // const LISTENING = 3;
+    // const SPEAKING = 4;
 
-    const TYPES = [
-        self::READING => 'reading',
-        self::WRITING => 'writing',
-        self::LISTENING => 'listening',
-        self::SPEAKING => 'speaking'
-    ];
-
+    // const TYPES = [
+    //     self::READING => 'reading',
+    //     self::WRITING => 'writing',
+    //     self::LISTENING => 'listening',
+    //     self::SPEAKING => 'speaking',
+    // ];
 
     public function quiz()
     {
@@ -71,11 +70,11 @@ class Question extends Model
     {
         $this->quiz->load('exams');
         switch ($this->quiz->exams->type) {
-            case Examination::ASSESSMENT:
+            case \Constants::EXAMINATION_ASSESSMENT:
                 return $this->questionTypeAssessment()->first();
-            case Examination::EXERCISES:
+            case \Constants::EXAMINATION_EXERCISES:
                 return $this->questionTypeExercise()->first();
-            case Examination::QUIZ:
+            case \Constants::EXAMINATION_QUIZ:
                 return $this->questionTypeQuiz()->first();
             default:
                 return null;
@@ -85,13 +84,13 @@ class Question extends Model
     private function questionTypeAssessment()
     {
         switch ($this->type) {
-            case self::READING:
+            case \Constants::COURSE_READING:
                 return $this->readingQuestion();
-            case self::WRITING:
+            case \Constants::COURSE_WRITING:
                 return $this->writingAssessmentQuestion();
-            case self::LISTENING:
+            case \Constants::COURSE_LISTENING:
                 return $this->listenAssessmentQuestion();
-            case self::SPEAKING:
+            case \Constants::COURSE_SPEAKING:
                 return $this->speakAssessmentQuestion();
             default:
                 return null;
@@ -101,13 +100,13 @@ class Question extends Model
     private function questionTypeExercise()
     {
         switch ($this->type) {
-            case self::READING:
+            case \Constants::COURSE_READING:
                 return $this->readingQuestion();
-            case self::WRITING:
+            case \Constants::COURSE_WRITING:
                 return $this->writingAssessmentQuestion();
-            case self::LISTENING:
+            case \Constants::COURSE_LISTENING:
                 return $this->listenAssessmentQuestion();
-            case self::SPEAKING:
+            case \Constants::COURSE_SPEAKING:
                 return $this->speakExercisesQuestion();
             default:
                 return null;
@@ -117,13 +116,13 @@ class Question extends Model
     private function questionTypeQuiz()
     {
         switch ($this->type) {
-            case self::READING:
+            case \Constants::COURSE_READING:
                 return $this->readingQuestion();
-            case self::WRITING:
+            case \Constants::COURSE_WRITING:
                 return $this->writingQuizQuestion();
-            case self::LISTENING:
+            case \Constants::COURSE_LISTENING:
                 return $this->listenAssessmentQuestion();
-            case self::SPEAKING:
+            case \Constants::COURSE_SPEAKING:
                 return $this->speakQuizQuestion();
             default:
                 return null;

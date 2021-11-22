@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AudioFile;
 use App\Models\Question;
 use App\Models\Quiz;
-use App\Models\SpeakAssessmentAnswer;
+use App\Models\MCAnswerItem;
 use App\Models\SpeakAssessmentQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,22 +41,22 @@ class SpeakAssessmentQuestionController extends Controller
     public function store(Request $request, Quiz $quiz)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'audio'=> 'file',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'audio' => 'file',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
 
         DB::beginTransaction();
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::SPEAKING,
-                'index' => $input['index']
+                'type' => \Constants::COURSE_SPEAKING,
+                'index' => $input['index'],
             ]);
 
-            if(!empty($input['audio'])){
+            if (!empty($input['audio'])) {
                 $file = AudioFile::storeFile($input['audio']);
                 $listenQuestion = SpeakAssessmentQuestion::create([
                     'question_id' => $question->id,
@@ -102,8 +102,8 @@ class SpeakAssessmentQuestionController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            SpeakAssessmentAnswer::where('s_a_question_id', $question->id)->update(['is_correct' => false]);
-            $answer = SpeakAssessmentAnswer::find($input['answer']);
+            $question->answers()->update(['is_correct' => false]);
+            $answer = MCAnswerItem::find($input['answer']);
             $answer->update(['is_correct' => true]);
             DB::commit();
             return back()->with('success', 'Update success!');
@@ -123,21 +123,21 @@ class SpeakAssessmentQuestionController extends Controller
     public function update(Request $request, Quiz $quiz, Question $question)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'audio'=> 'nullable|file',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'audio' => 'nullable|file',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
-            ]); 
+                'index' => $input['index'],
+            ]);
 
             $speakQuestion = SpeakAssessmentQuestion::where(['question_id' => $question->id])->first();
 
-            if(!empty($input['audio'])){
+            if (!empty($input['audio'])) {
                 $file = AudioFile::storeFile($input['audio']);
                 $speakQuestion->update([
                     'audio_ref' => $file,
@@ -174,7 +174,7 @@ class SpeakAssessmentQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );

@@ -2,6 +2,7 @@
 
 use App\Models\Course;
 use App\Models\User;
+
 $course = $courseDetail->membershipCourses->course;
 $latesLecture = null;
 if (!empty($student_course)) {
@@ -20,10 +21,10 @@ if (!empty($student_course)) {
         @if (!Auth::check() || empty($student_course))
             <x-home.buy-course :course=$course></x-home.buy-course>
         @else
-            @if ($course->type == Course::LIVE)
+            @if ($course->type == \Constants::COURSE_LIVE)
                 <x-product-detail.course-card-page :course=$course :studentCourse=$student_course>
                 </x-product-detail.course-card-page>
-            @elseif($course->type == Course::RECORD )
+            @elseif($course->type == \Constants::COURSE_RECORD )
                 <x-home.video-course :courseDetail=$course :latesLecture=$latesLecture></x-home.video-course>
             @else
                 <div class="mt-5">
@@ -41,7 +42,7 @@ if (!empty($student_course)) {
                                 </h2>
                             </a>
                         </li>
-                        @if ($course->type == Course::LIVE)
+                        @if ($course->type == \Constants::COURSE_LIVE)
                             <li class="nav-item">
                                 <a class="nav-link category-link-text" data-toggle="pill" href="#menuCourse1">
                                     <h2 class="font-weight-bold">
@@ -70,7 +71,7 @@ if (!empty($student_course)) {
                         <div id="homeCourse" class="container-fluid pt-5 mb-5 tab-pane active">
                             <x-product-detail.course-overview :courseDetail=$course></x-product-detail.course-overview>
                         </div>
-                        @if ($course->type == Course::LIVE)
+                        @if ($course->type == \Constants::COURSE_LIVE)
                             <div id="menuCourse1" class="container-fluid pb-5 tab-pane fade">
                                 <x-product-detail.online-class :courseDetail=$course></x-product-detail.online-class>
                             </div>
@@ -79,15 +80,16 @@ if (!empty($student_course)) {
                             <x-product-detail.course-tutor :courseDetail=$course></x-product-detail.course-tutor>
                         </div>
                         <div id="menuCourse3" class="container-fluid pt-5 pb-5 tab-pane fade"><br>
-                            <x-product-detail.course-rate :courseDetail=$course :studentCourse=$student_course></x-product-detail.course-rate>
+                            <x-product-detail.course-rate :courseDetail=$course :studentCourse=$student_course>
+                            </x-product-detail.course-rate>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
                     @if (empty($student_course))
                         <x-product-detail.buy-course :courseDetail=$courseDetail></x-product-detail.buy-course>
-                    @elseif($course->type == Course::RECORD)
-                        <review-exam-component v-bind:exams="{{$exams}}"></review-exam-component>
+                    @elseif($course->type == \Constants::COURSE_RECORD)
+                        <review-exam-component v-bind:exams="{{ $exams }}"></review-exam-component>
                     @endif
                 </div>
             </div>

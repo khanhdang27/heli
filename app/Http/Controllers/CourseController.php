@@ -150,14 +150,13 @@ class CourseController extends Controller
                     ->where('course_id', $course->id)
                     ->where('student_id', Auth::user()->id)
                     ->first();
-                $exams = StudentExamination::select('student_id', 'course_id', 'exam_id', 'quiz_id')
+                $exams = StudentExamination::select('student_course_id', 'exam_id', 'quiz_id')
                     ->distinct()
                     ->with('exam')
                     ->whereHas('exam', function ($query) {
-                        return $query->where('type', '!=', Examination::ASSESSMENT);
+                        return $query->where('type', '!=', \Constants::EXAMINATION_ASSESSMENT);
                     })
-                    ->where('course_id', $course->id)
-                    ->where('student_id', Auth::user()->id)
+                    ->where('student_course_id', $student_course->id)
                     ->get();
             }
             return view('course.course-page', [
@@ -192,19 +191,19 @@ class CourseController extends Controller
         $speaking = 0;
         foreach ($exam_details as $detail) {
             switch ($detail->question->type) {
-                case Question::READING:
+                case \Constants::COURSE_READING:
                     $reading += $detail->time;
                     break;
 
-                case Question::WRITING:
+                case \Constants::COURSE_WRITING:
                     $writing += $detail->time;
                     break;
 
-                case Question::LISTENING:
+                case \Constants::COURSE_LISTENING:
                     $listening += $detail->time;
                     break;
 
-                case Question::SPEAKING:
+                case \Constants::COURSE_SPEAKING:
                     $speaking += $detail->time;
                     break;
 

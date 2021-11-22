@@ -4,15 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('', 'HomeController@index')->name('home');
 
-Route::get('faq', function () {
-    return view('home.faq');
-})->name('faq');
-Route::get('privacy-policy', function () {
-    return view('home.privacy-policy');
-})->name('privacy-policy');
-Route::get('terms-conditions', function () {
-    return view('home.terms-conditions');
-})->name('terms-conditions');
+Route::get('faq', 'HomeController@faq')->name('faq');
+Route::get('privacy-policy', 'HomeController@privacy')->name('privacy-policy');
+Route::get('terms-conditions', 'HomeController@terms')->name('terms-conditions');
 
 Route::post('register', 'Auth\RegisterController@register')->name('register');
 Route::post('login', 'Auth\LoginController@login')
@@ -32,9 +26,7 @@ Route::get('/loginby/{provide}/callback', 'SocialAccountController@handleProvide
 Route::get('news/list', 'NewsController@list')->name('news.list');
 Route::get('news', 'NewsController@show')->name('news');
 Route::get('news/{id}', 'NewsController@newsDetail')->name('news-detail');
-Route::get('teams', function () {
-    return view('team-page');
-})->name('teams');
+Route::get('teams', 'HomeController@team')->name('teams');
 
 Route::resource('subject', 'SubjectController');
 
@@ -44,9 +36,7 @@ Route::get('course/search', 'CourseController@search')->name('course.search');
 Route::get('course/lectures/{course}', 'CourseController@lectureList')->name('course.lectureList');
 Route::resource('course', 'CourseController')->except(['index', 'update', 'store', 'delete']);
 
-Route::get('blog-view', function () {
-    return view('blog.blog-view');
-})->name('blog-view');
+Route::get('blog-view', 'HomeController@blog')->name('blog-view');
 
 Route::get('blog/list', 'BlogController@list')->name('blog.list');
 Route::get('show-blog', 'BlogController@showBlogPage')->name('show-blog');
@@ -55,13 +45,10 @@ Route::get('blog/tag/{tag}', 'BlogController@listByTag')->name('blog.list.tag');
 
 Route::get('view-blog/{id}', 'BlogController@viewBlog')->name('view-blog');
 
-Route::get('forumAnswer', function () {
-    return view('forum.post-view');
-})->name('forumAnswers');
+Route::get('forumAnswer', 'HomeController@forumAnswers')->name('forumAnswers');
 Route::post('subscribe', 'UserSubscribeController@customerSubscribe')->name('customerSubscribe');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('file/download/{file}', 'FileController@download')->name('file.download');
     Route::middleware('student')->group(function () {
         Route::post('payment/add-payment', 'PaymentController@addPayment')->name('payment.add-payment');
@@ -115,8 +102,7 @@ Route::middleware('auth')->group(function () {
     Route::get('token/skipPrice', 'SkipLevelController@skipPrice')->name('token.skipPrice');
     Route::post('token/skipPrice', 'SkipLevelController@paymentSkipLevel')->name('token.skipPrice.pay');
 
-    Route::post('lecture/lectureRelated', 'LectureController@getLectureRelated')
-        ->name('lecture.getLectureRelated');
+    Route::post('lecture/lectureRelated', 'LectureController@getLectureRelated')->name('lecture.getLectureRelated');
     Route::prefix('my/')
         ->name('user.')
         ->group(function () {

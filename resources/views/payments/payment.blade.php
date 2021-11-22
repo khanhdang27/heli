@@ -1,15 +1,15 @@
+@php
+use App\Models\Course;
+$course = $course_with_group->membershipCourses->course;
+@endphp
 @extends('layout.app')
-@section('title','Payment')
+@section('title', 'Payment')
 @section('content')
-    @php
-        use App\Models\Course;
-        $course = $course_with_group->membershipCourses->course;
-    @endphp
     <div class="body-content">
         <div class="container-fluid text-center top-news-page">
             @lang('keywords.coursePayment')
         </div>
-        @if($duplicate == true)
+        @if ($duplicate == true)
             <div class="modal show d-block overlay" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -19,7 +19,8 @@
                             Duplicate schedule! Please check your schedule.
                         </div>
                         <div class="modal-footer border-0 pb-5">
-                            <a type="button" class="btn btn-secondary mx-auto" href="{{route('site.course.show', $course->id)}}">
+                            <a type="button" class="btn btn-secondary mx-auto"
+                                href="{{ route('site.course.show', $course->id) }}">
                                 Back</a>
                         </div>
                     </div>
@@ -42,31 +43,32 @@
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <div class="product-payment card-body mb-3"
-                                                     style="background-color: {{ $course->subject->subject_color_background }};
-                                                         color: {{ $course->subject->subject_color_text }}">
+                                                    style="background-color: {{ $course->subject->subject_color_background }};
+                                                                             color: {{ $course->subject->subject_color_text }}">
                                                     <div class="text-center">
-                                                        <small>{{$course->subject->certificate->certificate_code}}</small>
+                                                        <small>{{ $course->subject->certificate->certificate_code }}</small>
                                                     </div>
                                                     <p class="text-center">
                                                         <small>
-                                                            @if ($course->type == Course::LIVE)
+                                                            @if ($course->type == \Constants::COURSE_LIVE)
                                                                 @lang('keywords.course-item.liveCourse')
-                                                            @elseif($course->type== Course::RECORD)
+                                                            @elseif($course->type== \Constants::COURSE_RECORD)
                                                                 @lang('keywords.course-item.courseRecord')
                                                             @endif
                                                         </small>
                                                     </p>
                                                     <div class="py-2 px-4 border border-white">
                                                         <p class="text-center m-0">
-                                                            <small>{{$course->course_name}}</small>
+                                                            <small>{{ $course->course_name }}</small>
                                                         </p>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-7">
                                                 <div class="card-body p-0">
-                                                    <h5 class="text-limit-3">{{$course->course_description}}</h5>
-                                                    <p class="card-text"><small>{{ $course->tutor->full_name }}</small>
+                                                    <h5 class="text-limit-3">{{ $course->course_description }}</h5>
+                                                    <p class="card-text">
+                                                        <small>{{ $course->tutor->full_name }}</small>
                                                     </p>
                                                     <h3 class="font-weight-bold">
                                                         @if ($course_with_group->getDiscount() > 0)
@@ -96,7 +98,7 @@
                                             </td>
                                             <td class="text-right">
                                                 <h4 class="font-weight-bold">
-                                                    {{$course_with_group->getDiscount()}} tokens</h4>
+                                                    {{ $course_with_group->getDiscount() }} tokens</h4>
                                             </td>
                                         </tr>
                                     </table>
@@ -114,7 +116,7 @@
                                         </h3>
                                     </div>
                                     <a class="btn btn-primary w-100 py-3 h5 font-weight-bold"
-                                       href="{{route('site.user.confirm', ['product_id'=> $product_id, 'room' => $room])}}">
+                                        href="{{ route('site.user.confirm', ['product_id' => $product_id, 'room' => $room]) }}">
                                         Payment</a>
                                 </div>
                             </div>
@@ -127,21 +129,20 @@
                                     </h4>
                                     <div class="d-flex mb-5">
                                         <div class="rounded-circle border border-primary mr-4 bg-user user-avatar"
-                                             style="background-image: url('{{ asset(empty(Auth::user()->avatar)
-                                                                        ? "images/user_default.png"
-                                                                        : '/file/'.Auth::user()->avatar->id
-                                                                        )}}');">
+                                            style="background-image: url('{{ asset(empty(Auth::user()->avatar) ? 'images/user_default.png' : '/file/' . Auth::user()->avatar->id) }}');">
                                         </div>
                                         <div>
-                                            <h4 class="mb-3 font-weight-bold">{{Auth::user()->name}}</h4>
-                                            <h5>{{Auth::user()->email}}</h5>
+                                            <h4 class="mb-3 font-weight-bold">{{ Auth::user()->name }}</h4>
+                                            <h5>{{ Auth::user()->email }}</h5>
                                         </div>
                                     </div>
                                     <table width="100%" class="mt-5">
                                         <tr>
-                                            <td><h4 class="font-weight-bold">Wallet Balance </h4></td>
+                                            <td>
+                                                <h4 class="font-weight-bold">Wallet Balance </h4>
+                                            </td>
                                             <td class="text-right">
-                                                <h4 class="font-weight-bold">{{Auth::user()->balance}} tokens</h4>
+                                                <h4 class="font-weight-bold">{{ Auth::user()->balance }} tokens</h4>
                                             </td>
                                         </tr>
                                     </table>

@@ -24,10 +24,10 @@ use App\Models\ListenAssessmentQuestion;
                         </h3>
                         <h5>
                             <span class="font-weight-bold">Exam type:
-                            </span>{{ Examination::TYPES[$exam_details[0]->exam->type] }}
+                            </span>{{ \Constants::EXAMINATION_TYPES[$exam_details[0]->exam->type] }}
                         </h5>
                         <h5>
-                            @if ($exam_details[0]->exam->type != Examination::ASSESSMENT)
+                            @if ($exam_details[0]->exam->type != \Constants::EXAMINATION_ASSESSMENT)
                                 Set: {{ Quiz::SET_LIST[$exam_details[0]->quiz->set] }}
                             @endif
                         </h5>
@@ -85,21 +85,21 @@ use App\Models\ListenAssessmentQuestion;
                                                         </div>
                                                         <hr />
                                                         <div class="p-3">
-                                                            @if ($detail->question->type == Question::READING)
+                                                            @if ($detail->question->type == \Constants::COURSE_READING)
                                                                 <h4 class="font-weight-bold mr-2">Passage:</h4>
                                                                 {!! $detail->quiz->passage->content !!}
                                                             @elseif($detail->question->type ==
-                                                                \App\Models\Question::LISTENING)
+                                                                \Constants::COURSE_LISTENING)
                                                                 <h4 class="font-weight-bold">
                                                                     Audio
                                                                     {{ $detail->question->questionContent()->part }}
                                                                 </h4>
-                                                                @if ($detail->question->type == Question::LISTENING && $detail->quiz->audioListen)
+                                                                @if ($detail->question->type == \Constants::COURSE_LISTENING && $detail->quiz->audioListen)
                                                                     @php
-                                                                        $audio_1 = $detail->quiz->audioListen->where('part', ListenAssessmentQuestion::PART_1)->first();
-                                                                        $audio_2 = $detail->quiz->audioListen->where('part', ListenAssessmentQuestion::PART_2)->first();
+                                                                        $audio_1 = $detail->quiz->audioListen->where('part', \Constants::QUESTION_PART_1)->first();
+                                                                        $audio_2 = $detail->quiz->audioListen->where('part', \Constants::QUESTION_PART_2)->first();
                                                                     @endphp
-                                                                    @if ($detail->question->questionContent()->part == ListenAssessmentQuestion::PART_1 && !empty($audio_1))
+                                                                    @if ($detail->question->questionContent()->part == \Constants::QUESTION_PART_1 && !empty($audio_1))
                                                                         <embed id="audio" type="text/html" height="30"
                                                                             width="100%"
                                                                             src="{{ asset(route('audio', $audio_1->audio_code)) }}">
@@ -109,10 +109,11 @@ use App\Models\ListenAssessmentQuestion;
                                                                             src="{{ asset(route('audio', $audio_2->audio_code)) }}">
                                                                     @endif
                                                                 @endif
-                                                            @elseif($detail->question->type == Question::SPEAKING)
+                                                            @elseif($detail->question->type ==
+                                                                \Constants::COURSE_SPEAKING)
                                                             @else
-                                                                @if ($detail->exam->type == Examination::QUIZ)
-                                                                    @if ($detail->question->questionContent()->part == WritingQuizQuestion::PART_1 && !empty($detail->question->questionContent()->file))
+                                                                @if ($detail->exam->type == \Constants::EXAMINATION_QUIZ)
+                                                                    @if ($detail->question->questionContent()->part == \Constants::QUESTION_PART_2 && !empty($detail->question->questionContent()->file))
                                                                         <img class="img-thumbnail"
                                                                             src="{{ asset('/file/' . $detail->question->questionContent()->file->id) }}"
                                                                             alt="" width="500">

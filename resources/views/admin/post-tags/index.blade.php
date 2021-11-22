@@ -1,5 +1,5 @@
 @php
-    use App\Models\Tag;
+use App\Models\Tag;
 @endphp
 
 @extends('admin.layout')
@@ -56,7 +56,7 @@
                                             </td>
                                             <td class="goal-project">
 
-                                                {{ Tag::TAG_TYPES[$value->tag_type] }}
+                                                {{ \Constants::TAG_TYPES[$value->tag_type] }}
                                             </td>
                                             <td class="text-right">
                                                 <div class="dropdown">

@@ -10,15 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class Course extends Model implements TranslatableContract
 {
-    const LIVE = 1;
-    const RECORD = 2;
-    const DOCUMENT = 3;
+    // const LIVE = 1;
+    // const RECORD = 2;
+    // const DOCUMENT = 3;
     use Translatable, SoftDeletes;
 
-    const COURSE_TYPE = [
-        self::LIVE => 'Live Course',
-        self::RECORD => 'Record Video',
-    ];
+    // const COURSE_TYPE = [
+    //     self::LIVE => 'Live Course',
+    //     self::RECORD => 'Record Video',
+    // ];
 
     protected $table = 'courses';
     protected $guarded = [];

@@ -13,7 +13,7 @@ class CreateWritingAssessmentQuestionsTable extends Migration
      */
     public function up()
     {
-        // use for both assessment and excises 
+        // use for both assessment and excises
         Schema::create('writing_assessment_questions', function (Blueprint $table) {
             $table->id();
             $table

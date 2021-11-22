@@ -68,15 +68,8 @@ use App\Models\Lecture;
                             <input type="file" class="custom-file-input" id="customFile" name="file" accept=".pdf">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
-                        <div class="form-group">
-                            <label for="level">Level</label>
-                            {{ Form::select('level', Lecture::LEVELS, old('level'), ['class' => 'form-control']) }}
-                        </div>
-                        <div class="form-group">
-                            <label for="type">Type</label>
-                            {{ Form::select('type', Lecture::TYPES, old('type'), ['class' => 'form-control']) }}
-                        </div>
-                        <button type="submit" class="btn btn-primary"> Save </button>
+
+                        <button type="submit" class="btn btn-primary mt-3"> Save </button>
                         {!! Form::close() !!}
                     </div>
                 </div>

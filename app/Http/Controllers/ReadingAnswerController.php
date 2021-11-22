@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ReadingAnswer;
+use App\Models\MCAnswerItem;
+use App\Models\ReadingQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,51 +40,26 @@ class ReadingAnswerController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            $readingAnswer = ReadingAnswer::create([
-                'reading_question_id' => $input['question_id'],
-                'answer' => $input['answer'],
-                'is_correct' => false
-            ]);
+            // $readingAnswer = ReadingAnswer::create([
+            //     'reading_question_id' => $input['question_id'],
+            //     'answer' => $input['answer'],
+            //     'is_correct' => false
+            // ]);
+
+            $question = ReadingQuestion::find($input['question_id']);
+
+            $answer = new MCAnswerItem();
+            $answer->answer = $input['answer'];
+            $answer->is_correct = false;
+
+            $question->answers()->save($answer);
+
             DB::commit();
-            return response()->json(['message' => 'Success', 'answer' => $readingAnswer]);
+            return response()->json(['message' => 'Success', 'answer' => $answer]);
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json(['message' => 'error', $th]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ReadingAnswer  $readingAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ReadingAnswer $readingAnswer)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ReadingAnswer  $readingAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ReadingAnswer $readingAnswer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ReadingAnswer  $readingAnswer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ReadingAnswer $readingAnswer)
-    {
-        //
     }
 
     /**
@@ -92,7 +68,7 @@ class ReadingAnswerController extends Controller
      * @param  \App\ReadingAnswer  $readingAnswer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReadingAnswer $answer)
+    public function destroy(MCAnswerItem $answer)
     {
         DB::beginTransaction();
         try {

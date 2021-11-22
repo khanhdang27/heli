@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ListenAssessmentAnswer;
+use App\Models\MCAnswerItem;
 use App\Models\ListenAssessmentQuestion;
 use App\Models\Question;
 use App\Models\Quiz;
@@ -40,18 +40,18 @@ class ListenAssessmentQuestionController extends Controller
     public function store(Request $request, Quiz $quiz)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'part'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'part' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $question = Question::create([
                 'quiz_id' => $quiz->id,
-                'type' => Question::LISTENING,
-                'index' => $input['index']
+                'type' => \Constants::COURSE_LISTENING,
+                'index' => $input['index'],
             ]);
 
             $listenQuestion = ListenAssessmentQuestion::create([
@@ -97,8 +97,8 @@ class ListenAssessmentQuestionController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            ListenAssessmentAnswer::where('l_a_question_id', $question->id)->update(['is_correct' => false]);
-            $answer = ListenAssessmentAnswer::find($input['answer']);
+            $question->answers()->update(['is_correct' => false]);
+            $answer = MCAnswerItem::find($input['answer']);
             $answer->update(['is_correct' => true]);
             DB::commit();
             return back()->with('success', 'Update success!');
@@ -118,15 +118,15 @@ class ListenAssessmentQuestionController extends Controller
     public function update(Request $request, Quiz $quiz, Question $question)
     {
         $input = $request->validate([
-            'index'=> 'required',
-            'question'=> 'required',
-            'message_wrong'=> 'required',
-            'lecture_index'=> 'required',
+            'index' => 'required',
+            'question' => 'required',
+            'message_wrong' => 'required',
+            'lecture_index' => 'required',
         ]);
         DB::beginTransaction();
         try {
             $question->update([
-                'index' => $input['index']
+                'index' => $input['index'],
             ]);
 
             $readQuestion = ListenAssessmentQuestion::where(['question_id' => $question->id])->first();
@@ -162,7 +162,7 @@ class ListenAssessmentQuestionController extends Controller
             return response(
                 [
                     'message' => 'Cannot delete course',
-                    'exception' => $exception
+                    'exception' => $exception,
                 ],
                 400,
             );

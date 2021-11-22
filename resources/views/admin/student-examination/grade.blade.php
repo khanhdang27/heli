@@ -35,7 +35,7 @@ use App\Models\Quiz;
                                     Exam: {{ $exam_details[0]->exam->name }}
                                 </h3>
                                 <h5>
-                                    Exam type: {{ Examination::TYPES[$exam_details[0]->exam->type] }}
+                                    Exam type: {{ \Constants::EXAMINATION_TYPES[$exam_details[0]->exam->type] }}
                                 </h5>
                                 <h5>
                                     Set: {{ Quiz::SET_LIST[$exam_details[0]->quiz->set] }}
@@ -185,15 +185,17 @@ use App\Models\Quiz;
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="embed-responsive embed-responsive-16by9">
-                                    <iframe id="answerVideo" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
-                                            style="position:absolute;top:0;left:0;" height="320" width="640" frameborder="0"></iframe>
+                                    <iframe id="answerVideo" allow="autoplay; fullscreen; picture-in-picture"
+                                        allowfullscreen style="position:absolute;top:0;left:0;" height="320" width="640"
+                                        frameborder="0"></iframe>
                                 </div>
                                 <script type="application/javascript" src="https://player.vimeo.com/api/player.js"></script>
                             </div>
                             <div class="col-lg-6">
                                 @csrf
                                 <label for="scoreVideo"> Score </label>
-                                <input type="number" min="0" max="10" step="1" class="form-control" name="score" id="scoreVideo">
+                                <input type="number" min="0" max="10" step="1" class="form-control" name="score"
+                                    id="scoreVideo">
                                 <label for="comment"> Comment </label>
                                 <textarea class="form-control rich-text mb-3" name="comment" id="ckeditorVideo"></textarea>
                             </div>

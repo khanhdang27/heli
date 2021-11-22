@@ -45,7 +45,7 @@ use App\Models\ListenAssessmentQuestion;
                                 </div>
                                 <div class="form-group">
                                     <label for="part" class="required text-dark">Part</label>
-                                    {{ Form::select('part', ListenAssessmentQuestion::PART, $question->questionContent()->part, ['class' => 'form-control', 'required']) }}
+                                    {{ Form::select('part', Constants::QUESTION_PARTS, $question->questionContent()->part, ['class' => 'form-control', 'required']) }}
                                 </div>
                                 <div class="form-group">
                                     <label for="message_wrong" class="required text-dark">Message Wrong</label>
