@@ -38,18 +38,17 @@
           <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
           <!-- +++++++++++++++++++++++++++++ -->
           <div class="container vue">
-            <div v-for="(group, key) in lectureCollapse" :key="key">
-              <button
-                class="btn btn-outline-primary btn-lg btn-block"
-                @click="toggleExpansion(key)"
-              >
-                <h3>
-                  {{ key | uppercase }}
-                </h3>
-              </button>
-              <div v-show="isExpanded(key)">
+<!--              <button-->
+<!--                class="btn btn-outline-primary btn-lg btn-block"-->
+<!--                @click="toggleExpansion(keyLecture[typePart-1])"-->
+<!--              >-->
+<!--                <h3>-->
+<!--                  {{ keyLecture[typePart-1] | uppercase }}-->
+<!--                </h3>-->
+<!--              </button>-->
+              <div>
                 <div
-                  v-for="(items, key_level) in group"
+                  v-for="(items, key_level) in lectures[typePart-1]"
                   :key="key_level"
                   class="list-group list-group-flush"
                 >
@@ -62,9 +61,9 @@
                     <button
                       class="btn btn-primary btn-sm my-2"
                       ref="skip_button"
-                      v-if="canSkipLevel(key_level, key)"
+                      v-if="canSkipLevel(key_level, keyLecture[typePart-1])"
                       data-toggle="modal"
-                      :data-part="key"
+                      :data-part="keyLecture[typePart-1]"
                       :data-level="key_level"
                       data-target="#skip_level"
                     >
@@ -83,7 +82,7 @@
                             item.index,
                             item.level,
                             item.type,
-                            $getConst(key)
+                            $getConst(keyLecture[typePart-1])
                           )
                         "
                       >
@@ -177,7 +176,6 @@
                 </div>
               </div>
               <hr />
-            </div>
           </div>
           <!-- +++++++++++++++++++++++++++++ -->
         </div>
@@ -332,6 +330,8 @@ export default {
   props: {
     courseId: Number,
     userId: Number,
+    typePart: Number,
+    courseLevel: Number
   },
   components: {
     QuizComponent,
@@ -413,6 +413,13 @@ export default {
       skipInPart: 0,
       studentCourse: [],
       questionType: 0,
+      lectures: [],
+      keyLecture: [
+        'reading',
+        'writing',
+        'listening',
+        'speaking',
+      ],
     };
   },
   created() {
@@ -518,6 +525,7 @@ export default {
         .get(route("site.course.lectureList", this.courseId))
         .then((response) => {
           this.studentCourse = response.data.student_lecture;
+          console.log("course:",this.studentCourse)
           this.isPassed = response.data.student_lecture.passed == 1;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
@@ -587,6 +595,12 @@ export default {
             }
             setTimeout(() => this.showLecture(this.lectureIndex), 2000);
           }
+            this.lectures = [
+                this.lectureCollapse.reading,
+                this.lectureCollapse.writing,
+                this.lectureCollapse.listening,
+                this.lectureCollapse.speaking,
+            ];
         })
         .catch(function (error) {
           console.error(error);
