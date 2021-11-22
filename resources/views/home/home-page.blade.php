@@ -11,6 +11,9 @@
 @section('title', 'Home Page')
 
 @section('content')
+    @if (!Auth::user()->student->level_read)
+        <modal-assessment-component></modal-assessment-component>
+    @endif
     <div class="banner position-relative">
         <x-sub-header :subjects=$subjects page="home"></x-sub-header>
         @if ($message = Session::get('error'))
@@ -192,5 +195,11 @@
             <subscribe-container v-bind:lang="{{json_encode($lang)}}"></subscribe-container>
         @endif
     </div>
-
+    @push('scripts')
+        <script>
+            $('#modalAssessment').modal({
+                show: true
+            })
+        </script>
+    @endpush
 @endsection

@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Utilities\Constants;
 
 use Illuminate\Support\Carbon;
 
@@ -191,19 +192,19 @@ class CourseController extends Controller
         $speaking = 0;
         foreach ($exam_details as $detail) {
             switch ($detail->question->type) {
-                case \Constants::COURSE_READING:
+                case Constants::COURSE_READING:
                     $reading += $detail->time;
                     break;
 
-                case \Constants::COURSE_WRITING:
+                case Constants::COURSE_WRITING:
                     $writing += $detail->time;
                     break;
 
-                case \Constants::COURSE_LISTENING:
+                case Constants::COURSE_LISTENING:
                     $listening += $detail->time;
                     break;
 
-                case \Constants::COURSE_SPEAKING:
+                case Constants::COURSE_SPEAKING:
                     $speaking += $detail->time;
                     break;
 

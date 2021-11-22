@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="h-100">
         <div v-if="typeExercise === $getConst('reading')" class="h-100">
             <reading-component
                 v-bind:examId="examId"
@@ -48,6 +48,9 @@ export default {
             typeExercise: 0
         }
     },
+    created() {
+        this.$parent.$on('onclose', this.onClose);
+    },
     mounted() {
         this.typeExercise = this.$root.$getConst('reading')
     },
@@ -55,6 +58,10 @@ export default {
         nextTypeExam: function (type) {
                 this.typeExercise = type;
         },
+        onClose() {
+            console.log("tat di");
+            // this.$destroy();
+        }
     }
 }
 </script>
