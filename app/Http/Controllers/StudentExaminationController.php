@@ -210,9 +210,7 @@ class StudentExaminationController extends Controller
                 }
             }
         } catch (\Throwable $th) {
-            dd($th);
             DB::rollback();
-            dd($th);
             return response()->json(
                 [
                     'message' => $th->getMessage(),
