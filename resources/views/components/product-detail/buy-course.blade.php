@@ -21,26 +21,56 @@ $course = $courseDetail->membershipCourses->course;
     <h2 class="my-5 font-weight-bold">HKD: {{ $courseDetail->getPriceDiscount() }}$ </h2>
     @if (Auth::check())
         @if (Auth::user()->hasRole('student'))
-            @if ($course->type == \Constants::COURSE_LIVE)
-                <div id="buy_live">
-                    <form id="form-room" class="form-inline" method="get"
-                        action="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
-                        @csrf
-                        <input name="product_id" value="{{ $courseDetail->id }}" form="form-room" required hidden>
-                        <div class="btn-above-video w-100">
-                            <button type="submit" class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
+            @if (Auth::user()->student->level)
+                @if ($course->type == \Constants::COURSE_LIVE)
+                    <div id="buy_live">
+                        <form id="form-room" class="form-inline" method="get"
+                            action="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
+                            @csrf
+                            <input name="product_id" value="{{ $courseDetail->id }}" form="form-room" required hidden>
+                            <div class="btn-above-video w-100">
+                                <button type="submit" class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
+                                    @lang('keywords.coursePage.buyNow')
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                @else
+                    <div class="btn-above-video">
+                        <a href="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
+                            <div class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
                                 @lang('keywords.coursePage.buyNow')
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endif
             @else
                 <div class="btn-above-video">
-                    <a href="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
-                        <div class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2">
-                            @lang('keywords.coursePage.buyNow')
+                    <button class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2" data-toggle="modal"
+                        data-target="#staticBackdrop">
+                        @lang('keywords.coursePage.buyNow')
+                    </button>
+                </div>
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="staticBackdropLabel">First assessment</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h4>You need to complete the assessment before starting the course !</h4>
+                                <assessment-component :type-exam="1" :course-id="21" :exam-id="10">
+                                </assessment-component>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">Understood</button>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             @endif
         @endif
