@@ -34,7 +34,10 @@ use Illuminate\Support\Facades\Auth;
         <div class="col-lg-4">
         </div>
     </div>
-    <lecture-component v-bind:course-id="{{ $courseDetail->id }}" v-bind:user-id="{{ Auth::user()->id }}">
+    <lecture-component v-bind:course-id="{{ $courseDetail->id }}"
+                       v-bind:user-id="{{ Auth::user()->id }}"
+                       v-bind:type-part="{{$courseDetail->type_part}}"
+                       v-bind:course-level="{{$courseDetail->level}}">
     </lecture-component>
 </div>
 

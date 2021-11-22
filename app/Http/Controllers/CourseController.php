@@ -185,7 +185,7 @@ class CourseController extends Controller
             ->orderBy('reviewed', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
-
+//dd($exam_details);
         $reading = 0;
         $writing = 0;
         $listening = 0;
@@ -220,6 +220,7 @@ class CourseController extends Controller
             'writing' => $writing,
             'listening' => $listening,
             'speaking' => $speaking,
+            'course' => $course
         ]);
     }
 
