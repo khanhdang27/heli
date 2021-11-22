@@ -1,8 +1,12 @@
 <?php
 
 use App\Models\Certificate;
-use App\Models\SkipLevel;
+use App\Models\Course;
+use App\Models\Examination;
 use App\Models\Setting;
+use App\Models\Subject;
+use App\Models\Tutor;
+use App\Models\Quiz;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -40,7 +44,6 @@ class DatabaseSeeder extends Seeder
             'certificate_code' => 'IAL',
             'certificate_name' => 'International Advanced Level',
         ]);
-
         $setting = Setting::create([
             'key' => 'token_exchange_rate',
             'value' => '2',
@@ -65,18 +68,40 @@ class DatabaseSeeder extends Seeder
             'key' => 'address_cbs_footer',
             'value' => 'Helios Education (Causeway Bay Store) To Make An Appointment Room 2202, Causeway Bay Plaza 1, 489 Hennessy Road, Causeway Bay',
         ]);
-        // buy level
-        $skipLevel = SkipLevel::create([
-            'name' => 'level_50',
-            'tokens' => '100',
+
+        // create a course for assessment
+        $subject = Subject::create([
+            'certificate_id' => 1,
+            'subject_color_background' => '#fff',
+            'subject_color_text' => '#fff',
+            'status' => 1
         ]);
-        $skipLevel = SkipLevel::create([
-            'name' => 'level_55',
-            'tokens' => '200',
+
+        $tutor = Tutor::create([
+            "user_id" => $super_admin->id,
+            "full_name" => 'Administrator',
         ]);
-        $skipLevel = SkipLevel::create([
-            'name' => 'level_60',
-            'tokens' => '300',
+
+        $course = Course::create([
+            'subject_id' => $subject->id,
+            'tutor_id' => $tutor->id,
+            'type' => 1,
+            'course_overview' => "",
+            'level' => 5,
+            'type_part' => 1,
+            'course_price' => 0
+        ]);
+
+        $exams = Examination::create([
+            'name' => '',
+            'index' => 0,
+            'type' => 1,
+            'course_id' => $course->id,
+        ]);
+
+        $quiz = Quiz::create([
+            'exam_id' => $exams->id,
+            'set' => 1
         ]);
     }
 }

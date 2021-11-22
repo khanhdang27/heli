@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
 use App\Models\Student;
+use App\Models\StudentCourses;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use DateTime;
 
 
 class RegisterController extends Controller
@@ -44,7 +45,7 @@ class RegisterController extends Controller
     public function __construct()
     {
     }
-    
+
 
     public function register(Request $request)
     {
@@ -55,39 +56,48 @@ class RegisterController extends Controller
             try {
                 $array = explode('@', $input['email']);
                 $name = reset($array);
-                $user = new User(['name' => $name, 'email' => $input['email'], 'password' => $random]);
-
+                $user = User::create(['name' => $name, 'email' => $input['email'], 'password' => $random]);
                 $user->assignRole('student');
-                $user->save();
 
-                $student = new Student(['user_id' => $user->id]);
-                $student->save();
-
+                $student = Student::create(['user_id' => $user->id]);
                 $stripeCustomer = $user->createAsStripeCustomer(['email' => $input['email']]);
 
                 $send_mail = new SendMail();
                 $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
                 Mail::to($input['email'])->send($send_mail);
+                $student_course = StudentCourses::create([
+                    'course_id' => 1,
+                    'student_id' => $user->id,
+                    'room_live_course_id' => null,
+                    'latest_study' => new DateTime(),
+                    'lecture_study' => 0,
+                    'watched_list' => '0,',
+                ]);
                 DB::commit();
                 return response()->json(
                     [
                         'status' => 200,
                         'message' => 'succeed'
-                    ], 200);
+                    ],
+                    200
+                );
             } catch (\Throwable $th) {
                 DB::rollBack();
                 return response()->json(
                     [
                         'status' => 400,
                         'message' => "Register Error"
-                    ], 400);
+                    ],
+                    400
+                );
             }
         }
         return response()->json(
             [
                 'status' => 400,
                 'message' => 'Please enter email'
-            ], 400);
+            ],
+            400
+        );
     }
-
 }

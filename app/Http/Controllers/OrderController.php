@@ -9,11 +9,8 @@ use App\Models\RoomLiveCourse;
 use App\Models\StudentCourses;
 use App\Models\StudentSchedule;
 use App\Models\User;
-use DateTime;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Laravel\Cashier\Cashier;
 
 class OrderController extends Controller

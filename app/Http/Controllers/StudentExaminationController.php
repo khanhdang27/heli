@@ -166,33 +166,35 @@ class StudentExaminationController extends Controller
                 'course_id' => $courseId,
             ])->first();
 
+            $studentCourseId = $student_course->id;
+
             $quiz = Quiz::find($quizId)->load('question');
             if ($exams->type == \Constants::EXAMINATION_ASSESSMENT) {
-                [$result, $score, $_] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                [$result, $score, $_] = $this->doGrade($quiz->question, $input['questions'], $studentCourseId, $quizId, $exams->id);
 
                 $question = Question::find($input['questions'][0]['questionID']);
                 if ($question->type == \Constants::COURSE_SPEAKING) {
-                    $scoreGrade = $this->assessment($courseId, $quizId, $exams->id);
+                    $scoreGrade = $this->assessment($studentCourseId, $quizId, $exams->id);
                     DB::commit();
                     return response()->json(['passgrade' => $scoreGrade]);
                 }
                 DB::commit();
                 return response()->json(['quiz_result' => $result, 'score' => $score]);
             } elseif ($exams->type == \Constants::EXAMINATION_EXERCISES) {
-                if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
-                    [$result, $score, $_] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
+                if ($input['questions'][0]['answerType'] == \Constants::ANSWER_MC) {
+                    [$result, $score, $_] = $this->doGrade($quiz->question, $input['questions'], $studentCourseId, $quizId, $exams->id);
                     DB::commit();
                     return response()->json(['quiz_result' => $result, 'score' => $score]);
                 } else {
-                    $this->saveAnswer($input['questions'], $courseId, $quizId, $exams->id);
+                    $this->saveAnswer($input['questions'], $studentCourseId, $quizId, $exams->id);
                     DB::commit();
                     return response()->json(['message' => 'grading']);
                 }
             } else {
                 // Quiz Type
-                if ($input['questions'][0]['answerType'] == StudentExamination::ANSWER_MC) {
-                    [$result, $score, $questionType] = $this->doGrade($quiz->question, $input['questions'], $courseId, $quizId, $exams->id);
-                    $studentInfo = User::find($studentExam->student_id)->studentInfo();
+                if ($input['questions'][0]['answerType'] == \Constants::ANSWER_MC) {
+                    [$result, $score, $questionType] = $this->doGrade($quiz->question, $input['questions'], $studentCourseId, $quizId, $exams->id);
+                    $studentInfo = User::find($studentExam->student_id)->student;
                     if ($score / count($result) > 0.8) {
                         $this->upLevel($studentInfo, $student_course, $questionType);
                     } else {
@@ -201,13 +203,14 @@ class StudentExaminationController extends Controller
                     DB::commit();
                     return response()->json(['quiz_result' => $result, 'score' => $score]);
                 } else {
-                    $this->saveAnswer($input['questions'], $courseId, $quizId, $exams->id);
+                    $this->saveAnswer($input['questions'], $studentCourseId, $quizId, $exams->id);
                     DB::commit();
                     return response()->json(['message' => 'grading']);
                 }
             }
         } catch (\Throwable $th) {
             DB::rollback();
+            dd($th);
             return response()->json(
                 [
                     'message' => $th->getMessage(),
@@ -217,11 +220,10 @@ class StudentExaminationController extends Controller
         }
     }
 
-    public function saveAnswer(array $answer, $courseId, $quizId, $examId)
+    public function saveAnswer(array $answer, $studentCourseId, $quizId, $examId)
     {
         $answerRecord = StudentExamination::where([
-            'student_id' => Auth::user()->id,
-            'course_id' => $courseId,
+            'student_course_id' => $studentCourseId,
             'quiz_id' => $quizId,
             'exam_id' => $examId,
             'question_id' => $answer[0]['questionID'],
@@ -230,8 +232,7 @@ class StudentExaminationController extends Controller
         if (empty($answerRecord)) {
             foreach ($answer as $item) {
                 StudentExamination::create([
-                    'student_id' => Auth::user()->id,
-                    'course_id' => $courseId,
+                    'student_course_id' => $studentCourseId,
                     'quiz_id' => $quizId,
                     'exam_id' => $examId,
                     'question_id' => $item['questionID'],
@@ -244,15 +245,14 @@ class StudentExaminationController extends Controller
         }
     }
 
-    public function doGrade($question, array $answer, $courseId, $quizId, $examId)
+    public function doGrade($question, array $answer, $studentCourseId, $quizId, $examId)
     {
         $result = [];
         $score = 0;
         $questionType = 0;
         foreach ($answer as $item) {
             $answerRecord = StudentExamination::where([
-                'student_id' => Auth::user()->id,
-                'course_id' => $courseId,
+                'student_course_id' => $studentCourseId,
                 'quiz_id' => $quizId,
                 'exam_id' => $examId,
                 'question_id' => $item['questionID'],
@@ -270,20 +270,19 @@ class StudentExaminationController extends Controller
                 ]);
 
                 if ($_answer->is_correct) {
-                    $score += Examination::BASE_SCORE_MC;
+                    $score += \Constants::BASE_SCORE_MC;
                 }
 
                 $_answerRecord = StudentExamination::create([
-                    'student_id' => Auth::user()->id,
-                    'course_id' => $courseId,
+                    'student_course_id' => $studentCourseId,
                     'quiz_id' => $quizId,
                     'exam_id' => $examId,
                     'question_id' => $item['questionID'],
-                    'answer_type' => StudentExamination::ANSWER_MC,
+                    'answer_type' => \Constants::ANSWER_MC,
                     'answer' => $item['answerID'],
                     'time' => $item['time'],
                     'reviewed' => true,
-                    'score' => $_answer->is_correct ? Examination::BASE_SCORE_MC : 0,
+                    'score' => $_answer->is_correct ? \Constants::BASE_SCORE_MC : 0,
                 ]);
 
                 if ($questionType == 0) {
@@ -306,16 +305,15 @@ class StudentExaminationController extends Controller
         return [$result, $score, $questionType];
     }
 
-    public function assessment($courseId, $quizId, $examId)
+    public function assessment($studentCourseId, $quizId, $examId)
     {
         $answerRecords = StudentExamination::where([
-            'student_id' => Auth::user()->id,
-            'course_id' => $courseId,
+            'student_course_id' => $studentCourseId,
             'quiz_id' => $quizId,
             'exam_id' => $examId,
         ])->with('question');
 
-        $studentInfo = Auth::user()->studentInfo();
+        $studentInfo = Auth::user()->student;
 
         $answerRecordsReading = clone $answerRecords;
         $answerRecordsSpeaking = clone $answerRecords;
@@ -352,10 +350,7 @@ class StudentExaminationController extends Controller
 
         $summaryScore = round($summaryScore * 2) / 2;
 
-        $studentCourse = StudentCourses::where([
-            'course_id' => $courseId,
-            'student_id' => Auth::user()->id,
-        ]);
+        $studentCourse = StudentCourses::find($studentCourseId);
 
         if ($summaryScore == 5) {
             $studentInfo->update([
@@ -495,8 +490,8 @@ class StudentExaminationController extends Controller
                 'course_id' => $studentExam->course_id,
             ])->first();
 
-            $studentInfo = User::find($studentExam->student_id)->studentInfo();
-            if ((int) $input['score'] >= StudentExamination::BASE_SCORE_PASS) {
+            $studentInfo = User::find($studentExam->student_id)->student;
+            if ((int) $input['score'] >= \Constants::BASE_SCORE_PASS) {
                 $this->upLevel($studentInfo, $student_course, $studentExam->question->type);
             } else {
                 $this->resetLevel($studentInfo, $student_course, $studentExam->question->type);
@@ -569,6 +564,7 @@ class StudentExaminationController extends Controller
 
     public function upLevel($studentInfo, $student_course, $type)
     {
+        dd($studentInfo);
         switch ($type) {
             case \Constants::COURSE_READING:
                 if ($studentInfo->exam_buy_read) {

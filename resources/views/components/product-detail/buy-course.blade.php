@@ -21,7 +21,7 @@ $course = $courseDetail->membershipCourses->course;
     <h2 class="my-5 font-weight-bold">HKD: {{ $courseDetail->getPriceDiscount() }}$ </h2>
     @if (Auth::check())
         @if (Auth::user()->hasRole('student'))
-            @if (Auth::user()->student->level)
+            @if (Auth::user()->student->level_read)
                 @if ($course->type == \Constants::COURSE_LIVE)
                     <div id="buy_live">
                         <form id="form-room" class="form-inline" method="get"
@@ -63,7 +63,7 @@ $course = $courseDetail->membershipCourses->course;
                             </div>
                             <div class="modal-body">
                                 <h4>You need to complete the assessment before starting the course !</h4>
-                                <assessment-component :type-exam="1" :course-id="21" :exam-id="10">
+                                <assessment-component :type-exam="1" :course-id="1" :exam-id="1">
                                 </assessment-component>
                             </div>
                             <div class="modal-footer">

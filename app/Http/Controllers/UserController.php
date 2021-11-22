@@ -25,13 +25,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $member = User::with('student','roles')->whereHas('roles', function ($query) {
-            $query->where('name','student');
+        $member = User::with('student', 'roles')->whereHas('roles', function ($query) {
+            $query->where('name', 'student');
         })->get();
         return view('admin.user.index', [
             'roleUsers' => $member
         ]);
-
     }
 
     /**
@@ -57,7 +56,7 @@ class UserController extends Controller
         );
         $user->assignRole(['student']);
         $user->save();
-        $student = new Student(['user_id'=>$user->id]);
+        $student = new Student(['user_id' => $user->id]);
         $student->save();
         return back()->with('success', 'Save success');
     }
@@ -116,7 +115,8 @@ class UserController extends Controller
         $tutor = Tutor::where('user_id', Auth::user()->id)->first();
         $tutor->load(['translations', 'user', 'subject']);
 
-        return view('admin.tutor.edit',
+        return view(
+            'admin.tutor.edit',
             [
                 'tutor' => $tutor,
             ]
@@ -169,10 +169,10 @@ class UserController extends Controller
             } catch (\Throwable $th) {
                 DB::rollBack();
 
-                return back()->withErrors( 'Update Error!');
+                return back()->withErrors('Update Error!');
             }
         }
-        return back()->withErrors( 'Error: Password not validate');
+        return back()->withErrors('Error: Password not validate');
     }
 
 
@@ -194,5 +194,4 @@ class UserController extends Controller
 
         return false;
     }
-
 }

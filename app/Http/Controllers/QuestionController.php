@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Examination;
 use App\Models\Question;
-use App\Models\Answer;
 use App\Models\Quiz;
-use App\Models\ReadingQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -69,7 +67,7 @@ class QuestionController extends Controller
         }
     }
 
-    
+
     /**
      * Display the specified resource.
      *
@@ -78,7 +76,6 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-       
     }
 
     /**
@@ -87,9 +84,8 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit( Question $question)
+    public function edit(Question $question)
     {
-        
     }
 
     /**
@@ -101,7 +97,6 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Quiz $quiz, Question $question)
     {
-        
     }
 
     /**
