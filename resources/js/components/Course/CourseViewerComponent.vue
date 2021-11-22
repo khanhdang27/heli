@@ -38,38 +38,12 @@
           <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
           <!-- +++++++++++++++++++++++++++++ -->
           <div class="container vue">
-<!--              <button-->
-<!--                class="btn btn-outline-primary btn-lg btn-block"-->
-<!--                @click="toggleExpansion(keyLecture[typePart-1])"-->
-<!--              >-->
-<!--                <h3>-->
-<!--                  {{ keyLecture[typePart-1] | uppercase }}-->
-<!--                </h3>-->
-<!--              </button>-->
               <div>
                 <div
                   v-for="(items, key_level) in lectures[typePart-1]"
                   :key="key_level"
                   class="list-group list-group-flush"
                 >
-                  <div
-                    class="border-bottom mt-1 d-flex justify-content-between"
-                  >
-                    <div class="h4">
-                      {{ key_level | uppercase | replace }}
-                    </div>
-                    <button
-                      class="btn btn-primary btn-sm my-2"
-                      ref="skip_button"
-                      v-if="canSkipLevel(key_level, keyLecture[typePart-1])"
-                      data-toggle="modal"
-                      :data-part="keyLecture[typePart-1]"
-                      :data-level="key_level"
-                      data-target="#skip_level"
-                    >
-                      skip level >
-                    </button>
-                  </div>
                   <div v-for="item in items" :key="item.id">
                     <div class="d-flex">
                       <button
@@ -80,9 +54,9 @@
                         v-on:click="
                           onClickLecture(
                             item.index,
-                            item.level,
+                            courseLevel,
                             item.type,
-                            $getConst(keyLecture[typePart-1])
+                            typePart
                           )
                         "
                       >
@@ -108,20 +82,9 @@
                               {{ item.name }}
                             </h5>
                             <strong
-                              v-if="
-                                canLoadlecture(
-                                  item.index,
-                                  item.level,
-                                  item.type
-                                )
-                              "
                               class="text-dark text-wrap"
                             >
                               <i class="fe fe-message-square mr-2"></i>
-                              <span>Quiz</span>
-                            </strong>
-                            <strong v-else class="text-dark text-wrap">
-                              <i class="fe fe-lock mr-2"></i>
                               <span>Quiz</span>
                             </strong>
                           </div>
@@ -133,20 +96,9 @@
                               {{ item.lectures_name }}
                             </h4>
                             <strong
-                              v-if="
-                                canLoadlecture(
-                                  item.index,
-                                  item.level,
-                                  item.type
-                                )
-                              "
                               class="text-dark text-wrap"
                             >
                               <i class="fe fe-youtube mr-2"></i>
-                              <span>Video</span>
-                            </strong>
-                            <strong v-else class="text-dark text-wrap">
-                              <i class="fe fe-lock mr-2"></i>
                               <span>Video</span>
                             </strong>
                           </div>
@@ -161,11 +113,7 @@
                             h-100
                             pt-4
                           "
-                          v-bind:href="[
-                            canLoadlecture(item.index, item.level, item.type)
-                              ? downloadPDF(item.file)
-                              : 'javascript:void(0)',
-                          ]"
+                          v-bind:href="downloadPDF(item.file)"
                         >
                           <i class="fe fe-download"></i>
                           PDF</a
@@ -175,7 +123,6 @@
                   </div>
                 </div>
               </div>
-              <hr />
           </div>
           <!-- +++++++++++++++++++++++++++++ -->
         </div>
@@ -525,7 +472,7 @@ export default {
         .get(route("site.course.lectureList", this.courseId))
         .then((response) => {
           this.studentCourse = response.data.student_lecture;
-          console.log("course:",this.studentCourse)
+
           this.isPassed = response.data.student_lecture.passed == 1;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
@@ -547,7 +494,7 @@ export default {
                   this.addExamsToAllPart(
                     _lectures,
                     item,
-                    _lectures[item].level
+                    this.courseLevel
                   );
                 } else if (
                   _lectures[item].type === this.$root.$getConst("quiz")
@@ -556,24 +503,24 @@ export default {
                   this.addExamsToAllPart(
                     _lectures,
                     item,
-                    _lectures[item].level
+                    this.courseLevel
                   );
                 } else {
                   // do not thing with assessment
                 }
               } else {
-                if (_lectures[item].type === this.$root.$getConst("reading")) {
+                if (this.typePart === this.$root.$getConst("reading")) {
                   this.addLectureByReading(_lectures, item);
                 }
-                if (_lectures[item].type === this.$root.$getConst("writing")) {
+                if (this.typePart === this.$root.$getConst("writing")) {
                   this.addLectureByWriting(_lectures, item);
                 }
                 if (
-                  _lectures[item].type === this.$root.$getConst("listening")
+                    this.typePart === this.$root.$getConst("listening")
                 ) {
                   this.addLectureByListening(_lectures, item);
                 }
-                if (_lectures[item].type === this.$root.$getConst("speaking")) {
+                if (this.typePart === this.$root.$getConst("speaking")) {
                   this.addLectureBySpeaking(_lectures, item);
                 }
               }
@@ -609,28 +556,76 @@ export default {
     addExamsToAllPart(lectures, index, part) {
       switch (part) {
         case this.$root.$getConst("level_50"):
-          this.lectureCollapse.reading.level_50.push(lectures[index]);
-          this.lectureCollapse.listening.level_50.push(lectures[index]);
-          this.lectureCollapse.speaking.level_50.push(lectures[index]);
-          this.lectureCollapse.writing.level_50.push(lectures[index]);
+          switch (this.typePart) {
+              case this.$root.$getConst("reading"):
+                  this.lectureCollapse.reading.level_50.push(lectures[index]);
+                  break;
+              case this.$root.$getConst("listening"):
+                  this.lectureCollapse.listening.level_50.push(lectures[index]);
+                  break;
+              case this.$root.$getConst("speaking"):
+                  this.lectureCollapse.speaking.level_50.push(lectures[index]);
+                  break;
+              case this.$root.$getConst("writing"):
+                  this.lectureCollapse.writing.level_50.push(lectures[index]);
+                  break;
+              default:
+                  break;
+          }
           break;
         case this.$root.$getConst("level_55"):
-          this.lectureCollapse.reading.level_55.push(lectures[index]);
-          this.lectureCollapse.listening.level_55.push(lectures[index]);
-          this.lectureCollapse.speaking.level_55.push(lectures[index]);
-          this.lectureCollapse.writing.level_55.push(lectures[index]);
+            switch (this.typePart) {
+                case this.$root.$getConst("reading"):
+                    this.lectureCollapse.reading.level_55.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("listening"):
+                    this.lectureCollapse.listening.level_55.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("speaking"):
+                    this.lectureCollapse.speaking.level_55.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("writing"):
+                    this.lectureCollapse.writing.level_55.push(lectures[index]);
+                    break;
+                default:
+                    break;
+            }
           break;
         case this.$root.$getConst("level_60"):
-          this.lectureCollapse.reading.level_60.push(lectures[index]);
-          this.lectureCollapse.listening.level_60.push(lectures[index]);
-          this.lectureCollapse.speaking.level_60.push(lectures[index]);
-          this.lectureCollapse.writing.level_60.push(lectures[index]);
+            switch (this.typePart) {
+                case this.$root.$getConst("reading"):
+                    this.lectureCollapse.reading.level_60.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("listening"):
+                    this.lectureCollapse.listening.level_60.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("speaking"):
+                    this.lectureCollapse.speaking.level_60.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("writing"):
+                    this.lectureCollapse.writing.level_60.push(lectures[index]);
+                    break;
+                default:
+                    break;
+            }
           break;
         case this.$root.$getConst("level_65"):
-          this.lectureCollapse.reading.level_65.push(lectures[index]);
-          this.lectureCollapse.listening.level_65.push(lectures[index]);
-          this.lectureCollapse.speaking.level_65.push(lectures[index]);
-          this.lectureCollapse.writing.level_65.push(lectures[index]);
+            switch (this.typePart) {
+                case this.$root.$getConst("reading"):
+                    this.lectureCollapse.reading.level_65.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("listening"):
+                    this.lectureCollapse.listening.level_65.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("speaking"):
+                    this.lectureCollapse.speaking.level_65.push(lectures[index]);
+                    break;
+                case this.$root.$getConst("writing"):
+                    this.lectureCollapse.writing.level_65.push(lectures[index]);
+                    break;
+                default:
+                    break;
+            }
           break;
 
         default:
@@ -638,7 +633,7 @@ export default {
       }
     },
     addLectureBySpeaking(lectures, index) {
-      switch (lectures[index].level) {
+      switch (this.courseLevel) {
         case this.$root.$getConst("level_50"):
           this.lectureCollapse.speaking.level_50.push(lectures[index]);
           break;
@@ -656,7 +651,7 @@ export default {
       }
     },
     addLectureByListening(lectures, index) {
-      switch (lectures[index].level) {
+      switch (this.courseLevel) {
         case this.$root.$getConst("level_50"):
           this.lectureCollapse.listening.level_50.push(lectures[index]);
           break;
@@ -674,7 +669,7 @@ export default {
       }
     },
     addLectureByReading(lectures, index) {
-      switch (lectures[index].level) {
+      switch (this.courseLevel) {
         case this.$root.$getConst("level_50"):
           this.lectureCollapse.reading.level_50.push(lectures[index]);
           break;
@@ -692,7 +687,7 @@ export default {
       }
     },
     addLectureByWriting(lectures, index) {
-      switch (lectures[index].level) {
+      switch (this.courseLevel) {
         case this.$root.$getConst("level_50"):
           this.lectureCollapse.writing.level_50.push(lectures[index]);
           break;
@@ -788,11 +783,7 @@ export default {
     },
     onClickLecture(index, level, type, questionType = null) {
       this.questionType = questionType;
-      if (this.canLoadlecture(index, level, type)) {
         this.showLecture(index);
-      } else {
-        confirm("This lecture not open now !");
-      }
     },
     canLoadlecture(index, level, type) {
       switch (type) {

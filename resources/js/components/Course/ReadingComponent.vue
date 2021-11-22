@@ -335,9 +335,9 @@
             </div>
           </div>
         </div>
-        <div v-else class="text-success">
-          You have completed the this part. Please select continue to complete
-          the First Free Assessment!
+        <div v-else class="text-success text-center h-100">
+          <h5>You have completed the this part. Please select continue to complete
+              the First Free Assessment!</h5>
           <button class="btn btn-primary my-5" v-on:click="nextTypeExam()">
             Continue <i class="fe fe-arrow-right"></i>
           </button>

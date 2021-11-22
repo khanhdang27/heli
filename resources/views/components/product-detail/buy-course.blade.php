@@ -1,6 +1,7 @@
 @php
 use App\Models\Course;
 $course = $courseDetail->membershipCourses->course;
+use App\Utilities\Constants
 @endphp
 @error('room_id')
     <div class="alert text-center alert-danger alert-block">
@@ -15,14 +16,14 @@ $course = $courseDetail->membershipCourses->course;
             {{ $course->course_name }}
         </p>
     </div>
-    @if ($course->type != \Constants::COURSE_DOCUMENT)
+    @if ($course->type != Constants::COURSE_DOCUMENT)
         <p class="my-5 h4">{{ $course->tutor->full_name }}</p>
     @endif
-    <h2 class="my-5 font-weight-bold">HKD: {{ $courseDetail->getPriceDiscount() }}$ </h2>
+    <h2 class="my-5 font-weight-bold">TOKEN: {{ $courseDetail->getPriceDiscount() }} </h2>
     @if (Auth::check())
         @if (Auth::user()->hasRole('student'))
-            @if (Auth::user()->student->level)
-                @if ($course->type == \Constants::COURSE_LIVE)
+            @if (Auth::user()->student->level_read)
+                @if ($course->type == Constants::COURSE_LIVE)
                     <div id="buy_live">
                         <form id="form-room" class="form-inline" method="get"
                             action="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
@@ -47,31 +48,11 @@ $course = $courseDetail->membershipCourses->course;
             @else
                 <div class="btn-above-video">
                     <button class="btn btn-register-now w-100 border-primary h4 m-0 py-1 px-2" data-toggle="modal"
-                        data-target="#staticBackdrop">
+                        data-target="#modalAssessment">
                         @lang('keywords.coursePage.buyNow')
                     </button>
                 </div>
-                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="staticBackdropLabel">First assessment</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <h4>You need to complete the assessment before starting the course !</h4>
-                                <assessment-component :type-exam="1" :course-id="21" :exam-id="10">
-                                </assessment-component>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">Understood</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <modal-assessment-component></modal-assessment-component>
             @endif
         @endif
     @else

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use phpDocumentor\Reflection\Types\Boolean;
+use App\Utilities\Constants;
 
 class CourseMembershipDiscountController extends Controller
 {
@@ -109,16 +110,16 @@ class CourseMembershipDiscountController extends Controller
                 return back()->withErrors('Update error!');
             }
         } else {
-            $_course_type = Course::COURSE_TYPE[$new_price_tag->membershipCourses->course->type];
+            $_course_type = Constants::COURSE_TYPES[$new_price_tag->membershipCourses->course->type];
             $_url = '';
             switch ($new_price_tag->membershipCourses->course->type) {
-                case \Constants::COURSE_LIVE:
+                case Constants::COURSE_LIVE:
                     $_url = route('admin.course.index');
                     break;
-                case \Constants::COURSE_RECORD:
+                case Constants::COURSE_RECORD:
                     $_url = route('admin.course.index');
                     break;
-                case \Constants::COURSE_DOCUMENT:
+                case Constants::COURSE_DOCUMENT:
                     $_url = route('admin.course-material.index');
                     break;
                 default:
@@ -131,11 +132,11 @@ class CourseMembershipDiscountController extends Controller
     public function canPublic($course): bool
     {
         switch ($course->type) {
-            case \Constants::COURSE_LIVE:
+            case Constants::COURSE_LIVE:
                 return $course->rooms->isNotEmpty();
-            case \Constants::COURSE_RECORD:
+            case Constants::COURSE_RECORD:
                 return $course->lecture->isNotEmpty();
-            case \Constants::COURSE_DOCUMENT:
+            case Constants::COURSE_DOCUMENT:
                 return $course->courseMaterial->isNotEmpty();
             default:
                 return false;
