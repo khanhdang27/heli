@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use App\Models\StudentSchedule;
 use App\Models\User;
 use Bavix\Wallet\Models\Transaction;
 use Bavix\Wallet\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Role;
 
 class WalletManagerController extends Controller
 {
@@ -21,11 +18,13 @@ class WalletManagerController extends Controller
      */
     public function index()
     {
-        $wallets = User::with('wallet', 'roles')->whereHas('roles', function ($query){
-            return $query->where('roles.id', 3);
-        }
+        $wallets = User::with('wallet', 'roles')->whereHas(
+            'roles',
+            function ($query) {
+                return $query->where('roles.id', 3);
+            }
         )->paginate(9);
-        return view('admin.wallet-manager.index',[
+        return view('admin.wallet-manager.index', [
             'wallets' => $wallets
         ]);
     }
@@ -78,7 +77,7 @@ class WalletManagerController extends Controller
     {
         $user = User::where('id', $wallet_manager->holder_id)->first();
         return view('admin.wallet-manager.edit', [
-            'wallet' =>$wallet_manager,
+            'wallet' => $wallet_manager,
             'user' => $user
         ]);
     }
@@ -93,16 +92,16 @@ class WalletManagerController extends Controller
     public function update(Request $request, Wallet $wallet_manager)
     {
         $validate_request = $request->validate([
-           'balance' => 'required|numeric|min:0'
+            'balance' => 'required|numeric|min:0'
         ]);
         DB::beginTransaction();
         try {
             $wallet_manager->update([
-                'balance' =>$validate_request['balance']
+                'balance' => $validate_request['balance']
             ]);
             DB::commit();
             return back()->with('success', 'Update success');
-        } catch (\Throwable $th){
+        } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors('Update error');
         }

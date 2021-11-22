@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
-use App\Models\Membership;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use phpDocumentor\Reflection\Types\Boolean;
 use App\Utilities\Constants;
 
 class CourseMembershipDiscountController extends Controller

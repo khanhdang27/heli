@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Moderator\UpdateModeratorRequest;
 use App\Models\File;
 use App\Models\Moderator;
 use App\Models\Order;
@@ -13,7 +12,6 @@ use Bavix\Wallet\Models\Transaction;
 use Bavix\Wallet\Models\Wallet;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -54,26 +52,26 @@ class UserManagerController extends Controller
         $moderator = Moderator::with('user')->where('id', $id)->first();
         $_request = $request->validate([
             'name' => 'required',
-            'email'=>'required',
-            'full_name'=>'required',
-            'phone'=>'required',
+            'email' => 'required',
+            'full_name' => 'required',
+            'phone' => 'required',
         ]);
         DB::beginTransaction();
         try {
-                $user = User::where('id',$moderator->user_id)->first();
-                $user->update([
-                    'name' => $_request['name'],
-                    'email' => $_request['email'],
-                ]);
-                $moderator->update([
-                    'full_name' => $_request['full_name'],
-                    'phone' => $_request['phone'],
-                ]);
-                DB::commit();
-                return back()->with('success', 'Save success');
+            $user = User::where('id', $moderator->user_id)->first();
+            $user->update([
+                'name' => $_request['name'],
+                'email' => $_request['email'],
+            ]);
+            $moderator->update([
+                'full_name' => $_request['full_name'],
+                'phone' => $_request['phone'],
+            ]);
+            DB::commit();
+            return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Save error');
+            return back()->withErrors('Save error');
         }
     }
 
@@ -84,7 +82,7 @@ class UserManagerController extends Controller
      */
     public function studentIndex()
     {
-        $students = Student::with('user','user.wallet','user.membership')->paginate(15);
+        $students = Student::with('user', 'user.wallet', 'user.membership')->paginate(15);
         return view('admin.user-manager.Student.index', [
             'students' => $students
         ]);
@@ -96,7 +94,7 @@ class UserManagerController extends Controller
      */
     public function studentEdit($id)
     {
-        $student = Student::with('user','user.membership')->where('id', $id)->first();
+        $student = Student::with('user', 'user.membership')->where('id', $id)->first();
         return view('admin.user-manager.Student.edit', [
             'student' => $student
         ]);
@@ -112,15 +110,15 @@ class UserManagerController extends Controller
         $student = Student::with('user')->where('id', $id)->first();
         $_request = $request->validate([
             'name' => 'required',
-            'full_name'=>'required',
-            'day_of_birth'=>'required',
-            'phone_no'=>'required|numeric',
-            'education_level'=>'required',
+            'full_name' => 'required',
+            'day_of_birth' => 'required',
+            'phone_no' => 'required|numeric',
+            'education_level' => 'required',
             'membership' => 'required|numeric',
         ]);
         DB::beginTransaction();
         try {
-            $user = User::where('id',$student->user_id)->first();
+            $user = User::where('id', $student->user_id)->first();
             $user->update([
                 'name' => $_request['name'],
                 'membership_group' => $_request['membership']
@@ -145,35 +143,38 @@ class UserManagerController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Save error');
+            return back()->withErrors('Save error');
         }
     }
 
-    public function editToken(Wallet $wallet){
+    public function editToken(Wallet $wallet)
+    {
 
         $user = User::where('id', $wallet->holder_id)->first();
         return view('admin.user-manager.Student.token', [
-            'wallet' =>$wallet,
+            'wallet' => $wallet,
             'user' => $user
         ]);
     }
-    public function updateToken(Request $request, Wallet $wallet){
+    public function updateToken(Request $request, Wallet $wallet)
+    {
         $validate_request = $request->validate([
             'balance' => 'required|numeric|min:0'
         ]);
         DB::beginTransaction();
         try {
             $wallet->update([
-                'balance' =>$validate_request['balance']
+                'balance' => $validate_request['balance']
             ]);
             DB::commit();
             return back()->with('success', 'Update success');
-        } catch (\Throwable $th){
+        } catch (\Throwable $th) {
             DB::rollBack();
             return back()->withErrors('Update error');
         }
     }
-    public function depositHistory(Wallet $wallet){
+    public function depositHistory(Wallet $wallet)
+    {
         $transactions = Transaction::where('wallet_id', $wallet->id)->where('type', 'deposit')
             ->orderBy('created_at', 'desc')->paginate(9);
         $user = User::where('id', $wallet->holder_id)->first();
@@ -182,7 +183,8 @@ class UserManagerController extends Controller
             'user' => $user
         ]);
     }
-    public function paymentHistory(User $user){
+    public function paymentHistory(User $user)
+    {
         $payment_history = Order::with('course')->where('user_id', $user->id)
             ->orderBy('created_at', 'desc')->paginate(9);
         return \view('admin.user-manager.Student.payment-history', [
@@ -197,7 +199,7 @@ class UserManagerController extends Controller
      */
     public function tutorIndex()
     {
-        $tutors = Tutor::with('translations','user','subject')
+        $tutors = Tutor::with('translations', 'user', 'subject')
             ->when(request('name') != '', function (Builder $query) {
                 $query->where('full_name', 'like', '%' . request('name') . '%');
             })
@@ -214,7 +216,7 @@ class UserManagerController extends Controller
      */
     public function tutorEdit($id)
     {
-        $tutor = Tutor::with('user','subject')->where('id', $id)->first();
+        $tutor = Tutor::with('user', 'subject')->where('id', $id)->first();
         return view('admin.user-manager.Tutor.edit', [
             'tutor' => $tutor
         ]);
@@ -230,14 +232,14 @@ class UserManagerController extends Controller
         $tutor = Tutor::with('user')->where('id', $id)->first();
         $_request = $request->validate([
             'name' => 'required',
-            'email'=>'required',
-            'full_name'=>'required',
-            'day_of_birth'=>'required',
-            'phone_no'=>'required',
+            'email' => 'required',
+            'full_name' => 'required',
+            'day_of_birth' => 'required',
+            'phone_no' => 'required',
         ]);
         DB::beginTransaction();
         try {
-            $user = User::where('id',$tutor->user_id)->first();
+            $user = User::where('id', $tutor->user_id)->first();
             $user->update([
                 'name' => $_request['name'],
                 'email' => $_request['email'],
@@ -251,7 +253,7 @@ class UserManagerController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Save error');
+            return back()->withErrors('Save error');
         }
     }
 
@@ -260,17 +262,16 @@ class UserManagerController extends Controller
         $user = User::where('id', $id)->first();
         DB::beginTransaction();
         try {
-            if ($user->active == 1){
+            if ($user->active == 1) {
                 $user->active = 0;
                 $user->save();
-            } else{
+            } else {
                 $user->active = 1;
                 $user->save();
             }
             DB::commit();
             return back()->with('success', 'Save success');
-        } catch (\Throwable $th)
-        {
+        } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', 'Save error');
         }

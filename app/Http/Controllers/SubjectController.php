@@ -6,12 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\CreateSubjectRequest;
 use App\Models\Certificate;
 use App\Models\CourseMembershipDiscount;
-use App\Models\PostTag;
 use App\Models\Subject;
-use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -28,7 +25,7 @@ class SubjectController extends Controller
         $subjects = Subject::where('status', 1)->latest()->paginate(15);
         return view('admin.subject.index', [
             'subjects' => $subjects,
-            'certificates' =>$certificates
+            'certificates' => $certificates
         ]);
     }
 
@@ -39,8 +36,8 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        $certificates = Certificate::all()->where('id','!=', 1);
-        return view('admin.subject.create',[
+        $certificates = Certificate::all()->where('id', '!=', 1);
+        return view('admin.subject.create', [
             'certificates' => $certificates
         ]);
     }
@@ -77,12 +74,12 @@ class SubjectController extends Controller
             'membershipCourses.course.subject.certificate',
             'membershipCourses.course.tutor',
             'membershipCourses.course.courseMaterial'
-        )->where('publish',1)
-        ->whereHas('membershipCourses', function ($query) {
-            return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
-         })->whereHas('membershipCourses.course', function ($query) use ($subject) {
-            return $query->where('subject_id', $subject->id);
-         })->get();
+        )->where('publish', 1)
+            ->whereHas('membershipCourses', function ($query) {
+                return $query->where('membership_id', Auth::check() ? Auth::user()->membership_group : 1);
+            })->whereHas('membershipCourses.course', function ($query) use ($subject) {
+                return $query->where('subject_id', $subject->id);
+            })->get();
 
         return view('subject.index', [
             'subject' => $subject,
@@ -129,15 +126,15 @@ class SubjectController extends Controller
 
     public function updateActive(int $id)
     {
-//        $subject = Subject::find($id);
-//
-//        $active = $subject->status;
-//
-//        $subject->status = $active == 1 ? 0 : 0;
-//
-//        $subject->save();
-//
-//        return $subject->save();
+        //        $subject = Subject::find($id);
+        //
+        //        $active = $subject->status;
+        //
+        //        $subject->status = $active == 1 ? 0 : 0;
+        //
+        //        $subject->save();
+        //
+        //        return $subject->save();
     }
 
     public function destroy(Subject $subject)
@@ -145,7 +142,7 @@ class SubjectController extends Controller
         DB::beginTransaction();
         try {
             $_course = $subject->course->toArray();
-            if (empty($_course) ){
+            if (empty($_course)) {
                 $subject->delete();
                 DB::commit();
                 return response([
@@ -175,10 +172,8 @@ class SubjectController extends Controller
             $subject = Subject::getValues($certificate_id, true);
         } else {
             $subject = Subject::getValues($certificate_id);
-
         }
 
         return $subject;
     }
-
 }

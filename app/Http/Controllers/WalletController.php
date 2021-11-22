@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\CourseSchedule;
 use App\Models\Order;
@@ -11,7 +10,6 @@ use App\Models\Setting;
 use App\Models\StudentCourses;
 use App\Models\StudentSchedule;
 use App\Models\User;
-use App\Models\SkipLevel;
 use Bavix\Wallet\Exceptions\InsufficientFunds;
 use Bavix\Wallet\Models\Transaction;
 use Bavix\Wallet\Models\Wallet;

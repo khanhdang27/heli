@@ -1,7 +1,7 @@
 @php
 use App\Models\Course;
 $course = $courseDetail->membershipCourses->course;
-use App\Utilities\Constants
+use App\Utilities\Constants;
 @endphp
 @error('room_id')
     <div class="alert text-center alert-danger alert-block">
@@ -23,7 +23,7 @@ use App\Utilities\Constants
     @if (Auth::check())
         @if (Auth::user()->hasRole('student'))
             @if (Auth::user()->student->level_read)
-                @if ($course->type == Constants::COURSE_LIVE)
+                @if ($course->type == \Constants::COURSE_LIVE)
                     <div id="buy_live">
                         <form id="form-room" class="form-inline" method="get"
                             action="{{ route('site.user.payment', ['product_id' => $courseDetail->id]) }}">
