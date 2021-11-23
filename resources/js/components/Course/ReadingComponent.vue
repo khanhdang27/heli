@@ -296,37 +296,46 @@
                 <div
                   v-for="questionItem in questionReading"
                   v-bind:key="questionItem.id"
-                  v-if="result.question === questionItem.id"
                 >
-                  <h5 v-if="result.is_correct">
-                    <i class="fe fe-check-circle text-success"></i>
-                    {{ questionItem.reading_question.question }}
-                  </h5>
-                  <div v-else>
-                    <h5>
-                      <i class="fe fe-x-circle text-danger"></i>
+                  <div v-if="result.question === questionItem.id">
+                    <h5 v-if="result.is_correct">
+                      <i class="fe fe-check-circle text-success"></i>
                       {{ questionItem.reading_question.question }}
                     </h5>
-                    <div
-                      class="ml-4"
-                      v-for="answerItem in questionItem.reading_question
-                        .answers"
-                      v-bind:key="answerItem.id"
-                    >
+                    <div v-else>
+                      <h5>
+                        <i class="fe fe-x-circle text-danger"></i>
+                        {{ questionItem.reading_question.question }}
+                      </h5>
                       <div
-                        v-if="answerItem.is_correct === $getConst('correct')"
+                        class="ml-4"
+                        v-for="answerItem in questionItem.reading_question
+                          .answers"
+                        v-bind:key="answerItem.id"
                       >
+                        <div
+                          v-if="answerItem.is_correct === $getConst('correct')"
+                        >
                           <div class="d-flex flex-wrap">
-                              <h5 class="mr-2">Correct answer is:</h5>
-                              <div class="h5 mb-0">{{ answerItem.answer }}</div>
+                            <h5 class="mr-2">Correct answer is:</h5>
+                            <div class="h5 mb-0">{{ answerItem.answer }}</div>
                           </div>
                           <div class="h5" v-if="typeExam === $getConst('quiz')">
-                              Lecture related:
-                              <a href="#" class="h5 mb-0 border-primary border-bottom"
-                                 v-on:click="goToLecture(questionItem.reading_question.lecture_index)">
-                                  Lecture {{questionItem.reading_question.lecture_index}}
-                              </a>
+                            Lecture related:
+                            <a
+                              href="#"
+                              class="h5 mb-0 border-primary border-bottom"
+                              v-on:click="
+                                goToLecture(
+                                  questionItem.reading_question.lecture_index
+                                )
+                              "
+                            >
+                              Lecture
+                              {{ questionItem.reading_question.lecture_index }}
+                            </a>
                           </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -336,8 +345,10 @@
           </div>
         </div>
         <div v-else class="text-success text-center h-100">
-          <h5>You have completed the this part. Please select continue to complete
-              the First Free Assessment!</h5>
+          <h5>
+            You have completed the this part. Please select continue to complete
+            the First Free Assessment!
+          </h5>
           <button class="btn btn-primary my-5" v-on:click="nextTypeExam()">
             Continue <i class="fe fe-arrow-right"></i>
           </button>
@@ -372,8 +383,8 @@ export default {
       startQuiz: false,
       timeNow: "",
       timeEnd: "",
-      timeLimitQuiz: 60,
-      timeLimitAssessment: 2,
+      timeLimitQuiz: 20,
+      timeLimitAssessment: 20,
       timeStartDo: "",
       timeDo: "",
       countClick: 0,
@@ -577,21 +588,26 @@ export default {
         );
       }
     },
-    goToLecture(index){
-        axios.post(route("site.lecture.getLectureRelated"), {
-            courseID: this.courseId,
-            index: index
+    goToLecture(index) {
+      axios
+        .post(route("site.lecture.getLectureRelated"), {
+          courseID: this.courseId,
+          index: index,
         })
-            .then((response) => {
-                console.log("Lecture",response);
-                let level = response.data.level;
-                this.$emit("goToLecture", index,level,this.$root.$getConst('reading'));
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-
-    }
+        .then((response) => {
+          console.log("Lecture", response);
+          let level = response.data.level;
+          this.$emit(
+            "goToLecture",
+            index,
+            level,
+            this.$root.$getConst("reading")
+          );
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
   },
 };
 </script>

@@ -54,6 +54,7 @@ class CourseController extends Controller
                 $_user->load('tutor');
                 $query->where('tutor_id', $_user->tutor->id);
             })
+            ->where('id', '!=', 1)
             ->orderByDesc('created_at')
             ->paginate(15)
             ->withQueryString();
@@ -373,9 +374,7 @@ class CourseController extends Controller
             'lectures_description' => 'required',
             'video_resource' => 'required',
             'index' => 'required',
-            'level' => 'required',
             'file' => 'required',
-            'type' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -385,8 +384,6 @@ class CourseController extends Controller
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
                 'index' => $input['index'],
-                'level' => $input['level'],
-                'type' => $input['type'],
             ]);
 
             if (!empty($input['file'])) {
@@ -416,8 +413,6 @@ class CourseController extends Controller
             'lectures_description' => 'required',
             'video_resource' => 'required',
             'index' => 'required',
-            'level' => 'required',
-            'type' => 'required',
             'file' => 'file|nullable',
         ]);
         DB::beginTransaction();
@@ -427,8 +422,6 @@ class CourseController extends Controller
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
                 'index' => $input['index'],
-                'level' => $input['level'],
-                'type' => $input['type'],
             ]);
             if (!empty($input['file'])) {
                 if (!empty($lecture->file)) {

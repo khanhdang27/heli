@@ -10,8 +10,8 @@ use App\Models\Examination;
 
 <div class="modal fade" id="modalWriting_{{ $quiz->id }}" tabindex="0" role="dialog"
     aria-labelledby="modalWriting_{{ $quiz->id }}_Title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content"> 
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     Writing Question</h5>
@@ -20,7 +20,8 @@ use App\Models\Examination;
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.writing.assessment.store', ['quiz' => $quiz->id])]) !!}
+                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.writing.assessment.store',
+                ['quiz' => $quiz->id])]) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}

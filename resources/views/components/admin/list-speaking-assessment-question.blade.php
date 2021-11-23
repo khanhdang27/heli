@@ -20,7 +20,7 @@
                 <div class="modal fade" id="modalSpeakingAssessmentQuestion{{ $question->id }}" tabindex="0"
                     role="dialog" aria-labelledby="modalSpeakingAssessmentQuestion{{ $question->id }}_Title"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title text-dark">

@@ -11,8 +11,8 @@ use App\Models\ListenAssessmentQuestion;
 
 <div class="modal fade" id="modalSpeakingQuiz_{{ $quiz->id }}" tabindex="0" role="dialog"
     aria-labelledby="modalSpeakingQuiz_{{ $quiz->id }}_Title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content"> 
+    <div class="modal-dialog modal-dialog-centered  modal-xl" role="document">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     Speaking Question</h5>
@@ -21,7 +21,8 @@ use App\Models\ListenAssessmentQuestion;
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.quiz.store', ['quiz' => $quiz->id])]) !!}
+                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.quiz.store', ['quiz'
+                => $quiz->id])]) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}

@@ -78,22 +78,22 @@ class RoleSeeder extends Seeder
             'subscribe-create',
             'subscribe-edit',
             'subscribe-delete',
-            
+
             'examination-list',
             'examination-create',
             'examination-edit',
             'examination-delete',
-            
+
             'membership-list',
             'membership-create',
             'membership-edit',
             'membership-delete',
-            
+
             'price-list',
             'price-create',
             'price-edit',
             'price-delete',
-            
+
             'discount-list',
             'discount-create',
             'discount-edit',
@@ -116,6 +116,5 @@ class RoleSeeder extends Seeder
 
         $superRole = Role::create(['name' => 'super-admin']);
         $superRole->givePermissionTo(Permission::all());
-
     }
 }

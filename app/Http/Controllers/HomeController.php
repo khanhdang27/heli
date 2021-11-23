@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
-use App\Models\Course;
 use App\Models\CourseMembershipDiscount;
 use App\Models\News;
-use App\Models\StudentCourses;
 use App\Models\Subject;
 use App\Models\Tutor;
 use Illuminate\Database\Eloquent\Builder;
@@ -51,19 +49,19 @@ class HomeController extends Controller
 
         [$courseIGCSE, $courseIELTS, $courseUKISET, $courseIAL] = $this->getCourseHotByTag($course_hot);
 
-        [$courseVideo, $latesLecture] = $this->getCourseVideo();
+        // [$courseVideo, $latesLecture] = $this->getCourseVideo();
 
         $news = News::query()
             ->orderByDesc('created_at')
             ->limit(8)
             ->get();
-        $tutors = Tutor::with('user', 'user.avatar')
+        $tutors = Tutor::with('user', 'user.avatar')->where('id', '!=', 1)
             ->limit(9)
             ->get();
         return view('home.home-page', [
             'banners' => $banners,
-            'courseVideo' => $courseVideo,
-            'latesLecture' => $latesLecture,
+            // 'courseVideo' => $courseVideo,
+            // 'latesLecture' => $latesLecture,
             'news' => $news,
             'course_recommended' => $course_recommended,
             'course_hot' => $course_hot,
@@ -78,42 +76,42 @@ class HomeController extends Controller
         ]);
     }
 
-    function getCourseVideo()
-    {
-        if (Auth::check()) {
-            $user_course = StudentCourses::where('student_id', Auth::user()->id)
-                ->latest('latest_study')
-                ->first();
-            if (empty($user_course)) {
-                $course = Course::with('tutor', 'lecture')
-                    ->whereHas('lecture', function ($query) {
-                        return $query->where(['id' => 1]);
-                    })
-                    ->first();
+    // function getCourseVideo()
+    // {
+    //     if (Auth::check()) {
+    //         $user_course = StudentCourses::where('student_id', Auth::user()->id)
+    //             ->latest('latest_study')
+    //             ->first();
+    //         if (empty($user_course)) {
+    //             $course = Course::with('tutor', 'lecture')
+    //                 ->whereHas('lecture', function ($query) {
+    //                     return $query->where(['id' => 1]);
+    //                 })
+    //                 ->first();
 
-                return [$course, null];
-            } else {
-                $course = Course::with('tutor', 'lecture')
-                    ->where('id', $user_course->course_id)
-                    ->first();
-                if (empty($course->lecture[0])) {
-                    $course = Course::with('tutor', 'lecture')
-                        ->where('id', 1)
-                        ->first();
-                    return [$course, null];
-                } else {
-                    return [$course, $user_course->lecture_study];
-                }
-            }
-        } else {
-            return [
-                Course::with('tutor', 'lecture')
-                    ->where('id', 1)
-                    ->first(),
-                null,
-            ];
-        }
-    }
+    //             return [$course, null];
+    //         } else {
+    //             $course = Course::with('tutor', 'lecture')
+    //                 ->where('id', $user_course->course_id)
+    //                 ->first();
+    //             if (empty($course->lecture[0])) {
+    //                 $course = Course::with('tutor', 'lecture')
+    //                     ->where('id', 1)
+    //                     ->first();
+    //                 return [$course, null];
+    //             } else {
+    //                 return [$course, $user_course->lecture_study];
+    //             }
+    //         }
+    //     } else {
+    //         return [
+    //             Course::with('tutor', 'lecture')
+    //                 ->where('id', 1)
+    //                 ->first(),
+    //             null,
+    //         ];
+    //     }
+    // }
 
     function getCourseHotByTag($course_hot)
     {

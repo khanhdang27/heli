@@ -13,13 +13,13 @@ class UpdateLecture extends Migration
      */
     public function up()
     {
-        Schema::table('lectures', function (Blueprint $table) {
-            $table->dropColumn(['level', 'type']);
-        });
+        // Schema::table('lectures', function (Blueprint $table) {
+        //     $table->dropColumn(['level', 'type']);
+        // });
 
-        Schema::table('exams', function (Blueprint $table) {
-            $table->dropColumn(['level']);
-        });
+        // Schema::table('exams', function (Blueprint $table) {
+        //     $table->dropColumn(['level']);
+        // });
     }
 
     /**

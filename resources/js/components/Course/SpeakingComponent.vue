@@ -372,7 +372,10 @@ export default {
       options: {
         controls: true,
         autoplay: false,
-        fluid: true,
+        fluid: false,
+        width: 250,
+        height: 300,
+        responsive: true,
         loop: false,
         bigPlayButton: true,
         controlBar: {

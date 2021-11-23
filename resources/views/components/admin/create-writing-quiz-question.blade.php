@@ -11,8 +11,8 @@ use App\Models\WritingQuizQuestion;
 
 <div class="modal fade" id="modalWritingQuiz_{{ $quiz->id }}" tabindex="0" role="dialog"
     aria-labelledby="modalWritingQuiz_{{ $quiz->id }}_Title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content"> 
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     Writing Question</h5>
@@ -22,9 +22,9 @@ use App\Models\WritingQuizQuestion;
             </div>
             <div class="modal-body">
                 {!! Form::open([
-                    'methods' => 'POST',
-                    'url' => route('admin.quiz.question.writing.quiz.store', ['quiz' => $quiz->id]),
-                    'enctype' => 'multipart/form-data'
+                'methods' => 'POST',
+                'url' => route('admin.quiz.question.writing.quiz.store', ['quiz' => $quiz->id]),
+                'enctype' => 'multipart/form-data'
                 ]) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
@@ -32,15 +32,17 @@ use App\Models\WritingQuizQuestion;
                 </div>
                 <div class="form-group">
                     <label for="part" class="required">Part</label>
-                    {{ Form::select('part', WritingQuizQuestion::PART, old('part'), ['class' => 'form-control', 'required', 'id'=> 'part']) }}
+                    {{ Form::select('part', \Constants::QUESTION_PARTS, old('part'), ['class' => 'form-control',
+                    'required', 'id'=> 'part{{ $quiz->id }}']) }}
                 </div>
                 <div class="form-group">
                     <label for="question" class="required">Question</label>
                     {{ Form::textarea('question', old('question'), ['class' => 'form-control', 'required']) }}
                 </div>
-                <div class="custom-file" id="pickFile">
+                <div class="custom-file" id="pickFile{{ $quiz->id }}">
                     <label for="photo" class="custom-file-label">Photo</label>
-                    <input type="file" name="photo" id="photo" class="form-control custom-file-input ", accept="image/*">
+                    <input type="file" name="photo" id="photo{{ $quiz->id }}" class="form-control custom-file-input " ,
+                        accept="image/*">
                 </div>
                 <div class="form-group">
                     <label for="message_wrong" class="required">Message Wrong</label>
@@ -62,20 +64,20 @@ use App\Models\WritingQuizQuestion;
 
 
 <script type="text/javascript">
-$(document).ready(function (){
-    $('#modalWritingQuiz_{{ $quiz->id }}').on('shown.bs.modal', function (event) {
-        let partElement = document.getElementById("part");
-        let fileElement = document.getElementById("pickFile");
-        
-        partElement.addEventListener('change', (event) => {
-            if (event.target.value == 1) {
-                fileElement.style.visibility = 'visible';
-            } else {
-                fileElement.style.visibility = 'hidden';
-            }
-        });
+    $(document).ready(function () {
+        $('#modalWritingQuiz_{{ $quiz->id }}').on('shown.bs.modal', function (event) {
+            let partElement = document.getElementById("part{{ $quiz->id }}");
+            let fileElement = document.getElementById("pickFile{{ $quiz->id }}");
+
+            partElement.addEventListener('change', (event) => {
+                if (event.target.value == 1) {
+                    fileElement.style.visibility = 'visible';
+                } else {
+                    fileElement.style.visibility = 'hidden';
+                }
+            });
+        })
     })
-})
 </script>
 
 

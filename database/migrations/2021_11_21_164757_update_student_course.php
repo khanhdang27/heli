@@ -13,10 +13,10 @@ class UpdateStudentCourse extends Migration
      */
     public function up()
     {
-        Schema::table('student_courses', function (Blueprint $table) {
-            $table->dropColumn(['level_read', 'level_write', 'level_speak', 'level_listen', 'exam_read', 'exam_write', 'exam_speak', 'exam_listen', 'set_exam_read', 'set_exam_write', 'set_exam_speak', 'set_exam_listen', 'exam_buy_read', 'exam_buy_write', 'exam_buy_speak', 'exam_buy_listen']);
-            $table->bigInteger('set_exam')->nullable();
-        });
+        // Schema::table('student_courses', function (Blueprint $table) {
+        //     $table->dropColumn(['level_read', 'level_write', 'level_speak', 'level_listen', 'exam_read', 'exam_write', 'exam_speak', 'exam_listen', 'set_exam_read', 'set_exam_write', 'set_exam_speak', 'set_exam_listen', 'exam_buy_read', 'exam_buy_write', 'exam_buy_speak', 'exam_buy_listen']);
+        //     $table->bigInteger('set_exam')->nullable();
+        // });
     }
 
     /**

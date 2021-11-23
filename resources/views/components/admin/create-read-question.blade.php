@@ -20,7 +20,7 @@ use App\Models\Examination;
 <div class="modal fade" id="modalReading_{{ $quiz->id }}" tabindex="0" role="dialog"
     aria-labelledby="modalReading_{{ $quiz->id }}_Title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-        <div class="modal-content"> 
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
                     Reading Question</h5>
@@ -40,7 +40,7 @@ use App\Models\Examination;
                                 {!! $passage->content !!}
                             </span>
                         </div>
-                        @else 
+                        @else
                             <h3 class="text-danger">You not set up Passage</h3>
                         @endif
                     </div>
@@ -78,9 +78,9 @@ use App\Models\Examination;
                         </div>
                         {!! Form::close() !!}
                     </div>
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@ use App\Models\WritingQuizQuestion;
                 <div class="modal fade" id="modalWritingQuizQuestion_{{ $question->id }}" tabindex="0"
                     role="dialog" aria-labelledby="modalWritingQuizQuestion_{{ $question->id }}_Title"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable  modal-xl" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title text-dark">
@@ -42,13 +42,13 @@ use App\Models\WritingQuizQuestion;
                                 </div>
                                 <div class="form-group">
                                     <label for="part" class="required text-dark">Part</label>
-                                    {{ Form::select('part', WritingQuizQuestion::PART, $question->questionContent()->part, ['class' => 'form-control', 'required', 'id' => 'part_update']) }}
+                                    {{ Form::select('part', Constants::QUESTION_PARTS, $question->questionContent()->part, ['class' => 'form-control', 'required', 'id' => 'part_update{{ $quiz->id }}']) }}
                                 </div>
                                 <div class="form-group">
                                     <label for="question" class="required text-dark">Question</label>
                                     {{ Form::text('question', $question->questionContent()->question, ['class' => 'form-control', 'required']) }}
                                 </div>
-                                <div id="pickFile_update">
+                                <div id="pickFile_update{{ $quiz->id }}">
                                     @if ($question->questionContent()->file)
                                         <div id="preview_file_already" class="mb-4">
                                             <img src="{{ asset('/file/' . $question->questionContent()->file->id) }}"
@@ -84,8 +84,8 @@ use App\Models\WritingQuizQuestion;
                     $(document).ready(function() {
                         $('#modalWritingQuizQuestion_{{ $question->id }}').on('shown.bs.modal', function() {
 
-                            let partElement = document.getElementById("part_update");
-                            let fileElement = document.getElementById("pickFile_update");
+                            let partElement = document.getElementById("part_update{{ $quiz->id }}");
+                            let fileElement = document.getElementById("pickFile_update{{ $quiz->id }}");
 
                             if (partElement.value == 1) {
                                 fileElement.style.visibility = 'visible';

@@ -57,7 +57,7 @@
                                     @foreach ($exam_details as $value)
                                         <tr>
                                             <td class="c-30 text-overflow-ellipsis">
-                                                {{ $value->course_id }}
+                                                {{ $value->student_course_id }}
                                             </td>
                                             <td>
                                                 {{ $value->exam_id }}
@@ -85,8 +85,7 @@
                                             </td>
                                             <td class="text-right">
                                                     <a class="btn btn-outline-primary btn-sm" href="{{ route('admin.student-examination.grade', [
-                                                        'student'=> $value->student_id,
-                                                        'course'=> $value->course_id,
+                                                        'student_course'=> $value->student_course_id,
                                                         'exam'=> $value->exam_id,
                                                         'quiz'=> $value->quiz_id
                                                     ]) }}"

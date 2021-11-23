@@ -38,7 +38,7 @@ use App\Models\Quiz;
                                     Exam type: {{ \Constants::EXAMINATION_TYPES[$exam_details[0]->exam->type] }}
                                 </h5>
                                 <h5>
-                                    Set: {{ Quiz::SET_LIST[$exam_details[0]->quiz->set] }}
+                                    Set: {{ \Constants::SET_LIST[$exam_details[0]->quiz->set] }}
                                 </h5>
                             </div>
                             <div class="col-3">
@@ -67,8 +67,7 @@ use App\Models\Quiz;
                         </div>
                         {!! Form::open([
     'url' => route('admin.student-examination.handleGrade', [
-        'student' => $exam_details[0]->student->id,
-        'course' => $exam_details[0]->course->id,
+        'student_course' => $exam_details[0]->student_course_id,
         'exam' => $exam_details[0]->exam->id,
         'quiz' => $exam_details[0]->quiz->id,
     ]),
@@ -92,9 +91,9 @@ use App\Models\Quiz;
                                             {{ $detail->time }}
                                         </td>
                                         <td class="c-20">
-                                            @if ($detail->answer_type === StudentExamination::ANSWER_MC)
+                                            @if ($detail->answer_type === \Constants::ANSWER_MC)
                                                 {{ $detail->question->questionContent()->findAnswerById($detail->answer)->answer }}
-                                            @elseif ($detail->answer_type === StudentExamination::ANSWER_TEXT)
+                                            @elseif ($detail->answer_type === \Constants::ANSWER_TEXT)
                                                 <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
                                                     data-target="#reviewTextAnswer" data-answer="{{ $detail->answer }}"
                                                     data-comment-url="{{ route('admin.student-examination.comment', ['studentExam' => $detail->id]) }}"

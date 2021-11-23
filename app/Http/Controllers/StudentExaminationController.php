@@ -24,7 +24,7 @@ class StudentExaminationController extends Controller
     public function index()
     {
         DB::enableQueryLog();
-        $exam_details = StudentExamination::select('student_id', 'course_id', 'exam_id', 'quiz_id', 'reviewed')
+        $exam_details = StudentExamination::select('student_course_id', 'exam_id', 'quiz_id', 'reviewed')
             ->distinct()
             ->orderBy('reviewed')
             ->paginate(15);
@@ -72,11 +72,10 @@ class StudentExaminationController extends Controller
         }
     }
 
-    public function grade(User $student, Course $course, Examination $exam, Quiz $quiz)
+    public function grade(StudentCourses $student_course, Examination $exam, Quiz $quiz)
     {
         $exam_details = StudentExamination::where([
-            'student_id' => $student->id,
-            'course_id' => $course->id,
+            'student_course_id' => $student_course->id,
             'exam_id' => $exam->id,
             'quiz_id' => $quiz->id,
         ])
@@ -125,14 +124,14 @@ class StudentExaminationController extends Controller
         ]);
     }
 
-    public function handleGrade(Request $request, User $student, Course $course, Examination $exam, Quiz $quiz)
+    public function handleGrade(Request $request, StudentCourses $student_course, Examination $exam, Quiz $quiz)
     {
+
         $input = $request->input();
         DB::beginTransaction();
         try {
             $exam_details = StudentExamination::where([
-                'student_id' => $student->id,
-                'course_id' => $course->id,
+                'student_course_id' => $student_course->id,
                 'exam_id' => $exam->id,
                 'quiz_id' => $quiz->id,
             ])->update(['reviewed' => false]);
@@ -509,8 +508,8 @@ class StudentExaminationController extends Controller
     {
         switch ($type) {
             case \Constants::COURSE_READING:
-                if (empty($studentInfo->set_exam_read) && $studentInfo->set_exam_read < 4) {
-                    $studentInfo->update(['set_exam_read' => $studentInfo->set_exam_read + 1]);
+                if (empty($student_course->set_exam) && $student_course->set_exam < 4) {
+                    $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
                     if ($studentInfo->exam_buy_read) {
                         $studentInfo->update(['exam_buy_read' => null]);
@@ -521,10 +520,10 @@ class StudentExaminationController extends Controller
                 }
                 break;
             case \Constants::COURSE_WRITING:
-                if (empty($studentInfo->set_exam_write) && $studentInfo->set_exam_write <= 4) {
-                    $studentInfo->update(['set_exam_write' => $studentInfo->set_exam_write + 1]);
+                if (empty($student_course->set_exam) && $student_course->set_exam <= 4) {
+                    $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
-                    if ($studentInfo->exam_buy_read) {
+                    if ($studentInfo->exam_buy_write) {
                         $studentInfo->update(['exam_buy_write' => null]);
                         $student_course->update(['failed' => time(), 'set_exam' => 1]);
                     } else {
@@ -533,10 +532,10 @@ class StudentExaminationController extends Controller
                 }
                 break;
             case \Constants::COURSE_LISTENING:
-                if (empty($studentInfo->set_exam_listen) && $studentInfo->set_exam_listen <= 4) {
-                    $studentInfo->update(['set_exam_listen' => $studentInfo->set_exam_listen + 1]);
+                if (empty($student_course->set_exam) && $student_course->set_exam <= 4) {
+                    $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
-                    if ($studentInfo->exam_buy_read) {
+                    if ($studentInfo->exam_buy_listen) {
                         $studentInfo->update(['exam_buy_listen' => null]);
                         $student_course->update(['failed' => time(), 'set_exam' => 1]);
                     } else {
@@ -545,10 +544,10 @@ class StudentExaminationController extends Controller
                 }
                 break;
             case \Constants::COURSE_SPEAKING:
-                if (empty($studentInfo->set_exam_speak) && $studentInfo->set_exam_speak <= 4) {
-                    $studentInfo->update(['set_exam_speak' => $studentInfo->set_exam_speak + 1]);
+                if (empty($student_course->set_exam) && $student_course->set_exam <= 4) {
+                    $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
-                    if ($studentInfo->exam_buy_read) {
+                    if ($studentInfo->exam_buy_speak) {
                         $studentInfo->update(['exam_buy_speak' => null]);
                         $student_course->update(['failed' => time(), 'set_exam' => 1]);
                     } else {

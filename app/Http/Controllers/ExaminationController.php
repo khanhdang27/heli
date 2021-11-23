@@ -52,7 +52,6 @@ class ExaminationController extends Controller
                 'name' => $input['name'],
                 'index' => $input['index'],
                 'type' => $input['type'],
-                'level' => $input['level'],
             ]);
 
             for ($i = 1; $i <= 4; $i++) {
@@ -175,7 +174,7 @@ class ExaminationController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $exams->course_id,
             ])->first();
-            $set = $student_course->set_exam_read ?? 1;
+            $set = $student_course->set_exam ?? 1;
             $exams->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
@@ -209,7 +208,7 @@ class ExaminationController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $exams->course_id,
             ])->first();
-            $set = $student_course->set_exam_read ?? 1;
+            $set = $student_course->set_exam ?? 1;
             $exams->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
@@ -257,7 +256,7 @@ class ExaminationController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $exams->course_id,
             ])->first();
-            $set = $student_course->set_exam_read ?? 1;
+            $set = $student_course->set_exam ?? 1;
             $exams->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
@@ -291,7 +290,7 @@ class ExaminationController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $exams->course_id,
             ])->first();
-            $set = $student_course->set_exam_read ?? 1;
+            $set = $student_course->set_exam ?? 1;
             $exams->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
@@ -338,7 +337,7 @@ class ExaminationController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $exams->course_id,
             ])->first();
-            $set = $student_course->set_exam_read ?? 1;
+            $set = $student_course->set_exam ?? 1;
             $exams->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
@@ -372,7 +371,7 @@ class ExaminationController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $exams->course_id,
             ])->first();
-            $set = $student_course->set_exam_read ?? 1;
+            $set = $student_course->set_exam ?? 1;
             $exams->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
@@ -419,7 +418,7 @@ class ExaminationController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $exams->course_id,
             ])->first();
-            $set = $student_course->set_exam_read ?? 1;
+            $set = $student_course->set_exam ?? 1;
             $exams->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
@@ -451,7 +450,7 @@ class ExaminationController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $exams->course_id,
             ])->first();
-            $set = $student_course->set_exam_read ?? 1;
+            $set = $student_course->set_exam ?? 1;
             $exams->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);

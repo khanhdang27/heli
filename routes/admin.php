@@ -180,8 +180,8 @@ Route::middleware('auth.admin')->group(function () {
     Route::resource('study-session', 'StudySessionController');
     Route::resource('wallet-manager', 'WalletManagerController');
 
-    Route::get('student-examination/student/{student}/course/{course}/exam/{exam}/quiz/{quiz}', 'StudentExaminationController@grade')->name('student-examination.grade');
-    Route::post('student-examination/student/{student}/course/{course}/exam/{exam}/quiz/{quiz}', 'StudentExaminationController@handleGrade')->name('student-examination.handleGrade');
+    Route::get('student-examination/student/course/{student_course}/exam/{exam}/quiz/{quiz}', 'StudentExaminationController@grade')->name('student-examination.grade');
+    Route::post('student-examination/student/course/{student_course}/exam/{exam}/quiz/{quiz}', 'StudentExaminationController@handleGrade')->name('student-examination.handleGrade');
     Route::post('student-examination/comment/{studentExam}', 'StudentExaminationController@comment')->name('student-examination.comment');
     Route::resource('student-examination', 'StudentExaminationController');
 

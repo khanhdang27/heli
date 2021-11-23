@@ -11,7 +11,7 @@ use App\Models\ListenAssessmentQuestion;
 
 <div class="modal fade" id="modalSpeakingAssessment_{{ $quiz->id }}" tabindex="0" role="dialog"
     aria-labelledby="modalSpeakingAssessment_{{ $quiz->id }}_Title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered  modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">
@@ -22,14 +22,15 @@ use App\Models\ListenAssessmentQuestion;
             </div>
             <div class="modal-body">
                 {!! Form::open(['methods' => 'POST',
-                        'url' => route('admin.quiz.question.speaking.assessment.store', ['quiz' => $quiz->id]),
-                        'enctype'=>'multipart/form-data']) !!}
+                'url' => route('admin.quiz.question.speaking.assessment.store', ['quiz' => $quiz->id]),
+                'enctype'=>'multipart/form-data']) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}
                 </div>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="audioSpeakingAssessment" name="audio" accept=".mp3">
+                    <input type="file" class="custom-file-input" id="audioSpeakingAssessment" name="audio"
+                        accept=".mp3">
                     <label class="custom-file-label" for="audioSpeakingAssessment">Choose file</label>
                 </div>
                 <div class="form-group">
@@ -55,7 +56,7 @@ use App\Models\ListenAssessmentQuestion;
 </div>
 
 <script type="application/javascript">
-    $("#audioSpeakingAssessment").on("change", function() {
+    $("#audioSpeakingAssessment").on("change", function () {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });

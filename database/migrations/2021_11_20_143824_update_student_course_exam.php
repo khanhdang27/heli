@@ -13,22 +13,22 @@ class UpdateStudentCourseExam extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::table('student_examinations', function (Blueprint $table) {
-            $table->dropForeign(['student_id']);
-            $table->dropForeign(['course_id']);
-            $table->dropColumn(['student_id', 'course_id']);
-            $table
-                ->foreignId('student_course_id')
-                ->constrained('student_courses')
-                ->cascadeOnDelete();
-        });
-        Schema::table('student_courses', function (Blueprint $table) {
-            $table->dateTime('failed')->nullable();
+        // Schema::disableForeignKeyConstraints();
+        // Schema::table('student_examinations', function (Blueprint $table) {
+        //     $table->dropForeign(['student_id']);
+        //     $table->dropForeign(['course_id']);
+        //     $table->dropColumn(['student_id', 'course_id']);
+        //     $table
+        //         ->foreignId('student_course_id')
+        //         ->constrained('student_courses')
+        //         ->cascadeOnDelete();
+        // });
+        // Schema::table('student_courses', function (Blueprint $table) {
+        //     $table->dateTime('failed')->nullable();
 
-            $table->dropUnique(['student_id', 'course_id']);
-            $table->unique(['student_id', 'course_id', 'failed']);
-        });
+        //     $table->dropUnique(['student_id', 'course_id']);
+        //     $table->unique(['student_id', 'course_id', 'failed']);
+        // });
     }
 
     /**
