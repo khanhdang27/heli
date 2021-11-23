@@ -89,7 +89,7 @@ Route::middleware('auth')->group(function () {
     Route::get('exam/listenAssessment/{exams}', 'ExaminationController@getListeningAssessmentQuestionsClient')->name('exam.getListeningAssessmentQuestionsClient');
     Route::get('exam/listenExercise/{exams}', 'ExaminationController@getListeningExerciseQuestionsClient')->name('exam.getListeningExerciseQuestionsClient');
     Route::get('exam/listenQuiz/{exams}', 'ExaminationController@getListeningQuizQuestionsClient')->name('exam.getListeningQuizQuestionsClient');
-    Route::get('studentCourse/{studentCourse}/exam/{exam}/quiz/{quiz}', 'CourseController@showExam')->name('showExam');
+    Route::get('course/{course}/exam/{exam}/quiz/{quiz}', 'CourseController@showExam')->name('showExam');
 
     Route::get('exam/speakingAssessment/{exams}', 'ExaminationController@getSpeakingAssessmentQuestionsClient')->name('exam.getSpeakingAssessmentQuestionsClient');
     Route::get('exam/speakingExercise/{exams}', 'ExaminationController@getSpeakingExerciseQuestionsClient')->name('exam.getSpeakingExerciseQuestionsClient');

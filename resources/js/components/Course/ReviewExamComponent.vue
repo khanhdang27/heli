@@ -26,9 +26,9 @@ export default {
     return {};
   },
   methods: {
-    routeHref(studentCourse, exam, quiz) {
-      if (studentCourse && exam && quiz) {
-        return route("site.showExam", { studentCourse, exam, quiz });
+    routeHref(course, exam, quiz) {
+      if (course && exam && quiz) {
+        return route("site.showExam", { course, exam, quiz });
       }
     },
   },

@@ -351,7 +351,7 @@ export default {
     typeExam: function (value) {
       this.allResults = [];
       this.questionIndex = 0;
-      this.questionReading = [];
+      this.questionListening = [];
       this.getQuestion();
       this.getAnswerUser();
     },
