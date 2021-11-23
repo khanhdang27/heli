@@ -7,7 +7,7 @@
         class="list-group-item list-group-item-action border-0"
         v-for="exam in exams"
         :key="exam.exam_id"
-        :href="routeHref(exam.course_id, exam.exam_id, exam.quiz_id)"
+        :href="routeHref(exam.student_course_id, exam.exam_id, exam.quiz_id)"
         target="_blank"
       >
         {{ exam.exam.name }}
@@ -26,9 +26,9 @@ export default {
     return {};
   },
   methods: {
-    routeHref(course, exam, quiz) {
-      if (course && exam && quiz) {
-        return route("site.showExam", { course, exam, quiz });
+    routeHref(studentCourse, exam, quiz) {
+      if (studentCourse && exam && quiz) {
+        return route("site.showExam", { studentCourse, exam, quiz });
       }
     },
   },
