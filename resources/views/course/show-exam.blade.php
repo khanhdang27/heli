@@ -28,7 +28,7 @@ use App\Models\ListenAssessmentQuestion;
                         </h5>
                         <h5>
                             @if ($exam_details[0]->exam->type != \Constants::EXAMINATION_ASSESSMENT)
-                                Set: {{ Quiz::SET_LIST[$exam_details[0]->quiz->set] }}
+                                Set: {{ \Constants::SET_LIST[$exam_details[0]->quiz->set] }}
                             @endif
                         </h5>
                     </div>
@@ -133,7 +133,7 @@ use App\Models\ListenAssessmentQuestion;
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-between">
-                                            @if ($detail->answer_type === StudentExamination::ANSWER_MC)
+                                            @if ($detail->answer_type === \Constants::ANSWER_MC)
                                                 <p class="text-truncate" style="max-width: 200px">
                                                     {{ $detail->question->questionContent()->findAnswerById($detail->answer)->answer }}
                                                 </p>
@@ -159,10 +159,10 @@ use App\Models\ListenAssessmentQuestion;
                                                     <div class="modal-body row">
                                                         <div class="col-md-6">
                                                             <h4 class="font-weight-bold">Answer:</h4>
-                                                            @if ($detail->answer_type === StudentExamination::ANSWER_MC)
+                                                            @if ($detail->answer_type === \Constants::ANSWER_MC)
                                                                 {{ $detail->question->questionContent()->findAnswerById($detail->answer)->answer }}
                                                             @elseif ($detail->answer_type ===
-                                                                StudentExamination::ANSWER_TEXT)
+                                                                \Constants::ANSWER_TEXT)
                                                                 <h5>{{ $detail->answer }}</h5>
                                                             @else
                                                                 @if (!empty($detail->answer))
@@ -187,7 +187,7 @@ use App\Models\ListenAssessmentQuestion;
                                         </div>
                                     </td>
                                     <td>
-                                        @if ($detail->answer_type === StudentExamination::ANSWER_MC)
+                                        @if ($detail->answer_type === \Constants::ANSWER_MC)
                                             @if ($detail->question->questionContent()->findAnswerById($detail->answer)->is_correct)
                                                 <i class="fe fe-check text-success h3"></i>
                                             @else
@@ -196,7 +196,7 @@ use App\Models\ListenAssessmentQuestion;
                                         @endif
                                     </td>
                                     <td id="score-show{{ $detail->id }}">
-                                        @if ($detail->answer_type !== StudentExamination::ANSWER_MC)
+                                        @if ($detail->answer_type !== \Constants::ANSWER_MC)
                                             @if ($detail->score < 5)
                                                 <div class="text-danger">
                                                     {{ $detail->score }}

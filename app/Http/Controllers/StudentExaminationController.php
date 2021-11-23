@@ -607,7 +607,7 @@ class StudentExaminationController extends Controller
     public function viewedExam(StudentExamination $studentExam)
     {
         $studentExam->update(['had_update' => false]);
-        return redirect(route('site.showExam', ['course' => $studentExam->course_id, 'exam' => $studentExam->exam_id, 'quiz' => $studentExam->quiz_id]));
+        return redirect(route('site.showExam', ['course' => $studentExam->student_course_id, 'exam' => $studentExam->exam_id, 'quiz' => $studentExam->quiz_id]));
     }
 
     /**

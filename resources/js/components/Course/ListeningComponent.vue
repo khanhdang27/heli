@@ -349,6 +349,9 @@ export default {
   },
   watch: {
     typeExam: function (value) {
+      this.allResults = [];
+      this.questionIndex = 0;
+      this.questionListening = [];
       this.getQuestion();
       this.getAnswerUser();
     },

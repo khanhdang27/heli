@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\SocialAccount;
+use App\Models\StudentCourses;
 use App\Models\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -47,27 +49,26 @@ class SocialAccountController extends Controller
                     $newUser->assignRole('student');
 
                     if ($newUser->save()){
-                        
-                        $student = new Student(['user_id' => $newUser->id]);
-                        $student->save();
-                        $newUser_social = new SocialAccount([
+
+                        $student = Student::create(['user_id' => $newUser->id]);
+                        $newUser_social = SocialAccount::create([
                             'user_id' => $newUser->id,
                             'social_id' => $user->getId(),
                             'social_name' => $provider
                         ]);
-                        $newUser_social->save();
                         $stripeCustomer = $newUser->createAsStripeCustomer(['email' => $user->getEmail()]);
-                        // if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
-                        //     NewsletterFacade::subscribe($user->getEmail());
-                        // }
-
-                        // if (!(NewsletterFacade::isSubscribed($user->getEmail()))){
-                        //     NewsletterFacade::subscribe($user->getEmail());
-                        // }
 
                         $send_mail = new SendMail();
                         $send_mail = $send_mail->subject('Welcome to Helios Education!')->title('YOUR PASSWORD')->view('mail.mail', ['password' => $random]);
                         Mail::to($user->getEmail())->send($send_mail);
+                        $student_course = StudentCourses::create([
+                            'course_id' => 1,
+                            'student_id' => $newUser->id,
+                            'room_live_course_id' => null,
+                            'latest_study' => new DateTime(),
+                            'lecture_study' => 0,
+                            'watched_list' => '0,',
+                        ]);
                         Auth::login($newUser);
                     }
                     DB::commit();

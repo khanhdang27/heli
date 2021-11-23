@@ -170,13 +170,12 @@ class CourseController extends Controller
         }
     }
 
-    public function showExam(Course $course, Examination $exam, Quiz $quiz)
+    public function showExam($studentCourses,  $exam,  $quiz)
     {
         $exam_details = StudentExamination::where([
-            'student_id' => Auth::user()->id,
-            'course_id' => $course->id,
-            'exam_id' => $exam->id,
-            'quiz_id' => $quiz->id,
+            'student_course_id' => $studentCourses,
+            'exam_id' => $exam,
+            'quiz_id' => $quiz,
         ])
             ->with('question', 'quiz.passage', 'quiz.audioListen')
             ->whereHas('question', function ($query) {

@@ -11,9 +11,6 @@
 @section('title', 'Home Page')
 
 @section('content')
-    @if (!Auth::user()->student->level_read)
-        <modal-assessment-component></modal-assessment-component>
-    @endif
     <div class="banner position-relative">
         <x-sub-header :subjects=$subjects page="home"></x-sub-header>
         @if ($message = Session::get('error'))
@@ -25,6 +22,9 @@
         @if (!Auth::check())
             <x-home.banner :banner=$banners></x-home.banner>
         @else
+            @if (!Auth::user()->student->level_read)
+                <modal-assessment-component></modal-assessment-component>
+            @endif
             <br>
             <div class="container pt-5 mt-5">
                 <h1 class="text-center text-secondary mt-3">
@@ -90,23 +90,12 @@
             <x-home.step-register></x-home.step-register>
         @endif
         @if (!Auth::check())
-            {{-- chua dang nhap --}}
-            {{-- <x-home.video-course :courseDetail=$courseVideo></x-home.video-course> --}}
-
             <slide-tutor-component v-bind:tutors="{{$tutors}}"></slide-tutor-component>
 
         @else
             {{-- da dang nhap --}}
             <div class="mx-auto container-home mt-5">
-                {{-- <div class="d-flex justify-content-between flex-wrap pt-5 btn-above-video px-3">
-                    <h2 class="text-primary">@lang('keywords.continueMyCourse')</h2>
-                    <a href="{{ route('site.user.course') }}" class="m-0 btn btn-register-now btn-login px-5">
-                        @lang('keywords.otherPurchasedCourses')
-                    </a>
-                </div> --}}
-                {{-- <x-home.video-course :courseDetail=$courseVideo :latesLecture=$latesLecture></x-home.video-course> --}}
             <slide-tutor-component v-bind:tutors="{{$tutors}}"></slide-tutor-component>
-
             </div>
         @endif
         @if (!Auth::check())

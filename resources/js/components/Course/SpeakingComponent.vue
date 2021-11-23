@@ -318,10 +318,10 @@
             tutor. Please wait for the results and come back later!
           </div>
         </div>
-        <div v-else>
+        <div v-else class="py-5">
           <h2>Congratulation! You got level: {{ allResults.passgrade }}</h2>
           <button
-            class="btn btn-primary btn-lg btn-block"
+            class="btn btn-primary btn-lg btn-block mt-5"
             @click="cleanOldAnswers()"
           >
             Start the Course
@@ -404,6 +404,9 @@ export default {
   },
   watch: {
     typeExam: function (value) {
+      this.allResults = [];
+      this.questionIndex = 0;
+      this.questionSpeaking = [];
       this.getQuestion();
       this.getAnswerUser();
     },
