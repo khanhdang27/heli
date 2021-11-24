@@ -3,7 +3,6 @@ use App\Models\WritingQuizQuestion;
 @endphp
 
 <ul class="list-group" id="listQuestionWriting_{{ $quiz->set }}">
-    {{-- @dd($questions) --}}
     @foreach ($questions as $question)
     @if ($question->questionContent())
     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info selectable"
@@ -80,36 +79,36 @@ use App\Models\WritingQuizQuestion;
 
         <script type="application/javascript">
             $(document).ready(function() {
-                        $('#modalWritingQuizQuestion_{{ $question->id }}').on('shown.bs.modal', function() {
+                $('#modalWritingQuizQuestion_{{ $question->id }}').on('shown.bs.modal', function() {
 
-                            let partElement = document.getElementById("part_update{{ $quiz->id }}");
-                            let fileElement = document.getElementById("pickFile_update{{ $quiz->id }}");
+                    let partElement = document.getElementById("part_update{{ $quiz->id }}");
+                    let fileElement = document.getElementById("pickFile_update{{ $quiz->id }}");
 
-                            if (partElement.value == 1) {
-                                fileElement.style.visibility = 'visible';
-                            } else {
-                                fileElement.style.visibility = 'hidden';
-                            }
-                            partElement.addEventListener('change', (event) => {
-                                console.log(event.target.value);
-                                if (event.target.value == 1) {
-                                    fileElement.style.visibility = 'visible';
-                                } else {
-                                    fileElement.style.visibility = 'hidden';
-                                }
-                            });
-                        });
+                    if (partElement.value == 1) {
+                        fileElement.style.visibility = 'visible';
+                    } else {
+                        fileElement.style.visibility = 'hidden';
+                    }
+                    partElement.addEventListener('change', (event) => {
+                        console.log(event.target.value);
+                        if (event.target.value == 1) {
+                            fileElement.style.visibility = 'visible';
+                        } else {
+                            fileElement.style.visibility = 'hidden';
+                        }
                     });
+                });
+            });
         </script>
 
     </li>
     @push('inputFile')
     <script type="application/javascript">
         // Add the following code if you want the name of the file appear on select
-                    $(".custom-file-input").on("change", function() {
-                        var fileName = $(this).val().split("\\").pop();
-                        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-                    });
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
     </script>
     @endpush
 

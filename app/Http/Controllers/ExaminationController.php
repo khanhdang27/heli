@@ -298,8 +298,9 @@ class ExaminationController extends Controller
                 'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_WRITING);
                 },
-                'quiz.questions.writingQuizQuestion',
-                'quiz.questions.writingQuizQuestion.answers',
+                'quiz.question.writingQuizQuestion',
+                'quiz.question.writingQuizQuestion.answers',
+                'quiz.question.writingQuizQuestion.picture',
             ]);
             $questions = $exams->quiz;
             DB::commit();
