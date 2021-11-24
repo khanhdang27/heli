@@ -66,7 +66,7 @@ class ExaminationController extends Controller
                 ->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors('errors', 'Create errors!');
+            return back()->withErrors('errors', $th->getMessage());
         }
     }
 
@@ -126,7 +126,7 @@ class ExaminationController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors('errors', 'Update errors!');
+            return back()->withErrors('errors', $th->getMessage());
         }
     }
 
@@ -156,11 +156,11 @@ class ExaminationController extends Controller
     public function getReadingAssessmentQuestionsClient(Examination $exams)
     {
         $exams->load([
-            'quiz.question' => function ($query) {
+            'quiz.questions' => function ($query) {
                 $query->where('type', '=', \Constants::COURSE_READING);
             },
-            'quiz.question.readingQuestion',
-            'quiz.question.readingQuestion.answers',
+            'quiz.questions.readingQuestion',
+            'quiz.questions.readingQuestion.answers',
             'quiz.passage',
         ]);
         $questions = $exams->quiz[0];
@@ -179,11 +179,11 @@ class ExaminationController extends Controller
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
                 },
-                'quiz.question' => function ($query) {
+                'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_READING);
                 },
-                'quiz.question.readingQuestion',
-                'quiz.question.readingQuestion.answers',
+                'quiz.questions.readingQuestion',
+                'quiz.questions.readingQuestion.answers',
                 'quiz.passage',
             ]);
             $questions = $exams->quiz;
@@ -213,11 +213,11 @@ class ExaminationController extends Controller
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
                 },
-                'quiz.question' => function ($query) {
+                'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_READING);
                 },
-                'quiz.question.readingQuestion',
-                'quiz.question.readingQuestion.answers',
+                'quiz.questions.readingQuestion',
+                'quiz.questions.readingQuestion.answers',
                 'quiz.passage',
             ]);
             $questions = $exams->quiz;
@@ -238,11 +238,11 @@ class ExaminationController extends Controller
     public function getWritingAssessmentQuestionsClient(Examination $exams)
     {
         $exams->load([
-            'quiz.question' => function ($query) {
+            'quiz.questions' => function ($query) {
                 $query->where('type', '=', \Constants::COURSE_WRITING);
             },
-            'quiz.question.writingAssessmentQuestion',
-            'quiz.question.writingAssessmentQuestion.answers',
+            'quiz.questions.writingAssessmentQuestion',
+            'quiz.questions.writingAssessmentQuestion.answers',
         ]);
         $questions = $exams->quiz[0];
         return response()->json(['questions' => $questions]);
@@ -261,11 +261,11 @@ class ExaminationController extends Controller
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
                 },
-                'quiz.question' => function ($query) {
+                'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_WRITING);
                 },
-                'quiz.question.writingAssessmentQuestion',
-                'quiz.question.writingAssessmentQuestion.answers',
+                'quiz.questions.writingAssessmentQuestion',
+                'quiz.questions.writingAssessmentQuestion.answers',
             ]);
             $questions = $exams->quiz;
             return response()->json(['questions' => $questions]);
@@ -295,11 +295,11 @@ class ExaminationController extends Controller
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
                 },
-                'quiz.question' => function ($query) {
+                'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_WRITING);
                 },
-                'quiz.question.writingQuizQuestion',
-                'quiz.question.writingQuizQuestion.answers',
+                'quiz.questions.writingQuizQuestion',
+                'quiz.questions.writingQuizQuestion.answers',
             ]);
             $questions = $exams->quiz;
             DB::commit();
@@ -318,11 +318,11 @@ class ExaminationController extends Controller
     public function getListeningAssessmentQuestionsClient(Examination $exams)
     {
         $exams->load([
-            'quiz.question' => function ($query) {
+            'quiz.questions' => function ($query) {
                 $query->where('type', '=', \Constants::COURSE_LISTENING);
             },
-            'quiz.question.listenAssessmentQuestion',
-            'quiz.question.listenAssessmentQuestion.answers',
+            'quiz.questions.listenAssessmentQuestion',
+            'quiz.questions.listenAssessmentQuestion.answers',
         ]);
         $questions = $exams->quiz[0];
         $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
@@ -342,11 +342,11 @@ class ExaminationController extends Controller
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
                 },
-                'quiz.question' => function ($query) {
+                'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_LISTENING);
                 },
-                'quiz.question.listenAssessmentQuestion',
-                'quiz.question.listenAssessmentQuestion.answers',
+                'quiz.questions.listenAssessmentQuestion',
+                'quiz.questions.listenAssessmentQuestion.answers',
             ]);
             $questions = $exams->quiz;
             $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
@@ -376,11 +376,11 @@ class ExaminationController extends Controller
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
                 },
-                'quiz.question' => function ($query) {
+                'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_LISTENING);
                 },
-                'quiz.question.listenAssessmentQuestion',
-                'quiz.question.listenAssessmentQuestion.answers',
+                'quiz.questions.listenAssessmentQuestion',
+                'quiz.questions.listenAssessmentQuestion.answers',
             ]);
             $questions = $exams->quiz;
             $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
@@ -400,11 +400,11 @@ class ExaminationController extends Controller
     public function getSpeakingAssessmentQuestionsClient(Examination $exams)
     {
         $exams->load([
-            'quiz.question' => function ($query) {
+            'quiz.questions' => function ($query) {
                 $query->where('type', '=', \Constants::COURSE_SPEAKING);
             },
-            'quiz.question.speakAssessmentQuestion',
-            'quiz.question.speakAssessmentQuestion.answers',
+            'quiz.questions.speakAssessmentQuestion',
+            'quiz.questions.speakAssessmentQuestion.answers',
         ]);
         $questions = $exams->quiz[0];
         return response()->json(['questions' => $questions]);
@@ -423,10 +423,10 @@ class ExaminationController extends Controller
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
                 },
-                'quiz.question' => function ($query) {
+                'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_SPEAKING);
                 },
-                'quiz.question.speakExercisesQuestion',
+                'quiz.questions.speakExercisesQuestion',
             ]);
             $questions = $exams->quiz[0];
             DB::commit();
@@ -455,10 +455,10 @@ class ExaminationController extends Controller
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
                 },
-                'quiz.question' => function ($query) {
+                'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_SPEAKING);
                 },
-                'quiz.question.speakQuizQuestion',
+                'quiz.questions.speakQuizQuestion',
             ]);
             $questions = $exams->quiz[0];
             DB::commit();

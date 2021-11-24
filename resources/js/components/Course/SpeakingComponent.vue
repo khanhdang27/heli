@@ -216,13 +216,19 @@
                 Please record one video with voice that answers all question.
               </p>
               <div>
-                <video
-                  v-cloak
-                  id="myVideo"
-                  ref="videoPlayer"
-                  class="video-js"
-                  playsinline
-                ></video>
+                  <div class="row">
+                      <div class="col-2"></div>
+                      <div class="col-8">
+                          <video
+                              v-cloak
+                              id="myVideo"
+                              ref="videoPlayer"
+                              class="video-js vjs-layout-x-small vjs-layout-medium vjs-layout-large"
+                              playsinline
+                          ></video>
+                      </div>
+                      <div class="col-2"></div>
+                  </div>
                 <div
                   id="progress"
                   class="
@@ -366,15 +372,13 @@ export default {
         quizID: "",
         questions: [],
       },
-      timeStartDo: new Date(),
+      timeStartDo: "",
       timeDo: "",
       player: "",
       options: {
         controls: true,
         autoplay: false,
-        fluid: false,
-        width: 250,
-        height: 300,
+        fluid: true,
         responsive: true,
         loop: false,
         bigPlayButton: true,
@@ -388,7 +392,7 @@ export default {
             debug: true,
             maxLength: 1800,
           },
-        },
+        }
       },
       allResults: [],
       countClick: 0,
@@ -454,6 +458,7 @@ export default {
       // user clicked the record button and started recording
       this.player.on("startRecord", () => {
         console.log("started recording!");
+        this.timeStartDo = new Date();
       });
 
       // user completed recording and stream is available
@@ -537,7 +542,7 @@ export default {
       axios
         .get(route("site.exam.getSpeakingQuizQuestionsClient", this.examId))
         .then((response) => {
-          this.questionSpeaking = response.data.questions.question.filter(
+          this.questionSpeaking = response.data.questions.questions.filter(
             (question) => {
               return question.speak_quiz_question !== null;
             }
@@ -562,12 +567,7 @@ export default {
           }
         }
         if (this.typeExam === this.$root.$getConst("quiz")) {
-          this.userAnswerQuiz({
-            answerType: this.$root.$getConst("Video"),
-            questionID: parseInt(this.questionSpeaking[this.questionIndex].id),
-            answerID: "",
-            time: null,
-          });
+            this.userAnswer();
         }
         this.questionIndex++;
       }
@@ -588,7 +588,8 @@ export default {
       if (this.typeExam === this.$root.$getConst("quiz")) {
         this.player.record().stop();
         console.log("is waiting upload video");
-      } else {
+      }
+      else {
         axios
           .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
           .then((data) => {
@@ -601,15 +602,22 @@ export default {
       }
     },
     userAnswer: function () {
-      if (this.typeExam === this.$root.$getConst("assessment")) {
         this.timeDo = (new Date() - this.timeStartDo) / 1000;
         this.timeStartDo = new Date();
+      if (this.typeExam === this.$root.$getConst("assessment")) {
         this.userAnswerQuiz({
           answerType: this.$root.$getConst("MC"),
           questionID: parseInt(this.questionSpeaking[this.questionIndex].id),
           answerID: this.userChoose[this.questionIndex],
           time: this.timeDo,
         });
+      }else if (this.typeExam === this.$root.$getConst("quiz")){
+          this.userAnswerQuiz({
+              answerType: this.$root.$getConst("Video"),
+              questionID: parseInt(this.questionSpeaking[this.questionIndex].id),
+              answerID: "",
+              time: this.timeDo,
+          });
       }
     },
     userAnswerQuiz: function (value) {

@@ -93,52 +93,6 @@ class OrderController extends Controller
 
     public function createBuyCourse($courses_with_group, $paymentMethods, $request)
     {
-        // $room = $request->query('room_id');
-        // DB::beginTransaction();
-        // try {
-        //     $order = Order::create_instance([
-        //         'user_id' => Auth::user()->id,
-        //         'course_id' => $courses_with_group->membershipCourses->course_id,
-        //         'course_price' => $courses_with_group->getPrice(),
-        //         'discount' => $courses_with_group->getDiscount(), //$course_detail->discount,
-        //         'total' => $courses_with_group->getPriceDiscount(),
-        //         'membership' => $courses_with_group->membershipCourses->membership_id,
-        //         'membership_discount' => $courses_with_group->membershipCourses->price_value,
-        //         'discount_info' => !empty($courses_with_group->courseDiscounts) ? $courses_with_group->courseDiscounts->discount_id : 0,
-        //     ]);
-        //     $result = $order->createPaymentIntent($paymentMethods[0]);
-
-        //     if ($result instanceof RedirectResponse) {
-        //         DB::commit();
-        //         return $result;
-        //     } else {
-        //         if ($result instanceof Order) {
-        //             if ($room) {
-        //                 $this->updateSchedule($room);
-        //             }
-        //             $student_course = StudentCourses::create([
-        //                 'course_id' => (int) $courses_with_group->membershipCourses->course_id,
-        //                 'student_id' => Auth::user()->id,
-        //                 'room_live_course_id' => $room,
-        //                 'latest_study' => new DateTime(),
-        //                 'lecture_study' => 0,
-        //             ]);
-        //         }
-        //         DB::commit();
-        //         if ($request->ajax()) {
-        //             return response()->json([
-        //                 'path' => route('site.order.show', $result->id),
-        //                 'status' => 200,
-        //             ]);
-        //         }
-        //         return redirect()->route('site.order.show', $result->id);
-        //     }
-        // } catch (\Throwable $th) {
-        //     DB::rollback();
-        //     return redirect()
-        //         ->route('site.home')
-        //         ->with('errors', 'Buy Fails');
-        // }
     }
 
     public function getVariable($request)

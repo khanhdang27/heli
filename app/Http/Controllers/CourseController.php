@@ -120,7 +120,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Create Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -167,7 +167,7 @@ class CourseController extends Controller
                 'exams' => $exams,
             ]);
         } catch (\Throwable $th) {
-            return back()->withErrors('Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -247,7 +247,7 @@ class CourseController extends Controller
 
             return response()->json(['lectures' => $lecture_course->sortBy('index')->toArray(), 'student_lecture' => $student_course->toArray()]);
         } catch (\Throwable $th) {
-            return back()->withErrors('Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -356,7 +356,7 @@ class CourseController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors('Update Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -394,7 +394,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Create Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -434,7 +434,7 @@ class CourseController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             dd($th);
-            return back()->withErrors('Update Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -448,7 +448,7 @@ class CourseController extends Controller
         } catch (\Throwable $th) {
             return response(
                 [
-                    'message' => 'Cannot delete course',
+                    'message' => $th->getMessage(),
                 ],
                 400,
             );
@@ -524,7 +524,7 @@ class CourseController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors('Create error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -543,7 +543,7 @@ class CourseController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors('Create error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -615,7 +615,7 @@ class CourseController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors('Create error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 }

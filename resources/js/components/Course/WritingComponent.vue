@@ -391,7 +391,7 @@ export default {
         .then((response) => {
           console.log("response.data >>>", response.data);
 
-          this.questionWriting = response.data.questions.question.filter(
+          this.questionWriting = response.data.questions.questions.filter(
             (question) => {
               return question.writing_assessment_question !== null;
             }

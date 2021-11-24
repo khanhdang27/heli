@@ -18,7 +18,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = News::orderBy('created_at', 'desc')->paginate(15);
-        return view('admin.news.index',[
+        return view('admin.news.index', [
             'news' => $news
         ]);
     }
@@ -70,12 +70,10 @@ class NewsController extends Controller
 
             DB::commit();
             return back()->with('success', 'Create success');
-
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Create error');
+            return back()->withErrors($th->getMessage());
         }
-
     }
 
     /**
@@ -87,7 +85,7 @@ class NewsController extends Controller
     public function show()
     {
         $news = News::query()->orderByDesc('created_at')->paginate(8);
-        return view('news.news-page',[
+        return view('news.news-page', [
             'news' => $news
         ]);
     }
@@ -100,8 +98,8 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        return view('admin.news.edit',[
-           'news' => $news
+        return view('admin.news.edit', [
+            'news' => $news
         ]);
     }
 
@@ -112,7 +110,7 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update (Request $request, News $news)
+    public function update(Request $request, News $news)
     {
 
         $newsValidate = $request->validate([
@@ -130,7 +128,7 @@ class NewsController extends Controller
             ]);
             $old_file = File::where('fileable_type', News::class)->where('fileable_id', $news->id)->first();
 
-            if(!empty($request['file'])){
+            if (!empty($request['file'])) {
                 if (!empty($old_file)) {
                     $old_file->delete();
                 }
@@ -143,18 +141,16 @@ class NewsController extends Controller
 
             DB::commit();
             return back()->with('success', 'Create success');
-
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Create error');
-            //throw $th;
+            return back()->withErrors($th->getMessage());
         }
     }
 
     public function newsDetail($id)
     {
-        $news = News::where('id',$id)->first();
-        return view('news.news-detail',[
+        $news = News::where('id', $id)->first();
+        return view('news.news-detail', [
             'news' => $news
         ]);
     }

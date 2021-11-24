@@ -98,7 +98,7 @@ class PassageController extends Controller
             return redirect()->back()->with('success', 'Create Success !!!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Create Fails !!!');
+            return redirect()->back()->with('error', $th->getMessage());
         }
     }
 

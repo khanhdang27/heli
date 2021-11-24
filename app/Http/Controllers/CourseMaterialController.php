@@ -30,10 +30,8 @@ class CourseMaterialController extends Controller
             ->when(request('name') != '', function (Builder $query) {
                 $query->whereTranslationLike('course_material_name', '%' . request('name') . '%');
             })
-            ->when($_user->hasRole('tutor'), function (Builder $query) use ($_user)
-            {
-                $query->whereHas('course.tutor.user', function ($_query) use ($_user)
-                {
+            ->when($_user->hasRole('tutor'), function (Builder $query) use ($_user) {
+                $query->whereHas('course.tutor.user', function ($_query) use ($_user) {
                     $_query->where('user_id', $_user->id);
                 });
             })
@@ -89,9 +87,8 @@ class CourseMaterialController extends Controller
             DB::commit();
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
-            //throw $th;
             DB::rollback();
-            return back()->withErrors( 'Create Fails');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -157,7 +154,7 @@ class CourseMaterialController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollback();
-            return back()->withErrors( 'Create Fails');
+            return back()->withErrors($th->getMessage());
         }
     }
 

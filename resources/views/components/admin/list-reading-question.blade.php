@@ -1,5 +1,4 @@
 <ul class="list-group" id="listQuestionReading_{{ $quiz->set }}">
-    {{-- @dd($questions) --}}
     @foreach ($questions as $question)
     @if ($question->questionContent())
     <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info selectable"
@@ -72,7 +71,6 @@
                                 {!! Form::close() !!}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -88,7 +86,7 @@
                 </button>
             </div>
             <script type="application/javascript">
-                function addAnswer_{ { $question -> id } } () {
+                function addAnswer_{{ $question->id }}() {
                     var data = $('#formAnswerReading_{{ $question->id }}').serializeArray()
                     console.log(data);
                     $.ajax({
@@ -110,12 +108,10 @@
                             document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;
                             $('#modalReadingAnswer{{ $question->id }}').modal('hide')
                         }
-                        console.log(data);
+
+                    }).fail(function (err) {
 
                     })
-                        .fail(function (err) {
-
-                        })
                 }
             </script>
             <!-- Modal -->

@@ -33,7 +33,7 @@ use App\Models\WritingQuizQuestion;
                 <div class="form-group">
                     <label for="part" class="required">Part</label>
                     {{ Form::select('part', \Constants::QUESTION_PARTS, old('part'), ['class' => 'form-control',
-                    'required', 'id'=> 'part{{ $quiz->id }}']) }}
+                    'required', 'id'=> 'part'.$quiz->id]) }}
                 </div>
                 <div class="form-group">
                     <label for="question" class="required">Question</label>

@@ -38,91 +38,87 @@
           <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
           <!-- +++++++++++++++++++++++++++++ -->
           <div class="container vue">
-              <div>
-                <div
-                  v-for="(items, key_level) in lectures[typePart-1]"
-                  :key="key_level"
-                  class="list-group list-group-flush"
-                >
-                  <div v-for="item in items" :key="item.id">
-                    <div class="d-flex">
-                      <button
-                        class="list-group-item list-group-item-action border-0"
-                        v-bind:class="{
-                          active: item.index == lectureIndex,
-                        }"
-                        v-on:click="
-                          onClickLecture(
-                            item.index,
-                            courseLevel,
-                            item.type,
-                            typePart
-                          )
-                        "
-                      >
-                        <div class="d-flex w-100 justify-content-left">
-                          <div class="my-auto mr-3">
-                            <input
-                              readonly
-                              type="checkbox"
-                              :value="item.index"
-                              name="index"
-                              id="index"
-                              v-model="studentLecture"
-                            />
-                          </div>
-                          <div v-if="item.model_name == 'Examination'">
-                            <h5 class="mb-1">
-                              {{
-                                item.type == $getConst("exercise")
-                                  ? "Exercise"
-                                  : "Quiz"
-                              }}
-                              -
-                              {{ item.name }}
-                            </h5>
-                            <strong
-                              class="text-dark text-wrap"
-                            >
-                              <i class="fe fe-message-square mr-2"></i>
-                              <span>Quiz</span>
-                            </strong>
-                          </div>
-
-                          <div v-if="item.model_name == 'Lecture'">
-                            <h4 class="mb-1">
-                              {{ item.index }}
-                              -
-                              {{ item.lectures_name }}
-                            </h4>
-                            <strong
-                              class="text-dark text-wrap"
-                            >
-                              <i class="fe fe-youtube mr-2"></i>
-                              <span>Video</span>
-                            </strong>
-                          </div>
+            <div>
+              <div
+                v-for="(items, key_level) in lectures[typePart - 1]"
+                :key="key_level"
+                class="list-group list-group-flush"
+              >
+                <div v-for="item in items" :key="item.index">
+                  <div class="d-flex">
+                    <button
+                      class="list-group-item list-group-item-action border-0"
+                      v-bind:class="{
+                        active: item.index == lectureIndex,
+                      }"
+                      v-on:click="
+                        onClickLecture(
+                          item.index,
+                          courseLevel,
+                          item.type,
+                          typePart
+                        )
+                      "
+                    >
+                      <div class="d-flex w-100 justify-content-left">
+                        <div class="my-auto mr-3">
+                          <input
+                            readonly
+                            type="checkbox"
+                            :value="item.index"
+                            name="index"
+                            id="index"
+                            v-model="studentLecture"
+                          />
                         </div>
-                      </button>
-                      <div v-if="item.model_name == 'Lecture' && item.file">
-                        <a
-                          class="
-                            btn btn-light
-                            text-nowrap
-                            font-weight-bold
-                            h-100
-                            pt-4
-                          "
-                          v-bind:href="downloadPDF(item.file)"
-                        >
-                          <i class="fe fe-download"></i>
-                          PDF</a
-                        >
+                        <div v-if="item.model_name == 'Examination'">
+                          <h5 class="mb-1">
+                            {{
+                              item.type == $getConst("exercise")
+                                ? "Exercise"
+                                : "Quiz"
+                            }}
+                            -
+                            {{ item.name }}
+                          </h5>
+                          <strong class="text-dark text-wrap">
+                            <i class="fe fe-message-square mr-2"></i>
+                            <span>Quiz</span>
+                          </strong>
+                        </div>
+
+                        <div v-if="item.model_name == 'Lecture'">
+                          <h4 class="mb-1">
+                            {{ item.index }}
+                            -
+                            {{ item.lectures_name }}
+                          </h4>
+                          <strong class="text-dark text-wrap">
+                            <i class="fe fe-youtube mr-2"></i>
+                            <span>Video</span>
+                          </strong>
+                        </div>
                       </div>
+                    </button>
+                    <div v-if="item.model_name == 'Lecture' && item.file">
+                      <a
+                        class="
+                          btn btn-light
+                          text-nowrap
+                          font-weight-bold
+                          h-100
+                          pt-4
+                        "
+                        v-bind:href="downloadPDF(item.file)"
+                      >
+                        <i class="fe fe-download"></i>
+                        PDF</a
+                      >
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
           <!-- +++++++++++++++++++++++++++++ -->
         </div>
@@ -278,7 +274,7 @@ export default {
     courseId: Number,
     userId: Number,
     typePart: Number,
-    courseLevel: Number
+    courseLevel: Number,
   },
   components: {
     QuizComponent,
@@ -361,12 +357,7 @@ export default {
       studentCourse: [],
       questionType: 0,
       lectures: [],
-      keyLecture: [
-        'reading',
-        'writing',
-        'listening',
-        'speaking',
-      ],
+      keyLecture: ["reading", "writing", "listening", "speaking"],
     };
   },
   created() {
@@ -491,20 +482,12 @@ export default {
               if (_lectures[item].model_name === "Examination") {
                 if (_lectures[item].type === this.$root.$getConst("exercise")) {
                   _lectures[item].sortIndex = 999;
-                  this.addExamsToAllPart(
-                    _lectures,
-                    item,
-                    this.courseLevel
-                  );
+                  this.addExamsToAllPart(_lectures, item, this.courseLevel);
                 } else if (
                   _lectures[item].type === this.$root.$getConst("quiz")
                 ) {
                   _lectures[item].sortIndex = 1000;
-                  this.addExamsToAllPart(
-                    _lectures,
-                    item,
-                    this.courseLevel
-                  );
+                  this.addExamsToAllPart(_lectures, item, this.courseLevel);
                 } else {
                   // do not thing with assessment
                 }
@@ -515,9 +498,7 @@ export default {
                 if (this.typePart === this.$root.$getConst("writing")) {
                   this.addLectureByWriting(_lectures, item);
                 }
-                if (
-                    this.typePart === this.$root.$getConst("listening")
-                ) {
+                if (this.typePart === this.$root.$getConst("listening")) {
                   this.addLectureByListening(_lectures, item);
                 }
                 if (this.typePart === this.$root.$getConst("speaking")) {
@@ -542,12 +523,12 @@ export default {
             }
             setTimeout(() => this.showLecture(this.lectureIndex), 2000);
           }
-            this.lectures = [
-                this.lectureCollapse.reading,
-                this.lectureCollapse.writing,
-                this.lectureCollapse.listening,
-                this.lectureCollapse.speaking,
-            ];
+          this.lectures = [
+            this.lectureCollapse.reading,
+            this.lectureCollapse.writing,
+            this.lectureCollapse.listening,
+            this.lectureCollapse.speaking,
+          ];
         })
         .catch(function (error) {
           console.error(error);
@@ -557,75 +538,75 @@ export default {
       switch (part) {
         case this.$root.$getConst("level_50"):
           switch (this.typePart) {
-              case this.$root.$getConst("reading"):
-                  this.lectureCollapse.reading.level_50.push(lectures[index]);
-                  break;
-              case this.$root.$getConst("listening"):
-                  this.lectureCollapse.listening.level_50.push(lectures[index]);
-                  break;
-              case this.$root.$getConst("speaking"):
-                  this.lectureCollapse.speaking.level_50.push(lectures[index]);
-                  break;
-              case this.$root.$getConst("writing"):
-                  this.lectureCollapse.writing.level_50.push(lectures[index]);
-                  break;
-              default:
-                  break;
+            case this.$root.$getConst("reading"):
+              this.lectureCollapse.reading.level_50.push(lectures[index]);
+              break;
+            case this.$root.$getConst("listening"):
+              this.lectureCollapse.listening.level_50.push(lectures[index]);
+              break;
+            case this.$root.$getConst("speaking"):
+              this.lectureCollapse.speaking.level_50.push(lectures[index]);
+              break;
+            case this.$root.$getConst("writing"):
+              this.lectureCollapse.writing.level_50.push(lectures[index]);
+              break;
+            default:
+              break;
           }
           break;
         case this.$root.$getConst("level_55"):
-            switch (this.typePart) {
-                case this.$root.$getConst("reading"):
-                    this.lectureCollapse.reading.level_55.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("listening"):
-                    this.lectureCollapse.listening.level_55.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("speaking"):
-                    this.lectureCollapse.speaking.level_55.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("writing"):
-                    this.lectureCollapse.writing.level_55.push(lectures[index]);
-                    break;
-                default:
-                    break;
-            }
+          switch (this.typePart) {
+            case this.$root.$getConst("reading"):
+              this.lectureCollapse.reading.level_55.push(lectures[index]);
+              break;
+            case this.$root.$getConst("listening"):
+              this.lectureCollapse.listening.level_55.push(lectures[index]);
+              break;
+            case this.$root.$getConst("speaking"):
+              this.lectureCollapse.speaking.level_55.push(lectures[index]);
+              break;
+            case this.$root.$getConst("writing"):
+              this.lectureCollapse.writing.level_55.push(lectures[index]);
+              break;
+            default:
+              break;
+          }
           break;
         case this.$root.$getConst("level_60"):
-            switch (this.typePart) {
-                case this.$root.$getConst("reading"):
-                    this.lectureCollapse.reading.level_60.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("listening"):
-                    this.lectureCollapse.listening.level_60.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("speaking"):
-                    this.lectureCollapse.speaking.level_60.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("writing"):
-                    this.lectureCollapse.writing.level_60.push(lectures[index]);
-                    break;
-                default:
-                    break;
-            }
+          switch (this.typePart) {
+            case this.$root.$getConst("reading"):
+              this.lectureCollapse.reading.level_60.push(lectures[index]);
+              break;
+            case this.$root.$getConst("listening"):
+              this.lectureCollapse.listening.level_60.push(lectures[index]);
+              break;
+            case this.$root.$getConst("speaking"):
+              this.lectureCollapse.speaking.level_60.push(lectures[index]);
+              break;
+            case this.$root.$getConst("writing"):
+              this.lectureCollapse.writing.level_60.push(lectures[index]);
+              break;
+            default:
+              break;
+          }
           break;
         case this.$root.$getConst("level_65"):
-            switch (this.typePart) {
-                case this.$root.$getConst("reading"):
-                    this.lectureCollapse.reading.level_65.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("listening"):
-                    this.lectureCollapse.listening.level_65.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("speaking"):
-                    this.lectureCollapse.speaking.level_65.push(lectures[index]);
-                    break;
-                case this.$root.$getConst("writing"):
-                    this.lectureCollapse.writing.level_65.push(lectures[index]);
-                    break;
-                default:
-                    break;
-            }
+          switch (this.typePart) {
+            case this.$root.$getConst("reading"):
+              this.lectureCollapse.reading.level_65.push(lectures[index]);
+              break;
+            case this.$root.$getConst("listening"):
+              this.lectureCollapse.listening.level_65.push(lectures[index]);
+              break;
+            case this.$root.$getConst("speaking"):
+              this.lectureCollapse.speaking.level_65.push(lectures[index]);
+              break;
+            case this.$root.$getConst("writing"):
+              this.lectureCollapse.writing.level_65.push(lectures[index]);
+              break;
+            default:
+              break;
+          }
           break;
 
         default:
@@ -783,7 +764,7 @@ export default {
     },
     onClickLecture(index, level, type, questionType = null) {
       this.questionType = questionType;
-        this.showLecture(index);
+      this.showLecture(index);
     },
     canLoadlecture(index, level, type) {
       switch (type) {

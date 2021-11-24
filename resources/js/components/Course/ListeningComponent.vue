@@ -401,7 +401,7 @@ export default {
           route("site.exam.getListeningAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          this.questionListening = response.data.questions.question.filter(
+          this.questionListening = response.data.questions.questions.filter(
             (question) => {
               return question.listen_assessment_question !== null;
             }

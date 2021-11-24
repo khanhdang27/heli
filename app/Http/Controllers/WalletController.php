@@ -114,7 +114,7 @@ class WalletController extends Controller
             return redirect()->route('site.user.topUp-success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Top-up error!');
+            return back()->with('error', $th->getMessage());
         }
     }
 

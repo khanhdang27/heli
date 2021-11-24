@@ -1,9 +1,9 @@
 @php
 
-    use App\Utilities\SelectionByClass;
-    use App\Models\Tutor;
-    use App\Models\Subject;
-    use App\Models\Lecture;
+use App\Utilities\SelectionByClass;
+use App\Models\Tutor;
+use App\Models\Subject;
+use App\Models\Lecture;
 
 @endphp
 

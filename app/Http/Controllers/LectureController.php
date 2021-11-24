@@ -97,7 +97,7 @@ class LectureController extends Controller
                 DB::rollBack();
                 return response(
                     [
-                        'message' => 'update fails!',
+                        'message' => $th->getMessage(),
                     ],
                     400,
                 );

@@ -61,11 +61,11 @@ class AudioListenController extends Controller
                 return back()->with('success', 'Save success');
             } else {
                 DB::rollBack();
-                return back()->withErrors('Save error');
+                return back()->withErrors('File is error');
             }
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Save error');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -134,7 +134,7 @@ class AudioListenController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Save error');
+            return back()->withErrors($th->getMessage());
         }
     }
 

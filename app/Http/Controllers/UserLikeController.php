@@ -32,7 +32,7 @@ class UserLikeController extends Controller
             DB::rollBack();
             return new JsonResponse([
                 'status' => 400,
-                'message' => 'fails'
+                'message' => $th->getMessage()
             ], 400);
         }
     }
@@ -67,7 +67,7 @@ class UserLikeController extends Controller
             DB::rollback();
             return new JsonResponse([
                 'status' => 400,
-                'message' => 'fails'
+                'message' => $th->getMessage()
             ], 400);
         }
     }

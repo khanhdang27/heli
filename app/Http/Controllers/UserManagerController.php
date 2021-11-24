@@ -71,7 +71,7 @@ class UserManagerController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Save error');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -143,7 +143,7 @@ class UserManagerController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Save error');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -170,7 +170,7 @@ class UserManagerController extends Controller
             return back()->with('success', 'Update success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Update error');
+            return back()->withErrors($th->getMessage());
         }
     }
     public function depositHistory(Wallet $wallet)
@@ -253,7 +253,7 @@ class UserManagerController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Save error');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -273,7 +273,7 @@ class UserManagerController extends Controller
             return back()->with('success', 'Save success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->with('error', 'Save error');
+            return back()->with('error', $th->getMessage());
         }
     }
 }

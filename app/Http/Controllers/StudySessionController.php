@@ -59,7 +59,7 @@ class StudySessionController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Create Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ class StudySessionController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Update Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 

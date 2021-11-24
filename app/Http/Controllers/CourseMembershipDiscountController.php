@@ -104,7 +104,7 @@ class CourseMembershipDiscountController extends Controller
                 return back()->with('success', 'Update success!');
             } catch (\Throwable $th) {
                 DB::rollBack();
-                return back()->withErrors('Update error!');
+                return back()->withErrors($th->getMessage());
             }
         } else {
             $_course_type = \Constants::COURSE_TYPES[$new_price_tag->membershipCourses->course->type];

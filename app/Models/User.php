@@ -102,7 +102,7 @@ class User extends Authenticatable implements Wallet, Customer
         return $this->hasOne(Moderator::class);
     }
 
-    public function student_courses()
+    public function studentCourses()
     {
         if ($this->hasRole('student')) {
             return $this->hasMany(StudentCourses::class, 'student_id');
