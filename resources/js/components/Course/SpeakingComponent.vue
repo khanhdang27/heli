@@ -1,18 +1,18 @@
 <template>
-    <div class="container-fluid h-100 text-primary pt-4">
-        <h1 class="text-center font-weight-bold">Speaking</h1>
-        <div v-if="allResults.length === 0">
-            <div class="py-4 row h-100 justify-content-center lecture overflow-auto">
-                <div class="col-lg-8">
-                    <div class="h-100">
-                        <div
-                            v-if="
+  <div class="container-fluid h-100 text-primary pt-4">
+    <h1 class="text-center font-weight-bold">Speaking</h1>
+    <div v-if="allResults.length === 0">
+      <div class="py-4 row h-100 justify-content-center lecture overflow-auto">
+        <div class="col-lg-8">
+          <div class="h-100">
+            <div
+              v-if="
                 typeExam === $getConst('assessment') &&
                 questionSpeaking[questionIndex]
               "
-                        >
-                            <div
-                                class="
+            >
+              <div
+                class="
                   border
                   shadow-sm
                   bg-white
@@ -22,320 +22,323 @@
                   h4
                   text-center
                 "
-                            >
-                                <audio
-                                    v-if="questionSpeaking[questionIndex]"
-                                    ref="audioSpeaking"
-                                    :class="[audioShow ? 'd-inline' : 'd-none']"
-                                    controls
-                                    controlsList="nodownload noremoteplayback"
-                                    @play="audioStart()"
-                                >
-                                    <source :src="audioSrc" type="audio/mpeg" />
-                                </audio>
-                                <h5>Audio can played once only</h5>
-                            </div>
-                            <h3 v-cloak>
-                                {{ questionIndex + 1 }}
-                                {{
-                                    questionSpeaking[questionIndex].speak_assessment_question
-                                        .question
-                                }}
-                            </h3>
-                            <p>Choose the most correct answer</p>
-                            <div class="mt-5">
-                                <div
-                                    v-for="answer in questionSpeaking[questionIndex]
+              >
+                <audio
+                  v-if="questionSpeaking[questionIndex]"
+                  ref="audioSpeaking"
+                  :class="[audioShow ? 'd-inline' : 'd-none']"
+                  controls
+                  controlsList="nodownload noremoteplayback"
+                  @play="audioStart()"
+                >
+                  <source :src="audioSrc" type="audio/mpeg" />
+                </audio>
+                <h5>Audio can played once only</h5>
+              </div>
+              <h3 v-cloak>
+                {{ questionIndex + 1 }}
+                {{
+                  questionSpeaking[questionIndex].speak_assessment_question
+                    .question
+                }}
+              </h3>
+              <p>Choose the most correct answer</p>
+              <div class="mt-5">
+                <div
+                  v-for="answer in questionSpeaking[questionIndex]
                     .speak_assessment_question.answers"
-                                    v-bind:key="answer.id"
-                                    class="
+                  v-bind:key="answer.id"
+                  class="
                     py-0
                     my-3
                     border border-primary
                     rounded
                     answer-selection
                   "
-                                >
-                                    <input
-                                        :id="answer.id"
-                                        v-model="userChoose[questionIndex]"
-                                        :value="answer.id"
-                                        class="ip-answer"
-                                        hidden
-                                        type="radio"
-                                        v-bind:disabled="resultCheck.questions[questionIndex]"
-                                    />
-                                    <label :for="answer.id" class="w-100">
-                                        <a class="btn text-left w-100">
-                                            <h5 class="mb-0">{{ answer.answer }}</h5>
-                                        </a>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            v-if="
+                >
+                  <input
+                    :id="answer.id"
+                    v-model="userChoose[questionIndex]"
+                    :value="answer.id"
+                    class="ip-answer"
+                    hidden
+                    type="radio"
+                    v-bind:disabled="resultCheck.questions[questionIndex]"
+                  />
+                  <label :for="answer.id" class="w-100">
+                    <a class="btn text-left w-100">
+                      <h5 class="mb-0">{{ answer.answer }}</h5>
+                    </a>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              v-if="
                 typeExam === $getConst('exercise') &&
                 questionSpeaking[questionIndex]
               "
-                        >
-                            <h3 v-if="videoId === videoPracticeId">
-                                Video for you to self-practice
-                            </h3>
-                            <h3 v-else>A guide for you how to response</h3>
-                            <vimeo-player
-                                ref="player"
-                                :video-id="videoId"
-                                :video-url="getVideoUrl(videoId)"
-                                class="embed-responsive embed-responsive-16by9"
-                                height="100%"
-                                width="100%"
-                            />
-                        </div>
-                        <div class="h-100" v-if="typeExam === $getConst('quiz')">
-                            <div class="h4 text-center timer mb-3">
-                                <vue-countdown-timer
-                                    id="timePause"
-                                    v-if="pause === true"
-                                    @start_callback="startCallBackTimePause('event started')"
-                                    @end_callback="endCallBackTimePause('event ended')"
-                                    :start-time="timeNow"
-                                    :end-time="timeEnd"
-                                    :interval="1000"
-                                    :start-label="'Until start:'"
-                                    :end-label="'You have 1 minute pause'"
-                                    label-position="begin"
-                                    :end-text="''"
-                                    :day-txt="'days'"
-                                    :hour-txt="'hours'"
-                                    :minutes-txt="'minutes'"
-                                    :seconds-txt="'seconds'"
-                                >
-                                    <template slot="start-label" slot-scope="scope">
-                                        <i class="fe fe-clock"></i>
-                                        <span
-                                            v-if="
+            >
+              <h3 v-if="videoId === videoPracticeId">
+                Video for you to self-practice
+              </h3>
+              <h3 v-else>A guide for you how to response</h3>
+              <vimeo-player
+                ref="player"
+                :video-id="videoId"
+                :video-url="getVideoUrl(videoId)"
+                class="embed-responsive embed-responsive-16by9"
+                height="100%"
+                width="100%"
+              />
+            </div>
+            <div class="h-100" v-if="typeExam === $getConst('quiz')">
+              <div class="h4 text-center timer mb-3">
+                <vue-countdown-timer
+                  id="timePause"
+                  v-if="pause === true"
+                  @start_callback="startCallBackTimePause('event started')"
+                  @end_callback="endCallBackTimePause('event ended')"
+                  :start-time="timeNow"
+                  :end-time="timeEnd"
+                  :interval="1000"
+                  :start-label="'Until start:'"
+                  :end-label="'You have 1 minute pause'"
+                  label-position="begin"
+                  :end-text="''"
+                  :day-txt="'days'"
+                  :hour-txt="'hours'"
+                  :minutes-txt="'minutes'"
+                  :seconds-txt="'seconds'"
+                >
+                  <template slot="start-label" slot-scope="scope">
+                    <i class="fe fe-clock"></i>
+                    <span
+                      v-if="
                         scope.props.startLabel !== '' &&
                         scope.props.tips &&
                         scope.props.labelPosition === 'begin'
                       "
-                                        >
+                    >
                       {{ scope.props.startLabel }}:</span
-                                        >
-                                        <span
-                                            v-if="
+                    >
+                    <span
+                      v-if="
                         scope.props.endLabel !== '' &&
                         !scope.props.tips &&
                         scope.props.labelPosition === 'begin'
                       "
-                                        >
+                    >
                       {{ scope.props.endLabel }}:</span
-                                        >
-                                    </template>
-                                    <template slot="countdown" slot-scope="scope">
-                                        <span>{{ scope.props.days }} </span><a>:</a>
-                                        <span>{{ scope.props.hours }} </span><a>:</a>
-                                        <span>{{ scope.props.minutes }} </span><a>:</a>
-                                        <span>{{ scope.props.seconds }} </span><a></a>
-                                        <h5 class="mt-3">
-                                            After 1 minute is over, you will have 2 minutes to answer
-                                            the last question.
-                                        </h5>
-                                    </template>
-                                </vue-countdown-timer>
-                                <vue-countdown-timer
-                                    id="timeAnswer"
-                                    v-if="showLastQuestion === true"
-                                    @start_callback="startCallBack('event started')"
-                                    @end_callback="endCallBack('event ended')"
-                                    :start-time="timeStartAnswer"
-                                    :end-time="timeEndAnswer"
-                                    :interval="1000"
-                                    :start-label="'Until start:'"
-                                    :end-label="'Time limit'"
-                                    label-position="begin"
-                                    :end-text="''"
-                                    :day-txt="'days'"
-                                    :hour-txt="'hours'"
-                                    :minutes-txt="'minutes'"
-                                    :seconds-txt="'seconds'"
-                                >
-                                    <template slot="start-label" slot-scope="scope">
-                                        <i class="fe fe-clock"></i>
-                                        <span
-                                            v-if="
+                    >
+                  </template>
+                  <template slot="countdown" slot-scope="scope">
+                    <span>{{ scope.props.days }} </span><a>:</a>
+                    <span>{{ scope.props.hours }} </span><a>:</a>
+                    <span>{{ scope.props.minutes }} </span><a>:</a>
+                    <span>{{ scope.props.seconds }} </span><a></a>
+                    <h5 class="mt-3">
+                      After 1 minute is over, you will have 2 minutes to answer
+                      the last question.
+                    </h5>
+                  </template>
+                </vue-countdown-timer>
+                <vue-countdown-timer
+                  id="timeAnswer"
+                  v-if="showLastQuestion === true"
+                  @start_callback="startCallBack('event started')"
+                  @end_callback="endCallBack('event ended')"
+                  :start-time="timeStartAnswer"
+                  :end-time="timeEndAnswer"
+                  :interval="1000"
+                  :start-label="'Until start:'"
+                  :end-label="'Time limit'"
+                  label-position="begin"
+                  :end-text="''"
+                  :day-txt="'days'"
+                  :hour-txt="'hours'"
+                  :minutes-txt="'minutes'"
+                  :seconds-txt="'seconds'"
+                >
+                  <template slot="start-label" slot-scope="scope">
+                    <i class="fe fe-clock"></i>
+                    <span
+                      v-if="
                         scope.props.startLabel !== '' &&
                         scope.props.tips &&
                         scope.props.labelPosition === 'begin'
                       "
-                                        >
+                    >
                       {{ scope.props.startLabel }}:</span
-                                        >
-                                        <span
-                                            v-if="
+                    >
+                    <span
+                      v-if="
                         scope.props.endLabel !== '' &&
                         !scope.props.tips &&
                         scope.props.labelPosition === 'begin'
                       "
-                                        >
+                    >
                       {{ scope.props.endLabel }}:</span
-                                        >
-                                    </template>
-                                    <template slot="countdown" slot-scope="scope">
-                                        <span>{{ scope.props.days }} </span><a>:</a>
-                                        <span>{{ scope.props.hours }} </span><a>:</a>
-                                        <span>{{ scope.props.minutes }} </span><a>:</a>
-                                        <span>{{ scope.props.seconds }} </span><a></a>
-                                    </template>
-                                </vue-countdown-timer>
-                            </div>
-                            <!--              <div v-if="questionIndex < questionSpeaking.length - 1">-->
-                            <!--                <h3 v-cloak v-if="questionSpeaking[questionIndex]">-->
-                            <!--                  {{ questionIndex + 1 }}-->
-                            <!--                  {{-->
-                            <!--                    questionSpeaking[questionIndex].speak_quiz_question.question-->
-                            <!--                  }}-->
-                            <!--                </h3>-->
-                            <!--                <p>-->
-                            <!--                  Please record one video with voice that answers all question.-->
-                            <!--                </p>-->
-                            <!--              </div>-->
-                            <!--              <h3 v-cloak v-if="showLastQuestion === true">-->
-                            <!--                {{ questionIndex + 1 }}-->
-                            <!--                {{-->
-                            <!--                  questionSpeaking[questionIndex].speak_quiz_question.question-->
-                            <!--                }}-->
-                            <!--              </h3>-->
-                            <h3 v-if="questionSpeaking[questionIndex]">
-                                {{ questionIndex + 1 }}
-                                {{
-                                    questionSpeaking[questionIndex].speak_quiz_question.question
-                                }}
-                            </h3>
-                            <p>
-                                Please record one video with voice that answers all question.
-                            </p>
-                            <div>
-                                <div class="row">
-                                    <div class="col-2"></div>
-                                    <div class="col-8">
-                                        <video
-                                            v-cloak
-                                            id="myVideo"
-                                            ref="videoPlayer"
-                                            class="video-js vjs-layout-x-small vjs-layout-medium vjs-layout-large"
-                                            playsinline
-                                        ></video>
-                                    </div>
-                                    <div class="col-2"></div>
-                                </div>
-                                <div
-                                    id="progress"
-                                    class="
+                    >
+                  </template>
+                  <template slot="countdown" slot-scope="scope">
+                    <span>{{ scope.props.days }} </span><a>:</a>
+                    <span>{{ scope.props.hours }} </span><a>:</a>
+                    <span>{{ scope.props.minutes }} </span><a>:</a>
+                    <span>{{ scope.props.seconds }} </span><a></a>
+                  </template>
+                </vue-countdown-timer>
+              </div>
+              <!--              <div v-if="questionIndex < questionSpeaking.length - 1">-->
+              <!--                <h3 v-cloak v-if="questionSpeaking[questionIndex]">-->
+              <!--                  {{ questionIndex + 1 }}-->
+              <!--                  {{-->
+              <!--                    questionSpeaking[questionIndex].speak_quiz_question.question-->
+              <!--                  }}-->
+              <!--                </h3>-->
+              <!--                <p>-->
+              <!--                  Please record one video with voice that answers all question.-->
+              <!--                </p>-->
+              <!--              </div>-->
+              <!--              <h3 v-cloak v-if="showLastQuestion === true">-->
+              <!--                {{ questionIndex + 1 }}-->
+              <!--                {{-->
+              <!--                  questionSpeaking[questionIndex].speak_quiz_question.question-->
+              <!--                }}-->
+              <!--              </h3>-->
+              <h3 v-if="questionSpeaking[questionIndex]">
+                {{ questionIndex + 1 }}
+                {{
+                  questionSpeaking[questionIndex].speak_quiz_question.question
+                }}
+              </h3>
+              <p>
+                Please record one video with voice that answers all question.
+              </p>
+              <div>
+                <div class="row">
+                  <div class="col-2"></div>
+                  <div class="col-8">
+                    <video
+                      v-cloak
+                      id="myVideo"
+                      ref="videoPlayer"
+                      class="
+                        video-js
+                        vjs-layout-x-small vjs-layout-medium vjs-layout-large
+                      "
+                      playsinline
+                    ></video>
+                  </div>
+                  <div class="col-2"></div>
+                </div>
+                <div
+                  id="progress"
+                  class="
                     progress-bar progress-bar-info progress-bar-striped
                     active
                   "
-                                    role="progressbar"
-                                    aria-valuenow="46"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                    style="width: 0%"
-                                >
-                                    &nbsp;0%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="button control">
-                <div
-                    v-if="typeExam === $getConst('assessment')"
-                    class="text-right py-4 pr-3"
+                  role="progressbar"
+                  aria-valuenow="46"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style="width: 0%"
                 >
-                    <button
-                        v-if="questionIndex > 0"
-                        class="btn btn-primary"
-                        v-on:click="prev()"
-                    >
-                        Previous
-                    </button>
-                    <span>
+                  &nbsp;0%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button control">
+        <div
+          v-if="typeExam === $getConst('assessment')"
+          class="text-right py-4 pr-3"
+        >
+          <button
+            v-if="questionIndex > 0"
+            class="btn btn-primary"
+            v-on:click="prev()"
+          >
+            Previous
+          </button>
+          <span>
             <button
-                v-if="questionIndex === questionSpeaking.length - 1"
-                class="btn btn-primary mx-2"
-                v-on:click="submit()"
+              v-if="questionIndex === questionSpeaking.length - 1"
+              class="btn btn-primary mx-2"
+              v-on:click="submit()"
             >
               Submit
             </button>
             <button
-                v-if="questionIndex < questionSpeaking.length - 1"
-                class="btn btn-primary mx-2"
-                v-on:click="next()"
+              v-if="questionIndex < questionSpeaking.length - 1"
+              class="btn btn-primary mx-2"
+              v-on:click="next()"
             >
               Next
             </button>
           </span>
-                </div>
-                <div
-                    class="text-right py-4 pr-3"
-                    v-if="typeExam === $getConst('exercise')"
-                >
+        </div>
+        <div
+          class="text-right py-4 pr-3"
+          v-if="typeExam === $getConst('exercise')"
+        >
           <span>
             <button
-                class="btn btn-primary mx-2"
-                v-on:click="showVideoExercise(videoPracticeId)"
+              class="btn btn-primary mx-2"
+              v-on:click="showVideoExercise(videoPracticeId)"
             >
               Practice
             </button>
             <button
-                class="btn btn-primary mx-2"
-                v-on:click="showVideoExercise(videoResponseId)"
+              class="btn btn-primary mx-2"
+              v-on:click="showVideoExercise(videoResponseId)"
             >
               How to response
             </button>
           </span>
-                </div>
-                <div v-if="typeExam === $getConst('quiz')" class="text-right py-4 pr-3">
+        </div>
+        <div v-if="typeExam === $getConst('quiz')" class="text-right py-4 pr-3">
           <span>
             <button
-                v-if="questionIndex === questionSpeaking.length - 1"
-                class="btn btn-primary mx-2"
-                v-on:click="submit()"
+              v-if="questionIndex === questionSpeaking.length - 1"
+              class="btn btn-primary mx-2"
+              v-on:click="submit()"
             >
               Submit
             </button>
             <button
-                v-if="questionIndex < questionSpeaking.length - 1"
-                class="btn btn-primary mx-2"
-                v-on:click="next()"
+              v-if="questionIndex < questionSpeaking.length - 1"
+              class="btn btn-primary mx-2"
+              v-on:click="next()"
             >
               Next
             </button>
           </span>
-                </div>
-            </div>
         </div>
-        <div v-else class="h-100">
-            <div class="text-center">
-                <div v-if="typeExam !== $getConst('assessment')">
-                    <div class="text-success">
-                        You have completed this section. Your exam is being graded by the
-                        tutor. Please wait for the results and come back later!
-                    </div>
-                </div>
-                <div v-else class="py-5">
-                    <h2>Congratulation! You got level: {{ allResults.passgrade }}</h2>
-                    <button
-                        class="btn btn-primary btn-lg btn-block mt-5"
-                        @click="cleanOldAnswers()"
-                    >
-                        Start the Course
-                    </button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div v-else class="h-100">
+      <div class="text-center">
+        <div v-if="typeExam !== $getConst('assessment')">
+          <div class="text-success">
+            You have completed this section. Your exam is being graded by the
+            tutor. Please wait for the results and come back later!
+          </div>
+        </div>
+        <div v-else class="py-5">
+          <h2>Congratulation! You got level: {{ allResults.passgrade }}</h2>
+          <button
+            class="btn btn-primary btn-lg btn-block mt-5"
+            @click="cleanOldAnswers()"
+          >
+            Start the Course
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -726,6 +729,6 @@ export default {
 
 <style scoped>
 .timer {
-    min-height: 60px;
+  min-height: 60px;
 }
 </style>

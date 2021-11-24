@@ -54,23 +54,22 @@ class BannerController extends Controller
 
         try {
             $old_banner = Banner::all()->first();
-            if (!empty($old_banner)){
+            if (!empty($old_banner)) {
                 $old_banner->delete();
             }
             $banner = Banner::create([
                 'banner_title' => $request->input('banner_title'),
             ]);
 
-            if(!empty($input['file'])){
-                $file = File::storeFile($input['file'],Banner::class, $banner->id);
+            if (!empty($input['file'])) {
+                $file = File::storeFile($input['file'], Banner::class, $banner->id);
             }
 
             DB::commit();
             return back()->with('success', 'Save success');
-
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Save error');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -118,17 +117,16 @@ class BannerController extends Controller
                 'banner_title' => $request->input('banner_title'),
             ]);
 
-            if(!empty($input['file'])){
+            if (!empty($input['file'])) {
                 $banner->image->delete();
-                $file = File::storeFile($input['file'],Banner::class, $banner->id);
+                $file = File::storeFile($input['file'], Banner::class, $banner->id);
             }
 
             DB::commit();
             return redirect()->route('admin.banner.index')->with('success', 'Save success');
-
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Save error');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -143,7 +141,7 @@ class BannerController extends Controller
             Storage::delete($banner->banner_photo);
             return response([
                 'message' => 'Delete success!'
-            ],200);
+            ], 200);
         } catch (\Exception $exception) {
             return response([
                 'message' => 'Cannot delete',

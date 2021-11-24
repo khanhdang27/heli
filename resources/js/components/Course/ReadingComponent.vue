@@ -444,8 +444,9 @@ export default {
       axios
         .get(route("site.exam.getReadingQuizQuestionsClient", this.examId))
         .then((response) => {
-          this.passage = response.data.questions[0].passage.content;
-          this.questionReading = response.data.questions[0].question;
+          console.log(response.data.questions);
+          this.passage = response.data.questions.passage.content;
+          this.questionReading = response.data.questions.questions;
         })
         .catch(function (error) {
           console.error(error);

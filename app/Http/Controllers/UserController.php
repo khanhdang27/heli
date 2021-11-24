@@ -169,7 +169,7 @@ class UserController extends Controller
             } catch (\Throwable $th) {
                 DB::rollBack();
 
-                return back()->withErrors('Update Error!');
+                return back()->withErrors($th->getMessage());
             }
         }
         return back()->withErrors('Error: Password not validate');

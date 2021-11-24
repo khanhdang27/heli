@@ -27,7 +27,7 @@ class TutorController extends Controller
     {
         $subjects = Subject::all();
         $tutors = Tutor::query()
-            ->with('subject', 'translations', 'avatar','user')
+            ->with('subject', 'translations', 'avatar', 'user')
             ->when(request('name') != '', function (Builder $query) {
                 $query->where('full_name', 'like', '%' . request('name') . '%');
             })
@@ -126,9 +126,8 @@ class TutorController extends Controller
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Create error');
+            return back()->withErrors($th->getMessage());
         }
-
     }
 
     /**
@@ -214,7 +213,7 @@ class TutorController extends Controller
                 );
             }
             $_oldTutorTeachSubject = TutorTeachSubject::where('tutor_id', $tutor->id)
-                                        ->where('subject_id', $input['subject_id'])->first();
+                ->where('subject_id', $input['subject_id'])->first();
             if (empty($_oldTutorTeachSubject)) {
                 $_teachSubject = TutorTeachSubject::where('tutor_id', $tutor->id)->first();
                 $_teachSubject->delete();
@@ -227,9 +226,8 @@ class TutorController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors('Update error');
+            return back()->withErrors($th->getMessage());
         }
-
     }
 
     /**

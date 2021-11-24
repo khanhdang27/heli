@@ -84,4 +84,10 @@ class Constants
         self::EXAMINATION_EXERCISES => 'Exercises',
         self::EXAMINATION_QUIZ => 'Quiz',
     ];
+
+    const EXAMINATION_ADMIN_TYPES = [
+        self::EXAMINATION_ASSESSMENT => 'Assessment',
+        self::EXAMINATION_EXERCISES => 'Exercises',
+        self::EXAMINATION_QUIZ => 'Quiz',
+    ];
 }

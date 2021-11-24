@@ -58,7 +58,7 @@ class QuizController extends Controller
             return back()->with('success', 'Create success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors('Create error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -105,7 +105,7 @@ class QuizController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollback();
-            return back()->withErrors('Update error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 

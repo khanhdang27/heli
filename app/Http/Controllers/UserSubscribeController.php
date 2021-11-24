@@ -35,9 +35,9 @@ class UserSubscribeController extends Controller
                 NewsletterFacade::subscribe($input['email']);
                 return back()->with('success', 'Subscribed');
             }
-            return back()->withErrors( 'Invalid email');
+            return back()->withErrors('Invalid email');
         } catch (\Throwable $th) {
-            return back()->withErrors('Can not subscribe');
+            return back()->withErrors('Can not subscribe :' . $th->getMessage());
         }
     }
 
@@ -63,27 +63,34 @@ class UserSubscribeController extends Controller
                         [
                             'status' => 200,
                             'message' => "Subscribed"
-                        ], 200);
+                        ],
+                        200
+                    );
                 } else {
                     return response()->json(
                         [
                             'status' => 400,
                             'message' => "Can not subscribed"
-                        ], 400);
+                        ],
+                        400
+                    );
                 }
-
             } catch (\Throwable $th) {
                 return response()->json(
                     [
                         'status' => 400,
-                        'message' => "Can not subscribed"
-                    ], 400);
+                        'message' => "Can not subscribed " . $th->getMessage()
+                    ],
+                    400
+                );
             }
         }
         return response()->json(
             [
                 'status' => 400,
                 'message' => 'Please enter email'
-            ], 400);
+            ],
+            400
+        );
     }
 }

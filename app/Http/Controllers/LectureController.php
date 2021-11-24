@@ -97,7 +97,7 @@ class LectureController extends Controller
                 DB::rollBack();
                 return response(
                     [
-                        'message' => 'update fails!',
+                        'message' => $th->getMessage(),
                     ],
                     400,
                 );
@@ -155,31 +155,6 @@ class LectureController extends Controller
                 'student_id' => Auth::user()->id,
                 'course_id' => $courseId,
             ])->first();
-            #region Old code
-            // if (empty($student_course->quiz_lecture) || ($student_course->quiz_lecture != $exams->id && $index == $student_course->lecture_open)) {
-            //     $student_course->quiz_lecture = $exams->id;
-            //     $student_course->level_quiz = 1;
-            // } else {
-            //     return response()->json(
-            //         [
-            //             'message' => 'You Passed this Exam',
-            //         ],
-            //         205,
-            //     );
-            // }
-            // $quiz = Quiz::with('question')
-            //     ->with('question.answers')
-            //     ->where('set', $set)
-            //     ->where('exam_id', $exams->id)->first();
-            // if (empty($quiz)) {
-            //     return response()->json(
-            //         [
-            //             'message' => 'Quiz not found',
-            //         ],
-            //         400,
-            //     );
-            // }
-            #endregion
             $this->updateWatched($input);
             DB::commit();
             return response()->json($student_course);

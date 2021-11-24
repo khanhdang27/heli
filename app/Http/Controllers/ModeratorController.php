@@ -66,7 +66,7 @@ class ModeratorController extends Controller
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Create Error!');
+            return back()->withErrors($th->getMessage());
         }
     }
 
@@ -128,7 +128,7 @@ class ModeratorController extends Controller
             }
         } catch (\Throwable $th) {
             DB::rollBack();
-            return back()->withErrors( 'Save error');
+            return back()->withErrors($th->getMessage());
         }
     }
 

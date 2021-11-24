@@ -57,7 +57,7 @@ class WritingAssessmentAnswerController extends Controller
             return response()->json(['message' => 'Success', 'answer' => $answer]);
         } catch (\Throwable $th) {
             DB::rollback();
-            return response()->json(['message' => 'error']);
+            return response()->json(['message' => $th->getMessage()]);
         }
     }
 

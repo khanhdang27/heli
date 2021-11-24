@@ -1,11 +1,11 @@
 @php
-    $education_level = [
-    'Primary education' => 'Primary education',
-    'Junior Secondary education' => 'Junior Secondary education',
-    'Senior Secondary education' => 'Senior Secondary education',
-    'University education' => 'University education',
-    'Went to work' => 'Went to work'
-    ]
+$education_level = [
+'Primary education' => 'Primary education',
+'Junior Secondary education' => 'Junior Secondary education',
+'Senior Secondary education' => 'Senior Secondary education',
+'University education' => 'University education',
+'Went to work' => 'Went to work'
+]
 @endphp
 @extends('layout.app')
 

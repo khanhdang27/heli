@@ -80,7 +80,7 @@ use App\Models\ListenAssessmentQuestion;
                 </button>
             </div>
             <script type="application/javascript">
-                function addAnswer_{{ $question -> id }} () {
+                function addAnswer_{{ $question->id }}() {
                     var data = $('#formAnswerReading_{{ $question->id }}').serializeArray()
                     console.log(data);
                     $.ajax({

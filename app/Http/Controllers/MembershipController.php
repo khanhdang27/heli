@@ -17,7 +17,7 @@ class MembershipController extends Controller
     public function index()
     {
         $memberships = Membership::query()->orderByDesc('created_at')->paginate(15);
-        return view('admin.membership.index',[
+        return view('admin.membership.index', [
             'memberships' => $memberships
         ]);
     }
@@ -41,8 +41,8 @@ class MembershipController extends Controller
     public function store(Request $request)
     {
         $input = $request->validate([
-            'name'=>'required',
-            'base_point'=>'required|integer',
+            'name' => 'required',
+            'base_point' => 'required|integer',
         ]);
 
         $membership = Membership::create(
@@ -59,7 +59,6 @@ class MembershipController extends Controller
      */
     public function show(Membership $membership)
     {
-        
     }
 
     /**
@@ -70,7 +69,7 @@ class MembershipController extends Controller
      */
     public function edit(Membership $membership)
     {
-        
+
         return view('admin.membership.edit', [
             'membership' => $membership
         ]);
@@ -86,7 +85,7 @@ class MembershipController extends Controller
     public function update(Request $request, Membership $membership)
     {
         $input = $request->validate([
-            'name'=> 'string',
+            'name' => 'string',
             'base_point' => 'numeric'
         ]);
         try {
@@ -95,7 +94,7 @@ class MembershipController extends Controller
             DB::commit();
             return back()->with('success', 'Create success');
         } catch (\Throwable $th) {
-            return back()->withErrors('Create error');
+            return back()->withErrors($th->getMessage());
         }
     }
 
