@@ -185,6 +185,11 @@
                   questionWriting[questionIndex].writing_quiz_question.question
                 }}
               </h3>
+              <div v-if="questionWriting[questionIndex].writing_quiz_question.part === 1 &&
+                        questionWriting[questionIndex].writing_quiz_question.picture">
+                  <img class="img-thumbnail border-0 p-0 rounded-0"
+                       :src="'/file/'+questionWriting[questionIndex].writing_quiz_question.picture.id">
+              </div>
               <div v-if="typeExam === $getConst('quiz')" class="mt-5">
                 <div :id="questionWriting[questionIndex].id" class="form-group">
                   <ckeditor
@@ -391,7 +396,7 @@ export default {
         .then((response) => {
           console.log("response.data >>>", response.data);
 
-          this.questionWriting = response.data.questions.question.filter(
+          this.questionWriting = response.data.questions.questions.filter(
             (question) => {
               return question.writing_assessment_question !== null;
             }

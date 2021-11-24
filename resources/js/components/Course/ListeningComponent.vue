@@ -177,6 +177,29 @@
                   questionListening[questionIndex]
                 "
               >
+                  <div
+                      class="
+                    border
+                    shadow-sm
+                    bg-white
+                    rounded
+                    p-3
+                    mb-3
+                    h4
+                    text-center
+                  "
+                  >
+                      <audio
+                          ref="audio"
+                          :class="[audioShow ? 'd-inline' : 'd-none']"
+                          controls
+                          controlsList="nodownload noremoteplayback"
+                          @play="audioStart()"
+                      >
+                          <source :src="audioSrc" type="audio/mpeg" />
+                      </audio>
+                      <h5>Audio can played once only</h5>
+                  </div>
                 <h3 v-cloak>
                   {{
                     questionListening[questionIndex].listen_assessment_question
@@ -401,7 +424,7 @@ export default {
           route("site.exam.getListeningAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          this.questionListening = response.data.questions.question.filter(
+          this.questionListening = response.data.questions.questions.filter(
             (question) => {
               return question.listen_assessment_question !== null;
             }
@@ -435,7 +458,28 @@ export default {
         )
         .then((response) => {
           console.log(response.data.questions);
-          this.questionListening = response.data.questions[0].question;
+            this.questionListening = response.data.questions[0].questions.filter(
+                (question) => {
+                    return question.listen_assessment_question !== null;
+                }
+            );
+            this.questionListening.sort((first, second) => {
+                if (
+                    first.listen_assessment_question.part >
+                    second.listen_assessment_question.part
+                ) {
+                    return 1;
+                } else {
+                    if (first.index > second.index) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+            });
+            this.audioCodes = response.data.audioCodes;
+            this.audioPart = 1;
+            this.loadAudio();
         })
         .catch((error) => {
           console.error(error);
@@ -446,7 +490,29 @@ export default {
         .get(route("site.exam.getListeningQuizQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data.questions);
-          this.questionListening = response.data.questions[0].question;
+            this.questionListening = response.data.questions[0].questions.filter(
+                (question) => {
+                    return question.listen_assessment_question !== null;
+                }
+            );
+            this.questionListening.sort((first, second) => {
+                if (
+                    first.listen_assessment_question.part >
+                    second.listen_assessment_question.part
+                ) {
+                    return 1;
+                } else {
+                    if (first.index > second.index) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                }
+            });
+            this.audioCodes = response.data.audioCodes;
+            this.audioPart = 1;
+            this.loadAudio();
+
         })
         .catch((error) => {
           console.error(error);

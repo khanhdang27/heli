@@ -421,7 +421,7 @@ export default {
         )
         .then((response) => {
           this.passage = response.data.questions.passage.content;
-          this.questionReading = response.data.questions.question;
+          this.questionReading = response.data.questions.questions;
         })
         .catch(function (error) {
           console.error(error);

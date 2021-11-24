@@ -300,6 +300,7 @@ class ExaminationController extends Controller
                 },
                 'quiz.question.writingQuizQuestion',
                 'quiz.question.writingQuizQuestion.answers',
+                'quiz.question.writingQuizQuestion.picture',
             ]);
             $questions = $exams->quiz;
             DB::commit();

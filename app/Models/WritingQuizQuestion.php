@@ -32,4 +32,9 @@ class WritingQuizQuestion extends Model
     {
         return $this->morphMany(MCAnswerItem::class, 'answerItemable');
     }
+
+    public function picture()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
 }

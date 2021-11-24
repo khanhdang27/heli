@@ -28,8 +28,8 @@
             </div>
           </div>
           <div v-else>
-            {{ lectureList }}
-            {{ lectureIndex }}
+              <img class="img-thumbnail border-0 p-0 rounded-0"
+                   :src="'/images/Helios.jpg'">
           </div>
         </div>
       </div>
