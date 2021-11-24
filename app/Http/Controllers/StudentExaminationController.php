@@ -169,7 +169,7 @@ class StudentExaminationController extends Controller
 
             $studentCourseId = $student_course->id;
 
-            $quiz = Quiz::find($quizId)->load('question');
+            $quiz = Quiz::find($quizId)->load('questions');
             if ($exams->type == \Constants::EXAMINATION_ASSESSMENT) {
                 [$result, $score, $_] = $this->doGrade($quiz->questions, $input['questions'], $studentCourseId, $quizId, $exams->id);
 
@@ -478,7 +478,7 @@ class StudentExaminationController extends Controller
         $input = $request->input();
         DB::beginTransaction();
         try {
-            $studentExam->load(['quiz', 'quiz.studentExaminations', 'quiz.questions', 'question', 'studentCourse']);
+            $studentExam->load(['quiz', 'question', 'studentCourse', 'quiz.studentExaminations', 'quiz.questions']);
             $studentExam->update([
                 'comment' => $input['comment'],
                 'reviewed' => true,
@@ -491,6 +491,7 @@ class StudentExaminationController extends Controller
 
             if (count($studentExam->quiz->questions) === $allQuestions) {
                 $answersSubmit = $studentExam->quiz->studentExaminations;
+
                 $scoreAvg = 0;
                 foreach ($answersSubmit as $answer) {
                     $scoreAvg += $answer->score;
@@ -516,7 +517,10 @@ class StudentExaminationController extends Controller
     {
         switch ($type) {
             case \Constants::COURSE_READING:
-                if (empty($student_course->set_exam) && $student_course->set_exam < 4) {
+                if (empty($student_course->set_exam)) {
+                    $student_course->update(['set_exam' => 1]);
+                }
+                if ($student_course->set_exam < 4) {
                     $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
                     if ($studentInfo->exam_buy_read) {
@@ -528,7 +532,10 @@ class StudentExaminationController extends Controller
                 }
                 break;
             case \Constants::COURSE_WRITING:
-                if (empty($student_course->set_exam) && $student_course->set_exam <= 4) {
+                if (empty($student_course->set_exam)) {
+                    $student_course->update(['set_exam' => 1]);
+                }
+                if ($student_course->set_exam <= 4) {
                     $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
                     if ($studentInfo->exam_buy_write) {
@@ -540,7 +547,10 @@ class StudentExaminationController extends Controller
                 }
                 break;
             case \Constants::COURSE_LISTENING:
-                if (empty($student_course->set_exam) && $student_course->set_exam <= 4) {
+                if (empty($student_course->set_exam)) {
+                    $student_course->update(['set_exam' => 1]);
+                }
+                if ($student_course->set_exam <= 4) {
                     $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
                     if ($studentInfo->exam_buy_listen) {
@@ -552,7 +562,10 @@ class StudentExaminationController extends Controller
                 }
                 break;
             case \Constants::COURSE_SPEAKING:
-                if (empty($student_course->set_exam) && $student_course->set_exam <= 4) {
+                if (empty($student_course->set_exam)) {
+                    $student_course->update(['set_exam' => 1]);
+                }
+                if ($student_course->set_exam <= 4) {
                     $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
                     if ($studentInfo->exam_buy_speak) {

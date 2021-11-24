@@ -220,7 +220,7 @@ class ExaminationController extends Controller
                 'quiz.questions.readingQuestion.answers',
                 'quiz.passage',
             ]);
-            $questions = $exams->quiz;
+            $questions = $exams->quiz[0];
 
             DB::commit();
             return response()->json(['questions' => $questions]);
@@ -267,8 +267,7 @@ class ExaminationController extends Controller
                 'quiz.questions.writingAssessmentQuestion',
                 'quiz.questions.writingAssessmentQuestion.answers',
             ]);
-            $questions = $exams->quiz;
-            return response()->json(['questions' => $questions]);
+            $questions = $exams->quiz[0];
             DB::commit();
             return response()->json(['questions' => $questions]);
         } catch (\Throwable $th) {
@@ -298,11 +297,11 @@ class ExaminationController extends Controller
                 'quiz.questions' => function ($query) {
                     $query->where('type', '=', \Constants::COURSE_WRITING);
                 },
-                'quiz.question.writingQuizQuestion',
-                'quiz.question.writingQuizQuestion.answers',
-                'quiz.question.writingQuizQuestion.picture',
+                'quiz.questions.writingQuizQuestion',
+                'quiz.questions.writingQuizQuestion.answers',
+                'quiz.questions.writingQuizQuestion.picture',
             ]);
-            $questions = $exams->quiz;
+            $questions = $exams->quiz[0];
             DB::commit();
             return response()->json(['questions' => $questions]);
         } catch (\Throwable $th) {
@@ -349,7 +348,7 @@ class ExaminationController extends Controller
                 'quiz.questions.listenAssessmentQuestion',
                 'quiz.questions.listenAssessmentQuestion.answers',
             ]);
-            $questions = $exams->quiz;
+            $questions = $exams->quiz[0];
             $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
             DB::commit();
             return response()->json(['questions' => $questions, 'audioCodes' => $audioCodes]);
@@ -383,7 +382,7 @@ class ExaminationController extends Controller
                 'quiz.questions.listenAssessmentQuestion',
                 'quiz.questions.listenAssessmentQuestion.answers',
             ]);
-            $questions = $exams->quiz;
+            $questions = $exams->quiz[0];
             $audioCodes = AudioListen::where('quiz_id', '=', $exams->quiz[0]->id)->get();
             DB::commit();
             return response()->json(['questions' => $questions, 'audioCodes' => $audioCodes]);

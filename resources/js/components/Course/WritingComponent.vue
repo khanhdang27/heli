@@ -185,10 +185,21 @@
                   questionWriting[questionIndex].writing_quiz_question.question
                 }}
               </h3>
-              <div v-if="questionWriting[questionIndex].writing_quiz_question.part === 1 &&
-                        questionWriting[questionIndex].writing_quiz_question.picture">
-                  <img class="img-thumbnail border-0 p-0 rounded-0"
-                       :src="'/file/'+questionWriting[questionIndex].writing_quiz_question.picture.id">
+              <div
+                v-if="
+                  questionWriting[questionIndex].writing_quiz_question.part ===
+                    1 &&
+                  questionWriting[questionIndex].writing_quiz_question.picture
+                "
+              >
+                <img
+                  class="img-thumbnail border-0 p-0 rounded-0"
+                  :src="
+                    '/file/' +
+                    questionWriting[questionIndex].writing_quiz_question.picture
+                      .id
+                  "
+                />
               </div>
               <div v-if="typeExam === $getConst('quiz')" class="mt-5">
                 <div :id="questionWriting[questionIndex].id" class="form-group">
@@ -240,7 +251,7 @@
               <div class="col-lg-6 col-md-10 col-12">
                 <div
                   v-for="result in allResults.quiz_result"
-                  :key="result.question"
+                  :key="result.questions"
                   class="text-left mb-2"
                 >
                   <div
@@ -425,7 +436,7 @@ export default {
         .get(route("site.exam.getWritingExerciseQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data);
-          this.questionWriting = response.data.questions[0].question;
+          this.questionWriting = response.data.questions.questions;
           this.timeStartDo = new Date();
         })
         .catch(function (error) {
@@ -437,7 +448,7 @@ export default {
         .get(route("site.exam.getWritingQuizQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data);
-          this.questionWriting = response.data.questions[0].question;
+          this.questionWriting = response.data.questions.questions;
         })
         .catch(function (error) {
           console.error(error);
