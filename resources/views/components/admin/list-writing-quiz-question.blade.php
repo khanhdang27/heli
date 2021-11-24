@@ -42,7 +42,7 @@ use App\Models\WritingQuizQuestion;
                                 </div>
                                 <div class="form-group">
                                     <label for="part" class="required text-dark">Part</label>
-                                    {{ Form::select('part', Constants::QUESTION_PARTS, $question->questionContent()->part, ['class' => 'form-control', 'required', 'id' => 'part_update{{ $quiz->id }}']) }}
+                                    {{ Form::select('part', Constants::QUESTION_PARTS, $question->questionContent()->part, ['class' => 'form-control', 'required', 'id' => 'part_update'.$quiz->id]) }}
                                 </div>
                                 <div class="form-group">
                                     <label for="question" class="required text-dark">Question</label>
