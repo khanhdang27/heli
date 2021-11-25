@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
                 <div class="d-flex">
                     <div class="h2 mb-0 mr-3">
                         {{ $courseDetail->course_name }}
-
                     </div>
                     <div class="mt-auto d-flex">
                         @if (Auth::check())
@@ -25,7 +24,6 @@ use Illuminate\Support\Facades\Auth;
                         @endif
                         @endif
                     </div>
-
                 </div>
                 <div>
                     <p class="h5 mt-2 text-primary">{{ $courseDetail->tutor->full_name }}</p>

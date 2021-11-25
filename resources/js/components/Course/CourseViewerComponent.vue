@@ -28,8 +28,10 @@
             </div>
           </div>
           <div v-else>
-              <img class="img-thumbnail border-0 p-0 rounded-0"
-                   :src="'/images/Helios.jpg'">
+            <img
+              class="img-thumbnail border-0 p-0 rounded-0"
+              :src="'/images/Helios.jpg'"
+            />
           </div>
         </div>
       </div>
@@ -86,7 +88,6 @@
                             <span>Quiz</span>
                           </strong>
                         </div>
-
                         <div v-if="item.model_name == 'Lecture'">
                           <h4 class="mb-1">
                             {{ item.index }}
