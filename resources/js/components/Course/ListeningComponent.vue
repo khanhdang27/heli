@@ -393,6 +393,10 @@ export default {
       this.audioShow = true;
       this.getQuestion();
       this.getAnswerUser();
+
+      setTimeout(() => {
+        this.loadAudio();
+      }, 600);
     },
   },
   mounted() {
@@ -446,7 +450,9 @@ export default {
           });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
-          this.loadAudio();
+          setTimeout(() => {
+            this.loadAudio();
+          }, 1600);
         })
         .catch(function (error) {
           console.error(error);
@@ -458,7 +464,6 @@ export default {
           route("site.exam.getListeningExerciseQuestionsClient", this.examId)
         )
         .then((response) => {
-          console.log(response.data.questions);
           this.questionListening = response.data.questions.questions.filter(
             (question) => {
               return question.listen_assessment_question !== null;
@@ -480,7 +485,10 @@ export default {
           });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
-          this.loadAudio();
+
+          setTimeout(() => {
+            this.loadAudio();
+          }, 1600);
         })
         .catch((error) => {
           console.error(error);
@@ -512,7 +520,10 @@ export default {
           });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
-          this.loadAudio();
+
+          setTimeout(() => {
+            this.loadAudio();
+          }, 1600);
         })
         .catch((error) => {
           console.error(error);
@@ -521,22 +532,8 @@ export default {
     next: function () {
       if (this.typeExam !== this.$root.$getConst("exercise")) {
         if (this.questionIndex < this.questionListening.length - 1) {
-          console.log("this.questionListening :>> ", this.questionListening);
           this.userAnswer();
           this.questionIndex++;
-          if (
-            this.audioPart !==
-            this.questionListening[this.questionIndex]
-              .listen_assessment_question.part
-          ) {
-            this.audioPart =
-              this.questionListening[
-                this.questionIndex
-              ].listen_assessment_question.part;
-            console.log("part update  :>> ", this.audioPart);
-            this.loadAudio();
-            this.audioShow = true;
-          }
         }
       } else {
         if (this.countClick % 2 === 0) {
@@ -549,6 +546,19 @@ export default {
           if (this.questionIndex < this.questionListening.length - 1) {
             this.questionIndex++;
           }
+        }
+        if (
+          this.audioPart !==
+          this.questionListening[this.questionIndex].listen_assessment_question
+            .part
+        ) {
+          this.audioPart =
+            this.questionListening[
+              this.questionIndex
+            ].listen_assessment_question.part;
+          console.log("part update  :>> ", this.audioPart);
+          this.audioShow = true;
+          this.loadAudio();
         }
         this.countClick++;
       }
@@ -604,7 +614,7 @@ export default {
       this.userAnswerQuiz({
         answerType: this.$root.$getConst("MC"),
         questionID: parseInt(this.questionListening[this.questionIndex].id),
-        answerID: this.userChoose[this.questionIndex],
+        answerID: this.userChoose[this.questionIndex] ?? 0,
         time: this.timeDo,
       });
     },

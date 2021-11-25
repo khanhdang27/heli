@@ -19,11 +19,6 @@ class ReadingQuestion extends Model
         return $this->belongsTo(Question::class);
     }
 
-    // public function answers()
-    // {
-    //     return $this->hasMany(ReadingAnswer::class);
-    // }
-
     public function answers()
     {
         return $this->morphMany(MCAnswerItem::class, 'answerItemable');

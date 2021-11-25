@@ -97,7 +97,7 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
             </div>
             <div class="modal-body">
                 {!! Form::open(['method' => 'PUT', 'enctype' => 'multipart/form-data', 'id' =>
-                'audio-listen-udate{{ $quiz->id }}'])
+                'audio-listen-udate'. $quiz->id])
                 !!}
                 @csrf
                 <input type="text" hidden id="quiz_update{{ $quiz->id }}" name="quiz">
@@ -210,7 +210,10 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
             document.getElementById('exam_update{{ $quiz->id }}').value = exam;
             document.getElementById('course_update{{ $quiz->id }}').value = course;
             document.getElementById('audio{{ $quiz->id }}').src = audio;
-            document.getElementById('audio-listen-udate{{ $quiz->id }}').action = url;
+
+            let fmt = document.getElementById('audio-listen-udate{{ $quiz->id }}');
+            console.log(fmt);
+            fmt.action = url;
         })
     })
 </script>

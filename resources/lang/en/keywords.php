@@ -21,9 +21,9 @@ return [
         'welcomeBack' => 'Welcome back!',
         'loginToContinueCourse' => 'Login to continue the course',
     ],
-    'passwordReset'=> [
-        'resetPassword' =>'Reset Password',
-        'sendPasswordResetLink'=> 'Send Password Reset Link'
+    'passwordReset' => [
+        'resetPassword' => 'Reset Password',
+        'sendPasswordResetLink' => 'Send Password Reset Link'
     ],
     'registerModal' => [
         'register' => 'Register',
@@ -87,7 +87,8 @@ return [
         'myCourses' => 'My Courses',
         'wishlist' => 'My Wishlist',
         'registerNow' => 'Register Now',
-        'buyNow' => 'Buy Now'
+        'buyNow' => 'Buy Now',
+        'reTry' => 'Try Again',
     ],
     'blog-page' => [
         'learningColumn' => 'Learning Column',
@@ -113,12 +114,12 @@ return [
         'brainExperienceCourse' => 'Use your mobile phone, tablet or phone anytime, anywhere Brain experience course!'
     ],
     'freeTrialClass' => 'Free trial class; experience courses online courses and real-time courses for you to choose',
-    'course-item' =>[
+    'course-item' => [
         'section' => 'Section',
         'liveCourse' => 'Live course',
         'courseRecord' => 'Course recorded video'
     ],
-    'toast' =>[
+    'toast' => [
         'loginSuccess' => 'Login success',
         'loginFailed' => 'Login failed',
         'loginInactive' => 'Login Inactive',
@@ -128,7 +129,7 @@ return [
         'pleaseEnterEmail' => 'Please enter your email!',
         'pleaseCheckEmail' => 'Please check your email!',
     ],
-    'forum' =>[
+    'forum' => [
         'bestAnswer' => 'Best answer',
         'addAnswer' => 'Add your answer',
         'postQuestion' => 'Post your question'

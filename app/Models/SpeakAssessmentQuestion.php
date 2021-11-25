@@ -19,11 +19,6 @@ class SpeakAssessmentQuestion extends Model
         return $this->belongsTo(Question::class);
     }
 
-    // public function answers()
-    // {
-    //     return $this->hasMany(SpeakAssessmentAnswer::class, 's_a_question_id');
-    // }
-
     public function answers()
     {
         return $this->morphMany(MCAnswerItem::class, 'answerItemable');

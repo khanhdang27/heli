@@ -64,18 +64,18 @@ export default {
     };
   },
   mounted: function () {
-      this.typeExercise = this.questionType;
+    this.typeExercise = this.questionType;
   },
   watch: {
-      questionType : function (value) {
-          this.typeExercise = value
-      }
+    questionType: function (value) {
+      this.typeExercise = value;
+    },
   },
   methods: {
     nextTypeExam: function (type) {
-        if (this.typeExam === this.$root.$getConst('assessment')){
-            this.typeExercise = type;
-        }
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        this.typeExercise = type;
+      }
     },
     userAnswer: function () {
       this.questionNo = document.getElementById(

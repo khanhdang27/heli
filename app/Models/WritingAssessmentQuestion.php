@@ -16,10 +16,6 @@ class WritingAssessmentQuestion extends Model
         return $this->belongsTo(Question::class);
     }
 
-    // public function answers()
-    // {
-    //     return $this->hasMany(WritingAssessmentAnswer::class, 'w_a_question_id');
-    // }
     public function answers()
     {
         return $this->morphMany(MCAnswerItem::class, 'answerItemable');

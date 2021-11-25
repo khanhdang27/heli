@@ -33,9 +33,10 @@ use App\Models\ListenAssessmentQuestion;
                         </button>
                     </div>
                     <div class="modal-body">
-                        {!! Form::open(['methods' => 'put', 'url' =>
+                        {!! Form::open(['method' => 'put', 'url' =>
                         route('admin.quiz.question.listening.assessment.update', ['quiz' => $quiz->id, 'question' =>
                         $question->id]), 'id' => 'formReadingQuestion_{{ $question->id }}']) !!}
+                        @csrf
                         <div class="form-group">
                             <label for="index" class="required text-dark">Index</label>
                             {{ Form::number('index', $question->index, ['class' => 'form-control', 'required']) }}

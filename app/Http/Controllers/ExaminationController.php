@@ -186,7 +186,7 @@ class ExaminationController extends Controller
                 'quiz.questions.readingQuestion.answers',
                 'quiz.passage',
             ]);
-            $questions = $exams->quiz;
+            $questions = $exams->quiz[0];
 
             DB::commit();
             return response()->json(['questions' => $questions]);

@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use App\Utilities\Constants;
 
 use Illuminate\Support\Carbon;
 
@@ -159,11 +158,12 @@ class CourseController extends Controller
                 $student_course = StudentCourses::query()
                     ->where('course_id', $course->id)
                     ->where('student_id', Auth::user()->id)
+                    ->orderBy('created_at', 'DESC')
                     ->first();
                 if (!empty($student_course)) {
                     $exams = StudentExamination::select('student_course_id', 'exam_id', 'quiz_id')
                         ->distinct()
-                        ->with('exam')
+                        ->with(['exam', 'studentCourse'])
                         ->whereHas('exam', function ($query) {
                             return $query->where('type', '!=', \Constants::EXAMINATION_ASSESSMENT);
                         })
