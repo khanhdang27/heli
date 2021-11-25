@@ -28,7 +28,8 @@ $latesLecture = $student_course->lecture_study;
     @if (!empty($student_course->failed))
     <x-home.buy-course :course=$course></x-home.buy-course>
     @else
-    <x-home.video-course :courseDetail=$course :latesLecture=$latesLecture></x-home.video-course>
+    <x-home.video-course :courseDetail=$course :studentCourse=$student_course :latesLecture=$latesLecture>
+    </x-home.video-course>
     @endif
     @else
     <div class="mt-5">

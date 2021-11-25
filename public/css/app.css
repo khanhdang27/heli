@@ -12493,6 +12493,10 @@ body {
   white-space: normal;
 }
 
+.bg-fail {
+  opacity: 0.6;
+}
+
 .rating {
   display: inline-block;
   position: relative;
