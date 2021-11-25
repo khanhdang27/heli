@@ -432,8 +432,8 @@ export default {
         .get(route("site.exam.getReadingExerciseQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data);
-          this.passage = response.data.questions[0].passage.content;
-          this.questionReading = response.data.questions[0].question;
+          this.passage = response.data.questions.passage.content;
+          this.questionReading = response.data.questions.questions;
           this.timeStartDo = new Date();
         })
         .catch(function (error) {

@@ -63,6 +63,9 @@ export default {
       typeExercise: 0,
     };
   },
+  mounted: function () {
+    this.typeExercise = this.questionType;
+  },
   watch: {
     questionType: function (value) {
       this.typeExercise = value;

@@ -21,15 +21,15 @@ return [
         'welcomeBack' => '歡迎回來!',
         'loginToContinueCourse' => '登入繼續體驗課程',
     ],
-    'passwordReset'=> [
-        'resetPassword' =>'重设密码',
-        'sendPasswordResetLink'=> '发送密码重置链接'
+    'passwordReset' => [
+        'resetPassword' => '重设密码',
+        'sendPasswordResetLink' => '发送密码重置链接'
     ],
     'registerModal' => [
         'register' => '登记',
         'freeRegistration' => '免費註冊',
         'experienceCourse' => '體驗課程',
-        'onlineAndRealTimeCourse'=> '網上課程及實時課程',
+        'onlineAndRealTimeCourse' => '網上課程及實時課程',
     ],
     'footer' => [
         'searchForCourses' => '搜尋課程',
@@ -87,7 +87,9 @@ return [
         'myCourses' => '我的課程',
         'wishlist' => '我的收藏',
         'registerNow' => '馬上報讀',
-        'addToCart' => '加入購物車'
+        'addToCart' => '加入購物車',
+        'buyNow' => '立即购买',
+        'reTry' => '再试一次',
     ],
     'blog-page' => [
         'learningColumn' => '學習專欄',
@@ -104,7 +106,7 @@ return [
     'updateYourProfile' => '更新您的個人資料',
     'uploadYourPhoto' => '上傳你的照片',
     'changePassword' => '更改密碼',
-    'step-register' =>[
+    'step-register' => [
         'onlineRegistration' => '線上註冊',
         'enjoyNewUserDiscount' => '享受新用戶優惠',
         'experienceNow' => '立即體驗',
@@ -113,12 +115,12 @@ return [
         'brainExperienceCourse' => '隨時隨地以手機、平板電腦或電 腦體驗課程!'
     ],
     'freeTrialClass' => '免費試堂；體驗課程網上課程 及實時課程 任你選擇',
-    'course-item' =>[
+    'course-item' => [
         'section' => '節',
         'liveCourse' => '實時直播課程',
         'courseRecord' => '錄製課程'
     ],
-    'toast' =>[
+    'toast' => [
         'loginSuccess' => '登錄成功',
         'loginFailed' => '登錄失敗',
         'loginInactive' => '登录无效',
@@ -128,7 +130,7 @@ return [
         'pleaseEnterEmail' => '請輸入您的郵箱!',
         'pleaseCheckEmail' => '請檢查您的電子郵件!',
     ],
-    'forum' =>[
+    'forum' => [
         'bestAnswer' => '最佳答案',
         'addAnswer' => '添加您的答案',
         'postQuestion' => '發表你的問題'
