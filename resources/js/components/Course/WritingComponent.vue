@@ -185,6 +185,7 @@
                   questionWriting[questionIndex].writing_quiz_question.question
                 }}
               </h3>
+
               <div
                 v-if="
                   questionWriting[questionIndex].writing_quiz_question.part ===
@@ -405,8 +406,6 @@ export default {
           route("site.exam.getWritingAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          console.log("response.data >>>", response.data);
-
           this.questionWriting = response.data.questions.questions.filter(
             (question) => {
               return question.writing_assessment_question !== null;
@@ -435,7 +434,6 @@ export default {
       axios
         .get(route("site.exam.getWritingExerciseQuestionsClient", this.examId))
         .then((response) => {
-          console.log(response.data);
           this.questionWriting = response.data.questions.questions;
           this.timeStartDo = new Date();
         })
@@ -447,7 +445,6 @@ export default {
       axios
         .get(route("site.exam.getWritingQuizQuestionsClient", this.examId))
         .then((response) => {
-          console.log(response.data);
           this.questionWriting = response.data.questions.questions;
         })
         .catch(function (error) {
@@ -493,7 +490,6 @@ export default {
           }
         }
       }
-      console.log(this.checkAnswer);
     },
     submit: function () {
       this.userAnswer();
@@ -557,11 +553,8 @@ export default {
         questions: [],
       };
       this.resultCheck.questions.forEach((item) => {
-        console.log("item :>> ", item);
         this.userChoose.push(item.answerID);
       });
-
-      console.log("this.resultCheck :>> ", this.resultCheck);
     },
   },
 };

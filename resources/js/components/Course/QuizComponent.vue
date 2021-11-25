@@ -63,19 +63,16 @@ export default {
       typeExercise: 0,
     };
   },
-  mounted: function () {
-      this.typeExercise = this.questionType;
-  },
   watch: {
-      questionType : function (value) {
-          this.typeExercise = value
-      }
+    questionType: function (value) {
+      this.typeExercise = value;
+    },
   },
   methods: {
     nextTypeExam: function (type) {
-        if (this.typeExam === this.$root.$getConst('assessment')){
-            this.typeExercise = type;
-        }
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        this.typeExercise = type;
+      }
     },
     userAnswer: function () {
       this.questionNo = document.getElementById(

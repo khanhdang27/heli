@@ -18,11 +18,6 @@ class SpeakExercisesQuestion extends Model
         return $this->belongsTo(Question::class);
     }
 
-    // public function answers()
-    // {
-    //     return $this->hasMany(SpeakExercisesAnswer::class);
-    // }
-
     public function answers()
     {
         return $this->morphMany(MCAnswerItem::class, 'answerItemable');
