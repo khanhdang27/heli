@@ -66,17 +66,27 @@ class CourseController extends Controller
 
     public function my()
     {
-        $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.tutor', 'membershipCourses.course.student')
+        $studentCourses = StudentCourses::with('course')->where('student_id', Auth::user()->id)
+            ->where('course_id', '!=', 1)->get();
+
+        $myCourses = [];
+        foreach ($studentCourses as $item){
+            array_push($myCourses, $item->course_id);
+        }
+        $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course',
+            'membershipCourses.course.tutor', 'membershipCourses.course.student')
             ->where('publish', 1)
-            ->whereHas('membershipCourses.course.student', function (Builder $query) {
-                $query->where('student_id', Auth::user()->id);
-            })
-            ->whereHas('membershipCourses', function (Builder $query) {
-                $query->where('membership_id', Auth::user()->membership_group);
+            ->whereHas('membershipCourses.course', function (Builder $query) use ($myCourses) {
+                $query->whereIn('id', $myCourses);
             })
             ->get();
 
-        return view('course.my-course-page', ['courses' => $courses]);
+        $studentCoursesResult = $studentCourses->map( function ($item, $key) use ($courses){
+            $item->course = $courses->where('membershipCourses.course_id', $item->course_id);
+            return $item;
+        });
+
+        return view('course.my-course-page', ['courses' => $studentCoursesResult]);
     }
 
     /**

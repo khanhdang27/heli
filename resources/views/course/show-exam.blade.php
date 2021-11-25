@@ -163,7 +163,7 @@ use App\Models\ListenAssessmentQuestion;
                                                                 {{ $detail->question->questionContent()->findAnswerById($detail->answer)->answer }}
                                                             @elseif ($detail->answer_type ===
                                                                 \Constants::ANSWER_TEXT)
-                                                                <h5>{{ $detail->answer }}</h5>
+                                                                <h5>{!! $detail->answer !!}</h5>
                                                             @else
                                                                 @if (!empty($detail->answer))
                                                                     <vimeo-player
