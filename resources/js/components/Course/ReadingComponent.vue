@@ -248,7 +248,7 @@
           <button
             class="btn btn-primary"
             v-on:click="prev()"
-            v-if="questionIndex > 0 && resultCheck.questions[questionIndex]"
+            v-if="questionIndex > 0"
           >
             Previous
           </button>
@@ -343,6 +343,12 @@
               </div>
             </div>
           </div>
+            <button
+               class="btn btn-primary mt-5"
+               v-on:click="otherTest()"
+            >
+                Other Test
+            </button>
         </div>
         <div v-else class="text-success text-center h-100">
           <h5>
@@ -609,6 +615,9 @@ export default {
           console.error(error);
         });
     },
+      otherTest(){
+          this.$emit("reTryLecture");
+      }
   },
 };
 </script>

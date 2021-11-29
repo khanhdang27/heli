@@ -284,6 +284,12 @@
                 </div>
               </div>
             </div>
+              <button
+                  class="btn btn-primary mt-5"
+                  v-on:click="otherTest()"
+              >
+                  Other Test
+              </button>
           </div>
           <div v-else class="text-success">
             You have completed this section. Your exam is being graded by the
@@ -563,6 +569,10 @@ export default {
 
       console.log("this.resultCheck :>> ", this.resultCheck);
     },
+
+      otherTest(){
+          this.$emit("reTryLecture");
+      }
   },
 };
 </script>

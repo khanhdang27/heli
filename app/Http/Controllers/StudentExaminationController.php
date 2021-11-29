@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Examination;
+use App\Models\Notification;
 use App\Models\Question;
 use App\Models\StudentCourses;
 use App\Models\Quiz;
 use App\Models\StudentExamination;
 use App\Models\User;
+use App\Utilities\Constants;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -486,6 +488,24 @@ class StudentExaminationController extends Controller
                 'had_update' => true,
             ]);
             $student_course = $studentExam->studentCourse;
+
+            $routeRelate = route('site.showExam',[
+                'course' => $studentExam->student_course_id,
+                'exam' => $studentExam->exam_id,
+                'quiz' => $studentExam->quiz_id]);
+            if($studentExam->answer_type === \Constants::ANSWER_TEXT){
+                $content_noti = 'Result for writing part';
+            }elseif($studentExam->answer_type === \Constants::ANSWER_VIDEO){
+                $content_noti = 'Result for speaking part';
+            }
+            $noti = new Notification();
+
+            $noti->createNotify(
+                $student_course->student_id,
+                trans('keywords.hasCommentsForExam'),
+                $content_noti,
+                $routeRelate);
+            $noti->saveNotify();
 
             $allQuestions = count($studentExam->quiz->studentExaminations);
 

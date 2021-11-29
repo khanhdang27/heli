@@ -9,7 +9,16 @@
           class="py-4 h-100 row justify-content-center lecture overflow-auto"
         >
           <div class="col-lg-8">
-            <div class="h-100">
+            <div v-if="startQuiz === false" class="h-100">
+              <h5 class="text-center">There will be 1 audio for each part.</h5>
+              <div v-for="( part, index) in questionListeningPreview" :key="index">
+                <h5 class="font-weight-bold">{{ index | uppercase | replace }}</h5>
+                <div v-for="question in part " :key="question.id">
+                    <h5>{{question.index}}. {{ question.listen_assessment_question.question }}</h5>
+                </div>
+              </div>
+            </div>
+            <div v-else class="h-100">
               <div
                 v-if="
                   typeExam === $getConst('assessment') &&
@@ -22,7 +31,7 @@
                     shadow-sm
                     bg-white
                     rounded
-                    p-3
+                    py-3
                     mb-3
                     h4
                     text-center
@@ -89,7 +98,7 @@
                     shadow-sm
                     bg-white
                     rounded
-                    p-3
+                    py-3
                     mb-3
                     h4
                     text-center
@@ -183,7 +192,7 @@
                     shadow-sm
                     bg-white
                     rounded
-                    p-3
+                    py-3
                     mb-3
                     h4
                     text-center
@@ -243,35 +252,40 @@
             </div>
           </div>
         </div>
-        <div class="text-right pb-4 pr-3">
-          <button
-            v-if="questionIndex > 0 && resultCheck[questionIndex]"
-            class="btn btn-primary"
-            v-on:click="prev()"
-          >
-            Previous
-          </button>
-          <span v-if="typeExam === $getConst('exercise')">
-            <button class="btn btn-primary mx-2" v-on:click="next()">
-              Next
-            </button>
-          </span>
-          <span v-if="typeExam !== $getConst('exercise')">
+        <div class="pb-4 pr-3">
+          <div v-if="startQuiz === false" class="text-center">
+            <button class="btn btn-primary" v-on:click="start()">Start</button>
+          </div>
+          <div v-else class="text-right">
             <button
-              v-if="questionIndex === questionListening.length - 1"
-              class="btn btn-primary mx-2"
-              v-on:click="submit()"
+              v-if="questionIndex > 0"
+              class="btn btn-primary"
+              v-on:click="prev()"
             >
-              Submit
+              Previous
             </button>
-            <button
-              v-if="questionIndex < questionListening.length - 1"
-              class="btn btn-primary mx-2"
-              v-on:click="next()"
-            >
-              Next
-            </button>
-          </span>
+            <span v-if="typeExam === $getConst('exercise')">
+              <button class="btn btn-primary mx-2" v-on:click="next()">
+                Next
+              </button>
+            </span>
+            <span v-if="typeExam !== $getConst('exercise')">
+              <button
+                v-if="questionIndex === questionListening.length - 1"
+                class="btn btn-primary mx-2"
+                v-on:click="submit()"
+              >
+                Submit
+              </button>
+              <button
+                v-if="questionIndex < questionListening.length - 1"
+                class="btn btn-primary mx-2"
+                v-on:click="next()"
+              >
+                Next
+              </button>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -340,6 +354,12 @@
               </div>
             </div>
           </div>
+            <button
+               class="btn btn-primary mt-5"
+               v-on:click="otherTest()"
+            >
+                Other Test
+            </button>
         </div>
         <div v-else class="text-success text-center h-100">
           <h5>
@@ -357,6 +377,14 @@
 
 <script>
 export default {
+  filters: {
+    uppercase: function (v) {
+      return v.charAt(0).toUpperCase() + v.slice(1);
+    },
+    replace: function (v) {
+      return v.replace("_", " ");
+    },
+  },
   props: {
     typeExam: Number,
     examId: Number,
@@ -364,6 +392,10 @@ export default {
   },
   data() {
     return {
+      questionListeningPreview: {
+        part_1: [],
+        part_2: [],
+      },
       questionListening: [],
       questionIndex: 0,
       questionNo: "",
@@ -383,6 +415,7 @@ export default {
       audioCodes: {},
       countClick: 0,
       audioPart: 0,
+      startQuiz: false,
     };
   },
   watch: {
@@ -391,6 +424,11 @@ export default {
       this.questionIndex = 0;
       this.questionListening = [];
       this.audioShow = true;
+      this.startQuiz = false;
+      this.questionListeningPreview = {
+          part_1: [],
+          part_2: [],
+      }
       this.getQuestion();
       this.getAnswerUser();
 
@@ -448,6 +486,13 @@ export default {
               }
             }
           });
+            this.questionListening.forEach((item) => {
+                if (item.listen_assessment_question.part === 1) {
+                    this.questionListeningPreview.part_1.push(item);
+                } else {
+                    this.questionListeningPreview.part_2.push(item);
+                }
+            });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
           setTimeout(() => {
@@ -481,6 +526,13 @@ export default {
               } else {
                 return -1;
               }
+            }
+          });
+          this.questionListening.forEach((item) => {
+            if (item.listen_assessment_question.part === 1) {
+              this.questionListeningPreview.part_1.push(item);
+            } else {
+              this.questionListeningPreview.part_2.push(item);
             }
           });
           this.audioCodes = response.data.audioCodes;
@@ -518,6 +570,13 @@ export default {
               }
             }
           });
+            this.questionListening.forEach((item) => {
+                if (item.listen_assessment_question.part === 1) {
+                    this.questionListeningPreview.part_1.push(item);
+                } else {
+                    this.questionListeningPreview.part_2.push(item);
+                }
+            });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
 
@@ -675,6 +734,12 @@ export default {
           console.error(error);
         });
     },
+    start() {
+      this.startQuiz = true;
+    },
+      otherTest(){
+          this.$emit("reTryLecture");
+      }
   },
 };
 </script>
