@@ -13,7 +13,7 @@
                 :questionType="questionType"
                 v-if="questions"
                 @goToLecture="onClickLecture"
-                @reTryLecture="reTryLecture()"
+                @reTryLecture="reTryLecture"
                 @nextToLecture="nextToLecture()"
               ></quiz-component>
             </div>

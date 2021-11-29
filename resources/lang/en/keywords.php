@@ -187,5 +187,6 @@ return [
     'coursePayment' => 'Course payment',
     'addCard' => 'Add card',
     'addSuccessCard' => 'Add success card',
-    'addErrorCard' => 'Error, can not add card'
+    'addErrorCard' => 'Error, can not add card',
+    'hasCommentsForExam' => 'Has comments for the exam'
 ];

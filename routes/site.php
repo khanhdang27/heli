@@ -103,6 +103,8 @@ Route::middleware('auth')->group(function () {
     Route::post('token/skipPrice', 'SkipLevelController@paymentSkipLevel')->name('token.skipPrice.pay');
 
     Route::post('lecture/lectureRelated', 'LectureController@getLectureRelated')->name('lecture.getLectureRelated');
+
+    Route::resource('notification', 'NotificationController');
     Route::prefix('my/')
         ->name('user.')
         ->group(function () {

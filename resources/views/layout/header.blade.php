@@ -51,7 +51,7 @@ use App\Utilities\SelectionByClass;
                     <a class="nav-link dropdown-toggle" href="#" id="navLang" data-toggle="dropdown">
                         {{ Config::get('languages')[App::getLocale()] }}
                     </a>
-                    <div class="dropdown-menu bg-primary border border-white rounded-0">
+                    <div class="dropdown-menu dropdown-menu-header bg-primary border border-white rounded-0">
                         @foreach (Config::get('languages') as $lang => $language)
                         @if ($lang != App::getLocale())
                         <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
@@ -66,7 +66,7 @@ use App\Utilities\SelectionByClass;
                     <a class="nav-link dropdown-toggle" href="#" id="certificateDrop" data-toggle="dropdown">
                         @lang('keywords.navBar.subjects')
                     </a>
-                    <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0"
+                    <div class="dropdown-menu dropdown-menu-header bg-primary py-1 px-1 border border-white rounded-0"
                         aria-labelledby="certificateDrop">
                         @foreach(SelectionByClass::getValues(\App\Models\Certificate::class,'certificate_code', 'id') as
                         $key => $value)
@@ -125,13 +125,6 @@ use App\Utilities\SelectionByClass;
         <div id="overlay" class="overlay position-fixed" style="display: none"></div>
         <div class="d-flex ml-auto">
             @if(Auth::check())
-            @if(Auth::user()->hasRole('student'))
-            <div class="nav-item py-1 user-cart d-none d-xl-block">
-                <a class="btn-link bg-white" href="{{route('site.payment-history')}}">
-                    <img src={{asset("images/ic/ic_cart.svg")}} width="21px">
-                </a>
-            </div>
-            @endif
             <div class="nav-item ml-2 user-name d-none d-xl-block">
                 <a class="nav-link px-0 mr-1">
                     {{Auth::user()->name}}
@@ -141,7 +134,7 @@ use App\Utilities\SelectionByClass;
                 <a class="btn btn-link bg-white" id="navbardrop" data-toggle="dropdown">
                     <img src={{asset("images/ic/ic_user.svg")}} width="24">
                 </a>
-                <div class="dropdown-menu bg-primary py-1 px-1 border border-white rounded-0">
+                <div class="dropdown-menu dropdown-menu-header bg-primary py-1 px-1 border border-white rounded-0">
                     @if (Auth::user()->hasRole('student'))
                     <a class="dropdown-item"
                         href="{{ URL::route('site.user.wishlist') }}">@lang('keywords.coursePage.wishlist')</a>
@@ -154,6 +147,18 @@ use App\Utilities\SelectionByClass;
                         href="{{ URL::route('site.userLogout')}}">@lang('keywords.navBar.logOut')</a>
                 </div>
             </div>
+            @if (Auth::user()->hasRole('student'))
+                <div class="nav-item btn-group p-0 border-0 ml-auto dropdown-noti">
+                    <button type="button" class="btn bg-white pt-2 border-0 btn-noti" id="notification" data-toggle="dropdown">
+                        <i class="fe fe-bell h4 mb-0"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right border border-secondary rounded-0 py-0">
+                        <div id="notisList" class="">
+
+                        </div>
+                    </div>
+                </div>
+            @endif
             @else
             <!-- Button login modal -->
             <button type="button" class="btn btn-header py-0 border-primary" data-toggle="modal"
@@ -188,7 +193,8 @@ use App\Utilities\SelectionByClass;
                         {{ Config::get('languages')[App::getLocale()] }}
                     </a>
                     <div
-                        class="dropdown-menu bg-primary border border-white rounded-0 dropdown-menu-language position-absolute">
+                        class="dropdown-menu dropdown-menu-header bg-primary border border-white rounded-0
+                        dropdown-menu-language position-absolute">
                         @foreach (Config::get('languages') as $lang => $language)
                         @if ($lang != App::getLocale())
                         <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"> {{$language}}</a>
@@ -204,14 +210,37 @@ use App\Utilities\SelectionByClass;
 @push('showNavbar')
 <script type="application/javascript">
     $(document).ready(function () {
-            $('#openNavbar').click(function () {
-                document.getElementById('overlay').style.display = 'inline-block';
-            });
+        $('#openNavbar').click(function () {
+            document.getElementById('overlay').style.display = 'inline-block';
         });
-        $(document).ready(function () {
-            $('#closeNavbar').click(function () {
-                document.getElementById('overlay').style.display = 'none';
-            });
+        $('#closeNavbar').click(function () {
+            document.getElementById('overlay').style.display = 'none';
         });
+
+        axios.get(route('site.notification.index'))
+        .then(
+            function (response) {
+                console.log(response);
+                let list = document.querySelector('#notisList');
+                let html = '';
+                if (response.data){
+                    response.data.data.forEach((item) => {
+                        html += `<a class="dropdown-item text-primary" href="${route('site.notification.show', item.id)}">
+                                <div class="font-weight-bold">${item.title}</div>
+                                <div>${item.content}</div>
+                             </a>
+                            `
+                    })
+                }
+                list.innerHTML = html;
+            }
+        )
+        .catch(
+            function (error) {
+                console.log(error)
+            }
+        )
+
+    });
 </script>
 @endpush
