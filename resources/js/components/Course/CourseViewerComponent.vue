@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="row mb-4" id="video-lecture">
-      <div class="col-lg-9 bg-white">
+    <div class="row" id="video-lecture">
+      <div class="col-lg-8 col-xl-9 bg-white mb-3">
         <div class="min-vh-50 h-100 border border-primary">
           <div v-if="lectureList[lectureIndex]" class="h-100" v-cloak>
             <div v-if="lectureList[lectureIndex].model_name == 'Examination'">
@@ -35,8 +35,8 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 bg-white">
-        <div class="box-list-video text-primary lecture overflow-auto">
+      <div class="col-lg-4 col-xl-3 bg-white">
+        <div class="box-list-video text-primary course-content overflow-auto">
           <h2 class="font-weight-bolder pb-2 background-">Course Content</h2>
           <!-- +++++++++++++++++++++++++++++ -->
           <div class="container vue">
@@ -89,11 +89,11 @@
                           </strong>
                         </div>
                         <div v-if="item.model_name == 'Lecture'">
-                          <h4 class="mb-1">
+                          <h5 class="mb-1">
                             {{ item.index }}
                             -
                             {{ item.lectures_name }}
-                          </h4>
+                          </h5>
                           <strong class="text-dark text-wrap">
                             <i class="fe fe-youtube mr-2"></i>
                             <span>Video</span>
