@@ -8,6 +8,7 @@
             <div
               v-if="
                 typeExam === $getConst('assessment') &&
+                startQuiz === true &&
                 questionSpeaking[questionIndex]
               "
             >
@@ -63,7 +64,6 @@
                     class="ip-answer"
                     hidden
                     type="radio"
-                    v-bind:disabled="resultCheck.questions[questionIndex]"
                   />
                   <label :for="answer.id" class="w-100">
                     <a class="btn text-left w-100">
@@ -92,8 +92,8 @@
                 width="100%"
               />
             </div>
-            <div class="text-center" v-if="startQuiz===false">
-                  <button class="btn btn-primary" v-on:click="start()">Start</button>
+            <div class="text-center" v-if="typeExam !== $getConst('exercise') && startQuiz===false">
+                  <button class="btn btn-success" v-on:click="start()">Start</button>
             </div>
             <div v-else>
               <div class="h-100" v-if="typeExam === $getConst('quiz')">
@@ -143,7 +143,7 @@
                     <span>{{ scope.props.seconds }} </span><a></a>
                     <h5 class="mt-3">
                       After 1 minute is over, you will have 2 minutes to answer
-                      the last question.
+                      this question.
                     </h5>
                   </template>
                 </vue-countdown-timer>
@@ -241,11 +241,11 @@
       </div>
       <div class="button control">
         <div
-          v-if="typeExam === $getConst('assessment')"
+          v-if="typeExam !== $getConst('exercise') && startQuiz===true"
           class="text-right py-4 pr-3"
         >
           <button
-            v-if="questionIndex > 0"
+            v-if="questionIndex > 0 && typeExam === $getConst('assessment')"
             class="btn btn-primary"
             v-on:click="prev()"
           >
@@ -275,40 +275,9 @@
           <span>
             <button
               class="btn btn-primary mx-2"
-              v-on:click="showVideoExercise(videoPracticeId)"
-            >
-              Practice
-            </button>
-            <button
-              class="btn btn-primary mx-2"
               v-on:click="showVideoExercise(videoResponseId)"
             >
               How to response
-            </button>
-          </span>
-        </div>
-        <div v-if="typeExam === $getConst('quiz') && startQuiz===true" class="text-right py-4 pr-3">
-            <button
-                v-if="questionIndex > 0"
-                class="btn btn-primary"
-                v-on:click="prev()"
-            >
-                Previous
-            </button>
-          <span>
-            <button
-              v-if="questionIndex === questionSpeaking.length - 1"
-              class="btn btn-primary mx-2"
-              v-on:click="submit()"
-            >
-              Submit
-            </button>
-            <button
-              v-if="questionIndex < questionSpeaking.length - 1"
-              class="btn btn-primary mx-2"
-              v-on:click="next()"
-            >
-              Next
             </button>
           </span>
         </div>
@@ -318,8 +287,9 @@
       <div class="text-center">
         <div v-if="typeExam !== $getConst('assessment')">
           <div class="text-success">
-            You have completed this section. Your exam is being graded by the
-            tutor. Please wait for the results and come back later!
+              <h2>You have completed this section.</h2>
+              <h2>Your exam is being graded by the
+                  tutor. Please wait for the results and come back later!</h2>
           </div>
         </div>
         <div v-else class="py-5">
@@ -557,7 +527,7 @@ export default {
           this.userAnswer();
           this.loadAudio();
         } else {
-          if (this.questionIndex === this.questionSpeaking.length - 2) {
+          if (this.questionIndex === this.questionSpeaking.length - 4) {
             this.pause = true;
             this.timeNow = new Date();
             this.timeEnd = new Date();
@@ -667,7 +637,7 @@ export default {
     },
     startCallBack: function (x) {},
     endCallBack: function (x) {
-      this.submit();
+      this.next();
     },
     cleanOldAnswers() {
       localStorage.removeItem("speaking_" + this.examId);

@@ -84,7 +84,6 @@
                       :value="answer.id"
                       hidden
                       type="radio"
-                      v-bind:disabled="resultCheck.questions[questionIndex]"
                     />
                     <label :for="answer.id" class="w-100">
                       <a class="btn text-left w-100">
@@ -123,34 +122,6 @@
                   </audio>
                   <h5>Audio can played once only</h5>
                 </div>
-                <div
-                  v-if="checkAnswer[questionIndex] === $getConst('incorrect')"
-                >
-                  <div
-                    class="p-3 bg-danger rounded h5 text-white font-weight-bold"
-                  >
-                    Incorrect answer !
-                  </div>
-                  <h5
-                    v-for="answer_item in questionListening[questionIndex]
-                      .listen_assessment_question.answers"
-                    v-bind:key="answer_item.id"
-                    class="text-success"
-                  >
-                    <span
-                      v-if="answer_item.is_correct === $getConst('correct')"
-                    >
-                      Correct answer is: {{ answer_item.answer }}
-                    </span>
-                  </h5>
-                </div>
-
-                <div
-                  v-if="checkAnswer[questionIndex] === $getConst('correct')"
-                  class="p-3 bg-success rounded h5 text-white font-weight-bold"
-                >
-                  Good job !
-                </div>
                 <h3 v-cloak>
                   {{ questionIndex + 1 }}.
                   {{
@@ -178,7 +149,6 @@
                       :value="answer.id"
                       hidden
                       type="radio"
-                      v-bind:disabled="resultCheck.questions[questionIndex]"
                     />
                     <label :for="answer.id" class="w-100">
                       <a class="btn text-left w-100">
@@ -218,10 +188,7 @@
                   <h5>Audio can played once only</h5>
                 </div>
                 <h3 v-cloak>
-                  {{
-                    questionListening[questionIndex].listen_assessment_question
-                      .id
-                  }}.
+                  {{ questionIndex + 1 }}.
                   {{
                     questionListening[questionIndex].listen_assessment_question
                       .question
@@ -247,7 +214,6 @@
                       :value="answer.id"
                       hidden
                       type="radio"
-                      v-bind:disabled="resultCheck.questions[questionIndex]"
                     />
                     <label :for="answer.id" class="w-100">
                       <a class="btn text-left w-100">
@@ -262,7 +228,7 @@
         </div>
         <div class="pb-4 pr-3">
           <div v-if="startQuiz === false" class="text-center">
-            <button class="btn btn-primary" v-on:click="start()">Start</button>
+            <button class="btn btn-success" v-on:click="start()">Start</button>
           </div>
           <div v-else class="text-right">
             <button
@@ -272,12 +238,7 @@
             >
               Previous
             </button>
-            <span v-if="typeExam === $getConst('exercise')">
-              <button class="btn btn-primary mx-2" v-on:click="next()">
-                Next
-              </button>
-            </span>
-            <span v-if="typeExam !== $getConst('exercise')">
+            <span>
               <button
                 v-if="questionIndex === questionListening.length - 1"
                 class="btn btn-primary mx-2"
@@ -297,12 +258,23 @@
         </div>
       </div>
     </div>
-    <div v-else class="mt-5 h-100">
+    <div v-else class="h-100">
       <div class="text-center">
-        <div v-if="typeExam !== $getConst('assessment')">
+        <div
+          class="container-fluid"
+          v-if="typeExam !== $getConst('assessment')"
+        >
           <h2 class="text-success">You score {{ allResults.score }}</h2>
-          <div class="row justify-content-center align-items-start">
-            <div class="col-lg-6 col-md-10 col-12">
+          <div
+            class="
+              row
+              justify-content-center
+              align-items-start
+              lecture
+              overflow-auto
+            "
+          >
+            <div class="col-lg-8 col-md-10 col-12">
               <div
                 class="text-left mb-2"
                 v-for="result in allResults.quiz_result"
@@ -312,16 +284,18 @@
                   v-for="questionItem in questionListening"
                   v-bind:key="questionItem.id"
                 >
-                  <div v-if="result.question === questionItem.id">
-                    <h5 v-if="result.is_correct">
-                      <i class="fe fe-check-circle text-success"></i>
-                      {{ questionItem.listen_assessment_question.question }}
-                    </h5>
-                    <div v-else>
-                      <h5>
-                        <i class="fe fe-x-circle text-danger"></i>
-                        {{ questionItem.listen_assessment_question.question }}
-                      </h5>
+                  <div
+                    v-if="result.question === questionItem.id"
+                    class="list-group"
+                  >
+                    <div v-if="result.is_correct" class="list-group-item">
+                      <div class="d-flex">
+                        <i class="fe fe-check-circle text-success h5 pr-2"></i>
+                        <h5>
+                          <span class="font-weight-bold">Question: </span>
+                          {{ questionItem.listen_assessment_question.question }}
+                        </h5>
+                      </div>
                       <div
                         class="ml-4"
                         v-for="answerItem in questionItem
@@ -332,7 +306,35 @@
                           v-if="answerItem.is_correct === $getConst('correct')"
                         >
                           <div class="d-flex flex-wrap">
-                            <h5 class="mr-2">Correct answer is:</h5>
+                            <h5 class="mr-2 font-weight-bold">
+                              Correct answer:
+                            </h5>
+                            <div class="h5 mb-0">{{ answerItem.answer }}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="list-group-item">
+                      <div class="d-flex">
+                        <i class="fe fe-x-circle text-danger pr-2 h5"></i>
+                        <h5>
+                          <span class="font-weight-bold">Question: </span>
+                          {{ questionItem.listen_assessment_question.question }}
+                        </h5>
+                      </div>
+                      <div
+                        class="ml-4"
+                        v-for="answerItem in questionItem
+                          .listen_assessment_question.answers"
+                        v-bind:key="answerItem.id"
+                      >
+                        <div
+                          v-if="answerItem.is_correct === $getConst('correct')"
+                        >
+                          <div class="d-flex flex-wrap">
+                            <h5 class="mr-2 font-weight-bold">
+                              Correct answer:
+                            </h5>
                             <div class="h5 mb-0">{{ answerItem.answer }}</div>
                           </div>
                           <div class="h5" v-if="typeExam === $getConst('quiz')">
@@ -362,9 +364,11 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-primary mt-5" v-on:click="otherTest()">
-            Other Test
-          </button>
+          <div class="pb-4">
+            <button class="btn btn-primary mt-2" v-on:click="otherTest()">
+              Other Test
+            </button>
+          </div>
         </div>
         <div v-else class="text-success text-center h-100">
           <h5>
@@ -596,37 +600,22 @@ export default {
         });
     },
     next: function () {
-      if (this.typeExam !== this.$root.$getConst("exercise")) {
-        if (this.questionIndex < this.questionListening.length - 1) {
-          this.userAnswer();
-          this.questionIndex++;
-        }
-      } else {
-        if (this.countClick % 2 === 0) {
-          this.check(this.questionIndex);
-          this.userAnswer();
-          if (this.questionIndex === this.questionListening.length - 1) {
-            this.submit();
-          }
-        } else {
-          if (this.questionIndex < this.questionListening.length - 1) {
-            this.questionIndex++;
-          }
-        }
-        if (
-          this.audioPart !==
-          this.questionListening[this.questionIndex].listen_assessment_question
-            .part
-        ) {
-          this.audioPart =
-            this.questionListening[
-              this.questionIndex
-            ].listen_assessment_question.part;
-          console.log("part update  :>> ", this.audioPart);
-          this.audioShow = true;
-          this.loadAudio();
-        }
-        this.countClick++;
+      if (this.questionIndex < this.questionListening.length - 1) {
+        this.userAnswer();
+        this.questionIndex++;
+      }
+      if (
+        this.audioPart !==
+        this.questionListening[this.questionIndex].listen_assessment_question
+          .part
+      ) {
+        this.audioPart =
+          this.questionListening[
+            this.questionIndex
+          ].listen_assessment_question.part;
+        console.log("part update  :>> ", this.audioPart);
+        this.audioShow = true;
+        this.loadAudio();
       }
     },
     prev: function () {
