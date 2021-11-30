@@ -11098,12 +11098,12 @@ h5,
   fill: var(--secondary);
 }
 
-.dropdown-menu a {
+.dropdown-menu-header a {
   color: var(--white);
   font-size: 12pt;
 }
 
-.dropdown-menu a:hover {
+.dropdown-menu-header a:hover {
   background: none;
   color: var(--secondary);
 }
@@ -12495,6 +12495,10 @@ body {
 
 .bg-fail {
   opacity: 0.6;
+}
+
+.dropdown-noti:focus {
+  outline: none;
 }
 
 .rating {

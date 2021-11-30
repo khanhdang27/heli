@@ -11,10 +11,18 @@
           <div class="col-lg-8">
             <div v-if="startQuiz === false" class="h-100">
               <h5 class="text-center">There will be 1 audio for each part.</h5>
-              <div v-for="( part, index) in questionListeningPreview" :key="index">
-                <h5 class="font-weight-bold">{{ index | uppercase | replace }}</h5>
-                <div v-for="question in part " :key="question.id">
-                    <h5>{{question.index}}. {{ question.listen_assessment_question.question }}</h5>
+              <div
+                v-for="(part, index) in questionListeningPreview"
+                :key="index"
+              >
+                <h5 class="font-weight-bold">
+                  {{ index | uppercase | replace }}
+                </h5>
+                <div v-for="question in part" :key="question.id">
+                  <h5>
+                    {{ question.index }}.
+                    {{ question.listen_assessment_question.question }}
+                  </h5>
                 </div>
               </div>
             </div>
@@ -252,9 +260,20 @@
     </div>
     <div v-else class="h-100">
       <div class="text-center">
-        <div class="container-fluid" v-if="typeExam !== $getConst('assessment')">
+        <div
+          class="container-fluid"
+          v-if="typeExam !== $getConst('assessment')"
+        >
           <h2 class="text-success">You score {{ allResults.score }}</h2>
-          <div class="row justify-content-center align-items-start lecture overflow-auto">
+          <div
+            class="
+              row
+              justify-content-center
+              align-items-start
+              lecture
+              overflow-auto
+            "
+          >
             <div class="col-lg-8 col-md-10 col-12">
               <div
                 class="text-left mb-2"
@@ -265,32 +284,17 @@
                   v-for="questionItem in questionListening"
                   v-bind:key="questionItem.id"
                 >
-                  <div v-if="result.question === questionItem.id" class="list-group">
+                  <div
+                    v-if="result.question === questionItem.id"
+                    class="list-group"
+                  >
                     <div v-if="result.is_correct" class="list-group-item">
                       <div class="d-flex">
                         <i class="fe fe-check-circle text-success h5 pr-2"></i>
-                          <h5><span class="font-weight-bold">Question: </span>
-                              {{ questionItem.listen_assessment_question.question }}</h5>
-                      </div>
-                      <div class="ml-4"
-                           v-for="answerItem in questionItem.listen_assessment_question.answers"
-                           v-bind:key="answerItem.id"
-                      >
-                          <div
-                              v-if="answerItem.is_correct === $getConst('correct')"
-                          >
-                              <div class="d-flex flex-wrap">
-                                  <h5 class="mr-2 font-weight-bold">Correct answer:</h5>
-                                  <div class="h5 mb-0">{{ answerItem.answer }}</div>
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <div v-else class="list-group-item">
-                      <div class="d-flex">
-                        <i class="fe fe-x-circle text-danger pr-2 h5"></i>
-                          <h5><span class="font-weight-bold">Question: </span>
-                              {{ questionItem.listen_assessment_question.question }}</h5>
+                        <h5>
+                          <span class="font-weight-bold">Question: </span>
+                          {{ questionItem.listen_assessment_question.question }}
+                        </h5>
                       </div>
                       <div
                         class="ml-4"
@@ -302,7 +306,35 @@
                           v-if="answerItem.is_correct === $getConst('correct')"
                         >
                           <div class="d-flex flex-wrap">
-                            <h5 class="mr-2 font-weight-bold">Correct answer:</h5>
+                            <h5 class="mr-2 font-weight-bold">
+                              Correct answer:
+                            </h5>
+                            <div class="h5 mb-0">{{ answerItem.answer }}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="list-group-item">
+                      <div class="d-flex">
+                        <i class="fe fe-x-circle text-danger pr-2 h5"></i>
+                        <h5>
+                          <span class="font-weight-bold">Question: </span>
+                          {{ questionItem.listen_assessment_question.question }}
+                        </h5>
+                      </div>
+                      <div
+                        class="ml-4"
+                        v-for="answerItem in questionItem
+                          .listen_assessment_question.answers"
+                        v-bind:key="answerItem.id"
+                      >
+                        <div
+                          v-if="answerItem.is_correct === $getConst('correct')"
+                        >
+                          <div class="d-flex flex-wrap">
+                            <h5 class="mr-2 font-weight-bold">
+                              Correct answer:
+                            </h5>
                             <div class="h5 mb-0">{{ answerItem.answer }}</div>
                           </div>
                           <div class="h5" v-if="typeExam === $getConst('quiz')">
@@ -333,10 +365,7 @@
             </div>
           </div>
           <div class="pb-4">
-            <button
-                class="btn btn-primary mt-2"
-                v-on:click="otherTest()"
-            >
+            <button class="btn btn-primary mt-2" v-on:click="otherTest()">
               Other Test
             </button>
           </div>
@@ -406,9 +435,9 @@ export default {
       this.audioShow = true;
       this.startQuiz = false;
       this.questionListeningPreview = {
-          part_1: [],
-          part_2: [],
-      }
+        part_1: [],
+        part_2: [],
+      };
       this.getQuestion();
       this.getAnswerUser();
 
@@ -467,13 +496,13 @@ export default {
               }
             }
           });
-            this.questionListening.forEach((item) => {
-                if (item.listen_assessment_question.part === 1) {
-                    this.questionListeningPreview.part_1.push(item);
-                } else {
-                    this.questionListeningPreview.part_2.push(item);
-                }
-            });
+          this.questionListening.forEach((item) => {
+            if (item.listen_assessment_question.part === 1) {
+              this.questionListeningPreview.part_1.push(item);
+            } else {
+              this.questionListeningPreview.part_2.push(item);
+            }
+          });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
           setTimeout(() => {
@@ -490,6 +519,7 @@ export default {
           route("site.exam.getListeningExerciseQuestionsClient", this.examId)
         )
         .then((response) => {
+          console.log(response.data.questions);
           this.questionListening = response.data.questions.questions.filter(
             (question) => {
               return question.listen_assessment_question !== null;
@@ -551,13 +581,13 @@ export default {
               }
             }
           });
-            this.questionListening.forEach((item) => {
-                if (item.listen_assessment_question.part === 1) {
-                    this.questionListeningPreview.part_1.push(item);
-                } else {
-                    this.questionListeningPreview.part_2.push(item);
-                }
-            });
+          this.questionListening.forEach((item) => {
+            if (item.listen_assessment_question.part === 1) {
+              this.questionListeningPreview.part_1.push(item);
+            } else {
+              this.questionListeningPreview.part_2.push(item);
+            }
+          });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
 
@@ -576,10 +606,13 @@ export default {
       }
       if (
         this.audioPart !==
-        this.questionListening[this.questionIndex].listen_assessment_question.part
+        this.questionListening[this.questionIndex].listen_assessment_question
+          .part
       ) {
-        this.audioPart = this.questionListening[
-                         this.questionIndex].listen_assessment_question.part;
+        this.audioPart =
+          this.questionListening[
+            this.questionIndex
+          ].listen_assessment_question.part;
         console.log("part update  :>> ", this.audioPart);
         this.audioShow = true;
         this.loadAudio();
@@ -700,9 +733,9 @@ export default {
     start() {
       this.startQuiz = true;
     },
-      otherTest(){
-          this.$emit("reTryLecture");
-      }
+    otherTest() {
+      this.$emit("reTryLecture");
+    },
   },
 };
 </script>

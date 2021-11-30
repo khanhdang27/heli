@@ -133,8 +133,8 @@ class WritingQuizQuestionController extends Controller
             ]);
 
             if (!empty($request['photo'])) {
-                if (!empty($writingQuestion->photo)) {
-                    $writingQuestion->photo->delete();
+                if (!empty($writingQuestion->picture)) {
+                    $writingQuestion->picture->delete();
                 }
                 $file = File::storeFile($request['photo'], WritingQuizQuestion::class, $writingQuestion->id);
             }

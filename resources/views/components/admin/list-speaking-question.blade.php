@@ -44,10 +44,10 @@
                                     <label for="video_code_practice" class="required text-dark"> Video Practice </label>
                                     {{ Form::text('video_code_practice', $question->questionContent()->video_code_practice, ['class' => 'form-control', 'required']) }}
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="video_code_response" class="required text-dark"> Video Response </label>
                                     {{ Form::text('video_code_response', $question->questionContent()->video_code_response, ['class' => 'form-control', 'required']) }}
-                                </div>
+                                </div> --}}
                                 <div class="form-group ">
                                     Pick up video
                                     <div class="custom-file">

@@ -43,6 +43,7 @@ class SpeakQuizQuestionController extends Controller
             'question' => 'required',
             'message_wrong' => 'required',
             'lecture_index' => 'required',
+            'long_answer' => 'nullable',
         ]);
         DB::beginTransaction();
         try {
@@ -57,6 +58,7 @@ class SpeakQuizQuestionController extends Controller
                 'question' => $input['question'],
                 'message_wrong' => $input['message_wrong'],
                 'lecture_index' => $input['lecture_index'],
+                'long_answer' => !empty($input['long_answer']),
             ]);
 
             DB::commit();
@@ -103,6 +105,7 @@ class SpeakQuizQuestionController extends Controller
             'question' => 'required',
             'message_wrong' => 'required',
             'lecture_index' => 'required',
+            'long_answer' => 'nullable',
         ]);
         DB::beginTransaction();
         try {
@@ -116,6 +119,7 @@ class SpeakQuizQuestionController extends Controller
                 'question' => $input['question'],
                 'message_wrong' => $input['message_wrong'],
                 'lecture_index' => $input['lecture_index'],
+                'long_answer' => !empty($input['long_answer']),
             ]);
 
             DB::commit();
