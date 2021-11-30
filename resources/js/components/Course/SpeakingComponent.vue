@@ -92,7 +92,11 @@
                 width="100%"
               />
             </div>
-            <div class="h-100" v-if="typeExam === $getConst('quiz')">
+            <div class="text-center" v-if="startQuiz===false">
+                  <button class="btn btn-primary" v-on:click="start()">Start</button>
+            </div>
+            <div v-else>
+              <div class="h-100" v-if="typeExam === $getConst('quiz')">
               <div class="h4 text-center timer mb-3">
                 <vue-countdown-timer
                   id="timePause"
@@ -231,6 +235,7 @@
                 </div>
               </div>
             </div>
+            </div>
           </div>
         </div>
       </div>
@@ -282,7 +287,14 @@
             </button>
           </span>
         </div>
-        <div v-if="typeExam === $getConst('quiz')" class="text-right py-4 pr-3">
+        <div v-if="typeExam === $getConst('quiz') && startQuiz===true" class="text-right py-4 pr-3">
+            <button
+                v-if="questionIndex > 0"
+                class="btn btn-primary"
+                v-on:click="prev()"
+            >
+                Previous
+            </button>
           <span>
             <button
               v-if="questionIndex === questionSpeaking.length - 1"
@@ -393,6 +405,7 @@ export default {
       videoPracticeId: "",
       videoResponseId: "",
       videoSubmitID: null,
+      startQuiz: false
     };
   },
   watch: {
@@ -444,7 +457,6 @@ export default {
       // user clicked the record button and started recording
       this.player.on("startRecord", () => {
         console.log("started recording!");
-        this.timeStartDo = new Date();
       });
 
       // user completed recording and stream is available
@@ -704,6 +716,10 @@ export default {
       element.setAttribute("style", "width:" + progress + "%");
       element.innerHTML = "&nbsp;" + progress + "%";
     },
+      start() {
+          this.startQuiz = true;
+          this.timeStartDo = new Date();
+      },
   },
 };
 </script>

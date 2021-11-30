@@ -128,4 +128,8 @@ class User extends Authenticatable implements Wallet, Customer
     {
         return $this->belongsTo(Membership::class, 'membership_group');
     }
+    public function notification()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

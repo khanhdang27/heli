@@ -189,6 +189,7 @@ return [
     'coursePayment' => '課程付款',
     'addCard' => '添加卡片',
     'addSuccessCard' => '添加成功卡',
-    'addErrorCard' => '錯誤, 無法添加卡'
+    'addErrorCard' => '錯誤, 無法添加卡',
+    'hasCommentsForExam' => '考試有評語'
 
 ];

@@ -133,7 +133,7 @@ h5,
     fill: var(--secondary);
 }
 
-.dropdown-menu {
+.dropdown-menu-header {
     a {
         color: var(--white);
         font-size: 12pt;
@@ -1455,4 +1455,9 @@ body {
 }
 .bg-fail {
     opacity: 0.6;
+}
+.dropdown-noti{
+    &:focus{
+        outline: none;
+    }
 }
