@@ -1439,7 +1439,7 @@ body {
         background-color: rgba(10, 10, 125, 0.3);
     }
 }
-.lecture{
+.course-content{
     max-height: 610px;
 }
 .min-vh-50{
@@ -1460,4 +1460,7 @@ body {
     &:focus{
         outline: none;
     }
+}
+.lecture{
+    max-height: 500px;
 }
