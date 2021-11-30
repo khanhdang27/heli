@@ -21,15 +21,18 @@ use App\Models\ListenAssessmentQuestion;
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.quiz.store', ['quiz'
-                => $quiz->id])]) !!}
+                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.quiz.store', ['quiz' => $quiz->id])]) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}
                 </div>
                 <div class="form-group">
+                    <label for="long_answer" class="">Long Answer</label>
+                    {{ Form::checkbox('long_answer', old('long_answer')) }}
+                </div>
+                <div class="form-group">
                     <label for="question" class="required">Question</label>
-                    {{ Form::textarea('question', old('question'), ['class' => 'form-control', 'required']) }}
+                    {{ Form::textarea('question', old('question'), ['class' => 'form-control', 'required', 'rows' => '3']) }}
                 </div>
                 <div class="form-group">
                     <label for="message_wrong" class="required">Message Wrong</label>

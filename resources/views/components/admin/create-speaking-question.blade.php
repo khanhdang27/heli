@@ -20,8 +20,7 @@ use App\Models\Examination;
                 </button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.exercises.store',
-                ['quiz' => $quiz->id]), 'enctype' => 'multipart/form-data']) !!}
+                {!! Form::open(['methods' => 'POST', 'url' => route('admin.quiz.question.speaking.exercises.store', ['quiz' => $quiz->id]), 'enctype' => 'multipart/form-data']) !!}
                 <div class="form-group">
                     <label for="index" class="required">Index</label>
                     {{ Form::number('index', old('index'), ['class' => 'form-control', 'required']) }}
@@ -34,10 +33,10 @@ use App\Models\Examination;
                     <label for="video_code_practice"> Video Practice </label>
                     {{ Form::text('video_code_practice', null, ['class' => 'form-control', 'required']) }}
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="video_code_response"> Video Response </label>
                     {{ Form::text('video_code_response', null, ['class' => 'form-control', 'required']) }}
-                </div>
+                </div> --}}
                 <div class="form-group ">
                     Pick up video
                     <div class="custom-file">

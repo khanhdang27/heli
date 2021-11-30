@@ -539,6 +539,7 @@ export default {
       axios
         .get(route("site.exam.getSpeakingQuizQuestionsClient", this.examId))
         .then((response) => {
+            console.log(response.data.questions);
           this.questionSpeaking = response.data.questions.questions.filter(
             (question) => {
               return question.speak_quiz_question !== null;

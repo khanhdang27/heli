@@ -37,8 +37,12 @@
                                     {{ Form::number('index', $question->index, ['class' => 'form-control', 'required']) }}
                                 </div>
                                 <div class="form-group">
+                                    <label for="long_answer" class="text-dark">Long Answer</label>
+                                    {{ Form::checkbox('long_answer', $question->questionContent()->long_answer) }}
+                                </div>
+                                <div class="form-group">
                                     <label for="question" class="required text-dark">Question</label>
-                                    {{ Form::textarea('question', $question->questionContent()->question, ['class' => 'form-control', 'required']) }}
+                                    {{ Form::textarea('question', $question->questionContent()->question, ['class' => 'form-control', 'required', 'rows' => '3']) }}
                                 </div>
                                 <div class="form-group">
                                     <label for="message_wrong" class="required text-dark">Message Wrong</label>

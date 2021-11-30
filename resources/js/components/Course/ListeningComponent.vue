@@ -11,10 +11,18 @@
           <div class="col-lg-8">
             <div v-if="startQuiz === false" class="h-100">
               <h5 class="text-center">There will be 1 audio for each part.</h5>
-              <div v-for="( part, index) in questionListeningPreview" :key="index">
-                <h5 class="font-weight-bold">{{ index | uppercase | replace }}</h5>
-                <div v-for="question in part " :key="question.id">
-                    <h5>{{question.index}}. {{ question.listen_assessment_question.question }}</h5>
+              <div
+                v-for="(part, index) in questionListeningPreview"
+                :key="index"
+              >
+                <h5 class="font-weight-bold">
+                  {{ index | uppercase | replace }}
+                </h5>
+                <div v-for="question in part" :key="question.id">
+                  <h5>
+                    {{ question.index }}.
+                    {{ question.listen_assessment_question.question }}
+                  </h5>
                 </div>
               </div>
             </div>
@@ -354,12 +362,9 @@
               </div>
             </div>
           </div>
-            <button
-               class="btn btn-primary mt-5"
-               v-on:click="otherTest()"
-            >
-                Other Test
-            </button>
+          <button class="btn btn-primary mt-5" v-on:click="otherTest()">
+            Other Test
+          </button>
         </div>
         <div v-else class="text-success text-center h-100">
           <h5>
@@ -426,9 +431,9 @@ export default {
       this.audioShow = true;
       this.startQuiz = false;
       this.questionListeningPreview = {
-          part_1: [],
-          part_2: [],
-      }
+        part_1: [],
+        part_2: [],
+      };
       this.getQuestion();
       this.getAnswerUser();
 
@@ -448,6 +453,7 @@ export default {
       });
       this.audioSrc = route("audio", audio.audio_code);
       this.$refs.audio.load();
+      this.$refs.audio.play();
     },
     audioStart() {
       this.audioShow = false;
@@ -486,13 +492,13 @@ export default {
               }
             }
           });
-            this.questionListening.forEach((item) => {
-                if (item.listen_assessment_question.part === 1) {
-                    this.questionListeningPreview.part_1.push(item);
-                } else {
-                    this.questionListeningPreview.part_2.push(item);
-                }
-            });
+          this.questionListening.forEach((item) => {
+            if (item.listen_assessment_question.part === 1) {
+              this.questionListeningPreview.part_1.push(item);
+            } else {
+              this.questionListeningPreview.part_2.push(item);
+            }
+          });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
           setTimeout(() => {
@@ -509,6 +515,7 @@ export default {
           route("site.exam.getListeningExerciseQuestionsClient", this.examId)
         )
         .then((response) => {
+          console.log(response.data.questions);
           this.questionListening = response.data.questions.questions.filter(
             (question) => {
               return question.listen_assessment_question !== null;
@@ -570,13 +577,13 @@ export default {
               }
             }
           });
-            this.questionListening.forEach((item) => {
-                if (item.listen_assessment_question.part === 1) {
-                    this.questionListeningPreview.part_1.push(item);
-                } else {
-                    this.questionListeningPreview.part_2.push(item);
-                }
-            });
+          this.questionListening.forEach((item) => {
+            if (item.listen_assessment_question.part === 1) {
+              this.questionListeningPreview.part_1.push(item);
+            } else {
+              this.questionListeningPreview.part_2.push(item);
+            }
+          });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
 
@@ -737,9 +744,9 @@ export default {
     start() {
       this.startQuiz = true;
     },
-      otherTest(){
-          this.$emit("reTryLecture");
-      }
+    otherTest() {
+      this.$emit("reTryLecture");
+    },
   },
 };
 </script>

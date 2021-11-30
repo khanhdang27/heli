@@ -40,7 +40,7 @@ class SpeakExercisesQuestionController extends Controller
     {
         $input = $request->validate([
             'video_code_practice' => 'required',
-            'video_code_response' => 'required',
+            // 'video_code_response' => 'required',
             'index' => 'required',
             'question' => 'required',
             'message_wrong' => 'required',
@@ -58,7 +58,7 @@ class SpeakExercisesQuestionController extends Controller
                 'question_id' => $question->id,
                 'question' => $input['question'],
                 'video_code_practice' => $input['video_code_practice'],
-                'video_code_response' => $input['video_code_response'],
+                // 'video_code_response' => $input['video_code_response'],
                 'message_wrong' => $input['message_wrong'],
                 'lecture_index' => $input['lecture_index'],
             ]);
@@ -104,7 +104,7 @@ class SpeakExercisesQuestionController extends Controller
     {
         $input = $request->validate([
             'video_code_practice' => 'required',
-            'video_code_response' => 'required',
+            // 'video_code_response' => 'required',
             'index' => 'required',
             'question' => 'required',
             'message_wrong' => 'required',
@@ -120,7 +120,7 @@ class SpeakExercisesQuestionController extends Controller
 
             $readQuestion->update([
                 'video_code_practice' => $input['video_code_practice'],
-                'video_code_response' => $input['video_code_response'],
+                // 'video_code_response' => $input['video_code_response'],
                 'question' => $input['question'],
                 'message_wrong' => $input['message_wrong'],
                 'lecture_index' => $input['lecture_index'],
