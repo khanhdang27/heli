@@ -253,16 +253,27 @@ class WalletController extends Controller
             if ($room != 0) {
                 $this->updateSchedule($room);
             }
-            $student_course = StudentCourses::create([
-                'course_id' => $order->course_id,
-                'student_id' => Auth::user()->id,
-                'room_live_course_id' => $room == 0 ? null : $room,
-                'latest_study' => new DateTime(),
-                'lecture_study' => 0,
-                'watched_list' => '0,',
-            ]);
-            DB::commit();
-            return redirect()->route('site.user.pay-success', ['course_id' => $student_course->course_id]);
+
+            $student_info = Auth::user()->student;
+
+            if ($this->checkLevel($student_info, $courses_with_group->membershipCourses->course)) {
+                $student_course = StudentCourses::create([
+                    'course_id' => $order->course_id,
+                    'student_id' => Auth::user()->id,
+                    'room_live_course_id' => $room == 0 ? null : $room,
+                    'latest_study' => new DateTime(),
+                    'lecture_study' => 0,
+                    'watched_list' => '0,',
+                ]);
+                DB::commit();
+                return redirect()->route('site.user.pay-success', ['course_id' => $student_course->course_id]);
+            } else {
+                DB::rollback();
+                return redirect()
+                    ->route('site.home')
+                    ->with('errors', 'you need to complete the previously "purchased level-crossing" course
+                    ');
+            }
         } catch (\Throwable $th) {
             DB::rollback();
             return redirect()
@@ -300,7 +311,15 @@ class WalletController extends Controller
         $product_id = $request;
 
         // DB::enableQueryLog();
-        $courses_with_group = CourseMembershipDiscount::with('membershipCourses', 'courseDiscounts', 'membershipCourses.course', 'membershipCourses.course.subject', 'membershipCourses.course.subject.certificate', 'membershipCourses.course.tutor', 'membershipCourses.course.courseMaterial')->find($product_id);
+        $courses_with_group = CourseMembershipDiscount::with([
+            'membershipCourses',
+            'courseDiscounts',
+            'membershipCourses.course',
+            'membershipCourses.course.subject',
+            'membershipCourses.course.subject.certificate',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.courseMaterial'
+        ])->find($product_id);
 
         $student_bought = StudentCourses::query()
             ->where([
@@ -345,69 +364,44 @@ class WalletController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function checkLevel($student, $course)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        switch ($course->type_part) {
+            case \Constants::COURSE_READING:
+                if (empty($student->exam_buy_read)) {
+                    $student->update(['exam_buy_read' => $course->level]);
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            case \Constants::COURSE_WRITING:
+                if (empty($student->exam_buy_write)) {
+                    $student->update(['exam_buy_write' => $course->level]);
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            case \Constants::COURSE_LISTENING:
+                if (empty($student->exam_buy_listen)) {
+                    $student->update(['exam_buy_listen' => $course->level]);
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            case \Constants::COURSE_SPEAKING:
+                if (empty($student->exam_buy_speak)) {
+                    $student->update(['exam_buy_speak' => $course->level]);
+                    return true;
+                } else {
+                    return false;
+                }
+                break;
+            default:
+                return false;
+                break;
+        }
     }
 }

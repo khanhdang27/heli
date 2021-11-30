@@ -78,6 +78,7 @@ return [
     'liveCourses' => '實時直播課程',
     'recordALesson' => '錄製課程',
     'coursePage' => [
+        'levelOverWarning' => '本课程高于被评估能力，如果您不及格，课程历史将被删除，您将不得不重新购买课程',
         'courseOverview' => '課程概覧',
         'mentorIntroduction' => '導師介紹',
         'studentEvaluation' => '學生評價',

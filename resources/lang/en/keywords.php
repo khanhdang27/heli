@@ -78,6 +78,7 @@ return [
     'liveCourses' => 'Live courses',
     'recordALesson' => 'Record a lesson',
     'coursePage' => [
+        'levelOverWarning' => 'This course is higher than the ability to be assessed, if you fail the course, history will be deleted and you will have to buy the course again.',
         'courseOverview' => 'Course overview',
         'mentorIntroduction' => 'Mentor introduction',
         'studentEvaluation' => 'Student Evaluation',

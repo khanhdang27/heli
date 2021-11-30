@@ -9,6 +9,7 @@ use App\Models\StudentCourses;
 use App\Models\Quiz;
 use App\Models\StudentExamination;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -196,6 +197,7 @@ class StudentExaminationController extends Controller
                 if ($input['questions'][0]['answerType'] == \Constants::ANSWER_MC) {
                     [$result, $score, $questionType] = $this->doGrade($quiz->questions, $input['questions'], $studentCourseId, $quizId, $exams->id);
                     $studentInfo = User::find($student_course->student_id)->student;
+
                     if ($score / count($result) > 0.8) {
                         $this->upLevel($studentInfo, $student_course, $questionType);
                     } else {
@@ -256,7 +258,7 @@ class StudentExaminationController extends Controller
                 'quiz_id' => $quizId,
                 'exam_id' => $examId,
                 'question_id' => $item['questionID'],
-            ])->first();
+            ])->with('question')->first();
             if (empty($answerRecord)) {
                 $_question = $question->where('id', $item['questionID'])->first();
                 $_answer = $_question
@@ -295,6 +297,10 @@ class StudentExaminationController extends Controller
                 ]);
             } else {
                 $score += $answerRecord->score;
+                if ($questionType == 0) {
+                    $answerRecord->load('question');
+                    $questionType = $answerRecord->question->type;
+                }
                 array_push($result, [
                     'is_correct' => $answerRecord->score != 0 ? true : false,
                     'question' => $answerRecord->question_id,
@@ -498,6 +504,7 @@ class StudentExaminationController extends Controller
                 }
                 $allQuestions = round($scoreAvg / $allQuestions);
                 $studentInfo = User::find($student_course->student_id)->student;
+
                 if ((int) $allQuestions >= \Constants::BASE_SCORE_PASS) {
                     $this->upLevel($studentInfo, $student_course, $studentExam->question->type);
                 } else {
@@ -525,7 +532,7 @@ class StudentExaminationController extends Controller
                 } else {
                     if ($studentInfo->exam_buy_read) {
                         $studentInfo->update(['exam_buy_read' => null]);
-                        $student_course->update(['failed' => time(), 'set_exam' => 1]);
+                        $student_course->update(['failed' => Carbon::parse(time())->format('Y-m-d H:i:s'), 'set_exam' => 1]);
                     } else {
                         $student_course->update(['set_exam' => 1]);
                     }
@@ -535,12 +542,12 @@ class StudentExaminationController extends Controller
                 if (empty($student_course->set_exam)) {
                     $student_course->update(['set_exam' => 1]);
                 }
-                if ($student_course->set_exam <= 4) {
+                if ($student_course->set_exam < 4) {
                     $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
                     if ($studentInfo->exam_buy_write) {
                         $studentInfo->update(['exam_buy_write' => null]);
-                        $student_course->update(['failed' => time(), 'set_exam' => 1]);
+                        $student_course->update(['failed' => Carbon::parse(time())->format('Y-m-d H:i:s'), 'set_exam' => 1]);
                     } else {
                         $student_course->update(['set_exam' => 1]);
                     }
@@ -550,12 +557,12 @@ class StudentExaminationController extends Controller
                 if (empty($student_course->set_exam)) {
                     $student_course->update(['set_exam' => 1]);
                 }
-                if ($student_course->set_exam <= 4) {
+                if ($student_course->set_exam < 4) {
                     $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
                     if ($studentInfo->exam_buy_listen) {
                         $studentInfo->update(['exam_buy_listen' => null]);
-                        $student_course->update(['failed' => time(), 'set_exam' => 1]);
+                        $student_course->update(['failed' => Carbon::parse(time())->format('Y-m-d H:i:s'), 'set_exam' => 1]);
                     } else {
                         $student_course->update(['set_exam' => 1]);
                     }
@@ -565,12 +572,12 @@ class StudentExaminationController extends Controller
                 if (empty($student_course->set_exam)) {
                     $student_course->update(['set_exam' => 1]);
                 }
-                if ($student_course->set_exam <= 4) {
+                if ($student_course->set_exam < 4) {
                     $student_course->update(['set_exam' => $student_course->set_exam + 1]);
                 } else {
                     if ($studentInfo->exam_buy_speak) {
                         $studentInfo->update(['exam_buy_speak' => null]);
-                        $student_course->update(['failed' => time(), 'set_exam' => 1]);
+                        $student_course->update(['failed' => Carbon::parse(time())->format('Y-m-d H:i:s'), 'set_exam' => 1]);
                     } else {
                         $student_course->update(['set_exam' => 1]);
                     }
