@@ -180,15 +180,14 @@ $lang = [ 'subscribeUs' => __('keywords.subscribe.subscribeUs'),
     <x-home.review></x-home.review>
     @endif
     @if (!Auth::check() || (!NewsletterFacade::isSubscribed(Auth::user()->email)))
-    {{--        <x-subscribe-container></x-subscribe-container>--}}
     <subscribe-container v-bind:lang="{{json_encode($lang)}}"></subscribe-container>
     @endif
 </div>
 @push('scripts')
 <script>
     $('#modalAssessment').modal({
-                show: true
-            })
+        show: true
+    })
 </script>
 @endpush
 @endsection

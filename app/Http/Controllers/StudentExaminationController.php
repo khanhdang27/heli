@@ -275,7 +275,7 @@ class StudentExaminationController extends Controller
                     'is_correct' => $_answer_id_correct,
                     'question' => $_question->id,
                 ]);
-                if ($_answer->is_correct) {
+                if ($_answer_id_correct) {
                     $score += \Constants::BASE_SCORE_MC;
                 }
 
