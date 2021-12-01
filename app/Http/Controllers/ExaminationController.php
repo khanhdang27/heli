@@ -166,7 +166,7 @@ class ExaminationController extends Controller
             'quiz.passage',
         ]);
 
-        $questions = $exams->quiz[0];
+        $questions = $exams->quiz[0]->questions;
         $passages = $exams->quiz[0]->passage;
 
         DB::commit();
@@ -194,7 +194,7 @@ class ExaminationController extends Controller
                 },
                 'quiz.passage',
             ]);
-            $questions = $exams->quiz[0];
+            $questions = $exams->quiz[0]->questions;
             $passages = $exams->quiz[0]->passage;
 
             DB::commit();
@@ -259,7 +259,7 @@ class ExaminationController extends Controller
                 $query->inRandomOrder();
             },
         ]);
-        $questions = $exams->quiz[0];
+        $questions = $exams->quiz[0]->questions;
         return response()->json(['questions' => $questions]);
     }
 
@@ -284,7 +284,7 @@ class ExaminationController extends Controller
                     $query->inRandomOrder();
                 },
             ]);
-            $questions = $exams->quiz[0];
+            $questions = $exams->quiz[0]->questions;
             DB::commit();
             return response()->json(['questions' => $questions]);
         } catch (\Throwable $th) {
@@ -523,7 +523,7 @@ class ExaminationController extends Controller
                 $query->inRandomOrder();
             },
         ]);
-        $questions = $exams->quiz[0];
+        $questions = $exams->quiz[0]->questions;
         return response()->json(['questions' => $questions]);
     }
 
@@ -545,7 +545,7 @@ class ExaminationController extends Controller
                 },
                 'quiz.questions.speakExercisesQuestion',
             ]);
-            $questions = $exams->quiz[0];
+            $questions = $exams->quiz[0]->questions;
             DB::commit();
             return response()->json(['questions' => $questions]);
         } catch (\Throwable $th) {
