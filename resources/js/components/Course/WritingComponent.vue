@@ -408,7 +408,7 @@ export default {
         .then((response) => {
           console.log("response.data >>>", response.data);
 
-          this.questionWriting = response.data.questions.questions.filter(
+          this.questionWriting = response.data.questions.filter(
             (question) => {
               return question.writing_assessment_question !== null;
             }
@@ -437,7 +437,7 @@ export default {
         .get(route("site.exam.getWritingExerciseQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data);
-          this.questionWriting = response.data.questions.questions;
+          this.questionWriting = response.data.questions;
         })
         .catch(function (error) {
           console.error(error);
@@ -448,7 +448,7 @@ export default {
         .get(route("site.exam.getWritingQuizQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data);
-          this.questionWriting = response.data.questions.questions;
+          this.questionWriting = Object.values(response.data.questions);
         })
         .catch(function (error) {
           console.error(error);
@@ -516,10 +516,13 @@ export default {
       this.userAnswerQuiz({
         answerType:
           this.typeExam === this.$root.$getConst("quiz")
-            ? this.$root.$getConst("Text")
-            : this.$root.$getConst("MC"),
+          ? this.$root.$getConst("Text")
+          : this.$root.$getConst("MC"),
         questionID: parseInt(this.questionWriting[this.questionIndex].id),
-        answerID: this.userChoose[this.questionIndex],
+        answerID:
+          this.typeExam === this.$root.$getConst("quiz")
+          ? this.userChoose[this.questionIndex] || ''
+          : this.userChoose[this.questionIndex] || 0,
         time: this.timeDo,
       });
     },

@@ -7,6 +7,7 @@
         v-bind:courseId="courseId"
         @nextTypeExam="nextTypeExam"
         @goToLecture="goToLecture"
+        @reTryLecture="reTryLecture"
       >
       </reading-component>
     </div>
@@ -16,6 +17,7 @@
         v-bind:typeExam="typeExam"
         v-bind:courseId="courseId"
         @nextTypeExam="nextTypeExam"
+        @reTryLecture="reTryLecture"
       >
       </writing-component>
     </div>
@@ -26,6 +28,7 @@
         v-bind:courseId="courseId"
         @nextTypeExam="nextTypeExam"
         @goToLecture="goToLecture"
+        @reTryLecture="reTryLecture"
       ></listening-component>
     </div>
     <div v-if="typeExercise === $getConst('speaking')" class="h-100">
@@ -34,6 +37,7 @@
         v-bind:typeExam="typeExam"
         v-bind:courseId="courseId"
         @nextToLecture="nextToLecture"
+        @reTryLecture="reTryLecture"
       ></speaking-component>
     </div>
   </div>

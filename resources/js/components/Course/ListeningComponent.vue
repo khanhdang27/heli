@@ -5,12 +5,12 @@
       <div
         class="container-fluid h-100 d-flex flex-column justify-content-between"
       >
+        <h5 class="text-center">There will be 1 audio for each part.</h5>
         <div
           class="py-4 h-100 row justify-content-center lecture overflow-auto"
         >
           <div class="col-lg-8">
             <div v-if="startQuiz === false" class="h-100">
-              <h5 class="text-center">There will be 1 audio for each part.</h5>
               <div
                 v-for="(part, index) in questionListeningPreview"
                 :key="index"
@@ -18,9 +18,9 @@
                 <h5 class="font-weight-bold">
                   {{ index | uppercase | replace }}
                 </h5>
-                <div v-for="question in part" :key="question.id">
+                <div v-for="(question,index) in part" :key="question.id">
                   <h5>
-                    {{ question.index }}.
+                    {{ index + 1 }}.
                     {{ question.listen_assessment_question.question }}
                   </h5>
                 </div>
@@ -453,11 +453,13 @@ export default {
   methods: {
     loadAudio() {
       let audio = this.audioCodes.find((item) => {
-        return item.part == this.audioPart;
+        return item.part === this.audioPart;
       });
       this.audioSrc = route("audio", audio.audio_code);
-      this.$refs.audio.load();
-      this.$refs.audio.play();
+      if (this.audioSrc){
+          this.$refs.audio.load();
+          this.$refs.audio.play();
+      }
     },
     audioStart() {
       this.audioShow = false;
@@ -477,7 +479,8 @@ export default {
           route("site.exam.getListeningAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          this.questionListening = response.data.questions.questions.filter(
+            let arrayQuestionListening = Object.values(response.data.questions)
+            this.questionListening = arrayQuestionListening.filter(
             (question) => {
               return question.listen_assessment_question !== null;
             }
@@ -520,7 +523,8 @@ export default {
         )
         .then((response) => {
           console.log(response.data.questions);
-          this.questionListening = response.data.questions.questions.filter(
+          let arrayQuestionListening = Object.values(response.data.questions)
+          this.questionListening = arrayQuestionListening.filter(
             (question) => {
               return question.listen_assessment_question !== null;
             }
@@ -562,7 +566,8 @@ export default {
         .get(route("site.exam.getListeningQuizQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data.questions);
-          this.questionListening = response.data.questions.questions.filter(
+          let arrayQuestionListening = Object.values(response.data.questions)
+            this.questionListening = arrayQuestionListening.filter(
             (question) => {
               return question.listen_assessment_question !== null;
             }

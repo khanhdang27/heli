@@ -402,8 +402,8 @@ export default {
           route("site.exam.getReadingAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          this.passage = response.data.questions.passage.content;
-          this.questionReading = response.data.questions.questions;
+          this.passage = response.data.passages.content;
+          this.questionReading = response.data.questions;
         })
         .catch(function (error) {
           console.error(error);
@@ -414,8 +414,8 @@ export default {
         .get(route("site.exam.getReadingExerciseQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data);
-          this.passage = response.data.questions.passage.content;
-          this.questionReading = response.data.questions.questions;
+          this.passage = response.data.passages.content;
+          this.questionReading = response.data.questions;
 
         })
         .catch(function (error) {
@@ -427,8 +427,8 @@ export default {
         .get(route("site.exam.getReadingQuizQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data.questions);
-          this.passage = response.data.questions.passage.content;
-          this.questionReading = response.data.questions.questions;
+          this.passage = response.data.passages.content;
+          this.questionReading = response.data.questions;
         })
         .catch(function (error) {
           console.error(error);
@@ -485,7 +485,7 @@ export default {
       this.userAnswerQuiz({
         answerType: this.$root.$getConst("MC"),
         questionID: parseInt(this.questionReading[this.questionIndex].id),
-        answerID: this.userChoose[this.questionIndex],
+        answerID: this.userChoose[this.questionIndex] || 0,
         time: this.timeDo,
       });
     },
