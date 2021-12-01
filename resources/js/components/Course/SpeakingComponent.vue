@@ -97,7 +97,7 @@
             </div>
             <div v-else>
               <div class="h-100" v-if="typeExam === $getConst('quiz')">
-              <div class="h4 text-center timer mb-3">
+              <div class="h4 text-center timer mb-3" v-if="pause === true || showLastQuestion === true">
                 <vue-countdown-timer
                   id="timePause"
                   v-if="pause === true"
@@ -487,7 +487,7 @@ export default {
       axios
         .get(route("site.exam.getSpeakingExerciseQuestionsClient", this.examId))
         .then((response) => {
-          this.questionSpeaking = response.data.questions.questions.filter(
+          this.questionSpeaking = response.data.questions.filter(
             (question) => {
               return question.speak_exercises_question !== null;
             }
@@ -541,6 +541,10 @@ export default {
             this.timeNow = new Date();
             this.timeEnd = new Date();
             this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
+          }
+          if (this.questionIndex === this.questionSpeaking.length - 3){
+              this.pause = false;
+              this.showLastQuestion = false;
           }
         }
         if (this.typeExam === this.$root.$getConst("quiz")) {
