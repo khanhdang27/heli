@@ -12476,7 +12476,7 @@ body {
   background-color: rgba(10, 10, 125, 0.3);
 }
 
-.lecture {
+.course-content {
   max-height: 610px;
 }
 
@@ -12499,6 +12499,10 @@ body {
 
 .dropdown-noti:focus {
   outline: none;
+}
+
+.lecture {
+  max-height: 500px;
 }
 
 .rating {

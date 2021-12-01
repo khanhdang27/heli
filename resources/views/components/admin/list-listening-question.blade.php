@@ -13,14 +13,20 @@ use App\Models\ListenAssessmentQuestion;
                     aria-controls="collapseAnswerListening_{{ $question->id }}">
                     {{ $question->index }} - {{ $question->questionContent()->question }}
                 </div>
-                <div class="ml-auto w-25">
-                    <button class="btn btn-warning btn-sm m-1 w-100" data-toggle="modal"
-                        data-target="#modalListeningQuestion_{{ $question->id }}"> Update </button>
-                    <button class="btn btn-danger btn-sm  m-1 w-100"
-                        onclick="itemDelete(`{{ route('admin.quiz.question.listening.assessment.destroy', ['quiz' => $quiz->id, 'question' => $question->id]) }}`)">
-                        Delete </button>
+                <div class="ml-auto w-25 d-flex">
+                    <div class="w-50 py-4 align-items-center">
+                        <strong>
+                            Part {{ $question->questionContent()->part }}
+                        </strong>
+                    </div>
+                    <div class="w-50 d-inline-block">
+                        <button class="btn btn-warning btn-sm m-1 w-100" data-toggle="modal"
+                            data-target="#modalListeningQuestion_{{ $question->id }}"> Update </button>
+                        <button class="btn btn-danger btn-sm  m-1 w-100"
+                            onclick="itemDelete(`{{ route('admin.quiz.question.listening.assessment.destroy', ['quiz' => $quiz->id, 'question' => $question->id]) }}`)">
+                            Delete </button>
+                    </div>
                 </div>
-
                 <div class="modal fade" id="modalListeningQuestion_{{ $question->id }}" tabindex="0" role="dialog"
                     aria-labelledby="modalListeningQuestion_{{ $question->id }}_Title" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -92,9 +98,6 @@ use App\Models\ListenAssessmentQuestion;
                                         <input type="radio" class="form-check-input" id="answer_${data.answer.id}" name="answer"  value="${data.answer.id}" >
                                         <label class="form-check-label " for="answer_${data.answer.id}">${data.answer.answer}</label>
                                     </div>
-                                    <a href="javascript:void(0)">
-                                        <i class="fe fe-trash mr-2 text-danger"></i>
-                                    </a>
                                 </li>`;
 
                                         document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;

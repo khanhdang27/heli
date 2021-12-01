@@ -31,7 +31,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.speaking.assessment.update', ['quiz' => $quiz->id, 'question' => $question->id]), 'id' => 'formReadingQuestion_{{ $question->id }}', 'enctype' => 'multipart/form-data']) !!}
+                                {!! Form::open(['methods' => 'put', 'url' => route('admin.quiz.question.speaking.assessment.update', ['quiz' => $quiz->id, 'question' => $question->id]), 'id' => 'formReadingQuestion_' . $question->id, 'enctype' => 'multipart/form-data']) !!}
                                 <div class="form-group">
                                     <label for="index" class="required text-dark">Index</label>
                                     {{ Form::number('index', $question->index, ['class' => 'form-control', 'required']) }}
@@ -96,9 +96,6 @@
                                         <input type="radio" class="form-check-input" id="answer_${data.answer.id}" name="answer"  value="${data.answer.id}" >
                                         <label class="form-check-label " for="answer_${data.answer.id}" >${data.answer.answer}</label>
                                     </div>
-                                    <a href="javascript:void(0)">
-                                        <i class="fe fe-trash mr-2 text-danger"></i>
-                                    </a>
                                 </li>`;
 
                                         document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;

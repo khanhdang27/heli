@@ -23,6 +23,7 @@ class CreateWritingQuizQuestionsTable extends Migration
             $table->text('question');
             $table->text('message_wrong');
             $table->bigInteger('lecture_index');
+            $table->boolean('long_answer');
             $table->softDeletes();
             $table->timestamps();
         });

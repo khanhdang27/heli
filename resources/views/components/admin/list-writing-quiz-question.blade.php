@@ -12,12 +12,19 @@ use App\Models\WritingQuizQuestion;
                     aria-controls="collapseAnswerWritingQuiz_{{ $question->id }}">
                     {{ $question->index }} - {{ $question->questionContent()->question }}
                 </div>
-                <div class="ml-auto w-25">
-                    <button class="btn btn-warning btn-sm m-1 w-100" data-toggle="modal"
-                        data-target="#modalWritingQuizQuestion_{{ $question->id }}"> Update </button>
-                    <button class="btn btn-danger btn-sm  m-1 w-100"
-                        onclick="itemDelete('{{ route('admin.quiz.question.writing.quiz.destroy', ['quiz' => $quiz->id, 'question' => $question->id]) }}')">
-                        Delete </button>
+                <div class="ml-auto w-25 d-flex">
+                    <div class="w-50 py-4 align-items-center">
+                        <strong>
+                            Part {{ $question->questionContent()->part }}
+                        </strong>
+                    </div>
+                    <div class="w-50">
+                        <button class="btn btn-warning btn-sm m-1 w-100" data-toggle="modal"
+                            data-target="#modalWritingQuizQuestion_{{ $question->id }}"> Update </button>
+                        <button class="btn btn-danger btn-sm  m-1 w-100"
+                            onclick="itemDelete('{{ route('admin.quiz.question.writing.quiz.destroy', ['quiz' => $quiz->id, 'question' => $question->id]) }}')">
+                            Delete </button>
+                    </div>
                 </div>
 
                 <div class="modal fade" id="modalWritingQuizQuestion_{{ $question->id }}" tabindex="0"

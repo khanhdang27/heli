@@ -165,8 +165,12 @@ class ExaminationController extends Controller
             },
             'quiz.passage',
         ]);
+
         $questions = $exams->quiz[0];
-        return response()->json(['questions' => $questions]);
+        $passages = $exams->quiz[0]->passage;
+
+        DB::commit();
+        return response()->json(['questions' => $questions, 'passages' => $passages]);
     }
     public function getReadingExerciseQuestionsClient(Examination $exams)
     {
@@ -191,9 +195,10 @@ class ExaminationController extends Controller
                 'quiz.passage',
             ]);
             $questions = $exams->quiz[0];
+            $passages = $exams->quiz[0]->passage;
 
             DB::commit();
-            return response()->json(['questions' => $questions]);
+            return response()->json(['questions' => $questions, 'passages' => $passages]);
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json(
@@ -204,6 +209,7 @@ class ExaminationController extends Controller
             );
         }
     }
+
     public function getReadingQuizQuestionsClient(Examination $exams)
     {
         DB::beginTransaction();
@@ -226,10 +232,11 @@ class ExaminationController extends Controller
                 },
                 'quiz.passage',
             ]);
-            $questions = $exams->quiz[0];
+            $questions = $exams->quiz[0]->questions;
+            $passages = $exams->quiz[0]->passage;
 
             DB::commit();
-            return response()->json(['questions' => $questions]);
+            return response()->json(['questions' => $questions, 'passages' => $passages]);
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json(
@@ -310,7 +317,7 @@ class ExaminationController extends Controller
                     $query->where('part', \Constants::QUESTION_PART_1);
                 },
                 'quiz.questions' => function ($query) {
-                    $query->where('type', '=', \Constants::COURSE_WRITING)->inRandomOrder()->limit(1);
+                    $query->where('type', '=', \Constants::COURSE_WRITING)->inRandomOrder();
                 },
                 'quiz.questions.writingQuizQuestion.picture',
             ]);
@@ -322,11 +329,15 @@ class ExaminationController extends Controller
                     $query->where('part', \Constants::QUESTION_PART_2);
                 },
                 'quiz.questions' => function ($query) {
-                    $query->where('type', '=', \Constants::COURSE_WRITING)->inRandomOrder()->limit(1);
+                    $query->where('type', '=', \Constants::COURSE_WRITING)->inRandomOrder();
                 },
             ]);
+
+            $part_1->quiz[0]->questions = $part_1->quiz[0]->questions->whereNotNull('writingQuizQuestion')->take(1);
+            $part_2->quiz[0]->questions = $part_2->quiz[0]->questions->whereNotNull('writingQuizQuestion')->take(1);
+
             $questions = $part_1->quiz[0]->questions->concat($part_2->quiz[0]->questions);
-            // $questions = $questions->whereNotNull('writingQuizQuestion')->all();
+            $questions = $questions->whereNotNull('writingQuizQuestion')->all();
             DB::commit();
             return response()->json(['questions' => $questions]);
         } catch (\Throwable $th) {
@@ -346,10 +357,10 @@ class ExaminationController extends Controller
         $exam_2 = clone $exams;
         $part_1 = $exam_1->load([
             'quiz.questions.listenAssessmentQuestion' => function ($query) {
-                $query->where('listen_assessment_questions.part', '=', \Constants::QUESTION_PART_1);
+                $query->where('part', '=', \Constants::QUESTION_PART_1);
             },
             'quiz.questions' => function ($query) {
-                $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder()->limit(5);
+                $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder();
             },
             'quiz.questions.listenAssessmentQuestion.answers' => function ($query) {
                 $query->inRandomOrder();
@@ -357,15 +368,19 @@ class ExaminationController extends Controller
         ]);
         $part_2 = $exam_2->load([
             'quiz.questions.listenAssessmentQuestion' => function ($query) {
-                $query->where('listen_assessment_questions.part', '=', \Constants::QUESTION_PART_2);
+                $query->where('part', '=', \Constants::QUESTION_PART_2);
             },
             'quiz.questions' => function ($query) {
-                $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder()->limit(5);
+                $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder();
             },
             'quiz.questions.listenAssessmentQuestion.answers' => function ($query) {
                 $query->inRandomOrder();
             },
         ]);
+
+        $part_1->quiz[0]->questions = $part_1->quiz[0]->questions->whereNotNull('listenAssessmentQuestion')->take(5);
+        $part_2->quiz[0]->questions = $part_2->quiz[0]->questions->whereNotNull('listenAssessmentQuestion')->take(5);
+
         $questions = $part_1->quiz[0]->questions->concat($part_2->quiz[0]->questions);
         $questions = $questions->whereNotNull('listenAssessmentQuestion')->all();
         $audioCodes = AudioListen::where('quiz_id', '=', $part_1->quiz[0]->id)->get();
@@ -393,12 +408,13 @@ class ExaminationController extends Controller
                     $query->where('part', \Constants::QUESTION_PART_1);
                 },
                 'quiz.questions' => function ($query) {
-                    $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder()->limit(5);
+                    $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder();
                 },
                 'quiz.questions.listenAssessmentQuestion.answers' => function ($query) {
                     $query->inRandomOrder();
                 },
             ]);
+
             $part_2 = $exam_2->load([
                 'quiz' => function ($query) use ($set) {
                     $query->where('set', '=', $set);
@@ -407,12 +423,15 @@ class ExaminationController extends Controller
                     $query->where('part', \Constants::QUESTION_PART_2);
                 },
                 'quiz.questions' => function ($query) {
-                    $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder()->limit(5);
+                    $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder();
                 },
                 'quiz.questions.listenAssessmentQuestion.answers' => function ($query) {
                     $query->inRandomOrder();
                 },
             ]);
+
+            $part_1->quiz[0]->questions = $part_1->quiz[0]->questions->whereNotNull('listenAssessmentQuestion')->take(5);
+            $part_2->quiz[0]->questions = $part_2->quiz[0]->questions->whereNotNull('listenAssessmentQuestion')->take(5);
 
             $questions = $part_1->quiz[0]->questions->concat($part_2->quiz[0]->questions);
             $questions = $questions->whereNotNull('listenAssessmentQuestion')->all();
@@ -452,7 +471,7 @@ class ExaminationController extends Controller
                     $query->where('part', \Constants::QUESTION_PART_1);
                 },
                 'quiz.questions' => function ($query) {
-                    $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder()->limit(5);
+                    $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder();
                 },
                 'quiz.questions.listenAssessmentQuestion.answers' => function ($query) {
                     $query->inRandomOrder();
@@ -466,16 +485,20 @@ class ExaminationController extends Controller
                     $query->where('part', \Constants::QUESTION_PART_2);
                 },
                 'quiz.questions' => function ($query) {
-                    $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder()->limit(5);
+                    $query->where('type', '=', \Constants::COURSE_LISTENING)->inRandomOrder();
                 },
                 'quiz.questions.listenAssessmentQuestion.answers' => function ($query) {
                     $query->inRandomOrder();
                 },
             ]);
 
+            $part_1->quiz[0]->questions = $part_1->quiz[0]->questions->whereNotNull('listenAssessmentQuestion')->take(5);
+            $part_2->quiz[0]->questions = $part_2->quiz[0]->questions->whereNotNull('listenAssessmentQuestion')->take(5);
+
             $questions = $part_1->quiz[0]->questions->concat($part_2->quiz[0]->questions);
             $questions = $questions->whereNotNull('listenAssessmentQuestion')->all();
             $audioCodes = AudioListen::where('quiz_id', '=', $part_1->quiz[0]->id)->get();
+
             DB::commit();
             return response()->json(['questions' => $questions, 'audioCodes' => $audioCodes]);
         } catch (\Throwable $th) {
@@ -570,6 +593,11 @@ class ExaminationController extends Controller
                     $query->where('type', '=', \Constants::COURSE_SPEAKING)->inRandomOrder()->limit(1);
                 },
             ]);
+
+
+            $short->quiz[0]->questions = $short->quiz[0]->questions->whereNotNull('speakQuizQuestion')->take(5);
+            $long->quiz[0]->questions = $long->quiz[0]->questions->whereNotNull('speakQuizQuestion')->take(5);
+
             $questions = $short->quiz[0]->questions->concat($long->quiz[0]->questions);
             $questions = $questions->whereNotNull('speakQuizQuestion')->all();
             DB::commit();
