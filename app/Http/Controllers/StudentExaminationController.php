@@ -267,11 +267,14 @@ class StudentExaminationController extends Controller
                     ->answers->where('id', $item['answerID'])
                     ->first();
 
+                $_answer_id_correct = false;
+                if (!empty($_answer)) {
+                    $_answer_id_correct = $_answer->is_correct;
+                }
                 array_push($result, [
-                    'is_correct' => $_answer->is_correct,
+                    'is_correct' => $_answer_id_correct,
                     'question' => $_question->id,
                 ]);
-
                 if ($_answer->is_correct) {
                     $score += \Constants::BASE_SCORE_MC;
                 }
@@ -285,7 +288,7 @@ class StudentExaminationController extends Controller
                     'answer' => $item['answerID'],
                     'time' => $item['time'],
                     'reviewed' => true,
-                    'score' => $_answer->is_correct ? \Constants::BASE_SCORE_MC : 0,
+                    'score' => $_answer_id_correct ? \Constants::BASE_SCORE_MC : 0,
                 ]);
 
                 if ($questionType == 0) {

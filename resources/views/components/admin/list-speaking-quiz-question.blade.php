@@ -8,12 +8,25 @@
                     aria-controls="collapseAnswerSpeakingQuiz_{{ $question->id }}">
                     {{ $question->index }} - {{ $question->questionContent()->question }}
                 </div>
-                <div class="ml-auto w-25">
-                    <button class="btn btn-warning btn-sm m-1 w-100" data-toggle="modal"
-                        data-target="#modalSpeakingQuizQuestion_{{ $question->id }}"> Update </button>
-                    <button class="btn btn-danger btn-sm  m-1 w-100"
-                        onclick="itemDelete('{{ route('admin.quiz.question.speaking.quiz.destroy', ['quiz' => $quiz->id, 'question' => $question->id]) }}')">
-                        Delete </button>
+                <div class="ml-auto w-25 d-flex">
+                    <div class="w-50 py-2 align-items-center">
+                        @if ($question->questionContent()->long_answer)
+                            <strong>
+                                Long Answer
+                            </strong>
+                        @else
+                            <strong>
+                                Short Answer
+                            </strong>
+                        @endif
+                    </div>
+                    <div class="w-50">
+                        <button class="btn btn-warning btn-sm m-1 w-100" data-toggle="modal"
+                            data-target="#modalSpeakingQuizQuestion_{{ $question->id }}"> Update </button>
+                        <button class="btn btn-danger btn-sm  m-1 w-100"
+                            onclick="itemDelete('{{ route('admin.quiz.question.speaking.quiz.destroy', ['quiz' => $quiz->id, 'question' => $question->id]) }}')">
+                            Delete </button>
+                    </div>
                 </div>
 
                 <div class="modal fade" id="modalSpeakingQuizQuestion_{{ $question->id }}" tabindex="0"
@@ -38,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="long_answer" class="text-dark">Long Answer</label>
-                                    {{ Form::checkbox('long_answer', $question->questionContent()->long_answer) }}
+                                    {{ Form::checkbox('long_answer', $question->questionContent()->id, $question->questionContent()->long_answer ? 'checked' : '') }}
                                 </div>
                                 <div class="form-group">
                                     <label for="question" class="required text-dark">Question</label>
