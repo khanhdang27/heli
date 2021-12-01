@@ -404,6 +404,7 @@ export default {
           .audio_ref
       );
       this.$refs.audioSpeaking.load();
+      this.$refs.audioSpeaking.play();
     },
     createVideoRecord() {
       // this.player = videojs(this.$refs.videoPlayer);
@@ -468,7 +469,7 @@ export default {
           route("site.exam.getSpeakingAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          this.questionSpeaking = response.data.questions.questions.filter(
+          this.questionSpeaking = response.data.questions.filter(
             (question) => {
               return question.speak_assessment_question !== null;
             }
@@ -509,12 +510,20 @@ export default {
       axios
         .get(route("site.exam.getSpeakingQuizQuestionsClient", this.examId))
         .then((response) => {
-            console.log(response.data.questions);
-          this.questionSpeaking = response.data.questions.questions.filter(
+            console.log(response.data);
+            let arrayQuestionSpeaking = Object.values(response.data.questions)
+          this.questionSpeaking = arrayQuestionSpeaking.filter(
             (question) => {
               return question.speak_quiz_question !== null;
             }
           );
+            let long_question = '';
+            this.questionSpeaking.forEach((item, index) => {
+                if (item.speak_quiz_question.long_answer){
+                    long_question = this.questionSpeaking.splice(index,1)
+                }
+            });
+            this.questionSpeaking.splice(3,0,long_question[0]);
           this.createVideoRecord();
         })
         .catch(function (error) {
@@ -575,7 +584,7 @@ export default {
         this.userAnswerQuiz({
           answerType: this.$root.$getConst("MC"),
           questionID: parseInt(this.questionSpeaking[this.questionIndex].id),
-          answerID: this.userChoose[this.questionIndex],
+          answerID: this.userChoose[this.questionIndex] || 0,
           time: this.timeDo,
         });
       } else if (this.typeExam === this.$root.$getConst("quiz")) {
