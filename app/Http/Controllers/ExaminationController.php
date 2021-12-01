@@ -579,7 +579,7 @@ class ExaminationController extends Controller
                     $query->where('long_answer', '=', false);
                 },
                 'quiz.questions' => function ($query) {
-                    $query->where('type', '=', \Constants::COURSE_SPEAKING)->inRandomOrder()->limit(5);
+                    $query->where('type', '=', \Constants::COURSE_SPEAKING)->inRandomOrder();
                 },
             ]);
             $long = $exam_2->load([
@@ -590,13 +590,13 @@ class ExaminationController extends Controller
                     $query->where('long_answer', '=', true);
                 },
                 'quiz.questions' => function ($query) {
-                    $query->where('type', '=', \Constants::COURSE_SPEAKING)->inRandomOrder()->limit(1);
+                    $query->where('type', '=', \Constants::COURSE_SPEAKING)->inRandomOrder();
                 },
             ]);
 
 
             $short->quiz[0]->questions = $short->quiz[0]->questions->whereNotNull('speakQuizQuestion')->take(5);
-            $long->quiz[0]->questions = $long->quiz[0]->questions->whereNotNull('speakQuizQuestion')->take(5);
+            $long->quiz[0]->questions = $long->quiz[0]->questions->whereNotNull('speakQuizQuestion')->take(1);
 
             $questions = $short->quiz[0]->questions->concat($long->quiz[0]->questions);
             $questions = $questions->whereNotNull('speakQuizQuestion')->all();
