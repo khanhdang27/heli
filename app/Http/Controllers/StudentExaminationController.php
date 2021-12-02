@@ -14,6 +14,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class StudentExaminationController extends Controller
 {
@@ -30,11 +34,21 @@ class StudentExaminationController extends Controller
         ])->select('student_course_id', 'exam_id', 'quiz_id', 'reviewed')
             ->orderBy('reviewed')
             ->distinct()
-            ->paginate(15);
+            ->get();
+        $data = $this->paginate($exam_details, 15);
         return view('admin.student-examination.index', [
-            'exam_details' => $exam_details,
+            'exam_details' => $data,
         ]);
     }
+
+
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, ['path' => URL::current()]);
+    }
+
 
     /**
      * Show the form for creating a new resource.

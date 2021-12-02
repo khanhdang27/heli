@@ -159,8 +159,8 @@
                                     <!-- Modal answer details-->
                                     <div class="modal fade" id="viewDetailsAnswer_{{ $detail->question->id }}"
                                          aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-scrollable modal-xl text-primary">
-                                            <div class="modal-content">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-xl text-primary h-100">
+                                            <div class="modal-content h-100">
                                                 <div class="modal-header">
                                                     <h3 class="modal-title font-weight-bold">
                                                         Answer details</h3>
@@ -181,10 +181,12 @@
                                                             <h5>{!! $detail->answer !!}</h5>
                                                         @else
                                                             @if (!empty($detail->answer))
-                                                                <vimeo-player
-                                                                    class="embed-responsive embed-responsive-16by9"
-                                                                    ref="player" :video-id="{{ $detail->answer }}">
-                                                                </vimeo-player>
+                                                            <div style="padding:25% 0 0 0;position:relative;" class="h-100">
+                                                                <iframe
+                                                                    src="{{ 'https://player.vimeo.com/video/' . $detail->answer . '?badge=0&autopause=0&app_id=' . config('app.vimeo_app_id') }}"
+                                                                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                                                                    style="position:absolute;top:0;left:0;" height="80%" class="embed-responsive embed-responsive-16by9"></iframe>
+                                                            </div>
                                                             @endif
                                                         @endif
 
