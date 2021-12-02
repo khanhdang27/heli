@@ -52,16 +52,13 @@ export default {
     this.$parent.$on("onclose", this.onClose);
   },
   mounted() {
-    this.typeExercise = this.$root.$getConst("reading");
+    this.typeExercise = this.$root.$getConst("speaking");
   },
   methods: {
     nextTypeExam: function (type) {
       this.typeExercise = type;
     },
-    onClose() {
-      console.log("tat di");
-      // this.$destroy();
-    },
+    onClose() {},
   },
 };
 </script>

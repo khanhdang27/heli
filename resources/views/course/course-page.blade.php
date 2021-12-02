@@ -6,9 +6,8 @@ use App\Models\User;
 $course = $courseDetail->membershipCourses->course;
 $latesLecture = null;
 $studentPartLevel = null;
-if (!empty($student_course)) {
-    $latesLecture = $student_course->lecture_study;
 
+if (Auth::check()) {
     $student = Auth::user()->student;
     switch ($course->type_part) {
         case \Constants::COURSE_READING:
@@ -30,6 +29,11 @@ if (!empty($student_course)) {
     }
 }
 
+
+if (!empty($student_course)) {
+    $latesLecture = $student_course->lecture_study;
+}
+
 @endphp
 
 @extends('layout.app')
@@ -40,7 +44,7 @@ if (!empty($student_course)) {
     <hr class="m-0">
     <div class="body-content container-fluid p-0">
         @if (!Auth::check() || empty($student_course))
-            @if (Auth::check() && $studentPartLevel < $course->type_part)
+            @if (Auth::check() && $studentPartLevel < $course->level)
                 <div class="container-fluid show-video pt-2">
                     <div class="alert alert-warning" role="alert">
                         <h5 class="font-weight-bold text-center"> @lang('keywords.coursePage.levelOverWarning') </h5>

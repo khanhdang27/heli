@@ -92,156 +92,164 @@
                 width="100%"
               />
             </div>
-            <div class="text-center" v-if="typeExam !== $getConst('exercise') && startQuiz===false">
-                  <button class="btn btn-success" v-on:click="start()">Start</button>
+            <div
+              class="text-center"
+              v-if="typeExam !== $getConst('exercise') && startQuiz === false"
+            >
+              <button class="btn btn-success" v-on:click="start()">
+                Start
+              </button>
             </div>
             <div v-else>
               <div class="h-100" v-if="typeExam === $getConst('quiz')">
-              <div class="h4 text-center timer mb-3" v-if="pause === true || showLastQuestion === true">
-                <vue-countdown-timer
-                  id="timePause"
-                  v-if="pause === true"
-                  @start_callback="startCallBackTimePause('event started')"
-                  @end_callback="endCallBackTimePause('event ended')"
-                  :start-time="timeNow"
-                  :end-time="timeEnd"
-                  :interval="1000"
-                  :start-label="'Until start:'"
-                  :end-label="'You have 1 minute pause'"
-                  label-position="begin"
-                  :end-text="''"
-                  :day-txt="'days'"
-                  :hour-txt="'hours'"
-                  :minutes-txt="'minutes'"
-                  :seconds-txt="'seconds'"
-                >
-                  <template slot="start-label" slot-scope="scope">
-                    <i class="fe fe-clock"></i>
-                    <span
-                      v-if="
-                        scope.props.startLabel !== '' &&
-                        scope.props.tips &&
-                        scope.props.labelPosition === 'begin'
-                      "
-                    >
-                      {{ scope.props.startLabel }}:</span
-                    >
-                    <span
-                      v-if="
-                        scope.props.endLabel !== '' &&
-                        !scope.props.tips &&
-                        scope.props.labelPosition === 'begin'
-                      "
-                    >
-                      {{ scope.props.endLabel }}:</span
-                    >
-                  </template>
-                  <template slot="countdown" slot-scope="scope">
-                    <span>{{ scope.props.days }} </span><a>:</a>
-                    <span>{{ scope.props.hours }} </span><a>:</a>
-                    <span>{{ scope.props.minutes }} </span><a>:</a>
-                    <span>{{ scope.props.seconds }} </span><a></a>
-                    <h5 class="mt-3">
-                      After 1 minute is over, you will have 2 minutes to answer
-                      this question.
-                    </h5>
-                  </template>
-                </vue-countdown-timer>
-                <vue-countdown-timer
-                  id="timeAnswer"
-                  v-if="showLastQuestion === true"
-                  @start_callback="startCallBack('event started')"
-                  @end_callback="endCallBack('event ended')"
-                  :start-time="timeStartAnswer"
-                  :end-time="timeEndAnswer"
-                  :interval="1000"
-                  :start-label="'Until start:'"
-                  :end-label="'Time limit'"
-                  label-position="begin"
-                  :end-text="''"
-                  :day-txt="'days'"
-                  :hour-txt="'hours'"
-                  :minutes-txt="'minutes'"
-                  :seconds-txt="'seconds'"
-                >
-                  <template slot="start-label" slot-scope="scope">
-                    <i class="fe fe-clock"></i>
-                    <span
-                      v-if="
-                        scope.props.startLabel !== '' &&
-                        scope.props.tips &&
-                        scope.props.labelPosition === 'begin'
-                      "
-                    >
-                      {{ scope.props.startLabel }}:</span
-                    >
-                    <span
-                      v-if="
-                        scope.props.endLabel !== '' &&
-                        !scope.props.tips &&
-                        scope.props.labelPosition === 'begin'
-                      "
-                    >
-                      {{ scope.props.endLabel }}:</span
-                    >
-                  </template>
-                  <template slot="countdown" slot-scope="scope">
-                    <span>{{ scope.props.days }} </span><a>:</a>
-                    <span>{{ scope.props.hours }} </span><a>:</a>
-                    <span>{{ scope.props.minutes }} </span><a>:</a>
-                    <span>{{ scope.props.seconds }} </span><a></a>
-                  </template>
-                </vue-countdown-timer>
-              </div>
-              <h3 v-if="questionSpeaking[questionIndex]">
-                {{ questionIndex + 1 }}
-                {{
-                  questionSpeaking[questionIndex].speak_quiz_question.question
-                }}
-              </h3>
-              <p>
-                Please record one video with voice that answers all question.
-              </p>
-              <div>
-                <div class="row">
-                  <div class="col-2"></div>
-                  <div class="col-8">
-                    <video
-                      v-cloak
-                      id="myVideo"
-                      ref="videoPlayer"
-                      class="
-                        video-js
-                        vjs-layout-x-small vjs-layout-medium vjs-layout-large
-                      "
-                      playsinline
-                    ></video>
-                  </div>
-                  <div class="col-2"></div>
-                </div>
                 <div
-                  id="progress"
-                  class="
-                    progress-bar progress-bar-info progress-bar-striped
-                    active
-                  "
-                  role="progressbar"
-                  aria-valuenow="46"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  style="width: 0%"
+                  class="h4 text-center timer mb-3"
+                  v-if="pause === true || showLastQuestion === true"
                 >
-                  &nbsp;0%
+                  <vue-countdown-timer
+                    id="timePause"
+                    v-if="pause === true"
+                    @start_callback="startCallBackTimePause('event started')"
+                    @end_callback="endCallBackTimePause('event ended')"
+                    :start-time="timeNow"
+                    :end-time="timeEnd"
+                    :interval="1000"
+                    :start-label="'Until start:'"
+                    :end-label="'You have 1 minute pause'"
+                    label-position="begin"
+                    :end-text="''"
+                    :day-txt="'days'"
+                    :hour-txt="'hours'"
+                    :minutes-txt="'minutes'"
+                    :seconds-txt="'seconds'"
+                  >
+                    <template slot="start-label" slot-scope="scope">
+                      <i class="fe fe-clock"></i>
+                      <span
+                        v-if="
+                          scope.props.startLabel !== '' &&
+                          scope.props.tips &&
+                          scope.props.labelPosition === 'begin'
+                        "
+                      >
+                        {{ scope.props.startLabel }}:</span
+                      >
+                      <span
+                        v-if="
+                          scope.props.endLabel !== '' &&
+                          !scope.props.tips &&
+                          scope.props.labelPosition === 'begin'
+                        "
+                      >
+                        {{ scope.props.endLabel }}:</span
+                      >
+                    </template>
+                    <template slot="countdown" slot-scope="scope">
+                      <span>{{ scope.props.days }} </span><a>:</a>
+                      <span>{{ scope.props.hours }} </span><a>:</a>
+                      <span>{{ scope.props.minutes }} </span><a>:</a>
+                      <span>{{ scope.props.seconds }} </span><a></a>
+                      <h5 class="mt-3">
+                        After 1 minute is over, you will have 2 minutes to
+                        answer this question.
+                      </h5>
+                    </template>
+                  </vue-countdown-timer>
+                  <vue-countdown-timer
+                    id="timeAnswer"
+                    v-if="showLastQuestion === true"
+                    @start_callback="startCallBack('event started')"
+                    @end_callback="endCallBack('event ended')"
+                    :start-time="timeStartAnswer"
+                    :end-time="timeEndAnswer"
+                    :interval="1000"
+                    :start-label="'Until start:'"
+                    :end-label="'Time limit'"
+                    label-position="begin"
+                    :end-text="''"
+                    :day-txt="'days'"
+                    :hour-txt="'hours'"
+                    :minutes-txt="'minutes'"
+                    :seconds-txt="'seconds'"
+                  >
+                    <template slot="start-label" slot-scope="scope">
+                      <i class="fe fe-clock"></i>
+                      <span
+                        v-if="
+                          scope.props.startLabel !== '' &&
+                          scope.props.tips &&
+                          scope.props.labelPosition === 'begin'
+                        "
+                      >
+                        {{ scope.props.startLabel }}:</span
+                      >
+                      <span
+                        v-if="
+                          scope.props.endLabel !== '' &&
+                          !scope.props.tips &&
+                          scope.props.labelPosition === 'begin'
+                        "
+                      >
+                        {{ scope.props.endLabel }}:</span
+                      >
+                    </template>
+                    <template slot="countdown" slot-scope="scope">
+                      <span>{{ scope.props.days }} </span><a>:</a>
+                      <span>{{ scope.props.hours }} </span><a>:</a>
+                      <span>{{ scope.props.minutes }} </span><a>:</a>
+                      <span>{{ scope.props.seconds }} </span><a></a>
+                    </template>
+                  </vue-countdown-timer>
+                </div>
+                <h3 v-if="questionSpeaking[questionIndex]">
+                  {{ questionIndex + 1 }}
+                  {{
+                    questionSpeaking[questionIndex].speak_quiz_question.question
+                  }}
+                </h3>
+                <p>
+                  Please record one video with voice that answers all question.
+                </p>
+                <div>
+                  <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                      <video
+                        v-cloak
+                        id="myVideo"
+                        ref="videoPlayer"
+                        class="
+                          video-js
+                          vjs-layout-x-small vjs-layout-medium vjs-layout-large
+                        "
+                        playsinline
+                      ></video>
+                    </div>
+                    <div class="col-2"></div>
+                  </div>
+                  <div
+                    id="progress"
+                    class="
+                      progress-bar progress-bar-info progress-bar-striped
+                      active
+                    "
+                    role="progressbar"
+                    aria-valuenow="46"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="width: 0%"
+                  >
+                    &nbsp;0%
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
       </div>
       <div class="button control">
         <div
-          v-if="typeExam !== $getConst('exercise') && startQuiz===true"
+          v-if="typeExam !== $getConst('exercise') && startQuiz === true"
           class="text-right py-4 pr-3"
         >
           <button
@@ -259,41 +267,45 @@
             >
               Submit
             </button>
-              <span v-if="typeExam === $getConst('assessment')">
-                 <button
-                     v-if="questionIndex < questionSpeaking.length - 1"
-                     class="btn btn-primary mx-2"
-                     v-on:click="next()"
-                 >
-                  Next
-                 </button>
-              </span>
-              <span v-else>
-                 <button
-                     v-if="startRecord === true && questionIndex < questionSpeaking.length - 1"
-                     class="btn btn-primary mx-2"
-                     v-on:click="next()"
-                 >
-                  Next
-                 </button>
-              </span>
+            <span v-if="typeExam === $getConst('assessment')">
+              <button
+                v-if="questionIndex < questionSpeaking.length - 1"
+                class="btn btn-primary mx-2"
+                v-on:click="next()"
+              >
+                Next
+              </button>
+            </span>
+            <span v-else>
+              <button
+                v-if="
+                  startRecord === true &&
+                  questionIndex < questionSpeaking.length - 1
+                "
+                class="btn btn-primary mx-2"
+                v-on:click="next()"
+              >
+                Next
+              </button>
+            </span>
           </span>
         </div>
-        <div
-          class="text-right py-4 pr-3"
-          v-else
-        >
+        <div class="text-right py-4 pr-3" v-else>
           <span>
             <button
               class="btn btn-primary mx-2"
-              v-on:click="showVideoExercise(videoPracticeId, $getConst('practice'))"
+              v-on:click="
+                showVideoExercise(videoPracticeId, $getConst('practice'))
+              "
               v-if="showButtonPractice === true"
             >
               Practice
             </button>
             <button
               class="btn btn-primary mx-2"
-              v-on:click="showVideoExercise(videoResponseId, $getConst('response'))"
+              v-on:click="
+                showVideoExercise(videoResponseId, $getConst('response'))
+              "
               v-if="showButtonPractice === false"
             >
               How to response
@@ -306,9 +318,11 @@
       <div class="text-center">
         <div v-if="typeExam !== $getConst('assessment')">
           <div class="text-success">
-              <h2>You have completed this section.</h2>
-              <h2>Your exam is being graded by the
-                  tutor. Please wait for the results and come back later!</h2>
+            <h2>You have completed this section.</h2>
+            <h2>
+              Your exam is being graded by the tutor. Please wait for the
+              results and come back later!
+            </h2>
           </div>
         </div>
         <div v-else class="py-5">
@@ -474,7 +488,7 @@ export default {
       });
     },
     audioStart() {
-      this.audioShow = true;
+      this.audioShow = false;
     },
     getQuestion: function () {
       if (this.typeExam === this.$root.$getConst("assessment")) {
@@ -491,15 +505,9 @@ export default {
           route("site.exam.getSpeakingAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-          this.questionSpeaking = response.data.questions.filter(
-            (question) => {
-              return question.speak_assessment_question !== null;
-            }
-          );
-
-          setTimeout(() => {
-            this.loadAudio();
-          }, 1000);
+          this.questionSpeaking = response.data.questions.filter((question) => {
+            return question.speak_assessment_question !== null;
+          });
         })
         .catch(function (error) {
           console.error(error);
@@ -509,11 +517,9 @@ export default {
       axios
         .get(route("site.exam.getSpeakingExerciseQuestionsClient", this.examId))
         .then((response) => {
-          this.questionSpeaking = response.data.questions.filter(
-            (question) => {
-              return question.speak_exercises_question !== null;
-            }
-          );
+          this.questionSpeaking = response.data.questions.filter((question) => {
+            return question.speak_exercises_question !== null;
+          });
           this.videoPracticeId =
             this.questionSpeaking[
               this.questionIndex
@@ -532,20 +538,18 @@ export default {
       axios
         .get(route("site.exam.getSpeakingQuizQuestionsClient", this.examId))
         .then((response) => {
-            console.log(response.data);
-            let arrayQuestionSpeaking = Object.values(response.data.questions)
-          this.questionSpeaking = arrayQuestionSpeaking.filter(
-            (question) => {
-              return question.speak_quiz_question !== null;
+          console.log(response.data);
+          let arrayQuestionSpeaking = Object.values(response.data.questions);
+          this.questionSpeaking = arrayQuestionSpeaking.filter((question) => {
+            return question.speak_quiz_question !== null;
+          });
+          let long_question = "";
+          this.questionSpeaking.forEach((item, index) => {
+            if (item.speak_quiz_question.long_answer) {
+              long_question = this.questionSpeaking.splice(index, 1);
             }
-          );
-            let long_question = '';
-            this.questionSpeaking.forEach((item, index) => {
-                if (item.speak_quiz_question.long_answer){
-                    long_question = this.questionSpeaking.splice(index,1)
-                }
-            });
-            this.questionSpeaking.splice(3,0,long_question[0]);
+          });
+          this.questionSpeaking.splice(3, 0, long_question[0]);
           this.createVideoRecord();
         })
         .catch(function (error) {
@@ -564,9 +568,9 @@ export default {
             this.timeEnd = new Date();
             this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
           }
-          if (this.questionIndex === this.questionSpeaking.length - 3){
-              this.pause = false;
-              this.showLastQuestion = false;
+          if (this.questionIndex === this.questionSpeaking.length - 3) {
+            this.pause = false;
+            this.showLastQuestion = false;
           }
         }
         if (this.typeExam === this.$root.$getConst("quiz")) {
@@ -590,12 +594,10 @@ export default {
       this.userAnswer();
       if (this.typeExam === this.$root.$getConst("quiz")) {
         this.player.record().stop();
-        console.log("is waiting upload video");
       } else {
         axios
           .post(route("site.exam.handleSubmitAnswer"), this.resultCheck)
           .then((data) => {
-            console.log("push data success");
             this.allResults = data.data;
           })
           .catch((error) => {
@@ -683,8 +685,8 @@ export default {
     },
     showVideoExercise(video, typeVideo) {
       this.videoId = video;
-      this.showButtonPractice = typeVideo === this.$root.$getConst("response") ? true : false;
-
+      this.showButtonPractice =
+        typeVideo === this.$root.$getConst("response") ? true : false;
     },
     uploadVideo(fileName, file) {
       new VimeoUpload({
@@ -692,7 +694,8 @@ export default {
         description: fileName,
         private: true,
         file: file,
-        token: "a4e21d56502edc34f8e27e0244fc46b9",
+        // MIX_VIMEO_TOKEN
+        token: process.env.MIX_VIMEO_TOKEN,
         upgrade_to_1080: true,
         onError: (data) => {},
         onProgress: (data) => {
@@ -724,10 +727,15 @@ export default {
       element.setAttribute("style", "width:" + progress + "%");
       element.innerHTML = "&nbsp;" + progress + "%";
     },
-      start() {
-          this.startQuiz = true;
-          this.timeStartDo = new Date();
-      },
+    start() {
+      if (this.typeExam === this.$root.$getConst("assessment")) {
+        setTimeout(() => {
+          this.loadAudio();
+        }, 600);
+      }
+      this.startQuiz = true;
+      this.timeStartDo = new Date();
+    },
   },
 };
 </script>
