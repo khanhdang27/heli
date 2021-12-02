@@ -115,7 +115,7 @@
                     :end-time="timeEnd"
                     :interval="1000"
                     :start-label="'Until start:'"
-                    :end-label="'You have 1 minute pause'"
+                    :end-label="'You have 1 minute to ready answer'"
                     label-position="begin"
                     :end-text="''"
                     :day-txt="'days'"
@@ -290,7 +290,10 @@
             </span>
           </span>
         </div>
-        <div class="text-right py-4 pr-3" v-else>
+        <div
+          class="text-right py-4 pr-3"
+          v-if="typeExam == $getConst('exercise')"
+        >
           <span>
             <button
               class="btn btn-primary mx-2"
@@ -411,6 +414,7 @@ export default {
       startQuiz: false,
       startRecord: false,
       showButtonPractice: false,
+      longQuestionPosition: 10,
     };
   },
   watch: {
@@ -549,8 +553,15 @@ export default {
               long_question = this.questionSpeaking.splice(index, 1);
             }
           });
-          this.questionSpeaking.splice(3, 0, long_question[0]);
-          this.createVideoRecord();
+          if (long_question !== "") {
+            if (this.questionSpeaking.length >= 3) {
+              this.questionSpeaking.splice(3, 0, long_question[0]);
+              this.longQuestionPosition = 3;
+            } else {
+              this.questionSpeaking.push(long_question[0]);
+              this.longQuestionPosition = this.questionSpeaking.length - 1;
+            }
+          }
         })
         .catch(function (error) {
           console.error(error);
@@ -562,13 +573,14 @@ export default {
           this.userAnswer();
           this.loadAudio();
         } else {
-          if (this.questionIndex === this.questionSpeaking.length - 4) {
+          if (this.questionIndex === this.longQuestionPosition - 1) {
             this.pause = true;
             this.timeNow = new Date();
             this.timeEnd = new Date();
             this.timeEnd.setMinutes(this.timeEnd.getMinutes() + 1);
+            console.log("timePause", this.pause);
           }
-          if (this.questionIndex === this.questionSpeaking.length - 3) {
+          if (this.questionIndex === this.longQuestionPosition) {
             this.pause = false;
             this.showLastQuestion = false;
           }
@@ -731,6 +743,11 @@ export default {
       if (this.typeExam === this.$root.$getConst("assessment")) {
         setTimeout(() => {
           this.loadAudio();
+        }, 600);
+      }
+      if (this.typeExam === this.$root.$getConst("quiz")) {
+        setTimeout(() => {
+          this.createVideoRecord();
         }, 600);
       }
       this.startQuiz = true;

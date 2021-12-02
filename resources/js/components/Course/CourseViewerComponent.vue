@@ -52,6 +52,10 @@
                       class="list-group-item list-group-item-action border-0"
                       v-bind:class="{
                         active: item.index == lectureIndex,
+                        disabled:
+                          isPassed &&
+                          (item.type == $getConst('exercise') ||
+                            item.type == $getConst('quiz')),
                       }"
                       v-on:click="
                         onClickLecture(

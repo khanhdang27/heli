@@ -96,7 +96,8 @@ use App\Models\Quiz;
                                     <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal"
                                         data-target="#reviewTextAnswer" data-answer="{{ $detail->answer }}"
                                         data-comment-url="{{ route('admin.student-examination.comment', ['studentExam' => $detail->id]) }}"
-                                        data-detail-id="{{ $detail->id }}" data-detail-comment="{{ $detail->comment }}">
+                                        data-detail-id="{{ $detail->id }}" data-detail-comment="{{ $detail->comment }}"
+                                        data-detail-score="{{ $detail->score }}">
                                         View Answer <i class="fe fe-eye"></i>
                                     </button>
                                     @else
@@ -104,7 +105,8 @@ use App\Models\Quiz;
                                         data-target="#reviewVideoAnswer"
                                         data-comment-url="{{ route('admin.student-examination.comment', ['studentExam' => $detail->id]) }}"
                                         data-answer="{{ 'https://player.vimeo.com/video/' . $detail->answer . '?badge=0&autopause=0&app_id=' . config('app.vimeo_app_id') }}"
-                                        data-detail-id="{{ $detail->id }}" data-detail-comment="{{ $detail->comment }}">
+                                        data-detail-id="{{ $detail->id }}" data-detail-comment="{{ $detail->comment }}"
+                                        data-detail-score="{{ $detail->score }}">>
                                         View Answer <i class="fe fe-eye"></i>
                                     </button>
                                     @endif
@@ -190,10 +192,9 @@ use App\Models\Quiz;
                             @csrf
                             <label for="scoreVideo"> Score </label>
                             <input type="number" min="0" max="10" step="1" class="form-control" name="score"
-                                id="scoreVideo" value="">
+                                id="scoreVideo">
                             <label for="comment"> Comment </label>
-                            <textarea class="form-control rich-text mb-3" name="comment" id="ckeditorVideo"
-                                value=""></textarea>
+                            <textarea class="form-control rich-text mb-3" name="comment" id="ckeditorVideo"></textarea>
                         </div>
                     </div>
                 </div>
@@ -237,6 +238,7 @@ use App\Models\Quiz;
             CKEDITOR.replace('ckeditor');
             $('#reviewTextAnswer').on('shown.bs.modal', function(event) {
                 let textAnswer = document.getElementById('anwser-text');
+                let textScore = document.getElementById('score');
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var anwser = button.data('answer') // Extract info from data-* attributes
                 textAnswer.innerHTML = anwser
@@ -244,20 +246,20 @@ use App\Models\Quiz;
                 detailId = button.data('detailId')
                 detailComment = button.data('detailComment')
                 CKEDITOR.instances['ckeditor'].setData(detailComment)
-            })
-            $('#reviewTextAnswer').on('shown.bs.modal', function(event) {
-
+                textScore.value = button.data('detailScore');
             })
 
             $('#reviewVideoAnswer').on('shown.bs.modal', function(event) {
                 let textAnswer = document.getElementById('answerVideo');
+                let textScore = document.getElementById('score');
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var anwser = button.data('answer') // Extract info from data-* attributes
                 textAnswer.setAttribute('src', anwser);
                 submitUrl = button.data('commentUrl')
                 detailId = button.data('detailId')
                 detailComment = button.data('detailComment')
-                // CKEDITOR.instances['ckeditorVideo'].setData(detailComment)
+                CKEDITOR.instances['ckeditorVideo'].setData(detailComment)
+                textScore.value = button.data('detailScore');
             })
         })
 </script>
