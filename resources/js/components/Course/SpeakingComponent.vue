@@ -267,23 +267,46 @@
             >
               Submit
             </button>
-            <button
-              v-if="questionIndex < questionSpeaking.length - 1"
-              class="btn btn-primary mx-2"
-              v-on:click="next()"
-            >
-              Next
-            </button>
+            <span v-if="typeExam === $getConst('assessment')">
+              <button
+                v-if="questionIndex < questionSpeaking.length - 1"
+                class="btn btn-primary mx-2"
+                v-on:click="next()"
+              >
+                Next
+              </button>
+            </span>
+            <span v-else>
+              <button
+                v-if="
+                  startRecord === true &&
+                  questionIndex < questionSpeaking.length - 1
+                "
+                class="btn btn-primary mx-2"
+                v-on:click="next()"
+              >
+                Next
+              </button>
+            </span>
           </span>
         </div>
-        <div
-          class="text-right py-4 pr-3"
-          v-if="typeExam === $getConst('exercise')"
-        >
+        <div class="text-right py-4 pr-3" v-else>
           <span>
             <button
               class="btn btn-primary mx-2"
-              v-on:click="showVideoExercise(videoResponseId)"
+              v-on:click="
+                showVideoExercise(videoPracticeId, $getConst('practice'))
+              "
+              v-if="showButtonPractice === true"
+            >
+              Practice
+            </button>
+            <button
+              class="btn btn-primary mx-2"
+              v-on:click="
+                showVideoExercise(videoResponseId, $getConst('response'))
+              "
+              v-if="showButtonPractice === false"
             >
               How to response
             </button>
@@ -386,6 +409,8 @@ export default {
       videoResponseId: "",
       videoSubmitID: null,
       startQuiz: false,
+      startRecord: false,
+      showButtonPractice: false,
     };
   },
   watch: {
@@ -438,6 +463,7 @@ export default {
       // user clicked the record button and started recording
       this.player.on("startRecord", () => {
         console.log("started recording!");
+        this.startRecord = true;
       });
 
       // user completed recording and stream is available
@@ -657,8 +683,10 @@ export default {
       localStorage.removeItem("reading_" + this.examId);
       window.location.reload();
     },
-    showVideoExercise(video) {
+    showVideoExercise(video, typeVideo) {
       this.videoId = video;
+      this.showButtonPractice =
+        typeVideo === this.$root.$getConst("response") ? true : false;
     },
     uploadVideo(fileName, file) {
       new VimeoUpload({

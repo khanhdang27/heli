@@ -240,7 +240,7 @@ class StudentExaminationController extends Controller
                     'exam_id' => $examId,
                     'question_id' => $item['questionID'],
                     'answer_type' => $item['answerType'],
-                    'answer' => $item['answerID'],
+                    'answer' => !empty($item['answerID']) ? $item['answerID'] : "",
                     'time' => $item['time'],
                     'reviewed' => false,
                 ]);
