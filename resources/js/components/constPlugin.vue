@@ -21,6 +21,9 @@ const Numbers = {
   level_55: 5.5,
   level_60: 6.0,
   level_65: 6.5,
+  // Type video of exercise speaking
+  practice: 1,
+  response: 2,
 };
 Numbers.install = function (Vue) {
   Vue.prototype.$getConst = (key) => {
