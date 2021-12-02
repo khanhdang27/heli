@@ -33,10 +33,10 @@ use App\Models\Examination;
                     <label for="video_code_practice"> Video Practice </label>
                     {{ Form::text('video_code_practice', null, ['class' => 'form-control', 'required']) }}
                 </div>
-                {{-- <div class="form-group">
+                <div class="form-group">
                     <label for="video_code_response"> Video Response </label>
                     {{ Form::text('video_code_response', null, ['class' => 'form-control', 'required']) }}
-                </div> --}}
+                </div>
                 <div class="form-group ">
                     Pick up video
                     <div class="custom-file">

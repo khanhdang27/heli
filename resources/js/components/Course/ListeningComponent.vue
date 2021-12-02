@@ -18,7 +18,7 @@
                 <h5 class="font-weight-bold">
                   {{ index | uppercase | replace }}
                 </h5>
-                <div v-for="(question,index) in part" :key="question.id">
+                <div v-for="(question, index) in part" :key="question.id">
                   <h5>
                     {{ index + 1 }}.
                     {{ question.listen_assessment_question.question }}
@@ -456,9 +456,9 @@ export default {
         return item.part === this.audioPart;
       });
       this.audioSrc = route("audio", audio.audio_code);
-      if (this.audioSrc){
-          this.$refs.audio.load();
-          this.$refs.audio.play();
+      if (this.audioSrc) {
+        this.$refs.audio.load();
+        this.$refs.audio.play();
       }
     },
     audioStart() {
@@ -479,12 +479,10 @@ export default {
           route("site.exam.getListeningAssessmentQuestionsClient", this.examId)
         )
         .then((response) => {
-            let arrayQuestionListening = Object.values(response.data.questions)
-            this.questionListening = arrayQuestionListening.filter(
-            (question) => {
-              return question.listen_assessment_question !== null;
-            }
-          );
+          let arrayQuestionListening = Object.values(response.data.questions);
+          this.questionListening = arrayQuestionListening.filter((question) => {
+            return question.listen_assessment_question !== null;
+          });
           this.questionListening.sort((first, second) => {
             if (
               first.listen_assessment_question.part >
@@ -523,12 +521,10 @@ export default {
         )
         .then((response) => {
           console.log(response.data.questions);
-          let arrayQuestionListening = Object.values(response.data.questions)
-          this.questionListening = arrayQuestionListening.filter(
-            (question) => {
-              return question.listen_assessment_question !== null;
-            }
-          );
+          let arrayQuestionListening = Object.values(response.data.questions);
+          this.questionListening = arrayQuestionListening.filter((question) => {
+            return question.listen_assessment_question !== null;
+          });
           this.questionListening.sort((first, second) => {
             if (
               first.listen_assessment_question.part >
@@ -566,12 +562,10 @@ export default {
         .get(route("site.exam.getListeningQuizQuestionsClient", this.examId))
         .then((response) => {
           console.log(response.data.questions);
-          let arrayQuestionListening = Object.values(response.data.questions)
-            this.questionListening = arrayQuestionListening.filter(
-            (question) => {
-              return question.listen_assessment_question !== null;
-            }
-          );
+          let arrayQuestionListening = Object.values(response.data.questions);
+          this.questionListening = arrayQuestionListening.filter((question) => {
+            return question.listen_assessment_question !== null;
+          });
           this.questionListening.sort((first, second) => {
             if (
               first.listen_assessment_question.part >
@@ -595,10 +589,6 @@ export default {
           });
           this.audioCodes = response.data.audioCodes;
           this.audioPart = 1;
-
-          setTimeout(() => {
-            this.loadAudio();
-          }, 1600);
         })
         .catch((error) => {
           console.error(error);
@@ -737,6 +727,9 @@ export default {
     },
     start() {
       this.startQuiz = true;
+      setTimeout(() => {
+        this.loadAudio();
+      }, 600);
     },
     otherTest() {
       this.$emit("reTryLecture");

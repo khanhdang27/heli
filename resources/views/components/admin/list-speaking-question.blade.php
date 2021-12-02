@@ -44,10 +44,10 @@
                                     <label for="video_code_practice" class="required text-dark"> Video Practice </label>
                                     {{ Form::text('video_code_practice', $question->questionContent()->video_code_practice, ['class' => 'form-control', 'required']) }}
                                 </div>
-                                {{-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="video_code_response" class="required text-dark"> Video Response </label>
                                     {{ Form::text('video_code_response', $question->questionContent()->video_code_response, ['class' => 'form-control', 'required']) }}
-                                </div> --}}
+                                </div>
                                 <div class="form-group ">
                                     Pick up video
                                     <div class="custom-file">
@@ -110,7 +110,7 @@
                         description: fileName,
                         private: true,
                         file: files[0],
-                        token: 'a4e21d56502edc34f8e27e0244fc46b9',
+                        token: {{ app.config("app.vimeo_token") }},
                         upgrade_to_1080: true,
                         onError: function(data) {
                             showMessage_{{ $question->index }}('<strong>Error</strong>: ' + JSON.parse(data).error,
@@ -122,10 +122,11 @@
                         onComplete: function(videoId, index) {
 
                             showMessage_{{ $question->index }}(`<strong>Upload Successful</strong>: \nThis is ID of video, please copy this <input readonly id="video_id_result" value="${videoId}"></input> &nbsp;
-                <button id="copy-button_{{ $question->index }}" class="btn btn-outline-success btn-sm" type="button" onclick="handleCopy_{{ $question->index }}()" ><i class="fe fe-copy"></i></button>
-                    to resource field`)
-                        }
-                    })).upload()
+                                <button id="copy-button_{{ $question->index }}" class="btn btn-outline-success btn-sm" type="button" onclick="handleCopy_{{ $question->index }}()" ><i class="fe fe-copy"></i></button>
+                                    to resource field`
+                                )}
+                        })
+                    ).upload()
 
                     // /* local function: show a user message */
                     function showMessage_{{ $question->index }}(html, type) {

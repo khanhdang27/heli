@@ -24,22 +24,23 @@ function handleFileSelect(evt) {
     updateProgress(0)
     document.getElementById('progress-container').style.display = 'block'
 
-    /* Instantiate Vimeo Uploader */
-    ;
+        /* Instantiate Vimeo Uploader */
+        ;
     (new VimeoUpload({
         name: fileName,
         description: fileName,
         private: true,
         file: files[0],
+        // MIX_VIMEO_TOKEN
         token: 'a4e21d56502edc34f8e27e0244fc46b9',
         upgrade_to_1080: true,
-        onError: function(data) {
+        onError: function (data) {
             showMessage('<strong>Error</strong>: ' + JSON.parse(data).error, 'danger')
         },
-        onProgress: function(data) {
+        onProgress: function (data) {
             updateProgress(data.loaded / data.total)
         },
-        onComplete: function(videoId, index) {
+        onComplete: function (videoId, index) {
 
             showMessage(`<strong>Upload Successful</strong>: \nThis is ID of video, please copy this <input readonly id="video_id_result" value="${videoId}"></input> &nbsp;
                 <button id="copy-button" class="btn btn-outline-success btn-sm" type="button" onclick="handleCopy()" ><i class="fe fe-copy"></i></button>
@@ -51,7 +52,7 @@ function handleFileSelect(evt) {
     function showMessage(html, type) {
         /* hide progress bar */
         document.getElementById('progress-container').style.display = 'none'
-            /* display alert message */
+        /* display alert message */
         var element = document.createElement('div')
         element.setAttribute('class', ' p-3 rounded border border-' + (type || 'success'))
         element.innerHTML = html
@@ -80,7 +81,7 @@ function updateProgress(progress) {
 /**
  * Wire up drag & drop listeners once page loads
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var browse = document.getElementById('browse')
     browse.addEventListener('change', handleFileSelect, false)
 })
@@ -101,5 +102,5 @@ function handleCopy() {
     copyButton.classList.remove('btn-outline-success');
     copyButton.classList.add('btn-success');
     copyButton.innerHTML = "copied"
-        // 641400179
+    // 641400179
 }
