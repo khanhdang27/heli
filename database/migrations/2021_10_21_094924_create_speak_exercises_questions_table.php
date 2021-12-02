@@ -20,7 +20,7 @@ class CreateSpeakExercisesQuestionsTable extends Migration
                 ->constrained('questions')
                 ->cascadeOnDelete();
             $table->string('video_code_practice');
-            // $table->string('video_code_response');
+            $table->string('video_code_response');
             $table->text('question');
             $table->text('message_wrong');
             $table->bigInteger('lecture_index');
