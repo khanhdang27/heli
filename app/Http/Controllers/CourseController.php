@@ -69,18 +69,22 @@ class CourseController extends Controller
             ->where('course_id', '!=', 1)->get();
 
         $myCourses = [];
-        foreach ($studentCourses as $item){
+        foreach ($studentCourses as $item) {
             array_push($myCourses, $item->course_id);
         }
-        $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course',
-            'membershipCourses.course.tutor', 'membershipCourses.course.student')
+        $courses = CourseMembershipDiscount::with(
+            'membershipCourses',
+            'membershipCourses.course',
+            'membershipCourses.course.tutor',
+            'membershipCourses.course.student'
+        )
             ->where('publish', 1)
             ->whereHas('membershipCourses.course', function (Builder $query) use ($myCourses) {
                 $query->whereIn('id', $myCourses);
             })
             ->get();
 
-        $studentCoursesResult = $studentCourses->map( function ($item, $key) use ($courses){
+        $studentCoursesResult = $studentCourses->map(function ($item, $key) use ($courses) {
             $item->course = $courses->where('membershipCourses.course_id', $item->course_id);
             return $item;
         });
@@ -443,7 +447,6 @@ class CourseController extends Controller
             return back()->with('success', 'Update success!');
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             return back()->withErrors($th->getMessage());
         }
     }

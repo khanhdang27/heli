@@ -48,14 +48,14 @@
           </template>
         </vue-countdown-timer>
       </div>
-        <div v-if="startQuiz === false" class="text-center">
-            <button class="btn btn-success mt-3" v-on:click="startExam()">
-                Start
-            </button>
-        </div>
+      <div v-if="startQuiz === false" class="text-center">
+        <button class="btn btn-success mt-3" v-on:click="startExam()">
+          Start
+        </button>
+      </div>
       <div class="py-4 row justify-content-center lecture overflow-auto">
         <div class="col-lg-8">
-          <div class="h-100" v-if="startQuiz===true">
+          <div class="h-100" v-if="startQuiz === true">
             <div
               v-if="
                 typeExam === $getConst('assessment') &&
@@ -144,12 +144,11 @@
 
             <div
               v-if="
-                typeExam === $getConst('quiz') &&
-                questionWriting[questionIndex]
+                typeExam === $getConst('quiz') && questionWriting[questionIndex]
               "
             >
               <h3 v-cloak>
-                {{ questionIndex + 1}}.
+                {{ questionIndex + 1 }}.
                 {{
                   questionWriting[questionIndex].writing_quiz_question.question
                 }}
@@ -210,99 +209,138 @@
     </div>
     <div v-else class="h-100">
       <div class="text-center">
-        <div class="container-fluid" v-if="typeExam !== $getConst('assessment')">
+        <div
+          class="container-fluid"
+          v-if="typeExam !== $getConst('assessment')"
+        >
           <div v-if="typeExam === $getConst('exercise')">
             <h2 class="text-success">You score {{ allResults.score }}</h2>
-              <div class="row justify-content-center align-items-start lecture overflow-auto">
-                  <div class="col-lg-8 col-md-10 col-12">
-                      <div
-                          class="text-left mb-2"
-                          v-for="result in allResults.quiz_result"
-                          :key="result.question"
-                      >
-                          <div
-                              v-for="questionItem in questionWriting"
-                              v-bind:key="questionItem.id"
-                          >
-                              <div v-if="result.question === questionItem.id" class="list-group">
-                                  <div v-if="result.is_correct" class="list-group-item">
-                                      <div class="d-flex">
-                                          <i class="fe fe-check-circle text-success h5 pr-2"></i>
-                                          <h5><span class="font-weight-bold">Question: </span>
-                                              {{ questionItem.writing_assessment_question.question }}</h5>
-                                      </div>
-                                      <div class="ml-4"
-                                           v-for="answerItem in questionItem.writing_assessment_question.answers"
-                                           v-bind:key="answerItem.id"
-                                      >
-                                          <div
-                                              v-if="answerItem.is_correct === $getConst('correct')"
-                                          >
-                                              <div class="d-flex flex-wrap">
-                                                  <h5 class="mr-2 font-weight-bold">Correct answer:</h5>
-                                                  <div class="h5 mb-0">{{ answerItem.answer }}</div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                  <div v-else class="list-group-item">
-                                      <div class="d-flex">
-                                          <i class="fe fe-x-circle text-danger pr-2 h5"></i>
-                                          <h5><span class="font-weight-bold">Question: </span>
-                                              {{ questionItem.writing_assessment_question.question }}</h5>
-                                      </div>
-                                      <div
-                                          class="ml-4"
-                                          v-for="answerItem in questionItem.writing_assessment_question.answers"
-                                          v-bind:key="answerItem.id"
-                                      >
-                                          <div
-                                              v-if="answerItem.is_correct === $getConst('correct')"
-                                          >
-                                              <div class="d-flex flex-wrap">
-                                                  <h5 class="mr-2 font-weight-bold">Correct answer:</h5>
-                                                  <div class="h5 mb-0">{{ answerItem.answer }}</div>
-                                              </div>
-                                              <div class="h5" v-if="typeExam === $getConst('quiz')">
-                                                  <span class="font-weight-bold">Lecture related: </span>
-                                                  <a
-                                                      href="#"
-                                                      class="h5 mb-0 border-primary border-bottom"
-                                                      v-on:click="
-                                                                goToLecture(
-                                                                  questionItem.writing_assessment_question
-                                                                    .lecture_index
-                                                                )
-                                                              "
-                                                  >
-                                                      Lecture
-                                                      {{
-                                                          questionItem.writing_assessment_question
-                                                              .lecture_index
-                                                      }}
-                                                  </a>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="pb-4">
-                  <button
-                      class="btn btn-primary mt-2"
-                      v-on:click="otherTest()"
+            <div
+              class="
+                row
+                justify-content-center
+                align-items-start
+                lecture
+                overflow-auto
+              "
+            >
+              <div class="col-lg-8 col-md-10 col-12">
+                <div
+                  class="text-left mb-2"
+                  v-for="result in allResults.quiz_result"
+                  :key="result.question"
+                >
+                  <div
+                    v-for="questionItem in questionWriting"
+                    v-bind:key="questionItem.id"
                   >
-                      Other Test
-                  </button>
+                    <div
+                      v-if="result.question === questionItem.id"
+                      class="list-group"
+                    >
+                      <div v-if="result.is_correct" class="list-group-item">
+                        <div class="d-flex">
+                          <i
+                            class="fe fe-check-circle text-success h5 pr-2"
+                          ></i>
+                          <h5>
+                            <span class="font-weight-bold">Question: </span>
+                            {{
+                              questionItem.writing_assessment_question.question
+                            }}
+                          </h5>
+                        </div>
+                        <div
+                          class="ml-4"
+                          v-for="answerItem in questionItem
+                            .writing_assessment_question.answers"
+                          v-bind:key="answerItem.id"
+                        >
+                          <div
+                            v-if="
+                              answerItem.is_correct === $getConst('correct')
+                            "
+                          >
+                            <div class="d-flex flex-wrap">
+                              <h5 class="mr-2 font-weight-bold">
+                                Correct answer:
+                              </h5>
+                              <div class="h5 mb-0">{{ answerItem.answer }}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div v-else class="list-group-item">
+                        <div class="d-flex">
+                          <i class="fe fe-x-circle text-danger pr-2 h5"></i>
+                          <h5>
+                            <span class="font-weight-bold">Question: </span>
+                            {{
+                              questionItem.writing_assessment_question.question
+                            }}
+                          </h5>
+                        </div>
+                        <div
+                          class="ml-4"
+                          v-for="answerItem in questionItem
+                            .writing_assessment_question.answers"
+                          v-bind:key="answerItem.id"
+                        >
+                          <div
+                            v-if="
+                              answerItem.is_correct === $getConst('correct')
+                            "
+                          >
+                            <div class="d-flex flex-wrap">
+                              <h5 class="mr-2 font-weight-bold">
+                                Correct answer:
+                              </h5>
+                              <div class="h5 mb-0">{{ answerItem.answer }}</div>
+                            </div>
+                            <div
+                              class="h5"
+                              v-if="typeExam === $getConst('quiz')"
+                            >
+                              <span class="font-weight-bold"
+                                >Lecture related:
+                              </span>
+                              <a
+                                href="#"
+                                class="h5 mb-0 border-primary border-bottom"
+                                v-on:click="
+                                  goToLecture(
+                                    questionItem.writing_assessment_question
+                                      .lecture_index
+                                  )
+                                "
+                              >
+                                Lecture
+                                {{
+                                  questionItem.writing_assessment_question
+                                    .lecture_index
+                                }}
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
+            <div class="pb-4">
+              <!-- <button class="btn btn-primary mt-2" v-on:click="otherTest()">
+                Other Test
+              </button> -->
+            </div>
           </div>
           <div v-else class="text-success">
-              <h2>You have completed this section.</h2>
-              <h2>Your exam is being graded by the
-                  tutor. Please wait for the results and come back later!</h2>
+            <h2>You have completed this section.</h2>
+            <h2>
+              Your exam is being graded by the tutor. Please wait for the
+              results and come back later!
+            </h2>
           </div>
         </div>
         <div v-else class="text-success text-center h-100">
@@ -408,11 +446,9 @@ export default {
         .then((response) => {
           console.log("response.data >>>", response.data);
 
-          this.questionWriting = response.data.questions.filter(
-            (question) => {
-              return question.writing_assessment_question !== null;
-            }
-          );
+          this.questionWriting = response.data.questions.filter((question) => {
+            return question.writing_assessment_question !== null;
+          });
           this.questionWriting.sort((first, second) => {
             if (
               first.writing_assessment_question.part >
@@ -516,13 +552,13 @@ export default {
       this.userAnswerQuiz({
         answerType:
           this.typeExam === this.$root.$getConst("quiz")
-          ? this.$root.$getConst("Text")
-          : this.$root.$getConst("MC"),
+            ? this.$root.$getConst("Text")
+            : this.$root.$getConst("MC"),
         questionID: parseInt(this.questionWriting[this.questionIndex].id),
         answerID:
           this.typeExam === this.$root.$getConst("quiz")
-          ? this.userChoose[this.questionIndex] || ''
-          : this.userChoose[this.questionIndex] || 0,
+            ? this.userChoose[this.questionIndex] || ""
+            : this.userChoose[this.questionIndex] || 0,
         time: this.timeDo,
       });
     },
@@ -567,9 +603,9 @@ export default {
       console.log("this.resultCheck :>> ", this.resultCheck);
     },
 
-      otherTest(){
-          this.$emit("reTryLecture");
-      }
+    otherTest() {
+      this.$emit("reTryLecture");
+    },
   },
 };
 </script>

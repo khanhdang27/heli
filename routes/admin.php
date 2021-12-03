@@ -56,7 +56,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::post('course/related', 'CourseController@updateRelated')->name('course.related');
     Route::resource('course', 'CourseController');
 
-    // =============== Assessment Manange =======================
+    // =============== Assessment Manage =======================
     Route::get('assessment', 'ExaminationController@getExaminationAssessment')->name('assessment.getExaminationAssessment');
 
     // =============== Question Reading =======================

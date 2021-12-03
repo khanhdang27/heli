@@ -531,7 +531,8 @@ class StudentExaminationController extends Controller
             );
             $noti->saveNotify();
 
-            $allQuestions = count($studentExam->quiz->studentExaminations);
+            // $allQuestions = count($studentExam->quiz->studentExaminations);
+            $allQuestions = $studentExam->question->type === \Constants::COURSE_WRITING ? 2 : 6;
 
             if (count($studentExam->quiz->questions) === $allQuestions) {
                 $answersSubmit = $studentExam->quiz->studentExaminations;

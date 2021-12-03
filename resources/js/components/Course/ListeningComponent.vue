@@ -365,9 +365,9 @@
             </div>
           </div>
           <div class="pb-4">
-            <button class="btn btn-primary mt-2" v-on:click="otherTest()">
+            <!-- <button class="btn btn-primary mt-2" v-on:click="otherTest()">
               Other Test
-            </button>
+            </button> -->
           </div>
         </div>
         <div v-else class="text-success text-center h-100">

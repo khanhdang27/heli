@@ -81,6 +81,12 @@
                             <input type="file" class="custom-file-input" id="customFile" name="file" accept=".pdf">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
+                        @if (!empty($lecture->file))
+                        <a href="{{ route('site.file.download', $lecture->file) }}" >
+                            <i class="fe fe-file"></i>
+                            {{ $lecture->file->raw_name }}
+                        </a>
+                        @endif
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-3"> Save </button>

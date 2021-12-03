@@ -213,14 +213,9 @@ class WalletController extends Controller
 
     public function paymentSuccess($product_id, $room)
     {
-        [$product_id, $courses_with_group, $student_bought] = $this->getVariable($product_id);
         try {
-            $user = User::query()
-                ->where('id', Auth::user()->id)
-                ->first();
-            $item = $courses_with_group;
-            $item->getAmountProduct($user);
-            $user->pay($item);
+            [$product_id, $courses_with_group, $student_bought] = $this->getVariable($product_id);
+
             return $this->createBuyCourse($courses_with_group, $room);
         } catch (InsufficientFunds $insufficientFunds) {
             return back()->with('errors', $insufficientFunds->getMessage());
@@ -238,6 +233,11 @@ class WalletController extends Controller
     {
         DB::beginTransaction();
         try {
+            $user = User::query()
+                ->where('id', Auth::user()->id)
+                ->first();
+            $item = $courses_with_group;
+
             $order = Order::create([
                 'user_id' => Auth::user()->id,
                 'payment_id' => uniqid(),
@@ -265,6 +265,9 @@ class WalletController extends Controller
                     'lecture_study' => 0,
                     'watched_list' => '0,',
                 ]);
+
+                $item->getAmountProduct($user);
+                $user->pay($item);
                 DB::commit();
                 return redirect()->route('site.user.pay-success', ['course_id' => $student_course->course_id]);
             } else {
@@ -372,7 +375,11 @@ class WalletController extends Controller
                     $student->update(['exam_buy_read' => $course->level]);
                     return true;
                 } else {
-                    return false;
+                    if ($student->exam_buy_read >= $course->level) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 break;
             case \Constants::COURSE_WRITING:
@@ -380,7 +387,11 @@ class WalletController extends Controller
                     $student->update(['exam_buy_write' => $course->level]);
                     return true;
                 } else {
-                    return false;
+                    if ($student->exam_buy_write >= $course->level) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 break;
             case \Constants::COURSE_LISTENING:
@@ -388,7 +399,11 @@ class WalletController extends Controller
                     $student->update(['exam_buy_listen' => $course->level]);
                     return true;
                 } else {
-                    return false;
+                    if ($student->exam_buy_listen >= $course->level) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 break;
             case \Constants::COURSE_SPEAKING:
@@ -396,7 +411,11 @@ class WalletController extends Controller
                     $student->update(['exam_buy_speak' => $course->level]);
                     return true;
                 } else {
-                    return false;
+                    if ($student->exam_buy_speak >= $course->level) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
                 break;
             default:
