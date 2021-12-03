@@ -59,6 +59,8 @@ class RegisterController extends Controller
                 $user = User::create(['name' => $name, 'email' => $input['email'], 'password' => $random]);
                 $user->assignRole('student');
 
+                $user->balance;
+
                 $student = Student::create(['user_id' => $user->id]);
                 $stripeCustomer = $user->createAsStripeCustomer(['email' => $input['email']]);
 

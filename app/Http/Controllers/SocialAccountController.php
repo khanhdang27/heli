@@ -39,7 +39,7 @@ class SocialAccountController extends Controller
                 Auth::login($existingUser);
             } else {
                 DB::beginTransaction();
-                try{
+                try {
                     $random = Str::random(10);
                     $newUser = new User([
                         'name' => $user->getName(),
@@ -48,7 +48,9 @@ class SocialAccountController extends Controller
                     ]);
                     $newUser->assignRole('student');
 
-                    if ($newUser->save()){
+                    $user->balance;
+
+                    if ($newUser->save()) {
 
                         $student = Student::create(['user_id' => $newUser->id]);
                         $newUser_social = SocialAccount::create([

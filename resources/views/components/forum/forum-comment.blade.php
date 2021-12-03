@@ -1,4 +1,4 @@
-{{-- {{dd($comment->comment)}} --}}
+
 @foreach ($comment->comment as $item)
     @php
         if (Auth::check()){

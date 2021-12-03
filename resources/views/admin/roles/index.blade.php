@@ -1,7 +1,5 @@
 @extends('admin.layout')
 @section('content')
-
-{{-- @dd($roles) --}}
 <div>
     {!! Form::open(['url'=> route('admin.roles.update', 1), 'method'=>'PUT']) !!}
     @csrf

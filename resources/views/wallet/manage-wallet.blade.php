@@ -39,7 +39,6 @@
                                 <div class="d-flex justify-content-between mt-5 mb-3">
                                     <h4 class="font-weight-bold">@lang('keywords.wallet.balance'):</h4>
                                     <p class="font-weight-bold h3">
-                                        {{--                                        {{dd($wallet)}}--}}
                                         {{$wallet->wallet->balance}} {{$wallet->wallet->balance > 1 ? 'tokens' : 'token'}}</p>
                                 </div>
                                 <div class="d-flex justify-content-between mb-5 flex-wrap">

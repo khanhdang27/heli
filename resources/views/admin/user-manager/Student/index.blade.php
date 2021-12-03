@@ -112,7 +112,6 @@
                                                                 Token purchase history
                                                             </a>
                                                         @endif
-
                                                         <a href="{{ route('admin.user-manager.student.paymentHistory', ['user' => $value->user->id]) }}"
                                                             class="dropdown-item">
                                                             Course purchase history

@@ -63,7 +63,7 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
                 </div>
                 <div class="form-group">
                     <label for="part" class="required">Part</label>
-                    {{                     Form::select('part', Constants::QUESTION_PARTS, old('part'), ['class' => 'form-control', 'required']) }}
+                    {{ Form::select('part', Constants::QUESTION_PARTS, old('part'), ['class' => 'form-control', 'required']) }}
                 </div>
                 <div class="form-group">
                     <label for="question" class="required">Question</label>
@@ -109,7 +109,7 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
                 </audio>
                 <div class="form-group">
                     <label for="part" class="required">Part</label>
-                    {{                     Form::text('part', old('part'), ['class' => 'form-control', 'required', 'readonly', 'id' => 'part_audio_update' . $quiz->id]) }}
+                    {{ Form::text('part', old('part'), ['class' => 'form-control', 'required', 'readonly', 'id' => 'part_audio_update' . $quiz->id]) }}
                 </div>
 
                 <div class="custom-file">
@@ -208,7 +208,7 @@ $audio_2 = $quiz->audioListen->where('part', 2)->first();
             document.getElementById('course_update{{ $quiz->id }}').value = course;
             document.getElementById('audio{{ $quiz->id }}').src = audio;
 
-            let fmt = document.getElementById('audio-listen-udate{{ $quiz->id }}');
+            let fmt = document.getElementById('audio-listen-update{{ $quiz->id }}');
             console.log(fmt);
             fmt.action = url;
         })
