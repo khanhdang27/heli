@@ -11,6 +11,7 @@
                 :courseId="lectureList[lectureIndex].course_id"
                 :examId="lectureList[lectureIndex].id"
                 :questionType="questionType"
+                :isAwait="isAwait"
                 v-if="questions"
                 @goToLecture="onClickLecture"
                 @reTryLecture="reTryLecture"
@@ -324,6 +325,7 @@ export default {
       quiz: [],
       related: [],
       isPassed: false,
+      isAwait: false,
       swiperOptions: {
         speed: 700,
         pagination: {
@@ -470,6 +472,7 @@ export default {
           this.studentCourse = response.data.student_lecture;
 
           this.isPassed = response.data.student_lecture.passed == 1;
+          this.isAwait = response.data.student_lecture.await == 1;
           this.studentLecture =
             response.data.student_lecture.watched_list.split(",");
           if (this.lectureList.length == 0) {

@@ -1,44 +1,55 @@
 <template>
   <div class="h-100">
-    <div v-if="typeExercise === $getConst('reading')" class="h-100">
-      <reading-component
-        v-bind:examId="examId"
-        v-bind:typeExam="typeExam"
-        v-bind:courseId="courseId"
-        @nextTypeExam="nextTypeExam"
-        @goToLecture="goToLecture"
-        @reTryLecture="reTryLecture"
-      >
-      </reading-component>
+    <div v-if="isAwait" class="container-fluid">
+      <div class="pt-5 text-center text-success">
+        <h2>You have completed this section.</h2>
+        <h2>
+          Your exam is being graded by the tutor. Please wait for the results
+          and come back later!
+        </h2>
+      </div>
     </div>
-    <div v-if="typeExercise === $getConst('writing')" class="h-100">
-      <writing-component
-        v-bind:examId="examId"
-        v-bind:typeExam="typeExam"
-        v-bind:courseId="courseId"
-        @nextTypeExam="nextTypeExam"
-        @reTryLecture="reTryLecture"
-      >
-      </writing-component>
-    </div>
-    <div v-if="typeExercise === $getConst('listening')" class="h-100">
-      <listening-component
-        v-bind:examId="examId"
-        v-bind:typeExam="typeExam"
-        v-bind:courseId="courseId"
-        @nextTypeExam="nextTypeExam"
-        @goToLecture="goToLecture"
-        @reTryLecture="reTryLecture"
-      ></listening-component>
-    </div>
-    <div v-if="typeExercise === $getConst('speaking')" class="h-100">
-      <speaking-component
-        v-bind:examId="examId"
-        v-bind:typeExam="typeExam"
-        v-bind:courseId="courseId"
-        @nextToLecture="nextToLecture"
-        @reTryLecture="reTryLecture"
-      ></speaking-component>
+    <div v-else>
+      <div v-if="typeExercise === $getConst('reading')" class="h-100">
+        <reading-component
+          v-bind:examId="examId"
+          v-bind:typeExam="typeExam"
+          v-bind:courseId="courseId"
+          @nextTypeExam="nextTypeExam"
+          @goToLecture="goToLecture"
+          @reTryLecture="reTryLecture"
+        >
+        </reading-component>
+      </div>
+      <div v-if="typeExercise === $getConst('writing')" class="h-100">
+        <writing-component
+          v-bind:examId="examId"
+          v-bind:typeExam="typeExam"
+          v-bind:courseId="courseId"
+          @nextTypeExam="nextTypeExam"
+          @reTryLecture="reTryLecture"
+        >
+        </writing-component>
+      </div>
+      <div v-if="typeExercise === $getConst('listening')" class="h-100">
+        <listening-component
+          v-bind:examId="examId"
+          v-bind:typeExam="typeExam"
+          v-bind:courseId="courseId"
+          @nextTypeExam="nextTypeExam"
+          @goToLecture="goToLecture"
+          @reTryLecture="reTryLecture"
+        ></listening-component>
+      </div>
+      <div v-if="typeExercise === $getConst('speaking')" class="h-100">
+        <speaking-component
+          v-bind:examId="examId"
+          v-bind:typeExam="typeExam"
+          v-bind:courseId="courseId"
+          @nextToLecture="nextToLecture"
+          @reTryLecture="reTryLecture"
+        ></speaking-component>
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +63,7 @@ export default {
     courseId: Number,
     examId: Number,
     questionType: Number,
+    isAwait: Boolean,
   },
   data() {
     return {

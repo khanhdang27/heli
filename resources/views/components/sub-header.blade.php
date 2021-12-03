@@ -27,9 +27,9 @@ $url = 'site.certificate.show';
                     $key => $value)
                     @if ($key)
                     @if ($page != 'home')
-                    <a class="dropdown-item" href="{{ route($url, $cer_show). '?certificate='.$key }}"> {{$value}}</a>
+                    <a class="dropdown-item text-white" href="{{ route($url, $cer_show). '?certificate='.$key }}"> {{$value}}</a>
                     @else
-                    <a class="dropdown-item" href="{{ route($url, ['certificate'=>$key]) }}"> {{$value}}</a>
+                    <a class="dropdown-item text-white" href="{{ route($url, ['certificate'=>$key]) }}"> {{$value}}</a>
                     @endif
                     @endif
                     @endforeach

@@ -221,6 +221,7 @@ class StudentExaminationController extends Controller
                     DB::commit();
                     return response()->json(['quiz_result' => $result, 'score' => $score]);
                 } else {
+                    $student_course->update(['await' => true]);
                     $this->saveAnswer($input['questions'], $studentCourseId, $quizId, $exams->id);
                     DB::commit();
                     return response()->json(['message' => 'grading']);
@@ -546,8 +547,10 @@ class StudentExaminationController extends Controller
 
                 if ((int) $allQuestions >= \Constants::BASE_SCORE_PASS) {
                     $this->upLevel($studentInfo, $student_course, $studentExam->question->type);
+                    $student_course->update(['await' => false]);
                 } else {
                     $this->resetLevel($studentInfo, $student_course, $studentExam->question->type);
+                    $student_course->update(['await' => false]);
                 }
             }
 

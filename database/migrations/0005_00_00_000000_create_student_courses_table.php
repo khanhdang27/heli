@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -49,6 +50,7 @@ class CreateStudentCoursesTable extends Migration
             // $table->double('exam_buy_listen')->nullable(); // id of exam buy with token
 
             $table->boolean('passed')->default(false);
+            $table->boolean('await')->default(false);
             $table->dateTime('failed')->nullable();
             $table->unique(['student_id', 'course_id', 'failed']);
             $table->timestamps();
