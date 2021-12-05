@@ -52,7 +52,7 @@ export default {
     this.$parent.$on("onclose", this.onClose);
   },
   mounted() {
-    this.typeExercise = this.$root.$getConst("speaking");
+    this.typeExercise = this.$root.$getConst("reading");
   },
   methods: {
     nextTypeExam: function (type) {
