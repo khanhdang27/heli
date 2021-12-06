@@ -246,6 +246,10 @@ class CourseController extends Controller
     public function lectureList(Course $course)
     {
         try {
+            $student_course = StudentCourses::where('course_id', $course->id)
+                ->where('student_id', Auth::user()->id)
+                ->first();
+
             $courses = CourseMembershipDiscount::with('membershipCourses', 'membershipCourses.course', 'membershipCourses.course.lecture', 'membershipCourses.course.lecture.file', 'membershipCourses.course.exams')
                 ->where('publish', 1)
                 ->whereHas('membershipCourses.course', function ($query) use ($course) {
@@ -253,13 +257,11 @@ class CourseController extends Controller
                 })
                 ->first();
 
-            $student_course = StudentCourses::where('course_id', $courses->membershipCourses->course->id)
-                ->where('student_id', Auth::user()->id)
-                ->first();
+            $student_exam_set = $student_course->set_exam || 1;
+            $courseList = $courses->membershipCourses->course->lecture->whereBetween('set', [1, $student_exam_set])->all();
+            $_item = collect($courseList)->concat($courses->membershipCourses->course->exams);
 
-            $lecture_course = $courses->membershipCourses->course->lecture->concat($courses->membershipCourses->course->exams);
-
-            return response()->json(['lectures' => $lecture_course->sortBy('index')->toArray(), 'student_lecture' => $student_course->toArray()]);
+            return response()->json(['lectures' => $_item, 'student_lecture' => $student_course->toArray()]);
         } catch (\Throwable $th) {
             return back()->withErrors($th->getMessage());
         }
@@ -389,6 +391,7 @@ class CourseController extends Controller
             'video_resource' => 'required',
             'index' => 'required',
             'file' => 'required',
+            'set' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -398,6 +401,7 @@ class CourseController extends Controller
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
                 'index' => $input['index'],
+                'set' => $input['set'],
             ]);
 
             if (!empty($input['file'])) {
@@ -428,6 +432,7 @@ class CourseController extends Controller
             'video_resource' => 'required',
             'index' => 'required',
             'file' => 'file|nullable',
+            'set' => 'required',
         ]);
         DB::beginTransaction();
         try {
@@ -436,6 +441,7 @@ class CourseController extends Controller
                 'lectures_description' => $input['lectures_description'],
                 'video_resource' => $input['video_resource'],
                 'index' => $input['index'],
+                'set' => $input['set'],
             ]);
             if (!empty($input['file'])) {
                 if (!empty($lecture->file)) {

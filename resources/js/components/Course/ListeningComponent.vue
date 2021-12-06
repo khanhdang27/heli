@@ -365,9 +365,25 @@
             </div>
           </div>
           <div class="pb-4">
-            <!-- <button class="btn btn-primary mt-2" v-on:click="otherTest()">
-              Other Test
-            </button> -->
+            <div v-if="allResults.score / allResults.quiz_result.length < 0.8">
+              <h3>
+                <button class="btn btn-primary mt-2" v-on:click="otherTest()">
+                  Re-try
+                </button>
+              </h3>
+            </div>
+            <div v-else>
+              <div v-if="typeExam === $getConst('quiz')">
+                <h3>
+                  <button
+                    class="btn btn-primary mt-2"
+                    v-on:click="gotoRelated()"
+                  >
+                    Go to next level
+                  </button>
+                </h3>
+              </div>
+            </div>
           </div>
         </div>
         <div v-else class="text-success text-center h-100">
@@ -398,6 +414,7 @@ export default {
     typeExam: Number,
     examId: Number,
     courseId: Number,
+    related: Array,
   },
   data() {
     return {
@@ -451,6 +468,9 @@ export default {
     this.getAnswerUser();
   },
   methods: {
+    gotoRelated() {
+      window.location.href = route("site.course.show", this.related[0]?.id);
+    },
     loadAudio() {
       let audio = this.audioCodes.find((item) => {
         return item.part === this.audioPart;
@@ -732,7 +752,8 @@ export default {
       }, 600);
     },
     otherTest() {
-      this.$emit("reTryLecture");
+      window.location.reload();
+      //   this.$emit("reTryLecture");
     },
   },
 };

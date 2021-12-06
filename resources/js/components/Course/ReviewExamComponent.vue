@@ -5,8 +5,8 @@
     <div class="list-group border-0">
       <a
         class="list-group-item list-group-item-action border-0"
-        v-for="exam in exams"
-        :key="exam.exam_id"
+        v-for="(exam, index) in exams"
+        :key="index"
         :href="routeHref(exam.student_course_id, exam.exam_id, exam.quiz_id)"
         target="_blank"
       >

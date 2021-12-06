@@ -14,8 +14,6 @@ use App\Mail\SendMail;
 use App\Models\Student;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Session;
-use Spatie\Newsletter\NewsletterFacade;
 
 class SocialAccountController extends Controller
 {
@@ -41,17 +39,16 @@ class SocialAccountController extends Controller
                 DB::beginTransaction();
                 try {
                     $random = Str::random(10);
-                    $newUser = new User([
+                    $newUser = User::create([
                         'name' => $user->getName(),
                         'email' => $user->getEmail(),
                         'password' => $random
                     ]);
                     $newUser->assignRole('student');
 
-                    $user->balance;
+                    $newUser->balance;
 
                     if ($newUser->save()) {
-
                         $student = Student::create(['user_id' => $newUser->id]);
                         $newUser_social = SocialAccount::create([
                             'user_id' => $newUser->id,

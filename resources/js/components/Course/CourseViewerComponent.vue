@@ -12,6 +12,7 @@
                 :examId="lectureList[lectureIndex].id"
                 :questionType="questionType"
                 :isAwait="isAwait"
+                :related="related"
                 v-if="questions"
                 @goToLecture="onClickLecture"
                 @reTryLecture="reTryLecture"
@@ -47,7 +48,7 @@
                 :key="key_level"
                 class="list-group list-group-flush"
               >
-                <div v-for="item in items" :key="item.index">
+                <div v-for="(item, index) in items" :key="index">
                   <div class="d-flex">
                     <button
                       class="list-group-item list-group-item-action border-0"
@@ -95,7 +96,7 @@
                         </div>
                         <div v-if="item.model_name == 'Lecture'">
                           <h5 class="mb-1">
-                            {{ item.index }}
+                            {{ index + 1 }}
                             -
                             {{ item.lectures_name }}
                           </h5>
@@ -207,53 +208,6 @@
           >
             <p class="m-0 h2 text-center">❯</p>
             <p class="text-nowrap text-center m-0">更多</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="modal fade"
-      ref="modal_skip"
-      id="skip_level"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="skipModalComfirm"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="skipModalComfirm">Skip Level</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <h4 class="text-danger">
-              You will pay
-              <strong>{{ tokenSkip }} Tokens </strong> to skip this level
-            </h4>
-            <h5>
-              Use this opportunity to shorten your study time effectively, good
-              luck
-            </h5>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary" @click="buySkip()">
-              Save changes
-            </button>
           </div>
         </div>
       </div>
@@ -372,40 +326,8 @@ export default {
     this.syncCourseRelate();
     this.downloadPDF();
   },
-  mounted() {
-    $(this.$refs.modal_skip).on("shown.bs.modal", (event) => {
-      var button = $(event.relatedTarget);
-      var level = button.data("level");
-      var part = button.data("part");
-      console.log("level >>>", level);
-      axios
-        .get(route("site.token.skipPrice"), {
-          params: { level: level },
-        })
-        .then((data) => {
-          this.tokenSkip = data.data.token;
-          this.skipFormLevel = level;
-          this.skipInPart = part;
-
-          console.log(this.skipFormLevel);
-        })
-        .catch((error) => {});
-    });
-  },
+  mounted() {},
   methods: {
-    buySkip() {
-      axios
-        .post(route("site.token.skipPrice.pay"), {
-          course_id: this.courseId,
-          level: this.skipFormLevel,
-          part: this.skipInPart,
-        })
-        .then((data) => {
-          console.log(data);
-          window.location.reload();
-        })
-        .catch((error) => {});
-    },
     isExpanded(key) {
       return this.expandedGroup.indexOf(key) !== -1;
     },
@@ -420,7 +342,6 @@ export default {
       }
     },
     getExamination(questionType) {
-      // # Need update
       axios
         .get(
           route("site.exam.showLecture", {
@@ -469,6 +390,7 @@ export default {
       axios
         .get(route("site.course.lectureList", this.courseId))
         .then((response) => {
+          console.log(response.data);
           this.studentCourse = response.data.student_lecture;
 
           this.isPassed = response.data.student_lecture.passed == 1;

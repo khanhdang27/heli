@@ -15,6 +15,7 @@
           v-bind:examId="examId"
           v-bind:typeExam="typeExam"
           v-bind:courseId="courseId"
+          :related="related"
           @nextTypeExam="nextTypeExam"
           @goToLecture="goToLecture"
           @reTryLecture="reTryLecture"
@@ -36,6 +37,7 @@
           v-bind:examId="examId"
           v-bind:typeExam="typeExam"
           v-bind:courseId="courseId"
+          :related="related"
           @nextTypeExam="nextTypeExam"
           @goToLecture="goToLecture"
           @reTryLecture="reTryLecture"
@@ -64,6 +66,7 @@ export default {
     examId: Number,
     questionType: Number,
     isAwait: Boolean,
+    related: Array,
   },
   data() {
     return {

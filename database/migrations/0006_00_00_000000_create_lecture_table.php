@@ -15,9 +15,8 @@ class CreateLectureTable extends Migration
     {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
-            // $table->double('level')->nullable(true);
-            // $table->integer('type')->nullable(true);
             $table->integer('index')->default(0);
+            $table->integer('set')->default(1);
             $table
                 ->foreignId('course_id')
                 ->constrained('courses')

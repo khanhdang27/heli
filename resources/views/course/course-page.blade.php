@@ -29,7 +29,6 @@ if (Auth::check()) {
     }
 }
 
-
 if (!empty($student_course)) {
     $latesLecture = $student_course->lecture_study;
 }
@@ -124,7 +123,9 @@ if (!empty($student_course)) {
                 </div>
                 <div class="col-xl-4 col-md-6">
                     @if (empty($student_course))
-                        <x-product-detail.buy-course :courseDetail=$courseDetail></x-product-detail.buy-course>
+                        @if ($studentPartLevel >= $course->level)
+                            <x-product-detail.buy-course :courseDetail=$courseDetail></x-product-detail.buy-course>
+                        @endif
                     @elseif($course->type == \Constants::COURSE_RECORD)
                         <review-exam-component v-bind:exams="{{ $exams }}"></review-exam-component>
                         <br>

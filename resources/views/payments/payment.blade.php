@@ -21,7 +21,8 @@ $course = $course_with_group->membershipCourses->course;
                         <div class="modal-footer border-0 pb-5">
                             <a type="button" class="btn btn-secondary mx-auto"
                                 href="{{ route('site.course.show', $course->id) }}">
-                                Back</a>
+                                Back
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -44,7 +45,7 @@ $course = $course_with_group->membershipCourses->course;
                                             <div class="col-md-5">
                                                 <div class="product-payment card-body mb-3"
                                                     style="background-color: {{ $course->subject->subject_color_background }};
-                                                                             color: {{ $course->subject->subject_color_text }}">
+                                                                                                         color: {{ $course->subject->subject_color_text }}">
                                                     <div class="text-center">
                                                         <small>{{ $course->subject->certificate->certificate_code }}</small>
                                                     </div>
@@ -71,11 +72,7 @@ $course = $course_with_group->membershipCourses->course;
                                                         <small>{{ $course->tutor->full_name }}</small>
                                                     </p>
                                                     <h3 class="font-weight-bold">
-                                                        @if ($course_with_group->getDiscount() > 0)
-                                                            {{ $course_with_group->getPriceDiscount() }}
-                                                        @else
-                                                            {{ $course_with_group->getPrice() }}
-                                                        @endif
+                                                        {{ $course_with_group->getPriceDiscount() }}
                                                         tokens
                                                     </h3>
                                                 </div>
@@ -88,8 +85,8 @@ $course = $course_with_group->membershipCourses->course;
                                                 <h4 class="font-weight-bold">Sub Total</h4>
                                             </td>
                                             <td class="text-right">
-                                                <h4 class="font-weight-bold"> {{ $course_with_group->getPrice() }}
-                                                    tokens</h4>
+                                                <h4 class="font-weight-bold"> {{ $course_with_group->getPrice() }} tokens
+                                                </h4>
                                             </td>
                                         </tr>
                                         <tr class="font-weight-bold">
@@ -98,7 +95,8 @@ $course = $course_with_group->membershipCourses->course;
                                             </td>
                                             <td class="text-right">
                                                 <h4 class="font-weight-bold">
-                                                    {{ $course_with_group->getDiscount() }} tokens</h4>
+                                                    {{ $course_with_group->getDiscount() }} tokens
+                                                </h4>
                                             </td>
                                         </tr>
                                     </table>
@@ -107,17 +105,20 @@ $course = $course_with_group->membershipCourses->course;
                                                 mb-5">
                                         <h3 class="m-0 font-weight-bold">Total</h3>
                                         <h3 class="m-0 font-weight-bold">
-                                            @if ($course_with_group->getDiscount() > 0)
-                                                {{ $course_with_group->getPriceDiscount() }}
-                                            @else
-                                                {{ $course_with_group->getPrice() }}
-                                            @endif
+                                            {{ $course_with_group->getPriceDiscount() }}
                                             tokens
                                         </h3>
                                     </div>
-                                    <a class="btn btn-primary w-100 py-3 h5 font-weight-bold"
-                                        href="{{ route('site.user.confirm', ['product_id' => $product_id, 'room' => $room]) }}">
-                                        Payment</a>
+                                    @if ($course_with_group->getPriceDiscount() > Auth::user()->balance)
+                                        <a class="btn btn-secondary w-100 py-3 h5 font-weight-bold"
+                                            href="{{ route('site.user.wallet') }}">
+                                            Purchase Token
+                                        </a>
+                                    @else
+                                        <a class="btn btn-primary w-100 py-3 h5 font-weight-bold"
+                                            href="{{ route('site.user.confirm', ['product_id' => $product_id, 'room' => $room]) }}">
+                                            Payment</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -128,9 +129,7 @@ $course = $course_with_group->membershipCourses->course;
                                         Your Information
                                     </h4>
                                     <div class="d-flex mb-5">
-                                        <div class="rounded-circle border border-primary mr-4 bg-user user-avatar"
-                                            style="background-image: url('{{ asset(empty(Auth::user()->avatar) ? 'images/user_default.png' : '/file/' . Auth::user()->avatar->id) }}');">
-                                        </div>
+                                        <div class="rounded-circle border border-primaryr"> </div>
                                         <div>
                                             <h4 class="mb-3 font-weight-bold">{{ Auth::user()->name }}</h4>
                                             <h5>{{ Auth::user()->email }}</h5>
@@ -147,8 +146,12 @@ $course = $course_with_group->membershipCourses->course;
                                         </tr>
                                     </table>
                                 </div>
-
                             </div>
+                            @if ($course_with_group->getPriceDiscount() > Auth::user()->balance)
+                                <div class="alert alert-danger" role="alert" id="noToken">
+                                    <h5 class="font-weight-bold text-center">Not enough tokens to pay</h5>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
