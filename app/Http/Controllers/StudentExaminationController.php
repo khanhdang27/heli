@@ -199,7 +199,7 @@ class StudentExaminationController extends Controller
                 return response()->json(['quiz_result' => $result, 'score' => $score]);
             } elseif ($exams->type == \Constants::EXAMINATION_EXERCISES) {
                 if ($input['questions'][0]['answerType'] == \Constants::ANSWER_MC) {
-                    [$result, $score, $_] = $this->doGrade($quiz->questions, $input['questions'], $studentCourseId, $quizId, $exams->id);
+                    [$result, $score, $_] = $this->doGrade($quiz->questions, $input['questions'], $studentCourseId, $quizId, $exams->id, true);
                     DB::commit();
                     return response()->json(['quiz_result' => $result, 'score' => $score]);
                 } else {
@@ -263,7 +263,7 @@ class StudentExaminationController extends Controller
         }
     }
 
-    public function doGrade($question, array $answer, $studentCourseId, $quizId, $examId)
+    public function doGrade($question, array $answer, $studentCourseId, $quizId, $examId, $excises = false)
     {
         $result = [];
         $score = 0;
@@ -315,15 +315,58 @@ class StudentExaminationController extends Controller
                     'had_update' => true,
                 ]);
             } else {
-                $score += $answerRecord->score;
-                if ($questionType == 0) {
-                    $answerRecord->load('question');
-                    $questionType = $answerRecord->question->type;
+                if ($excises) {
+                    $_question = $question->where('id', $item['questionID'])->first();
+                    $_answer = $_question
+                        ->questionContent()
+                        ->answers->where('id', $item['answerID'])
+                        ->first();
+
+                    $_answer_id_correct = false;
+                    if (!empty($_answer)) {
+                        $_answer_id_correct = $_answer->is_correct;
+                    }
+                    array_push($result, [
+                        'is_correct' => $_answer_id_correct,
+                        'question' => $_question->id,
+                    ]);
+                    if ($_answer_id_correct) {
+                        $score += \Constants::BASE_SCORE_MC;
+                    }
+
+                    $_answerRecord = StudentExamination::where([
+                        'student_course_id' => $studentCourseId,
+                        'quiz_id' => $quizId,
+                        'exam_id' => $examId,
+                        'question_id' => $item['questionID'],
+                    ])->first();
+
+                    $_answerRecord->update([
+                        'student_course_id' => $studentCourseId,
+                        'quiz_id' => $quizId,
+                        'exam_id' => $examId,
+                        'question_id' => $item['questionID'],
+                        'answer_type' => \Constants::ANSWER_MC,
+                        'answer' => $item['answerID'],
+                        'time' => $item['time'],
+                        'reviewed' => true,
+                        'score' => $_answer_id_correct ? \Constants::BASE_SCORE_MC : 0,
+                    ]);
+
+                    $_answerRecord->update([
+                        'had_update' => true,
+                    ]);
+                } else {
+                    $score += $answerRecord->score;
+                    if ($questionType == 0) {
+                        $answerRecord->load('question');
+                        $questionType = $answerRecord->question->type;
+                    }
+                    array_push($result, [
+                        'is_correct' => $answerRecord->score != 0 ? true : false,
+                        'question' => $answerRecord->question_id,
+                    ]);
                 }
-                array_push($result, [
-                    'is_correct' => $answerRecord->score != 0 ? true : false,
-                    'question' => $answerRecord->question_id,
-                ]);
             }
         }
 
