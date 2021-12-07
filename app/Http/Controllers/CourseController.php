@@ -257,8 +257,8 @@ class CourseController extends Controller
                 })
                 ->first();
 
-            $student_exam_set = $student_course->set_exam || 1;
-            $courseList = $courses->membershipCourses->course->lecture->whereBetween('set', [1, $student_exam_set])->all();
+            $student_exam_set = empty($student_course->set_exam) ? 1 : $student_course->set_exam;
+            $courseList = $courses->membershipCourses->course->lecture->whereBetween('set', [1, $student_exam_set]);
             $_item = collect($courseList)->concat($courses->membershipCourses->course->exams);
 
             return response()->json(['lectures' => $_item, 'student_lecture' => $student_course->toArray()]);

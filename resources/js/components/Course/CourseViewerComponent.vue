@@ -3,13 +3,13 @@
     <div class="row" id="video-lecture">
       <div class="col-lg-8 col-xl-9 bg-white mb-3">
         <div class="min-vh-50 h-100 border border-primary">
-          <div v-if="lectureList[lectureIndex]" class="h-100" v-cloak>
-            <div v-if="lectureList[lectureIndex].model_name == 'Examination'">
+          <div v-if="currentLecture" class="h-100" v-cloak>
+            <div v-if="currentLecture.model_name == 'Examination'">
               <quiz-component
                 v-cloak
-                :typeExam="lectureList[lectureIndex].type"
-                :courseId="lectureList[lectureIndex].course_id"
-                :examId="lectureList[lectureIndex].id"
+                :typeExam="currentLecture.type"
+                :courseId="currentLecture.course_id"
+                :examId="currentLecture.id"
                 :questionType="questionType"
                 :isAwait="isAwait"
                 :related="related"
@@ -19,7 +19,7 @@
                 @nextToLecture="nextToLecture()"
               ></quiz-component>
             </div>
-            <div v-if="lectureList[lectureIndex].model_name == 'Lecture'">
+            <div v-if="currentLecture.model_name == 'Lecture'">
               <vimeo-player
                 ref="player"
                 :video-id="videoId"
@@ -319,6 +319,7 @@ export default {
       questionType: 0,
       lectures: [],
       keyLecture: ["reading", "writing", "listening", "speaking"],
+      currentLecture: {},
     };
   },
   created() {
@@ -341,19 +342,19 @@ export default {
         return route("site.file.download", lecture);
       }
     },
-    getExamination(questionType) {
+    getExamination(questionType, lecture) {
       axios
         .get(
           route("site.exam.showLecture", {
-            exams: this.lectureList[this.lectureIndex].id,
+            exams: lecture.id,
           }),
           {
             params: {
               questionType: questionType,
-              courseId: this.lectureList[this.lectureIndex].course_id,
-              modelName: this.lectureList[this.lectureIndex].model_name,
-              index: this.lectureList[this.lectureIndex].index,
-              id: this.lectureList[this.lectureIndex].id,
+              courseId: lecture.course_id,
+              modelName: lecture.model_name,
+              index: lecture.index,
+              id: lecture.id,
             },
           }
         )
@@ -390,7 +391,6 @@ export default {
       axios
         .get(route("site.course.lectureList", this.courseId))
         .then((response) => {
-          console.log(response.data);
           this.studentCourse = response.data.student_lecture;
 
           this.isPassed = response.data.student_lecture.passed == 1;
@@ -438,12 +438,15 @@ export default {
             }
             this.sortLecture(_lectures);
             if (response.data.student_lecture.lecture_study !== 0) {
-              if (
-                this.lectureList[this.lectureIndex].model_name === "Examination"
-              ) {
+              let _thisLecture = this.lectureList.find(
+                (lecture) => lecture.index == this.lectureIndex
+              );
+              this.currentLecture = _thisLecture;
+              if (_thisLecture.model_name === "Examination") {
                 for (let i = this.lectureList.length - 1; i >= 0; i--) {
                   if (this.lectureList[i].model_name !== "Examination") {
-                    this.lectureIndex = i;
+                    this.lectureIndex = this.lectureList[i].index;
+                    this.currentLecture = this.lectureList[i];
                     break;
                   }
                 }
@@ -673,15 +676,15 @@ export default {
         return a.sortIndex - b.sortIndex;
       });
     },
-    getLecture() {
+    getLecture(lecture) {
       axios
         .get(
           route("site.lecture.showLecture", {
             userId: this.userId,
-            courseId: this.lectureList[this.lectureIndex].course_id,
-            modelName: this.lectureList[this.lectureIndex].model_name,
-            index: this.lectureList[this.lectureIndex].index,
-            id: this.lectureList[this.lectureIndex].id,
+            courseId: lecture.course_id,
+            modelName: lecture.model_name,
+            index: lecture.index,
+            id: lecture.id,
           })
         )
         .then((response) => {
@@ -748,10 +751,14 @@ export default {
     },
     showLecture(index) {
       this.lectureIndex = index;
-      if (this.lectureList[this.lectureIndex].model_name === "Examination") {
-        this.getExamination(this.questionType);
+      let _lecture = this.lectureList.find(
+        (lecture) => lecture.index == this.lectureIndex
+      );
+      this.currentLecture = _lecture;
+      if (_lecture.model_name === "Examination") {
+        this.getExamination(this.questionType, _lecture);
       } else {
-        this.getLecture();
+        this.getLecture(_lecture);
       }
     },
     canSkipLevel(level, type) {
