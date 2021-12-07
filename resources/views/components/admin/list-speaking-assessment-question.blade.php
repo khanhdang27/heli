@@ -83,7 +83,7 @@
                     </div>
                     <script type="application/javascript">
                         function addAnswer_{{ $question->id }}() {
-                            var data = $('#formAnswerReading_{{ $question->id }}').serializeArray()
+                            var data = $('#formAnswerSpeaking_{{ $question->id }}').serializeArray()
                             console.log(data);
                             $.ajax({
                                     type: "POST",
@@ -100,6 +100,7 @@
 
                                         document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;
                                         $('#modalSpeakingAssessmentAnswer{{ $question->id }}').modal('hide')
+                                        $('#formAnswerSpeaking_{{ $question->id }}').get(0).reset();
                                     }
                                     console.log(data);
 
@@ -122,7 +123,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="formAnswerReading_{{ $question->id }}">
+                                    <form id="formAnswerSpeaking_{{ $question->id }}">
                                         @csrf
                                         <input name="question_id" type="text" hidden
                                             value="{{ $question->questionContent()->id }}" />

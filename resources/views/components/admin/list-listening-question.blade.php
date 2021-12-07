@@ -85,7 +85,7 @@ use App\Models\ListenAssessmentQuestion;
                     </div>
                     <script type="application/javascript">
                         function addAnswer_{{ $question->id }}() {
-                            var data = $('#formAnswerReading_{{ $question->id }}').serializeArray()
+                            var data = $('#formAnswerListening_{{ $question->id }}').serializeArray()
                             console.log(data);
                             $.ajax({
                                     type: "POST",
@@ -102,6 +102,7 @@ use App\Models\ListenAssessmentQuestion;
 
                                         document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;
                                         $('#modalListeningAnswer{{ $question->id }}').modal('hide')
+                                        $('#formAnswerListening_{{ $question->id }}').get(0).reset()
                                     }
                                 })
                                 .fail(function(err) {
@@ -112,7 +113,7 @@ use App\Models\ListenAssessmentQuestion;
                     <!-- Modal -->
                     <div class="modal fade" id="modalListeningAnswer{{ $question->id }}" tabindex="-1"
                         aria-labelledby="modalListeningAnswer{{ $question->id }}Label" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-xl">
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Answer</h5>
@@ -122,7 +123,7 @@ use App\Models\ListenAssessmentQuestion;
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="formAnswerReading_{{ $question->id }}">
+                                    <form id="formAnswerListening_{{ $question->id }}">
                                         @csrf
                                         <input name="question_id" type="text" hidden
                                             value="{{ $question->questionContent()->id }}" />

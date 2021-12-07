@@ -89,7 +89,7 @@ use App\Models\Lecture;
                         </div>
                         <div class="form-group ">
                             {{ Form::label('set', 'Try Set') }}
-                            {{ Form::selectRange('set', 1, 4, old('set'), ['class' => 'form-control', 'required', 'id' => 'set']) }}
+                            {{ Form::selectRange('set', 1, 4, $lecture->set, ['class' => 'form-control', 'required', 'id' => 'set']) }}
                         </div>
                         <button type="submit" class="btn btn-primary mt-3"> Save </button>
                         {!! Form::close() !!}

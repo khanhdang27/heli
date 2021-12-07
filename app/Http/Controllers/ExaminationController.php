@@ -119,7 +119,7 @@ class ExaminationController extends Controller
                 'name' => $input['name'],
                 'index' => $input['index'],
                 'type' => $input['type'],
-                'level' => $input['level'],
+                // 'level' => $input['level'],
             ]);
 
             DB::commit();

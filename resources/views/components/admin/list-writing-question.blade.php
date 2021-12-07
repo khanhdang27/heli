@@ -87,6 +87,7 @@
 
                                         document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;
                                         $('#modalAssessmentAnswer{{ $question->id }}').modal('hide')
+                                        $('#formAnswerAssessmentWritting_{{ $question->id }}').get(0).reset()
                                     }
                                 })
                                 .fail(function(err) {

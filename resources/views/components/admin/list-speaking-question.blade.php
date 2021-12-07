@@ -1,4 +1,6 @@
 <ul class="list-group" id="listQuestionSpeakingExercises_{{ $quiz->set }}">
+
+    <script src="https://player.vimeo.com/api/player.js"></script>
     @foreach ($questions as $question)
         @if ($question->questionContent())
             <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info selectable"
@@ -43,10 +45,22 @@
                                 <div class="form-group">
                                     <label for="video_code_practice" class="required text-dark"> Video Practice </label>
                                     {{ Form::text('video_code_practice', $question->questionContent()->video_code_practice, ['class' => 'form-control', 'required']) }}
+                                    <div style="padding:25% 0 0 0;position:relative;">
+                                        <iframe
+                                            src="{{ 'https://player.vimeo.com/video/' . $question->questionContent()->video_code_practice . '?badge=0&autopause=0&app_id=' . config('app.vimeo_app_id') }}"
+                                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                                            style="position:absolute;top:0;left:0;"></iframe>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="video_code_response" class="required text-dark"> Video Response </label>
                                     {{ Form::text('video_code_response', $question->questionContent()->video_code_response, ['class' => 'form-control', 'required']) }}
+                                    <div style="padding:25% 0 0 0;position:relative;">
+                                        <iframe
+                                            src="{{ 'https://player.vimeo.com/video/' . $question->questionContent()->video_code_response . '?badge=0&autopause=0&app_id=' . config('app.vimeo_app_id') }}"
+                                            allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
+                                            style="position:absolute;top:0;left:0;"></iframe>
+                                    </div>
                                 </div>
                                 <div class="form-group ">
                                     Pick up video
@@ -110,7 +124,7 @@
                         description: fileName,
                         private: true,
                         file: files[0],
-                        token: {{ app.config("app.vimeo_token") }},
+                        token: {{ config('app.vimeo_token') }},
                         upgrade_to_1080: true,
                         onError: function(data) {
                             showMessage_{{ $question->index }}('<strong>Error</strong>: ' + JSON.parse(data).error,
@@ -123,10 +137,9 @@
 
                             showMessage_{{ $question->index }}(`<strong>Upload Successful</strong>: \nThis is ID of video, please copy this <input readonly id="video_id_result" value="${videoId}"></input> &nbsp;
                                 <button id="copy-button_{{ $question->index }}" class="btn btn-outline-success btn-sm" type="button" onclick="handleCopy_{{ $question->index }}()" ><i class="fe fe-copy"></i></button>
-                                    to resource field`
-                                )}
-                        })
-                    ).upload()
+                                    to resource field`)
+                        }
+                    })).upload()
 
                     // /* local function: show a user message */
                     function showMessage_{{ $question->index }}(html, type) {

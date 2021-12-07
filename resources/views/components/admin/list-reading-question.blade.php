@@ -100,6 +100,7 @@
 
                                     document.getElementById('listAnswerOf_{{ $question->id }}').innerHTML += answerHTML;
                                     $('#modalReadingAnswer{{ $question->id }}').modal('hide')
+                                    $('#formAnswerReading_{{ $question->id }}').get(0).reset()
                                 }
 
                             }).fail(function(err) {

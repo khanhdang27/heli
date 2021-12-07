@@ -3,6 +3,7 @@
 use App\Models\Certificate;
 use App\Models\Course;
 use App\Models\Examination;
+use App\Models\Membership;
 use App\Models\Setting;
 use App\Models\Subject;
 use App\Models\Tutor;
@@ -103,5 +104,7 @@ class DatabaseSeeder extends Seeder
             'exam_id' => $exams->id,
             'set' => 1
         ]);
+
+        Membership::create(['name' => 'base', 'base_point' => 0]);
     }
 }
