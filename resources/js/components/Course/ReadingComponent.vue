@@ -311,8 +311,8 @@
                             <div class="h5 mb-0">{{ answerItem.answer }}</div>
                           </div>
                           <div class="h5" v-if="typeExam === $getConst('quiz')">
-                            <span class="font-weight-bold"
-                              >Lecture related:
+                            <span class="font-weight-bold">
+                              Lecture related:
                             </span>
                             <a
                               href="#"
@@ -345,7 +345,12 @@
             </div>
             <div v-else>
               <div v-if="typeExam === $getConst('quiz')">
-                <h3>
+                <div v-if="related.length == 0">
+                  <a class="btn btn-primary mt-2" href="/site">
+                    Get another Course
+                  </a>
+                </div>
+                <h3 v-else>
                   <button
                     class="btn btn-primary mt-2"
                     v-on:click="gotoRelated()"
