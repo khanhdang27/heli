@@ -35,7 +35,7 @@ $setting = Setting::getObject();
             </div>
             <div class="col-lg-2 mb-3">
                 <h2 class="title-foot">@lang('keywords.footer.member')</h2>
-                @if (Auth::check())
+                @if (Auth::check() && Auth::user()->hasRole('student'))
                     <a href="{{ route('site.profile.show', Auth::user()->id) }}">
                         @lang('keywords.footer.myAccount')
                     </a><br>

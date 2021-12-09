@@ -9,23 +9,24 @@ $studentPartLevel = null;
 
 if (Auth::check()) {
     $student = Auth::user()->student;
-    switch ($course->type_part) {
-        case \Constants::COURSE_READING:
-            $studentPartLevel = $student->level_read;
-            break;
-        case \Constants::COURSE_WRITING:
-            $studentPartLevel = $student->level_write;
-            break;
-        case \Constants::COURSE_LISTENING:
-            $studentPartLevel = $student->level_listen;
-            break;
-        case \Constants::COURSE_SPEAKING:
-            $studentPartLevel = $student->level_speak;
-            break;
-
-        default:
-            # code...
-            break;
+    if (!empty($student)) {
+        switch ($course->type_part) {
+            case \Constants::COURSE_READING:
+                $studentPartLevel = $student->level_read;
+                break;
+            case \Constants::COURSE_WRITING:
+                $studentPartLevel = $student->level_write;
+                break;
+            case \Constants::COURSE_LISTENING:
+                $studentPartLevel = $student->level_listen;
+                break;
+            case \Constants::COURSE_SPEAKING:
+                $studentPartLevel = $student->level_speak;
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 }
 
@@ -105,7 +106,8 @@ if (!empty($student_course)) {
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div id="homeCourse" class="container-fluid pt-5 mb-5 tab-pane active">
-                            <x-product-detail.course-overview :courseDetail=$course></x-product-detail.course-overview>
+                            <x-product-detail.course-overview :courseDetail=$course :studentCourse=$student_course>
+                            </x-product-detail.course-overview>
                         </div>
                         @if ($course->type == \Constants::COURSE_LIVE)
                             <div id="menuCourse1" class="container-fluid pb-5 tab-pane fade">

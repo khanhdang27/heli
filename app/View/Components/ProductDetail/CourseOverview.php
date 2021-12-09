@@ -7,14 +7,16 @@ use Illuminate\View\Component;
 class CourseOverview extends Component
 {
     public $courseDetail;
+    public $studentCourse;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($courseDetail)
+    public function __construct($courseDetail, $studentCourse)
     {
         $this->courseDetail = $courseDetail;
+        $this->studentCourse = $studentCourse;
     }
 
     /**
@@ -24,8 +26,9 @@ class CourseOverview extends Component
      */
     public function render()
     {
-        return view('components.product-detail.course-overview',[
-            'courseDetail' => $this->courseDetail
+        return view('components.product-detail.course-overview', [
+            'courseDetail' => $this->courseDetail,
+            'studentCourse' => $this->studentCourse
         ]);
     }
 }

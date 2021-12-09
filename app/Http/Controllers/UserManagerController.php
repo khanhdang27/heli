@@ -200,6 +200,7 @@ class UserManagerController extends Controller
     public function tutorIndex()
     {
         $tutors = Tutor::with('translations', 'user', 'subject')
+            ->where('id', '!=', 1)
             ->when(request('name') != '', function (Builder $query) {
                 $query->where('full_name', 'like', '%' . request('name') . '%');
             })

@@ -17,7 +17,7 @@ class CreateCourseMembershipDiscountsTable extends Migration
         Schema::create('course_membership_discounts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('course_discount_id')->nullable();
-            $table->bigInteger('membership_course_id')->constrained('membership_course');            
+            $table->bigInteger('membership_course_id')->constrained('membership_course')->cascadeOnDelete();
             $table->boolean('recommended')->default(false);
             $table->boolean('welcomes')->default(false);
             $table->boolean('hot')->default(false);

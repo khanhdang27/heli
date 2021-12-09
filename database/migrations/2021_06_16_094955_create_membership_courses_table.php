@@ -15,8 +15,8 @@ class CreateMembershipCoursesTable extends Migration
     {
         Schema::create('membership_course', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('membership_id')->constrained('memberships');
-            $table->foreignId('course_id')->constrained('courses');
+            $table->foreignId('membership_id')->constrained('memberships')->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->unique(['membership_id', 'course_id']);
             $table->double('price_value');
             $table->softDeletes();

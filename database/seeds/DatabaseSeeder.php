@@ -20,11 +20,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Membership::create(['name' => 'base', 'base_point' => 0]);
         $super_admin = User::create([
             'name' => 'Super admin',
             'email' => 'admin@gmail.com',
             'password' => '123123',
         ]);
+
+        $this->call(RoleSeeder::class);
 
         $super_admin->assignRole(['super-admin']);
         $super_admin->save();
@@ -75,7 +78,7 @@ class DatabaseSeeder extends Seeder
             'certificate_id' => 1,
             'subject_color_background' => '#fff',
             'subject_color_text' => '#fff',
-            'status' => 1
+            'status' => 0
         ]);
 
         $tutor = Tutor::create([
@@ -104,9 +107,5 @@ class DatabaseSeeder extends Seeder
             'exam_id' => $exams->id,
             'set' => 1
         ]);
-
-        Membership::create(['name' => 'base', 'base_point' => 0]);
-
-        $this->call(RoleSeeder::class);
     }
 }
