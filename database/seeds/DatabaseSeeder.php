@@ -106,5 +106,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Membership::create(['name' => 'base', 'base_point' => 0]);
+
+        $this->call(RoleSeeder::class);
     }
 }
