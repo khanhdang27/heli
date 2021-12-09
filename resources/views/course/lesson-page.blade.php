@@ -13,7 +13,7 @@
         <div class="container-fluid pt-5 pb-5 pl-0 pr-0">
             <div class="w-75 m-auto">
                 <div class="row">
-                    <div id="detail" class="col-lg-8">
+                    <div id="detail" class="col-lg-9">
                         <div class="product-box mt-0 row bg-white m-0">
                             <div class="top-product col-lg-5">
                                 <div class="content-product rounded-top-course"
@@ -34,26 +34,41 @@
                                 </div>
                             </div>
                             <div class="col-lg-7">
-                                <div class="d-flex justify-content-between h-100">
+                                <div class="h-100">
                                     <div
-                                        class="name-product w-75 d-flex flex-column justify-content-between text-primary p-3">
+                                        class="name-product d-flex flex-column justify-content-between text-primary p-3">
                                         <div class="text-multiline-truncate">
                                             <h2 class="font-weight-bold">
                                                 {{ mb_substr($course->course_description,0,50)}}
                                             </h2>
                                         </div>
-                                        <div class="h4 mt-auto">
+                                        <div class="h5 mt-5">
                                             {{$course->tutor->full_name}}
+                                        </div>
+                                        <div class="d-flex align-items-center text-primary">
+                                            @php
+                                                $rate = (int) floor($course->rating_average);
+                                            @endphp
+                                            @for ($i = 0; $i < $rate; $i++) <img
+                                                src="{{ asset('images/ic/ic_star.svg') }}" width="29">
+                                            @endfor
+                                            @for ($i = 0; $i < 5 - $rate; $i++) <img
+                                                src="{{ asset('images/ic/ic_star_border.svg') }}" width="29">
+                                            @endfor
+                                            <h5 class="mb-0 ml-3">{{ $course->rating_average }}/5</h5>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="detail" class="col-lg-4"></div>
+                    <div id="detail" class="col-lg-3"></div>
                 </div>
                 <div class="pt-5">
-                    <x-product-detail.lecture-course videoId={{$live_code}}></x-product-detail.lecture-course>
+                    <iframe class="embed-responsive embed-responsive-16by9 responsive-iframe"
+                            src="{{ 'https://player.vimeo.com/video/' . $live_code . '?badge=0&autopause=0&app_id=' . config('app.vimeo_app_id') }}"
+                            frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
+                            allowfullscreen title="Default name"></iframe>
                 </div>
             </div>
         </div>
