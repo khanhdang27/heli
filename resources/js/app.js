@@ -15,7 +15,7 @@ require('./vimeo-upload');
 
 window.Vue = require('vue');
 Vue.use(vueVimeoPlayer);
-Vue.use( CKEditor );
+Vue.use(CKEditor);
 Vue.use(VueCountdownTimer);
 Vue.use(constPlugin);
 /**

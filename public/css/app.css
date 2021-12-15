@@ -11598,7 +11598,7 @@ input.check-subscribe {
   height: 95.38px;
   font-size: 41px;
   background-color: var(--white) !important;
-  background-image: url("/../images/ic/bg-tab-Active.svg") !important;
+  background-image: url("/../images/ic/bg-tab-active.svg") !important;
   background-size: cover;
 }
 
@@ -12505,6 +12505,10 @@ body {
   max-height: 500px;
 }
 
+.responsive-iframe {
+  height: 650px;
+}
+
 .rating {
   display: inline-block;
   position: relative;
@@ -12755,6 +12759,10 @@ body {
 
   .circle-check {
     left: 60%;
+  }
+
+  .responsive-iframe {
+    height: 300px;
   }
 }
 
